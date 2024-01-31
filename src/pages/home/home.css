@@ -1,0 +1,1232 @@
+/* screen - bettermidapp-home-1 */
+
+.bettermidapp-home-1 {
+  /* background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+  /* background-color: rgba(255,255,255,1.0); */
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-home-1 .bg-RoXPLo {
+  height: 844px;
+  left: 0px;
+  top: -2px;
+  width: 390px;
+}
+
+.bettermidapp-home-1 .bg-mTcWcI {
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-home-1 .home-indicator-RoXPLo {
+  background-color: transparent;
+  height: 34px;
+  left: 0px;
+  position: absolute;
+  top: 810px;
+  width: 390px;
+}
+
+.bettermidapp-home-1 .home-indicator-7yU37x {
+  background-color: var(--white);
+  border-radius: 100px;
+  bottom: calc(27.59% - 1px);
+  height: 5px;
+  left: 121px;
+  position: absolute;
+  width: calc(100.00% - 241px);
+}
+
+.bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+/* .bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar {
+
+  height: 6px;
+	background-color: #ccc;
+	border-radius: 20px;
+}
+.bettermidapp-home-1 .missions-scroll-RoXPLo::-webkit-scrollbar-thumb {
+	background-color: #111;
+	border-radius: 20px;
+} */
+
+
+.bettermidapp-home-1 .missions-scroll-RoXPLo {
+  background-color: transparent;
+  /* height: 110px; */ /* for scrolling exist */
+  height: 100px;
+  left: 38px;
+  mix-blend-mode: normal;
+  /* overflow-x: scroll; */
+
+  overflow-y: hidden;
+  position: absolute;
+  top: 631px;
+  width: 352px;
+}
+
+/* .x-scrolling-container {
+  overflow-y: scroll;
+
+  transform: rotate(-90deg);
+}
+
+.x-scrolling-content {
+  transform: rotate(90deg);
+} */
+
+.bettermidapp-home-1 .challenges-x9-hacks-GEWAL1 {
+  cursor: pointer;
+  background-color: transparent;
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 202px;
+}
+
+.bettermidapp-home-1 .challenge-x9_banner-UqALvc {
+  background-color: transparent;
+  border-radius: 6px;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .challengesx-9-hacks-ewZMRw {
+  background-color: transparent;
+  height: 40px;
+  letter-spacing: 0.00px;
+  line-height: 19px;
+  position: absolute;
+  right: 15px;
+  text-align: left;
+  top: -2px;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .x1-3mins-each-ewZMRw {
+  background-color: transparent;
+  bottom: calc(35.16% - 6px);
+  height: 17px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: 15px;
+  text-align: left;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .sigdao-score-ewZMRw {
+  bottom: 0px;
+  height: 17px;
+  right: 0px;
+  width: 112px;
+}
+
+.bettermidapp-home-1 .x10-HEHiSw {
+  height: calc(100.00% + 2px);
+  line-height: 14px;
+  top: 2px;
+  width: 94px;
+}
+
+.bettermidapp-home-1 .signdao_tokengradient-HEHiSw {
+  top: 1px;
+  width: 17px;
+}
+
+.bettermidapp-home-1 .x441-giFx9O {
+  border-radius: 8.26px;
+}
+
+.bettermidapp-home-1 .x442-giFx9O {
+  border-radius: 8.03px;
+}
+
+.bettermidapp-home-1 .x880-giFx9O {
+  height: 54.69%;
+}
+
+.bettermidapp-home-1 .meditations-GEWAL1 {
+  background: #171717CC;
+  height: 80px;
+  left: 217px;
+  position: relative;
+  top: 0px;
+  width: 187px;
+  border: 1px solid #4136F1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.meditations-overlay {  
+  position: absolute;
+  width: 100%;
+  height: 78px;
+  top: 0;
+  right: 0;
+
+  background: #171717CC;
+  /* opacity: 0.4; */
+}
+
+.home-meditation-content {
+  width: 100%;
+  height: 100%;
+  background: #171717CC;
+  /* opacity: 0.4; */
+}
+
+.bettermidapp-home-1 .meditation_banner-dLbFgX {
+  background-color: transparent;
+  border-radius: 6px;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .weekly-meditation-3kbxqV {
+  background-color: transparent;
+  height: 40px;
+  letter-spacing: 0.00px;
+  line-height: 19px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: -2px;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .saturday-only-3kbxqV {
+  background-color: transparent;
+  bottom: calc(33.58% - 6px);
+  height: 17px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: 0px;
+  text-align: left;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .sigdao-score-3kbxqV {
+  bottom: 0px;
+  height: 17px;
+  right: calc(35.93% - 17px);
+  width: 47px;
+}
+
+.bettermidapp-home-1 .x10-UyxTRp {
+  height: calc(100.00% + 2px);
+  line-height: 14px;
+  top: 2px;
+  width: 29px;
+}
+
+.bettermidapp-home-1 .signdao_tokengradient-UyxTRp {
+  top: 1px;
+  width: 17px;
+}
+
+.bettermidapp-home-1 .x441-ozHgg7 {
+  border-radius: 8.26px;
+}
+
+.bettermidapp-home-1 .x442-ozHgg7 {
+  border-radius: 8.03px;
+}
+
+.bettermidapp-home-1 .x880-ozHgg7 {
+  height: 54.69%;
+}
+.home_nft_-avatar{
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 100px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 8px;
+  width: 107px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.home_icon_ic_add{
+  height: 28px;
+  width: 28px;
+}
+.home_icon_ic_loading{
+  height: 100px;
+  width: 100px;
+}
+.home_nft_-avatar:hover{
+  cursor: pointer;
+}
+
+.bettermidapp-home-1 .step-counts-GEWAL1 {
+  background-color: transparent;
+  height: 80px;
+  left: 417px;
+  position: absolute;
+  top: 0px;
+  width: 187px;
+  border: 1px solid #4136F1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bettermidapp-home-1 .step_count_banner-45Wblr {
+  background-color: transparent;
+  border-radius: 6px;
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .walking-mission-7hGHU0 {
+  background-color: transparent;
+  height: 40px;
+  letter-spacing: 0.00px;
+  line-height: 19px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: -2px;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .step-count-7hGHU0 {
+  background-color: transparent;
+  bottom: calc(33.58% - 6px);
+  height: 17px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: 0px;
+  text-align: left;
+  width: 97px;
+}
+
+.bettermidapp-home-1 .sigdao-score-7hGHU0 {
+  bottom: 0px;
+  height: 17px;
+  right: calc(35.93% - 17px);
+  width: 47px;
+}
+
+.bettermidapp-home-1 .x10-SMcg87 {
+  height: calc(100.00% + 2px);
+  line-height: 14px;
+  top: 2px;
+  width: 29px;
+}
+
+.bettermidapp-home-1 .signdao_tokengradient-SMcg87 {
+  top: 1px;
+  width: 17px;
+}
+
+.bettermidapp-home-1 .x441-JHyhgs {
+  border-radius: 8.26px;
+}
+
+.bettermidapp-home-1 .x442-JHyhgs {
+  border-radius: 8.03px;
+}
+
+.bettermidapp-home-1 .x880-JHyhgs {
+  height: 54.69%;
+}
+
+.bettermidapp-home-1 .view-all-RoXPLo {
+  cursor: pointer;
+  background-color: transparent;
+  height: auto;
+  left: 311px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: center;
+  text-decoration: underline;
+  top: 594px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.bettermidapp-home-1 .feature-missions-RoXPLo {
+  background-color: transparent;
+  height: auto;
+  left: 38px;
+  letter-spacing: 0.00px;
+  line-height: 28px;
+  position: absolute;
+  text-align: left;
+  top: 583px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.bettermidapp-home-1 .reservation_button-RoXPLo {
+  background-color: var(--woodsmoke);
+  border-radius: 28px;
+  height: 56px;
+  /* left: 30px;
+  position: absolute;
+  top: 498px; */
+  width: 58px;
+}
+
+.bettermidapp-home-1 .button_bg-nXPAX5 {
+  background-color: transparent;
+  height: 56px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 58px;
+}
+
+.bettermidapp-home-1 .ic_reservation-nXPAX5 {
+  height: 20px;
+  width: 18px;
+}
+
+.bettermidapp-home-1 .ic_reservation-p9BhAR {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+  filter: brightness(0.4);
+}
+
+.bettermidapp-home-1 .ic_locked-nXPAX5 {
+  height: 20px;
+  right: 0px;
+  position: absolute;
+  width: 15px;
+}
+
+.bettermidapp-home-1 .ic_locked-OiAYIf {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .leaderboard_button-RoXPLo {
+  background-color: #0D0D0D;
+  border-radius: 28px;
+  height: 56px;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 434px; */
+  width: 58px;
+  border:1px solid;
+  border-color: var(--royal-blue);
+}
+
+.bettermidapp-home-1 .button_bg-IgToMG {
+  background-color: var(--woodsmoke);
+  border-radius: 28px;
+  box-shadow: 0px 15px 30px #00000008;
+  height: 56px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 58px;
+}
+
+.ic_forum_image {
+  height: 20px;
+  width: 20px;
+}
+
+.bettermidapp-home-1 .ic_leaderboard-IgToMG {
+  height: 21px;
+  width: 16px;
+}
+
+.bettermidapp-home-1 .ic_leaderboard-6DxnCN {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .ic_locked-IgToMG {
+  height: 20px;
+  right: 0px;
+  width: 15px;
+}
+
+.bettermidapp-home-1 .ic_locked-Itp9oo {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .special-card-RoXPLo {
+  background-color: transparent;
+  height: 186px;
+  left: 30px;
+  position: absolute;
+  top: 369px;
+  width: 326px;
+}
+
+.bettermidapp-home-1 .special-scroll-hH9Cww::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.bettermidapp-home-1 .special-scroll-hH9Cww {
+  background-color: transparent;
+  bottom: 0px;
+  height: 185px;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  width: 250px;
+  display: flex;
+  flex: 1;
+}
+
+.bettermidapp-home-1 .x25-hK4LUV {
+  background-color: transparent;
+  height: 185px;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 800px;
+}
+
+.home-scroller-element-image {
+  height: 185px;
+  width: 250px;
+  object-fit:cover;
+  border:1px solid;
+  border-radius: 10px;
+  border-color: var(--royal-blue);
+}
+
+.home-scroller-element {
+  
+}
+
+.bettermidapp-home-1 .x01-78JfKY {
+  background-color: transparent;
+  height: 185px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 250px;
+}
+
+.bettermidapp-home-1 .x11-78JfKY {
+  background-color: transparent;
+  height: 185px;
+  left: 265px;
+  position: absolute;
+  top: 0px;
+  width: 250px;
+}
+
+.bettermidapp-home-1 .x21-78JfKY {
+  background-color: transparent;
+  height: 185px;
+  left: 530px;
+  position: absolute;
+  top: 0px;
+  width: 250px;
+}
+
+.bettermidapp-home-1 .slide-dots-hH9Cww {
+  background-color: transparent;
+  bottom: 11px;
+  height: 5px;
+  position: absolute;
+  left: calc(50% - 12.5px);
+  width: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bettermidapp-home-1 .x444-3SAlGE {
+  background-color: var(--white);
+  border: 1px solid;
+  border-color: var(--cadet-blue-2);
+  border-radius: 2.5px;
+  height: 100%;
+  width: 5px;
+}
+
+.bettermidapp-home-1 .x445-3SAlGE {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--cadet-blue-2);
+  border-radius: 2.5px;
+  height: 100%;
+  /* left: calc(50.00% - 2px);
+  position: absolute;
+  top: 0px; */
+  width: 5px;
+  cursor: pointer;
+}
+
+.bettermidapp-home-1 .x446-3SAlGE {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--cadet-blue-2);
+  border-radius: 2.5px;
+  height: 100%;
+  /* position: absolute;
+  right: 0px;
+  top: 0px; */
+  width: 5px;
+  cursor: pointer;
+}
+
+.special_button-hH9Cww-active {
+  background-color: #0D0D0D;
+  border-radius: 28px;
+  height: 55px;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+
+}
+
+.bettermidapp-home-1 .special_button-hH9Cww {
+  background-color: #0D0D0D;
+  border-radius: 28px;
+  height: 55px;
+  border: none;
+  position: relative;
+  /* left: 0px;
+  position: absolute;
+  top: 0px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+}
+
+.buttons-slider-container {
+  display: flex;
+  flex-direction: column;
+  height: 185px;
+  width: 55px;
+  gap: 10px;
+}
+
+.bettermidapp-home-1 .button_bg-9uK1Tx {
+  background-color: var(--woodsmoke);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 28px;
+  box-shadow: 0px 15px 30px #00000008;
+  height: 55px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 55px;
+}
+
+.bettermidapp-home-1 .ic_notifications-9uK1Tx {
+  height: 20px;
+  width: 20px;
+}
+
+.bettermidapp-home-1 .ic_notifications-6bhCAa {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .discord-RoXPLo {
+  /* background-color: transparent; */
+  /* height: auto; */
+  right: 31px;
+  /* letter-spacing: 0.00px; */
+  /* line-height: 14px; */
+  position: absolute;
+  /* text-align: center; */
+  /* text-decoration: underline; */
+  top: 325px;
+  /* white-space: nowrap; */
+  /* width: auto; */
+}
+
+.bettermidapp-home-1 .our-community-RoXPLo {
+  background-color: transparent;
+  height: auto;
+  left: 38px;
+  letter-spacing: 0.00px;
+  line-height: 28px;
+  position: absolute;
+  text-align: left;
+  top: 320px;
+  white-space: nowrap;
+  width: auto;
+}
+
+/* .bettermidapp-home-1 .button_-selfie-to-earn-RoXPLo {
+  cursor: pointer;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
+  height: 56px;
+  left: 30px;
+  position: absolute;
+  top: 238px;
+  width: 326px;
+}
+
+.bettermidapp-home-1 .button_bg-TRrnim {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -30px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-home-1 .take-a-selfie-to-earn-TRrnim {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(46.02% - 70px);
+  text-align: left;
+  white-space: nowrap;
+  margin: 0;
+  width: 153px;
+}
+color
+.bettermidapp-home-1 .ic_selfie-TRrnim {
+  background-: transparent;
+  bottom: 18px;
+  height: 23px;
+  left: calc(12.39% - 3px);
+  object-fit: cover;
+  position: absolute;
+  width: 25px;
+}
+
+.bettermidapp-home-1 .ic_arrow_forward-TRrnim {
+  background-color: transparent;
+  height: 16px;
+  object-fit: cover;
+  position: absolute;
+  right: calc(10.66% - 2px);
+  top: calc(50.00% - 8px);
+  width: 16px;
+} */
+
+.bettermidapp-home-1 .quick-actions-RoXPLo {
+  background-color: transparent;
+  height: auto;
+  left: 38px;
+  letter-spacing: 0.00px;
+  line-height: 28px;
+  position: absolute;
+  text-align: left;
+  top: 192px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.bettermidapp-home-1 .greetings-RoXPLo {
+  background-color: transparent;
+  height: 115px;
+  left: 32px;
+  position: absolute;
+  top: 50px;
+  width: 316px;
+}
+
+.bettermidapp-home-1 .title-2ZgxSS {
+  margin: 0;
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxxl);
+  font-style: normal;
+  font-weight: 600;
+  height: 36px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: calc(29.94% - 42px);
+  text-align: left;
+  top: 12px;
+  white-space: nowrap;
+  width: 139px;
+}
+
+.bettermidapp-home-1 .lv_-reward-2ZgxSS {
+  background-color: transparent;
+  bottom: calc(40.62% - 8px);
+  height: 19px;
+  position: absolute;
+  right: 0px;
+  width: 192px;
+}
+
+.bettermidapp-home-1 .lv-1-b5x63m {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 2px;
+  white-space: nowrap;
+  width: 32px;
+}
+
+.bettermidapp-home-1 .nft-reward-10-b5x63m {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 15px;
+  position: absolute;
+  right: -2px;
+  text-align: center;
+  top: 2px;
+  white-space: nowrap;
+  width: 144px;
+}
+
+.bettermidapp-home-1 .seperate-line-b5x63m {
+  background-color: transparent;
+  height: calc(100.00% - 4px);
+  left: 20.47%;
+  object-fit: cover;
+  position: absolute;
+  top: 2px;
+  width: 1px;
+}
+
+
+.bettermidapp-home-1 .nft_-avatar-2ZgxSS {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 155px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  cursor: pointer;
+  top: 8px;
+  width: 107px;
+  clip: rect(0, 110px, 100px, 0);
+}
+
+.bettermidapp-home-1 .ic_next-2ZgxSS {
+  background-color: transparent;
+  cursor: pointer;
+  height: 44px;
+  position: absolute;
+  left: 220px;
+  top: 0px;
+  width: 20px;
+}
+
+.bettermidapp-home-1 .ic_chevron_right_24px-LRB8nH {
+  background-color: transparent;
+  height: 12px;
+  left: calc(49.19% - 4px);
+  object-fit: cover;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 7px;
+}
+
+.bettermidapp-home-1 .score-bar_3-2ZgxSS {
+  background-color: transparent;
+  bottom: 1px;
+  height: 22px;
+  position: absolute;
+  right: calc(20.80% - 14px);
+  width: 69px;
+}
+
+.bettermidapp-home-1 .sigdao-score-iPTNDG {
+  height: 22px;
+  right: 0px;
+  top: calc(50.00% - 11px);
+  width: 69px;
+}
+
+.bettermidapp-home-1 .x10-kxjIEt {
+  height: calc(100.00% - 1px);
+  line-height: 15px;
+  top: 3px;
+  width: 44px;
+}
+
+.bettermidapp-home-1 .signdao_tokengradient-kxjIEt {
+  top: 0px;
+  width: 22px;
+}
+
+.bettermidapp-home-1 .x441-e5x8kp {
+  border-radius: 10.76px;
+}
+
+.bettermidapp-home-1 .x442-e5x8kp {
+  border-radius: 10.46px;
+}
+
+.bettermidapp-home-1 .x880-e5x8kp {
+  height: 54.68%;
+}
+
+.bettermidapp-home-1 .sigdao-2ZgxSS {
+  background-color: transparent;
+  bottom: -2px;
+  height: 21px;
+  left: calc(49.21% - 31px);
+  letter-spacing: 0.00px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  width: 64px;
+}
+
+.bettermidapp-home-1 .bars-status-bar-i-phone-light-RoXPLo {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 390px;
+}
+
+.bettermidapp-home-1 .frame-Kudt5Q {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .status-bar-Kudt5Q {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-home-1 .battery-DCToX1 {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-home-1 .border-X3kIl8 {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-home-1 .cap-X3kIl8 {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-home-1 .capacity-X3kIl8 {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-home-1 .wifi-DCToX1 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-home-1 .cellular-connection-DCToX1 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-home-1 .time-style-DCToX1 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-home-1 .time-lnUbG0 {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-home-1 .bg {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .ic_leaderboard {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .ic_locked {
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+}
+
+.bettermidapp-home-1 .ic_notifications {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .ic_reservation {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .sigdao-score {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .signdao_tokengradient {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+}
+
+.bettermidapp-home-1 .small-image {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 80px;
+}
+
+.bettermidapp-home-1 .x1 {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 185px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 250px;
+}
+
+.bettermidapp-home-1 .x10 {
+  background-color: transparent;
+  letter-spacing: 0.00px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.bettermidapp-home-1 .x441 {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-home-1 .x442 {
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  background-color: transparent;
+  height: 97.18%;
+  left: 1.41%;
+  position: absolute;
+  top: 1.41%;
+  width: 97.18%;
+}
+
+.bettermidapp-home-1 .x880 {
+  background-color: transparent;
+  left: 25.90%;
+  object-fit: cover;
+  position: absolute;
+  top: 22.14%;
+  width: 47.30%;
+}
+
+
+
+
+
+
+ /*Anderson's Code */
+ .featureMissionHome{
+  height:100px;
+  top:631px;
+  left:38px;
+  background-color: transparent;
+  width:390px;
+  position:absolute;
+  overflow-x: scroll;
+
+}
+.featureMissionHome::-webkit-scrollbar {
+  background:  #221D4B;
+  width: 2px;
+  height:10px;
+  border-radius: 12px;
+}
+.featureMissionHome::-webkit-scrollbar-track {
+
+  border-radius: 20px;
+  background: transparent;
+}
+.featureMissionHome::-webkit-scrollbar-thumb {
+  background:  #3125b8; 
+  border-radius: 20px;
+}
+
+.buttonHome1{
+  cursor: pointer;
+  height: 80px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 202px;
+}
+.buttonHome2{
+  height: 80px;
+  left: 217px;
+  position: absolute;
+  top: 0px;
+  width: 187px;
+}
+.buttonHome3{
+  background-color: transparent;
+  height: 80px;
+  left: 417px;
+  position: absolute;
+  top: 0px;
+  width: 187px;
+}
+
+.home-ai-select-icon {
+  position: absolute;
+  top: 12px;
+  left: 257px;
+  width: 24px;
+  height: 20px;
+}
+
+.home-setting-icon {
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+  top: 12px;
+  left: 297px
+}
+
+.nav-to-take-selfie-content {
+  left: 30px;
+  position: absolute;
+  top: 238px;
+}
+
+.no-scroll{
+  overflow: hidden;
+}
+
+.alert-get-signa {
+  position: absolute;
+  top: 327px;
+  right: 62px;
+  color: #5146ff;
+}

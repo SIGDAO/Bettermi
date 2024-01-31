@@ -1,0 +1,99 @@
+/* back button */
+/* .icon-arrow-left {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  left: 16px;
+  min-width: 44px;
+  padding-left: 14px;
+  position: relative;
+  top: 44px;
+}
+
+.icon-arrow-left-1 {
+  width: 16px;
+} */
+
+
+
+
+/* for success box */
+.success-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: calc((100% - 282px) / 2);
+  min-height: 242px;
+  /* position: relative; */
+  /* position: absolute; */
+  top: calc((100% - 242px) / 2);
+  width: 282px;
+}
+
+.success-connect-wallet-message {
+  margin-top: 0px;
+  margin-bottom: 31px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.icon-awesome-check {
+  height: 27px;
+  object-fit: cover;
+  width: 35px;
+}
+.your-crypto-wallet-is-connected {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* success box - background */
+.finished-connect-wallet-icon-container {
+  background: linear-gradient(135deg, #4136f1 0%, #8643ff 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 118px;
+  margin-bottom: 40px;
+  /* margin-right: 2.0px; */
+  min-width: 118px;
+}
+.button_-selfie {
+  align-items: center;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 56px;
+  justify-content: center;
+  left: calc((100% - 248px)/ 2);
+  width: 248px;
+  /* padding: 13.5px 20.4px; */
+  /* position: absolute; */
+  top: calc(100%/ 2 + 121px + 128px);
+}
+
+.ic_selfie {
+  height: 23px;
+  /* margin-bottom: 2.94px; */
+  object-fit: cover;
+  width: 25px;
+}
+
+.continue {
+  align-self: flex-end;
+  letter-spacing: 0;
+  line-height: 14px;
+  min-height: 21px;
+  min-width: 170px;
+  text-align: center;
+  white-space: nowrap;
+}

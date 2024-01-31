@@ -1,0 +1,1189 @@
+/* screen - bettermidapp-generate-bmi-daily */
+
+.bettermidapp-generate-bmi-daily {
+  background-color: transparent;
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-generate-bmi-daily .bg_2-Fd1por {
+  background-color: transparent;
+  height: 844px;
+  left: 0px;
+  position: absolute;
+  top: -0px;
+  width: 390px;
+}
+
+.bettermidapp-generate-bmi-daily .bg-8YXhC4 {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-generate-bmi-daily .home-indicator-Fd1por {
+  background-color: transparent;
+  height: 34px;
+  left: 0px;
+  position: absolute;
+  top: 810px;
+  width: 390px;
+}
+
+.bettermidapp-generate-bmi-daily .home-indicator-96Qeho {
+  background-color: var(--white);
+  border-radius: 100px;
+  bottom: calc(27.59% - 1px);
+  height: 5px;
+  left: 121px;
+  position: absolute;
+  width: calc(100.00% - 241px);
+}
+
+.bettermidapp-generate-bmi-daily .photo-Fd1por {
+  background-color: transparent;
+  border-radius: 20px;
+  height: 288px;
+  left: 64px;
+  object-fit: cover;
+  position: absolute;
+  top: 88px;
+  width: 262px;
+}
+
+.bettermidapp-generate-bmi-daily .icon-arrow-left-Fd1por {
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  top: 44px;
+  width: 44px;
+}
+
+.bettermidapp-generate-bmi-daily .icon-arrow-left-oj1bIY {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-generate-bmi-daily .bars-status-bar-i-phone-light-Fd1por {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 390px;
+}
+
+.bettermidapp-generate-bmi-daily .frame-QzAZ9H {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmi-daily .status-bar-QzAZ9H {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-generate-bmi-daily .battery-xaNOTb {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-generate-bmi-daily .border-6ExhPn {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-generate-bmi-daily .cap-6ExhPn {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .capacity-6ExhPn {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-generate-bmi-daily .wifi-xaNOTb {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-generate-bmi-daily .cellular-connection-xaNOTb {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-generate-bmi-daily .time-style-xaNOTb {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-generate-bmi-daily .time-NPVfvp {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-generate-bmi-daily .bottom-controls-Fd1por {
+  background-color: transparent;
+  cursor: pointer;
+  height: 56px;
+  left: 71px;
+  position: absolute;
+  top: 735px;
+  width: 248px;
+}
+
+.bettermidapp-generate-bmi-daily .button_-mint-FZh05Y {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmi-daily .button1-WZiHbv {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmi-daily .mint-WZiHbv {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.49% - 25px);
+  text-align: center;
+  white-space: nowrap;
+  width: 50px;
+}
+
+.bettermidapp-generate-bmi-daily .bmi-bar-Fd1por {
+  background-color: transparent;
+  height: 36px;
+  left: 39px;
+  position: absolute;
+  top: 633px;
+  width: 312px;
+}
+
+.bettermidapp-generate-bmi-daily .x42-W9pEKc {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: #757575;
+  border-radius: 50px;
+  bottom: -376.32%;
+  height: 312px;
+  left: 147px;
+  position: absolute;
+  transform: rotate(-90deg);
+  width: calc(100.00% - 293px);
+}
+
+.bettermidapp-generate-bmi-daily .x43-W9pEKc {
+  background-color: var(--hot-magenta);
+  border: 1px solid;
+  border-color: var(--hot-magenta);
+  border-radius: 0px 50px 50px 0px;
+  height: 19px;
+  position: absolute;
+  right: 1px;
+  top: calc(47.05% - 9px);
+  width: 56px;
+}
+
+.bettermidapp-generate-bmi-daily .x44-W9pEKc {
+  background-color: var(--neon-carrot);
+  border: 1px solid;
+  border-color: var(--neon-carrot);
+  height: 19px;
+  position: absolute;
+  right: calc(24.05% - 19px);
+  top: calc(47.05% - 9px);
+  width: 79px;
+}
+
+.bettermidapp-generate-bmi-daily .x45-W9pEKc {
+  background-color: var(--keppel);
+  border: 1px solid;
+  /* border-color: var(--keppel); */
+  height: 19px;
+  left: calc(24.14% - 32px);
+  position: absolute;
+  top: calc(47.05% - 9px);
+  width: 134px;
+}
+
+.bettermidapp-generate-bmi-daily .x48-W9pEKc {
+  background-color: var(--royal-blue);
+  border: 1px solid;
+  /* border-color: var(--royal-blue); */
+  border-radius: 50px 50px 0px 0px;
+  bottom: -7.48%;
+  height: 43px;
+  left: 12px;
+  position: absolute;
+  transform: rotate(-90deg);
+  width: 19px;
+}
+
+.bettermidapp-generate-bmi-daily .x546-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  left: 26.47%;
+  object-fit: cover;
+  position: absolute;
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x612-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  left: 11.41%;
+  object-fit: cover;
+  position: absolute;
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x547-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  left: calc(41.53% - 1px);
+  object-fit: cover;
+  position: absolute;
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x548-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  object-fit: cover;
+  position: absolute;
+  right: 41px;
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x549-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  object-fit: cover;
+  position: absolute;
+  right: calc(43.41% - 1px);
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x550-W9pEKc {
+  background-color: transparent;
+  bottom: calc(37.04% - 4px);
+  height: 11px;
+  object-fit: cover;
+  position: absolute;
+  right: 28.35%;
+  width: 2px;
+}
+
+.bettermidapp-generate-bmi-daily .x555-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 23.50%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x556-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 24.71%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x560-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 28.31%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x611-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 13.28%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x561-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 29.82%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x610-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 14.78%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x562-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 31.32%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x609-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 16.29%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x563-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 32.82%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x608-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 17.79%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x564-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 38.84%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x565-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 40.04%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x566-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 34.33%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x607-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 19.29%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x567-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 35.83%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x606-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 20.80%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x568-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 37.34%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x605-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 22.30%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x569-W9pEKc {
+  background-color: transparent;
+  height: 100%;
+  left: calc(43.00% - 1px);
+  object-fit: cover;
+  position: absolute;
+  top: 1px;
+  width: 3px;
+}
+
+.bettermidapp-generate-bmi-daily .x570-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 44.55%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x571-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 46.06%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x572-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 47.56%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x573-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 46.43%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x574-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 45.22%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x575-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 49.06%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x576-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 49.43%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x577-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 47.93%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x578-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 41.92%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x613-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 11.55%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x579-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 40.41%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x614-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 10.04%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x621-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 2.15%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x580-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 38.91%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x615-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 8.54%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x622-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 3.66%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x581-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 37.41%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x616-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 7.04%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x623-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 5.16%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x582-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 31.39%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x583-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 30.19%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x584-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 35.90%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x617-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 5.53%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x624-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 6.66%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x585-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 34.40%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x618-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 4.03%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x625-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 8.17%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x586-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 32.90%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x619-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 2.53%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x626-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  left: 9.67%;
+  object-fit: cover;
+  position: absolute;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x587-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 26.88%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x588-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 25.38%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x589-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 23.88%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x590-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 22.37%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x591-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 51px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x592-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 47px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x593-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 20.87%;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x594-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 60px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x595-W9pEKc {
+  background-color: transparent;
+  bottom: calc(30.30% - 2px);
+  height: 6px;
+  object-fit: cover;
+  position: absolute;
+  right: 56px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmi-daily .x16226-Fd1por {
+  background-color: transparent;
+  height: 16px;
+  left: 31px;
+  position: absolute;
+  top: 586px;
+  width: 328px;
+}
+
+.bettermidapp-generate-bmi-daily .bmi-goal-hRJK8R {
+  background-color: transparent;
+  height: calc(100.00% - 1px);
+  left: calc(38.81% - 23px);
+  position: absolute;
+  top: 0px;
+  width: 60px;
+}
+
+.bettermidapp-generate-bmi-daily .healthy-XoARmf {
+  background-color: transparent;
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 400;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: 46px;
+}
+
+.bettermidapp-generate-bmi-daily .x876-XoARmf {
+  background-color: var(--keppel);
+  border-radius: 8px;
+  height: calc(100.00% - 5px);
+  left: 0px;
+  position: absolute;
+  top: 2px;
+  width: 13px;
+}
+
+.bettermidapp-generate-bmi-daily .today-bmi-hRJK8R {
+  left: 0px;
+  top: 0px;
+  width: 89px;
+}
+
+.bettermidapp-generate-bmi-daily .underweight-nuwbc0 {
+  background-color: transparent;
+  color: var(--royal-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 400;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: 75px;
+}
+
+.bettermidapp-generate-bmi-daily .x877-nuwbc0 {
+  background-color: var(--royal-blue);
+  border-radius: 5px;
+}
+
+.bettermidapp-generate-bmi-daily .today-bmi-dLN1xz {
+  right: calc(27.53% - 22px);
+  top: 0px;
+  width: 81px;
+}
+
+.bettermidapp-generate-bmi-daily .overweight-fJOyTP {
+  background-color: transparent;
+  color: var(--neon-carrot);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 400;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: 67px;
+}
+
+.bettermidapp-generate-bmi-daily .x877-fJOyTP {
+  background-color: var(--neon-carrot);
+  border-radius: 8px;
+}
+
+.bettermidapp-generate-bmi-daily .today-bmi-RPkxVM {
+  right: 0px;
+  top: 1px;
+  width: 53px;
+}
+
+.bettermidapp-generate-bmi-daily .obese-Uyn5Ye {
+  background-color: transparent;
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 400;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: 39px;
+}
+
+.bettermidapp-generate-bmi-daily .x877-Uyn5Ye {
+  background-color: var(--hot-magenta);
+  border-radius: 8px;
+}
+
+.bettermidapp-generate-bmi-daily .bmi-Fd1por {
+  background-color: transparent;
+  height: 151px;
+  left: 1px;
+  position: absolute;
+  top: 407px;
+  width: 389px;
+}
+
+.bettermidapp-generate-bmi-daily .bmi-result-bg-xzTWC0 {
+  background-color: transparent;
+  height: 151px;
+  left: 0px;
+  position: absolute;
+  top: calc(50.00% - 76px);
+  width: 100%;
+}
+
+.bettermidapp-generate-bmi-daily .seperate-line-tCiIF6 {
+  top: 0px;
+  position: absolute;
+}
+
+.bettermidapp-generate-bmi-daily .seperate-line-yGZJUM {
+  bottom: 0px;
+  position: absolute;
+}
+
+.bettermidapp-generate-bmi-daily .bmi-result-xzTWC0 {
+  background-color: transparent;
+  bottom: 22px;
+  height: 48px;
+  position: absolute;
+  right: calc(39.56% - 64px);
+  width: 162px;
+}
+
+.bettermidapp-generate-bmi-daily .bg-jtY5eq {
+  background-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 70.37%;
+}
+
+.bettermidapp-generate-bmi-daily .x255-jtY5eq {
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 36px;
+  left: calc(27.27% - 17px);
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: left;
+  top: calc(33.33% - 12px);
+  white-space: nowrap;
+  width: 63px;
+}
+
+.bettermidapp-generate-bmi-daily .kgm2-jtY5eq {
+  background-color: transparent;
+  bottom: calc(36.21% - 7px);
+  color: var(--royal-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-weight: 400;
+  height: 19px;
+  left: calc(101.64% - 41px);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 40px;
+}
+
+.bettermidapp-generate-bmi-daily .span0-JRVpal {
+}
+
+.bettermidapp-generate-bmi-daily .span1-JRVpal {
+}
+
+.bettermidapp-generate-bmi-daily .title-xzTWC0 {
+  background-color: transparent;
+  height: 36px;
+  left: 54px;
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  top: calc(20.00% - 7px);
+  white-space: nowrap;
+  width: calc(100.00% - 107px);
+  margin: 0;
+}
+
+.bettermidapp-generate-bmi-daily .today-bmi {
+  background-color: transparent;
+  height: calc(100.00% - 1px);
+  position: absolute;
+}
+
+.bettermidapp-generate-bmi-daily .x877 {
+  height: calc(100.00% - 5px);
+  left: 0px;
+  position: absolute;
+  top: 2px;
+  width: 13px;
+}

@@ -1,0 +1,144 @@
+.photo {
+  height: 672px;
+  left: calc((100% - 319px)/ 2);
+  object-fit: cover;
+  position: absolute;
+  top: 91px;
+  width: 319px;
+}
+
+.x0-generateFreeNFT {
+  border-radius: 10px;
+  height: 500px;
+  left: calc((100% - 351px)/ 2);
+  object-fit: cover;
+  position: absolute;
+  top: 135px;
+  width: 351px;
+  z-index: 201;
+}
+
+
+.hidden-content {
+  width: 100vw;
+  height: 100vh;
+  background:#0d0d0da8;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.click-the-area-to-make-it-hidden-again {
+  width: 100%;
+  height: 100%;
+}
+
+.text-1 {
+  color: var(--royal-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  left: calc((100% - 167px)/ 2);
+  letter-spacing: 0;
+  line-height: 28px;
+  position: absolute;
+  text-align: center;
+  top: 105px;
+  white-space: nowrap;
+  margin: 0;
+  z-index: 200;
+}
+
+.continue {
+  letter-spacing: 0;
+  line-height: 14px;
+  min-height: 21px;
+  min-width: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.button_-import {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  cursor: pointer;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  align-content: center;
+  left: calc((100% - 248px)/ 2);
+  width: 248px;
+  /* padding: 13.5px 98px; */
+  flex-wrap: wrap;
+  position: absolute;
+  top: 735px;
+}
+
+.x16206 {
+  align-items: flex-end;
+  display: flex;
+  height: 17px;
+  left: calc((100% - 150px)/ 2);
+  width: 150px;
+  position: absolute;
+  top: 658px;
+  z-index: 201;
+}
+
+.lv-1 {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  min-height: 19px;
+  min-width: 30px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.x6 {
+  align-self: flex-start;
+  height: 15px;
+  margin-left: 8px;
+  margin-top: 0.5px;
+  object-fit: cover;
+  width: 1px;
+}
+
+.reward-10 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  margin-left: 10px;
+  min-height: 19px;
+  min-width: 102px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.x0-signa {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  text-align: center;
+  top: 697px;
+  white-space: nowrap;
+  z-index: 200;
+}

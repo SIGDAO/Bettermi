@@ -1,0 +1,441 @@
+/* screen - bettermidapp-generate-bmidata-import */
+
+.bettermidapp-generate-bmidata-import {
+  background-color: transparent;
+  cursor: pointer;
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-generate-bmidata-import .bg_2-pqhvJT {
+  background-color: transparent;
+  height: 844px;
+  left: 0px;
+  position: absolute;
+  top: -0px;
+  width: 390px;
+}
+
+.disable-isOpen-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.bettermidapp-generate-bmidata-import .bg-1BxzIu {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-generate-bmidata-import .home-indicator-pqhvJT {
+  background-color: transparent;
+  height: 34px;
+  left: 0px;
+  position: absolute;
+  top: 810px;
+  width: 390px;
+}
+
+.bettermidapp-generate-bmidata-import .home-indicator-CChn3U {
+  background-color: var(--white);
+  border-radius: 100px;
+  bottom: calc(27.59% - 1px);
+  height: 5px;
+  left: 121px;
+  position: absolute;
+  width: calc(100.00% - 241px);
+}
+
+.bettermidapp-generate-bmidata-import .icon-arrow-left-pqhvJT {
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  top: 44px;
+  width: 44px;
+}
+
+.bettermidapp-generate-bmidata-import .icon-arrow-left-x0RVVs {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-generate-bmidata-import .bars-status-bar-i-phone-light-pqhvJT {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 390px;
+}
+
+.bettermidapp-generate-bmidata-import .frame-xAxCpN {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmidata-import .status-bar-xAxCpN {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-generate-bmidata-import .battery-fvCpv5 {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-generate-bmidata-import .border-2fTQ0M {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-generate-bmidata-import .cap-2fTQ0M {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-generate-bmidata-import .capacity-2fTQ0M {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-generate-bmidata-import .wifi-fvCpv5 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-generate-bmidata-import .cellular-connection-fvCpv5 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-generate-bmidata-import .time-style-fvCpv5 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-generate-bmidata-import .time-B7jQaS {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-generate-bmidata-import .bottom-controls-pqhvJT {
+  background-color: transparent;
+  cursor: pointer;
+  height: 56px;
+  left: 71px;
+  position: absolute;
+  top: 735px;
+  width: 248px;
+}
+
+.bettermidapp-generate-bmidata-import .button_-mint-RUzxTX {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmidata-import .button1-T8l3Om {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-bmidata-import .mint-T8l3Om {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.31% - 51px);
+  text-align: center;
+  white-space: nowrap;
+  width: 104px;
+}
+
+/* .birthday-select-container {
+  width: 164px;
+  top: 580px;
+  left: 68px;
+  position: absolute;
+} */
+
+.bettermidapp-generate-bmidata-import .import-biological-sex-birth-pqhvJT {
+  background-color: transparent;
+  height: auto;
+  /* left: 68px; */
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 580px;
+  white-space: nowrap;
+  width: 100%;
+  margin: 0;
+}
+
+.bettermidapp-generate-bmidata-import .your-selection-cannot-be-changed-later-pqhvJT {
+  background-color: transparent;
+  color: #a6b3bb98;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 400;
+  height: auto;
+  left: 46px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 607px;
+  white-space: nowrap;
+  width: 300px;
+  margin: 0 auto;
+}
+
+
+.bettermidapp-generate-bmidata-import .sex-pqhvJT {
+  background-color: transparent;
+  height: 48px;
+  left: 51px;
+  position: absolute;
+  top: 647px;
+  width: 114px;
+}
+
+.bettermidapp-generate-bmidata-import .x425-oCWL6w {
+  position: relative;
+  width: 114px;
+}
+
+.bettermidapp-generate-bmidata-import .female-cMsATY {
+  background-color: transparent;
+  bottom: 16px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 49px);
+}
+
+.bettermidapp-generate-bmidata-import .arrow-down-cMsATY {
+  height: 10.24%;
+  left: 74.92%;
+  top: 44.88%;
+  width: 7.54%;
+}
+
+.bettermidapp-generate-bmidata-import .bmi-pqhvJT {
+  background-color: transparent;
+  height: 151px;
+  left: 1px;
+  position: absolute;
+  top: 407px;
+  width: 389px;
+}
+
+.bettermidapp-generate-bmidata-import .bmi-result-bg-bL0gm3 {
+  background-color: transparent;
+  height: 151px;
+  left: 0px;
+  position: absolute;
+  top: calc(50.00% - 76px);
+  width: 100%;
+}
+
+.bettermidapp-generate-bmidata-import .seperate-line-IJAMVx {
+  top: 0px;
+  position: absolute;
+}
+
+.bettermidapp-generate-bmidata-import .seperate-line-X2g18V {
+  bottom: 0px;
+  position: absolute;
+}
+
+.bettermidapp-generate-bmidata-import .bmi-result-bL0gm3 {
+  background-color: transparent;
+  bottom: 22px;
+  height: 48px;
+  position: absolute;
+  right: calc(39.56% - 64px);
+  width: 162px;
+}
+
+.bettermidapp-generate-bmidata-import .bg-Gw4eM2 {
+  background-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 70.37%;
+}
+
+.bettermidapp-generate-bmidata-import .x255-Gw4eM2 {
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 36px;
+  left: calc(27.27% - 17px);
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: left;
+  top: calc(33.33% - 12px);
+  white-space: nowrap;
+  width: 63px;
+}
+
+.bettermidapp-generate-bmidata-import .kgm2-Gw4eM2 {
+  background-color: transparent;
+  bottom: calc(36.21% - 7px);
+  color: var(--royal-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-weight: 400;
+  height: 19px;
+  left: calc(101.64% - 41px);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 40px;
+}
+
+.bettermidapp-generate-bmidata-import .span0-IFVIgU {
+}
+
+.bettermidapp-generate-bmidata-import .span1-IFVIgU {
+}
+
+.bettermidapp-generate-bmidata-import .title-bL0gm3 {
+  background-color: transparent;
+  height: 36px;
+  left: 54px;
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  top: calc(20.00% - 7px);
+  white-space: nowrap;
+  width: calc(100.00% - 107px);
+  margin: 0;
+}
+
+.bettermidapp-generate-bmidata-import .photo-pqhvJT {
+  background-color: transparent;
+  border-radius: 20px;
+  height: 288px;
+  left: 64px;
+  object-fit: cover;
+  position: absolute;
+  top: 88px;
+  width: 262px;
+}
+
+.bettermidapp-generate-bmidata-import .arrow-down {
+  background-color: transparent;
+  object-fit: cover;
+  position: absolute;
+}
+
+.bettermidapp-generate-bmidata-import .x425 {
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 48px;
+  left: 0px;
+  top: 0px;
+}
+
+.bettermidapp-generate-bmidata-import .react-calendar {
+  position: absolute;
+  right: 50px;
+  top: calc(647px - 371px);
+  width: 250px;
+  z-index: 99;
+}

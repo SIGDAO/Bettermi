@@ -1,0 +1,127 @@
+.dropdown-container {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  border: 1px solid var(--royal-blue);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 40px;
+  border-radius: 10px;
+  height: 48px;
+  /* width: 136px; */
+  position: absolute;
+  /* left: calc((100% - 136px) / 2);
+  top: 625px; */
+  display: flex;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  /* color: var(--white); */
+  /* line-height: 20px; */
+  cursor: pointer;
+  width: 100%;
+}
+
+.select-image {
+  width: 18px;
+  height: 10px;
+}
+
+.selected-sex {
+  /* left: calc((100% - 56px) / 2); */
+  letter-spacing: 0;
+  line-height: 20px;
+  /* position: absolute; */
+  /* top: 12px; */
+  white-space: nowrap;
+  width: 56px;
+}
+
+
+.dropdown-icon {
+  margin-left: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: calc(114px - 10px);
+  height: 90px;
+  z-index: 9999;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  color: black;
+  background-color: var(--woodsmoke);
+  padding-left: 10px;
+  border: 0;
+}
+
+.dropdown-options li {
+  /* padding: 10px; */
+  list-style: none;
+  cursor: pointer;
+  /* transition: background-color 0.2s ease-in-out; */
+}
+/* .x3308 {
+  align-items: flex-start;
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  left: 0;
+  min-width: 136px;
+  padding: 21.1px 21px;
+  position: absolute;
+  top: 0;
+} */
+
+
+/* date picker */
+.bettermidapp-generate-bmidata-import .birth-pqhvJT {
+  background-color: transparent;
+  height: 48px;
+  left: 175px;
+  position: absolute;
+  top: 647px;
+  width: 164px;
+}
+
+.bettermidapp-generate-bmidata-import .x425-hrEXXf {
+  position: absolute;
+  width: 164px;
+}
+
+.bettermidapp-generate-bmidata-import .arrow-down-hrEXXf {
+  height: 5px;
+  left: 135px;
+  top: 22px;
+  width: 9px;
+}
+
+.bettermidapp-generate-bmidata-import .ddmmyyyy-Guzcj1 {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 56px);
+}

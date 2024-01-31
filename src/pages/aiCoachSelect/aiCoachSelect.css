@@ -1,0 +1,762 @@
+/* screen - bettermidapp-ai-coach */
+
+.bettermidapp-ai-coach {
+  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
+  background-color: rgba(255,255,255,1.0);
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-ai-coach .bg-O0wesW {
+  background-color: transparent;
+  height: 1176px;
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -47px;
+  width: 480px;
+}
+
+.bettermidapp-ai-coach .bg-C4VecI {
+  background-color: var(--eerie-black);
+  height: 263px;
+  left: 0px;
+  position: absolute;
+  top: 88px;
+  width: 390px;
+}
+
+.bettermidapp-ai-coach .time-indicator-O0wesW {
+  background-color: transparent;
+  height: 15px;
+  left: 24px;
+  position: absolute;
+  top: 343px;
+  width: 342px;
+}
+
+.bettermidapp-ai-coach .x15-pqjZDK {
+  background-color: transparent;
+  bottom: 35.71%;
+  height: 1px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  width: 114px;
+}
+
+.bettermidapp-ai-coach .today-pqjZDK {
+  background-color: transparent;
+  bottom: 0px;
+  height: 17px;
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  opacity: 0.4;
+  position: absolute;
+  right: calc(49.55% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.bettermidapp-ai-coach .x16-pqjZDK {
+  background-color: transparent;
+  bottom: 35.71%;
+  height: 1px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 114px;
+}
+
+.bettermidapp-ai-coach .know-more-about-bettermiio-O0wesW {
+  background-color: transparent;
+  height: auto;
+  left: 16px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: 378px;
+  white-space: nowrap;
+  width: auto;
+  margin: 0;
+}
+
+.bettermidapp-ai-coach .x9-O0wesW::-webkit-scrollbar {
+  display: none;
+  width: 0;
+}
+
+.bettermidapp-ai-coach .x9-O0wesW {
+  background-color: transparent;
+  height: 345px;
+  left: 16px;
+  mix-blend-mode: normal;
+  overflow-y: scroll;
+  position: absolute;
+  top: 414px;
+  width: 358px;
+}
+
+.bettermidapp-ai-coach .bettermi_qa-j4ugSM {
+  background-color: transparent;
+  /* height: 454px; */
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 358px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.bettermidapp-ai-coach .x425-ZFGQqm {
+  width: 171px;
+}
+
+.bettermidapp-ai-coach .what-is-bettermiio-nVZFoH {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 28px);
+  cursor: pointer;
+}
+
+.bettermidapp-ai-coach .size-F1ipSf {
+  left: 0px;
+  top: calc(14.29% - 7px);
+  width: 229px;
+}
+
+.bettermidapp-ai-coach .x425-U7TqLi {
+  width: 229px;
+}
+
+.bettermidapp-ai-coach .how-does-bettermiio-work-4kIHJA {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 28px);
+}
+
+.bettermidapp-ai-coach .size-XuahuD {
+  /* left: calc(50.00% - 160px); */
+  top: calc(28.57% - 14px);
+  width: 320px;
+}
+
+.bettermidapp-ai-coach .x425-CldZpK {
+  width: 320px;
+}
+
+.bettermidapp-ai-coach .what-are-the-key-features-of-bettermiio-MGMwe3 {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 28px);
+  margin: 0;
+}
+
+.bettermidapp-ai-coach .size-pREf5B {
+  left: 0px;
+  top: calc(42.86% - 21px);
+  width: 308px;
+}
+
+.bettermidapp-ai-coach .x425-nCPlS4 {
+  width: 308px;
+}
+
+.bettermidapp-ai-coach .how-can-i-earn-rewards-on-bettermiio-R6LMwU {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 28px);
+}
+
+.bettermidapp-ai-coach .size-MqzVLg {
+  bottom: calc(42.86% - 21px);
+  left: 0px;
+  width: 296px;
+}
+
+.bettermidapp-ai-coach .x425-Q9y5XS {
+  width: 296px;
+}
+
+.bettermidapp-ai-coach .are-the-nf-ts-on-bettermiio-valuable-fWbW1Y {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 15px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 28px);
+}
+
+.bettermidapp-ai-coach .size-d8uTg1 {
+  bottom: calc(28.57% - 14px);
+  /* left: calc(5.80% - 15px); */
+  width: 251px;
+}
+
+.bettermidapp-ai-coach .x425-TexyRD {
+  width: 251px;
+}
+
+.bettermidapp-ai-coach .can-i-connect-with-other-users-k5mvEy {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 11px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 24px);
+}
+
+.bettermidapp-ai-coach .size-D87IBR {
+  bottom: calc(14.29% - 7px);
+  /* left: calc(6.15% - 16px); */
+  width: 255px;
+}
+
+.bettermidapp-ai-coach .x425-glM2wM {
+  width: 255px;
+}
+
+.bettermidapp-ai-coach .is-my-personal-information-safe-KoUJ4p {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 11px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 24px);
+}
+
+.bettermidapp-ai-coach .size-TQoxDx {
+  bottom: 0px;
+  /* left: calc(3.10% - 6px); */
+  width: 191px;
+}
+
+.bettermidapp-ai-coach .x425-I1YSAZ {
+  width: 191px;
+}
+
+.bettermidapp-ai-coach .how-can-i-get-started-CqVjCz {
+  background-color: transparent;
+  bottom: 14px;
+  height: 21px;
+  left: 11px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: calc(100.00% - 24px);
+}
+
+.bettermidapp-ai-coach .title-bar-O0wesW {
+  background-color: transparent;
+  height: 88px;
+  left: 0px;
+  position: fixed;
+  top: -0px;
+  width: 390px;
+}
+
+.bettermidapp-ai-coach .bg-L4Fqzm {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-ai-coach .icon-arrow-left-L4Fqzm {
+  bottom: 0px;
+  height: 44px;
+  left: 16px;
+  width: 44px;
+}
+
+.bettermidapp-ai-coach .icon-arrow-left-lvAQvJ {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-ai-coach .bars-status-bar-i-phone-light-L4Fqzm {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.bettermidapp-ai-coach .frame-qOI8qW {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-ai-coach .status-bar-qOI8qW {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-ai-coach .battery-SgxZlV {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-ai-coach .border-kGvBQj {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-ai-coach .cap-kGvBQj {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-ai-coach .capacity-kGvBQj {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-ai-coach .wifi-SgxZlV {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-ai-coach .cellular-connection-SgxZlV {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-ai-coach .time-style-SgxZlV {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-ai-coach .time-xjBQbt {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-ai-coach .your-ai-coaches-L4Fqzm {
+  background-color: transparent;
+  bottom: 8px;
+  height: 23px;
+  left: calc(28.23% - 40px);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 142px;
+}
+
+.bettermidapp-ai-coach .seperat-line-L4Fqzm {
+  background-color: transparent;
+  bottom: 0px;
+  height: 1px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% - 1px);
+}
+
+.bettermidapp-ai-coach .icon-arrow-left-xKQNPw {
+  bottom: 0px;
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  width: 44px;
+}
+
+.bettermidapp-ai-coach .icon-arrow-left-BSydv2 {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-ai-coach .ic_settings_24px-L4Fqzm {
+  cursor: pointer;
+  height: 20px;
+  right: 29px;
+  top: 56px;
+  width: 19px;
+}
+
+.bettermidapp-ai-coach .ic_settings_24px-2Orjam {
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-ai-coach .write-msg-O0wesW {
+  background-color: transparent;
+  height: 93px;
+  left: 0px;
+  position: absolute;
+  top: 751px;
+  width: 390px;
+}
+
+.bettermidapp-ai-coach .menu_bar_bg-jnPNgT {
+  background-color: transparent;
+  height: calc(100.00% + 60px);
+  left: -30px;
+  object-fit: cover;
+  position: absolute;
+  top: -35px;
+  width: calc(100.00% + 60px);
+}
+
+.bettermidapp-ai-coach .chat-input-jnPNgT {
+  background-color: transparent;
+  height: 36px;
+  left: 25px;
+  position: absolute;
+  top: calc(40.17% - 14px);
+  width: 299px;
+}
+
+.bettermidapp-ai-coach .x123-5EBaGo {
+  background-color: var(--eerie-black);
+  border-radius: 100px;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-ai-coach .ic_send-jnPNgT {
+  height: 18px;
+  right: 25px;
+  top: calc(42.54% - 8px);
+  width: 21px;
+  position: absolute;
+}
+
+.bettermidapp-ai-coach .ic_send-7HEubO {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+  position: absolute;
+}
+
+.bettermidapp-ai-coach .user-O0wesW {
+  background-color: transparent;
+  height: 212px;
+  left: 29px;
+  position: absolute;
+  top: 119px;
+  width: 332px;
+}
+
+.bettermidapp-ai-coach .ai-chatbot_-mmi-NgcGm6 {
+  background-color: transparent;
+  /* cursor: pointer; */
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 162px;
+}
+
+.bettermidapp-ai-coach .bg-Kcwf64 {
+  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: calc(100.00% - 12px);
+  left: 2px;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 10px);
+}
+
+.bettermidapp-ai-coach .ai-chatbot_-mimi-Kcwf64 {
+  background-color: transparent;
+  bottom: 0px;
+  height: 155px;
+  left: 6px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% - 6px);
+}
+
+.bettermidapp-ai-coach .mental-coach-Kcwf64 {
+  background-color: transparent;
+  height: 17px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  opacity: 0.4;
+  position: absolute;
+  text-align: center;
+  top: calc(21.03% - 4px);
+  white-space: nowrap;
+  width: calc(100.00% - 4px);
+}
+
+.bettermidapp-ai-coach .mimi-Kcwf64 {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 16px;
+  white-space: nowrap;
+  width: calc(100.00% - 4px);
+}
+
+.bettermidapp-ai-coach .ai-chatbot_io-NgcGm6 {
+  /* cursor: pointer; */
+  height: calc(100.00% - 9px);
+  right: 0px;
+  top: 0px;
+  width: 156px;
+}
+
+.bettermidapp-ai-coach .bg-aeJf5z {
+  background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: calc(100.00% - 3px);
+  left: 2px;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 4px);
+}
+
+.bettermidapp-ai-coach .ai-chatbot_io-aeJf5z {
+  bottom: 0px;
+  height: 140px;
+  left: 8px;
+  object-fit: cover;
+  width: calc(100.00% - 16px);
+}
+
+.bettermidapp-ai-coach .physical-coach-aeJf5z {
+  background-color: transparent;
+  height: 17px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  opacity: 0.4;
+  position: absolute;
+  text-align: center;
+  top: calc(22.04% - 4px);
+  white-space: nowrap;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-ai-coach .io-aeJf5z {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 16px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.bettermidapp-ai-coach .ai-chatbot_io {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-ai-coach .size {
+  background-color: transparent;
+  height: 48px;
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 48px;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 171px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position: absolute; */
+}
+
+/* .bettermidapp-ai-coach .x425 {
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  height: 48px;
+  left: 0px;
+  position: relative;
+  top: 0px;
+} */
+
+.question-box {
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  /* height: 48px; */
+  /* left: 0px;
+  position: relative;
+  top: 0px; */
+  padding: 15px;
+  width: max-content;
+  max-width: calc(320px - 30px);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.answer-box {
+  background-color: var(--royal-blue);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  /* height: 48px; */
+  /* left: 0px;
+  position: relative;
+  top: 0px; */
+  padding: 15px;
+  width: max-content;
+  max-width: calc(320px - 30px);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.size {
+  margin: 0;
+}
+
+.inter-normal-white-15px {
+  margin: 0;
+}
+
+.talking-container {
+  cursor: pointer;
+}
+
+.ans-container {
+  /* top: 58px;
+  right: 0px;
+  position: absolute; */
+}

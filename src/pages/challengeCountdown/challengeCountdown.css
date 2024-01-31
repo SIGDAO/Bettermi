@@ -1,0 +1,448 @@
+/* screen - bettermidapp-challenges-countdown-1 */
+
+.bettermidapp-challenges-countdown-1 {
+  /* background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+  /* background-color: rgba(255,255,255,1.0); */
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+}
+
+.bettermidapp-challenges-countdown-1 .bg-oEaurv {
+  background-color: transparent;
+  height: 934px;
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -47px;
+  width: 480px;
+}
+
+.bettermidapp-challenges-countdown-1 .x1-hello-bae-gradient-bg-oEaurv {
+  background-color: transparent;
+  cursor: pointer;
+  height: 390px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 116px;
+  width: 390px;
+}
+
+.bettermidapp-challenges-countdown-1 .challenge-content-oEaurv {
+  background-color: transparent;
+  height: 311px;
+  left: 25px;
+  position: absolute;
+  top: 533px;
+  width: 340px;
+}
+
+.bettermidapp-challenges-countdown-1 .layer-D6xMU2 {
+  background-color: transparent;
+  height: calc(100.00% + 60px);
+  left: -30px;
+  object-fit: cover;
+  position: absolute;
+  top: -27px;
+  width: calc(100.00% + 60px);
+}
+
+.bettermidapp-challenges-countdown-1 .countdown-D6xMU2 {
+  background-color: transparent;
+  bottom: calc(23.32% - 21px);
+  height: 88px;
+  position: absolute;
+  right: calc(50.00% - 44px);
+  width: 88px;
+}
+
+.bettermidapp-challenges-countdown-1 .t-countdown-YGwjuf {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .bg-C3TEa1 {
+  background-color: var(--eerie-black);
+  border: 4px solid;
+  border-color: var(--eerie-black);
+  border-radius: 44px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .process-circle-C3TEa1 {
+  background-color: transparent;
+  height: calc(100.00% + 4px);
+  left: -2px;
+  object-fit: cover;
+  position: absolute;
+  top: -2px;
+  width: calc(100.00% + 4px);
+}
+
+.bettermidapp-challenges-countdown-1 .x0023-YGwjuf {
+  background-color: transparent;
+  bottom: calc(46.92% - 11px);
+  height: 23px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  right: calc(47.06% - 25px);
+  text-align: center;
+  white-space: nowrap;
+  width: 54px;
+}
+
+.bettermidapp-challenges-countdown-1 .straighten-your-arms-D6xMU2 {
+  background-color: transparent;
+  height: 19px;
+  left: 17px;
+  letter-spacing: 0.00px;
+  line-height: 21px;
+  position: absolute;
+  text-align: left;
+  top: calc(23.12% - 4px);
+  white-space: nowrap;
+  width: calc(100.00% - 18px);
+  margin: 0;
+}
+
+.bettermidapp-challenges-countdown-1 .challenge-guide-D6xMU2 {
+  background-color: transparent;
+  height: 21px;
+  left: 17px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: 32px;
+  white-space: nowrap;
+  width: 143px;
+}
+
+/* .bettermidapp-challenges-countdown-1 .ic_next-D6xMU2 {
+  background-color: transparent;
+  bottom: calc(27.72% - 12px);
+  height: 44px;
+  position: absolute;
+  right: 32px;
+  width: 44px;
+} */
+
+.bettermidapp-challenges-countdown-1 .ic_chevron_right_24px-0Ajecm {
+  background-color: transparent;
+  height: 12px;
+  left: calc(49.19% - 4px);
+  object-fit: cover;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 7px;
+}
+
+/* .bettermidapp-challenges-countdown-1 .ic_previous-D6xMU2 {
+  background-color: transparent;
+  bottom: calc(27.72% - 12px);
+  height: 44px;
+  left: 32px;
+  position: absolute;
+  width: 44px;
+} */
+
+.bettermidapp-challenges-countdown-1 .ic_chevron_left_24px-hZsyDr {
+  background-color: transparent;
+  height: 12px;
+  left: calc(49.19% - 4px);
+  object-fit: cover;
+  position: absolute;
+  top: calc(50.00% - 6px);
+  width: 7px;
+}
+
+.bettermidapp-challenges-countdown-1 .sigdao-score-D6xMU2 {
+  background-color: transparent;
+  height: 17px;
+  position: absolute;
+  right: 21px;
+  top: 33px;
+  width: 60px;
+}
+
+.bettermidapp-challenges-countdown-1 .x10-ajiZIc {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 42px;
+}
+
+.bettermidapp-challenges-countdown-1 .signdao_tokengradient-ajiZIc {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 17px;
+}
+
+.bettermidapp-challenges-countdown-1 .x441-8JkMaQ {
+  background-color: var(--white);
+  border-radius: 8.26px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .x442-8JkMaQ {
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  background-color: transparent;
+  border-radius: 8.03px;
+  height: 97.18%;
+  left: 1.41%;
+  position: absolute;
+  top: 1.41%;
+  width: 97.18%;
+}
+
+.bettermidapp-challenges-countdown-1 .x880-8JkMaQ {
+  background-color: transparent;
+  height: 54.68%;
+  left: 25.90%;
+  object-fit: cover;
+  position: absolute;
+  top: 22.14%;
+  width: 47.30%;
+}
+
+.bettermidapp-challenges-countdown-1 .goal-sets-D6xMU2 {
+  background-color: transparent;
+  height: 35px;
+  left: 17px;
+  position: absolute;
+  top: calc(39.13% - 14px);
+  width: 120px;
+}
+
+.bettermidapp-challenges-countdown-1 .x895-ku5xY4 {
+  background: linear-gradient(105.02deg, #171717 0.24%, #4136f1 99.66%);
+  background-color: transparent;
+  border-radius: 5px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .x250-ku5xY4 {
+  background-color: transparent;
+  bottom: calc(34.38% - 7px);
+  height: 19px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(47.73% - 36px);
+  text-align: left;
+  white-space: nowrap;
+  width: 76px;
+}
+
+.bettermidapp-challenges-countdown-1 .title-bar-oEaurv {
+  background-color: transparent;
+  height: 88px;
+  left: -0px;
+  position: fixed;
+  top: -0px;
+  width: 390px;
+}
+
+.bettermidapp-challenges-countdown-1 .bg-v2PIYB {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-challenges-countdown-1 .bars-status-bar-i-phone-light-v2PIYB {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .frame-AFGASt {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .status-bar-AFGASt {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-challenges-countdown-1 .battery-L1fd94 {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-challenges-countdown-1 .border-P9D7Sp {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-challenges-countdown-1 .cap-P9D7Sp {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-challenges-countdown-1 .capacity-P9D7Sp {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-challenges-countdown-1 .wifi-L1fd94 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-challenges-countdown-1 .cellular-connection-L1fd94 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-challenges-countdown-1 .time-style-L1fd94 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-challenges-countdown-1 .time-dLMQID {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-challenges-countdown-1 .x1-hello-bae-v2PIYB {
+  background-color: transparent;
+  bottom: 8px;
+  height: 23px;
+  left: calc(25.09% - 28px);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 111px;
+}
+
+.bettermidapp-challenges-countdown-1 .seperat-line-v2PIYB {
+  background-color: transparent;
+  bottom: 0px;
+  height: 1px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% - 1px);
+}
+
+.bettermidapp-challenges-countdown-1 .ic_help_24px-v2PIYB {
+  bottom: 12px;
+  height: 20px;
+  right: 29px;
+  width: 20px;
+}
+
+.bettermidapp-challenges-countdown-1 .ic_help_24px-qbQOdl {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-challenges-countdown-1 .icon-arrow-left-v2PIYB {
+  bottom: 0px;
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  width: 44px;
+}
+
+.bettermidapp-challenges-countdown-1 .icon-arrow-left-cJr6Kj {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}

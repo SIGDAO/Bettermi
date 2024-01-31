@@ -1,0 +1,454 @@
+/* screen - bettermidapp-generate-free-nft-minting */
+
+.bettermidapp-generate-free-nft-minting {
+  background-color: transparent;
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-generate-free-nft-minting .bg_2-JdJl2l {
+  background-color: transparent;
+  height: 844px;
+  left: 0px;
+  position: absolute;
+  top: -0px;
+  width: 390px;
+}
+
+.bettermidapp-generate-free-nft-minting .bg-7ckAMs {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bettermidapp-generate-free-nft-minting .loader-7ckAMs {
+  background-color: transparent;
+  height: 186px;
+  left: calc(50.00% - 90px);
+  position: absolute;
+  top: calc(35.89% - 67px);
+  width: 180px;
+}
+
+.bettermidapp-generate-free-nft-minting .x001-loading-u5QZHJ {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-free-nft-minting .x107-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 20px;
+  height: 40px;
+  left: 16px;
+  position: absolute;
+  top: 120px;
+  width: 40px;
+}
+
+.bettermidapp-generate-free-nft-minting .x108-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 16.52px;
+  height: 33px;
+  left: 147px;
+  position: absolute;
+  top: 107px;
+  width: 33px;
+}
+
+.bettermidapp-generate-free-nft-minting .x109-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 12.39px;
+  height: 25px;
+  left: 133px;
+  position: absolute;
+  top: 26px;
+  width: 25px;
+}
+
+.bettermidapp-generate-free-nft-minting .x110-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 21px;
+  height: 42px;
+  left: 0px;
+  position: absolute;
+  top: 70px;
+  width: 42px;
+}
+
+.bettermidapp-generate-free-nft-minting .x111-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 19.28px;
+  height: 39px;
+  left: 62px;
+  position: absolute;
+  top: 148px;
+  width: 39px;
+}
+
+.bettermidapp-generate-free-nft-minting .x112-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 17.9px;
+  height: 36px;
+  left: 112px;
+  position: absolute;
+  top: 141px;
+  width: 36px;
+}
+
+.bettermidapp-generate-free-nft-minting .x113-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 22.03px;
+  height: 44px;
+  left: 22px;
+  position: absolute;
+  top: 21px;
+  width: 44px;
+}
+
+.bettermidapp-generate-free-nft-minting .x114-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 13.77px;
+  height: 28px;
+  left: 152px;
+  position: absolute;
+  top: 64px;
+  width: 28px;
+}
+
+.bettermidapp-generate-free-nft-minting .x115-MxmV9X {
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%);
+  background-color: transparent;
+  border-radius: 22.72px;
+  height: 45px;
+  left: 75px;
+  position: absolute;
+  top: 0px;
+  width: 45px;
+}
+
+.bettermidapp-generate-free-nft-minting .x50-7ckAMs {
+  background-color: transparent;
+  bottom: 392px;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+  height: 23px;
+  left: calc((100% - 38px)/2);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  width: calc(100.00% - 352px);
+}
+
+.bettermidapp-generate-free-nft-minting .ic_settings_24px-7ckAMs {
+  cursor: pointer;
+  height: 20px;
+  right: 29px;
+  top: 56px;
+  width: 19px;
+}
+
+.bettermidapp-generate-free-nft-minting .ic_settings_24px-alZAUJ {
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-free-nft-minting .ic_sentiment_very_satisfied_24px-7ckAMs {
+  cursor: pointer;
+  height: 20px;
+  right: calc(18.50% - 4px);
+  top: 56px;
+  width: 20px;
+  position: absolute;
+}
+
+.bettermidapp-generate-free-nft-minting .ic_sentiment_very_satisfied_24px-VxvOOd {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-free-nft-minting .icon-arrow-left-JdJl2l {
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  top: 44px;
+  width: 44px;
+}
+
+.bettermidapp-generate-free-nft-minting .icon-arrow-left-cQ3AYZ {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-generate-free-nft-minting .bars-status-bar-i-phone-light-JdJl2l {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 390px;
+}
+
+.bettermidapp-generate-free-nft-minting .frame-PAFj23 {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-generate-free-nft-minting .status-bar-PAFj23 {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-generate-free-nft-minting .battery-9cGPS4 {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-generate-free-nft-minting .border-IlCvJx {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-generate-free-nft-minting .cap-IlCvJx {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-generate-free-nft-minting .capacity-IlCvJx {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-generate-free-nft-minting .wifi-9cGPS4 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-generate-free-nft-minting .cellular-connection-9cGPS4 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-generate-free-nft-minting .time-style-9cGPS4 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-generate-free-nft-minting .time-fIdwUD {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-generate-free-nft-minting .minting-JdJl2l {
+  background-color: transparent;
+  height: auto;
+  /* left: 163px; */
+  /* left: calc((100% - 218.21px)/2); */
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  top: 698px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-default div {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(134.3deg, #4136f1 20.02%, #8643ff 84.24%)#fff;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 37px;
+  left: 66px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 22px;
+  left: 62px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 11px;
+  left: 52px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 7px;
+  left: 37px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 11px;
+  left: 22px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 22px;
+  left: 11px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 37px;
+  left: 7px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 52px;
+  left: 11px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 62px;
+  left: 22px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 66px;
+  left: 37px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 62px;
+  left: 52px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 52px;
+  left: 62px;
+}
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.8);
+  }
+}
+
+.mimi-loading {
+  position: absolute;
+  top: 235px;
+  left: calc(50% - 100px);
+}
+
+.mimi-loading-image {
+  width: 200px;
+  height: 200px
+}
+
+.reminder-text-1, .reminder-text-2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+}
+
+.reminder-text-1 {
+  top: calc(698px + 25px);
+  font-size: 14px;
+}
+
+/* .reminder-text-2 {
+  top: calc(698px + 25px + 15px);
+} */

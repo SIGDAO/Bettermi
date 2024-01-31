@@ -1,0 +1,129 @@
+.webcam-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+/* 'zIndex': '1',
+'display': 'inline-block',
+'position': 'absolute',
+'top': '230px',   
+
+.webcam-container {
+  z-index: 1;
+  display: 'inline-block';
+  position: 'absolute';
+  top: '230px',
+} */
+
+.selfie-shadow {
+  object-fit: contain;
+}
+
+.selfie-shadow-container {
+  background: url("../../../public/img/takeSelfie/Scanning_layer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  background-position: center;
+
+
+  /* width: 819px; */
+  /* height: 461px; */
+
+  
+  box-shadow: 
+    inset 0px 30px 8px -30px var(--royal-blue),
+    inset 0px -30px 8px -30px var(--royal-blue); 
+  top: 0;
+  /* left: calc((100% - 819px) / 2); */
+  z-index: 999;
+}
+
+/* .kyc_scanning {
+  background-image: url(../img/file---1@1x.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 583px;
+  left: 22px;
+  position: absolute;
+  top: 0;
+  width: 390px;
+} */
+video {
+  z-index: 3;
+  /* position: absolute; */
+  /* left: calc((100% - 819px) / 2); */
+}
+
+.disclaimer {
+  display: inline;
+  /* justify-content: center; */
+  /* margin-top: 30px; */
+  /* position: absolute; */
+  text-align: center;
+  /* width: 475px; */
+  height: fit-content;
+  /* left: calc((100% - 450px) / 2); */
+  /* top: calc(676px - 50px) ; */
+}
+
+.disclaimer h3, .disclaimer h4 {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+.animation-containter {
+  width: 819px;
+  display: flex;
+  flex-direction: column;
+  /* top: 529px; */
+  justify-items: center;
+  align-items: center;
+  /* position: absolute; */
+  gap: 10px;
+}
+
+.selfie-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-device-width: 390px) {
+  .disclaimer {
+    /* width: 370px; */
+    left: calc((100% - 370px) / 2);
+    font-size: 13px;
+  }
+  
+}
+
+.percentage-display {
+  color: #39B3AF;
+}
+
+.selfie-content-container .icon-arrow-left {
+  position: absolute !important;
+}
+
+.loading-progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}

@@ -1,0 +1,51 @@
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.CarouselWrapper {
+  width: 250px;
+  font-family: sans-serif;
+  text-align: center;
+  align-items: end;
+  overflow: hidden;
+}
+.inner {
+  white-space: nowrap;
+  transition: transform 0.3s;
+  width: 100%;
+  /* width: 250px;
+  overflow: hidden; */
+}
+
+.dark-bg {
+  background-color: black;
+  height: 100vh;
+  width: 100%;
+}
+
+.carousel {
+  /* height: 185px; */
+  /* background-color: salmon; */
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  width: 250px;
+}
+
+button {
+  margin-right: 5px;
+}
+
+button.active {
+  background-color: salmon;
+}

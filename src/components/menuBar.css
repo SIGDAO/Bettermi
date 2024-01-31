@@ -1,0 +1,134 @@
+.menu-bar-RoXPLo {
+  /* background-color: transparent; */
+  /* background: url('../../public/img/menuBar/menu-bar-bg-1@1x.png'); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* background-position: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  height: 94px;
+  /* left: calc((100% - 820px) / 2); */
+  box-shadow: 0px 3px 30px var(--royal-blue);
+  position: fixed;
+  top: calc(100% - 94px);
+  /* width: 744px; */
+  width: 390px;
+  left: calc((100% - 390px) / 2);
+  background-color: var(--woodsmoke);
+  border-top: 1px solid var(--royal-blue);
+  z-index: 99;
+}
+
+
+.menu_bar_bg-j7gIYx {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  /* position: absolute;
+  top: -42px; */
+  width: calc(100.00% + 90px);
+}
+
+
+.ic_home-container {
+  height: 23px;
+  /* right: calc(49.86% - 13px);
+  top: calc(49.87% - 11px); */
+  width: 27px;
+}
+
+.ic_home-img {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+.ic_profile-container {
+  cursor: pointer;
+  height: 23px;
+  /* right: 38px;
+  top: calc(49.87% - 11px); */
+  width: 23px;
+}
+
+.ic_profile-img {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.ic_rewards-container {
+  background-color: transparent;
+  cursor: pointer;
+  height: 23px;
+  /* position: absolute;
+  right: calc(29.42% - 7px);
+  top: calc(49.86% - 11px); */
+  width: 23px;
+}
+
+/* .ic_rewards-JMXzIu {
+  background-color: transparent;
+  height: 100%;
+  left: 1px;
+  position: relative;
+  top: 1px;
+  width: 100%;
+} */
+
+.ic_-missions-container {
+  /* bottom: calc(48.57% - 8px); */
+  cursor: pointer;
+  height: 16px;
+  /* left: 34px; */
+  width: 29px;
+}
+
+.ic_-missions-img {
+  height: 100%;
+  /* left: 0px; */
+  /* object-fit: cover; */
+  /* top: 0px; */
+  width: 100%;
+}
+
+.ic_-selfie-container {
+  cursor: pointer;
+  height: 23px;
+  /* left: calc(30.19% - 8px);
+  top: calc(49.87% - 11px); */
+  width: 25px;
+}
+
+.ic_-selfie-img {
+  height: 100%;
+  /* left: 1px; */
+  /* object-fit: cover; */
+  /* top: 0px; */
+  width: 100%;
+}
+
+.seperat-line-j7gIYx {
+  background-color: transparent;
+  height: 1px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 1px);
+}
+
+.reward-icon {
+  height: 23px;
+  width: 23px;
+}
+
+a {
+  display: inline;
+}

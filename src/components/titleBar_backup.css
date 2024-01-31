@@ -1,0 +1,103 @@
+.title-bar-P2i95W {
+  /* background: url('/public/img/bg-11@1x.png'); */
+  background: linear-gradient(103deg, #221D4B 0%, #171717 100%);
+  box-shadow: 0px 0px 30px #4136F1;
+  background-position: center;
+  height: 88px;
+  left: calc(50.00% - 195px);
+  position: absolute;
+  top: 0px;
+  width: 390px;
+  z-index: 999;
+}
+
+.bg-sKtgaf {
+  height: calc(100.00% + 90px);
+  top: -45px;
+  width: calc(100.00% + 90px);
+}
+
+.bars-status-bar-i-phone-light-sKtgaf {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+
+.frame-zxxVUE {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+
+.master-collector-sKtgaf {
+  bottom: 8px;
+  height: 23px;
+  left: calc(28.81% - 42px);
+  width: 147px;
+}
+
+.seperat-line-sKtgaf {
+  background-color: transparent;
+  bottom: 0px;
+  height: 1px;
+  left: 1px;
+  object-fit: cover;
+  position: absolute;
+  width: calc(100.00% - 1px);
+}
+
+.ic_help_24px-sKtgaf {
+  position: absolute;
+  bottom: 12px;
+  height: 20px;
+  right: 29px;
+  width: 20px;
+}
+
+.ic_help_24px-m7uK5a {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+
+  top: 0px;
+  width: 100%;
+}
+
+.icon-arrow-left-sKtgaf {
+  bottom: 14px;
+  cursor: pointer;
+  left: 30px;
+  height: 16px;
+  position: absolute;
+}
+
+.icon-arrow-left-ywY1Kj {
+  /* object-fit: cover; */
+
+  height: 16px;
+  width: 16px;
+}
+
+.ic_settings_24px-sKtgaf {
+  bottom: 12px;
+  height: 20px;
+  right: calc(18.62% - 4px);
+  position: absolute;
+  width: 19px;
+}
+
+.ic_settings_24px-z3OtfL {
+  height: 100%;
+  left: 1px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}

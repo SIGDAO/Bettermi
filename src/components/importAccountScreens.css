@@ -1,0 +1,346 @@
+.importAccount-layer {
+    left: calc((100vw - 390px) / 2);
+    align-items: flex-start;
+    background-color: #0d0d0dcb;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 130px;
+    min-height: 844px;
+    padding: 44px 16px;
+    position: absolute;
+    width: 390px;
+    z-index: 999;
+  }
+  
+  .importAccount-icon-arrow-left-3 {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    height: 44px;
+    min-width: 44px;
+    padding: 14.0px 14.0px;
+  }
+  
+  .importAccount-icon-arrow-left {
+    height: 16px;
+    object-fit: cover;
+    width: 16px;
+  }
+  .importAccount {
+    align-items: flex-start;
+    align-self: flex-end;
+    display: flex;
+    height: 358px;
+    margin-right: -33.25px;
+    min-width: 332px;
+  }
+   .overlap-group1-1 {
+    height: 390px;
+    margin-left: -45px;
+    margin-top: -27.0px;
+    position: relative;
+    width: 422px;
+  }
+  .seperate-line-importAccount-1 {
+    height: 90px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 48px;
+    width: 422px;
+  }
+  
+  
+   .importAccountbg {
+    height: 390px;
+    left: 15px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 392px;
+  }
+  
+  .importAccount-seperate-line {
+    height: 1px;
+    left: 46px;
+    object-fit: cover;
+    position: absolute;
+    top: 92px;
+    width: 332px;
+  }
+  
+  .your-n-ft-id {
+    color: var(--royal-blue);
+    font-family: var(--font-family-inter);
+    font-weight: 700;
+    left: 164px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 112px;
+    white-space: nowrap;
+  }
+  
+  .importAccountrewards {
+    display: flex;
+    height: 21px;
+    justify-content: space-between;
+    left: 121px;
+    position: absolute;
+    top: 52px;
+    width: 184px;
+  }
+  
+  .ic_add-1 {
+    margin-bottom: 1.5px;
+    margin-top: 1.5px;
+  }
+  
+  .ic_add-3 {
+    align-items: flex-start;
+    display: flex;
+    min-width: 18px;
+    margin-left: 3px;
+  }
+  
+  .importAccount-overlap-group-1 {
+    height: 18px;
+    position: relative;
+    width: 18px;
+  }
+  
+  .importAccountadd {
+    height: 10px;
+    left: 4px;
+    object-fit: cover;
+    position: absolute;
+    top: 4px;
+    width: 10px;
+  }
+  
+  .importAccountic_add {
+    height: 18px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 18px;
+  }
+  .importAccount-import-your-nft {
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-bottom: -2.5px;
+    margin-right: 5px;
+    margin-top: 0.5px;
+    text-align: center;
+    white-space: nowrap;
+    width: 144px;
+  }
+  
+  .importAccountsearch_bar {
+    background-color: #ffffff08;
+    border-radius: 10px;
+    height: 56px;
+    left: 61px;
+    position: absolute;
+    top: 164px;
+    width: 300px;
+  }
+  
+  .importAccountbutton_save {
+    align-items: flex-end;
+    background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+    border-radius: 10px;
+    box-shadow: 0px 15px 30px #1466cc29;
+    cursor: pointer;
+    display: flex;
+    height: 56px;
+    justify-content: flex-end;
+    left: 87px;
+    min-width: 248px;
+    padding: 13.5px 75px;
+    position: absolute;
+    top: 329px;
+    border:none;
+
+  }
+  .importAccountbutton_save:hover{
+    
+  }
+  
+  .importAccounttext-7 {
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxxl);
+    font-weight: 700;
+    left: 128px;
+    letter-spacing: 0;
+    line-height: 28px;
+    position: absolute;
+    text-align: center;
+    top: 178px;
+    white-space: nowrap;
+  }
+  
+  .importAccount-error-message {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    height: 125px;
+    justify-content: space-between;
+    left: 53px;
+    position: absolute;
+    top: 182px;
+    width: 319px;
+  }
+  .importAccount_error_icon {
+    align-items: flex-start;
+    display: flex;
+    height: 20px;
+    justify-content: flex-end;
+    margin-right: 31.0px;
+    margin-top: 0;
+    min-width: 20px;
+  }
+  
+  .importAccount-x-container {
+    height: 20px;
+    margin-top: 0;
+    position: relative;
+    width: 20px;
+  }
+  .importAccountx11692 {
+    height: 1px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: 16px;
+    width: 1px;
+  }
+  .importAccountx11693 {
+    height: 20px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
+  
+  .importAccount_search_bar-4 {
+    background-color: #FFFFFF08;
+    border-radius: 10px;
+    left: 61px;
+    position: absolute;
+    top:149px;
+  }
+  
+  .importAccount_search_bar-1 {
+    align-items: flex-end;
+    display: flex;
+    height: 56px;
+    min-width: 300px;
+    padding: 16.5px 15px;
+    color: #FFFFFF;
+  }
+  .importAccount-noError {
+    /* color: #f51ee2; */
+    color:#FFFFFF;
+    flex: 1;
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-l);
+    font-weight: 400;
+    height: 61px;
+    letter-spacing: 0;
+    line-height: 21px;
+    margin-bottom: 1.5px;
+    margin-right: -2px;
+    max-height: 61px;
+    text-align: center;
+    margin-top:70px;
+  }
+  .importAccount-hasError {
+    /* color: #f51ee2; */
+    color:#f51ee2;
+    flex: 1;
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-l);
+    font-weight: 400;
+    height: 61px;
+    letter-spacing: 0;
+    line-height: 21px;
+    margin-bottom: 1.5px;
+    margin-right: -2px;
+    max-height: 61px;
+    text-align: center;
+    margin-top:70px;
+  }
+  .importAccountcontinue {
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 14px;
+    min-height: 21px;
+    min-width: 96px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .importAccounterror_icon {
+    align-items: flex-start;
+    display: flex;
+    height: 20px;
+    justify-content: flex-end;
+    margin-right: 31.0px;
+    margin-top: 0;
+    min-width: 20px;
+  }
+
+  .importAccountx-container {
+    height: 20px;
+    margin-top: 165px;
+    position: relative;
+    width: 20px;
+    margin-right: 40px;
+  }
+  
+
+  .importAccountx11692 {
+    height: 1px;
+    left: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: 16px;
+    width: 1px;
+  }
+
+  .importAccountx11693 {
+    height: 20px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
+  .importAccountLoadingPage {
+    height:100px;
+    left:105px;
+    position:absolute;
+    top:-40px;
+    width:100px;
+  }
+  .importSuccessCongrats{
+    color: var(--royal-blue);
+    font-family: var(--font-family-inter);
+    font-weight: 700;
+    left: 140px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 112px;
+    white-space: nowrap;
+  }

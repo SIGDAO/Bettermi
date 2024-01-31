@@ -1,0 +1,1051 @@
+/* screen - bettermidapp-leaderboad-the-best-100 */
+
+.bettermidapp-leaderboad-the-best-100 {
+  align-items: flex-start;
+  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
+  background-color: rgba(255,255,255,1.0);
+  display: flex;
+  height: 844px;
+  justify-content: center;
+  overflow: scroll;
+  width: 390px;
+  margin: 0 auto;
+
+}
+.bettermidapp-leaderboad-the-best-100::-webkit-scrollbar {
+  display: none;
+}
+
+
+.leaderboard_nft_-avatar{
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 110px;
+  /* left: 0px; */
+  object-fit: cover;
+  /* position: absolute;
+  top: 8px; */
+  width: 107px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.31);
+  object-position: top;
+
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%); */
+}
+.first-avatar {
+  height: 107px;
+  width: 107px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+}
+
+.top3-avatar {
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboard_nft_-avatar-top3{
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 80px;
+  /* left: 0px; */
+  object-fit: cover;
+  object-position: top;
+  /* position: absolute;
+  top: 8px; */
+  width: 80px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.32);
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%); */
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.bettermidapp-leaderboad-the-best-100 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader6 {
+  align-items: center;
+  /* background-image: url(../img/bg@1x.png); */
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: -45.48px;
+  min-height: 934px;
+  padding: 45.0px 0;
+  width: 480px;
+  z-index: 1;
+}
+
+.bettermidapp-leaderboad-the-best-100 ._px-container {
+  align-items: flex-start;
+  align-self: flex-end;
+  display: flex;
+  gap: 20px;
+  margin-right: 74.0px;
+  margin-top: 56px;
+  min-width: 59px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .ic_sentiment_very_satisfied_24px {
+  align-self: flex-end;
+  /* background-image: url(../img/ic-sentiment-very-satisfied-24px@1x.png); */
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 20px;
+  width: 20px;
+}
+/* 
+.bettermidapp-leaderboad-the-best-100 .ic_settings_24px {
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 20px;
+  width: 19px;
+} */
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader7 {
+  height: 420px;
+  position: relative;
+  width: 390px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .photo {
+  height: 240px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 390px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .leaderboard-top3 {
+  background: #0D0D0D;
+  border-radius: 20px;
+  border: 1px solid #4136F1;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  /* gap: 10px; */
+  height: 210px;
+  left: 25px;
+  min-width: 340px;
+  padding: 0 9px;
+  position: absolute;
+  top: 210px;
+}
+
+
+.top3-container {
+  width: 95px;
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.first-container {
+  width: 107px;
+  height: 174px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.bettermidapp-leaderboad-the-best-100 .leadboard_st-container {
+  height: 174px;
+  position: relative;
+  width: 212px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .leadboard_1st {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  left: 92px;
+  min-height: 174px;
+  position: absolute;
+  top: 0;
+  width: 120px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader2 {
+  height: 131px;
+  position: relative;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader1 {
+  height: 107px;
+  /* left: 0; */
+  /* position: absolute; */
+  /* top: 5px; */
+  width: 107px;
+  overflow: hidden;
+}
+
+.bettermidapp-leaderboad-the-best-100 .nft_-avatar-2 {
+  height: 110px;
+  left: 13px;
+  position: absolute;
+  top: 19px;
+  width: 107px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
+  transform: scale(1.32); /* Increase the scale to zoom in (e.g., 1.2 for 20% zoom) */
+    /* position: relative;
+    top: 10px; */
+}
+
+.bettermidapp-leaderboad-the-best-100 .crown-with-red-stone {
+  display: flex;
+  height: 39px;
+  left: -13px;
+  position: absolute;
+  top: 0;
+  width: 39px;
+  z-index: 10;
+}
+
+.bettermidapp-leaderboad-the-best-100 .crown-with-red-stone-1 {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  margin-bottom: 8.3px;
+  margin-left: 3.1px;
+  margin-right: 3.1px;
+  margin-top: 8.3px;
+  min-width: 32.81px;
+  transform: rotate(-45.00deg);
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader-1 {
+  height: 37px;
+  margin-left: -10px;
+  margin-top: -6.82px;
+  position: relative;
+  width: 53px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11694 {
+  height: 3px;
+  left: 41px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 3px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11695 {
+  height: 5px;
+  left: 26px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11696 {
+  height: 18px;
+  left: 27px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 18px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11697 {
+  height: 5px;
+  left: 26px;
+  object-fit: cover;
+  position: absolute;
+  top: 7px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11698 {
+  height: 19px;
+  left: 27px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 19px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x16232 {
+  height: 26px;
+  left: 22px;
+  object-fit: cover;
+  position: absolute;
+  top: 5px;
+  transform: rotate(45.00deg);
+  width: 26px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x16233 {
+  height: 26px;
+  left: 22px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 26px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x117 {
+  height: 7px;
+  left: 38px;
+  object-fit: cover;
+  position: absolute;
+  top: 11px;
+  transform: rotate(45.00deg);
+  width: 7px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11704 {
+  height: 22px;
+  left: 23px;
+  object-fit: cover;
+  position: absolute;
+  top: 8px;
+  transform: rotate(45.00deg);
+  width: 22px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11705 {
+  height: 12px;
+  left: 28px;
+  object-fit: cover;
+  position: absolute;
+  top: 21px;
+  transform: rotate(45.00deg);
+  width: 12px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11706 {
+  height: 5px;
+  left: 22px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11707 {
+  height: 18px;
+  left: 7px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 18px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11708 {
+  height: 5px;
+  left: 22px;
+  object-fit: cover;
+  position: absolute;
+  top: 7px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11709 {
+  height: 19px;
+  left: 7px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 19px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11710 {
+  height: 26px;
+  left: 5px;
+  object-fit: cover;
+  position: absolute;
+  top: 5px;
+  transform: rotate(45.00deg);
+  width: 26px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x16234 {
+  height: 26px;
+  left: 5px;
+  object-fit: cover;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45.00deg);
+  width: 26px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x1171 {
+  height: 7px;
+  left: 9px;
+  object-fit: cover;
+  position: absolute;
+  top: 11px;
+  transform: rotate(45.00deg);
+  width: 7px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11714 {
+  height: 1px;
+  left: 12px;
+  object-fit: cover;
+  position: absolute;
+  top: 17px;
+  transform: rotate(45.00deg);
+  width: 1px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11715 {
+  height: 1px;
+  left: 11px;
+  object-fit: cover;
+  position: absolute;
+  top: 11px;
+  transform: rotate(45.00deg);
+  width: 1px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11717 {
+  height: 22px;
+  left: 8px;
+  object-fit: cover;
+  position: absolute;
+  top: 8px;
+  transform: rotate(45.00deg);
+  width: 22px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11718 {
+  height: 6px;
+  left: 18px;
+  object-fit: cover;
+  position: absolute;
+  top: 18px;
+  transform: rotate(45.00deg);
+  width: 6px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11719 {
+  height: 1px;
+  left: 12px;
+  object-fit: cover;
+  position: absolute;
+  top: 19px;
+  transform: rotate(45.00deg);
+  width: 1px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11720 {
+  height: 11px;
+  left: 12px;
+  object-fit: cover;
+  position: absolute;
+  top: 15px;
+  transform: rotate(45.00deg);
+  width: 11px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11721 {
+  height: 5px;
+  left: 22px;
+  object-fit: cover;
+  position: absolute;
+  top: 10px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11722 {
+  height: 12px;
+  left: 13px;
+  object-fit: cover;
+  position: absolute;
+  top: 21px;
+  transform: rotate(45.00deg);
+  width: 12px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11723 {
+  height: 5px;
+  left: 26px;
+  object-fit: cover;
+  position: absolute;
+  top: 10px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11724 {
+  height: 6px;
+  left: 29px;
+  object-fit: cover;
+  position: absolute;
+  top: 18px;
+  transform: rotate(45.00deg);
+  width: 6px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11725 {
+  height: 14px;
+  left: 28px;
+  object-fit: cover;
+  position: absolute;
+  top: 16px;
+  transform: rotate(45.00deg);
+  width: 14px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11727 {
+  height: 6px;
+  left: 35px;
+  object-fit: cover;
+  position: absolute;
+  top: 24px;
+  transform: rotate(45.00deg);
+  width: 6px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11728 {
+  height: 7px;
+  left: 34px;
+  object-fit: cover;
+  position: absolute;
+  top: 23px;
+  transform: rotate(45.00deg);
+  width: 7px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11729 {
+  height: 6px;
+  left: 23px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 6px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11730 {
+  height: 5px;
+  left: 24px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 5px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11731 {
+  height: 4px;
+  left: 40px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 4px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11732 {
+  height: 3px;
+  left: 9px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 3px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x11733 {
+  height: 4px;
+  left: 9px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  transform: rotate(45.00deg);
+  width: 4px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x1st {
+  left: 58px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  white-space: nowrap;
+}
+
+.bettermidapp-leaderboad-the-best-100 .fung_fung00 {
+  letter-spacing: 0;
+  line-height: 19px;
+  margin-bottom: -2px;
+  margin-right: 4.0px;
+  margin-top: 2px;
+  min-height: 17px;
+  text-align: center;
+  white-space: nowrap;
+  width: 97px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .sigdao-score-1 {
+  align-self: center;
+  margin-left: 14.49px;
+  width: 84px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .signdao_tokengradient {
+  align-items: flex-start;
+  background-color: var(--white);
+  border-radius: 8.26px;
+  display: flex;
+  margin-bottom: 0.2px;
+  margin-top: 0.2px;
+  min-width: 16.53px;
+  padding: 0.2px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader {
+  align-items: flex-start;
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  border-radius: 8.03px;
+  display: flex;
+  height: 16px;
+  min-width: 16px;
+  padding: 3.4px 4.0px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x880 {
+  height: 9px;
+  object-fit: cover;
+  width: 8px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10 {
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  margin-right: -2px;
+  margin-top: 1.5px;
+  white-space: nowrap;
+}
+
+.bettermidapp-leaderboad-the-best-100 .leadboard_1st-1 {
+  left: 0;
+  position: absolute;
+  top: 14px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x2nd {
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-left: 1.0px;
+  min-height: 23px;
+  min-width: 26px;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+.bettermidapp-leaderboad-the-best-100 .nft_-avatar {
+  border-radius: 6px;
+  height: 80px;
+  margin-right: 1.0px;
+  margin-top: 1px;
+  object-fit: cover;
+  width: 80px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%);
+  position:relative;
+  top:10px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .son {
+  letter-spacing: 0;
+  line-height: 19px;
+  margin-bottom: -2px;
+  margin-top: 2px;
+  min-height: 17px;
+  text-align: center;
+  white-space: nowrap;
+  width: 97px;
+  overflow: hidden;
+}
+
+.bettermidapp-leaderboad-the-best-100 .sigdao-score-2 {
+  margin-left: 1.0px;
+  width: 76px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-1 {
+  width: 54px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .leadboard_1st-2 {
+  margin-bottom: 5.0px;
+}
+.numberThree{
+  margin-top: 23px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x3rd {
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-left: 1.0px;
+  min-height: 23px;
+  min-width: 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bettermidapp-leaderboad-the-best-100 .sigdao-score-3 {
+  width: 67px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-2 {
+  width: 54px !important;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x26 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 324px;
+  width: 358px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .rewards_card {
+  align-items: center;
+  background-color: var(--woodsmoke);
+  border-radius: 10px;
+  display: flex;
+  height: 80px;
+  min-width: 358px;
+  padding: 0 22px;
+  justify-content: space-between;
+}
+
+.bettermidapp-leaderboad-the-best-100 .number {
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-top: 4.0px;
+  min-height: 23px;
+  min-width: 14px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.home_body_icon_ic_add {
+  height: 12px;
+  width: 12px;
+}
+
+.leaderboard_body_nft_-avatar {
+  height: 40px;
+  width: 40px;
+  background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .nft_-avatar-1 {
+  /* margin-top: 20px; */
+  height: 40px;
+  width: 40px;
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 70%); */
+  transform: scale(1.32);
+}
+.ranking-image-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.bettermidapp-leaderboad-the-best-100 .x300 {
+  letter-spacing: 0;
+  line-height: 13px;
+  margin-left: 10px;
+  margin-top: 4.0px;
+  min-height: 17px;
+  width: 120px;
+  white-space: nowrap;
+}
+
+.bettermidapp-leaderboad-the-best-100 .sigdao-score {
+  display: flex;
+  height: 17px;
+  /* justify-content: space-between; */
+  margin-bottom: 0;
+  width: 65px;
+  gap: 3px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-3 {
+  width: 36px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-4 {
+  width: 50px !important;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-5 {
+  width: 36px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-6 {
+  width: 36px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .title-bar {
+  align-items: flex-start;
+  display: flex;
+  height: 88px;
+  left: 0;
+  min-width: 390px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader2-1 {
+  align-items: flex-end;
+  /* background-image: url(../img/bg-1@1x.png); */
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-left: -45px;
+  margin-top: -45px;
+  min-height: 178px;
+  padding: 44.5px 45.0px;
+  width: 480px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .bars-status-bar-i-phone-light {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  margin-top: 1px;
+  min-width: 390px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader1-1 {
+  height: 107px;
+  position: relative;
+  width: 107px;
+  overflow: hidden;
+}
+
+.bettermidapp-leaderboad-the-best-100 .frame {
+  background-color: var(--white);
+  height: 41px;
+  left: 0;
+  opacity: 0.0;
+  position: absolute;
+  top: 0;
+  width: 390px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .status-bar {
+  align-items: center;
+  display: flex;
+  height: 18px;
+  left: 18px;
+  min-width: 355px;
+  position: absolute;
+  top: 12px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .time-style {
+  display: flex;
+  height: 18px;
+  width: 56px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .time {
+  color: var(--white);
+  flex: 1;
+  font-family: var(--font-family-sfpro_text-semibold);
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  margin-bottom: -2px;
+  margin-right: -2px;
+  text-align: center;
+  width: 56px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .cellular-connection {
+  height: 11px;
+  margin-bottom: 1.0px;
+  margin-left: 232px;
+  object-fit: cover;
+  width: 17px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .wifi {
+  height: 11px;
+  margin-bottom: 1.34px;
+  margin-left: 5px;
+  object-fit: cover;
+  width: 15px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .battery {
+  align-items: center;
+  display: flex;
+  gap: 1px;
+  margin-bottom: 1.0px;
+  margin-left: 5px;
+  min-width: 24px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader-2 {
+  align-items: flex-start;
+  border: 1px solid;
+  border-color: #ffffff59;
+  border-radius: 2.67px;
+  display: flex;
+  height: 11px;
+  min-width: 22px;
+  padding: 1.0px 1px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .capacity {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: 7px;
+  width: 18px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .cap {
+  height: 4px;
+  margin-top: 0;
+  object-fit: cover;
+  width: 1px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader4 {
+  height: 44px;
+  position: relative;
+  width: 389px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .the-best-100 {
+  left: 69px;
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}
+
+.bettermidapp-leaderboad-the-best-100 .overlap-group-leader3 {
+  height: 44px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 389px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .seperat-line {
+  height: 1px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 44px;
+  width: 389px;
+}
+
+/* .bettermidapp-leaderboad-the-best-100 .icon-arrow-left {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  left: 15px;
+  min-width: 44px;
+  padding: 14.0px 14.0px;
+  position: absolute;
+  top: 0;
+}
+
+.bettermidapp-leaderboad-the-best-100 .icon-arrow-left-1 {
+  height: 16px;
+  object-fit: cover;
+  width: 16px;
+} */
+
+.bettermidapp-leaderboad-the-best-100 .leadboard_1st-3 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 147px;
+  width: 97px;
+}
+
+.bettermidapp-leaderboad-the-best-100 .nft_-avatar-3 {
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.bettermidapp-leaderboad-the-best-100 .sigdao-score-4 {
+  display: flex;
+  height: 17px;
+  /* justify-content: space-between; */
+  gap: 3px;
+  margin-top: 6px;
+
+}
+
+.bettermidapp-leaderboad-the-best-100 .x10-7 {
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-bottom: -3.5px;
+  margin-right: -2px;
+  margin-top: 1.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 60px;
+}
+

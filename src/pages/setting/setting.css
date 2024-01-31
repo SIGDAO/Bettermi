@@ -1,0 +1,616 @@
+/* screen - bettermidapp-settings-1 */
+
+.bettermidapp-settings-1 {
+  background: transparent;
+  /* background-color: rgba(255,255,255,1.0); */
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.bettermidapp-settings-1 .bg-7DUKxJ {
+  background-color: transparent;
+  cursor: pointer;
+  height: 917px;
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -45px;
+  width: 480px;
+}
+
+.bettermidapp-settings-1 .bars-status-bar-i-phone-light-7DUKxJ {
+  background-color: transparent;
+  height: 41px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 390px;
+}
+
+.bettermidapp-settings-1 .frame-xpaCij {
+  background-color: var(--white);
+  height: 100%;
+  left: 0px;
+  opacity: 0.0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .status-bar-xpaCij {
+  background-color: transparent;
+  bottom: calc(47.83% - 9px);
+  height: 18px;
+  left: 18px;
+  position: absolute;
+  width: calc(100.00% - 35px);
+}
+
+.bettermidapp-settings-1 .battery-KqfEf3 {
+  background-color: transparent;
+  height: 11px;
+  position: absolute;
+  right: 0px;
+  top: calc(42.50% - 5px);
+  width: 24px;
+}
+
+.bettermidapp-settings-1 .border-7gOqqF {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: var(--white);
+  border-radius: 2.67px;
+  height: 100%;
+  left: 0px;
+  opacity: 0.35;
+  position: absolute;
+  top: 0px;
+  width: calc(100.00% - 2px);
+}
+
+.bettermidapp-settings-1 .cap-7gOqqF {
+  background-color: transparent;
+  bottom: calc(50.00% - 2px);
+  height: 4px;
+  object-fit: cover;
+  position: absolute;
+  right: 0px;
+  width: 1px;
+}
+
+.bettermidapp-settings-1 .capacity-7gOqqF {
+  background-color: var(--white);
+  border-radius: 1.33px;
+  height: calc(100.00% - 4px);
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px;
+}
+
+.bettermidapp-settings-1 .wifi-KqfEf3 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 29px;
+  top: 3px;
+  width: 15px;
+}
+
+.bettermidapp-settings-1 .cellular-connection-KqfEf3 {
+  background-color: transparent;
+  height: calc(100.00% - 7px);
+  object-fit: cover;
+  position: absolute;
+  right: 50px;
+  top: 3px;
+  width: 17px;
+}
+
+.bettermidapp-settings-1 .time-style-KqfEf3 {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 54px;
+}
+
+.bettermidapp-settings-1 .time-XixtqU {
+  background-color: transparent;
+  height: 20px;
+  left: 0px;
+  letter-spacing: -0.30px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: calc(100.00% + 2px);
+}
+
+.bettermidapp-settings-1 .settings-7DUKxJ {
+  height: 656px;
+  left: 16px;
+  top: 107px;
+  width: 358px;
+}
+
+.bettermidapp-settings-1 .layer-azNBHQ {
+  background-color: transparent;
+  height: calc(100.00% + 60px);
+  left: -30px;
+  object-fit: cover;
+  position: absolute;
+  top: -27px;
+  width: calc(100.00% + 60px);
+}
+
+.bettermidapp-settings-1 .cards-azNBHQ {
+  background-color: transparent;
+  height: calc(100.00% - 142px);
+  left: 38px;
+  position: absolute;
+  top: 77px;
+  width: calc(100.00% - 76px);
+}
+
+.bettermidapp-settings-1 .x16185-VD8XDI {
+  background-color: transparent;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .membership-nkDCBT {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16184-RJpkbo {
+  right: 19px;
+  width: 54px;
+}
+
+.bettermidapp-settings-1 .discord-sDy3yd {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: right;
+  top: -2.63%;
+  white-space: nowrap;
+  width: 103.70%;
+}
+
+.bettermidapp-settings-1 .x16186-VD8XDI {
+  background-color: transparent;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  top: 55px;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .invite-friends-MxX0D6 {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16184-QxO6IE {
+  right: 19px;
+  width: 81px;
+}
+
+.bettermidapp-settings-1 .x12345678-lPJi7x {
+  background-color: transparent;
+  height: 21px;
+  left: -65px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: right;
+  top: -2.63%;
+  white-space: nowrap;
+  width: 102.47%;
+}
+
+.bettermidapp-settings-1 .x16187-VD8XDI {
+  background-color: transparent;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  top: calc(23.08% - 9px);
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .wallet-HTBhsQ {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16184-a64QJA {
+  right: 19px;
+  width: 65px;
+}
+
+.bettermidapp-settings-1 .xt-wallet-u2WLwG {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: right;
+  top: -2.63%;
+  white-space: nowrap;
+  width: 103.08%;
+}
+
+.bettermidapp-settings-1 .x16189-VD8XDI {
+  background-color: transparent;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  top: calc(34.63% - 13px);
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .multi-chain-switch-tbbzDm {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16184-6XzBK0 {
+  right: 19px;
+  width: 53px;
+}
+
+.bettermidapp-settings-1 .signum-qeaPIP {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: right;
+  top: -2.63%;
+  white-space: nowrap;
+  width: 103.77%;
+}
+
+.bettermidapp-settings-1 .x16190-VD8XDI {
+  background-color: transparent;
+  bottom: calc(42.29% - 16px);
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .nf-ts-marketplace-aBwqob {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16199-VD8XDI {
+  background-color: transparent;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  top: calc(46.17% - 17px);
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .get-sig-dao-token-R3QCCH {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16192-VD8XDI {
+  background-color: transparent;
+  bottom: calc(30.75% - 12px);
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .terms-of-use-vMQ5ls {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16193-VD8XDI {
+  background-color: transparent;
+  bottom: 92px;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .privacy-policy-Am8TnD {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16223-VD8XDI {
+  background-color: transparent;
+  bottom: 36px;
+  height: 38px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .help-YkYlbF {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .x16222-VD8XDI {
+  background-color: transparent;
+  bottom: 0px;
+  height: 19px;
+  left: 0px;
+  position: absolute;
+  width: calc(100.00% - 1px);
+}
+
+.bettermidapp-settings-1 .x16184-OCPXoe {
+  right: 0px;
+  width: 44px;
+}
+
+.bettermidapp-settings-1 .x0004-pzNHOH {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: right;
+  top: -2.63%;
+  white-space: nowrap;
+  width: 104.55%;
+}
+
+.bettermidapp-settings-1 .version-xPcu6a {
+  background-color: transparent;
+  bottom: 2.63%;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+  width: 101.08%;
+}
+
+.bettermidapp-settings-1 .settings-xeBDcv {
+  height: auto;
+  left: 70px;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  text-align: left;
+  top: 56px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.bettermidapp-settings-1 .icon-arrow-left-7DUKxJ {
+  cursor: pointer;
+  height: 44px;
+  left: 16px;
+  top: 44px;
+  width: 44px;
+}
+
+.bettermidapp-settings-1 .icon-arrow-left-trdL9a {
+  height: 35.44%;
+  left: 31.82%;
+  object-fit: cover;
+  top: 31.82%;
+  width: 36.36%;
+}
+
+.bettermidapp-settings-1 .bottom-controls-7DUKxJ {
+  background-color: transparent;
+  cursor: pointer;
+  height: 56px;
+  left: 71px;
+  position: absolute;
+  top: 735px;
+  width: 248px;
+  border: none;
+}
+
+.bettermidapp-settings-1 .button_-logout-ChdhUr {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .button1-GdXCBJ {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-settings-1 .mintagain-GdXCBJ {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.49% - 26px);
+  text-align: center;
+  white-space: nowrap;
+  width: 52px;
+}
+
+.bettermidapp-settings-1 .ic_sentiment_very_satisfied_24px-7DUKxJ {
+  cursor: pointer;
+  height: 20px;
+  left: 341px;
+  top: 56px;
+  width: 20px;
+  position: absolute;
+}
+
+.bettermidapp-settings-1 .ic_sentiment_very_satisfied_24px-FSbIhl {
+  height: 100%;
+  left: 0px;
+  object-fit: cover;
+  top: 0px;
+  width: 100%;
+}
+
+.brightness-0-5 {
+  filter: brightness(0.5);
+}
+
+.bettermidapp-settings-1 .icon-ionic-ios-arrow-forward {
+  background-color: transparent;
+  height: 33.52%;
+  left: 97.29%;
+  object-fit: cover;
+  position: absolute;
+  top: 10.67%;
+  width: 2.55%;
+}
+
+.bettermidapp-settings-1 .icon-ionic-ios-arrow-forward-inactive {
+  background-color: transparent;
+  height: 33.52%;
+  left: 97.29%;
+  object-fit: cover;
+  position: absolute;
+  top: 10.67%;
+  width: 2.55%;
+  filter: brightness(0.5);
+}
+
+
+.bettermidapp-settings-1 .settings {
+  background-color: transparent;
+  position: absolute;
+}
+
+.bettermidapp-settings-1 .x15 {
+  background-color: transparent;
+  height: 2.67%;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 98.67%;
+  width: 100.00%;
+}
+
+.bettermidapp-settings-1 .x16184 {
+  background-color: transparent;
+  height: 19px;
+  position: absolute;
+  top: 0px;
+}
+
+.bettermidapp-settings-1 .x31 {
+  background-color: transparent;
+  height: 19px;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 186px;
+}

@@ -1,0 +1,427 @@
+.banner_challengeCompleted{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 159px;
+    background-color:blue;
+  width: 392px;
+}
+
+.hi {
+    width:392px;
+    margin:auto;
+  }
+  
+  .main{
+    height:100px;
+  
+    display: flex;
+    flex-direction: row;
+    width:100%;
+  }
+  
+  /* .container1{
+  width:calc(50% - 196px);
+  background-color: aqua;
+  height:159px;
+  } */
+  .container2{
+    display:flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    /* width:min(95vw,820px); */
+    width:392px;
+    background-color: inherit;
+    height:159px;
+    overflow: hidden;
+    justify-content: space-between;
+    box-shadow: 0px 3px 30px var(--royal-blue);
+  }
+  /* @media all and (max-width: 392px) {
+    .container2{
+      width:100% !important;
+    }
+  }
+  @media all and (min-width:392px) and (max-width: 394px) {
+    .container2{
+      width:98% !important;
+    }
+  }
+  @media all and (min-width:394px) and (max-width: 396px) {
+    .container2{
+      width:96% !important;
+    }
+  } */
+  /* .container3{
+    width:calc(50% - 196px);
+    background-color: blue;
+    height:159px;
+    } */
+  .banner{
+    color:aquamarine;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width:392px;
+    align-self: center;
+    height:30px;
+    padding: 0 30px;
+  
+  }
+  .icon{
+    align-self: center;
+    display:flex;
+    margin-left: 15px;
+  }
+  .title{
+    align-self: center;
+    display:flex;
+    /* margin-left: 30px; */
+    /* font-family: 'Inter';
+    font-weight: 600; semiBold */
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxxl);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #FFFFFF;
+    /* padding-right: 85px; */
+  }
+  @media screen and (min-width: 392px) {
+    global {
+      display: fixed;
+    }
+  }
+  
+  .button1{
+    height:50px;
+    background-color: inherit;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    color:#FFFFFF;
+    margin-left: 15px;
+    /* border-color: #39B3AF; */
+    /* font-family: 'Inter';
+    font-weight: 600; /*semiBold*/
+    font-size: 15px; 
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 600;
+    width:100px;
+    border-color: #39B3AF;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    
+  }
+  .button1:hover{
+    border-color: #18efe8;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    
+  }
+ .button2:hover ~ .button1{
+    border-color: inherit   ;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    background-color: aquamarine;
+  }
+  /* .button2:hover{
+    border-color: inherit;
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    
+  } */
+  .button2{
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    color:#FFFFFF;
+    background-color: inherit;
+    height:50px;
+    /* font-family: 'Inter';
+    font-weight: 600; /*semiBold*/
+    font-size: 15px; 
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 600;
+    width:100px;
+  }
+  .button3{
+    border-top:inherit;
+    border-left: inherit;
+    border-right: inherit;
+    border-width: 3px;
+    color:#FFFFFF;
+    background-color: inherit;
+    height:50px;
+    margin-right: 85px;
+    /* font-family: 'Inter';
+    font-weight: 600; /*semiBold*/
+    font-size: 15px; 
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl);
+    font-style: normal;
+    font-weight: 600;
+    width:100px;
+    align-items: start;
+  }
+  .iconChallengeCompleted{
+    height:100%;
+    width:14px;
+    display: flex;
+    align-items: center;
+  }
+  .titleBar{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width:392px;
+    align-self: center;
+    height:50px;
+  }
+  .iconBar{
+    gap: 20px;
+    display:flex;
+    flex-direction:row;
+
+  }
+.navbarChallengeComplete{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 159px;
+    width:100%;
+align-self: flex-start;
+  z-index: 999;
+}
+.mission-body-container{
+    height:calc(100% - 159px);
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.mission-body{
+    display:flex;
+    flex-direction:column;
+    width:392px;
+    min-height: 663px;
+    /* height:calc(100% - 159px); */
+    background:  linear-gradient(112deg, #221D4B 0%, #171717 100%);
+    overflow: auto;
+    margin-top: 88px;
+}
+.mission-body::-webkit-scrollbar {
+  display: none;
+}
+
+.challengeCompletedLink{
+    display:flex;
+    flex-direction:row;
+    height:150px;
+    width: 340px;
+    align-self: center;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    overflow-y:hidden;
+    background-color: #0D0D0D;
+    border: 1px solid #4136F1;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.lock-image {
+  position: absolute;
+  right: 26.5px;
+  top: 18px;
+  width: 15px;
+  height: 20px;
+  z-index: 20;
+}
+
+.challengeCompletedLinkDisabled{
+  position: relative;
+  display:flex;
+  flex-direction:row;
+  height:150px;
+  width: 340px;
+  align-self: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y:hidden;
+  background-color: #0D0D0D;
+  border: 1px solid #4136F1;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.mission-button-content {
+  width: 100%;
+  height: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  opacity: 0.4;
+  /* justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 20px 20px 20px 30px; */
+}
+
+.challengeCompletedLink:hover{
+    cursor: pointer;
+   background-color: #123456;
+
+}
+
+.rewardTitle{
+  margin: 20.48px 0;
+  margin-left: 37px;
+
+    /* width:calc(100% - 50px);
+    align-self: center;
+    height:50px;
+    color:#4136F1;
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxxl);
+    font-style: normal;
+    margin-left:30px; */
+}
+
+.buttonIconChallengeCompleted{
+    height:107px;
+    width:107px;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.descriptionChallengeCompleted{
+    display:flex;
+    flex-direction: column;
+    align-self: center;
+    height:107px;
+    margin-left: 15px;
+    justify-content: space-between;
+    background-color:inherit;
+    width:166px;
+    align-items: start;
+
+}
+.descriptionTitleChallengeCompleted{
+    font-size: 18px; 
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxxl);
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+}
+.descriptionBodyChallengeCompleted{
+    text-align: left;
+    color: #A6B3BB98;
+    margin-right: 10px;
+}
+.descriptionBottomBodyChallengeCompleted{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:calc(100% );
+    align-self: center;
+    height:14px;
+    background-color: inherit;
+    align-items: center;
+}
+.descriptionBottomCountChallengeComplete{
+    width:65px;
+    height:35px;
+    background-color:#171717;
+    border-radius: 5px;
+    color: var(--white);
+    border:hidden;
+}
+.descriptionBottomCountChallengeComplete:hover{
+    cursor: pointer;
+    background-color: #123456;
+}
+
+.sigdaoChallengeCompleted{
+  padding-right: 40px;
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+    font-size: var(--font-size-s);
+    font-style: normal;
+    font-weight: 600;
+}
+.sigdaoIconChallengeCompleted{
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  border-radius: 8px;
+  height:17px;
+
+}
+.arrowChallengeCompleted{
+  padding-bottom: 25px;
+  width:7px;
+  height:12px;
+}
+  /*Anderson's code stops here*/
+
+
+
+
+  .sigdao_tokengradient{
+    background-color: transparent;
+    /* height: 100%; */
+    /* left: 0px;
+    position: absolute; */
+    /* top: 1px; */
+    width: 17px;
+    height: 17px;
+    position: relative;
+  }
+  .x441{
+    background-color: var(--white);
+    border-radius: 8.26px;
+    height: 100%;
+    /* left: 0px; */
+    position: absolute;
+    /* top: 0px; */
+    width: 100%;
+  }
+  .x442{
+    background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+    background-color: transparent;
+    border-radius: 8.03px;
+    height: 97.18%;
+    /* left: 1.41%; */
+    position: absolute;
+    /* top: 1.41%; */
+    width: 97.18%;
+  }
+  .x880{  background-color: transparent;
+    height: 54.68%;
+    /* left: 25.90%; */
+    object-fit: cover;
+    position: absolute;
+    top: calc((100% - 54.68%) / 2);
+    left: calc((100% - 47.30%) / 2);
+    width: 47.30%;}

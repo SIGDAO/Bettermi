@@ -1,0 +1,120 @@
+.title-Gzrq3v {
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 600;
+  width: 282px;
+  margin-left: 40px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.title-Gzrq3v-container {
+  /* width: 100%; */
+  height: auto;
+  left: calc((100% - 390px) /2);
+  letter-spacing: 0.00px;
+  line-height: 40px;
+  position: absolute;
+  text-align: left;
+  top: 479px;
+  width: 390px;
+}
+
+.pick-a-username-Gzrq3v {
+  background-color: transparent;
+  color: #4136f1;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+  height: auto;
+  left: calc((100% - 310px) /2);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: 578px;
+  white-space: nowrap;
+  width: 310px;
+}
+  
+.reserve-your-name-before-its-taken-Gzrq3v {
+  background-color: transparent;
+  color: #a6b3bb98;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+  height: auto;
+  left: calc((100% - 310px) /2);
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  top: 605px;
+  white-space: nowrap;
+  width: 390px;
+  margin: 0;
+}
+
+.button_-save-Gzrq3v {
+  background-color: transparent;
+  cursor: pointer;
+  height: 56px;
+  left: calc((100% - 248px) /2);
+  position: absolute;
+  top: 735px;
+  width: 248px;
+}
+
+.button1-S5Obts {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0px;
+  width: 248px;
+}
+
+.continue-S5Obts {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 600;
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.52% - 19px);
+  text-align: center;
+  white-space: nowrap;
+  width: 38px;
+}
+
+.photo-Gzrq3v {
+  background-color: transparent;
+  border-radius: 20px;
+  height: 500px;
+  left: calc((100% - 333px) /2);
+  object-fit: cover;
+  position: absolute;
+  top: 91px;
+  width: 333px;
+  clip:rect(0,351px,320px,0);
+}
+
+.search-bar-container-customizeYourProfile {
+  left: calc((100% - 310px) /2);
+  position: absolute;
+  top: 645px;
+
+}

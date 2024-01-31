@@ -1,0 +1,173 @@
+/* back button */
+/* .icon-arrow-left {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  left: 16px;
+  min-width: 44px;
+  padding-left: 14px;
+  position: relative;
+  top: 44px;
+} */
+
+.icon-arrow-left-1 {
+  width: 16px;
+}
+
+/* .button_-selfie-to-earn-RoXPLo {
+  cursor: pointer;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
+  height: 56px;
+  width: 326px;
+}
+
+.button_bg-TRrnim {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -30px;
+  width: calc(100.00% + 90px);
+}
+
+.take-a-selfie-to-earn-TRrnim {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(46.02% - 70px);
+  text-align: left;
+  white-space: nowrap;
+  margin: 0;
+  width: 153px;
+}
+
+.ic_selfie-TRrnim {
+  background-color: transparent;
+  bottom: 18px;
+  height: 23px;
+  left: calc(12.39% - 3px);
+  object-fit: cover;
+  position: absolute;
+  width: 25px;
+}
+
+.ic_arrow_forward-TRrnim {
+  background-color: transparent;
+  height: 16px;
+  object-fit: cover;
+  position: absolute;
+  right: calc(10.66% - 2px);
+  top: calc(50.00% - 8px);
+  width: 16px;
+} */
+
+.button_-selfie-to-earn-MUU5YC {
+  /* background-color: transparent; */
+  background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
+  height: 56px;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 108px; */
+  width: 326px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: calc(326px - 37.25px - 33.04px); */
+  padding-left: 37.25px;
+  padding-right: 33.04px;
+}
+
+.button_bg-u8P1YH {
+  background-color: transparent;
+  height: calc(100.00% + 90px);
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+  top: -30px;
+  width: calc(100.00% + 90px);
+}
+
+.take-a-selfie-to-earn-u8P1YH {
+  background-color: transparent;
+  margin: 0;
+  /* bottom: calc(38.57% - 8px); */
+  /* height: 21px; */
+  letter-spacing: 0.00px;
+  line-height: 16px;
+  /* position: relative; */
+  /* right: calc(46.02% - 70px); */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ic_selfie-u8P1YH {
+  background-color: transparent;
+  /* top: 0; */
+  height: 23px;
+  /* left: calc(12.39% - 3px); */
+  object-fit: cover;
+  /* position: relative; */
+  width: 25px;
+}
+
+.ic_arrow_forward-u8P1YH {
+  background-color: transparent;
+  height: 16px;
+  object-fit: cover;
+  /* position: relative;
+  right: 0;
+  top: calc(50.00% - 8px); */
+  width: 16px;
+}
+
+.lock-button-cover {
+  position: relative;
+}
+
+.selfie-time-countdown {
+  color: #4136F1;
+  margin: 0;
+  /* display: inline; */
+}
+
+
+.lock-button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 20;
+  background: #171717E5;
+  border-radius: 15px;
+  border: 1px solid #4136F1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.selfie-time-countdown {
+  margin-top: 30px;
+}
+
+.lock-icon-NavigateToTakeSelfieButton {
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  right: 31.5px;
+}
+
+.selfie-time-countdown-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

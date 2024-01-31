@@ -1,0 +1,18 @@
+#bettermiio_logo {
+  height: 303px;
+  width: 303px;
+  position: absolute;
+  left: calc((100% - 303px) / 2);
+}
+
+
+
+#logoPage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}

@@ -1,0 +1,242 @@
+/* bmi-result-bar */
+.bmi-result-bar {
+  align-items: center;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 279px;
+  min-height: 121px;
+  width: 389px;
+}
+
+.bmi-goal {
+  height: 1px;
+  object-fit: cover;
+  width: 389px;
+}
+
+.flex-row {
+  align-items: flex-end;
+  display: flex;
+  gap: 8px;
+  height: 36px;
+  margin-left: calc((100% - 111px) / 2);
+  margin-top: 16px;
+  min-width: 111px;
+}
+
+.text-2 {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 40px;
+  min-height: 36px;
+  min-width: 63px;
+  white-space: nowrap;
+}
+
+.kgm2 {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: 2.5px;
+  min-height: 19px;
+  min-width: 40px;
+  white-space: nowrap;
+}
+
+/* bmi bar, the x{number} pls just look at bmi-bar.css */
+/* too long don't read them */
+.bmi-bar {
+  height: 36px;
+  margin-right: 0.52px;
+  margin-top: 12px;
+  position: relative;
+  width: 312px;
+  left: calc((100% - 312px) / 2);
+}
+
+.overlap-group {
+  height: 19px;
+  left: calc((100% - 43px) / 2);
+  position: absolute;
+  top: 8px;
+  width: 43px;
+}
+
+.overlap-group1 {
+  height: 36px;
+  left: calc((100% - 312px) / 2);
+  position: absolute;
+  top: 0;
+  width: 312px;
+}
+
+/* bmi-display-container */
+.bmi-display-container {
+  position: absolute;
+  left: calc((100% - 390px) / 2);
+  top: 450px;
+  height: 121px; 
+  width: 390px;
+  border: 1px solid var(--royal-blue);
+  border-width: 1px 0 1px 0;
+}
+
+.bmi-goal-1 {
+  height: 1px;
+  margin-top: 18px;
+  object-fit: cover;
+  width: 389px;
+}
+
+
+/* select - sex */
+.select-your-biological-sex {
+  position: absolute;
+  color: var(--royal-blue);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 20px;
+  left: calc((100% - 240px) / 2);
+  /* margin-top: 20px; */
+  top: 591px;
+  height: 21px;
+  width: 240px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.overlap-group-1 {
+  border-radius: 10px;
+  height: 48px;
+  position: relative;
+  width: 136px;
+}
+
+.size {
+  align-items: flex-start;
+  display: flex;
+  margin-top: 14px;
+  min-width: 136px;
+}
+
+.x3308 {
+  align-items: flex-start;
+  background-color: var(--eerie-black);
+  border: 1px solid;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  display: flex;
+  height: 48px;
+  justify-content: flex-end;
+  left: calc((100% - 136px) / 2);
+  min-width: 136px;
+  padding: 21.1px 21.0px;
+  position: absolute;
+  top: 0;
+}
+
+.female {
+  left: calc((100% - 56px) / 2);
+  letter-spacing: 0;
+  line-height: 20px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+  width: 56px;
+}
+
+
+/* I don't know ah */
+.home-indicator {
+  align-items: flex-end;
+  display: flex;
+  height: 34px;
+  justify-content: flex-end;
+  left: calc((100% - 390px) / 2);
+  min-width: 390px;
+  padding: 8px 120px;
+  position: absolute;
+  top: 810px;
+}
+
+.bmi-photo {
+  border-radius: 20px;
+  height: 288px;
+  left: calc((100% - 262px) / 2);
+  object-fit: cover;
+  position: absolute;
+  top: 88px;
+  width: 262px;
+}
+
+.bmi-result {
+  left: calc((100% - 282px) / 2);
+  letter-spacing: 0;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  top: 396px;
+  white-space: nowrap;
+  width: 282px;
+  margin: 0;
+}
+
+.bottom-controls {
+  display: flex;
+  flex-direction: column;
+  height: 96px;
+  /* justify-content: center; */
+  align-items: center;
+  left: calc((100% - 282px) / 2);
+  position: absolute;
+  top: 696px;
+  width: 282px;
+}
+
+.your-selection-cannot-be-changed-later {
+  flex: 1;
+  height: 21px;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin-right: -2px;
+  margin-top: 2.5px;
+  max-height: 21px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.button_-confirm {
+  align-items: flex-end;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  cursor: pointer;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* margin-left: calc((100% - (100% - 34px)) / 2);
+  margin-right: calc((100% - (100% - 34px)) / 2); */
+  height: 56px;
+  width: 248px;
+  /* padding: 13.5px 93px; */
+}
+
+.confirm-bmi {
+  letter-spacing: 0;
+  /* line-height: 14px; */
+  min-height: 21px;
+  min-width: 60px;
+  text-align: center;
+}

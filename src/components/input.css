@@ -1,0 +1,93 @@
+.search_bar-Gzrq3v {
+  background-color: transparent;
+  height: 56px;
+  width: 310px;
+}
+
+
+.search-AToI7d {
+  cursor: text;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff08;
+  border-radius: 10px;
+  height: inherit;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 300px;
+}
+
+.card-number-AToI7d::placeholder {
+  color: white;
+}
+
+.card-number-AToI7d {
+  bottom: calc(44.29% - 9px);
+  color: var(--white);
+  font-size: var(--font-size-l);
+  height: 100%;
+  margin-left: 15px;
+  width: 180px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-family: var(--font-family-inter);
+  background-color: transparent;
+}
+
+.random-dice-AToI7d {
+  cursor: pointer;
+  background-color: transparent;
+  height: 17px;
+  /* position: absolute; */
+  /* right: 20px; */
+  width: 79px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.card-number-zhUTxv {
+  color: #39b3af;
+  font-size: var(--font-size-m);
+  /* height: 19px; */
+  /* left: calc(100% / 2); */
+  /* top: 8.82%; */
+  /* white-space: nowrap; */
+  width: 56px;
+}
+
+.ic_casino_24px-zhUTxv {
+  background-color: transparent;
+  height: 15px;
+  object-fit: cover;
+  /* position: absolute;
+  right: 0px;
+  top: 1px; */
+  width: 15px;
+}
+
+.customTextArea::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.customTextArea {
+  padding: 19.5px 15px;
+  resize: none;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+}
+
+.customInput {
+  padding: 3.1px 15px;
+  top: 512px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+}

@@ -1,0 +1,588 @@
+/* screen - bettermidapp-rewards-redeem-master-collector-1 */
+
+.bettermidapp-rewards-redeem-master-collector-1 {
+  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
+  background-color: rgba(255,255,255,1.0);
+  height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 div {
+  
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .bg-P2i95W {
+  height: 934px;
+  top: -47px;
+  width: 480px;
+}
+
+
+.bettermidapp-rewards-redeem-master-collector-1 .photo-P2i95W {
+  background-color: transparent;
+  height: 230px;
+  left: 0px;
+  object-fit: cover;
+  position: absolute;
+  top: 88px;
+  width: 390px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .layer-P2i95W {
+  background-color: transparent;
+  height: 586px;
+  left: -30px;
+  object-fit: cover;
+  position: absolute;
+  top: 291px;
+  width: 450px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .button_-redeem-P2i95W {
+  background-color: transparent;
+  height: 56px;
+  left: 38px;
+  position: absolute;
+  top: 611px;
+  width: 248px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .button1-r8fHLz {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .continue-r8fHLz {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.46% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .profile-content-P2i95W {
+  background-color: transparent;
+  height: 451px;
+  left: 38px;
+  position: absolute;
+  top: 348px;
+  width: 319px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .master-collector-tOBH5R {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  height: 28px;
+  left: 0px;
+  top: 3px;
+  width: 179px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .unlocked-by-users-wh-tOBH5R {
+  background-color: transparent;
+  height: 103px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 21px;
+  position: absolute;
+  text-align: left;
+  top: calc(23.71% - 24px);
+  width: calc(100.00% + 2px);
+  margin: 0;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .better-mi-reserves-t-tOBH5R {
+  background-color: transparent;
+  bottom: 2px;
+  height: 38px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 21px;
+  position: absolute;
+  text-align: left;
+  width: 100%;
+  margin: 0;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .score-bar_3-tOBH5R {
+  background-color: transparent;
+  height: 22px;
+  left: calc(27.33% - 15px);
+  position: absolute;
+  top: 46px;
+  width: 56px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .sigdao-score-oG1yRx {
+  background-color: transparent;
+  height: 22px;
+  position: absolute;
+  right: 0px;
+  top: calc(50.00% - 11px);
+  width: 56px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x10-ZdA7kA {
+  background-color: transparent;
+  height: calc(100.00% - 1px);
+  letter-spacing: 0.00px;
+  line-height: 15px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 3px;
+  white-space: nowrap;
+  width: 31px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .signdao_tokengradient-ZdA7kA {
+  background-color: transparent;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 22px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x441-hzgF5j {
+  background-color: var(--white);
+  border-radius: 10.76px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x442-hzgF5j {
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  background-color: transparent;
+  border-radius: 10.46px;
+  height: 97.18%;
+  left: 1.41%;
+  position: absolute;
+  top: 1.41%;
+  width: 97.18%;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x880-hzgF5j {
+  background-color: transparent;
+  height: 54.68%;
+  left: 25.91%;
+  object-fit: cover;
+  position: absolute;
+  top: 22.14%;
+  width: 47.29%;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .sigdao-tOBH5R {
+  background-color: transparent;
+  height: 21px;
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 15px;
+  position: absolute;
+  text-align: left;
+  top: 49px;
+  white-space: nowrap;
+  width: 64px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .goal-data-P2i95W {
+  background-color: transparent;
+  height: 36px;
+  left: 38px;
+  position: absolute;
+  top: 555px;
+  width: 65px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x893-LfPhsf {
+  background-color: var(--eerie-black);
+  border-radius: 5px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 0;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .goal-LfPhsf {
+  background-color: transparent;
+  height: 17px;
+  left: calc(49.25% - 16px);
+  position: absolute;
+  top: calc(46.13% - 8px);
+  width: 32px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x0-ucGgAD {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 11px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x3-ucGgAD {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 20px;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .bg {
+  background-color: transparent;
+  left: -45px;
+  object-fit: cover;
+  position: absolute;
+}
+
+
+
+.bettermidapp-rewards-redeem-master-collector-1 .master-collector {
+  background-color: transparent;
+  letter-spacing: 0.00px;
+  line-height: 20px;
+  position: absolute;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .x250-FtIem3 {
+  background-color: transparent;
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  height: calc(100% - 430px);
+  letter-spacing: 0px;
+  line-height: 15px;
+  position: absolute;
+  right: 76px;
+  text-align: left;
+  top: 38px;
+  white-space: nowrap;
+  width: 243px;
+  margin: 0;
+}
+
+.bettermidapp-rewards-redeem-master-collector-1 .earned-by-users-who-B1MGte {
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+  height: 124px;
+  left: 0px;
+  letter-spacing: 0px;
+  line-height: 21px;
+  position: absolute;
+  text-align: left;
+  top: 62px;
+  width: calc(100% + 2px);
+  margin: 0;
+}
+
+.x3-xfYnWc {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 28px;
+}
+
+.goal-data-HSU6AE {
+  background-color: transparent;
+  height: 36px;
+  left: 38px;
+  position: absolute;
+  top: 550px;
+  width: 65px;
+}
+
+.goal-i4N5X2 {
+  background-color: transparent;
+  height: 17px;
+  left: calc(50.00% - 20px);
+  position: absolute;
+  top: calc(46.13% - 8px);
+  width: 40px;
+}
+
+.x0-LOKbtF {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 11px;
+}
+
+.x3-LOKbtF {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 29px;
+}
+
+.button_-redeem-HSU6AE {
+  background-color: transparent;
+  height: 56px;
+  left: 38px;
+  position: absolute;
+  top: 601px;
+  width: 248px;
+}...button1-HGc5Lx {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.bettermidapp-rewards-redeem-selfie-champion-1 .continue-HGc5Lx {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.46% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.button1-HGc5Lx {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.continue-HGc5Lx {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.46% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.goal-data-3v78GY {
+  background-color: transparent;
+  height: 36px;
+  left: 38px;
+  position: absolute;
+  top: 529px;
+  width: 65px;
+}
+
+.goal-w4f5nL {
+  background-color: transparent;
+  height: 17px;
+  left: calc(50.00% - 20px);
+  position: absolute;
+  top: calc(46.13% - 8px);
+  width: 40px;
+}
+
+.x0-xfYnWc {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 11px;
+}
+
+.x3-xfYnWc {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 28px;
+}
+
+
+.button_-redeem-3v78GY {
+  background-color: transparent;
+  height: 56px;
+  left: 38px;
+  position: absolute;
+  top: 580px;
+  width: 248px;
+}
+
+.button1-H7SwXN {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.continue-H7SwXN {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.46% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.goal-data-sI1BHm {
+  background-color: transparent;
+  height: 36px;
+  left: 38px;
+  position: absolute;
+  top: 550px;
+  width: 65px;
+}
+
+.goal-uivXzE {
+  background-color: transparent;
+  height: 17px;
+  left: calc(50.00% - 20px);
+  position: absolute;
+  top: calc(46.13% - 8px);
+  width: 40px;
+}
+
+.x0-L2kRRH {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  left: 0px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 11px;
+}
+
+.x3-L2kRRH {
+  background-color: transparent;
+  height: calc(100.00% + 2px);
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: -2px;
+  text-align: left;
+  top: 2px;
+  white-space: nowrap;
+  width: 29px;
+}
+
+.button_-redeem-sI1BHm {
+  background-color: transparent;
+  height: 56px;
+  left: 38px;
+  position: absolute;
+  top: 601px;
+  width: 248px;
+}
+
+.button1-diHELh {
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.continue-diHELh {
+  background-color: transparent;
+  bottom: calc(38.57% - 8px);
+  height: 21px;
+  letter-spacing: 0.00px;
+  line-height: 14px;
+  position: absolute;
+  right: calc(49.46% - 31px);
+  text-align: center;
+  white-space: nowrap;
+  width: 62px;
+}
