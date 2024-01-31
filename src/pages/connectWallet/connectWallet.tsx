@@ -23,16 +23,20 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   localStorage.clear();//Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/'"/g, '');
-  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace(/'"/g, ''); // the code hash of the NFT contract
-  const assetId = process.env.REACT_APP_TOKEN_ID!.replace(/'"/g, '');
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace(/'"/g, '');
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!.replace(/'"/g, '');
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!.replace(/'"/g, '');
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', '');
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ''); // the code hash of the NFT contract
+  const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', '');
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', '');
+  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!.replace('"', '');
+  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!.replace('"', '');
   store.dispatch({ type: "USER_LOGOUT" });
+
+
+
   const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
     //const wallet = new GenericExtensionWallet();
     let key: string;
+
     Wallet.Extension.connect({ appName, networkName: Ledger.Network })
       .then(async (wallet: any) => {
         key = wallet.publicKey;
@@ -56,11 +60,11 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
         const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
 
-        console.log(codeHashId);
+        console.log(codeHashId, );
 
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,
-          machineCodeHash: codeHashId.replace(/'"/g, ''),
+          machineCodeHash: codeHashId.replace('"', ''),
         });
         ledger.asset.getAssetHolders({ assetId: assetId }).then((asset) => {
           for (var i = 0; i < asset.accountAssets.length; i++) {
@@ -138,6 +142,8 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       // todo: add error handling, and show it to user
       .catch((error: any) => {
         if (error.name === "InvalidNetworkError") {
+          // console.log("wallet", Wallet);
+          // console.log(error)
           alert(
             "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
           );
@@ -169,7 +175,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           </Link>
           <ButtonWithAction
             text="XT wallet"
-            action={() => connectWallet(appName, Wallet, Ledger)} // TODO: add action to connect wallet
+            action={() => setTimeout(() => connectWallet(appName, Wallet, Ledger), 5000)} // TODO: add action to connect wallet
             height="56px"
             width="150px"
           />

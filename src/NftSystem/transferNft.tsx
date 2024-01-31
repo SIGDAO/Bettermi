@@ -195,7 +195,6 @@ export const TransferNft = async (
   nftDistributorPrivateKey: string
 ) => {
   //const nftStorageAccounts:string[] = ["15665755121650078056","4706959057956461088"];
-  console.log("nftStorageAccounts", nftStorageAccounts);
   var nftStorageAccount = nftStorageAccounts![Math.floor(Math.random() * nftStorageAccounts!.length)]; //Pick a random account from the storage
   console.log(nftStorageAccount, "nftStorageAccount");
   var nftList = await getNftList(ledger2, nftStorageAccount, nftDistributor);

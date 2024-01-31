@@ -5,7 +5,7 @@ const Networks = {
   };
   
   // Here you can assign on which network you want to work
-  const selectedNetwork = Networks.MainNet;
+  const selectedNetwork = Networks.TestNet;
   
   // Here you can assign the dApp name
   const appName = "bettermi.io dapp";

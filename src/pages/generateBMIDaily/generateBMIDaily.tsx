@@ -33,7 +33,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const navigate = useNavigate();
   const ledger = useLedger();
   const dispatch = useDispatch();
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, ''); // the code hash of the BMI contract
 
   const handleImport = async () => {
     if (!ledger) return;

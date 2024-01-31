@@ -211,7 +211,7 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
       })
       .catch((err) => {
         console.log(err);
-        checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/'"/g, ''));
+        checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', ''));
       })
     console.log(isActive)
   }, [])
