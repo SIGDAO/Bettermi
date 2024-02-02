@@ -9,6 +9,7 @@ import { FindNftIpfsAddressWithConractId, IsUserUpdatingIcon } from "../../NftSy
 import { useLedger } from "../../redux/useLedger";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "../../redux/profile";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface GenerateFreeNFTProps {}
 
@@ -51,7 +52,8 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         <div className="x0-generateFreeNFT"></div>
       ) : (
         <>
-          <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" />
+          {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" /> */}
+          <IPFSImageComponent classname="x0-generateFreeNFT" imgAddress={nftIpfsAddress} />
           <h1 className="text-1">#{nftNumber}</h1>
         </>
       )}

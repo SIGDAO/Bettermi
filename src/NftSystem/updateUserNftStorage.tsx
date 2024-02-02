@@ -467,11 +467,32 @@ export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor
 }
 
 export async function FindNftIpfsAddressWithConractId(ledger2:any,nftId:string){
+    let res, text;
     const contractInfo = await ledger2.contract.getContract(nftId);
     const trial = JSON.parse(contractInfo.description);
-    //console.log("trial.descriptor is ",trial.descriptor);   
-    const res = await fetch(`https://ipfs.io/ipfs/${trial.descriptor}`);
-    const text = await res.text();
+    //console.log("trial.descriptor is ",trial.descriptor);
+    const domains = [
+        `https://gateway.pinata.cloud/ipfs/${trial.descriptor}`,
+        `https://ipfs.io/ipfs/${trial.descriptor}`,
+        `https://${trial.descriptor}.ipfs.dweb.link/`,
+        `https://cloudflare-ipfs.com/ipfs/${trial.descriptor}`,
+        `https://pfs.eth.aragon.network/ipfs/${trial.descriptor}`,
+        `https://video.oneloveipfs.com/ipfs/${trial.descriptor}`,
+        `https://ipfs.eth.aragon.network/ipfs/${trial.descriptor}`,
+    ];
+    let index = 0;
+    while (true) {
+        const ipfsAddress = domains[index];
+        try {
+            res = await fetch(ipfsAddress);
+            text = await res.text();
+            break;
+        }
+        catch (error){
+            console.log(error);
+            index = (index + 1) % domains.length
+        }    
+    }
     const nftInfo = JSON.parse(text);
     let matches = nftInfo.name.match(/(\d+)/);
     const nftNumber = matches[0].toString().padStart(8, '0');
