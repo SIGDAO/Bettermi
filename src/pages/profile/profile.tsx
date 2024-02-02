@@ -9,6 +9,7 @@ import { accountId } from "../../redux/account";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
+import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
 
 interface IProfileProps {}
 
@@ -19,14 +20,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-
-  useEffect(() => {
-    if (state?.previousPath === "/customizeYourProfile") {
-      setIsOpen(true);
-      setIsBackButton(false);
-      window.history.replaceState({}, document.title);
-    }
-  }, []);
+  const [rewardPercentage, setRewardPercentage] = useState<string>("0");
 
   /* Function to check whether we are updating personal information*/
   const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
@@ -34,6 +28,8 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+
+
   const checkIsLoading = async () => {
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     console.log(messages);
@@ -52,6 +48,21 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
 
   useEffect(() => {
     checkIsLoading();
+  }, []);
+
+  useEffect(() => {
+    if (state?.previousPath === "/customizeYourProfile") {
+      setIsOpen(true);
+      setIsBackButton(false);
+      window.history.replaceState({}, document.title);
+    }
+    GetRewardPercentage(ledger2, userAccountId)
+      .then((res) => {
+        setRewardPercentage(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   /* Function to check whether we are updating personal information*/
@@ -74,9 +85,9 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
               <div className="x16206">
                 <div className="lv-1">LV 1</div>
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD +5%</div>
+                <div className="reward-10">REWARD +{rewardPercentage}%</div>
               </div>
-              {/* <div className="x0-signa">$0 SIGNA</div> */}
+              <div className="x0-signa">$0 SIGNA</div>
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
               <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
             </div>

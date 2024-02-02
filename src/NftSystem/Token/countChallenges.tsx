@@ -46,7 +46,9 @@ async function getWorldTime() {
     const response = await fetch("https://worldtimeapi.org/api/ip");
     console.log("response is", response);
     const data = await response.json();
+    console.log("data is", data);
     const dateTime = new Date(data.datetime);
+    console.log("dateTime is", dateTime);
     var dateString = dateTime.toLocaleString();
     console.log("Current world time:", dateTime.toLocaleString());
 
@@ -73,8 +75,11 @@ async function getWorldTime() {
   const month = date.getMonth()+1;
   const year = date.getFullYear();
   console.log("day is",day);
-  console.log("month is",month+1);
+  console.log("month is",month);
   console.log("year is",year);
+  console.log("typeof day is",typeof day);
+  console.log("typeof month is",typeof month);
+  console.log("typeof year is",typeof year);
   // Get today's date
 
   const todayDay = parseInt(today[0]);
@@ -83,6 +88,9 @@ async function getWorldTime() {
   console.log(todayDay);
   console.log(todayMonth);
   console.log(todayYear);
+  console.log("typeof todayDay is",typeof todayDay);
+  console.log("typeof todayMonth is",typeof todayMonth);
+  console.log("typeof todayYear is",typeof todayYear);
   // Check if the extracted date matches today's date
   const isToday = (day === todayDay && month === todayMonth && year === todayYear);
 
@@ -107,7 +115,7 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
     const unconfirmedTransaction = await Ledger2.account.getUnconfirmedAccountTransactions(accountId);
     console.log(unconfirmedTransaction);
     const today = await getWorldTime();
-    console.log(today);
+    console.log("today from api is",today);
     if(today == null){
       return [3,3,3,3,3,3,3,3,3];
     }

@@ -19,7 +19,7 @@ interface AllNftProps {
 }
 
 const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
-  const { imgAddress, setPopUpIcon, popUpIcon,disabled } = props;
+  const { imgAddress, setPopUpIcon, popUpIcon, disabled } = props;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -47,7 +47,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             {disabled ===true?
             <></>
             
-            :<div className="x0-signa">${} SIGDAO</div>
+            :<div className="x0-signa">${} SIGNA</div>
       }
             <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
             <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
@@ -63,11 +63,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
             <div className="reward-10">REWARD +{imgAddress.nftReward}%</div>
           </div>
-          {disabled?
-          <></>
-          :
-          <div className="x0-signa">${imgAddress.nftPrice} SIGDAO</div>
-      }
+          <div className="x0-signa" style={{'position': 'absolute'}}>$0 SIGNA</div>
           <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
           <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
           </div>

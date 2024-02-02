@@ -31,14 +31,25 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!.replace('"', '');
   store.dispatch({ type: "USER_LOGOUT" });
 
-
+  // const [isClicked, setIsClicked] = React.useState(false);
 
   const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
     //const wallet = new GenericExtensionWallet();
     let key: string;
 
+    // console.log("isClicked in connectWallet", isClicked);
+
+    // setIsClicked(true);
+
+    // console.log("isClicked in connectWallet after setIsClicked", isClicked);
+
+
+    console.log("wallet", Wallet);
+    console.log("appName", appName);
+    console.log("networkName", Ledger.Network);
     Wallet.Extension.connect({ appName, networkName: Ledger.Network })
       .then(async (wallet: any) => {
+
         key = wallet.publicKey;
         const import_account: Address = Address.fromPublicKey(key, Ledger.AddressPrefix);
         const accountinfo: userAccount = {
@@ -59,8 +70,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         const ledger = LedgerClientFactory.createClient({ nodeHost: wallet.currentNodeHost });
         const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
         const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
-
-        console.log(codeHashId, );
 
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,
@@ -134,13 +143,17 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           // console.log(gender);
           // console.log(ourContract.ats[0]);
           //navigate('/connectSucceed');
+          // setIsClicked(false);
           navigate("/home");
         } else {
+
+          // setIsClicked(false);
           navigate("/connectSucceed");
         }
       })
       // todo: add error handling, and show it to user
       .catch((error: any) => {
+        console.log("error", error);
         if (error.name === "InvalidNetworkError") {
           // console.log("wallet", Wallet);
           // console.log(error)
@@ -151,6 +164,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         if (error.name === "NotFoundWalletError") {
           window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
         }
+        // setIsClicked(false);
       });
   };
 
@@ -175,7 +189,12 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           </Link>
           <ButtonWithAction
             text="XT wallet"
-            action={() => setTimeout(() => connectWallet(appName, Wallet, Ledger), 5000)} // TODO: add action to connect wallet
+            action={
+              () => {
+                // console.log("isClicked", isClicked);
+                // if (isClicked === true) return;
+                connectWallet(appName, Wallet, Ledger)
+              }} // TODO: add action to connect wallet
             height="56px"
             width="150px"
           />
