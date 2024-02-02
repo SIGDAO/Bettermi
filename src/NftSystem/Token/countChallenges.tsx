@@ -47,20 +47,30 @@ async function getWorldTime() {
     console.log("response is", response);
     const data = await response.json();
     console.log("data is", data);
-    const dateTime = new Date(data.datetime);
-    console.log("dateTime is", dateTime);
-    var dateString = dateTime.toLocaleString();
-    console.log("Current world time:", dateTime.toLocaleString());
 
-    const [datePart, timePart] = dateString.split(", ");
+    const [datePart, timePart] = data.datetime.split("T");
+    const [year, month, day] = datePart.split("-");
+    console.log("year is", year);
+    console.log("month is", month);
+    console.log("day is", day);
+    return [day, month, year];
 
-// Split the date part into day, month, and year
 
-    const [day, month, year] = datePart.split("/");
-    console.log(day);
-    console.log(month);
-    console.log(year);
-    return [day, month, year ]
+
+//     const dateTime = new Date(data.datetime);
+//     console.log("dateTime is", dateTime);
+//     var dateString = dateTime.toLocaleString();
+//     console.log("Current world time:", dateTime.toLocaleString());
+
+//     const [datePart, timePart] = dateString.split(", ");
+
+// // Split the date part into day, month, and year
+
+//     const [day, month, year] = datePart.split("/");
+//     console.log(day);
+//     console.log(month);
+//     console.log(year);
+//     return [day, month, year ]
   } catch (error) {
     console.log("Error:", error);
   }
