@@ -69,7 +69,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
 
   return (
     <CenterLayout
-      noScroll={false}
+      noScroll={true}
       content={
         <>
           {isPopUpIcon && (
