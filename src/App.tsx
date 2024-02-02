@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { loadState, saveState } from "./redux/sessionStorage";
 import { createTheme, ThemeProvider } from "@mui/material";
 
+
 // setting
 import { store } from "./redux/reducer";
 import { appConfig } from "./redux/useContext";
@@ -101,7 +102,12 @@ const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  return <Outlet />;
+  try {
+    return <Outlet />;
+  } catch (error) {
+    console.log(error);
+    return <Outlet />;
+  }
 
 
   if (currentPath === "/" || currentPath === "/connectWallet") {
@@ -116,10 +122,21 @@ const CheckStore: React.FC = () => {
 };
 
 function App() {
+  const [currentPath, setCurrentPath] = useState<string>("");
+  const [previousPath, setPreviousPath] = useState<string>("");
+
   const location = useLocation();
   useEffect(() => {
     document.title = titleList[location.pathname] ?? "BetterMi";
   }, [location]);
+
+
+  useEffect(() => {
+    if (location.pathname !== currentPath) {
+      setPreviousPath(currentPath);
+      setCurrentPath(location.pathname);
+    }
+  }, [location.pathname]);
 
   return (
     // path

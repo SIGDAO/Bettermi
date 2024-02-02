@@ -136,7 +136,7 @@
   font-weight: 500;
   letter-spacing: 0;
   line-height: 16px;
-  position: absolute;
+  position: relative;
   text-align: center;
   top: 697px;
   white-space: nowrap;

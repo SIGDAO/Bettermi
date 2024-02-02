@@ -40,7 +40,7 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
   const userAccountId = useSelector(accountId);
   const Id = userId == null?userAccountId:userId;
   //console.log("Id is ",Id);
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract 
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, ''); // the code hash of the BMI contract 
   const [count, setCount] = useState(1);
 
 
