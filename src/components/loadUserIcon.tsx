@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/home/home.css";
 import "../pages/profile/profile.css";
+import IPFSImageComponent from "./ipfsImgComponent";
 
 export interface IUserIconProps {
   home?: boolean;
@@ -86,12 +87,22 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       //   className="nft_-avatar_empty"
       // />
       haveNft === true ? (
-        <img onClick={() => {
-          setIsPopUpIcon(true);
-          if(setSelectedNft != null){
-            setSelectedNft(imgAddress);
-          }
-        }} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        // <img onClick={() => {
+        //   setIsPopUpIcon(true);
+        //   if(setSelectedNft != null){
+        //     setSelectedNft(imgAddress);
+        //   }
+        // }} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        <IPFSImageComponent
+          imgAddress={imgAddress}
+          onClick={() => {
+            setIsPopUpIcon(true);
+            if (setSelectedNft != null) {
+              setSelectedNft(imgAddress);
+            }
+          }}
+          classname={finalClassNames.forNftDisplay}
+        />
       ) : (
         <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>
