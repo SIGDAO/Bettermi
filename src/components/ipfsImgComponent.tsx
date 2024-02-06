@@ -7,14 +7,10 @@ interface IPFSImageComponentProps {
   alt?: string;
 }
 
-const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
-  imgAddress,
-  onClick,
-  className,
-  alt = "NFT",
-}) => {
-  
+const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT" }) => {
   const domains = [
+    // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
     `https://${imgAddress}.ipfs.dweb.link/`,
@@ -24,6 +20,7 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   ];
   const [src, setSrc] = useState(domains[0]);
   const [currentDomainIndex, setCurrentDomainIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -36,14 +33,39 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   //   return () => clearTimeout(timer);
   // }, [currentDomainIndex, domains]);
 
-  const handleImageError = () => {
-    setTimeout(switchDomain, 3000);
+  const switchDomain = () => {
+    // const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
+    console.log("switching domain", (currentDomainIndex + 1) % domains.length);
+    console.log(currentDomainIndex, "indexNum");
+    setSrc(domains[(currentDomainIndex + 1) % domains.length]);
+    setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
-  const switchDomain = () =>{
-    const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
-    setSrc(domains[nextDomainIndex]);
-    setCurrentDomainIndex(nextDomainIndex);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isLoading) {
+        clearInterval(interval);
+      } else {
+        setCurrentDomainIndex(prevDomainIndex => prevDomainIndex + 1);
   }
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isLoading]);
+
+  useEffect(() => {
+    const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
+    console.log("switching domain", nextDomainIndex);
+    setSrc(domains[nextDomainIndex]);
+  }, [currentDomainIndex]);
+
+  const handleImageError = () => {
+    // setTimeout(switchDomain, 3000);
+    console.log("image error");
+    // switchDomain();
+  };
 
   return (
     <img
@@ -52,6 +74,10 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
       onError={handleImageError}
       onClick={onClick}
       className={className}
+      onLoad={() => {
+        console.log("loaded");
+        setIsLoading(false);
+      }}
     />
   );
 };
