@@ -15,6 +15,8 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     `https://ipfs.io/ipfs/${imgAddress}`,
     `https://${imgAddress}.ipfs.dweb.link/`,
     `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+    `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+    `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
   ];
   const [src, setSrc] = useState(domains[0]);
   const [currentDomainIndex, setCurrentDomainIndex] = useState(0);
