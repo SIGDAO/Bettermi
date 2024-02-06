@@ -1,3 +1,5 @@
+import { fetchIPFSJSON } from "../updateUserNftStorage";
+
 export async function GetRewardPercentage(ledger2:any,userAccountId:string){
     // ledger2.account
     // .getAccount({ accountId: userAccountId })
@@ -9,12 +11,13 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
         console.log(description.id);
         if (description.id != null) {
             const accountInfo = await ledger2.contract.getContract(description.id);
-            console.log(accountInfo);
-            const ipfsJson = await fetch(`https://ipfs.io/ipfs/${JSON.parse(accountInfo.description).descriptor}`);
-            console.log(ipfsJson);
-            const text = await ipfsJson.text();
-            console.log(text);
-            const nftInfo = JSON.parse(text);
+            // console.log(accountInfo);
+            // const ipfsJson = await fetch(`https://ipfs.io/ipfs/${JSON.parse(accountInfo.description).descriptor}`);
+            // console.log(ipfsJson);
+            // const text = await ipfsJson.text();
+            // console.log(text);
+            // const nftInfo = JSON.parse(text);
+            const nftInfo = await fetchIPFSJSON(JSON.parse(accountInfo.description).descriptor);
             console.log(nftInfo.attributes)
             const array = nftInfo.attributes[2].key3;
             console.log("array is",array);

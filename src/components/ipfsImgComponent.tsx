@@ -5,9 +5,10 @@ interface IPFSImageComponentProps {
   onClick?: () => void;
   className?: string;
   alt?: string;
+  style?: React.CSSProperties;
 }
 
-const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT" }) => {
+const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT" , style}) => {
   const domains = [
     // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
     // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
@@ -65,7 +66,10 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     // setTimeout(switchDomain, 3000);
     console.log("image error");
     // switchDomain();
+    setCurrentDomainIndex(prevDomainIndex => prevDomainIndex + 1);
   };
+
+
 
   return (
     <img
@@ -74,11 +78,9 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
       onError={handleImageError}
       onClick={onClick}
       className={className}
-      onLoad={() => {
-        console.log("loaded");
-        setIsLoading(false);
-      }}
-    />
+      onLoad={() => setIsLoading(false)}
+      style={style}
+    ></img>
   );
 };
 

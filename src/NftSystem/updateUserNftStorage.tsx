@@ -17,6 +17,32 @@ export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDis
     
 }
 
+export async function fetchIPFSJSON(address: string) {
+    let res, text;
+    const domains = [
+        `https://ipfs.io/ipfs/${address}`,
+        `https://gateway.pinata.cloud/ipfs/${address}`,
+        `https://${address}.ipfs.dweb.link/`,
+        `https://cloudflare-ipfs.com/ipfs/${address}`,
+        `https://pfs.eth.aragon.network/ipfs/${address}`,
+        `https://video.oneloveipfs.com/ipfs/${address}`,
+        `https://ipfs.eth.aragon.network/ipfs/${address}`,
+    ];
+    let index = 0;
+    while (true) {
+        const ipfsAddress = domains[index];
+        try {
+            res = await fetch(ipfsAddress);
+            text = await res.text();
+            break;
+        }
+        catch (error){
+            console.log(error);
+            index = (index + 1) % domains.length
+        }    
+    }
+    return JSON.parse(text);
+}
 
 export async function FindLatestTransactionNumber(ledger2:any,recipient:string,nftDistributor:string){//Takes the account id of recipient but not the contrat Id
     console.log(ledger2);
@@ -435,14 +461,13 @@ export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor
                 var nft : myNftList;
                 var userNftList:string[] = [];
                 for (var i = 0;i < latestTransactionList.length;i++){
-      
-      
                     const contractInfo = await ledger2.contract.getContract(latestTransactionList[i]);
                     const trial = JSON.parse(contractInfo.description);
                     nft = {level:trial.version,image:trial.descriptor,nftId:latestTransactionList[i]};
-                    const res = await fetch(`https://ipfs.io/ipfs/${nft.image}`);
-                    const text = await res.text();
-                    const nftInfo = JSON.parse(text);
+                    // const res = await fetch(`https://ipfs.io/ipfs/${nft.image}`);
+                    // const text = await res.text();
+                    // const nftInfo = JSON.parse(text);
+                    const nftInfo = await fetchIPFSJSON(trial.descriptor);
                     userNftList.push(nftInfo.media[0].social);
                     
                     // fetch(`https://ipfs.io/ipfs/${nft.image}`).then((res)=>{
@@ -471,29 +496,30 @@ export async function FindNftIpfsAddressWithConractId(ledger2:any,nftId:string){
     const contractInfo = await ledger2.contract.getContract(nftId);
     const trial = JSON.parse(contractInfo.description);
     //console.log("trial.descriptor is ",trial.descriptor);
-    const domains = [
-        `https://gateway.pinata.cloud/ipfs/${trial.descriptor}`,
-        `https://ipfs.io/ipfs/${trial.descriptor}`,
-        `https://${trial.descriptor}.ipfs.dweb.link/`,
-        `https://cloudflare-ipfs.com/ipfs/${trial.descriptor}`,
-        `https://pfs.eth.aragon.network/ipfs/${trial.descriptor}`,
-        `https://video.oneloveipfs.com/ipfs/${trial.descriptor}`,
-        `https://ipfs.eth.aragon.network/ipfs/${trial.descriptor}`,
-    ];
-    let index = 0;
-    while (true) {
-        const ipfsAddress = domains[index];
-        try {
-            res = await fetch(ipfsAddress);
-            text = await res.text();
-            break;
-        }
-        catch (error){
-            console.log(error);
-            index = (index + 1) % domains.length
-        }    
-    }
-    const nftInfo = JSON.parse(text);
+
+    // const domains = [
+    //     `https://gateway.pinata.cloud/ipfs/${trial.descriptor}`,
+    //     `https://ipfs.io/ipfs/${trial.descriptor}`,
+    //     `https://${trial.descriptor}.ipfs.dweb.link/`,
+    //     `https://cloudflare-ipfs.com/ipfs/${trial.descriptor}`,
+    //     `https://pfs.eth.aragon.network/ipfs/${trial.descriptor}`,
+    //     `https://video.oneloveipfs.com/ipfs/${trial.descriptor}`,
+    //     `https://ipfs.eth.aragon.network/ipfs/${trial.descriptor}`,
+    // ];
+    // let index = 0;
+    // while (true) {
+    //     const ipfsAddress = domains[index];
+    //     try {
+    //         res = await fetch(ipfsAddress);
+    //         text = await res.text();
+    //         break;
+    //     }
+    //     catch (error){
+    //         console.log(error);
+    //         index = (index + 1) % domains.length
+    //     }    
+    // }
+    const nftInfo = await fetchIPFSJSON(trial.descriptor)
     let matches = nftInfo.name.match(/(\d+)/);
     const nftNumber = matches[0].toString().padStart(8, '0');
     //const nftNumber = "1234".padStart(8, '0');
