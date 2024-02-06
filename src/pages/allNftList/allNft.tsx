@@ -72,7 +72,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             }
           }}
           className="myNftImage"
-          src={`https://ipfs.io/ipfs/${imageAddress}`}
+          src={`https://gateway.pinata.cloud/ipfs/${imageAddress}`}
         ></img>
         <div className="myNftDescription">
           <div className="myNftNumber">#0000{nftIndex}</div>
