@@ -174,8 +174,8 @@ const loadNftList = async() => {
         if(i === contractInfoArray.length-1){
           setCount(100);   
           setTimeout(() => {
-            setMyNfts(trialMyNftArray);
-            //setMyNfts(userNftList);
+            //setMyNfts(trialMyNftArray);
+            setMyNfts(userNftList);
             setLoadingNft(false);
           },1000);
         }
@@ -183,8 +183,8 @@ const loadNftList = async() => {
       if(contractInfoArray.length === 0){
         setCount(100);   
         setTimeout(() => {
-          setMyNfts(trialMyNftArray);
-          //setMyNfts(userNftList);
+          //setMyNfts(trialMyNftArray);
+          setMyNfts(userNftList);
           setLoadingNft(false);
         },1000);
     }
