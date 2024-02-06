@@ -11,6 +11,7 @@ import { accountId } from "../redux/account";
 import { accountPublicKey } from "../redux/account";
 import { CenterLayout } from "./layout";
 import { selectedNftInfo } from "../pages/allNftList/indexAllNftList";
+import IPFSImageComponent from "./ipfsImgComponent";
 interface AllNftProps {
   imgAddress?: selectedNftInfo;
   setPopUpIcon: (popUpIcon: boolean) => void;
@@ -36,7 +37,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
       content={
         <>{imgAddress == null?
             <>
-            <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/bafkreigun2emdg5ndaavw2mmvocqwpdct2qcpb6kud7x76awln2cstodda`} alt="0" />
+            <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={"bafkreigun2emdg5ndaavw2mmvocqwpdct2qcpb6kud7x76awln2cstodda"} />
             {/* <h1 className="text-1">#{nftNumber}</h1> */}
   
             <div className="x16206">
@@ -55,7 +56,8 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             :
             <>
             <div style = {{display:'flex',alignItems:"center", justifyContent:"center",height:'100%',width:'100%'}}>
-          <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress.imageUrl}`} alt="0" />
+          {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress.imageUrl}`} alt="0" /> */}
+          <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress.imageUrl} />
           <h1 className="text-1">#{imgAddress.nftNumber}</h1>
           
           <div className="x16206">

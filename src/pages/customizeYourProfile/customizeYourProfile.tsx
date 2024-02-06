@@ -15,6 +15,7 @@ import { accountId, accountSlice } from "../../redux/account";
 import { accountPublicKey } from "../../redux/account";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface ICustomizeYourProfileProps {}
 
@@ -88,7 +89,11 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       </div>
       <div className="pick-a-username-Gzrq3v">PICK A USERNAME</div>
       <p className="reserve-your-name-before-its-taken-Gzrq3v">Reserve your @name before it's taken.</p>
-      <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage|| nftImageAddressFormRedux}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" />
+      {/* <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage|| nftImageAddressFormRedux}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" /> */}
+      <IPFSImageComponent
+        imgAddress={nftImage || nftImageAddressFormRedux}
+        className="photo-Gzrq3v"
+      />
       <div className="search-bar-container-customizeYourProfile">
         <RandomGenNameInput name={name} setName={setName} />
       </div>

@@ -31,6 +31,7 @@ import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 import { type } from "os";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface IHomeProps {}
 
@@ -231,8 +232,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="x0"></div>
           ) : (
             <>
-              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+              {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" /> */}
               {/* <h1 className="text-1">#{nftNumber}</h1> */}
+              <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress} />
             </>
           )}
           <div className="x16206">

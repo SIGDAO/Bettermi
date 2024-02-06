@@ -22,6 +22,7 @@ import { AppContext } from "../../redux/useContext";
 import UserIcon from "../../components/loadUserIcon";
 import { useLocation } from "react-router-dom";
 import CSS from "csstype";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface IAnimaGenContentProps {}
 interface myNftList {
@@ -363,9 +364,22 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                       </>
                     ) : (
                       myNfts.map((MyNft) => (
-                        <img
-                        onClick = {() => {setIsPopUpIcon(true); setSelectedNft(MyNft);}}
-                          src={`https://ipfs.io/ipfs/${MyNft}`}
+                        // <img
+                        // onClick = {() => {setIsPopUpIcon(true); setSelectedNft(MyNft);}}
+                        //   src={`https://ipfs.io/ipfs/${MyNft}`}
+                        //   style={{
+                        //     width: "152px",
+                        //     height: "217px",
+                        //     objectFit: "cover",
+                        //     marginRight: "10px",
+                        //   }}
+                        // />
+                        <IPFSImageComponent
+                          onClick={() => {
+                            setIsPopUpIcon(true);
+                            setSelectedNft(MyNft);
+                          }}
+                          imgAddress={MyNft}
                           style={{
                             width: "152px",
                             height: "217px",
@@ -383,7 +397,16 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
           </div>
         ) : (
           <>
-        <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${selectedNftId}`} alt="0" />
+        {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${selectedNftId}`} alt="0" /> */}
+        <IPFSImageComponent
+          imgAddress={selectedNftId}
+          className="x0-generateFreeNFT"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
           <h1 className="text-1">#{}</h1>
             <div className="hidden-content">
               <div className="x16206">
