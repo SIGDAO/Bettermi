@@ -53,7 +53,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
       ) : (
         <>
           {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${nftIpfsAddress}`} alt="0" /> */}
-          <IPFSImageComponent classname="x0-generateFreeNFT" imgAddress={nftIpfsAddress} />
+          <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={nftIpfsAddress} />
           <h1 className="text-1">#{nftNumber}</h1>
         </>
       )}

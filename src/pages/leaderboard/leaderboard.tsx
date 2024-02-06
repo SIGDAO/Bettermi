@@ -14,6 +14,7 @@ import { leaderBoardBanner, userRankingSlice } from "../../redux/userRanking";
 import { userRanking } from "../../redux/userRanking";
 import { userRankingListRedux } from "../../redux/userRanking";
 import { useNavigate } from "react-router-dom";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 type Props = {};
 
@@ -31,16 +32,16 @@ const Leaderboard = (props: Props) => {
     return (
       <>
         {userRankingList[index]?.accountImage || index == 0 ? (
-          <img
+          <IPFSImageComponent
             className={index == 0 ? "leaderboard_nft_-avatar" : "leaderboard_nft_-avatar-top3"}
-            src={index == 0 ? `https://ipfs.io/ipfs/QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `https://ipfs.io/ipfs/${userRankingList[index]?.accountImage}`}
+            imgAddress={index == 0 ? `QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `${userRankingList[index]?.accountImage}`}
             alt="NFT_Avatar"
             onClick={() => {
               navigate("/OtherUserProfile", { state: { userId: userRankingList[0].accountId } });
             }}
           />
         ) : (
-          <div className="leaderboard_nft_-avatar">
+          <div className="leaderboard_nft_-avatar-top3">
             <img className="home_icon_ic_add" src={`${process.env.PUBLIC_URL}/img/profile/ic-add-2@1x.png`} alt="ic_add" />
           </div>
         )}

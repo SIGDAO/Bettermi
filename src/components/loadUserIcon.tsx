@@ -102,7 +102,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
               setSelectedNft(imgAddress);
             }
           }}
-          classname={finalClassNames.forNftDisplay}
+          className={finalClassNames.forNftDisplay}
         />
       ) : (
         <Link to="/allNftList/">

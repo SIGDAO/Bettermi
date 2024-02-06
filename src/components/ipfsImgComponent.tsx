@@ -3,13 +3,15 @@ import React, { useState, useEffect } from "react";
 interface IPFSImageComponentProps {
   imgAddress: string;
   onClick?: () => void;
-  classname?: string;
+  className?: string;
+  alt?: string;
 }
 
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   imgAddress,
   onClick,
-  classname,
+  className,
+  alt = "NFT",
 }) => {
   
   const domains = [
@@ -41,10 +43,10 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   return (
     <img
       src={`${src}`}
-      alt="0"
+      alt={alt}
       onError={handleImageError}
       onClick={onClick}
-      className={classname}
+      className={className}
     />
   );
 };

@@ -61,6 +61,7 @@ export async function GetTokenRanking(ledger2: any) {
       userName = newDes.nm;
     }
     tokenBalance = Number(sortedArray[i].quantityQNT) / 10 ** Number(tokenDecimalPlace);
+    if (!imgAddress || imgAddress === "") continue;
     userRankingInfo = {
       userRanking: userRanking,
       displayAccountId: userName,
