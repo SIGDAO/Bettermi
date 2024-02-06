@@ -12,6 +12,7 @@ import { BuyNft } from "../../NftSystem/BuyNft/buyNft";
 import { accountId } from "../../redux/account";
 import { accountPublicKey } from "../../redux/account";
 import { selectedNftInfo } from "./indexAllNftList";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface AllNftProps {
   imageAddress: string;
@@ -50,7 +51,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
           imgAddress === ""?(<div>loading</div>):( */}
 
       <div className="myNftList">
-        <img
+        {/* <img
           onClick={() => {
             //   setIsOpenPopup((prev) => !prev);
             //   setSelectedAssetId(nftId);
@@ -72,8 +73,32 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             }
           }}
           className="myNftImage"
-          src={`https://gateway.pinata.cloud/ipfs/${imageAddress}`}
-        ></img>
+          src={`https://ipfs.io/ipfs/${imageAddress}`}
+        ></img> */}
+        <IPFSImageComponent
+          imgAddress={imageAddress}
+          onClick={() => {
+            //   setIsOpenPopup((prev) => !prev);
+            //   setSelectedAssetId(nftId);
+            //   setLevel(nftLevel);
+            console.log("testing");
+            if (setOpenModel) {
+              setOpenModel(!openModel);
+            }
+            if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
+              console.log(parseInt(String(nftIndex).padStart(8, "0")));
+              const selectedNftInfo: selectedNftInfo = {
+                imageUrl: imageAddress,
+                nftLevel: nftLevel,
+                nftPrice: (parseInt(nftPrice)/1000000).toString(),
+                nftReward: nftReward,
+                nftNumber:String(nftIndex).padStart(8, "0"),
+              };
+              setNftSelectedImage(selectedNftInfo);
+            }
+          }}
+          className="myNftImage"
+        />
         <div className="myNftDescription">
           <div className="myNftNumber">#0000{nftIndex}</div>
           <div className="myNftBar">

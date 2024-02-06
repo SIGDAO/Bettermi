@@ -454,7 +454,7 @@ return(
            </div>
            ):(
              <div className = "myNftList">
-             <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img>
+             {/* <img className = "myNftImage" src = {`https://ipfs.io/ipfs/${onDuty}`}></img> */}
              <div className = "myNftDescription">
              <div className = "myNftNumber">#0000000001</div>
                <div className = "myNftBar">
