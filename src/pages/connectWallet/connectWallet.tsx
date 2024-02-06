@@ -73,7 +73,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,
-          machineCodeHash: codeHashId.replace('"', ''),
+          machineCodeHash: codeHashId.replace(/['"]+/g, ''),
         });
         ledger.asset.getAssetHolders({ assetId: assetId }).then((asset) => {
           for (var i = 0; i < asset.accountAssets.length; i++) {
