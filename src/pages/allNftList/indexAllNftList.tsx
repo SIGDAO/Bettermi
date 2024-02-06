@@ -115,7 +115,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     for (var i = 0; i < nftStorages.length; i++) {
       try {
         const des = JSON.parse(nftStorages[i].description).descriptor;
-        const info: urlObject = { url: `https://ipfs.io/ipfs/${des}`, nftId: nftStorages[i].at, index: i };
+        const info: urlObject = { url: `https://gateway.pinata.cloud/ipfs/${des}`, nftId: nftStorages[i].at, index: i };
         InfoJson.push(info);
       } catch {
         console.log(nftStorages[i].description);
@@ -137,7 +137,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
             .getContract(nftStorage.nftId)
             .then((res) => {
               var nftContract = new ContractDataView(res);
-              var nftStatus = nftContract.getVariableAsDecimal(11);
+              var nftStatus = nftContract.getVariableAsDecimal(10);
               if (nftStatus === "15") {
                 nftStatus = "Not For Sale";
               }
@@ -159,8 +159,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               mergedArray[nftStorage.index] = {
                 ...mergedArray[nftStorage.index],
                 contractId: nftStorage.nftId,
-                contractPrice: nftContract.getVariableAsDecimal(10),
-                contractOwner: nftContract.getVariableAsDecimal(6),
+                contractPrice: nftContract.getVariableAsDecimal(9),
+                contractOwner: nftContract.getVariableAsDecimal(5),
                 nftStatus: nftStatus,
                 nftNumber: nftStorage.index,
               };

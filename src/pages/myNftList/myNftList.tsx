@@ -182,7 +182,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           console.log(description);
           const contract = await ledger2.contract.getContract(description.id);
           const nftContract = new ContractDataView(contract);
-          setOnDutyNftPrice(nftContract.getVariableAsDecimal(10));
+          setOnDutyNftPrice(nftContract.getVariableAsDecimal(9));
           // fetch(`https://ipfs.io/ipfs/${Object.keys(description.av)[0]}`).then((res)=>{
           //   res.text().then((text)=>{
           //       //console.log(text);
