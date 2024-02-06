@@ -29,6 +29,8 @@ import HorizontalScrollContainerMission from "./horzontalScrollContainer";
 import { CheckNftOwnerId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
+import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
+import { type } from "os";
 
 interface IHomeProps {}
 
@@ -141,22 +143,25 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           console.log(text);
           const nftInfo = JSON.parse(text);
           console.log(nftInfo);
+          console.log(nftInfo.attributes[6].value);
+          console.log(typeof(nftInfo.attributes[6].value));
+          var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
+          console.log(value);
+          console.log(typeof(value));
+          setReward(value);
           if (nftInfo.description.includes("1") === true) {
             setLevel("1");
-            setReward("5");
           }
           if (nftInfo.description.includes("2") === true) {
             setLevel("2");
-            setReward("10");
           }
           if (nftInfo.description.includes("3") === true) {
             setLevel("3");
-            setReward("15");
           }
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         } else {
           setLevel("1");
-          setReward("5");
+          setReward("loading...");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
 

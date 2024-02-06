@@ -102,6 +102,7 @@ const CheckStore: React.FC = () => {
   const location = useLocation();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
+  const fetchSetting = async () => {}
   try {
     return <Outlet />;
   } catch (error) {

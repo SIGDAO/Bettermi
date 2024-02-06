@@ -3,14 +3,17 @@ import React, { useState, useEffect } from "react";
 interface IPFSImageComponentProps {
   imgAddress: string;
   onClick?: () => void;
-  classname?: string;
+  className?: string;
+  alt?: string;
 }
 
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   imgAddress,
   onClick,
-  classname,
+  className,
+  alt = "NFT",
 }) => {
+  
   const domains = [
     `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
@@ -18,7 +21,6 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
     `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
     `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
     `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-    `https://ipfs.eth.aragon.network/ipfs/${imgAddress}`,
   ];
   const [src, setSrc] = useState(domains[0]);
   const [currentDomainIndex, setCurrentDomainIndex] = useState(0);
@@ -35,18 +37,21 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   // }, [currentDomainIndex, domains]);
 
   const handleImageError = () => {
+    setTimeout(switchDomain, 3000);
+  };
+  const switchDomain = () =>{
     const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
     setSrc(domains[nextDomainIndex]);
     setCurrentDomainIndex(nextDomainIndex);
-  };
+  }
 
   return (
     <img
       src={`${src}`}
-      alt="0"
+      alt={alt}
       onError={handleImageError}
       onClick={onClick}
-      className={classname}
+      className={className}
     />
   );
 };
