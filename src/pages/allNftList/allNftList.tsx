@@ -65,11 +65,16 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
   }
   const allNftList:number[] = [1,2,3,4];
   const displayMyNft = nftInfoArray.map((nft) => {
-    if(nft.contractOwner === nftDistributor || nft.nftStatus === "Not For Sale" || nft.nftStatus === "15" || nft.imageUrl === ''){
-    return (
-       <></>
-    )
-    }
+    // if(nft.contractOwner === nftDistributor || nft.nftStatus === "Not For Sale" || nft.nftStatus === "15" || nft.imageUrl === ''){
+    // return (
+    //    <></>
+    // )
+    // }
+    if(nft.contractOwner === nftDistributor  || nft.imageUrl === ''){
+      return (
+         <></>
+      )
+      }
     return(
       <AllNft nftReward={nft.nftReward} setNftSelectedImage={setSelectedImageAddress} nftId = {nft.contractId} nftIndex = {nft.nftNumber} nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )
