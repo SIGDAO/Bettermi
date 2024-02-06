@@ -15,6 +15,8 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
 }) => {
   
   const domains = [
+    `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+    `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
     `https://${imgAddress}.ipfs.dweb.link/`,
@@ -35,10 +37,13 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({
   // }, [currentDomainIndex, domains]);
 
   const handleImageError = () => {
+    setTimeout(switchDomain, 3000);
+  };
+  const switchDomain = () =>{
     const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
     setSrc(domains[nextDomainIndex]);
     setCurrentDomainIndex(nextDomainIndex);
-  };
+  }
 
   return (
     <img
