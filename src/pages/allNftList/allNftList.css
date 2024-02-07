@@ -89,3 +89,10 @@
   justify-content: center;
   width:100%;
 }
+.allNftImage{
+  height:217px;
+  width: 137px;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../myNftList/myNftList.css";
+import "./allNftList.css";
 import { useEffect } from "react";
 import { generateMethodCall } from "@signumjs/contracts";
 import { AttachmentMessage } from "@signumjs/core";
@@ -97,7 +98,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
               setNftSelectedImage(selectedNftInfo);
             }
           }}
-          className="myNftImage"
+          className="allNftImage"
         />
         <div className="myNftDescription">
           <div className="myNftNumber">#0000{nftIndex}</div>
