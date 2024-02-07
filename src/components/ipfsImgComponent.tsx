@@ -12,13 +12,23 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
   const domains = [
     // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
     // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
-    `https://ipfs.io/ipfs/${imgAddress}`,
     `https://${imgAddress}.ipfs.dweb.link/`,
     `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
-    `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
-    `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+    `https://ipfs.io/ipfs/${imgAddress}`,
   ];
+  if(className === "allNftImage"){
+    const domains = [
+      // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+      `https://ipfs.io/ipfs/${imgAddress}`,
+      `https://${imgAddress}.ipfs.dweb.link/`,
+      `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+      `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+    ];
+  }
   const [src, setSrc] = useState(domains[0]);
   const [currentDomainIndex, setCurrentDomainIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
