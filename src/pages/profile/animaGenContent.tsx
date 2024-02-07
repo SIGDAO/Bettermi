@@ -25,6 +25,7 @@ import { IsUserUpdatingDescription } from "../../NftSystem/updateUserNftStorage"
 import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
 
 interface IAnimaGenContentProps {
   isOpen: boolean;

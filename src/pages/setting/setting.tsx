@@ -128,7 +128,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               />
             <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
           </div>
-          <Link to="https://www.bettermi.io/Termsofservice.html">
+          <Link to="https://www.bettermi.io/en/termsofservice.html">
           <div className="x16192-VD8XDI">
             <div className="x31">
               <div className="terms-of-use-vMQ5ls inter-normal-white-15px">Terms of Service</div>
@@ -141,7 +141,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
           </div>
           </Link>
-          <Link to="https://www.bettermi.io/privacypolicy.html">
+          <Link to="https://www.bettermi.io/en/privacypolicy.html">
           <div className="x16193-VD8XDI">
             <div className="x31">
               <div className="privacy-policy-Am8TnD inter-normal-white-15px">Privacy Policy</div>
