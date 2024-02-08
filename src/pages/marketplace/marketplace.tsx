@@ -34,7 +34,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           <img className="bg-oobbG1" src={`${process.env.PUBLIC_URL}/img/marketplace/bg-23@1x.png`} alt="bg" />
           <div className="partner-company-oobbG1 partner-company">
             <p className="where-can-i-pay-with-sigdao-vbUx2m">WHERE CAN I PAY WITH SIGDAO?</p>
-            <Link to="https://www.bettermi.io/partner.html">
+            <Link to="https://www.bettermi.io/en/partner.html">
               <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">Partner</div>
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
