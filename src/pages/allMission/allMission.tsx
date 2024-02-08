@@ -66,7 +66,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   return (
     <div style={bgStyle}>
       <div style={centerLayoutStyle}>
-      <ShortTitleBar title='Feature Missions' backPath='/home'/>
+      <ShortTitleBar title='Feature Missions' customiseBackButton = {true} customiseBackButtonLink='/home'/>
 {/* The body part, which are the buttons */}
     <div className  = "mission-body-container">
         <div className = "mission-body">
