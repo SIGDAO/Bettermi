@@ -160,7 +160,7 @@ return finalArray;
 
 
 
-export async function updateReceiverAccount(ledger2:any, recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
+export async function updateReceiverAccount(ledger2:any, recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
     let receiverNftStorage = await ledger2.contract.getContractsByAccount({
         accountId: recipientId,
         machineCodeHash: codeHashId,
@@ -176,7 +176,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
         finalNftList.push(nftToBeDistributed); 
         finalNftListString = finalNftList.join(",");
         console.log("final nft list is",finalNftListString);
-        await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+        await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,"1000000");
     }
 
     else{
@@ -319,11 +319,11 @@ export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId
         console.log("the result is",result);
 
         //Run check if such nft belong to user
-        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor);
     }
 
     else{
-        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor);
         console.log("oops something went wrong");
 
         //Run check if such nft belong to user

@@ -5,7 +5,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { useSelector } from "react-redux";
 import { Api } from "@signumjs/core";
 import { useNavigate } from "react-router-dom";
-import { encryptAES,generateMasterKeys,hashSHA256 } from "@signumjs/crypto";
+import { encryptAES, generateMasterKeys, hashSHA256 } from "@signumjs/crypto";
 import { UpdateUserNftList } from "./updateUserNftList";
 import { sendMessage } from "./updateUserNftList";
 import { sortArrayAccordingToDescendingTimeStamps, sortUnconfirmedTransactionArrayAccordingToAscendingTimeStamps } from "./updateUserNftList";
@@ -13,44 +13,43 @@ import { FindLatestTransactionArray, FindLatestTransactionNumber, UpdateUserStor
 import { updateReceiverAccount } from "./updateUserNftStorage";
 import { CheckNftOwnerId } from "./updateUserNftStorage";
 import { AttachmentMessage } from "@signumjs/core";
+import { useGetBMIMutation } from "../redux/userBMIApi";
+import { useTransferAssetMutation } from "../redux/tokenAPI";
+import axios from "axios";
 
 //A helper function by Anderson
-export async function TransferTokenWithMessage(nodeHost:any,accountId:any,quantity:string,challengeNum:number){
-    const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
-    const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-    const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-      const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
-      const tokenId:string = process.env.REACT_APP_TOKEN_ID!;
-      console.log("quantity is",quantity);
-      console.log(ledger2, "ledger2");
-      console.log(nodeHost, "nodeHost");
-      console.log(quantity, 'quantity');
-      const date = new Date();
-      console.log(date);
-      const message = `Congrats! You completed challenge number ${challengeNum} on ${date}.`;
-      const hi:AttachmentMessage =new AttachmentMessage({
-        messageIsText:true,
-        message:message,
+export const TransferTokenWithMessage = async (nodeHost: any, accountId: any, quantity: string, challengeNum: number) => {
+  const walletNodeHost: string = nodeHost ? nodeHost : window.localStorage.getItem("nodeHost");
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost: nodeHost || walletNodeHost });
+  const tokenId: string = process.env.REACT_APP_TOKEN_ID!;
+  console.log("quantity is", quantity);
+  console.log(ledger2, "ledger2");
+  console.log(nodeHost, "nodeHost");
+  console.log(quantity, "quantity");
+  const date = new Date();
+  console.log(date);
+  const message = `Congrats! You completed challenge number ${challengeNum} on ${date}.`;
+  const hi: AttachmentMessage = new AttachmentMessage({
+    messageIsText: true,
+    message: message,
+  });
+  const reward: number = Number(quantity) * 1000000;
 
-    });
-    
-      if(ledger2 != null){
-        try {
-          const reward:number = (Number(quantity))*1000000;
-          await ledger2.asset.transferAsset({
-            assetId:tokenId,
-            quantity: reward,
-            recipientId:accountId,
-            senderPrivateKey:nftDistributorPrivateKey,
-            skipAdditionalSecurityCheck:true,
-            feePlanck:"1000000",
-            senderPublicKey:nftDistributorPublicKey,
-            attachment:hi
-          })
-  
-        } catch (error) {
-          console.log(error);
-        }
-      }
+  // const [transferAsset, { isLoading, data }] = useTransferAssetMutation();
+
+  if (ledger2 != null) {
+    try {
+      const reward: number = Number(quantity) * 1000000;
+      await axios.post("https://dapp.bettermi.io/api/transferAsset/", {
+        assetId: tokenId,
+        quantity: reward,
+        accountId: accountId,
+        skipAdditionalSecurityCheck: true,
+        feePlanck: "1000000",
+        attachment: hi,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
-  
+};

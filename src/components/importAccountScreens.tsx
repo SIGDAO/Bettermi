@@ -26,8 +26,6 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
     const [inputAddress, setInputAddress] = useState<string>("");
     const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
     const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-    const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-    const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
     const [hasError, setHasError] = useState<boolean>(false);
     const [loading,setLoading] = useState<boolean>(false);
     const nodeHost = useSelector(selectWalletNodeHost);
@@ -41,10 +39,10 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
         setLoading(true);
         if(nftAddress === "nft"){
             if(gender === "Female"){
-                await TransferNft(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+                await TransferNft(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor);
             }
             if(gender === "Male"){
-                await TransferNft(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+                await TransferNft(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor);
             }
             setLoading(false);
             setImportSuccess(true);
@@ -56,7 +54,7 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
                     const nftId = accountDes.account;
                     const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
                     if(nftOwnerId === userAccountId){
-                        const result = await updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+                        const result = await updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor);
                         if(result === "unsuccessful"){
                             setHasError(true);
                             setLoading(false);

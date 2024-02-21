@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { Api } from "@signumjs/core";
 import { walletNodeHost } from "../redux/wallet";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface myNftList {
   image: string;
@@ -23,11 +24,7 @@ export const TransferNftTokenOwnershipFinale = async (nodeHost: any, recipientId
   const walletNodeHost: string = nodeHost ? nodeHost : window.localStorage.getItem("nodeHost");
   const Ledger2 = LedgerClientFactory.createClient({ nodeHost: walletNodeHost });
   const nftStorageAccount: string = process.env.REACT_APP_NFT_TOKEN_STORAGE!;
-  const publicKey: string = process.env.REACT_APP_NFT_TOKEN_STORAGE_PUBLIC_KEY!;
-  const privateKey: string = process.env.REACT_APP_NFT_TOKEN_STORAGE_PRIVATE_KEY!;
   console.log("nftStorageAccount is ", nftStorageAccount);
-  console.log("publicKey is ", publicKey);
-  console.log("privateKey is ", privateKey);
   const accountInfo = await Ledger2.account.getAccount({ accountId: nftStorageAccount });
   console.log("accountInfo is ", accountInfo);
   const nftToBeDistributed = accountInfo.assetBalances[Math.floor(Math.random() * accountInfo.assetBalances.length)];
@@ -53,25 +50,13 @@ export const TransferNftTokenOwnershipFinale = async (nodeHost: any, recipientId
   // console.log(recipientId);
   // console.log(publicKey);
   // console.log(privateKey);
-  console.log("transferAsset ", {
-    assetId: nftToBeDistributed.asset,
-    quantity: "1",
-    recipientId: recipientId,
-    feePlanck: "1000000",
-    senderPrivateKey: privateKey,
-    skipAdditionalSecurityCheck: true,
-    senderPublicKey: publicKey,
-  });
-
   
-  await Ledger2.asset.transferAsset({
+  await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/api/transferAsset", {
     assetId: nftToBeDistributed.asset,
     quantity: "1",
     recipientId: recipientId,
     feePlanck: "1000000",
-    senderPrivateKey: privateKey,
     skipAdditionalSecurityCheck: true,
-    senderPublicKey: publicKey,
   });
   console.log("token transferred");
 };

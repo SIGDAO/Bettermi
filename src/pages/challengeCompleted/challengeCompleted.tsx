@@ -102,8 +102,6 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
 //Anderson's code ends here
 
   React.useEffect(() => {
-
-
     if (!NFT && distributed.current === false) {
       TransferTokenToUser(nodeHost, userAccountId, location.state?.reward,ledger2); //Anderson's code
       distributed.current = true;//Anderson's code
