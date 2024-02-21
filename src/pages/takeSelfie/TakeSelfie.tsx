@@ -108,7 +108,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   
 
   useEffect(() => {
-
     if (data && "bmi" in data) {
       const { bmi } = data
       console.log('bmi', bmi)

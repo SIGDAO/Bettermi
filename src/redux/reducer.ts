@@ -8,6 +8,7 @@ import { userBMISlice } from "./userBMI";
 import { loadState } from "./sessionStorage";
 import { userRankingSlice } from "./userRanking";
 import { selectedNftSlice } from "./selectedNft";
+import { tokenAPI } from "./tokenAPI";
 
 const appReducer = combineReducers({
   wallet: walletSlice.reducer,
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   userBMI: userBMISlice.reducer,
   userRanking: userRankingSlice.reducer,
   selectedNft: selectedNftSlice.reducer,
-  [userBMIApi.reducerPath]: userBMIApi.reducer
+  [userBMIApi.reducerPath]: userBMIApi.reducer,
+  [tokenAPI.reducerPath]: tokenAPI.reducer,
 });
 const rootReducer = (state:any, action:any) => {
   if (action.type === 'USER_LOGOUT') {
