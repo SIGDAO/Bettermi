@@ -85,8 +85,6 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
 
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!; // the code hash of the BMI contract
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const nftContractStorage = useSelector(getNftContractStorage);
   // for(var i = 0;i<6;i++){
   //   nft = {
@@ -299,7 +297,7 @@ let accountDes = await ledger2.account.getAccount({accountId:nftAddress});
 const nftId = accountDes.account;
     const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
     if(nftOwnerId === userAccountId){
-      updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+      updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor);
     }
   }
   catch(e){
@@ -351,7 +349,7 @@ const nftId = accountDes.account;
           methodArgs: [recipientInfo.account],
           });
           await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
-        await UpdateUserStorage(ledger2,userAccountId,inputAddress,codeHashIdForNft,selectedNftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        await UpdateUserStorage(ledger2,userAccountId,inputAddress,codeHashIdForNft,selectedNftId,nftDistributor);
       }
     }
     catch(e){

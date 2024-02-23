@@ -149,8 +149,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const [myNfts, setMyNfts] = useState<string[]>([]);
   const nftContractStorage = useSelector(getNftContractStorage);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftLoaded = useRef(false);
   var nft: myNftList;

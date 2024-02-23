@@ -160,7 +160,7 @@ return finalArray;
 
 
 
-export async function updateReceiverAccount(ledger2:any, recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
+export async function updateReceiverAccount(ledger2:any, recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
     let receiverNftStorage = await ledger2.contract.getContractsByAccount({
         accountId: recipientId,
         machineCodeHash: codeHashId,
@@ -176,7 +176,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
         finalNftList.push(nftToBeDistributed); 
         finalNftListString = finalNftList.join(",");
         console.log("final nft list is",finalNftListString);
-        await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+        await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,"1000000");
     }
 
     else{
@@ -193,7 +193,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
             if(i !=0 && i%46 == 0){
                 finalNftListString = finalNftList.join(",");
                 console.log("final nft list to be sent is",finalNftListString);
-                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,"6000000");
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
@@ -204,7 +204,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
                 console.log("final nft list to be sent is",finalNftListString);
                 const feePlanck:string = ((Math.floor((i%46)/8) + 1)*1000000).toString();
                 console.log(feePlanck);
-                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,feePlanck);
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
@@ -228,7 +228,7 @@ export async function CheckNftOwnerId(ledger2:any,contractId:string){
 };
 
 
-export async function updateSenderAccount(ledger2:any, senderId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
+export async function updateSenderAccount(ledger2:any, senderId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
     let senderNftStorage = await ledger2.contract.getContractsByAccount({
         accountId: senderId,
         machineCodeHash: codeHashId,
@@ -254,7 +254,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                 finalNftList.push("empty");
                 console.log("final nft list is empty and it is",finalNftList);
                 finalNftListString = finalNftList.join(",");
-                await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"1000000");
+                await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,"1000000");
             }
             for(var i = 0;i<latestTransactionList.length;i++){
                 console.log(latestTransactionList[i]);
@@ -262,7 +262,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                 if(i !=0 && i%46 == 0){
                     finalNftListString = finalNftList.join(",");
                     console.log("final nft list to be sent is",finalNftListString);
-                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
+                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,"6000000");
                     finalNftList = [];
                     finalNftList.push(newTransactionNumber);
                     console.log("The finalNftList after clearing",finalNftList);
@@ -273,7 +273,7 @@ export async function updateSenderAccount(ledger2:any, senderId:string,codeHashI
                     console.log("final nft list to be sent is",finalNftListString);
                     const feePlanck:string = ((Math.floor((i%46)/8) + 1)*1000000).toString();
                     console.log(feePlanck);
-                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+                    await sendMessage(ledger2,finalNftListString,senderNftStorage.ats[0].at,feePlanck);
                     finalNftList = [];
                     finalNftList.push(newTransactionNumber);
                     console.log("The finalNftList after clearing",finalNftList);
@@ -313,17 +313,17 @@ await ledger2.contract.callContractMethod({
 });
 }
 
-export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
-    const result = await updateSenderAccount(ledger2,senderId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey); //Find and delete
+export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
+    const result = await updateSenderAccount(ledger2,senderId,codeHashId,nftToBeDistributed,nftDistributor); //Find and delete
     if(result === "successful"){
         console.log("the result is",result);
 
         //Run check if such nft belong to user
-        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor);
     }
 
     else{
-        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+        await updateReceiverAccount(ledger2,recipientId,codeHashId,nftToBeDistributed,nftDistributor);
         console.log("oops something went wrong");
 
         //Run check if such nft belong to user

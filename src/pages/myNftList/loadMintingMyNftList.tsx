@@ -131,8 +131,6 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
 const nodeHost = useSelector(selectWalletNodeHost);
 const ledger2 = LedgerClientFactory.createClient({nodeHost});
 const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
 const codeHashIdForNft:string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
 const nftLoaded = useRef(false);
 var nft: myNftList;

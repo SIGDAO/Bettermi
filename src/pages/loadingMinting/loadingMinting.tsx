@@ -14,7 +14,7 @@ import { useRef } from "react";
 import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
 import { store } from "../../redux/reducer";
 import { profileSlice } from "../../redux/profile";
-import { decrypt } from "../../components/encryption";
+import axios from "axios";
 
 interface ILoadingMintingProps {
   pathname: string;
@@ -32,8 +32,6 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const nftLoaded = useRef(false);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const pathname: string = props.pathname;
@@ -71,6 +69,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
+    console.log(bmiContract, "bmiContract")
+
     while (bmiContract.ats[0] == null) {
       bmiContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
@@ -88,7 +88,17 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     try {
        description = JSON.parse(bmiContract.ats[0].description);
     } catch (error) {
-      description = decrypt(bmiContract.ats[0].description);
+      try {
+        const bmiEncrypteddata = bmiContract.ats[0].description;
+        console.log(bmiEncrypteddata, "bmiEncrypteddata")
+        description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+          data: bmiEncrypteddata,
+        })
+        description = description.data
+      } catch (error) {
+        alert("Cannot fetch the record, please contact system admin!")
+        navigate('/')
+      }
     }
     console.log("description is",description);
     console.log("description, gender is",description.gender)
@@ -98,9 +108,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     }
     if (gender === "Male") {
       console.log("called gender === Male");
-      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor);
     } else {
-      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor);
     }
     console.log("gender is   ", gender);
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger, nftContract.ats[0].at, nftDistributor);
@@ -145,8 +155,17 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
+      console.log("count is",count);
       if (count < 100) {
-        setCount((prevCount) => prevCount + 1);
+        console.log("testing");
+        setCount((prevCount) => {
+          console.log("count is", prevCount);
+          if (prevCount < 99) {
+            console.log("testing");
+            return prevCount + 1;
+          }
+          return prevCount;
+        });
       }
       // if (count => 100 ) {
       // } else {

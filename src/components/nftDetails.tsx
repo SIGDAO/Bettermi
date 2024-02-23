@@ -27,8 +27,6 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const codeHashIdForNft = process.env.REACT_APP_NFT_CONTRACT_MACHINE_CODE_HASH!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const userAccountPublicKey = useSelector(accountPublicKey);
 
   return (

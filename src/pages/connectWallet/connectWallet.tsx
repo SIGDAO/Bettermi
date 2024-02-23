@@ -27,8 +27,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ''); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', '');
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', '');
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!.replace('"', '');
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!.replace('"', '');
   store.dispatch({ type: "USER_LOGOUT" });
 
   // const [isClicked, setIsClicked] = React.useState(false);
@@ -112,9 +110,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         });
 
         if ((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)) {
-          //await TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-          //Transfer Nft plaed here for better testing. Will cancel later
-
           console.log("called the if statement");
 
           if (senderNftStorage.ats[0] != null) {

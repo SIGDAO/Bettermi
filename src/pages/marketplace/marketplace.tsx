@@ -8,7 +8,8 @@ import HorizontalScrollContainer from '../../components/horizontalScrollContaine
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
-import { getBMIRecordDay } from '../../components/bmiCalculate';
+import { getBMIRecordDay, isHitFirstHealthyBMIRange } from '../../components/bmiCalculate';
+import { CountChallenges, countTotalChallengesTimes } from '../../NftSystem/Token/countChallenges';
 
 interface IMarketplaceProps {
 }
@@ -16,12 +17,23 @@ interface IMarketplaceProps {
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
-  const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>(0);
+  const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>();
+  const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
+  const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
+  // const [totalChallengesTimes, setTotalChallengesTimes] = React.useState<number>();
 
   React.useEffect(() => {
     getBMIRecordDay(tempAccountId, Ledger2)
       .then((res) => {
         setBmiRecordTimes(res);
+      })
+    isHitFirstHealthyBMIRange(tempAccountId, Ledger2)
+      .then((ans) => {
+        setBmiHitHealthyNumber(ans? 1 : 0);
+      })
+      countTotalChallengesTimes(tempAccountId, Ledger2)
+      .then((res) => {
+        setChallengeCompletedTimes(res);
       })
   }, []);
 
@@ -103,7 +115,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/3" >
+            <Link to="/rewardDetail/4" >
               <div className="rewards-cards-YuvWOM rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
@@ -121,13 +133,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
-                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div>
                     <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/4" >
+            <Link to="/rewardDetail/3" >
               <div className="rewards-cards-DNKKjx rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Wellness Milestone</div>
@@ -143,7 +155,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-0yTxuU goal">
-                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
                     <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 1</div>
                   </div>
                 </div>

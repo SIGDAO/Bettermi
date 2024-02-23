@@ -12,6 +12,7 @@ import { sortArrayAccordingToDescendingTimeStamps, sortUnconfirmedTransactionArr
 import { FindLatestTransactionArray, FindLatestTransactionNumber, UpdateUserStorage } from "./updateUserNftStorage";
 import { updateReceiverAccount } from "./updateUserNftStorage";
 import { CheckNftOwnerId } from "./updateUserNftStorage";
+import axios from "axios";
 
 async function getNftList(ledger2: Api, nftStorageAccount: string, nftDistributor: string) {
   const nftTokenId = await ledger2.account.getAccountTransactions({
@@ -51,16 +52,19 @@ async function getNftList(ledger2: Api, nftStorageAccount: string, nftDistributo
   nftList = nftList.split(",");
   return nftList;
 }
+
 async function ChooseNftToBeDistributed(nftList: string[]) {
   const arrayIndex = Math.floor(Math.random() * nftList.length);
   const nftToBeDistributed = nftList[arrayIndex];
   console.log(nftToBeDistributed, "nftToBeDistributed");
   return { nft: nftToBeDistributed, arrayIndex: arrayIndex };
 }
+
 export interface NFTinfo {
   nft: string;
   arrayIndex: number;
 }
+
 async function CheckNftOwnership(ledger2: any, nftToBeDistributed: NFTinfo, nftDistributor: string) {
   const message = await ledger2.account.getUnconfirmedAccountTransactions(nftDistributor);
   console.log(message);
@@ -85,9 +89,9 @@ export async function SendBackToStorage(
   nftDistributorPublicKey: string,
   nftDistributorPrivateKey: string,
   recipientPrivateKey: string,
-  recipientPublicKey: string
+  recipientPublicKey: string,
 ) {
-  await TransferNftToUser(ledger2, nftToBeReturned, nftDistributor, recipientPrivateKey, recipientPublicKey);
+  await TransferNftToUser(ledger2, nftToBeReturned, nftDistributor);
   const message = await ledger2.account.getUnconfirmedAccountTransactions(nftDistributor);
   console.log(message);
   console.log(message.unconfirmedTransactions[0]);
@@ -125,20 +129,34 @@ export async function SendBackToStorage(
   console.log(message.unconfirmedTransactions[0]);
   return true;
 }
-async function TransferNftToUser(ledger2: any, nftToBeDistributed: string, recipientId: string, senderPrivateKey: string, senderPublicKey: string) {
+
+async function TransferNftToUser(ledger2: any, nftToBeDistributed: string, recipientId: string) {
   console.log(recipientId);
-  console.log("senderPrivateKey", senderPrivateKey);
-  console.log("senderPublicKey", senderPublicKey);
-  await ledger2.contract.callContractMethod({
-    senderPublicKey: senderPublicKey,
-    senderPrivateKey: senderPrivateKey,
+  console.log({
+      feePlanck: "1000000",
+      amountPlanck: "31000000",
+      contractId: nftToBeDistributed,
+      methodHash: "3",
+      methodArgs: [recipientId, "0", "0"],
+    })
+  await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/transferNftToUser", {
     feePlanck: "1000000",
     amountPlanck: "31000000",
     contractId: nftToBeDistributed,
     methodHash: "3",
     methodArgs: [recipientId, "0", "0"],
   });
+  // await ledger2.contract.callContractMethod({
+  //   senderPublicKey: senderPublicKey,
+  //   senderPrivateKey: senderPrivateKey,
+  //   feePlanck: "1000000",
+  //   amountPlanck: "31000000",
+  //   contractId: nftToBeDistributed,
+  //   methodHash: "3",
+  //   methodArgs: [recipientId, "0", "0"],
+  // });
 }
+
 async function UpdateNftUser(ledger2: any, nftToBeDistributed: string, recipient: string, codeHashId: string, nftDistributor: string) {
   let ourContract = await ledger2.contract.getContractsByAccount({
     accountId: recipient,
@@ -191,8 +209,8 @@ export const TransferNft = async (
   nftStorageAccounts: string[],
   codeHashId: string,
   nftDistributor: string,
-  nftDistributorPublicKey: string,
-  nftDistributorPrivateKey: string
+  // nftDistributorPublicKey: string,
+  // nftDistributorPrivateKey: string,
 ) => {
   //const nftStorageAccounts:string[] = ["15665755121650078056","4706959057956461088"];
   var nftStorageAccount = nftStorageAccounts![Math.floor(Math.random() * nftStorageAccounts!.length)]; //Pick a random account from the storage
@@ -212,7 +230,7 @@ export const TransferNft = async (
   console.log(nftToBeDistributed, "nftToBeDistributed");
   console.log("recipientId is ", recipientId);
 
-  await TransferNftToUser(ledger2, nftToBeDistributed.nft, recipientId, nftDistributorPrivateKey, nftDistributorPublicKey);
+  await TransferNftToUser(ledger2, nftToBeDistributed.nft, recipientId);
   console.log("transfered nft to user");
   nftList.splice(nftToBeDistributed.arrayIndex, 1);
   var newNftList = "empty";
@@ -225,8 +243,8 @@ export const TransferNft = async (
     console.log(newNftList.length, "newNftList.length");
     console.log("fee planck is", feePlanck);
   }
-  await sendMessage(ledger2, newNftList, nftStorageAccount, nftDistributorPublicKey, nftDistributorPrivateKey, feePlanck);
-  await updateReceiverAccount(ledger2, recipientId, codeHashId, nftToBeDistributed.nft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+  await sendMessage(ledger2, newNftList, nftStorageAccount, feePlanck);
+  await updateReceiverAccount(ledger2, recipientId, codeHashId, nftToBeDistributed.nft, nftDistributor);
 };
 
 export async function CheckNewUser(ledger2: any, userId: String, codeHashIdForNft: string, nftDistributor: string) {
@@ -251,12 +269,10 @@ export async function TransferNftToNewUser(
   nftStorageAccounts: string[],
   codeHashId: string,
   nftDistributor: string,
-  nftDistributorPublicKey: string,
-  nftDistributorPrivateKey: string
 ) {
   const isNewUser = await CheckNewUser(ledger2, userId, codeHashId, nftDistributor);
   if (isNewUser === true) {
     //console.log("Transfering NFT to new user");
-    await TransferNft(ledger2, userId, nftStorageAccounts, codeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+    await TransferNft(ledger2, userId, nftStorageAccounts, codeHashId, nftDistributor);
   }
 }

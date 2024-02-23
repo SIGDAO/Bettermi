@@ -3,7 +3,8 @@ import { accountId } from '../redux/account';
 import { useDispatch, useSelector } from "react-redux";
 import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
-import { decrypt } from './encryption';
+import { calBMIType } from './rewardCalculate';
+import axios from 'axios';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -37,8 +38,15 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     description = JSON.parse(contract.ats[0]?.description);
     description.time = new Date(description.time);
   } catch (error) {
-    description = decrypt(contract.ats[0]?.description);
-    description.time = new Date(description.time);
+    try {
+      description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+        data: contract.ats[0]?.description
+      })
+      description = description.data
+      description.time = new Date(description.time);  
+    } catch (error) {
+      alert("Cannot fetch the record, please contact system admin!")
+    }
   }
 
   processedBMIRecord.push(description);
@@ -51,20 +59,30 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
 
   for(let i = message.transactions.length - 1; i >= 0 ;i--){
-
+    let content:any;
     try {
       let tempRecord = JSON.parse(message.transactions[i].attachment.message);
       if (typeof tempRecord === 'number') continue;
       tempRecord.time = new Date(tempRecord.time);
       processedBMIRecord.push(tempRecord);
     } catch (error) {
-      let content = decrypt(message.transactions[i].attachment.message);
-      if (typeof content === 'number') continue;
-      content.time = new Date(content.time);
-      processedBMIRecord.push(content);
-      console.log(description, 'description')
+      // let content = decrypt(message.transactions[i].attachment.message);
+      try {
+        content = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+          data: message.transactions[i].attachment.message
+        })
+        content = content.data
+        if (typeof content === 'number') continue;
+        content.time = new Date(content.time);
+        processedBMIRecord.push(content);
+        console.log(description, 'description')  
+      } catch (error) {
+        alert("Cannot fetch the record, please contact system admin!")
+      }
     }
   }
+
+  console.log(processedBMIRecord, "processedBMIRecord")
   
   return processedBMIRecord;
 }
@@ -160,28 +178,50 @@ export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
 export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
   const message = await findBMIblockchainContract(tempAccountId, Ledger2)
   console.log(message, 'message');
+
+  if (message.length === 0) {
+    return 0;
+  }
+
+  let maxConsecutiveDays = 1;
+  let currentConsecutiveDays = 1;
+
   // if no ledger, return false
+  for (let i = 1; i < message.length; i++) {
+    const currentDate = message[i].time;
+    const previousDate = message[i - 1].time;
 
-  // dates.sort((a, b) => a.getTime() - b.getTime());
+    const isConsecutive =
+      currentDate.getDate() - previousDate.getDate() === 1 &&
+      currentDate.getMonth() === previousDate.getMonth() &&
+      currentDate.getFullYear() === previousDate.getFullYear();
 
-  // let longestConsecutive = 1;
-  // let currentConsecutive = 1;
+    if (isConsecutive) {
+      currentConsecutiveDays++;
 
-  // for (let i = 1; i < dates.length; i++) {
-  //   const diffInDays = Math.floor(
-  //     (dates[i].getTime() - dates[i - 1].getTime()) / (1000 * 60 * 60 * 24)
-  //   );
+      if (currentConsecutiveDays > maxConsecutiveDays) {
+        maxConsecutiveDays = currentConsecutiveDays;
+      }
+    } else {
+      currentConsecutiveDays = 1;
+    }
+  }
 
-  //   if (diffInDays === 1) {
-  //     currentConsecutive++;
-  //   } else if (diffInDays > 1) {
-  //     longestConsecutive = Math.max(longestConsecutive, currentConsecutive);
-  //     currentConsecutive = 1;
-  //   }
-  // }
+  return currentConsecutiveDays;
+}
 
-  // return Math.max(longestConsecutive, currentConsecutive);
+export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {
+  const message = await findBMIblockchainContract(tempAccountId, Ledger2)
+  console.log(message, 'message');
+  // if no ledger, return false
+  if (message.length === 0) return false;
 
+  for (let i = 0; i < message.length; i++) {
+    const BMIType = calBMIType(message[i].bmi);
+    if (BMIType.type === 'Healthy') {
+      return true;
+    }
+  }
 
-  return message.length;
+  return false;
 }
