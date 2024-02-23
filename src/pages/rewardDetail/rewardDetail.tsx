@@ -14,7 +14,7 @@ interface IRewardDetailProps {
 
 
 const determinePageClass = (id: string) => {
-  let classNameList = []
+  let classNameList:string[] = []
   // index 0: the bigger container of finished times finished times / require times
   // index 1: the container of finished times / require times
   // index 2: the container of finished times
