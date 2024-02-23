@@ -8,6 +8,7 @@ import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmi
 import { useSelector } from "react-redux";
 import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";
+import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
 
 interface IRewardDetailProps {}
 
@@ -64,7 +65,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const classNameList = determinePageClass(id as string);
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
-  const [BMIRecordTimes, setBMIRecordTimes] = React.useState<number>(0);
+  const [BMIRecordTimes, setBMIRecordTimes] = React.useState<number>();
 
   const getrewardDetailTimes = async () => {
     if (id === "2") {
@@ -75,6 +76,9 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         .then((ans) => {
           setBMIRecordTimes(ans ? 1 : 0);
         });
+    }
+    if (id === "4") {
+      setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
     }
   };
   const getReward = async () => {

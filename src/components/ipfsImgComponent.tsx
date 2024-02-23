@@ -8,7 +8,7 @@ interface IPFSImageComponentProps {
   style?: React.CSSProperties;
 }
 
-const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT" , style}) => {
+const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT", style }) => {
   const domains = [
     // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
     // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
@@ -18,7 +18,7 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
   ];
-  if(className === "allNftImage"){
+  if (className === "allNftImage") {
     const domains = [
       // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
       // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
@@ -76,22 +76,38 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     // setTimeout(switchDomain, 3000);
     console.log("image error");
     // switchDomain();
-    setCurrentDomainIndex(prevDomainIndex => prevDomainIndex + 1);
+    setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
 
-
-
+  // return !isLoading ? (
+  //   <img 
+  //     src={src} 
+  //     alt={alt} 
+  //     onError={handleImageError} 
+  //     onClick={onClick} 
+  //     className={className} 
+  //     onLoad={() => setIsLoading(false)} 
+  //     style={style}
+  //   ></img>
+  // ) : (
+  //   <div className="lds-ring">
+  //     <div></div>
+  //     <div></div>
+  //     <div></div>
+  //     <div></div>
+  //   </div>
+  // );
   return (
-    <img
-      src={`${isLoading? "/img/loadingMinting/mimi-dancing-for-loadin-page.gif": src}`}
-      alt={alt}
-      onError={handleImageError}
-      onClick={onClick}
-      className={className}
-      onLoad={() => setIsLoading(false)}
-      style={style}
-    ></img>
-  );
+  <img 
+    src={isLoading ? "/img/loadingMinting/mimi-dancing-for-loadin-page.gif" : src} 
+    alt={alt} 
+    onError={handleImageError} 
+    onClick={onClick} 
+    className={className} 
+    onLoad={() => setIsLoading(false)} 
+    style={style}
+  ></img>)
+
 };
 
 export default IPFSImageComponent;

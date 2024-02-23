@@ -47,7 +47,12 @@ export async function GetTokenRanking(ledger2: any) {
   console.log("results:", results);
   var imgAddress: string = "";
   for (var i = 0; i < Math.min(sortedArray.length, 100); i++) {
-    let newDes = results[i].description === undefined || results[i].description === "NFT"  ? {} : JSON.parse(results[i].description);
+    let newDes;
+    try {
+      newDes = results[i].description === undefined || results[i].description === "NFT"  ? {} : JSON.parse(results[i].description);
+    } catch (error) {
+      continue;
+    }
     console.log(newDes.nm, "newDes.av is ", newDes.av);
     if (newDes.av == null) {
       console.log("called newDes.av is null");
