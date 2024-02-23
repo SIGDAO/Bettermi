@@ -83,7 +83,7 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
 
   return (
     <img
-      src={`${src}`}
+      src={`${isLoading? "/img/loadingMinting/mimi-dancing-for-loadin-page.gif": src}`}
       alt={alt}
       onError={handleImageError}
       onClick={onClick}
