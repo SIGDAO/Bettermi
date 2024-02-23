@@ -33,8 +33,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   // const [Timedifference, setTimedifference] = useState<string[]>([]);
   const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, '');
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const updated = useRef(false);
   let isNew = false;
 

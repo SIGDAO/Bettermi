@@ -51,7 +51,7 @@ export const TransferNftTokenOwnershipFinale = async (nodeHost: any, recipientId
   // console.log(publicKey);
   // console.log(privateKey);
   
-  await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/api/transferAsset", {
+  await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/transferAsset", {
     assetId: nftToBeDistributed.asset,
     quantity: "1",
     recipientId: recipientId,

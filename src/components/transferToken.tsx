@@ -17,7 +17,7 @@ export async function TransferToken(nodeHost: any, accountId: any, quantity: str
   const assetId = process.env.REACT_APP_TOKEN_ID!;
 
   try {
-    await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/api/transferAsset", {
+    await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/transferAsset", {
       assetId: assetId,
       quantity: quantity,
       accountId: accountId,
