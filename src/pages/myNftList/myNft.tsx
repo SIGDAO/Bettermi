@@ -23,6 +23,7 @@ import * as React from 'react';
  import { UpdateUserIcon } from '../../NftSystem/updateUserNftStorage';
 import { selectCurrentUsername } from '../../redux/profile';
 import { selectedNftInfo } from '../allNftList/indexAllNftList';
+import IPFSImageComponent from '../../components/ipfsImgComponent';
 
  interface MyNftProps {
     image:string;
@@ -130,7 +131,7 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
           imgAddress === ""?(<div>loading</div>):(
 
                   <div className = "myNftList">
-                    <img onClick = {
+                    <IPFSImageComponent onClick = {
                       () =>{
                         setOpenModel(true);const nftInfo:selectedNftInfo={
                           imageUrl:imgAddress,
@@ -142,7 +143,8 @@ import { selectedNftInfo } from '../allNftList/indexAllNftList';
                         console.log(nftInfo);
                         setSelectedNft(nftInfo);
                       }
-                      } className = "myNftImage" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
+                      } className = "myNftImage" imgAddress = {`https://ipfs.io/ipfs/${imgAddress}`}></IPFSImageComponent>
+
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#{nftNumber}</div>
                       <div className = "myNftBar">
