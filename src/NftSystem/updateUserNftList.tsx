@@ -84,7 +84,7 @@ export async function UpdateUserNftList(
       console.log(nftList);
       var feePlanck = ((Math.floor(newArray.length / 8) + 1) * 1000000).toString();
       console.log(feePlanck);
-      sendMessage(ledger2, nftList, ourContract.ats[0].at, nftDistributorPublicKey, nftDistributorPrivateKey, feePlanck);
+      sendMessage(ledger2, nftList, ourContract.ats[0].at,  feePlanck);
       // await ledger2.message.sendMessage({
       //     message: nftList,
       //     recipientId: ourContract.ats[0].at,
@@ -126,7 +126,7 @@ export async function UpdateUserNftList(
     console.log(feePlanck);
     console.log(nftList);
     console.log(typeof transactionList.transactions[1].timestamp);
-    sendMessage(ledger2, nftList, ourContract.ats[0].at, nftDistributorPublicKey, nftDistributorPrivateKey, feePlanck);
+    sendMessage(ledger2, nftList, ourContract.ats[0].at, feePlanck);
     // await ledger2.message.sendMessage({
     //     message: nftList,
     //     recipientId: ourContract.ats[0].at,

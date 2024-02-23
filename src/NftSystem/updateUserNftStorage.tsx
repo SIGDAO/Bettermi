@@ -193,7 +193,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
             if(i !=0 && i%46 == 0){
                 finalNftListString = finalNftList.join(",");
                 console.log("final nft list to be sent is",finalNftListString);
-                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,"6000000");
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,"6000000");
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
@@ -204,7 +204,7 @@ export async function updateReceiverAccount(ledger2:any, recipientId:string,code
                 console.log("final nft list to be sent is",finalNftListString);
                 const feePlanck:string = ((Math.floor((i%46)/8) + 1)*1000000).toString();
                 console.log(feePlanck);
-                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,nftDistributorPublicKey,nftDistributorPrivateKey,feePlanck);
+                await sendMessage(ledger2,finalNftListString,receiverNftStorage.ats[0].at,feePlanck);
                 finalNftList = [];
                 finalNftList.push(newTransactionNumber);
                 console.log("The finalNftList after clearing",finalNftList);
