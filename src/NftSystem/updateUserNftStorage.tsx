@@ -228,7 +228,7 @@ export async function CheckNftOwnerId(ledger2:any,contractId:string){
 };
 
 
-export async function updateSenderAccount(ledger2:any, senderId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
+export async function updateSenderAccount(ledger2:any, senderId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
     let senderNftStorage = await ledger2.contract.getContractsByAccount({
         accountId: senderId,
         machineCodeHash: codeHashId,
@@ -313,8 +313,8 @@ await ledger2.contract.callContractMethod({
 });
 }
 
-export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string,nftDistributorPublicKey:string,nftDistributorPrivateKey:string){
-    const result = await updateSenderAccount(ledger2,senderId,codeHashId,nftToBeDistributed,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey); //Find and delete
+export async function UpdateUserStorage(ledger2:any, senderId:string,recipientId:string,codeHashId:string,nftToBeDistributed:string,nftDistributor:string){
+    const result = await updateSenderAccount(ledger2,senderId,codeHashId,nftToBeDistributed,nftDistributor); //Find and delete
     if(result === "successful"){
         console.log("the result is",result);
 

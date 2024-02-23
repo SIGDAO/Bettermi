@@ -32,8 +32,6 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const nftLoaded = useRef(false);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const pathname: string = props.pathname;
@@ -98,9 +96,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     }
     if (gender === "Male") {
       console.log("called gender === Male");
-      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor);
     } else {
-      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor);
     }
     console.log("gender is   ", gender);
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger, nftContract.ats[0].at, nftDistributor);

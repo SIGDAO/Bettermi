@@ -269,8 +269,6 @@ export async function TransferNftToNewUser(
   nftStorageAccounts: string[],
   codeHashId: string,
   nftDistributor: string,
-  nftDistributorPublicKey: string,
-  nftDistributorPrivateKey: string,
 ) {
   const isNewUser = await CheckNewUser(ledger2, userId, codeHashId, nftDistributor);
   if (isNewUser === true) {

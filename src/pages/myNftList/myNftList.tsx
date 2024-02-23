@@ -105,8 +105,6 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
 
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const nftContractStorage = useSelector(getNftContractStorage);
   useEffect(() => {
     if (nftContractChecked.current) {
@@ -121,10 +119,10 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       .then((senderNftStorage) => {
         store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
         if (gender === "Female") {
-          TransferNftToNewUser(ledger2, userAccountId, mimiNftStorageAccounts, codeHashIdForNft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+          TransferNftToNewUser(ledger2, userAccountId, mimiNftStorageAccounts, codeHashIdForNft, nftDistributor);
         }
         if (gender === "Male") {
-          TransferNftToNewUser(ledger2, userAccountId, ioNftStorageAccounts, codeHashIdForNft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+          TransferNftToNewUser(ledger2, userAccountId, ioNftStorageAccounts, codeHashIdForNft, nftDistributor);
         }
       })
       .catch((error) => {

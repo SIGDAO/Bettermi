@@ -2,7 +2,6 @@ import { generateMethodCall } from "@signumjs/contracts";
 import { Attachment, AttachmentMessage } from "@signumjs/core";
 import { CheckNftOwnerId } from "../updateUserNftStorage";
 import { FindLatestTransactionArray, FindLatestTransactionNumber, UpdateUserStorage } from "../updateUserNftStorage";
-
 export async function BuyNft(
   Wallet: any,
   ledger2: any,
@@ -11,8 +10,6 @@ export async function BuyNft(
   userAccountId: string,
   codeHashIdForNft: string,
   nftDistributor: string,
-  nftDistributorPublicKey: string,
-  nftDistributorPrivateKey: string,
   userAccountPublicKey: string,
 ) {
   const nftOwner = await CheckNftOwnerId(ledger2, nftId);
@@ -29,6 +26,7 @@ export async function BuyNft(
     message: hexMessage,
   });
   if (hi != null && nftId != null) {
+
     const transaction = await ledger2.asset.transferAsset({
       assetId: assetId,
       quantity: nftPrice!,
@@ -59,6 +57,6 @@ export async function BuyNft(
     senderPublicKey: userAccountPublicKey,
   });
 
-  await UpdateUserStorage(ledger2, nftOwner, userAccountId, codeHashIdForNft, nftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+  await UpdateUserStorage(ledger2, nftOwner, userAccountId, codeHashIdForNft, nftId, nftDistributor);
   await Wallet.Extension.confirm(userCoverTheirTransactionCost.unsignedTransactionBytes);
 }
