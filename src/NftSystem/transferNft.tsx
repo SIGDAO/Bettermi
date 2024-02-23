@@ -91,7 +91,7 @@ export async function SendBackToStorage(
   recipientPrivateKey: string,
   recipientPublicKey: string,
 ) {
-  await TransferNftToUser(ledger2, nftToBeReturned, nftDistributor, recipientPrivateKey, recipientPublicKey);
+  await TransferNftToUser(ledger2, nftToBeReturned, nftDistributor);
   const message = await ledger2.account.getUnconfirmedAccountTransactions(nftDistributor);
   console.log(message);
   console.log(message.unconfirmedTransactions[0]);
@@ -230,7 +230,7 @@ export const TransferNft = async (
   console.log(nftToBeDistributed, "nftToBeDistributed");
   console.log("recipientId is ", recipientId);
 
-  await TransferNftToUser(ledger2, nftToBeDistributed.nft, recipientId, nftDistributorPrivateKey, nftDistributorPublicKey);
+  await TransferNftToUser(ledger2, nftToBeDistributed.nft, recipientId);
   console.log("transfered nft to user");
   nftList.splice(nftToBeDistributed.arrayIndex, 1);
   var newNftList = "empty";
@@ -243,8 +243,8 @@ export const TransferNft = async (
     console.log(newNftList.length, "newNftList.length");
     console.log("fee planck is", feePlanck);
   }
-  await sendMessage(ledger2, newNftList, nftStorageAccount, nftDistributorPublicKey, nftDistributorPrivateKey, feePlanck);
-  await updateReceiverAccount(ledger2, recipientId, codeHashId, nftToBeDistributed.nft, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+  await sendMessage(ledger2, newNftList, nftStorageAccount, feePlanck);
+  await updateReceiverAccount(ledger2, recipientId, codeHashId, nftToBeDistributed.nft, nftDistributor);
 };
 
 export async function CheckNewUser(ledger2: any, userId: String, codeHashIdForNft: string, nftDistributor: string) {
@@ -275,6 +275,6 @@ export async function TransferNftToNewUser(
   const isNewUser = await CheckNewUser(ledger2, userId, codeHashId, nftDistributor);
   if (isNewUser === true) {
     //console.log("Transfering NFT to new user");
-    await TransferNft(ledger2, userId, nftStorageAccounts, codeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+    await TransferNft(ledger2, userId, nftStorageAccounts, codeHashId, nftDistributor);
   }
 }
