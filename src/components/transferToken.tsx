@@ -9,36 +9,22 @@ import { useSelector } from "react-redux";
 import { Api } from "@signumjs/core";
 import { walletNodeHost } from "../redux/wallet";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+export async function TransferToken(nodeHost: any, accountId: any, quantity: string) {
+  const walletNodeHost: string = nodeHost ? nodeHost : window.localStorage.getItem("nodeHost");
+  //const assetId = "3862155318820066741";
+  const assetId = process.env.REACT_APP_TOKEN_ID!;
 
-export async function TransferToken(nodeHost:any,accountId:any,quantity:string){
-  const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-  console.log(nftDistributorPrivateKey, "nftDistributorPrivateKey");
-    const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
-    const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-    //const assetId = "3862155318820066741";
-     const assetId = process.env.REACT_APP_TOKEN_ID!;
-    console.log(ledger2, "ledger2");
-    console.log(nodeHost, "nodeHost");
-    console.log(quantity, 'quantity');
-    console.log(nftDistributorPrivateKey,"nftDistributorPrivateKey");
-    console.log(nftDistributorPublicKey,"nftDistributorPublicKey");
-
-    if(ledger2 != null){
-      try {
-        await ledger2.asset.transferAsset({
-          assetId:assetId,
-          quantity:quantity,
-          recipientId:accountId,
-          senderPrivateKey:nftDistributorPrivateKey,
-          skipAdditionalSecurityCheck:true,
-          feePlanck:"1000000",
-          senderPublicKey:nftDistributorPublicKey,
-        })
-
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  try {
+    await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/api/transferAsset", {
+      assetId: assetId,
+      quantity: quantity,
+      accountId: accountId,
+      skipAdditionalSecurityCheck: true,
+      feePlanck: "1000000",
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }

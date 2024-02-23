@@ -41,7 +41,7 @@ export async function sortUnconfirmedTransactionArrayAccordingToAscendingTimeSta
 }
 
 export async function sendMessage(ledger2: any, message: string, recipientId: string, feePlanck: string) {
-  await axios.post("https://dapp.bettermi.io/api/sendMessage/", {
+  await axios.post( process.env.REACT_APP_NODE_ADDRESS + "/sendMessage", {
     message: message,
     recipientId: recipientId,
     feePlanck: feePlanck,
