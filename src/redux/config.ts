@@ -5,8 +5,7 @@ const Networks = {
   };
   
   // Here you can assign on which network you want to work
-  const selectedNetwork = process.env.REACT_APP_NETWORK;
-  
+  const selectedNetwork = process.env.REACT_APP_NETWORK==="Signum-TESTNET"?Networks.TestNet: Networks.MainNet;
   // Here you can assign the dApp name
   const appName = "bettermi.io dapp";
   
