@@ -69,6 +69,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
+    console.log(bmiContract, "bmiContract")
+
     while (bmiContract.ats[0] == null) {
       bmiContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,

@@ -66,7 +66,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
   console.log(ledger);
   const confirm = async () => {
-    let encrypted: string = "";
+    let encrypted: any;
 
     if (minted) {
       console.log("minted");
@@ -126,9 +126,15 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             birthday: birthday, 
             time: new Date() 
           });
+
+          console.log(bmiMessage);
               
           try {
-            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , {
+              data: bmiMessage
+            })
+            console.log(encrypted)
+            encrypted = encrypted.data
           } catch (error) {
             console.log(error)
             alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
@@ -153,9 +159,13 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             bmi: BMI,
             time: new Date(),
           });
+
+          console.log(bmiMessage, "bmiMessage")
           
           try {
             encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+            console.log(encrypted)
+            encrypted = encrypted.data
           } catch (error) {
             alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
             navigate('/')
