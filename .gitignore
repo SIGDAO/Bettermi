@@ -6,6 +6,8 @@
 .pnp.js
 .env
 env.txt
+envBackup.txt
+testingEnv.txt
 # testing
 /coverage
 

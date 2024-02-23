@@ -52,19 +52,19 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isLoading) {
-        clearInterval(interval);
-      } else {
-        setCurrentDomainIndex(prevDomainIndex => prevDomainIndex + 1);
-  }
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (!isLoading) {
+  //       clearInterval(interval);
+  //     } else {
+  //       setCurrentDomainIndex(prevDomainIndex => prevDomainIndex + 1);
+  // }
+  //   }, 5000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isLoading]);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [isLoading]);
 
   useEffect(() => {
     const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
