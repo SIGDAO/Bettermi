@@ -3,8 +3,8 @@ import { accountId } from '../redux/account';
 import { useDispatch, useSelector } from "react-redux";
 import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
-import { decrypt } from './encryption';
-import { calBMIType } from './selfieToEarnRewardType';
+import { calBMIType } from './rewardCalculate';
+import axios from 'axios';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -38,8 +38,15 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     description = JSON.parse(contract.ats[0]?.description);
     description.time = new Date(description.time);
   } catch (error) {
-    description = decrypt(contract.ats[0]?.description);
-    description.time = new Date(description.time);
+    try {
+      description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+        data: contract.ats[0]?.description
+      })
+      description = description.data
+      description.time = new Date(description.time);  
+    } catch (error) {
+      alert("Cannot fetch the record, please contact system admin!")
+    }
   }
 
   processedBMIRecord.push(description);
@@ -52,20 +59,30 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
 
   for(let i = message.transactions.length - 1; i >= 0 ;i--){
-
+    let content:any;
     try {
       let tempRecord = JSON.parse(message.transactions[i].attachment.message);
       if (typeof tempRecord === 'number') continue;
       tempRecord.time = new Date(tempRecord.time);
       processedBMIRecord.push(tempRecord);
     } catch (error) {
-      let content = decrypt(message.transactions[i].attachment.message);
-      if (typeof content === 'number') continue;
-      content.time = new Date(content.time);
-      processedBMIRecord.push(content);
-      console.log(description, 'description')
+      // let content = decrypt(message.transactions[i].attachment.message);
+      try {
+        content = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+          data: message.transactions[i].attachment.message
+        })
+        content = content.data
+        if (typeof content === 'number') continue;
+        content.time = new Date(content.time);
+        processedBMIRecord.push(content);
+        console.log(description, 'description')  
+      } catch (error) {
+        alert("Cannot fetch the record, please contact system admin!")
+      }
     }
   }
+
+  console.log(processedBMIRecord, "processedBMIRecord")
   
   return processedBMIRecord;
 }

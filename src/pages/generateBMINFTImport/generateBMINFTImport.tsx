@@ -22,10 +22,10 @@ import { accountId } from "../../redux/account";
 import { TransferNFTOwnership } from "./transferNFTOwnership";
 import { accountSlice } from "../../redux/account";
 import { store } from "../../redux/reducer";
-import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
+import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/rewardCalculate";
 import { TransferToken } from "../../components/transferToken";
 import JSEncrypt from "jsencrypt";
-import { encrypt } from "../../components/encryption";
+import axios from "axios";
 
 interface IGenerateBMINFTImportProps {}
 
@@ -66,6 +66,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
   console.log(ledger);
   const confirm = async () => {
+    let encrypted: string = "";
+
     if (minted) {
       console.log("minted");
       return;
@@ -124,9 +126,14 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             birthday: birthday, 
             time: new Date() 
           });
-          
-          let encrypted: string = encrypt(bmiMessage);
-
+              
+          try {
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+          } catch (error) {
+            console.log(error)
+            alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
+            navigate('/')
+          }
 
           const initializeContract = (await ledger.contract.publishContractByReference({
             name: "BMI",
@@ -147,7 +154,12 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             time: new Date(),
           });
           
-          let encrypted: string = encrypt(bmiMessage);
+          try {
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+          } catch (error) {
+            alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
+            navigate('/')
+          }
 
 
           const sendBMI = (await ledger.message.sendMessage({

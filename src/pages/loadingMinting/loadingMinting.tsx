@@ -14,7 +14,7 @@ import { useRef } from "react";
 import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
 import { store } from "../../redux/reducer";
 import { profileSlice } from "../../redux/profile";
-import { decrypt } from "../../components/encryption";
+import axios from "axios";
 
 interface ILoadingMintingProps {
   pathname: string;
@@ -86,7 +86,15 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     try {
        description = JSON.parse(bmiContract.ats[0].description);
     } catch (error) {
-      description = decrypt(bmiContract.ats[0].description);
+      try {
+        description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+          data: bmiContract.ats[0].description,
+        })
+        description = description.data
+      } catch (error) {
+        alert("Cannot fetch the record, please contact system admin!")
+        navigate('/')
+      }
     }
     console.log("description is",description);
     console.log("description, gender is",description.gender)

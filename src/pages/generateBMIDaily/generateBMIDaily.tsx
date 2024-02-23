@@ -15,8 +15,7 @@ import { walletNodeHost } from "../../redux/wallet";
 import { LedgerClientFactory } from "@signumjs/core";
 import { TransferToken } from "../../components/transferToken";
 import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
-import JSEncrypt from 'jsencrypt'
-import { encrypt } from "../../components/encryption";
+import axios from "axios";
 
 interface IGenerateBMIDailyProps {}
 
@@ -37,6 +36,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
 
   const handleImport = async () => {
     if (!ledger) return;
+    var encrypted: string = "";
     // const startTime: number = Date.now(); // get the current time in milliseconds
 
     let storeNftContract = await ledger.contract.getContractsByAccount({
@@ -76,7 +76,12 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       time: new Date(),
     });
     
-    let encrypted: string = encrypt(bmiMessage);
+    try {
+      encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+    } catch (error) {
+      alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
+      navigate('/')
+    }
     
     const sendBMI = (await ledger.message.sendMessage({
       message: encrypted,
