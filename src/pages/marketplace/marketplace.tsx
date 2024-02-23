@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { useLedger } from '../../redux/useLedger';
 import { getBMIRecordDay, isHitFirstHealthyBMIRange } from '../../components/bmiCalculate';
-import { CountChallenges } from '../../NftSystem/Token/countChallenges';
+import { CountChallenges, countTotalChallengesTimes } from '../../NftSystem/Token/countChallenges';
 
 interface IMarketplaceProps {
 }
@@ -20,6 +20,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>();
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
+  // const [totalChallengesTimes, setTotalChallengesTimes] = React.useState<number>();
 
   React.useEffect(() => {
     getBMIRecordDay(tempAccountId, Ledger2)
@@ -30,15 +31,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       .then((ans) => {
         setBmiHitHealthyNumber(ans? 1 : 0);
       })
-    CountChallenges(tempAccountId, Ledger2)
+      countTotalChallengesTimes(tempAccountId, Ledger2)
       .then((res) => {
-
-        let count = 0;
-        for (let i = 0; i < res.length; i++) {
-          count += res[i];
-        }
-
-        setChallengeCompletedTimes(count);
+        setChallengeCompletedTimes(res);
       })
   }, []);
 

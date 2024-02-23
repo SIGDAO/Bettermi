@@ -206,3 +206,63 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
   }
   return countTimes;
 }
+
+export async function countTotalChallengesTimes(accountId: string, Ledger2: any): Promise<number> {
+  var countTimes: number = 0;
+
+  // const GMTOffset = extractGMTOffset(dateString);
+  // console.log("extracting GMT offset from string:", GMTOffset);
+  // console.log("original Date:", dateString);
+  // const hongKongTime = convertToHongKongTime(dateString);
+
+  // console.log("Hong Kong Time:", hongKongTime);
+  if (Ledger2 != null) {
+    const unconfirmedTransaction = await Ledger2.account.getUnconfirmedAccountTransactions(accountId);
+    console.log(unconfirmedTransaction);
+    const today = await getWorldTime();
+    console.log("today from api is",today);
+    if(today == null){
+      return 0;
+    }
+    
+    for (var i = 0; i < unconfirmedTransaction.unconfirmedTransactions.length; i++) {
+      if (unconfirmedTransaction.unconfirmedTransactions[i] != undefined && unconfirmedTransaction.unconfirmedTransactions[i].attachment != undefined) {
+        try{
+        const message = unconfirmedTransaction.unconfirmedTransactions[i].attachment.message;
+        if (!message) {
+          continue;
+        }
+        console.log("unconfirmed transactions", message);
+        if (message.includes("Congrats! You completed challenge number")) {
+          countTimes++;
+        }
+      }
+      catch(error){
+        console.log("error is",error);
+
+        continue;
+      }
+      }
+    }
+    //Check string from unconfirmedList
+    const accounts = await Ledger2.account.getAccountTransactions({
+      accountId: accountId,
+      type: 2,
+      subtype: 1,
+    });
+    console.log(accounts);
+    for (var i = 0; i < accounts.transactions.length; i++) {
+      if (accounts.transactions[i] != undefined) {
+        const message = accounts.transactions[i].attachment.message;
+        if (!message) {
+          continue;
+        }
+        if (message.includes("Congrats! You completed challenge number")) {
+          countTimes++;
+        }
+      }
+    }
+    console.log(countTimes);
+  }
+  return countTimes;
+}
