@@ -103,7 +103,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/3" >
+            <Link to="/rewardDetail/4" >
               <div className="rewards-cards-YuvWOM rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
@@ -127,7 +127,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/4" >
+            <Link to="/rewardDetail/3" >
               <div className="rewards-cards-DNKKjx rewards-cards">
                 <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Wellness Milestone</div>

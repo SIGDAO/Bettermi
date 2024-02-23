@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
 import { decrypt } from './encryption';
+import { calBMIType } from './selfieToEarnRewardType';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -160,28 +161,50 @@ export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
 export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
   const message = await findBMIblockchainContract(tempAccountId, Ledger2)
   console.log(message, 'message');
+
+  if (message.length === 0) {
+    return 0;
+  }
+
+  let maxConsecutiveDays = 1;
+  let currentConsecutiveDays = 1;
+
   // if no ledger, return false
+  for (let i = 1; i < message.length; i++) {
+    const currentDate = message[i].time;
+    const previousDate = message[i - 1].time;
 
-  // dates.sort((a, b) => a.getTime() - b.getTime());
+    const isConsecutive =
+      currentDate.getDate() - previousDate.getDate() === 1 &&
+      currentDate.getMonth() === previousDate.getMonth() &&
+      currentDate.getFullYear() === previousDate.getFullYear();
 
-  // let longestConsecutive = 1;
-  // let currentConsecutive = 1;
+    if (isConsecutive) {
+      currentConsecutiveDays++;
 
-  // for (let i = 1; i < dates.length; i++) {
-  //   const diffInDays = Math.floor(
-  //     (dates[i].getTime() - dates[i - 1].getTime()) / (1000 * 60 * 60 * 24)
-  //   );
+      if (currentConsecutiveDays > maxConsecutiveDays) {
+        maxConsecutiveDays = currentConsecutiveDays;
+      }
+    } else {
+      currentConsecutiveDays = 1;
+    }
+  }
 
-  //   if (diffInDays === 1) {
-  //     currentConsecutive++;
-  //   } else if (diffInDays > 1) {
-  //     longestConsecutive = Math.max(longestConsecutive, currentConsecutive);
-  //     currentConsecutive = 1;
-  //   }
-  // }
+  return currentConsecutiveDays;
+}
 
-  // return Math.max(longestConsecutive, currentConsecutive);
+export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {
+  const message = await findBMIblockchainContract(tempAccountId, Ledger2)
+  console.log(message, 'message');
+  // if no ledger, return false
+  if (message.length === 0) return false;
 
+  for (let i = 0; i < message.length; i++) {
+    const BMIType = calBMIType(message[i].bmi);
+    if (BMIType.type === 'Healthy') {
+      return true;
+    }
+  }
 
-  return message.length;
+  return false;
 }
