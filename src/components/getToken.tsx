@@ -3,7 +3,7 @@ import { AppContext } from "../redux/useContext";
 import { useLedger } from "../redux/useLedger";
 import { UnsignedTransaction } from "@signumjs/core";
 import { Contract, ContractDataView } from "@signumjs/contracts";
-
+import React from "react";
 
 
 export function GetToken(accountId: string){

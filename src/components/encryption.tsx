@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 
-export function encrypt(data) {
+export function encrypt(data:any) {
   // var encrypted;
   const HexENCRYPTION_KEY = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_ENCRYPTION_KEY!.replace(/['"]+/g, ''));
   const HexIV = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_SECRET_IV!.replace(/['"]+/g, ''));

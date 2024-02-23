@@ -13,6 +13,7 @@ export const TransferNFTOwnership = async (ledger:Api, userAccountId:string,Wall
     //const { nftId, ledger, acåcountPublicKey, wallet } = this.context;
     // if not burning, check for account existence
     const NFT_address = "9209749234109330048";
+    const contract_Owner = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
     const NEXT_PUBLIC_NFT_CONTRACT_METHOD_TRANSFER="-8011735560658290665";
 
     if(ledger != null){
