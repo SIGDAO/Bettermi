@@ -87,8 +87,10 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
        description = JSON.parse(bmiContract.ats[0].description);
     } catch (error) {
       try {
+        const bmiEncrypteddata = bmiContract.ats[0].description;
+        console.log(bmiEncrypteddata, "bmiEncrypteddata")
         description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-          data: bmiContract.ats[0].description,
+          data: bmiEncrypteddata,
         })
         description = description.data
       } catch (error) {
