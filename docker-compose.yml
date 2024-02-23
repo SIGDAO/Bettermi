@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  bettermi.io:
+    image: "cychiuak/bettermi.io:latest"
+    ports:
+      - 3001:3001
+    environment:
+      - PORT=3001
