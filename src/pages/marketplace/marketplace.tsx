@@ -1,18 +1,17 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import './marketplace.css';
-import { CenterLayout } from '../../components/layout';
-import MenuBar from '../../components/menuBar';
-import { ShortTitleBar } from '../../components/titleBar';
-import HorizontalScrollContainer from '../../components/horizontalScrollContainer';
-import { useSelector } from 'react-redux';
-import { accountId } from '../../redux/account';
-import { useLedger } from '../../redux/useLedger';
-import { getBMIRecordDay, isHitFirstHealthyBMIRange } from '../../components/bmiCalculate';
-import { CountChallenges, countTotalChallengesTimes } from '../../NftSystem/Token/countChallenges';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import "./marketplace.css";
+import { CenterLayout } from "../../components/layout";
+import MenuBar from "../../components/menuBar";
+import { ShortTitleBar } from "../../components/titleBar";
+import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
+import { useSelector } from "react-redux";
+import { accountId } from "../../redux/account";
+import { useLedger } from "../../redux/useLedger";
+import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmiCalculate";
+import { CountChallenges, countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
 
-interface IMarketplaceProps {
-}
+interface IMarketplaceProps {}
 
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const tempAccountId = useSelector(accountId);
@@ -23,21 +22,17 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   // const [totalChallengesTimes, setTotalChallengesTimes] = React.useState<number>();
 
   React.useEffect(() => {
-    getBMIRecordDay(tempAccountId, Ledger2)
-      .then((res) => {
-        setBmiRecordTimes(res);
-      })
-    isHitFirstHealthyBMIRange(tempAccountId, Ledger2)
-      .then((ans) => {
-        setBmiHitHealthyNumber(ans? 1 : 0);
-      })
-      countTotalChallengesTimes(tempAccountId, Ledger2)
-      .then((res) => {
-        setChallengeCompletedTimes(res);
-      })
+    getBMIRecordDay(tempAccountId, Ledger2).then((res) => {
+      setBmiRecordTimes(res);
+    });
+    isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
+      setBmiHitHealthyNumber(ans ? 1 : 0);
+    });
+    countTotalChallengesTimes(tempAccountId, Ledger2).then((res) => {
+      setChallengeCompletedTimes(res);
+    });
   }, []);
 
-  
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-marketplace-1">
@@ -53,13 +48,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             <HorizontalScrollContainer inputClassName="x7-vbUx2m">
               <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Toget.png`} alt="Zoe Fitness" />
               <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/Flower.png`} alt="Vitev" />
-              <img className="zoe-fitness-HI0Hnc zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Ruto.png`}/>
-              <img className="zoe-fitness-eRgkx7 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Era.png`}/>
-              <img className="zoe-fitness-u91zz4 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/ALC.png`}/>
-              <img className="zoe-fitness-aEJ33D zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/FlavourHouse.png`}/>
-              <img className="zoe-fitness-Jc5OoT zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/BPSAA-Logo-NFT.png`}/>
-              <img className="zoe-fitness-SxtrzH zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Chuen-Yik-Logo-NFT.png`}/>
-              <img className="zoe-fitness-ppgU72 zoe-fitness" src = {`${process.env.PUBLIC_URL}/img/marketplace/Fourcheer-Logo-NFT.png`}/>
+              <img className="zoe-fitness-HI0Hnc zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Ruto.png`} />
+              <img className="zoe-fitness-eRgkx7 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Era.png`} />
+              <img className="zoe-fitness-u91zz4 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/ALC.png`} />
+              <img className="zoe-fitness-aEJ33D zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/FlavourHouse.png`} />
+              <img className="zoe-fitness-Jc5OoT zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/BPSAA-Logo-NFT.png`} />
+              <img className="zoe-fitness-SxtrzH zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Chuen-Yik-Logo-NFT.png`} />
+              <img className="zoe-fitness-ppgU72 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Fourcheer-Logo-NFT.png`} />
             </HorizontalScrollContainer>
           </div>
           <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>
@@ -67,20 +62,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             <div className="see-all-oobbG1 see-all inter-medium-royal-blue-14px">See all</div>
           </Link>
           <HorizontalScrollContainer inputClassName="x8-oobbG1">
-            <Link to='/rewardDetail/1'>
+            <Link to="/rewardDetail/1">
               <div className="rewards-cards-PbMWvx rewards-cards">
-                <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="master-collector-YV3xtK inter-semi-bold-white-18px">Master Collector</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-4@1x.png`} alt="NFT_Avatar" />
-                <p className="acquire-3-nf-ts-from-our-collection-YV3xtK inter-normal-cadet-blue-12px">
-                  Acquire 3 NFTs from our collection.
-                </p>
+                <p className="acquire-3-nf-ts-from-our-collection-YV3xtK inter-normal-cadet-blue-12px">Acquire 3 NFTs from our collection.</p>
                 <div className="ic_next">
-                  <img
-                    className="ic_chevron_right_24px"
-                    src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`}
-                    alt="ic_chevron_right_24px"
-                    />
+                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -91,20 +79,13 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/2" >
+            <Link to="/rewardDetail/2">
               <div className="rewards-cards-dMXoGx rewards-cards">
-                <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
                 <div className="selfie-champion-gKPNC7 inter-semi-bold-white-18px">Selfie Champion</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-5@1x.png`} alt="NFT_Avatar" />
-                <p className="selfies-for-60-consecutive-days-gKPNC7 inter-normal-cadet-blue-12px">
-                  Selfies for 60 consecutive days
-                </p>
+                <p className="selfies-for-60-consecutive-days-gKPNC7 inter-normal-cadet-blue-12px">Selfies for 60 consecutive days</p>
                 <div className="ic_next">
-                  <img
-                    className="ic_chevron_right_24px"
-                    src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`}
-                    alt="ic_chevron_right_24px"
-                    />
+                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -115,20 +96,17 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 </div>
               </div>
             </Link>
-            <Link to="/rewardDetail/4" >
-              <div className="rewards-cards-YuvWOM rewards-cards">
-                <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
+            {/* <Link to="/rewardDetail/4"> */}
+            <div className="rewards-cards rewards-cards-YuvWOM">
+            <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
+
+            <div className="rewards-cards-disable-content">
+                
                 <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
-                <p className="build-a-thriving-network-of-75-friends-00FLo4 inter-normal-cadet-blue-12px">
-                  Complete 50 challenges
-                </p>
+                <p className="build-a-thriving-network-of-75-friends-00FLo4 inter-normal-cadet-blue-12px">Complete 50 challenges</p>
                 <div className="ic_next">
-                  <img
-                    className="ic_chevron_right_24px"
-                    src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`}
-                    alt="ic_chevron_right_24px"
-                    />
+                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -138,19 +116,18 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   </div>
                 </div>
               </div>
-            </Link>
-            <Link to="/rewardDetail/3" >
-              <div className="rewards-cards-DNKKjx rewards-cards">
-                <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/marketplace/card-bg-1@1x.png`} alt="Card_bg" />
+              </div>
+            {/* </Link> */}
+            {/* <Link to="/rewardDetail/3" > */}
+            <div className="rewards-cards rewards-cards-DNKKjx">
+              <div className="rewards-cards-disable-content">
+                <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
+
                 <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Wellness Milestone</div>
                 <img className="nft_-avatar-new" src={`${process.env.PUBLIC_URL}/img/reward/Wellness_Milestone_Square.png`} alt="NFT_Avatar" />
                 <div className="complete-50-challenges-VtU7WE inter-normal-cadet-blue-12px">Hit the first healthy BMI range</div>
                 <div className="ic_next">
-                  <img
-                    className="ic_chevron_right_24px"
-                    src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`}
-                    alt="ic_chevron_right_24px"
-                    />
+                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -160,7 +137,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
+            {/* </Link> */}
           </HorizontalScrollContainer>
         </div>
         <div className="partner-company-Rea9Nd partner-company">
@@ -171,24 +149,24 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           </Link> */}
           <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
-              <div className="x0-Y63lEW x0-marketplace"><img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" /></div>
-              <div className="x1-Y63lEW x1-no-border"><img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" /></div>
-              <div className="x2-Y63lEW"><img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" /></div>
+              <div className="x0-Y63lEW x0-marketplace">
+                <img className="x1-z2FCJz x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Free_Consultation_Sample.png`} alt="1" />
+              </div>
+              <div className="x1-Y63lEW x1-no-border">
+                <img className="x1-0pT4eI x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Product_Discount_Sample.png`} alt="1" />
+              </div>
+              <div className="x2-Y63lEW">
+                <img className="x1-EMGmsF x1" src={`${process.env.PUBLIC_URL}/img/marketplace/Hot_Deals_Service_Sample.png`} alt="1" />
+              </div>
             </div>
           </HorizontalScrollContainer>
         </div>
-        <MenuBar/>
+        <MenuBar />
       </div>
     </div>
-  )
-
-
-  return (
-    <CenterLayout
-      content={content}
-      bgImg={false}
-    />
   );
+
+  return <CenterLayout content={content} bgImg={false} />;
 };
 
 export default Marketplace;

@@ -59,7 +59,6 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
         {/* </div> */}
         <Link to="/rewardDetail/1">
           <div className="rewards-cards-kQlY8S rewards-cards">
-            <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="master-collector-5RWzHs inter-semi-bold-white-18px">Master Collector</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-4@1x.png`} alt="NFT_Avatar" />
             <p className="acquire-3-nf-ts-from-our-collection-5RWzHs inter-normal-cadet-blue-12px">Acquire 3 NFTs from our collection.</p>
@@ -77,7 +76,6 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
         </Link>
         <Link to="/rewardDetail/2">
           <div className="rewards-cards-TttECi rewards-cards">
-            <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
             <div className="selfie-champion-O07kH5 inter-semi-bold-white-18px">Selfie Champion</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-5@1x.png`} alt="NFT_Avatar" />
             <p className="selfies-for-60-consecutive-days-O07kH5 inter-normal-cadet-blue-12px">Selfies for 60 consecutive days</p>
@@ -93,9 +91,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             </div>
           </div>
         </Link>
-        <Link to="/rewardDetail/4">
-          <div className="rewards-cards-xzgu34 rewards-cards">
-            <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
+        {/* <Link to="/rewardDetail/4"> */}
+        <div className="rewards-cards-xzgu34 rewards-cards">
+        <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
+
+        <div className="rewards-cards-disable-content">
             <div className="social-butterfly-nGgOF5 inter-semi-bold-white-18px">Elite Challenger</div>
             <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/reward/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
             <p className="build-a-thriving-network-of-75-friends-nGgOF5 inter-normal-cadet-blue-12px">Complete 50 challenges</p>
@@ -113,10 +113,13 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               </div>
             </div>
           </div>
-        </Link>
-        <Link to="/rewardDetail/3">
-          <div className="rewards-cards-C55ruw rewards-cards">
-            <img className="card_bg" src={`${process.env.PUBLIC_URL}/img/reward/card-bg-1@1x.png`} alt="Card_bg" />
+          </div>
+        {/* </Link> */}
+        {/* <Link to="/rewardDetail/3"> */}
+        <div className="rewards-cards-C55ruw rewards-cards">
+        <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
+
+        <div className="rewards-cards-disable-content">
             <div className="elite-challenger-yvS2xN inter-semi-bold-white-18px">Wellness Milestone</div>
             <div className="Wellness-Milestone-reward-list-container">
               <img className="nft_-avatar-new" src={`${process.env.PUBLIC_URL}/img/reward/Wellness_Milestone_Square.png`} alt="NFT_Avatar" />
@@ -133,7 +136,9 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               </div>
             </div>
           </div>
-        </Link>
+
+        </div>
+        {/* </Link> */}
       </div>
     </div>
   );

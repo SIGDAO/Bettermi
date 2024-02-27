@@ -438,12 +438,15 @@
 }
 
 .bettermidapp-rewards-2 .rewards-cards {
-  background-color: transparent;
+  background-color: #0D0D0D;
   cursor: pointer;
   height: 150px;
   left: 25px;
   position: absolute;
   width: 340px;
+  border: 1px solid #4136F1;
+  border-radius: 20px;
+
 }
 
 .bettermidapp-rewards-2 .x0 {
