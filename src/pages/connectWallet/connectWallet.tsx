@@ -16,6 +16,7 @@ import { profileSlice } from "../../redux/profile";
 import { CheckUnconfirmedNewNFTContract } from "../myNftList/checkNewContract";
 import { CheckUnconfirmedNewBMIContract } from "../myNftList/checkNewContract";
 import { Link } from "react-router-dom";
+import { contractSlice } from "../../redux/contract";
 
 export interface IConnectWalletProps {}
 
@@ -108,6 +109,14 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           accountId: accountinfo.accountId,
           machineCodeHash: codeHashIdForNft,
         });
+
+        // set the redux for if needed to recreate the BMI and NFT contract
+        store.dispatch(contractSlice.actions.setIsBMIContractBuild((ourContract.ats[0] != null || openedBmiContract === true)))
+        store.dispatch(contractSlice.actions.setIsNFTContractBuild((senderNftStorage.ats[0] != null || openedNftContract === true)))
+
+        if ((!ourContract.ats[0] && !openedBmiContract) || (!senderNftStorage.ats[0] && openedNftContract)) {
+          navigate('/generateBMINFTImport')
+        }
 
         if ((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)) {
           console.log("called the if statement");

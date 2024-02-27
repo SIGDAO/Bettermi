@@ -9,6 +9,7 @@ import { loadState } from "./sessionStorage";
 import { userRankingSlice } from "./userRanking";
 import { selectedNftSlice } from "./selectedNft";
 import { tokenAPI } from "./tokenAPI";
+import { contractSlice } from "./contract";
 
 const appReducer = combineReducers({
   wallet: walletSlice.reducer,
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
   userBMI: userBMISlice.reducer,
   userRanking: userRankingSlice.reducer,
   selectedNft: selectedNftSlice.reducer,
+  contract: contractSlice.reducer,
   [userBMIApi.reducerPath]: userBMIApi.reducer,
   [tokenAPI.reducerPath]: tokenAPI.reducer,
 });
@@ -25,7 +27,6 @@ const rootReducer = (state:any, action:any) => {
     localStorage.removeItem('persist:root')
     return appReducer(undefined, action)
   }
-
   return appReducer(state, action)
 }
 export const store = configureStore({

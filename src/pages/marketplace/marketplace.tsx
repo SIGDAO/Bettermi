@@ -98,10 +98,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             </Link>
             {/* <Link to="/rewardDetail/4"> */}
             <div className="rewards-cards rewards-cards-YuvWOM">
-            <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
-
-            <div className="rewards-cards-disable-content">
-                
+              <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />
+              <div className="rewards-cards-disable-content">
                 <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
                 <p className="build-a-thriving-network-of-75-friends-00FLo4 inter-normal-cadet-blue-12px">Complete 50 challenges</p>
@@ -116,7 +114,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                   </div>
                 </div>
               </div>
-              </div>
+            </div>
             {/* </Link> */}
             {/* <Link to="/rewardDetail/3" > */}
             <div className="rewards-cards rewards-cards-DNKKjx">
