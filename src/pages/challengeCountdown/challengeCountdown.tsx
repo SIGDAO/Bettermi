@@ -22,11 +22,12 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
   const displayMission = missionList.find((mission, index) => index === parseInt(id)-1) || missionList[0];
+  console.log("display mission is",displayMission);
 
 
   const displayTime = (function () {
     const minutes: number = parseInt(displayMission.duration.split(' ')[0]);
-     return minutes * 60;
+    return minutes * 60;
     //return 3;
   })()
 
@@ -94,8 +95,10 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
             <div className="x0023-YGwjuf inter-semi-bold-white-18px">00:23</div> */}
           </div>
           <p className="straighten-your-arms-D6xMU2 inter-normal-white-14px">
-            Straighten your arms &amp; Shake them outwardly.
+            {/* Straighten your arms &amp; Shake them outwardly. */}
+            {missionList[parseInt(id)-1].title}
           </p>
+
           <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
           {/* <div className="ic_next-D6xMU2">
             <img

@@ -456,14 +456,14 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       <div style={centerLayoutStyle} className="bettermidapp-mimi-nfts-send-address-1">
         {isOtherUser ? (
           <>
-            <ShortTitleBar title="My NFTs" addSign={true} aiCoach={false} filter={false} />
+            <ShortTitleBar title="My NFT Collection" addSign={true} aiCoach={false} filter={false} />
             <div className="containerMyNftList">
               <div className="containerMyNftList2">{displayMyNft}</div>
             </div>
           </>
         ) : (
           <>
-            <ShortTitleBar title="My NFTs" addSign={true} aiCoach={false} filter={false} importButton={true} isOpenImport={isOpenImport} setIsOpenImport={setIsOpenImport} />
+            <ShortTitleBar title="My NFT Collection" addSign={true} aiCoach={false} filter={false} importButton={true} isOpenImport={isOpenImport} setIsOpenImport={setIsOpenImport} />
             <div className="containerMyNftList">
               <div className="containerMyNftList2">
                 {onDuty === ""  ? (
