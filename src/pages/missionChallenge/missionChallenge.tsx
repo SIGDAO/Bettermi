@@ -93,7 +93,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         console.log(userChallengeTimes);
         setisOverDailyPlayTimesLimit(
           playedChallenge.map((numChallengesPlayed) => {
-            if (numChallengesPlayed > 2) {
+            if (numChallengesPlayed >= 2) {
               return false;
             }
             return true;
@@ -241,7 +241,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                           </div>
                         ) : (isOverDailyPlayTimesLimit[index] ? (
                           <div className="score-bar_2">
-                            <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/3`}</div>
+                            <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
                           </div>
                         ) : (
                           <div className="score-bar_2-completed inter-semi-bold-white-15px">
