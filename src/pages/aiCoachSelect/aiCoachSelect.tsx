@@ -23,7 +23,7 @@ const questionList = [
   },
   {
     question: 'Q:  How can I earn rewards on Bettermi.io?',
-    ans: "A:  Bettermi.io takes privacy and data security seriously, we do not store any picture from users. We also implemented measures to protect users' personal information in accordance with relevant privacy laws."
+    ans: "A:  Users can earn rewards by completing daily selfies, participating in fitness challenges, achieving goals, referring friends, and engaging with the community."
   },
   {
     question: "Q:  Can I connect with other users?",
