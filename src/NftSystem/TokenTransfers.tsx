@@ -22,12 +22,8 @@ export const TransferTokenWithMessage = async (nodeHost: any, accountId: any, qu
   const walletNodeHost: string = nodeHost ? nodeHost : window.localStorage.getItem("nodeHost");
   const ledger2 = LedgerClientFactory.createClient({ nodeHost: nodeHost || walletNodeHost });
   const tokenId: string = process.env.REACT_APP_TOKEN_ID!;
-  console.log("quantity is", quantity);
-  console.log(ledger2, "ledger2");
-  console.log(nodeHost, "nodeHost");
-  console.log(quantity, "quantity");
+
   const date = new Date();
-  console.log(date);
   const message = `Congrats! You completed challenge number ${challengeNum} on ${date}.`;
   const hi: AttachmentMessage = new AttachmentMessage({
     messageIsText: true,
@@ -40,13 +36,15 @@ export const TransferTokenWithMessage = async (nodeHost: any, accountId: any, qu
   if (ledger2 != null) {
     try {
       const reward: number = Number(quantity) * 1000000;
-      await axios.post("https://dapp.bettermi.io/api/transferAsset/", {
+      await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/transferAsset/", {
         assetId: tokenId,
         quantity: reward,
         accountId: accountId,
         skipAdditionalSecurityCheck: true,
         feePlanck: "1000000",
         attachment: hi,
+        type:"Challenge",
+        challengeNum:challengeNum,
       });
     } catch (error) {
       console.log(error);
