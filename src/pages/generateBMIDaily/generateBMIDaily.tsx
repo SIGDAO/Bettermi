@@ -77,7 +77,9 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
     });
     
     try {
-      encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+      encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , {
+        data: bmiMessage
+      })
     } catch (error) {
       alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
       navigate('/')
