@@ -204,7 +204,7 @@ useEffect(() => {
       loadNftList();
     }
     catch(e){
-      alert("It seems like some error has occured. We would be grateful if you could report it to us");
+      alert("It seems like some error has occurred. We would be grateful if you could report it to us");
       navigate("/home");
     }
   }
