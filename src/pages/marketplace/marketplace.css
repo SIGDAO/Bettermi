@@ -358,6 +358,14 @@
 .bettermidapp-marketplace-1 .rewards-cards-DNKKjx {
   cursor: pointer;
   left: 1050px;
+  background-color: #0D0D0D;
+}
+
+.rewards-cards-disable-content {
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+
 }
 
 .bettermidapp-marketplace-1 .elite-challenger-VtU7WE {
@@ -582,11 +590,13 @@
 }
 
 .bettermidapp-marketplace-1 .rewards-cards {
-  background-color: transparent;
+  background-color: #0D0D0D;
   height: 150px;
   position: absolute;
   top: 0px;
   width: 340px;
+  border: 1px solid #4136F1;
+  border-radius: 20px;
 }
 
 .bettermidapp-marketplace-1 .see-all {

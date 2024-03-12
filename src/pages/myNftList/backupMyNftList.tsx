@@ -420,7 +420,7 @@ const nftId = accountDes.account;
 return(
     <div style={bgStyle}>
     <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-      <ShortTitleBar title='My NFTs' addSign = {true} aiCoach = {false} filter = {false} importButton = {true} isOpenImport = {isOpenImport} setIsOpenImport={setIsOpenImport}/>
+      <ShortTitleBar title='My NFT Collection' addSign = {true} aiCoach = {false} filter = {false} importButton = {true} isOpenImport = {isOpenImport} setIsOpenImport={setIsOpenImport}/>
       <div className = "containerMyNftList">
         <div className = "containerMyNftList2">
         {onDuty === ""?(             

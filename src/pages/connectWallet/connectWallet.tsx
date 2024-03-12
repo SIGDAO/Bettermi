@@ -16,6 +16,8 @@ import { profileSlice } from "../../redux/profile";
 import { CheckUnconfirmedNewNFTContract } from "../myNftList/checkNewContract";
 import { CheckUnconfirmedNewBMIContract } from "../myNftList/checkNewContract";
 import { Link } from "react-router-dom";
+import { contractSlice } from "../../redux/contract";
+import axios from "axios";
 
 export interface IConnectWalletProps {}
 
@@ -34,6 +36,15 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
     //const wallet = new GenericExtensionWallet();
     let key: string;
+    
+  // await axios.post("http://localhost:8080/testnet/transferNftToUser", {
+  //   feePlanck: "1000000",
+  //   amountPlanck: "31000000",
+  //   contractId: "6669459809144332374",
+  //   methodHash: "3",
+  //   methodArgs: ["6876604111667823486", "0", "0"],
+  // });
+
 
     // console.log("isClicked in connectWallet", isClicked);
 
@@ -108,6 +119,14 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           accountId: accountinfo.accountId,
           machineCodeHash: codeHashIdForNft,
         });
+
+        // set the redux for if needed to recreate the BMI and NFT contract
+        store.dispatch(contractSlice.actions.setIsBMIContractBuild((ourContract.ats[0] != null || openedBmiContract === true)))
+        store.dispatch(contractSlice.actions.setIsNFTContractBuild((senderNftStorage.ats[0] != null || openedNftContract === true)))
+
+        if ((!ourContract.ats[0] && !openedBmiContract) || (!senderNftStorage.ats[0] && openedNftContract)) {
+          navigate('/generateBMINFTImport')
+        }
 
         if ((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)) {
           console.log("called the if statement");

@@ -26,6 +26,7 @@ import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/rewardCalc
 import { TransferToken } from "../../components/transferToken";
 import JSEncrypt from "jsencrypt";
 import axios from "axios";
+import { selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
 
 interface IGenerateBMINFTImportProps {}
 
@@ -48,7 +49,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const [isTransferToken, setIsTransferToken] = React.useState(false);
   const [isTransferNFT, setIsTransferNFT] = React.useState(false);
   const [isTransferBMI, setIsTransferBMI] = React.useState(false);
-
+  const isTransferBMIBefore = useSelector(selectCurrentIsBMIContractBuild)
+  const isTransferNFTBefore = useSelector(selectCurrentIsNFTContractBuild)
 
   // add a validation function to see if the user has already minted the NFT
   // check the
@@ -101,7 +103,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       console.log(Wallet);
       try {
         // todo: check if user has finished all smart contract build up
-        if (storeNftContract.ats[0] == null && isTransferNFT == false) {
+        if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
           console.log(storeNftContract.ats[0],"storeNftContract.ats[0] == null");
           const initializeNftContract = (await ledger.contract.publishContractByReference({
             name: "NFT",
@@ -117,7 +119,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         }
 
         // check if the user has minted the NFT
-        if (ourContract.ats[0] == null &&  isTransferBMI== false) {
+        if (ourContract.ats[0] == null &&  isTransferBMI== false && isTransferBMIBefore == false) {
           console.log("called ourContract.ats[0] == null");
 
           let bmiMessage = JSON.stringify({ 

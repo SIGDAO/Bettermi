@@ -23,6 +23,7 @@ export async function TransferToken(nodeHost: any, accountId: any, quantity: str
       accountId: accountId,
       skipAdditionalSecurityCheck: true,
       feePlanck: "1000000",
+      type:"BMI",
     });
   } catch (error) {
     console.log(error);

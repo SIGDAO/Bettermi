@@ -35,7 +35,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         setIsLoading(false);
       })
       .catch((e: any) => {
-        alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
+        alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
         console.log(e);
       });
     console.log("nftId is ", nftId);
@@ -63,7 +63,11 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         <div className="reward-10">REWARD +10%</div>
       </div>
       <div className="x0-signa">$0 SIGNA</div>
-      <div className="button_-import" onClick={() => navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId } })}>
+      <div className="button_-import" onClick={() => {
+        if (nftIpfsAddress != ""){
+              navigate("/customizeYourProfile", { state: { nftImageAddress: nftIpfsAddress, nftId: nftId }})  
+        }}}
+      >
         <div className="continue inter-semi-bold-white-15px">Next</div>
       </div>
       </div>

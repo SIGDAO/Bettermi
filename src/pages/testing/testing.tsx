@@ -71,7 +71,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         setIsLoading(false);
       })
       .catch((e: any) => {
-        alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
+        alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
         console.log(e);
       });
   }, [nftId]);
