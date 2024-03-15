@@ -77,6 +77,8 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         localStorage.setItem("accountId", import_account.getNumericId());
         localStorage.setItem("nodeHost", wallet.currentNodeHost);
         const ledger = LedgerClientFactory.createClient({ nodeHost: wallet.currentNodeHost });
+
+        // check if there is are unconfirmed NFT and BMI contract
         const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
         const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
 
