@@ -139,6 +139,8 @@ async function TransferNftToUser(ledger2: any, nftToBeDistributed: string, recip
       methodHash: "3",
       methodArgs: [recipientId, "0", "0"],
     })
+
+
   await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/transferNftToUser", {
     feePlanck: "1000000",
     amountPlanck: "31000000",
@@ -146,6 +148,9 @@ async function TransferNftToUser(ledger2: any, nftToBeDistributed: string, recip
     methodHash: "3",
     methodArgs: [recipientId, "0", "0"],
   });
+
+
+
   // await ledger2.contract.callContractMethod({
   //   senderPublicKey: senderPublicKey,
   //   senderPrivateKey: senderPrivateKey,
@@ -252,7 +257,7 @@ export async function CheckNewUser(ledger2: any, userId: String, codeHashIdForNf
     accountId: userId,
     machineCodeHash: codeHashIdForNft,
   });
-  if (senderNftStorage.ats.length === 1) {
+  if (senderNftStorage.ats.length >= 1) {
     //console.log("only one nft contract");
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger2, senderNftStorage.ats[0].at, nftDistributor);
     if (latestTransactionNumber === "0") {

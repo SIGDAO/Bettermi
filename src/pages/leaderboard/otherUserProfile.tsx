@@ -281,12 +281,12 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                   ) : (
                     <>
                       <div className="profile-content">
-                        <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                        <div className="zoe_li">{fetchName ? fetchName : name || "Anonymous"}</div>
                         <div className="perso-container">
                           <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
-                            {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
+                            {fetchDescription ? fetchDescription : descriptionText || ""}
                           </p>
-                          <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
+                          <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || ``}</p>
                         </div>
                       </div>
                     </>
@@ -307,7 +307,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                         className="card-number inter-normal-white-15px"
                         // style={{position: 'absolute',}}
                       >
-                        {fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}
+                        {fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || ""}
                       </div>
 
                       <div
