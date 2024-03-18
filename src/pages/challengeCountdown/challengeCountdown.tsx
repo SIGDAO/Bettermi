@@ -31,7 +31,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     //return 3;
   })()
 
-  const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);
+  const [timeBeforeStart, setTimeBeforeStart] = React.useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,7 +43,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
       // setTimeBeforeStart("Start!");
       clearInterval(timer);
       console.log("Countdown stopped.");
-    }, 4000);
+    }, 2000);
 
     // Clean up the timer on component unmount
     return () => clearInterval(timer);
@@ -74,11 +74,11 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
-        <ShortTitleBar title={displayMission.title} backButton={true} aiCoach={false} />
+        <ShortTitleBar title={displayMission.description} backButton={true} aiCoach={false} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
-        <div style={timerStyles}>{showTimeBeforeStart()}</div>
+        {/* <div style={timerStyles}>{showTimeBeforeStart()}</div> */}
         <img
-          style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
+          // style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
           className="x1-hello-bae-gradient-bg-oEaurv"
           // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
           src={displayMission.missionImgPath}
@@ -96,7 +96,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
           </div>
           <p className="straighten-your-arms-D6xMU2 inter-normal-white-14px">
             {/* Straighten your arms &amp; Shake them outwardly. */}
-            {missionList[parseInt(id)-1].title}
+            {displayMission.description}
           </p>
 
           <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
