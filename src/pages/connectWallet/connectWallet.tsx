@@ -126,11 +126,16 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         store.dispatch(contractSlice.actions.setIsBMIContractBuild((ourContract.ats[0] != null || openedBmiContract === true)))
         store.dispatch(contractSlice.actions.setIsNFTContractBuild((senderNftStorage.ats[0] != null || openedNftContract === true)))
 
-        if ((!ourContract.ats[0] && !openedBmiContract) || (!senderNftStorage.ats[0] && openedNftContract)) {
-          navigate('/generateBMINFTImport')
+        console.log("openedBmiContract", openedBmiContract)
+        console.log("openedNftContract", openedNftContract)
+
+        // if both contract is created
+        if ((openedBmiContract === true && senderNftStorage.ats[0]) || (ourContract.ats[0] != null && openedNftContract === true)) {
+          navigate('/loadingMinting')
+          return
         }
 
-        if ((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)) {
+        if (ourContract.ats[0] != null && senderNftStorage.ats[0] != null) {
           console.log("called the if statement");
 
           if (senderNftStorage.ats[0] != null) {

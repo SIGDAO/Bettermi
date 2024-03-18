@@ -34,7 +34,8 @@ const Leaderboard = (props: Props) => {
         {userRankingList[index]?.accountImage || index == 0 ? (
           <IPFSImageComponent
             className={index == 0 ? "leaderboard_nft_-avatar" : "leaderboard_nft_-avatar-top3"}
-            imgAddress={index == 0 ? `QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `${userRankingList[index]?.accountImage}`}
+            // imgAddress={index == 0 ? `QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `${userRankingList[index]?.accountImage}`}
+            imgAddress={`${userRankingList[index]?.accountImage}`}
             alt="NFT_Avatar"
             onClick={() => {
               navigate("/OtherUserProfile", { state: { userId: userRankingList[0].accountId } });
