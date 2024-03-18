@@ -59,7 +59,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
-
+    console.log("userAccountId is",userAccountId);
+    console.log("nftCodeHashId is",nftCodeHashId);
+    console.log("BMICodeHashId is",bmiCodeHashId);
     let nftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
       machineCodeHash: nftCodeHashId,

@@ -12,6 +12,7 @@ interface missionList {
 export const missionList = [
   {
     title: `1. Hello Bae !`,
+    description: `Hello Bae`,
     duration: `1 mins`,
     bodyPart: `Arms`,
     sigdao: `+5.25`,
@@ -35,6 +36,7 @@ export const missionList = [
   },
   {
     title: '2. Swiping Left & Right',
+    description: `Swiping Left & Right`,
     duration: `1 mins`,
     bodyPart: `Arms`,
     sigdao: `+5.25`,
@@ -57,6 +59,7 @@ export const missionList = [
   },
   {
     title: '3. Into Your Dm',
+    description: `Into Your Dm`,
     duration: `1 mins`,
     bodyPart: `Arms`,
     sigdao: `+5.25`,
@@ -79,6 +82,7 @@ export const missionList = [
   },
   {
     title: '4. Getting Butterflies',
+    description: `Getting Butterflies`,
     duration: `2 mins`,
     bodyPart: `Arms`,
     sigdao: `+10.5`,
@@ -101,6 +105,7 @@ export const missionList = [
   },
   {
     title: '5. Let\'s Cuddle',
+    description: `Let\'s Cuddle`,
     duration: `2 mins`,
     bodyPart: `Arms`,
     sigdao: `+10.5`,
@@ -123,6 +128,7 @@ export const missionList = [
   },
   {
     title: '6. Glow Up',
+    description: `Glow Up`,
     duration: `2 mins`,
     bodyPart: `Arms`,
     sigdao: `+10.5`,
@@ -145,6 +151,7 @@ export const missionList = [
   },
   {
     title: '7. Glow Up Together',
+    description: `Glow Up Together`,
     duration: `3 mins`,
     bodyPart: `Arms`,
     sigdao: `+15.75`,
@@ -167,6 +174,7 @@ export const missionList = [
   },
   {
     title: '8. Love Bird',
+    description: `Love Bird`,
     duration: `3 mins`,
     bodyPart: `Arms`,
     sigdao: `+15.75`,
@@ -189,6 +197,7 @@ export const missionList = [
   },
   {
     title: '9. Hold Onto You',
+    description: `Hold Onto You`,
     duration: `3 mins`,
     bodyPart: `Arms`,
     sigdao: `+15.75`,

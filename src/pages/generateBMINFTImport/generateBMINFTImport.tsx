@@ -6,7 +6,7 @@ import { CenterLayout } from "../../components/layout";
 import { BackButton, DisabledButton } from "../../components/button";
 import { BirthSelect, GenderSelect } from "../../components/select";
 import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday, profileSlice, selectCurrentIsSelfie } from "../../redux/profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { TransferNftTokenOwnershipFinale } from "../../components/transferNftTokenFinale";
@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useLedger } from "../../redux/useLedger";
 import { Api } from "@reduxjs/toolkit/dist/query";
 import { UnsignedTransaction } from "@signumjs/core";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../redux/useContext";
 import { accountPublicKey } from "../../redux/account";
 import { accountId } from "../../redux/account";
@@ -26,19 +26,21 @@ import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/rewardCalc
 import { TransferToken } from "../../components/transferToken";
 import JSEncrypt from "jsencrypt";
 import axios from "axios";
-import { selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
+import { contractSlice, selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
 
 interface IGenerateBMINFTImportProps {}
 
 const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> = (props) => {
+  const navigate = useNavigate();
+  const ledger = useLedger();
+  const dispatch = useDispatch();
+
   const gender = useSelector(selectCurrentGender);
   const selfie = useSelector(selectCurrentImg);
   const BMI = useSelector(selectCurrentBMI);
   const birthday = useSelector(selectCurrentBirthday);
   const nodeHost = useSelector(selectWalletNodeHost);
   const [minted, setMinted] = React.useState(false); // whether the user has minted the NFT
-  const navigate = useNavigate();
-  const ledger = useLedger();
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
@@ -51,6 +53,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const [isTransferBMI, setIsTransferBMI] = React.useState(false);
   const isTransferBMIBefore = useSelector(selectCurrentIsBMIContractBuild)
   const isTransferNFTBefore = useSelector(selectCurrentIsNFTContractBuild)
+
+
 
   // add a validation function to see if the user has already minted the NFT
   // check the
@@ -77,7 +81,6 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
 
     if (ledger) {
       setMinted(true);
-      // TransferNftTokenOwnershipFinale(nodeHost,userAccountId);
       const asset = await ledger.asset.getAssetHolders({ assetId:  assetId});
       asset.accountAssets.map((obj) => {
         if (obj.account == userAccountId) {
@@ -102,6 +105,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       // console.log(typeof(storeNftContract.ats[0]));
       console.log(Wallet);
       try {
+        console.log("isTransferNFT", isTransferNFT);
         // todo: check if user has finished all smart contract build up
         if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
           console.log(storeNftContract.ats[0],"storeNftContract.ats[0] == null");
@@ -113,23 +117,19 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             senderPublicKey: publicKey,
             deadline: 1440,
           })) as UnsignedTransaction;
-          console.log(initializeNftContract);
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
-          setIsTransferBMI(true);
+          setIsTransferNFT(true);
+          dispatch(contractSlice.actions.setIsNFTContractBuild(true));
         }
 
         // check if the user has minted the NFT
         if (ourContract.ats[0] == null &&  isTransferBMI== false && isTransferBMIBefore == false) {
-          console.log("called ourContract.ats[0] == null");
-
           let bmiMessage = JSON.stringify({ 
             bmi: BMI, 
             gender: gender, 
             birthday: birthday, 
             time: new Date() 
           });
-
-          console.log(bmiMessage);
               
           try {
             encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , {
@@ -154,6 +154,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           console.log(initializeContract);
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           setIsTransferBMI(true);
+          dispatch(contractSlice.actions.setIsBMIContractBuild(true));
         } else {
           //check whether the user has registered an account
           //testing

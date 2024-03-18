@@ -88,7 +88,6 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const dataFetchedRef = useRef(false);
   const nftContractChecked = useRef(false);
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const nftTokenIssuer: string = process.env.REACT_APP_NFT_TOKEN_ISSUER!;
   const userAccountpublicKey: string = useSelector(accountPublicKey);
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");

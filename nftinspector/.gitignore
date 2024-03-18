@@ -4,11 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-.env
-env.txt
-envBackup.txt
-testingEnv.txt
-env_final.txt
+
 # testing
 /coverage
 
@@ -25,7 +21,3 @@ env_final.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.env
-.vercel
-.env*.local
