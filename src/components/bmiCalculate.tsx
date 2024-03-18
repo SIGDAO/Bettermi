@@ -45,7 +45,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       description = description.data
       description.time = new Date(description.time);  
     } catch (error) {
-      alert("Cannot fetch the record, please contact system admin!")
+      //alert("Cannot fetch the record, please contact system admin!")
     }
   }
 
@@ -77,7 +77,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         processedBMIRecord.push(content);
         console.log(description, 'description')  
       } catch (error) {
-        alert("Cannot fetch the record, please contact system admin!")
+        //alert("Cannot fetch the record, please contact system admin!")
       }
     }
   }
