@@ -43,9 +43,11 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         data: contract.ats[0]?.description
       })
       description = description.data
-      description.time = new Date(description.time);  
+      if (description !== "error") {
+        description.time = new Date(description.time); 
+      }
     } catch (error) {
-      //alert("Cannot fetch the record, please contact core team through discord!")
+      alert("Cannot fetch the record, please contact core team through discord!")
     }
   }
 
@@ -79,7 +81,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         processedBMIRecord.push(content);
         console.log(description, 'description')  
       } catch (error) {
-        //alert("Cannot fetch the record, please contact core team through discord!")
+        alert("Cannot fetch the record, please contact core team through discord!")
       }
     }
   }

@@ -82,7 +82,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       })
       encrypted = encrypted.data
     } catch (error) {
-      //alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page")
+      alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page")
       navigate('/')
     }
     
