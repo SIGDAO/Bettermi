@@ -139,7 +139,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             encrypted = encrypted.data
           } catch (error) {
             console.log(error)
-            //alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
+            //alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page")
             navigate('/')
           }
 
@@ -170,7 +170,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             console.log(encrypted)
             encrypted = encrypted.data
           } catch (error) {
-            //alert("Cannot fetch the record, please contact system admin!\nWill return to home page")
+            //alert("Cannot fetch the record, please core team through discord!\nWill return to home page")
             navigate('/')
           }
 
