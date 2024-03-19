@@ -92,6 +92,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         accountId: userAccountId,
       });
       let newDes = {};
+      newDes = Object.assign(newDes, {vs: 1});
       newDes = Object.assign(newDes, { nm: name });
       newDes = Object.assign(newDes, { ds: aboutYourselfText });
       newDes = Object.assign(newDes, { hp: descriptionText });
@@ -103,24 +104,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const handleSave = async () => {
-    // validation check
-    let foundEmptyField = false;
-    //console.log("fdisjoidfsjioiosdfiodio");
-
-    // inputRefs.current.forEach((input, index) => {
-    //   console.log(input);
-    //   if (input && input.value === '') {
-    //     if (!foundEmptyField) {
-    //       input.focus();
-    //       console.log("idfosjdiofjdsiiofdisodfjio")
-    //       foundEmptyField = true;
-    //     }
-    //   }
-    // });
-
-    // null check for the profile
+    console.log("called handle save");
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
-      // alert("Please fill in all the fields");
       setShowStar(true);
       return;
     }
@@ -340,7 +325,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
               </div>
             </Link>
-            <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
+            <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
             {/* <div className="profile-description-bg"></div> */}
