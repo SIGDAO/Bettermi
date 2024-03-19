@@ -42,7 +42,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
         </div> */}
         </div>
         <div className="settings-7DUKxJ settings">
-          <img className="layer-azNBHQ" src="img/setting/layer-1@1x.png" alt="Layer" />
+          {/* <img className="layer-azNBHQ" src="img/setting/layer-1@1x.png" alt="Layer" /> */}
           <div className="cards-azNBHQ">
             <div className="x16185-VD8XDI">
               <div className="x31">

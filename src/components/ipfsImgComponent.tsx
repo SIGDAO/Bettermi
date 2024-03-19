@@ -76,6 +76,7 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     // setTimeout(switchDomain, 3000);
     console.log("image error");
     // switchDomain();
+    // setIsLoading(true)
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
 

@@ -319,7 +319,9 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       <div className="overlap-group5">
         <div className="overlap-design-layout">
           <div className="overlap-group1-profile">
-            <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
+          <div className="profile-description-bg"></div>
+
+            {/* <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" /> */}
             <Link to="/indexMyNftList">
               <div className="button_nft-collections">
                 <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
@@ -328,15 +330,13 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
-            {/* <div className="profile-description-bg"></div> */}
-            {isUpdatingUserIcon === true || isUserIconLoading === true ? (
+            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+            <>
               <div className="profile_icon_nft_-avatar_empty">
                 <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
               </div>
-            ) : (
-              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
-            )}
-            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+
+            <div className="profile-content-container">
               <div className="profile-content">
                 <div className="lds-ring">
                   <div></div>
@@ -345,7 +345,11 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <div></div>
                 </div>
               </div>
+              </div>
+            </>
             ) : (
+              <>
+              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
               <div className="profile-content-container">
                 <div className="profile-content">
                   <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
@@ -369,6 +373,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   </div>
                 </div>
               </div>
+              </>
             )}
           </div>
 
