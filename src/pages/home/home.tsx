@@ -37,7 +37,8 @@ interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/MATW3Dcdcw/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
@@ -258,11 +259,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
           <Link to="/leaderboard"></Link>
           <ImageSlider slides={slides} />
-          <Link to="https://discord.gg/MATW3Dcdcw">
+          {/* <Link to="https://discord.gg/MATW3Dcdcw">
             <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
-          </Link>
+          </Link> */}
           <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
-          <div className="alert-get-signa inter-semi-bold-white-15px">GET SIGNA:</div>
+          {/* <div className="alert-get-signa inter-semi-bold-white-15px">GET SIGNA:</div> */}
           <div className="nav-to-take-selfie-content">
             <NavigateToTakeSelfieButton />
           </div>

@@ -31,7 +31,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     //return 3;
   })()
 
-  const [timeBeforeStart, setTimeBeforeStart] = React.useState(1);
+  const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,7 +43,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
       // setTimeBeforeStart("Start!");
       clearInterval(timer);
       console.log("Countdown stopped.");
-    }, 2000);
+    }, 4000);
 
     // Clean up the timer on component unmount
     return () => clearInterval(timer);
@@ -76,9 +76,9 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
       <div className="bettermidapp-challenges-countdown-1">
         <ShortTitleBar title={displayMission.description} backButton={true} aiCoach={false} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
-        {/* <div style={timerStyles}>{showTimeBeforeStart()}</div> */}
+        <div style={timerStyles}>{showTimeBeforeStart()}</div>
         <img
-          // style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
+          style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
           className="x1-hello-bae-gradient-bg-oEaurv"
           // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
           src={displayMission.missionImgPath}

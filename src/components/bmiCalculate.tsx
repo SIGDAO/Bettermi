@@ -72,6 +72,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
           data: message.transactions[i].attachment.message
         })
         content = content.data
+        // for encrypt fail situation
+        if (content == "error") continue;
         if (typeof content === 'number') continue;
         content.time = new Date(content.time);
         processedBMIRecord.push(content);

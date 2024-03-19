@@ -190,7 +190,7 @@ const Leaderboard = (props: Props) => {
               <div className="ic_settings_24px"></div>
             </div>
             <div className="overlap-group-leader7">
-              <img className="photo" src="img/leaderboard/Leaderboard_Banner.png" alt="Photo" />
+              <img className="photo" src="img/leaderboard/Leaderboard_Banner_test.png" alt="Photo" />
               <div className="leaderboard-top3">
                 {Top3displayContainer(1)}
                 {Top3displayContainer(0)}

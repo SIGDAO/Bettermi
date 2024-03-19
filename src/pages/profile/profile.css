@@ -142,6 +142,11 @@
   width: 30px;
 }
 
+.profile-description-bg {
+  height: 261px;
+  width: 358px;
+  background: var(--woodsmoke);
+}
 
 
 .bettermidapp-profile-3 .ic_add {

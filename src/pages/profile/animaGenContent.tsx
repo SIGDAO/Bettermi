@@ -220,8 +220,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     }
   };
 
-
-
   const fetchProfile = async () => {
     const account = await ledger2.account.getAccount({
       accountId: userAccountId,
@@ -345,6 +343,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
+            {/* <div className="profile-description-bg"></div> */}
             {isUpdatingUserIcon === true || isUserIconLoading === true ? (
               <div className="profile_icon_nft_-avatar_empty">
                 <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
@@ -362,58 +361,14 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 </div>
               </div>
             ) : (
-              <div className="profile-content">
-                <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
-                <div className="perso-container">
-                  <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
-                    {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
-                  </p>
-                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
-                </div>
-              </div>
-            )}
-            {/* {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
-          <>
-              <div className="profile_icon_nft_-avatar_empty">
-                <img
-                    className="profile_icon_ic_add"
-                    src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
-                    alt="ic_add"
-                />
-                </div>
-                  <div className="profile-content">
-                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-                  </div>
-                </>
-        ):(
-          <>
-              <div className="profile-content">
-                <div className="zoe_li">{fetchName?fetchName:name || "zoe_li"}</div>
-                <div className="perso-container">
-                  <p 
-                    className="im-a-positive-perso"
-                    style={description ? {} : { color: "#8e8e8e" }}
-                  >
-                    {fetchDescription?fetchDescription:descriptionText ||
-                      "Please enter DESCRIPTION TO FRIENDS"}
-                  </p>
-                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
-                    {fetchAboutYourself?fetchAboutYourself:aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}
-                  </p>
-                </div>
-              </div>
-              </>
-              )
-            } 
-              <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon> */}
-            {isUpdatingUserSetting === true || isSettingLoading === true ? (
-              <div></div>
-            ) : (
-              <>
-                <div className="discord-card-container">
-                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
-                  <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
-                    <img src="img/profile/file---11690@1x.png" alt="" />
+              <div className="profile-content-container">
+                <div className="profile-content">
+                  <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                  <div className="perso-container">
+                    <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
+                      {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
+                    </p>
+                    <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
                   </div>
                 </div>
                 <div className="x16227">
@@ -422,7 +377,13 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   </div>
                   <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
-              </>
+                <div className="discord-card-container">
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                  <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
+                    <img src="img/profile/file---11690@1x.png" alt="" />
+                  </div>
+                </div>
+              </div>
             )}
           </div>
 
