@@ -18,6 +18,7 @@ import { CheckUnconfirmedNewBMIContract } from "../myNftList/checkNewContract";
 import { Link } from "react-router-dom";
 import { contractSlice } from "../../redux/contract";
 import axios from "axios";
+import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
 
 export interface IConnectWalletProps {}
 
@@ -138,10 +139,10 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         if (ourContract.ats[0] != null && senderNftStorage.ats[0] != null) {
           console.log("called the if statement");
 
-          if (senderNftStorage.ats[0] != null) {
+
             store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
-          }
-          if (ourContract.ats[0] != null) {
+          
+
             var description = ourContract.ats[0].description;
 
             //description = description.replace(/'/g, '"');
@@ -156,8 +157,14 @@ export default function ConnectWallet (props: IConnectWalletProps) {
             } else {
               store.dispatch(profileSlice.actions.setGender("Male"));
             }
-          }
-
+          const equippedBettermiNft = await checkEquippedBettermiNFT(ledger,accountinfo.accountId);
+            if(equippedBettermiNft === false){
+              alert("please equip a Bettermi NFT");
+              navigate("/connectWallet");
+            }
+            else{
+              navigate("/home");
+            };
           // Replace single quotes with double quotes
 
           // store.dispatch(profileSlice.actions.setGender(gender));
@@ -165,7 +172,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           // console.log(ourContract.ats[0]);
           //navigate('/connectSucceed');
           // setIsClicked(false);
-          navigate("/home");
         } else {
 
           // setIsClicked(false);

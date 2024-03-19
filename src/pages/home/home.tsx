@@ -258,7 +258,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
           <Link to="/leaderboard"></Link>
           <ImageSlider slides={slides} />
-          <Link to="https://discord.gg/MATW3Dcdcw">
+          <Link to="https://discord.gg/MATW3Dcdcw" target="_blank" rel="noopener noreferrer">
             <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
           </Link>
           <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
