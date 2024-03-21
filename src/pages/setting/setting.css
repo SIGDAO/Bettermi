@@ -138,6 +138,10 @@
   left: 16px;
   top: 107px;
   width: 358px;
+  background: var(--woodsmoke) !important;
+  border: 1px solid var(--royal-blue);
+  border-radius: 20px;
+  box-shadow: 0px 3px 20px var(--royal-blue);
 }
 
 .bettermidapp-settings-1 .layer-azNBHQ {

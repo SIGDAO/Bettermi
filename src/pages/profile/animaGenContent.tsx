@@ -92,6 +92,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         accountId: userAccountId,
       });
       let newDes = {};
+      newDes = Object.assign(newDes, {vs: 1});
       newDes = Object.assign(newDes, { nm: name });
       newDes = Object.assign(newDes, { ds: aboutYourselfText });
       newDes = Object.assign(newDes, { hp: descriptionText });
@@ -103,24 +104,8 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const handleSave = async () => {
-    // validation check
-    let foundEmptyField = false;
-    //console.log("fdisjoidfsjioiosdfiodio");
-
-    // inputRefs.current.forEach((input, index) => {
-    //   console.log(input);
-    //   if (input && input.value === '') {
-    //     if (!foundEmptyField) {
-    //       input.focus();
-    //       console.log("idfosjdiofjdsiiofdisodfjio")
-    //       foundEmptyField = true;
-    //     }
-    //   }
-    // });
-
-    // null check for the profile
+    console.log("called handle save");
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
-      // alert("Please fill in all the fields");
       setShowStar(true);
       return;
     }
@@ -219,8 +204,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         });
     }
   };
-
-
 
   const fetchProfile = async () => {
     const account = await ledger2.account.getAccount({
@@ -336,23 +319,24 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       <div className="overlap-group5">
         <div className="overlap-design-layout">
           <div className="overlap-group1-profile">
-            <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
+          <div className="profile-description-bg"></div>
+
+            {/* <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" /> */}
             <Link to="/indexMyNftList">
               <div className="button_nft-collections">
                 <div className="continue-profile inter-semi-bold-white-15px">My NFT Collection</div>
               </div>
             </Link>
-            <div className="ic_edit" onClick={() => setIsOpen((prev) => !prev)}>
+            <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
-            {isUpdatingUserIcon === true || isUserIconLoading === true ? (
+            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+            <>
               <div className="profile_icon_nft_-avatar_empty">
                 <img className="profile_icon_ic_loading" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
               </div>
-            ) : (
-              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
-            )}
-            {isUpdatingUserSetting === true || isSettingLoading === true ? (
+
+            <div className="profile-content-container">
               <div className="profile-content">
                 <div className="lds-ring">
                   <div></div>
@@ -361,59 +345,19 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <div></div>
                 </div>
               </div>
-            ) : (
-              <div className="profile-content">
-                <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
-                <div className="perso-container">
-                  <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
-                    {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
-                  </p>
-                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
-                </div>
               </div>
-            )}
-            {/* {(isSettingLoading ===true || isUpdatingUserSetting === true)?(
-          <>
-              <div className="profile_icon_nft_-avatar_empty">
-                <img
-                    className="profile_icon_ic_add"
-                    src= "/img/loadingMinting/mimi-dancing-for-loadin-page.gif"
-                    alt="ic_add"
-                />
-                </div>
-                  <div className="profile-content">
-                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-                  </div>
-                </>
-        ):(
-          <>
-              <div className="profile-content">
-                <div className="zoe_li">{fetchName?fetchName:name || "zoe_li"}</div>
-                <div className="perso-container">
-                  <p 
-                    className="im-a-positive-perso"
-                    style={description ? {} : { color: "#8e8e8e" }}
-                  >
-                    {fetchDescription?fetchDescription:descriptionText ||
-                      "Please enter DESCRIPTION TO FRIENDS"}
-                  </p>
-                  <p className="x29-personal-trainer inter-semi-bold-keppel-15px">
-                    {fetchAboutYourself?fetchAboutYourself:aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}
-                  </p>
-                </div>
-              </div>
-              </>
-              )
-            } 
-              <UserIcon profile = {true} userAccountId = {userAccountId}></UserIcon> */}
-            {isUpdatingUserSetting === true || isSettingLoading === true ? (
-              <div></div>
+            </>
             ) : (
               <>
-                <div className="discord-card-container">
-                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
-                  <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
-                    <img src="img/profile/file---11690@1x.png" alt="" />
+              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+              <div className="profile-content-container">
+                <div className="profile-content">
+                  <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                  <div className="perso-container">
+                    <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
+                      {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
+                    </p>
+                    <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
                   </div>
                 </div>
                 <div className="x16227">
@@ -422,6 +366,13 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   </div>
                   <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
+                <div className="discord-card-container">
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                  <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
+                    <img src="img/profile/file---11690@1x.png" alt="" />
+                  </div>
+                </div>
+              </div>
               </>
             )}
           </div>

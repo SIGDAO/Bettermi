@@ -115,7 +115,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
             {slides.map((slide, index) => {
               return (
                 <CarouselItem key={index}>
-                  <Link to={slide.link}>
+                  <Link to={slide.link} target={slide.link.charAt(0) === "/" ? "" : "_blank"} >
                     <img className="home-scroller-element-image" src={slide.src} alt="" />
                   </Link>
                 </CarouselItem>

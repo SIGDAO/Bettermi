@@ -113,8 +113,10 @@
   text-align: left;
   top: calc(23.12% - 4px);
   white-space: nowrap;
-  width: calc(100.00% - 18px);
+  width: calc(100.00% - 33px);
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bettermidapp-challenges-countdown-1 .challenge-guide-D6xMU2 {

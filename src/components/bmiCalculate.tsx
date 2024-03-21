@@ -43,9 +43,11 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         data: contract.ats[0]?.description
       })
       description = description.data
-      description.time = new Date(description.time);  
+      if (description !== "error") {
+        description.time = new Date(description.time); 
+      }
     } catch (error) {
-      //alert("Cannot fetch the record, please contact system admin!")
+      alert("Cannot fetch the record, please contact core team through discord!")
     }
   }
 
@@ -72,12 +74,14 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
           data: message.transactions[i].attachment.message
         })
         content = content.data
+        // for encrypt fail situation
+        if (content == "error") continue;
         if (typeof content === 'number') continue;
         content.time = new Date(content.time);
         processedBMIRecord.push(content);
         console.log(description, 'description')  
       } catch (error) {
-        //alert("Cannot fetch the record, please contact system admin!")
+        alert("Cannot fetch the record, please contact core team through discord!")
       }
     }
   }
