@@ -24,6 +24,9 @@ export const missionList = [
       endTime: '00:06',
     }
   ],
+  missionDescription:`Straighten your arms and shake them outwardly 
+  Swiping Left and Right (Hip Elbow 18:02 @video)
+  Sway your hips left and right to your elbow with bending arms pointing to the sky `
   //Changed by Anderson 2023/11/12
   //   timeslot: [{
   //     startingTime: '9:00',
@@ -49,6 +52,10 @@ export const missionList = [
       endTime: '00:06',
     }
   ],
+  missionDescription:`As if you are on a skate and skipping side to side
+  Getting butterflies (chicken wings)
+  Bend your arms towards the body and flap them like a butterfly`
+
   //Changed by Anderson 2023/11/12
     // timeslot: [{
     //   startingTime: '9:00',

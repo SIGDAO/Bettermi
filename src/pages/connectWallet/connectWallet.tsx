@@ -19,6 +19,9 @@ import { Link } from "react-router-dom";
 import { contractSlice } from "../../redux/contract";
 import axios from "axios";
 import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
+import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
+import { FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
+import { FindLatestTransactionArray } from "../../NftSystem/updateUserNftStorage";
 
 export interface IConnectWalletProps {}
 
@@ -32,26 +35,11 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', '');
   store.dispatch({ type: "USER_LOGOUT" });
 
-  // const [isClicked, setIsClicked] = React.useState(false);
+
 
   const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
-    //const wallet = new GenericExtensionWallet();
+
     let key: string;
-    
-  // await axios.post("http://localhost:8080/testnet/transferNftToUser", {
-  //   feePlanck: "1000000",
-  //   amountPlanck: "31000000",
-  //   contractId: "6669459809144332374",
-  //   methodHash: "3",
-  //   methodArgs: ["6876604111667823486", "0", "0"],
-  // });
-
-
-    // console.log("isClicked in connectWallet", isClicked);
-
-    // setIsClicked(true);
-
-    // console.log("isClicked in connectWallet after setIsClicked", isClicked);
 
 
     console.log("wallet", Wallet);
@@ -99,15 +87,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
               localStorage.setItem("token", "0");
             }
           }
-          // asset.accountAssets.map((obj)=>{
-          //   console.log(asset);
-          //   console.log(import_account.getNumericId());
-          //   if(obj.account == import_account.getNumericId()){
-          //     store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
-          //     localStorage.setItem('token',obj.quantityQNT);
-          //       console.log(obj.quantityQNT);
-          //   }
-          // })
         });
         const asset = await ledger.asset.getAssetHolders({ assetId: assetId });
         asset.accountAssets.map((obj) => {
@@ -145,11 +124,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
             var description = ourContract.ats[0].description;
 
-            //description = description.replace(/'/g, '"');
-            //description = description.replace(/ /g, '"');
-            // description = `"${description}"`
-            //  description = JSON.parse(description);
-            // console.log(description);
             if (description.includes("Female") === true) {
               store.dispatch(profileSlice.actions.setGender("Female"));
             } else if (description.includes("Male") === true) {
@@ -159,22 +133,36 @@ export default function ConnectWallet (props: IConnectWalletProps) {
             }
           const equippedBettermiNft = await checkEquippedBettermiNFT(ledger,accountinfo.accountId);
             if(equippedBettermiNft === false){
-              alert("please equip a Bettermi NFT");
+              alert("please equip a Bettermi NFT, we will shortly prompt a notification to help you change it");
+
+              const name = "ANderson";
+              let receiverNftStorage = await ledger.contract.getContractsByAccount({
+                accountId: accountinfo.accountId,
+                machineCodeHash: codeHashIdForNft,
+            });
+            console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
+              const latestTransactionNumber = await FindLatestTransactionNumber(ledger,receiverNftStorage.ats[0].at,nftDistributor);
+              const transactionArray = await FindLatestTransactionArray(ledger,receiverNftStorage.ats[0].at,nftDistributor,latestTransactionNumber);
+              if(transactionArray[0] == "empty"){
+                alert("we didn't detect any nfts");
+                navigate("/connectWallet");
+              }
+              const nftId = transactionArray[0];
+              console.log("nftId is",nftId);
+              const contractDescription = await ledger.contract.getContract(nftId);
+              const imgAddress = JSON.parse(contractDescription.description).descriptor;
+              console.log(imgAddress);
+
+              await UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
+
               navigate("/connectWallet");
             }
             else{
               navigate("/home");
             };
-          // Replace single quotes with double quotes
 
-          // store.dispatch(profileSlice.actions.setGender(gender));
-          // console.log(gender);
-          // console.log(ourContract.ats[0]);
-          //navigate('/connectSucceed');
-          // setIsClicked(false);
         } else {
 
-          // setIsClicked(false);
           navigate("/connectSucceed");
         }
       })
@@ -182,8 +170,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       .catch((error: any) => {
         console.log("error", error);
         if (error.name === "InvalidNetworkError") {
-          // console.log("wallet", Wallet);
-          // console.log(error)
           alert(
             "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
           );
@@ -191,7 +177,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         if (error.name === "NotFoundWalletError") {
           window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
         }
-        // setIsClicked(false);
       });
   };
 
@@ -218,8 +203,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
             text="XT wallet"
             action={
               () => {
-                // console.log("isClicked", isClicked);
-                // if (isClicked === true) return;
                 connectWallet(appName, Wallet, Ledger)
               }} // TODO: add action to connect wallet
             height="56px"

@@ -102,16 +102,16 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                   Weekly Meditation Session
                   </div>
                   <div className = "descriptionBodyChallengeCompleted">
-                    Saturday Only
+                    {/* Saturday Only */}
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className="sigdao_tokengradient">
+                  {/* <div className="sigdao_tokengradient">
                                   <div className="x441"></div>
                                   <div className="x442"></div>
                                   <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                                </div>
+                                </div> */}
                       <div className = "sigdaoChallengeCompleted">
-                        +5.25 ~ 5.00
+                        coming soon...
                     </div>
                     <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
                   </div>
@@ -128,18 +128,18 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                   {/* <img  style = {{width:"15px", height:"20px",paddingLeft:"10px"}} src={`${process.env.PUBLIC_URL}/img/allMission/ic-locked-1@1x.png`}></img> */}
                   </div>
                   <div className = "descriptionBodyChallengeCompleted">
-                  Secret Coach - Talk To mi 
+                  {/* Secret Coach - Talk To mi  */}
                   </div>
                   <div className = "descriptionBottomBodyChallengeCompleted">
-                  <div className="sigdao_tokengradient">
+                          {/* <div className="sigdao_tokengradient">
                                   <div className="x441"></div>
                                   <div className="x442"></div>
                                   <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                                </div>
+                          </div> */}
                       <div className = "sigdaoChallengeCompleted">
-                      +5.25 ~ 15.75
+                      coming soon...
                     </div>
-                    <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
+                    {/* <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img> */}
                   </div>
               </div>
             </div>

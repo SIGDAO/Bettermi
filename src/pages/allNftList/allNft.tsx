@@ -50,7 +50,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
           imgAddress === ""?(<div>loading</div>):( */}
 
       <div className="myNftList">
-        {/* <img
+        <img
           onClick={() => {
             //   setIsOpenPopup((prev) => !prev);
             //   setSelectedAssetId(nftId);
@@ -73,8 +73,8 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
           }}
           className="myNftImage"
           src={`https://ipfs.io/ipfs/${imageAddress}`}
-        ></img> */}
-        <IPFSImageComponent
+        ></img>
+        {/* <IPFSImageComponent
           imgAddress={imageAddress}
           onClick={() => {
             //   setIsOpenPopup((prev) => !prev);
@@ -97,7 +97,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             }
           }}
           className="allNftImage"
-        />
+        /> */}
         <div className="myNftDescription">
           <div className="myNftNumber">#0000{nftIndex}</div>
           <div className="myNftBar">

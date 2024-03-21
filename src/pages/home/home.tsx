@@ -356,14 +356,15 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                   <img className="meditation_banner-dLbFgX" src={`${process.env.PUBLIC_URL}/img/home/meditation-banner@1x.png`} alt="Meditation_banner" />
                 </div>
                 <div className="weekly-meditation-3kbxqV inter-medium-white-15px">Weekly Meditation</div>
-                <div className="saturday-only-3kbxqV inter-normal-cadet-blue-12px">Saturday only</div>
+                {/* <div className="saturday-only-3kbxqV inter-normal-cadet-blue-12px">coming soon..</div> */}
+                <div className="saturday-only-3kbxqV inter-semi-bold-keppel-12px">coming soon..</div>
                 <div className="sigdao-score-3kbxqV sigdao-score">
-                  <div className="x10-UyxTRp x10 inter-semi-bold-keppel-14px">+20</div>
-                  <div className="signdao_tokengradient-UyxTRp signdao_tokengradient">
+                  {/* <div className="x10-UyxTRp x10 inter-semi-bold-keppel-14px">coming soon...</div> */}
+                  {/* <div className="signdao_tokengradient-UyxTRp signdao_tokengradient">
                     <div className="x441-ozHgg7 x441"></div>
                     <div className="x442-ozHgg7 x442"></div>
                     <img className="x880-ozHgg7 x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="meditations-overlay">
@@ -376,14 +377,15 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                   <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
                 </div>
                 <div className="walking-mission-7hGHU0 inter-medium-white-15px">Secret Coach - Talk To mi</div>
-                <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Secret Coach - Talk To mi</div>
+                {/* <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Coming Soon...</div> */}
+                <div className="step-count-7hGHU0 inter-semi-bold-keppel-12px">Coming Soon...</div>
                 <div className="sigdao-score-7hGHU0 sigdao-score">
-                  <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">+20</div>
-                  <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
+                  {/* <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">coming soon...</div> */}
+                  {/* <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
                     <div className="x441-JHyhgs x441"></div>
                     <div className="x442-JHyhgs x442"></div>
                     <img className="x880-JHyhgs x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="meditations-overlay">
