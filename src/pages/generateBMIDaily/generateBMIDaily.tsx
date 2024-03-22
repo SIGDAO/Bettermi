@@ -123,7 +123,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       <div className="bettermidapp-generate-bmi-daily">
         {/* <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div> */}
         <BackButton />
-        <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
+        <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-6@1x`} alt="Photo" />
         <div className="bottom-controls-Fd1por" onClick={handleImport}>
           <div className="button_-mint-FZh05Y">
             <div className="button1-WZiHbv"></div>

@@ -249,7 +249,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           )}
         </div>
 
-        <img className="photo-pqhvJT" src={selfie ? selfie : "img/generateBMINFTImport/photo-1@1x.png"} alt="Photo" />
+        <img className="photo-pqhvJT" src={selfie ? selfie : "img/generateBMINFTImport/photo-6@1x"} alt="Photo" />
       </div>
     </div>
   );

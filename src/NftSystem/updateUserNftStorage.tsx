@@ -756,11 +756,17 @@ export async function UpdateUserIconNewVersion(ledger2:any,imgAddress:string,nft
 
     let newDes = {};
     const waitingToBeChangedDescription = await ledger2.account.getAccount({accountId: userAccountId});
+    console.log(waitingToBeChangedDescription.description);
     let oldDes =waitingToBeChangedDescription.description==null?{}:JSON.parse(waitingToBeChangedDescription.description);
-
+    console.log("newDes is",newDescriptionObj);
     console.log("old des is",oldDes);
     //console.log(newDes);
-    newDes = Object.assign(oldDes,newDescriptionObj);
+    if(typeof oldDes === 'object' && oldDes !== null){
+        newDes = Object.assign(oldDes,newDescriptionObj);
+    }
+    else{
+        newDes = newDescriptionObj;
+    }
     console.log("newDes is",newDes);
     //console.log(newDes);
     newDes = JSON.stringify(newDes);
