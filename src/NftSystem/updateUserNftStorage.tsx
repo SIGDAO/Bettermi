@@ -50,7 +50,7 @@ export async function FindLatestTransactionNumber(ledger2:any,recipient:string,n
     console.log(nftDistributor)
     const message = await ledger2.account.getUnconfirmedAccountTransactions(recipient);
     console.log(message);
-    var unconfirmedTransactionList = await sortUnconfirmedTransactionArrayAccordingToAscendingTimeStamps(message.unconfirmedTransactions);
+    const unconfirmedTransactionList = await sortUnconfirmedTransactionArrayAccordingToAscendingTimeStamps(message.unconfirmedTransactions);
     console.log(unconfirmedTransactionList);
     var latestTransactionNumber:string = "0";
     var finalArray:string[] = [];
@@ -64,12 +64,12 @@ export async function FindLatestTransactionNumber(ledger2:any,recipient:string,n
             return latestTransactionNumber;
     }
 }
-    var transactionList = await ledger2.account.getAccountTransactions({
+    const transactionList = await ledger2.account.getAccountTransactions({
         accountId: recipient,
     });
-    var nftListInUserAccount = await sortArrayAccordingToDescendingTimeStamps(transactionList.transactions);
+    const nftListInUserAccount = await sortArrayAccordingToDescendingTimeStamps(transactionList.transactions);
     console.log("Finding the lastest transaction from user's nftStorage account",transactionList);
-    for (var i = 0;nftListInUserAccount.length;i++){
+    for (var i = 0; i < nftListInUserAccount.length;i++){
         if(nftListInUserAccount[i].sender === nftDistributor && nftListInUserAccount[i].recipient === recipient){    
             tempArray = nftListInUserAccount[i].attachment.message.split(",");
                 latestTransactionNumber = tempArray[0];
@@ -131,8 +131,9 @@ export async function FindLatestTransactionArray(ledger2:any,recipient:string,nf
     });
     var nftListInUserAccount = await sortArrayAccordingToDescendingTimeStamps(transactionList.transactions);
     console.log("Finding the lastest transaction from user's nftStorage account",nftListInUserAccount);
-    console.log(nftListInUserAccount.length);
+    console.log("nftListInUserAccount.length", nftListInUserAccount.length);
     for (var i = 0;i<nftListInUserAccount.length;i++){
+        console.log("nftListInUserAccount[i].sender", nftListInUserAccount[i])
         if(nftListInUserAccount[i].sender === nftDistributor && nftListInUserAccount[i].recipient === recipient){
             tempArray = nftListInUserAccount[i].attachment.message.split(",");
             console.log(i);

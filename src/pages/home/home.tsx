@@ -37,7 +37,7 @@ interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/MATW3Dcdcw/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/C7rdyPqUZ8", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
