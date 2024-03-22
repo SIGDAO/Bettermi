@@ -5,7 +5,7 @@ import { CenterLayout } from "../../components/layout";
 import MenuBar from "../../components/menuBar";
 import { useSelector } from "react-redux";
 import { selectCurrentUsername } from "../../redux/profile";
-import { accountToken } from "../../redux/account";
+import { accountPublicKey, accountToken } from "../../redux/account";
 import { store } from "../../redux/reducer";
 import { useState } from "react";
 import { useAppSelector } from "../../redux/useLedger";
@@ -32,12 +32,15 @@ import HorizontalScrollContainer from "../../components/horizontalScrollContaine
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 import { type } from "os";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
+import { FindLatestTransactionArray,FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
+import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
 
 interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/MATW3Dcdcw/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/C7rdyPqUZ8", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
@@ -62,12 +65,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [reward,setReward] = useState<string>();
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
 
   // useEffect(() => {
   //   testing();
   // }, []);
 
     //Trying disabling refresh
+
+
+
     useEffect(() => {
       const disableRefresh = (e:any) => {
         e.preventDefault();
@@ -110,7 +118,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
-        .catch((error) => {
+        .catch(async(error) => {
           setIsNFTiconLoading(false);
           console.log("need to equip nft");
         });
@@ -118,9 +126,14 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   };
 
 
+  const nftIconCheck = useRef(false);
   useEffect(() => {
     // Function to fetch data from the APIc
-
+    if (nftIconCheck.current) {
+      console.log("called");
+      return;
+    }
+    nftIconCheck.current = true;
     
     ledger2.account
       .getAccount({ accountId: userAccountId })
@@ -129,27 +142,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           if (account.assetBalances[i].asset === tokenId) {
             store.dispatch(accountSlice.actions.setToken(Number(account.assetBalances[i].balanceQNT) / 1000000));
             localStorage.setItem("token", account.assetBalances[i].balanceQNT);
-            console.log(account.assetBalances[i].balanceQNT);
           }
         }
         const description = JSON.parse(account.description);
-        console.log(description.id);
         if (description.id != null) {
           const accountInfo = await ledger2.contract.getContract(description.id);
-          console.log(accountInfo);
           setIpfsAddress(JSON.parse(accountInfo.description).descriptor);
-          console.log(ipfsAddress);
           const ipfsJson = await fetch(`https://ipfs.io/ipfs/${JSON.parse(accountInfo.description).descriptor}`);
-          console.log(ipfsJson);
           const text = await ipfsJson.text();
-          console.log(text);
           const nftInfo = JSON.parse(text);
-          console.log(nftInfo);
-          console.log(nftInfo.attributes[6].value);
-          console.log(typeof(nftInfo.attributes[6].value));
           var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
-          console.log(value);
-          console.log(typeof(value));
           setReward(value);
           if (nftInfo.description.includes("1") === true) {
             setLevel("1");
@@ -169,15 +171,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
 
 
-        console.log("description", description);
-        console.log(Object.keys(description.av));
-        console.log(typeof Object.keys(description.av)[0]);
         // setImgAddress(Object.keys(description.av)[0]);
         setLoading(false);
-        console.log("imgAddress", imgAddress);
-        console.log(typeof imgAddress);
       })
-      .catch((error) => {
+      .catch(async(error) => {
         console.log("need to equip nft");
         console.log(error);
         console.log("imgAddress bug", imgAddress);
@@ -233,9 +230,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="x0"></div>
           ) : (
             <>
-              {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" /> */}
+              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
               {/* <h1 className="text-1">#{nftNumber}</h1> */}
-              <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress} />
+              {/* <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress} /> */}
             </>
           )}
           <div className="x16206">

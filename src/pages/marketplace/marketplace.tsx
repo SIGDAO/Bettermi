@@ -10,15 +10,19 @@ import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";
 import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmiCalculate";
 import { CountChallenges, countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
+import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 
 interface IMarketplaceProps {}
 
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>();
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
+  const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
   // const [totalChallengesTimes, setTotalChallengesTimes] = React.useState<number>();
 
   React.useEffect(() => {
@@ -31,6 +35,14 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
     countTotalChallengesTimes(tempAccountId, Ledger2).then((res) => {
       setChallengeCompletedTimes(res);
     });
+    GetUserNftList(Ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
+    .then((res) => {
+      setNftAcquireNumber(res.length);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+
   }, []);
 
   const content: JSX.Element = (
@@ -73,7 +85,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-xzndZB goal">
-                    <div className="x0-1Jks0w x0-marketplace inter-semi-bold-keppel-14px">0</div>
+                    <div className="x0-1Jks0w x0-marketplace inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
                     <div className="x3-1Jks0w x3 inter-semi-bold-white-14px">/ 3</div>
                   </div>
                 </div>

@@ -5,25 +5,45 @@ import MenuBar from "../../components/menuBar";
 import { CenterLayout } from "../../components/layout";
 import { ShortTitleBar } from "../../components/titleBar";
 import { rewardDetailList } from "../../data/rewardList";
-import { getBMIRecordDay } from "../../components/bmiCalculate";
+import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmiCalculate";
 import { useSelector } from "react-redux";
 import { accountId } from "../../redux/account";
 import { useLedger } from "../../redux/useLedger";
 import { useEffect } from "react";
+import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
+import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
 
 interface IRewardProps {}
 
 const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>(0);
-  
+  const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
+  const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
+  const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
   
   useEffect(() => {
     getBMIRecordDay(tempAccountId, Ledger2)
       .then((res) => {
         setBmiRecordTimes(res);
       })
+    GetUserNftList(Ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
+    .then((res) => {
+      setNftAcquireNumber(res.length);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+    isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
+      setBmiHitHealthyNumber(ans ? 1 : 0);
+    });
+    countTotalChallengesTimes(tempAccountId, Ledger2).then((res) => {
+      setChallengeCompletedTimes(res);
+    });
+
   }, []);
 
   // const redeemCard = rewardDetailList.map((cardContent) => (
@@ -68,7 +88,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="goal-data">
               <div className="x893"></div>
               <div className="goal-YBUPcf goal">
-                <div className="x0 inter-semi-bold-keppel-14px">0</div>
+                <div className="x0 inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
                 <div className="x3-XEqJB9 x3 inter-semi-bold-white-14px">/ 3</div>
               </div>
             </div>
@@ -108,7 +128,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="goal-data">
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
-                <div className="x0 inter-semi-bold-keppel-14px">0</div>
+                <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div>
                 <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 50</div>
               </div>
             </div>
@@ -131,7 +151,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="goal-data">
               <div className="x893"></div>
               <div className="goal-hu1xkO goal">
-                <div className="x0 inter-semi-bold-keppel-14px">0</div>
+                <div className="x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
                 <div className="x3-SJHvta x3 inter-semi-bold-white-14px">/ 1</div>
               </div>
             </div>

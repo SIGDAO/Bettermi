@@ -7,8 +7,10 @@ import { rewardDetailList } from "../../data/rewardList";
 import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmiCalculate";
 import { useSelector } from "react-redux";
 import { accountId } from "../../redux/account";
-import { useLedger } from "../../redux/useLedger";
+import { selectWalletNodeHost, useLedger } from "../../redux/useLedger";
 import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
+import { LedgerClientFactory } from "@signumjs/core";
+import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 
 interface IRewardDetailProps {}
 
@@ -66,8 +68,37 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
   const [BMIRecordTimes, setBMIRecordTimes] = React.useState<number>();
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  // const loadNftList = async () => {
+  //   try {
+  //     console.log(userAccountId);
+  //     userNftList = await GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft);
+  //     setMyNfts(userNftList);
+  //     setLoadingNft(false);
+  //     console.log(userNftList);
+  //     console.log(userNftList[0]);
+  //   } catch (e: any) {
+  //     console.log(e);
+  //   }
+  // };
+
+
 
   const getrewardDetailTimes = async () => {
+    if (id === "1") {
+      // setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
+      GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
+        .then((res) => {
+          console.log(res)
+          setBMIRecordTimes(res.length);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
     if (id === "2") {
       setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
     }

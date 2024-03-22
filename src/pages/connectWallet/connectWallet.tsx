@@ -131,36 +131,42 @@ export default function ConnectWallet (props: IConnectWalletProps) {
             } else {
               store.dispatch(profileSlice.actions.setGender("Male"));
             }
-          const equippedBettermiNft = await checkEquippedBettermiNFT(ledger,accountinfo.accountId);
-            if(equippedBettermiNft === false){
-              alert("please equip a Bettermi NFT, we will shortly prompt a notification to help you change it");
+          // const equippedBettermiNft = await checkEquippedBettermiNFT(ledger,accountinfo.accountId);
+          //   if(equippedBettermiNft === false){
+          //     alert("please equip a Bettermi NFT, we will shortly prompt a notification to help you change it");
 
-              const name = "ANderson";
-              let receiverNftStorage = await ledger.contract.getContractsByAccount({
-                accountId: accountinfo.accountId,
-                machineCodeHash: codeHashIdForNft,
-            });
-            console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
-              const latestTransactionNumber = await FindLatestTransactionNumber(ledger,receiverNftStorage.ats[0].at,nftDistributor);
-              const transactionArray = await FindLatestTransactionArray(ledger,receiverNftStorage.ats[0].at,nftDistributor,latestTransactionNumber);
-              if(transactionArray[0] == "empty"){
-                alert("we didn't detect any nfts");
-                navigate("/connectWallet");
-              }
-              const nftId = transactionArray[0];
-              console.log("nftId is",nftId);
-              const contractDescription = await ledger.contract.getContract(nftId);
-              const imgAddress = JSON.parse(contractDescription.description).descriptor;
-              console.log(imgAddress);
-
-              await UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
-
-              navigate("/connectWallet");
-            }
-            else{
-              navigate("/home");
-            };
-
+          //     const name = "ANderson";
+          //     let receiverNftStorage = await ledger.contract.getContractsByAccount({
+          //       accountId: accountinfo.accountId,
+          //       machineCodeHash: codeHashIdForNft,
+          //   });
+          //   console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
+          //     const latestTransactionNumber = await FindLatestTransactionNumber(ledger,receiverNftStorage.ats[0].at,nftDistributor);
+          //     const transactionArray = await FindLatestTransactionArray(ledger,receiverNftStorage.ats[0].at,nftDistributor,latestTransactionNumber);
+          //     if(transactionArray[0] == "empty"){
+          //       alert("we didn't detect any nfts");
+          //       navigate("/connectWallet");
+          //     }
+          //     const nftId = transactionArray[0];
+          //     console.log("nftId is",nftId);
+          //     const contractDescription = await ledger.contract.getContract(nftId);
+          //     const ipfsAddress = JSON.parse(contractDescription.description).descriptor;
+          //     console.log(ipfsAddress);
+          //     // await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`).then((res) => res.text()).then((res) => {
+          //     //   const text = JSON.parse(res);
+          //     //   const imgAddress = text.media[0].social
+          //     //   UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
+          //     // })
+          //     const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
+          //     const text = await ipfsJson.text();
+          //     const imgAddress = JSON.parse(text).media[0].social;
+          //     await  UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
+            //   navigate("/connectWallet");
+            // }
+            // else{
+            //   navigate("/home");
+            // };
+            navigate("/home");
         } else {
 
           navigate("/connectSucceed");

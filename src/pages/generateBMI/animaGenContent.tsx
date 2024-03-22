@@ -159,7 +159,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   return (
     <>
       <BackButton/>
-      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/photo-2@1x.png`}  alt="dfd" />
+      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/mimi.png`}  alt="dfd" />
       <h1 className="bmi-result inter-semi-bold-white-28px">Your BMI Result :</h1>
       <div className="bmi-display-container">
         <div className="flex-row">
