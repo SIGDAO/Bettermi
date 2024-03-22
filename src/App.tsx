@@ -103,12 +103,12 @@ const CheckStore: React.FC = () => {
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const fetchSetting = async () => {}
-  try {
-    return <Outlet />;
-  } catch (error) {
-    console.log(error);
-    return <Outlet />;
-  }
+  // try {
+  //   return <Outlet />;
+  // } catch (error) {
+  //   console.log(error);
+  //   return <Outlet />;
+  // }
 
 
   if (currentPath === "/" || currentPath === "/connectWallet") {
@@ -119,7 +119,7 @@ const CheckStore: React.FC = () => {
     return <Navigate to="/" />
   }
 
-  // return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
+  return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
 };
 
 function App() {
