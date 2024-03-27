@@ -238,7 +238,18 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
           </div>
           <div className="x50-7ckAMs">{count}%</div>
         </div>
-        <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
+        {pathname === "/loadingBMIDaily"?
+        (
+          <div className="minting-JdJl2l inter-normal-white-15px">
+          Importing...
+          </div>
+        )
+        :
+        (
+        <div className="minting-JdJl2l inter-normal-white-15px">
+          Minting…
+          </div>
+          )}
         <div className="reminder-text-1 inter-normal-white-15px">
           Please wait patiently
           <br />
