@@ -94,11 +94,11 @@
   width: 100%;
 }
 
-.discord-card-container {
+.otherUserProfileDiscordCardContainer {
   left: 52px;
   letter-spacing: 0;
   line-height: 22px;
-  position: absolute;
+  /* position: absolute; */
   top: 224px;
   display: flex;
   gap: 10px;
@@ -142,10 +142,16 @@
   width: 30px;
 }
 
-.profile-description-bg {
+.otherUserProfileDescriptionBackground {
   height: 261px;
   width: 358px;
   background: var(--woodsmoke);
+  border: 1px solid var(--royal-blue);
+  border-radius: 20px;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  position: absolute;
+  top: 39px;
+  left: 30px;
 }
 
 
@@ -1251,6 +1257,15 @@
   position: absolute;
   top: 478px;
   width: 183px;
+}
+.bettermidapp-profile-3 .x16227 {
+  display: flex;
+  height: 19px;
+  justify-content: space-between;
+  left: 52px;
+  /* position: absolute; */
+  top: 199px;
+  width: 95px;
 }
 
 .bettermidapp-profile-3 .discord-username {

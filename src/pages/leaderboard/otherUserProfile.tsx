@@ -252,7 +252,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
 
               <div className="overlap-group5">
                 <div className="overlap-group1-profile">
-                  <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
+                <div className="otherUserProfileDescriptionBackground"></div>
                   <div className="button_nft-collections" onClick={() => toUserNftList()}>
                     <div className="continue-profile inter-semi-bold-white-15px">My NFT Collections</div>
                   </div>
@@ -303,7 +303,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <div></div>
                   ) : (
-                    <div className="discord-card-container">
+                    <div className="otherUserProfileDiscordCardContainer">
                       <div
                         className="otherUserProfileCardNumber inter-normal-white-15px"
                         // style={{position: 'absolute',}}
