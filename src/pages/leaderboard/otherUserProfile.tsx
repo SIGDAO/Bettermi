@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./otherUserProfile.css"
 import MenuBar from "../../components/menuBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ShortTitleBar } from "../../components/titleBar";
@@ -251,7 +252,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
 
               <div className="overlap-group5">
                 <div className="overlap-group1-profile">
-                  <img className="layer" src="img/profile/layer-1@1x.png" alt="Layer" />
+                <div className="otherUserProfileDescriptionBackground"></div>
                   <div className="button_nft-collections" onClick={() => toUserNftList()}>
                     <div className="continue-profile inter-semi-bold-white-15px">My NFT Collections</div>
                   </div>
@@ -260,7 +261,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                       <div className="profile_icon_nft_-avatar_empty">
                         <img className="profile_icon_ic_add" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
                       </div>
-                      <div className="profile-content">
+                      <div className="otherUserProfileContent">
                         {/* <img
                         src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
                         style={{
@@ -280,7 +281,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     </>
                   ) : (
                     <>
-                      <div className="profile-content">
+                      <div className="otherUserProfileContent">
                         <div className="zoe_li">{fetchName ? fetchName : name || "Anonymous"}</div>
                         <div className="perso-container">
                           <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
@@ -291,7 +292,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                       </div>
                     </>
                   )}
-                  <div className="x16227">
+                  <div className="otherUserDiscordInfo">
                     <div className="discord-icon">
                       <img className="discord-icon-content" src="img/profile/file---11691@1x.png" />
                     </div>
@@ -302,9 +303,9 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <div></div>
                   ) : (
-                    <div className="discord-card-container">
+                    <div className="otherUserProfileDiscordCardContainer">
                       <div
-                        className="card-number inter-normal-white-15px"
+                        className="otherUserProfileCardNumber inter-normal-white-15px"
                         // style={{position: 'absolute',}}
                       >
                         {fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || ""}

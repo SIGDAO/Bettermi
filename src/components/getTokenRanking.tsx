@@ -53,9 +53,12 @@ export async function GetTokenRanking(ledger2: any) {
     } catch (error) {
       continue;
     }
-    console.log(newDes.nm, "newDes.av is ", newDes.av);
+    if(newDes.id == null){
+      console.log("account is",newDes)
+      console.log("called continue");
+      continue;
+    }
     if (newDes.av == null) {
-      console.log("called newDes.av is null");
     } else {
       imgAddress = Object.keys(newDes.av)[0];
     }
