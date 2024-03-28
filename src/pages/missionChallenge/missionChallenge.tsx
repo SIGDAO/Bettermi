@@ -326,7 +326,7 @@ export default MissionChallenge;
 //       <div className="arms inter-semi-bold-cadet-blue-14px">Arms</div>
 //     </div>
 //     <div className="sigdao-score">
-//       <div className="x10 inter-semi-bold-keppel-14px">+5.25</div>
+//       <div className="x10 inter-semi-bold-keppel-14px">+0.875</div>
 //       <div className="signdao_tokengradient">
 //         <div className="x441"></div>
 //         <div className="x442"></div>
