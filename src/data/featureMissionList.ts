@@ -16,7 +16,7 @@ export const missionList = [
     description: `Straighten your arms & Shake them outwardly`,
     duration: `1 mins`,
     bodyPart: `Arms`,
-    sigdao: `+5.25`,
+    sigdao: `+0.875`,
     nftLevel: `1`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/1HelloBae-BetterMiWithUniform.gif',
     timeslot: [{
@@ -44,7 +44,7 @@ export const missionList = [
     description: `Sway your hips left and right to your elbow with bending arms pointing to the sky`,
     duration: `1 mins`,
     bodyPart: `Hips`,
-    sigdao: `+5.25`,
+    sigdao: `+0.875`,
     nftLevel: `1`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/2SwipingLeftandRight-BetterMiWithUniform.gif',
     timeslot: [{
@@ -72,7 +72,7 @@ export const missionList = [
     description: `As if you are on a skate and skipping side to side`,
     duration: `1 mins`,
     bodyPart: `Legs`,
-    sigdao: `+5.25`,
+    sigdao: `+0.875`,
     nftLevel: `1`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/3IntoYourDM-BetterMiWithUniform.gif',
     timeslot: [{
@@ -96,7 +96,7 @@ export const missionList = [
     description: `Bend your arms towards the body and flap them like a butterfly`,
     duration: `2 mins`,
     bodyPart: `Arms`,
-    sigdao: `+10.5`,
+    sigdao: `+1.75`,
     nftLevel: `2`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/4GettingButterflies-BetterMiWithUniform.gif',
     timeslot: [{
@@ -120,7 +120,7 @@ export const missionList = [
     description: `Stretch like a star and jump while crossing the straightened arms and legs`,
     duration: `2 mins`,
     bodyPart: `Overall`,
-    sigdao: `+10.5`,
+    sigdao: `+1.75`,
     nftLevel: `2`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/5LetsCuddle-BetterMiWithUniform.gif',
     timeslot: [{
@@ -144,7 +144,7 @@ export const missionList = [
     description: `Stand upright with your arms extended straight above your head with crossing wrists, palms facing the sky`,
     duration: `2 mins`,
     bodyPart: `Overall`,
-    sigdao: `+10.5`,
+    sigdao: `+1.75`,
     nftLevel: `2`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/6GlowUp-BetterMiWithUniform.gif',
     timeslot: [{
@@ -168,7 +168,7 @@ export const missionList = [
     description: `Glow up, but with only one leg standing`,
     duration: `3 mins`,
     bodyPart: `Overall`,
-    sigdao: `+15.75`,
+    sigdao: `+2.635`,
     nftLevel: `3`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/7GlowUpTogether-BetterMiWithUniform.gif',
     timeslot: [{
@@ -192,7 +192,7 @@ export const missionList = [
     description: `Stretch both arms horizontally and make a minimum flap like a little bird`,
     duration: `3 mins`,
     bodyPart: `Arms`,
-    sigdao: `+15.75`,
+    sigdao: `+2.625`,
     nftLevel: `3`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/8LoveBird-BetterMiWithUniform.gif',
     timeslot: [{
@@ -216,7 +216,7 @@ export const missionList = [
     description: `Hold your core and do a plank`,
     duration: `3 mins`,
     bodyPart: `Overall`,
-    sigdao: `+15.75`,
+    sigdao: `+2.625`,
     nftLevel: `3`,
     missionImgPath: process.env.PUBLIC_URL + '/img/missionChallenge/9HoldOntoYou-BetterMiWithUniform.gif',
     timeslot: [{

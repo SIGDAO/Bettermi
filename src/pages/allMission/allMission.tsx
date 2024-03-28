@@ -87,7 +87,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                                   <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
                                 </div>
                     <div className = "sigdaoChallengeCompleted">
-                    +5.25 ~ 15.75
+                    +0.875 ~ 2.625
                   </div>
                   <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
                 </div>
@@ -159,7 +159,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                     <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
                     </div>
                     <div className = "sigdaoChallengeCompleted">
-                    +5.25 ~ 15.75
+                    +0.875 ~ 2.625
                   </div>
                   <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
                 </div>
@@ -179,7 +179,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
                     <img src = {`${process.env.PUBLIC_URL}/img/allMission/file---880-1x-png-10@1x.png`}></img>
                     </div>
                     <div className = "sigdaoChallengeCompleted">
-                    +5.25 ~ 15.75
+                    +0.875 ~ 2.625
                   </div>
                   <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
                 </div>
