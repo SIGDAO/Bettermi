@@ -70,11 +70,16 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     //    <></>
     // )
     // }
-    if(nft.contractOwner === nftDistributor  || nft.imageUrl === ''){
+    if(nft.contractOwner !== nftDistributor || nft.imageUrl === undefined || nft.imageUrl === ''){
       return (
          <></>
       )
       }
+    // if( nft.imageUrl === '' || nft.imageUrl === undefined){
+    //   return (
+    //      <></>
+    //   )
+    //   }
     return(
       <AllNft nftReward={nft.nftReward} setNftSelectedImage={setSelectedImageAddress} nftId = {nft.contractId} nftIndex = {nft.nftNumber} nftStatus = {nft.nftStatus} nftNumber = {nft.contractId} nftLevel = {nft.nftLevel} nftOwner = {nft.contractOwner} nftPrice = {nft.contractPrice} imageAddress={nft.imageUrl} openModel = {openModel} setOpenModel={setOpenModel}/>
     )

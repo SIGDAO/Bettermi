@@ -48,9 +48,11 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               <div className="x31">
                 <div className="membership-nkDCBT inter-normal-white-15px">Community</div>
               </div>
-              <div className="x16184-RJpkbo x16184">
-                <div className="discord-sDy3yd inter-normal-white-15px brightness-0-5">Discord</div>
-              </div>
+              <Link to="https://discord.com/invite/MATW3Dcdcw" target="_blank" rel="noopener noreferrer">
+                  <div className="x16184-RJpkbo x16184">
+                    <div className="discord-sDy3yd inter-normal-white-15px">Discord</div>
+                  </div>
+              </Link>
               <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>

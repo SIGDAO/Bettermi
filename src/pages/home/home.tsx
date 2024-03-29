@@ -40,7 +40,7 @@ interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/C7rdyPqUZ8", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
@@ -338,7 +338,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 </div>
                 <div className="x1-3mins-each-ewZMRw inter-normal-cadet-blue-12px">1-3mins/ each</div>
                 <div className="sigdao-score-ewZMRw sigdao-score">
-                  <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+0.875 ~ 2.625</div>
+                  <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+5.25 ~ 15.75</div>
                   <div className="signdao_tokengradient-HEHiSw signdao_tokengradient">
                     <div className="x441-giFx9O x441"></div>
                     <div className="x442-giFx9O x442"></div>

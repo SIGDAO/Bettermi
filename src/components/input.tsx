@@ -27,7 +27,7 @@ export const RandomGenNameInput: React.FunctionComponent<IRandomGenNameInputProp
   // maybe store the path in redux as well
   const { name, setName } = props;
   const nftImage = '';
-  const defaultName = 'zoe_li'
+  const defaultName = 'Enter Your Name'
   const navigate = useNavigate();
 
   // when user press "Save", putting the generated name into local storage
@@ -52,7 +52,7 @@ export const RandomGenNameInput: React.FunctionComponent<IRandomGenNameInputProp
   return (
     <div className="search_bar-Gzrq3v">
       <div className="search-AToI7d" >
-        <input placeholder={name || defaultName} className="card-number-AToI7d" value={name} onChange={(e) => setName(e.target.value)}/>
+        <input placeholder={name || defaultName} className="card-number-AToI7d" style = {{opacity:0.5}} value={name} onChange={(e) => setName(e.target.value)}/>
         <div className="random-dice-AToI7d" onClick={handleRandomGenerateName}>
           <div className="card-number-zhUTxv">Random</div>
           <img className="ic_casino_24px-zhUTxv" src={`${process.env.PUBLIC_URL}/img/customizeYourProfile/ic-casino-24px@1x.png`} alt="ic_casino_24px" />

@@ -121,7 +121,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
-                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div>
+                    {/* <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
+                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
@@ -142,7 +143,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-0yTxuU goal">
-                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
+                    {/* <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div> */}
+                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 1</div>
                   </div>
                 </div>

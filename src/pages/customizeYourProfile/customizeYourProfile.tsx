@@ -24,7 +24,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   // maybe store the path in redux as well
   const ledger = useLedger();
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const defaultName = "zoe_li";
+  const defaultName = "Enter your name";
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const location = useLocation();

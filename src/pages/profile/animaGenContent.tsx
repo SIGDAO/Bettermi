@@ -352,7 +352,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
               <div className="profile-content-container">
                 <div className="profile-content">
-                  <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                  <div className="zoe_li">{fetchName ? fetchName : name || "Enter your name"}</div>
                   <div className="perso-container">
                     <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
                       {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
@@ -367,7 +367,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
                 <div className="discord-card-container">
-                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "Signum#1234"}</div>
                   <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
                     <img src="img/profile/file---11690@1x.png" alt="" />
                   </div>
@@ -531,7 +531,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   text={discordUsernameText}
                   setText={setDiscordUsernameText}
                   width={300}
-                  placeholder="zoeeeee#1234"
+                  placeholder="Signum#1234"
                   // ref={(el) => (inputRefs.current[3] = el)}
                 />
                 {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}

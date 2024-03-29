@@ -90,25 +90,25 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       lastIndex: 500,
     });
     console.log(nftList);
-    var nftList2 = await ledger2.contract.getAllContractsByCodeHash({
-      machineCodeHash: newNftCodeHashId,
-      includeDetails: true,
-      firstIndex: 500,
-      lastIndex: 1000,
-    });
-    //await sleep(2000);
-    var nftList3 = await ledger2.contract.getAllContractsByCodeHash({
-      machineCodeHash: newNftCodeHashId,
-      includeDetails: true,
-      firstIndex: 1000,
-      lastIndex: 1100,
-    });
-    console.log(nftList2);
+    // var nftList2 = await ledger2.contract.getAllContractsByCodeHash({
+    //   machineCodeHash: newNftCodeHashId,
+    //   includeDetails: true,
+    //   firstIndex: 500,
+    //   lastIndex: 1000,
+    // });
+    // //await sleep(2000);
+    // var nftList3 = await ledger2.contract.getAllContractsByCodeHash({
+    //   machineCodeHash: newNftCodeHashId,
+    //   includeDetails: true,
+    //   firstIndex: 1000,
+    //   lastIndex: 1100,
+    // });
+    // console.log(nftList2);
     let nftStorages = nftList.ats;
-    let nftStorages2 = nftList2.ats;
-    let nftStorages3 = nftList3.ats;
-    Array.prototype.push.apply(nftStorages, nftStorages2);
-    Array.prototype.push.apply(nftStorages, nftStorages3);
+    // let nftStorages2 = nftList2.ats;
+    // let nftStorages3 = nftList3.ats;
+    // Array.prototype.push.apply(nftStorages, nftStorages2);
+    // Array.prototype.push.apply(nftStorages, nftStorages3);
     console.log(nftStorages);
     var index = 0;
     var InfoJson: urlObject[] = [];
@@ -181,8 +181,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     const requests2: Promise<void>[] = [];
     console.log(mergedArray);
     InfoJson.map((InfoJson) => {
-      if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
-        // if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
+      // if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
+      if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
         requests2.push(
           fetch(InfoJson.url)
             .then((res) => res.text())
