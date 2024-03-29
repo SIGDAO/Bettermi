@@ -69,11 +69,11 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           console.log(Object.keys(description.av)[0]);
           setHaveNft(true);
           setIsLoading(false);
-          reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
+          //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
         })
         .catch((error) => {
           setIsLoading(false);
-          reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
+          //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
           console.log("need to equip nft");
         });
     }

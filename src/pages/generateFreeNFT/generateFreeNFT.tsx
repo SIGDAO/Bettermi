@@ -10,6 +10,8 @@ import { useLedger } from "../../redux/useLedger";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "../../redux/profile";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { useSelector } from "react-redux";
+import { selectCurrentNFTImageAddress } from "../../redux/profile";
 
 interface GenerateFreeNFTProps {}
 
@@ -18,8 +20,10 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
   const location = useLocation();
   const dispatch = useDispatch();
   const Ledger = useLedger();
+  const newNftImageAddress = useSelector(selectCurrentNFTImageAddress);
   console.log("location.state is ", location.state);
-  const nftId = location.state.nftId;
+  console.log("newNftImageAddress is",newNftImageAddress);
+  const nftId = location.state.nftId?location.state.nftId:newNftImageAddress;
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
   const [nftNumber, setNftNumber] = React.useState<number>(0);

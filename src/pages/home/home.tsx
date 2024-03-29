@@ -5,36 +5,23 @@ import { CenterLayout } from "../../components/layout";
 import MenuBar from "../../components/menuBar";
 import { useSelector } from "react-redux";
 import { selectCurrentUsername } from "../../redux/profile";
-import { accountPublicKey, accountToken } from "../../redux/account";
+import {  accountPublicKey, accountToken } from "../../redux/account";
 import { store } from "../../redux/reducer";
 import { useState } from "react";
-import { useAppSelector } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { useEffect } from "react";
 import { accountSlice } from "../../redux/account";
-import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
-import { useLedger } from "../../redux/useLedger";
 import { accountId } from "../../redux/account";
-import { testing } from "../../redux/characteraiAPI";
-import { selectCurrentGender } from "../../redux/profile";
 import { NavigateToTakeSelfieButton } from "../../components/button";
-import ImageSlider, { Carousel, CarouselItem } from "./Carousel";
-import { accountLevel } from "../../redux/account";
-import { calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
-import { TransferToken } from "../../components/transferToken";
+import ImageSlider from "./Carousel";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
-import HorizontalScrollContainerMission from "./horzontalScrollContainer";
-import { CheckNftOwnerId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
+import {  IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
-import { type } from "os";
-import IPFSImageComponent from "../../components/ipfsImgComponent";
-import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
-import { FindLatestTransactionArray,FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
-import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
+import { reEquipNft } from "../../NftSystem/displayNft/reequipNft";
 
 interface IHomeProps {}
 
@@ -67,6 +54,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [reward,setReward] = useState<string>();
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const userAccountPublicKey = useSelector(accountPublicKey);
 
   // useEffect(() => {
   //   testing();
@@ -134,7 +122,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       return;
     }
     nftIconCheck.current = true;
-    
+    reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountPublicKey,navigate);
     ledger2.account
       .getAccount({ accountId: userAccountId })
       .then(async (account) => {
