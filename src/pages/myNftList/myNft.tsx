@@ -24,6 +24,7 @@ import * as React from 'react';
 import { selectCurrentUsername } from '../../redux/profile';
 import { selectedNftInfo } from '../allNftList/indexAllNftList';
 import IPFSImageComponent from '../../components/ipfsImgComponent';
+import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage';
 
  interface MyNftProps {
     image:string;
@@ -58,50 +59,38 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
-
-         // Function to fetch data from the APIc
-
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
-
                  const nftNumber:string = matches[0].toString().padStart(8, '0');
                  setNftNumber(nftNumber);
-                //  setNftLevel(nftInfo.attributes[0].level);
-
                  if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
-                  setReward("10"); //To be confirmed
                  }
                  if(nftInfo.description.includes("2") === true){
                   setNftLevel("2");
-                  setReward("15");//To be confirmed
                  }
                  if(nftInfo.description.includes("3") === true){
                   setNftLevel("3");
-                  setReward("20");//To be confirmed
                  }
-
-
+                 const level = convertWordToNumber(nftInfo.attributes[6].value);
+                 console.log("level is",level);
+                 if(isNaN(level) === false){
+                   console.log((level/3).toString());
+                  setReward(((level/3).toFixed(4)).toString());
+                 }
+                 else{
+                   setReward("");
+                 }
                  setImgAddress(nftInfo.media[0].social);
                  nftImgAddress = nftInfo.media[0].social; 
-
-
                  nftImgAddress = addressSuffix.concat(nftImgAddress);
-
                  setLoading(false);
              }).catch((e:any) => {console.log(e);});
 
          }).catch((e:any) => {console.log(e);});
 
-         // Call the fetchData function
-
-         // Optional cleanup function (not needed in this case)
-         // If you had any subscription or timers, you'd clean them up here
-
-         // Since we want the effect to run only once (on mount), we pass an empty dependency array
        }, [image]);
      const test = (abc:string) => {
 
@@ -137,7 +126,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           imageUrl:imgAddress,
                           nftLevel:nftLevel,
                           nftPrice:"0",
-                          nftReward:"5",
+                          nftReward:"",
                           nftNumber:nftNumber?nftNumber:"-1",
                         }
 
@@ -153,7 +142,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           </div>
                           <div className = "myNftVerticalLine"></div>  
                           <div  className = "inter-normal-white-12px">
-                            Reward + 5%
+                            Reward + %
                             </div>
                       </div>
                       <div className = "myNftPrice">

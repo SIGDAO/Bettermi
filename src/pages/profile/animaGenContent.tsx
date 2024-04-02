@@ -422,6 +422,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                     onClick={() => {
                       setIsPopUpIcon(true);
                       setImgAddress(MyNft);
+                      
                     }}
                     src={`https://ipfs.io/ipfs/${MyNft}`}
                     style={{

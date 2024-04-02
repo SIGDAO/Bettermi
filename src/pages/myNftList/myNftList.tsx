@@ -33,6 +33,7 @@ import { selectCurrentGender } from "../../redux/profile";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
 import { selectedNftInfo } from "../allNftList/indexAllNftList";
 import { ContractDataView } from "@signumjs/contracts";
+import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 
 interface IMyNftListProps {
   isUpdatingDescription: boolean;
@@ -78,6 +79,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   const [inputPrice, setInputPrice] = useState("");
   const [inputAddress, setInputAddress] = useState("");
   const [level, setLevel] = useState("1");
+  const [reward,setReward] = useState("");
   const [hasImportError, setHasImportError] = useState<boolean>(false);
   const [importSuccess, setImportSuccess] = useState<boolean>(false);
   const [isOpenImport, setIsOpenImport] = useState<boolean>(false);
@@ -148,6 +150,15 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           let matches = nftInfo.name.match(/(\d+)/);
           const nftNumber:string = matches[0].toString().padStart(8, "0");
           setNftNumber(nftNumber);
+          const level = convertWordToNumber(nftInfo.attributes[6].value);
+          console.log("level is",level);
+          if(isNaN(level) === false){
+            console.log((level/3).toString());
+            setReward(((level/3).toFixed(4)).toString());
+          }
+          else{
+            setReward("");
+          }
           if (nftInfo.description.includes("1") === true) {
             setOnDutyLevel("1");
           }
@@ -487,7 +498,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + 5%</div>
+                        <div className="inter-normal-white-12px">Reward + {reward}%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
@@ -510,7 +521,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                           imageUrl:onDuty,
                           nftLevel:onDutyNftLevel,
                           nftPrice:(parseInt(onDutyNftPrice)/1000000).toString(),
-                          nftReward:"5",
+                          nftReward:"",
                           nftNumber:nftNumber!,
                         }
                         setSelectedNft(nftInfo);
@@ -521,7 +532,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + 5%</div>
+                        <div className="inter-normal-white-12px">Reward + {reward}%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
