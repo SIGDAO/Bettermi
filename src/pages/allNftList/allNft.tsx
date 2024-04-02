@@ -103,7 +103,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
           <div className="myNftBar">
             <div className="myNftLevel">Lv{nftLevel}</div>
             <div className="myNftVerticalLine"></div>
-            <div className="inter-normal-white-12px">Reward + 10%</div>
+            <div className="inter-normal-white-12px" style = {{fontSize:"11px"}}>Reward + {nftReward}%</div>
           </div>
           <div className="myNftPrice">${nftPrice?(parseInt(nftPrice)/1000000).toString():""} SIGDAO</div>
         </div>

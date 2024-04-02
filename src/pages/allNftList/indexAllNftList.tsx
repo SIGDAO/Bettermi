@@ -15,6 +15,7 @@ import { ContractDataView } from "@signumjs/contracts";
 import PopupModal from "./modelTrial";
 import AllNftLoading from "./allNftLoading";
 import NftDetails from "../../components/nftDetails";
+import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 
 interface IINDEXAllNftListProps {
 
@@ -181,8 +182,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     const requests2: Promise<void>[] = [];
 
     InfoJson.map((InfoJson) => {
-      // if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
-      if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
+       if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
+      //if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
         requests2.push(
           fetch(InfoJson.url)
             .then((res) => res.text())
@@ -191,15 +192,15 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 const text = JSON.parse(res);
 
                 const levelNumber = text.description.match(/Level (\d+)/)?.[1];
-                var reward = "0"
-                if(levelNumber === "1"){
-                  reward = "5"
+                var reward = "0";
+                const level = convertWordToNumber(text.attributes[6].value);
+                console.log("level is",level);
+                if(isNaN(level) === false){
+                  console.log((level/3).toString());
+                   reward = ((level/3).toFixed(4)).toString();
                 }
-                if(levelNumber === "2"){
-                  reward = "10"
-                }
-                if(levelNumber === "3"){
-                  reward = "15"
+                else{
+                   reward = "";
                 }
                 const string = text.name;
                 const regex = /#(\d+)/;

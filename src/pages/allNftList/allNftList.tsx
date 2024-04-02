@@ -70,7 +70,7 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     //    <></>
     // )
     // }
-    if(nft.contractOwner !== nftDistributor || nft.imageUrl === undefined || nft.imageUrl === ''){
+    if(nft.contractOwner === nftDistributor || nft.imageUrl === undefined || nft.imageUrl === ''){
       return (
          <></>
       )
