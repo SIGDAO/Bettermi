@@ -42,7 +42,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   //Anderson's code starts here
   // const NewUserCheck = async () => {
   //   const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
-  //   console.log("isUpdated", isUpdated);
+
   //   return isUpdated === true
   // };
 
@@ -83,14 +83,14 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
             allowedChallenge.push(true);
           }
         } //Temporarily disable the remaining six challenges
-        console.log("allowedChallenge",allowedChallenge);
+
         setAllowedChallengeList(allowedChallenge);
 
         setUserChallengeTimes(playedChallenge);
-        console.log(playedChallenge);
-        console.log("userChallengeTimes is ", userChallengeTimes);
 
-        console.log(userChallengeTimes);
+
+
+
         setisOverDailyPlayTimesLimit(
           playedChallenge.map((numChallengesPlayed) => {
             if (numChallengesPlayed >= 2) {
@@ -100,21 +100,21 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
           })
         );
         setIsLoading(false);
-        console.log("isOverDailyPlayTimesLimit is ", isOverDailyPlayTimesLimit);
+
         //Anderson's code ends here
 
         //Anderson disabled this 2023/11/12
         // setisOverDailyPlayTimesLimit(
         //   missionList.map((mission) => {
         //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
-        //       console.log("special case for Hello Bae",isNew)
+
         //       return true;
         //     }
         //     const { timeslot } = mission;
         //     const isInSlot = timeslot.some(
         //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
         //     );
-        //     console.log("is In slot for",mission.title, "is",isInSlot)
+
         //     return isInSlot;
         //   })
         // );
@@ -135,13 +135,13 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       return timeDiff;
         //     });
         //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
-        //       console.log(date > 0, "timedifferentInFormat date");
+
         //       return date > 0;
         //     });
-        //     console.log(filteredtimedifferentInFormat, "filteredtimedifferentInFormat");
+
 
         //     filteredtimedifferentInFormat.sort((a, b) => a - b);
-        //     console.log(filteredtimedifferentInFormat, "timedifferentInFormat");
+
         //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
         //       .toString()
         //       .padStart(2, "0");
@@ -150,7 +150,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       .padStart(2, "0");
         //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
 
-        //     console.log(hours, minutes, seconds, "hours, minutes, seconds");
+
         //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
         //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
         //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
@@ -160,8 +160,8 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //     // return '';
         //   })
         // );
-        // console.log(Timedifference, "Timedifference");
-        //console.log(isOverDailyPlayTimesLimit, "isOverDailyPlayTimesLimit");
+
+
       }
     };
 
@@ -225,7 +225,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                       onClick={async () => {
                         
                         const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
-                        console.log(numChallengesPlayed);
+
                         if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
                           navigate(`/challengeCountdown/${index + 1}`);
                         }

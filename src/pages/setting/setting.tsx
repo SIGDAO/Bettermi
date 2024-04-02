@@ -16,10 +16,10 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const navigate = useNavigate();
   const logout = () => {
-    console.log(Wallet);
+
     store.dispatch({ type: "USER_LOGOUT" });
     Wallet.Extension = new GenericExtensionWallet();
-    console.log(Wallet);
+
     navigate("/");
   };
   const content: JSX.Element = (

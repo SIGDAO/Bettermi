@@ -130,7 +130,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
     // setValue(new Date())
 
     // real data
-    // console.log('Ledger2', Ledger2)
+
     findBMI(tempAccountId, Ledger2)
       .then((res) => {
         setData(res)
@@ -148,15 +148,15 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   // const genBMIlist 
   
   useEffect(() => {
-    // console.log(item)
+
 
     // forEach(optionList, (item) => {
     //   if (item.option) {
-    //     console.log(item.text)
+
     //     let startIndex = data?.length() 
 
     //     // filtering
-    //     console.log(bmiList)
+
     //     setData(bmiList)
     //     // dispatch(userBMISlice.actions.setBMI(bmiList))
     //   }
@@ -164,28 +164,28 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   }, [ weekOption, monthOption, yearOption, fiveYearOption ])
 
   useEffect(() => {
-    // console.log('value', value)
+
     if (value && data && typeof value === 'object') {
-      console.log('daySelectedData', daySelectedData)
-      console.log('data', data)
+
+
       let todayTimestamp = Math.floor((value.getTime() / 1000))
       let tmrTimestamp = todayTimestamp + 86400
       setDaySelectedData(data?.filter((item: any) => {
-        // console.log('item', item.time)
-        // console.log('todayTimestamp', todayTimestamp)
-        // console.log('tmrTimestamp', tmrTimestamp)
-        // console.log('yesterdayTimestamp', yesterdayTimestamp)
-        // console.log('today', new Date(todayTimestamp * 1000 ))
-        // console.log('yesterday', new Date(yesterdayTimestamp * 1000 ))
-        // console.log("return value", item.time >= todayTimestamp && item.time < tmrTimestamp)
+
+
+
+
+
+
+
         return item.time >= todayTimestamp && item.time < tmrTimestamp
       }))
       }
-      console.log('daySelectedData', daySelectedData)
+
   }, [value, data])
 
   useEffect(() => {
-    console.log('daySelectedData', daySelectedData);
+
   }, [daySelectedData])
 
   // const Custom..

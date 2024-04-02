@@ -59,14 +59,14 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log(typeof Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           //setImgAddress("bafybeifbyw43mxmn3yymgkfpehutftath3qwjhwlzox75l53zrjxfwxhra");
-          console.log(Object.keys(description.av)[0]);
+
           setHaveNft(true);
           setIsLoading(false);
           //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
@@ -74,14 +74,14 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
         .catch((error) => {
           setIsLoading(false);
           //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
-          console.log("need to equip nft");
+
         });
     }
   };
   const nftIconCheck = useRef(false);
   useEffect(() => {
     if (nftIconCheck.current) {
-      console.log("called");
+
       return;
     }
     nftIconCheck.current = true;

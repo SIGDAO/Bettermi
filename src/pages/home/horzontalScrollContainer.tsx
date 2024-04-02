@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import React from "react";
 
 function handleScrollHorizontally(event: any) {
-    console.log(event);   
+
     const container = document.querySelector("div.missions-scroll-RoXPLo.x-")!;
     //const container = event.target;
     const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
-    console.log(container);
+
     const scrollTop = event.pageYOffset || document.documentElement.scrollTop;
     container.scrollLeft -= (delta * 40); // Adjust scrolling speed here
     event.preventDefault();

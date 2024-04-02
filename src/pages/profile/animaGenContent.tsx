@@ -104,7 +104,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const handleSave = async () => {
-    console.log("called handle save");
+
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
       setShowStar(true);
       return;
@@ -140,12 +140,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   var userNftList: string[] = [];
   const loadNftList = async () => {
     try {
-      console.log(userAccountId);
+
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
       setMyNfts(userNftList);
       setLoadingNft(false);
-      console.log(userNftList);
-      console.log(userNftList[0]);
+
+
     } catch (e: any) {
       console.log(e);
     }
@@ -153,7 +153,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
   useEffect(() => {
     if (nftLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
       nftLoaded.current = true;
       loadNftList();
@@ -161,7 +161,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   }, [nftContractStorage]);
 
   const handleScroll = (event: any) => {
-    console.log(event);
+
     const container = document.querySelector("div.profileHorizontalScroll")!;
     const scrollAmount = event.deltaY;
 
@@ -190,17 +190,17 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log("imageaddress", Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
         .catch((error) => {
           setIsNFTiconLoading(false);
-          console.log("need to equip nft");
+
         });
     }
   };
@@ -209,7 +209,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     const account = await ledger2.account.getAccount({
       accountId: userAccountId,
     });
-    console.log(account);
+
     //    let newDes =waitingToBeChangedDescription.description===undefined?"":JSON.parse(waitingToBeChangedDescription.description);
     if (account.description === undefined) {
       setIsLoading(false);
@@ -227,7 +227,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   /*Ends here*/
 
   const handleScroll2 = (event: any) => {
-    console.log(event);
+
     const container = event.target!;
     const scrollAmount = event.deltaY;
     container.scrollTo({
@@ -264,33 +264,33 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       accountId: userAccountId,
     });
     let newDes = waitingToBeChangedDescription.description === undefined ? {} : JSON.parse(waitingToBeChangedDescription.description);
-    console.log(newDes);
+
     if (newDes.nm == null) {
-      console.log("called newDes.nm == null here");
+
       setFetchName("");
     } else {
-      console.log("called newDes.nm else here");
+
       setFetchName(newDes.nm);
     }
     if (newDes.ds == null) {
-      console.log("called newDes.ds == null here");
+
       setFetchDescription("");
     } else {
-      console.log("called newDes.ds else here");
+
       setFetchDescription(newDes.ds);
     }
     if (newDes.sc == null) {
-      console.log("called newDes.sc[0] == null here");
+
       setFetchDiscordUsername("");
     } else {
-      console.log("called newDes.sc[0] else here");
+
       setFetchDiscordUsername(newDes.sc[0]);
     }
     if (newDes.hp == null) {
-      console.log("called newDes.hp == null here");
+
       setFetchAboutYourself("");
     } else {
-      console.log("called newDes.hp else here");
+
       setFetchAboutYourself(newDes.hp);
     }
     setIsSettingLoading(false);

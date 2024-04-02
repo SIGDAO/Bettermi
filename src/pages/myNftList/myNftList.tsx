@@ -144,7 +144,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       .then((res) => {
         res.text().then((text) => {
           var nftInfo = JSON.parse(text);
-          console.log("nftInfo", nftInfo);
+
           let matches = nftInfo.name.match(/(\d+)/);
           const nftNumber:string = matches[0].toString().padStart(8, "0");
           setNftNumber(nftNumber);
@@ -166,7 +166,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
 
   useEffect(() => {
     if (dataFetchedRef.current) {
-      console.log("called");
+
       return;
     }
     dataFetchedRef.current = true;
@@ -176,16 +176,16 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
         const description = account.description == null ? {} : JSON.parse(account.description);
         if (description.av !== null) {
           setOnDutyNftId(description.id);
-          console.log(description);
+
           const contract = await ledger2.contract.getContract(description.id);
           const nftContract = new ContractDataView(contract);
           setOnDutyNftPrice(nftContract.getVariableAsDecimal(9));
           // fetch(`https://ipfs.io/ipfs/${Object.keys(description.av)[0]}`).then((res)=>{
           //   res.text().then((text)=>{
-          //       //console.log(text);
+
           //       var nftInfo = JSON.parse(text);
           //       let matches = nftInfo.name.match(/(\d+)/);
-          //       console.log("matches[0] is   ",matches[0]);
+
           //       setNftNumber(matches[0]);
           //   }).catch((error)=>{console.log(error)});
           // }).catch((error)=>{console.log(error)});
@@ -200,26 +200,26 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
 
   //   useEffect(() => {
   //         FindLatestTransactionNumber(ledger2,nftContractStorage,nftDistributor).then((number)=>{
-  //           console.log(number);
+
   //           FindLatestTransactionArray(ledger2,nftContractStorage,nftDistributor,number).then(async(nftAddressList)=>{
   //             if(nftAddressList[0] === "empty"){
   //               setLoading(false);
   //             }
   //             else{
-  //                   console.log(nftAddressList);
+
   //                 // nftAddressList.map((nftAddress)=>{
   //                 //   ledger2.contract.getContract(nftAddress).then((hi)=>{
-  //                 //       //console.log("array is ",nftAddress,"  ",hi);
+
   //                 //       const trial = JSON.parse(hi.description);
-  //                 //       //console.log(trial);
-  //                 //       //console.log(trial.descriptor);
+
+
   //                 //       nft = {level:trial.version,image:trial.descriptor,nftId:nftAddress};
-  //                 //       //console.log([...myNfts,nft]);
-  //                 //       //console.log(myNfts);
+
+
   //                 //       setMyNfts([...myNfts,nft]);
   //                 //       setArray([...array,"123"]);
-  //                 //       //console.log("testing array is ",array);
-  //                 //       //console.log("appended list is ",[...myNfts,nft]);
+
+
   //                 //       userNftList.push(nft);
   //                 //       setMyNfts(userNftList);
   //                 //       setLoading(false);
@@ -231,7 +231,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   //                   nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
   //                   userNftList.push(nft);
   //                   if(i === nftAddressList.length-1){
-  //                     console.log(userNftList);
+
   //                     setMyNfts(userNftList);
   //                     setLoading(false);
   //                   }
@@ -296,8 +296,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   //     const nftId = accountDes.account;
   //     const nftOwnerId = await CheckNftOwnerId(ledger2, nftId);
   //     if (nftOwnerId === userAccountId) {
-  //       //console.log("updating receiver account");
-  //       //console.log(userAccountId);
+
+
   //       updateReceiverAccount(ledger2, userAccountId, codeHashIdForNft, nftId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
   //     }
   //   } catch (e) {
@@ -306,7 +306,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   // };
   const displayMyNft = myNfts.map((nft) => {
     //Contract Id
-    //console.log("userNftList is  ", myNfts);
+
     return (
       <MyNft
         setOpenModel={setOpenModel}
@@ -350,8 +350,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
         setError(true);
       } else {
         if (inputValue === "sell") {
-          console.log("selectedNftID", selectedNftId);
-          console.log(inputValue);
+
+
           var price = (Number(inputPrice) * 1000000).toString();
           const transaction = await ledger2.contract.callContractMethod({
             contractId: selectedNftId,
@@ -384,7 +384,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
   };
   // const transferNft = async (assetId: string) => {
   //   try {
-  //     console.log(assetId);
+
   //     const contractInfo = await ledger2.contract.getContract(selectedNftId);
 
   //     const trial = JSON.parse(contractInfo.description);
@@ -540,7 +540,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
               {/* {loading?(<p>loading...</p>):(
                 <>
                       <ShortTitleBar title='My NFTs' />
-                      {console.log(userNftList)}{console.log(array)}
+
               <div className = "containerMyNftList">
                 <div className = "containerMyNftList2">
                     {displayMyNft}

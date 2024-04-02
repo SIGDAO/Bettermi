@@ -67,15 +67,15 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   var nftsToBeDistributed: string;
 
   React.useEffect(() => {
-    console.log(calRewardSigdaoOnSelfie(BMI).toString());
+
   }, []);
 
-  console.log(ledger);
+
   const confirm = async () => {
     let encrypted: any;
 
     if (minted) {
-      console.log("minted");
+
       return;
     }
 
@@ -86,7 +86,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         if (obj.account == userAccountId) {
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT) / 1000000));
           localStorage.setItem("token", obj.quantityQNT);
-          console.log(obj.quantityQNT);
+
         }
       });
 
@@ -94,21 +94,21 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         accountId: userAccountId,
         machineCodeHash: codeHashId,
       });
-      // console.log(ourContract);
-      // console.log(ourContract.ats[0]);
+
+
       let storeNftContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
       });
-      // console.log(storeNftContract);
-      // console.log(storeNftContract.ats[0]);
-      // console.log(typeof(storeNftContract.ats[0]));
-      console.log(Wallet);
+
+
+
+
       try {
-        console.log("isTransferNFT", isTransferNFT);
+
         // todo: check if user has finished all smart contract build up
         if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
-          console.log(storeNftContract.ats[0],"storeNftContract.ats[0] == null");
+
           const initializeNftContract = (await ledger.contract.publishContractByReference({
             name: "NFT",
             description: "storage_space_for_your_nft",
@@ -135,7 +135,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , {
               data: bmiMessage
             })
-            console.log(encrypted)
+
             encrypted = encrypted.data
           } catch (error) {
             console.log(error)
@@ -151,7 +151,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             senderPublicKey: publicKey,
             deadline: 1440,
           })) as UnsignedTransaction;
-          console.log(initializeContract);
+
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           setIsTransferBMI(true);
           dispatch(contractSlice.actions.setIsBMIContractBuild(true));
@@ -163,11 +163,11 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             time: new Date(),
           });
 
-          console.log(bmiMessage, "bmiMessage")
+
           
           try {
             encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
-            console.log(encrypted)
+
             encrypted = encrypted.data
           } catch (error) {
             alert("Cannot fetch the record, please core team through discord!\nWill return to home page")

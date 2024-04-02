@@ -74,12 +74,12 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   // const loadNftList = async () => {
   //   try {
-  //     console.log(userAccountId);
+
   //     userNftList = await GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft);
   //     setMyNfts(userNftList);
   //     setLoadingNft(false);
-  //     console.log(userNftList);
-  //     console.log(userNftList[0]);
+
+
   //   } catch (e: any) {
   //     console.log(e);
   //   }
@@ -92,7 +92,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
       // setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
       GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
         .then((res) => {
-          console.log(res)
+
           setBMIRecordTimes(res.length);
         })
         .catch((err) => {

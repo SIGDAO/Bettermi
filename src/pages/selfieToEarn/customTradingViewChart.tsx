@@ -33,7 +33,7 @@ const initialColors = {
 const genBMIlist = (option: string) => {
   let returnList = []
   let today = new Date()
-  console.log(today, "today")
+
   let totalDays = 0
   switch (option) {
     case '1W':
@@ -55,7 +55,7 @@ const genBMIlist = (option: string) => {
     let tempDate = new Date(today.setDate(today.getDate() - 1))
     let dateFormat = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
 
-    console.log()
+
     returnList.push({time: dateFormat, value: Math.floor(Math.random() * 10) + 20.1})
   }
   return returnList

@@ -1,9 +1,9 @@
 export const calRewardSigdaoOnSelfie = (bmi: number) => {
-  console.log("bmi calRewardSigdaoOnSelfie", typeof bmi);
+
   const bmiString = bmi.toString();
   const calBmi = parseFloat(bmiString);
 
-  console.log("calBmi", typeof calBmi);
+
 
   if (calBmi >= 18.5 && calBmi <= 22.9) {
     return 5.42 * 10 ** 6

@@ -26,8 +26,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const userAccountId = useSelector(accountId);
   const nftCodeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!; // the code hash of the BMI contract
   const bmiCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
-  console.log("nftCodeHashId", nftCodeHashId);
-  console.log("bmiCodeHashId", bmiCodeHashId);
+
+
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const nftLoaded = useRef(false);
@@ -59,9 +59,9 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
-    console.log("userAccountId is",userAccountId);
-    console.log("nftCodeHashId is",nftCodeHashId);
-    console.log("BMICodeHashId is",bmiCodeHashId);
+
+
+
     let nftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
       machineCodeHash: nftCodeHashId,
@@ -71,7 +71,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-    console.log(bmiContract, "bmiContract")
+
 
     while (bmiContract.ats[0] == null) {
       bmiContract = await ledger.contract.getContractsByAccount({
@@ -82,8 +82,8 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         accountId: userAccountId,
         machineCodeHash: nftCodeHashId,
       });
-      console.log(nftContract);
-      console.log(bmiContract);
+
+
     }
     var description: any;
     
@@ -92,7 +92,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     } catch (error) {
       try {
         const bmiEncrypteddata = bmiContract.ats[0].description;
-        console.log(bmiEncrypteddata, "bmiEncrypteddata")
+
         description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
           data: bmiEncrypteddata,
         })
@@ -102,28 +102,28 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         navigate('/')
       }
     }
-    console.log("description is",description);
-    console.log("description, gender is",description.gender)
+
+
     var gender = "Male";
     if (description.gender.includes("Female")) {
       gender = "Female";
     }
     if (gender === "Male") {
-      console.log("called gender === Male");
+
       await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor);
     } else {
       await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor);
     }
-    console.log("gender is   ", gender);
+
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger, nftContract.ats[0].at, nftDistributor);
     const latestTransactionList = await FindLatestTransactionArray(ledger, nftContract.ats[0].at, nftDistributor, latestTransactionNumber);
-    console.log(latestTransactionList);
-    console.log(latestTransactionList[0]);
+
+
     if (nftContract.ats[0] != null) {
       store.dispatch(accountSlice.actions.setNftContractStorage(nftContract.ats[0].at));
     }
     if (latestTransactionList.length === 0) {
-      console.log("The latestTransactionList is empty, returned error", latestTransactionList);
+
       setCount(100);
       setIsLoading(false);
       navigate("/generateFreeNFT", { state: { nftId: "error" } });
@@ -137,7 +137,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   useEffect(() => {
     if (nftLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
       nftLoaded.current = true;
       if (pathname === "/loadingBMIDaily") {
@@ -157,13 +157,13 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
-      console.log("count is",count);
+
       if (count < 100) {
-        console.log("testing");
+
         setCount((prevCount) => {
-          console.log("count is", prevCount);
+
           if (prevCount < 99) {
-            console.log("testing");
+
             return prevCount + 1;
           }
           return prevCount;

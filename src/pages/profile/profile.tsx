@@ -32,10 +32,10 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
 
   const checkIsLoading = async () => {
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-    console.log(messages);
+
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
       if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
-        console.log("the user is updating personal info");
+
         setIsUpdatingUserSetting(true);
         setIsSettingLoading(false);
         return;
@@ -61,7 +61,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
         setRewardPercentage(res);
       })
       .catch((err) => {
-        console.log(err);
+
       });
   }, []);
 

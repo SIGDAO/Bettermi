@@ -12,9 +12,9 @@ const AllNftLoading:React.FC<AllNftLoadingProps> = () => {
     const timer = setInterval(() => {
       if (count < 100) {
         setCount((prevCount) => {
-          console.log("count is", prevCount);
+
           if (prevCount < 99) {
-            console.log("testing");
+
             return prevCount + 1;
           }
           return prevCount;

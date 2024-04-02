@@ -76,13 +76,13 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   var userNftList: string[] = [];
   const loadNftList = async () => {
     try {
-      console.log(userAccountId);
+
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
       setMyNfts(userNftList);
-      console.log(myNfts);
+
       setLoadingNft(false);
-      console.log(userNftList);
-      console.log(userNftList[0]);
+
+
     } catch (e: any) {
       console.log(e);
     }
@@ -90,24 +90,24 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
 
   useEffect(() => {
     if (nftListLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
-      console.log("loading NFT");
+
       nftListLoaded.current = true;
       loadNftList();
     }
   }, [userAccountId]);
 
   const handleScroll = (event: any) => {
-    console.log(event);
+
     const container = document.querySelector("div.profileHorizontalScroll")!;
-    console.log(container);
+
     const scrollAmount = event.deltaY;
 
     // window.onscroll = function() {
     //   window.scrollTo({left:0, top:-scrollAmount});
     // };
-    console.log(container.scrollLeft);
+
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -125,11 +125,11 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   /*Ends here*/
 
   const handleScroll2 = (event: any) => {
-    console.log(event);
+
     const container = event.target!;
-    console.log(container);
+
     const scrollAmount = event.deltaY;
-    console.log(scrollAmount);
+
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -139,7 +139,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
   const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
   const fetchSetting = async (userAccountId: string) => {
-    console.log(userAccountId);
+
     const isUserSettingUpdating = await IsUserSettingUpdating(ledger2, userAccountId);
     if (isUserSettingUpdating === true) {
       setIsUpdatingUserSetting(true);
@@ -149,40 +149,40 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
     const waitingToBeChangedDescription = await ledger2.account.getAccount({ accountId: userAccountId });
     let newDes = waitingToBeChangedDescription.description === undefined ? {} : JSON.parse(waitingToBeChangedDescription.description);
     if (newDes.nm == null) {
-      console.log("called newDes.nm == null here");
+
       setFetchName("");
     } else {
-      console.log("called newDes.nm else here");
+
       setFetchName(newDes.nm);
     }
     if (newDes.ds == null) {
-      console.log("called newDes.ds == null here");
+
       setFetchDescription("");
     } else {
-      console.log("called newDes.ds else here");
+
       setFetchDescription(newDes.ds);
     }
     if (newDes.sc == null) {
-      console.log("called newDes.sc[0] == null here");
+
       setFetchDiscordUsername("");
     } else {
-      console.log("called newDes.sc[0] else here");
+
       setFetchDiscordUsername(newDes.sc[0]);
     }
     if (newDes.hp == null) {
-      console.log("called newDes.hp == null here");
+
       setFetchAboutYourself("");
     } else {
-      console.log("called newDes.hp else here");
+
       setFetchAboutYourself(newDes.hp);
     }
-    console.log("isSetting");
+
     setIsSettingLoading(false);
   };
 
   useEffect(() => {
     //while(location.state.accountId == null){console.log("waiting for location.state.accountId");}
-    console.log(location.state.userId);
+
     fetchSetting(userAccountId);
   }, []);
 

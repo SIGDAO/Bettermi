@@ -21,8 +21,8 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
   const dispatch = useDispatch();
   const Ledger = useLedger();
   const newNftImageAddress = useSelector(selectCurrentNFTImageAddress);
-  console.log("location.state is ", location.state);
-  console.log("newNftImageAddress is",newNftImageAddress);
+
+
   const nftId = location.state.nftId?location.state.nftId:newNftImageAddress;
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
@@ -32,7 +32,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
 
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
-        console.log("reslt is ", result);
+
         dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
         setNftIpfsAddress(result.nftImage);
         setNftNumber(result.nftNumber);
@@ -42,7 +42,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
         console.log(e);
       });
-    console.log("nftId is ", nftId);
+
   }, []);
 
 

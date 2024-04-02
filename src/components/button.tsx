@@ -185,7 +185,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       //   setIsMidnight(true);
       // }
 
-      console.log('is', isSelfie)
+
 
       setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     };
@@ -200,20 +200,20 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
     accountId :tempAccountId,
     machineCodeHash: bmiHashId,
   });
-  console.log(contract,"contract");
+
 }
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
-        console.log('result', result)
+
         setIsActive(result);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+
         checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', ''));
       })
-    console.log(isActive)
+
   }, [])
 
   async function handleTakeASelfie() {

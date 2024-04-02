@@ -58,19 +58,19 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
      var nftImgAddress:string = "";
      var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
-      //console.log(nftId);
+
          // Function to fetch data from the APIc
-         //console.log(`ipfs.io/ipfs/${image}`);
+
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 //console.log(text); 
+
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
-                 //console.log(matches[0]);
+
                  const nftNumber:string = matches[0].toString().padStart(8, '0');
                  setNftNumber(nftNumber);
                 //  setNftLevel(nftInfo.attributes[0].level);
-                //  console.log(nftInfo.attributes.description);
+
                  if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
                   setReward("10"); //To be confirmed
@@ -83,14 +83,14 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                   setNftLevel("3");
                   setReward("20");//To be confirmed
                  }
-                 //console.log(nftInfo); 
-                 //console.log(typeof(nftInfo.media[0].social));
+
+
                  setImgAddress(nftInfo.media[0].social);
                  nftImgAddress = nftInfo.media[0].social; 
-                 //console.log(nftImgAddress);
-                 //console.log(imgAddress);
+
+
                  nftImgAddress = addressSuffix.concat(nftImgAddress);
-                 //console.log(nftImgAddress);
+
                  setLoading(false);
              }).catch((e:any) => {console.log(e);});
 
@@ -104,7 +104,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
          // Since we want the effect to run only once (on mount), we pass an empty dependency array
        }, [image]);
      const test = (abc:string) => {
-         //console.log(abc);
+
          return 1;
      }
      const equipNft = async() => {
@@ -140,7 +140,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           nftReward:"5",
                           nftNumber:nftNumber?nftNumber:"-1",
                         }
-                        console.log(nftInfo);
+
                         setSelectedNft(nftInfo);
                       }
                       } className = "myNftImage" imgAddress = {`https://ipfs.io/ipfs/${imgAddress}`}></IPFSImageComponent>
@@ -168,7 +168,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
                             setSelectedAssetId(nftId);
-                            console.log("nftID is ",nftId);
+
                             setLevel(nftLevel);
   
                           }} 
@@ -182,7 +182,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);
-                              console.log("nftID is ",nftId);
+
                               setSelectedAssetId(nftId);
                               setLevel(nftLevel);
 

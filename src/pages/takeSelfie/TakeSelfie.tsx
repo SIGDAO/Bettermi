@@ -110,7 +110,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   useEffect(() => {
     if (data && "bmi" in data) {
       const { bmi } = data
-      console.log('bmi', bmi)
+
       dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()))
       
       navigate(navigatePath)
@@ -131,7 +131,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   //         await videoElement.play();
 
   //         const { videoWidth, videoHeight } = videoElement;
-  //         console.log('Camera Size:', videoWidth, 'x', videoHeight);
+
   //       }
   //     } catch (error) {
   //       console.error('Error accessing camera:', error);
@@ -153,7 +153,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   useEffect(() => {
     isSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
-        console.log("result",result);
+
         if (!result) {
           setNavigatePath('/generateBMINFTImport')
         }
@@ -166,7 +166,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
     const action: Function = async () => {
       const formData = new FormData();
       if (!imageSrc) {
-        console.log('imageSrc is null');
+
         navigate(navigatePath)
         return;
       }
@@ -208,8 +208,8 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   useEffect(() => {
     const handleResize = () => {
       setMobileWidth(window.innerWidth)
-      console.log('window.innerWidth', window.innerWidth)
-      // console.log('window.innerWidth', window.innerWidth)
+
+
       if (window.innerWidth < 819) return setIsMobile(true)
       setIsMobile(false)
     }

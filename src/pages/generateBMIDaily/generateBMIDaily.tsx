@@ -43,11 +43,11 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       accountId: userAccountId,
       machineCodeHash:codeHashIdForNft,
     });
-    console.log(storeNftContract);
+
     try {
       if (storeNftContract.ats[0] == null) {
-        console.log(storeNftContract.ats[0]);
-        console.log("called storeNftContract.ats.length", typeof process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH);
+
+
         const initializeNftContract = (await ledger.contract.publishContractByReference({
           name: "NFT",
           description: "storage_space_for_your_nft",
@@ -56,7 +56,7 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
           senderPublicKey: publicKey,
           deadline: 1440,
         })) as UnsignedTransaction;
-        console.log(initializeNftContract);
+
         await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
       }
     } catch (error) {

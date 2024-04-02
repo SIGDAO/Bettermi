@@ -98,17 +98,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log("imageaddress", Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
         .catch(async(error) => {
           setIsNFTiconLoading(false);
-          console.log("need to equip nft");
+
         });
     }
   };
@@ -118,7 +118,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   useEffect(() => {
     // Function to fetch data from the APIc
     if (nftIconCheck.current) {
-      console.log("called");
+
       return;
     }
     nftIconCheck.current = true;
@@ -163,16 +163,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         setLoading(false);
       })
       .catch(async(error) => {
-        console.log("need to equip nft");
+
         console.log(error);
-        console.log("imgAddress bug", imgAddress);
-        console.log(typeof imgAddress);
+
+
         setLoading(false);
       });
     fetchUserIcon()
     // TransferToken(nodeHost,userId,"10");
 
-    // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
+
   }, []);
 
   // todo: map
@@ -193,7 +193,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const nftContractChecked = useRef(false);
   useEffect(() => {
     if (nftContractChecked.current) {
-      console.log("called");
+
       return;
     }
     nftContractChecked.current = true;

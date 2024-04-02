@@ -28,8 +28,8 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const location = useLocation();
-  console.log("pathname is ", pathname);
-  console.log("pathname state is", location.state);
+
+
   const nftImage = location.state?.nftImageAddress;
   const nftImageAddressFormRedux = useSelector(selectCurrentNFTImageAddress);
   const nftId = location.state?.nftId;

@@ -22,7 +22,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
   const displayMission = missionList.find((mission, index) => index === parseInt(id)-1) || missionList[0];
-  console.log("display mission is",displayMission);
+
 
 
   const displayTime = (function () {
@@ -42,7 +42,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     setTimeout(() => {
       // setTimeBeforeStart("Start!");
       clearInterval(timer);
-      console.log("Countdown stopped.");
+
     }, 4000);
 
     // Clean up the timer on component unmount

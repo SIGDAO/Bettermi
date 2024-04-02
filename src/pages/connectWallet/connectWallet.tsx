@@ -42,9 +42,9 @@ export default function ConnectWallet (props: IConnectWalletProps) {
     let key: string;
 
 
-    console.log("wallet", Wallet);
-    console.log("appName", appName);
-    console.log("networkName", Ledger.Network);
+
+
+
     Wallet.Extension.connect({ appName, networkName: Ledger.Network })
       .then(async (wallet: any) => {
 
@@ -106,8 +106,8 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         store.dispatch(contractSlice.actions.setIsBMIContractBuild((ourContract.ats[0] != null || openedBmiContract === true)))
         store.dispatch(contractSlice.actions.setIsNFTContractBuild((senderNftStorage.ats[0] != null || openedNftContract === true)))
 
-        console.log("openedBmiContract", openedBmiContract)
-        console.log("openedNftContract", openedNftContract)
+
+
 
         // if both contract is created
         if ((openedBmiContract === true && senderNftStorage.ats[0]) || (ourContract.ats[0] != null && openedNftContract === true)) {
@@ -116,7 +116,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         }
 
         if (ourContract.ats[0] != null && senderNftStorage.ats[0] != null) {
-          console.log("called the if statement");
+
 
 
             store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
@@ -140,7 +140,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           //       accountId: accountinfo.accountId,
           //       machineCodeHash: codeHashIdForNft,
           //   });
-          //   console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
+
           //     const latestTransactionNumber = await FindLatestTransactionNumber(ledger,receiverNftStorage.ats[0].at,nftDistributor);
           //     const transactionArray = await FindLatestTransactionArray(ledger,receiverNftStorage.ats[0].at,nftDistributor,latestTransactionNumber);
           //     if(transactionArray[0] == "empty"){
@@ -148,10 +148,10 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           //       navigate("/connectWallet");
           //     }
           //     const nftId = transactionArray[0];
-          //     console.log("nftId is",nftId);
+
           //     const contractDescription = await ledger.contract.getContract(nftId);
           //     const ipfsAddress = JSON.parse(contractDescription.description).descriptor;
-          //     console.log(ipfsAddress);
+
           //     // await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`).then((res) => res.text()).then((res) => {
           //     //   const text = JSON.parse(res);
           //     //   const imgAddress = text.media[0].social
@@ -174,7 +174,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       })
       // todo: add error handling, and show it to user
       .catch((error: any) => {
-        console.log("error", error);
+
         if (error.name === "InvalidNetworkError") {
           alert(
             "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"

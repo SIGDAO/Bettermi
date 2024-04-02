@@ -33,7 +33,7 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
     const gender = useSelector(selectCurrentGender)
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
     const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
-    console.log(mimiNftStorageAccounts, "miminftstorage is");
+
     const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
     const importNft = async (ledger2:any,nftAddress:string,userAccountId:string) => {
         setLoading(true);

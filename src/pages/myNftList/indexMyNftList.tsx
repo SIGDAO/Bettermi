@@ -37,9 +37,9 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const userAccountId: string = useSelector(accountId);
   const userId = location.state == null ? userAccountId : location.state.userAccountId;
-  //console.log("location.state is  ",location.state);
-  //console.log("userId is ",userId);
-  //console.log("userAccountId is ",userAccountId);
+
+
+
   const navigate = useNavigate();
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -54,31 +54,31 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   if (location.state == null) {
     isOtherUser = false;
   }
-  //console.log("isOtherUser is ",isOtherUser);
+
 
   const checkIsLoading = async () => {
     // const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-    // console.log(messages);
+
     // for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
     //     if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-    //         console.log("updating personal info");
+
     //         setIsUpdating(true);
     //         setIsLoading(false);
     //         return;
     //     }
     // }
     try {
-      console.log("called check is loading");
+
       const equippedNftId = await GetEquippedNftId(ledger2, userId);
       setEquippedNftIpfsAddress(equippedNftId);
       const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2, userId);
       if (isUserUpdatingIcon === true) {
-        console.log("updating personal info");
+
         setIsUpdating(true);
         setIsLoading(false);
         return;
       }
-      console.log("is user updating icon", isUserUpdatingIcon);
+
       setIsUpdating(false);
       setIsLoading(false);
     } catch (e: any) {

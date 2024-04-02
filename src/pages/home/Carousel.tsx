@@ -32,7 +32,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
 
     useEffect(() => {
       let id = setInterval(() => {
-        console.log("activeIndex", activeIndex);
+
         setOnholdPage([false, false]);
         updateIndex(activeIndex + 1);
       }, 2000);
