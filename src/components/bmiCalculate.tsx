@@ -94,7 +94,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 // find all the BMI record
 // output: [] || [ {time: time, value: value} ]
 export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boolean | undefined) => {
-  let BMI: SeriesDataItemTypeMap['Area'][]= [];
+  // let BMI: SeriesDataItemTypeMap['Area'][]= [];
+  let BMI: { time: UTCTimestamp, value: Number, prev: Number }[] = [];
 
   if(Ledger2 == null) return [];
 
@@ -108,18 +109,27 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
 
   // if (!message) return [];
   let content: any;
-  for(let i = message.length - 1; i >= 0 ;i--){
+  let prev = 0;
+  for(let i = 0; i < message.length ;i++){
     content = message[i];
     let tempDate = content.time
 
     let dateFormat: UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
+    if (prev === 0) {
+      BMI.push({time: dateFormat, value: Number(content.bmi), prev: prev});
+    } else {
+      BMI.push({time: dateFormat, value: Number(content.bmi), prev: Number((Number(content.bmi) - prev).toFixed(1))});
+    }
 
-    BMI.push({time: dateFormat, value: Number(content.bmi)});
-    // sort the BMI value by time asc
-    BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
-
+    prev = content.bmi;
     // return_Date(Number(obj.timestamp));
+
   }
+  // sort the BMI value by time asc
+  BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+
+  console.log(BMI, "wtf")
+
   return BMI;
 }
 

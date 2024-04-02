@@ -87,10 +87,8 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               <div className="x16184-6XzBK0 x16184">
                 <div className="signum-qeaPIP inter-normal-white-15px brightness-0-5">Selection</div>
               </div>
-              <Link to="https://www.signumswap.com/tokens/5453974739826751020" target="_blank" rel="noopener noreferrer">
-                <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
-                <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
-              </Link>
+              <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+              <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>
             <div className="x16190-VD8XDI">
               <div className="x31">
@@ -99,13 +97,16 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               <img className="icon-ionic-ios-arrow-forward brightness-0-5" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>
-            <div className="x16199-VD8XDI">
-              <div className="x31">
-                <div className="get-sig-dao-token-R3QCCH inter-normal-white-15px ">Get SIGDAO Token</div>
+            <Link to="https://www.signumswap.com/tokens/5453974739826751020" target="_blank" rel="noopener noreferrer">
+              <div className="x16199-VD8XDI">
+                <div className="x31">
+                  <div className="get-sig-dao-token-R3QCCH inter-normal-white-15px ">Get SIGDAO Token</div>
+                </div>
+                  <img className="icon-ionic-ios-arrow-forward" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+                  <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
               </div>
-              <img className="icon-ionic-ios-arrow-forward brightness-0-5" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
-              <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
-            </div>
+            </Link>
+
             <Link to="https://www.bettermi.io/en/termsofservice.html" target="_blank" rel="noopener noreferrer">
               <div className="x16192-VD8XDI">
                 <div className="x31">

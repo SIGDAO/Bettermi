@@ -1871,6 +1871,14 @@
   width: 16px;
 }
 
+.bettermidapp-selfie-to-earn-1 .icon-arrow-left-XaN6DJ-up {
+  height: 16px;
+  object-fit: cover;
+  transform: rotate(180deg);
+  width: 16px;
+}
+
+
 .bettermidapp-selfie-to-earn-1 .gems-XaN6DJ {
   color: var(--keppel);
   display: inline;
