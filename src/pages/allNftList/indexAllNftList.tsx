@@ -182,7 +182,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     const requests2: Promise<void>[] = [];
 
     InfoJson.map((InfoJson) => {
-       if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
+       if (mergedArray[InfoJson.index].contractOwner === nftDistributor) {
       //if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
         requests2.push(
           fetch(InfoJson.url)
@@ -197,7 +197,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 console.log("level is",level);
                 if(isNaN(level) === false){
                   console.log((level/3).toString());
-                   reward = ((level/3).toFixed(4)).toString();
+                   reward = ((level/3).toFixed(2)).toString();
                 }
                 else{
                    reward = "";

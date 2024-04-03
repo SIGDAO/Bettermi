@@ -11,6 +11,8 @@ import { sortArrayAccordingToDescendingTimeStamps } from "./updateUserNftList";
 import { send } from "process";
 import { sendMessage } from "./updateUserNftList";
 import { myNftList } from "../pages/myNftList/myNftList";
+import { convertWordToNumber } from "./Reward/getRewardPercentage";
+import { otherUserNftList } from "../pages/leaderboard/otherUserProfile";
 
 
 export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDistributed:string){
@@ -460,31 +462,17 @@ export async function GetUserNftList(ledger2:any,accountId:string,nftDistributor
           else{
                 //console.log(latestTransactionList);
                 var nft : myNftList;
-                var userNftList:string[] = [];
+                var userNftList:otherUserNftList[] = [];
                 for (var i = 0;i < latestTransactionList.length;i++){
                     const contractInfo = await ledger2.contract.getContract(latestTransactionList[i]);
                     const trial = JSON.parse(contractInfo.description);
                     nft = {level:trial.version,image:trial.descriptor,nftId:latestTransactionList[i]};
-                    // const res = await fetch(`https://ipfs.io/ipfs/${nft.image}`);
-                    // const text = await res.text();
-                    // const nftInfo = JSON.parse(text);
                     const nftInfo = await fetchIPFSJSON(trial.descriptor);
-                    userNftList.push(nftInfo.media[0].social);
-                    
-                    // fetch(`https://ipfs.io/ipfs/${nft.image}`).then((res)=>{
-                    //   res.text().then((text)=>{
-                    //       //console.log(text); 
-                    //       var nftInfo = JSON.parse(text);
-                    //       userNftList.push(nftInfo.media[0].social);
-                    //       console.log(nftInfo.media[0].social);
-                    //       //console.log(userNftList);
-                    //   })
-                    // }).catch((error)=>{
-                    //   console.log(error);
-                    //   return "error";
-                    // });
-                    
+                    console.log("nftInfo is",nftInfo);
+                    console.log("reward percentage  is" , convertWordToNumber(nftInfo.attributes[6].value)/3);
+                    userNftList.push({rewardPercentage: ((convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2)).toString(),imageAddress:nftInfo.media[0].social});
                   }
+                  
                   console.log(userNftList[0]);
                   console.log(userNftList);
                     return userNftList;

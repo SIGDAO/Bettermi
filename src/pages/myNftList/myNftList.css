@@ -1392,6 +1392,14 @@ opacity: 0.5;
   cursor:text
 }
 
+.myNftListRewardPercentage {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 
 /* nft import screen css */
 

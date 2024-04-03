@@ -27,6 +27,11 @@ import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
 
+
+interface myNftProfile{
+  imageAddress:string,
+  rewardPercentage:string,
+}
 interface IAnimaGenContentProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -131,13 +136,13 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
-  const [myNfts, setMyNfts] = useState<string[]>([]);
+  const [myNfts, setMyNfts] = useState<myNftProfile[]>([]);
   const nftContractStorage = useSelector(getNftContractStorage);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftLoaded = useRef(false);
   var nft: myNftList;
-  var userNftList: string[] = [];
+  var userNftList: myNftProfile[] = [];
   const loadNftList = async () => {
     try {
 
@@ -421,10 +426,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <img
                     onClick={() => {
                       setIsPopUpIcon(true);
-                      setImgAddress(MyNft);
+                      setImgAddress(MyNft.imageAddress);
                       
                     }}
-                    src={`https://ipfs.io/ipfs/${MyNft}`}
+                    src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
                     style={{
                       width: "152px",
                       height: "217px",

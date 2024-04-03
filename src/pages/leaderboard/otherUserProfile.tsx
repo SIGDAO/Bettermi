@@ -31,6 +31,10 @@ interface myNftList {
   image: string;
   nftId: string;
 }
+export interface otherUserNftList{
+  imageAddress:string,
+  rewardPercentage:string,
+}
 
 const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -53,6 +57,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   const [alert, setAlert] = useState<boolean>(false);
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [selectedNftId,setSelectedNft] = useState<string>("");
+  const [reward,setReward] = useState<string>("");
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [count, setCount] = useState(0);
   const location = useLocation();
@@ -67,17 +72,18 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   };
 
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
-  const [myNfts, setMyNfts] = useState<string[]>([]);
+  const [myNfts, setMyNfts] = useState<otherUserNftList[]>([]);
   const nftContractStorage = useSelector(getNftContractStorage);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftListLoaded = useRef(false);
   var nft: myNftList;
-  var userNftList: string[] = [];
+  var userNftList: otherUserNftList[] = [];
   const loadNftList = async () => {
     try {
 
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
+      console.log("userNftList is ",userNftList);
       setMyNfts(userNftList);
 
       setLoadingNft(false);
@@ -254,7 +260,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                 <div className="overlap-group1-profile">
                 <div className="otherUserProfileDescriptionBackground"></div>
                   <div className="button_nft-collections" onClick={() => toUserNftList()}>
-                    <div className="continue-profile inter-semi-bold-white-15px">My NFT Collections</div>
+                    <div className="continue-profile inter-semi-bold-white-15px">NFT Collections</div>
                   </div>
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <>
@@ -376,9 +382,10 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                         <IPFSImageComponent
                           onClick={() => {
                             setIsPopUpIcon(true);
-                            setSelectedNft(MyNft);
+                            setSelectedNft(MyNft.imageAddress);
+                            setReward(MyNft.rewardPercentage)
                           }}
-                          imgAddress={MyNft}
+                          imgAddress={MyNft.imageAddress}
                           style={{
                             width: "152px",
                             height: "217px",
@@ -409,7 +416,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
               <div className="x16206">
                 <div className="lv-1">LV 1</div>
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD +%</div>
+                <div className="reward-10">REWARD + {reward}%</div>
               </div>
               <div className="x0-signa">$0 SIGNA</div>
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
