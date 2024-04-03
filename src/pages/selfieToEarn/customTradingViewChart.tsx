@@ -106,7 +106,7 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
     }
 
     if (param.time) {
-      setValue(new Date(param.time * 1000));
+      setValue(new Date(new Date(param.time * 1000).setHours(0, 0, 0, 0)));
     }
   };
 

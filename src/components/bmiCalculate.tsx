@@ -128,7 +128,6 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
   // sort the BMI value by time asc
   BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
 
-  console.log(BMI, "wtf")
 
   return BMI;
 }
