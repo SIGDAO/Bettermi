@@ -181,6 +181,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       return;
     }
     dataFetchedRef.current = true;
+    console.log("called use effect");
     ledger2.account
       .getAccount({ accountId: userAccountId })
       .then(async(account) => {

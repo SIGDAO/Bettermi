@@ -1,15 +1,7 @@
 import * as React from 'react';
  import './myNftList.css'
- import { CenterLayout } from '../../components/layout';
- import { Link } from 'react-router-dom';
- import { BackButton } from '../../components/button';
- import { GetToken } from '../../components/getToken';
  import { useSelector } from 'react-redux';
  import { accountId, accountPublicKey } from '../../redux/account';
- import CSS from 'csstype';
- import { ShortTitleBar } from '../../components/titleBar';
- import { Col,Row,Card,CardText,CardTitle,Button,CardImg,} from 'reactstrap';
- import { useLedger } from '../../redux/useLedger';
  import { useState } from 'react';
  import { useEffect } from 'react';
  import { useAppSelector } from '../../redux/useLedger';
@@ -55,9 +47,6 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
      const [nftNumber,setNftNumber] = useState<string>("");
      const [reward,setReward] = useState<string>("");
      const name = useAppSelector(selectCurrentUsername);
-     const navigate = useNavigate();
-     var nftImgAddress:string = "";
-     var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
@@ -84,18 +73,12 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
                    setReward("");
                  }
                  setImgAddress(nftInfo.media[0].social);
-                 nftImgAddress = nftInfo.media[0].social; 
-                 nftImgAddress = addressSuffix.concat(nftImgAddress);
                  setLoading(false);
              }).catch((e:any) => {console.log(e);});
 
          }).catch((e:any) => {console.log(e);});
 
        }, [image]);
-     const test = (abc:string) => {
-
-         return 1;
-     }
      const equipNft = async() => {
       try{
             const nftOwner = await CheckNftOwnerId(ledger2,nftId);
@@ -132,7 +115,7 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
 
                         setSelectedNft(nftInfo);
                       }
-                      } className = "myNftImage" imgAddress = {`https://ipfs.io/ipfs/${imgAddress}`}></IPFSImageComponent>
+                      } className = "myNftImage" imgAddress = {imgAddress}></IPFSImageComponent>
 
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#{nftNumber}</div>
