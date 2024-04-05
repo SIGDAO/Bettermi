@@ -171,7 +171,7 @@ const CustomTradingViewChart: React.FC<ChartProps> = (prop) => {
             };
           })}
         >
-          <PriceLine price={26.5} color={"#39b3af"} lineWidth={2} lineStyle={LineStyle.LargeDashed} />
+          <PriceLine price={22.9} color={"#39b3af"} lineWidth={2} lineStyle={LineStyle.LargeDashed} />
         </AreaSeries>
       )}
     </Chart>

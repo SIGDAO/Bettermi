@@ -125,15 +125,15 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
                 <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
               </div>
             </Link>
-            <Link to="https://www.bettermi.io/index.html" target="_blank" rel="noopener noreferrer">
+            <Link to="https://www.bettermi.io/#content3-gm" target="_blank" rel="noopener noreferrer">
 
-            <div className="x16223-VD8XDI">
-              <div className="x31">
-                <div className="help-YkYlbF inter-normal-white-15px">Help</div>
+              <div className="x16223-VD8XDI">
+                <div className="x31">
+                  <div className="help-YkYlbF inter-normal-white-15px">Help</div>
+                </div>
+                  <img className="icon-ionic-ios-arrow-forward " src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+                  <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
               </div>
-                <img className="icon-ionic-ios-arrow-forward " src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
-                <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
-            </div>
             </Link>
 
             <div className="x16222-VD8XDI">

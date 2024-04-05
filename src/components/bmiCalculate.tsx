@@ -90,6 +90,15 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
   
   return processedBMIRecord;
 }
+const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
+  if (!record1) return false;
+  const date1 = record1.toDateString();
+  const date2 = record2.toDateString();
+
+  console.log(date1, date2)
+  
+  return date1 === date2;
+};
 
 // find all the BMI record
 // output: [] || [ {time: time, value: value} ]
@@ -110,18 +119,22 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
   // if (!message) return [];
   let content: any;
   let prev = 0;
+  let prevDate: Date | null = null;
   for(let i = 0; i < message.length ;i++){
     content = message[i];
     let tempDate = content.time
 
     let dateFormat: UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
-    if (prev === 0) {
+    if (prev === 0 || prevDate === null) {
       BMI.push({time: dateFormat, value: Number(content.bmi), prev: prev});
+    } else if (areRecordsOnSameDay(prevDate, tempDate)) {
+      continue;
     } else {
       BMI.push({time: dateFormat, value: Number(content.bmi), prev: Number((Number(content.bmi) - prev).toFixed(1))});
     }
 
     prev = content.bmi;
+    prevDate = tempDate;
     // return_Date(Number(obj.timestamp));
 
   }
@@ -146,7 +159,6 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
       const element = bmi_fetchedData[i];
       const elementDate = new Date(element.time * 1000);
       if (elementDate.getDate() === today.getDate() && elementDate.getMonth() === today.getMonth() && elementDate.getFullYear() === today.getFullYear()) {
-
         return true;
       };
     }
