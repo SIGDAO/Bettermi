@@ -78,7 +78,7 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
                  console.log("level is",level);
                  if(isNaN(level) === false){
                    console.log((level/3).toString());
-                  setReward(((level/3).toFixed(4)).toString());
+                  setReward(((level/3).toFixed(2)).toString());
                  }
                  else{
                    setReward("");
@@ -126,7 +126,7 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
                           imageUrl:imgAddress,
                           nftLevel:nftLevel,
                           nftPrice:"0",
-                          nftReward:"",
+                          nftReward:reward,
                           nftNumber:nftNumber?nftNumber:"-1",
                         }
 
@@ -141,8 +141,8 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
                           Lv{nftLevel}       
                           </div>
                           <div className = "myNftVerticalLine"></div>  
-                          <div  className = "inter-normal-white-12px">
-                            Reward + %
+                          <div  className = "myNftListRewardPercentage">
+                            Reward + {reward}%
                             </div>
                       </div>
                       <div className = "myNftPrice">

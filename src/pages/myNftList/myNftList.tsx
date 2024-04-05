@@ -154,7 +154,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
           console.log("level is",level);
           if(isNaN(level) === false){
             console.log((level/3).toString());
-            setReward(((level/3).toFixed(4)).toString());
+            setReward(((level/3).toFixed(2)).toString());
           }
           else{
             setReward("");
@@ -466,7 +466,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       <div style={centerLayoutStyle} className="bettermidapp-mimi-nfts-send-address-1">
         {isOtherUser ? (
           <>
-            <ShortTitleBar title="My NFT Collection" addSign={true} aiCoach={false} filter={false} />
+            <ShortTitleBar title="NFT Collection" addSign={true} aiCoach={false} filter={false} />
             <div className="containerMyNftList">
               <div className="containerMyNftList2">{displayMyNft}</div>
             </div>
@@ -498,7 +498,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + {reward}%</div>
+                        <div className="myNftListRewardPercentage" style={{fontSize:"11px"}}>Reward + {reward}%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
@@ -521,7 +521,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                           imageUrl:onDuty,
                           nftLevel:onDutyNftLevel,
                           nftPrice:(parseInt(onDutyNftPrice)/1000000).toString(),
-                          nftReward:"",
+                          nftReward:reward,
                           nftNumber:nftNumber!,
                         }
                         setSelectedNft(nftInfo);
@@ -532,7 +532,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                       <div className="myNftBar">
                         <div className="myNftLevel">Lv{level}</div>
                         <div className="myNftVerticalLine"></div>
-                        <div className="inter-normal-white-12px">Reward + {reward}%</div>
+                        <div className="myNftListRewardPercentage">Reward + {reward}%</div>
                       </div>
                       <div className="myNftPrice">$0 SIGNA</div>
                     </div>
@@ -616,7 +616,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                     <div className="x0-signa-1">
                       <div className="x0-signa-1-level">LV 1</div>
                       <div className="x0-signa-1-block"></div>
-                      <div className="x0-signa-1-reward">REWARD +5%</div>
+                      <div className="x0-signa-1-reward">REWARD +{reward}%</div>
                     </div>
                     <div className="x16228">
                       YOU ARE SELLING YOUR NFT

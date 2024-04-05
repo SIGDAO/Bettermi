@@ -25,7 +25,7 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
             console.log("level is",level);
             if(isNaN(level) === false){
               console.log((level/3).toString());
-              return ((level/3).toFixed(4)).toString();
+              return ((level/3).toFixed(2)).toString();
             }
             else{
               return "";
