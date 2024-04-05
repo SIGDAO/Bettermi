@@ -57,7 +57,8 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   const [alert, setAlert] = useState<boolean>(false);
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [selectedNftId,setSelectedNft] = useState<string>("");
-  const [reward,setReward] = useState<string>("");
+  const [rewardPercentageUserIcon,setRewardPercentageUserIcon] = useState<string>("");
+  const [rewardPercentage,setRewardPercentage] = useState<string>("");
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [count, setCount] = useState(0);
   const location = useLocation();
@@ -305,7 +306,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                   </div>
 
-                  <UserIcon setSelectedNft={setSelectedNft} setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+                  <UserIcon setSelectedNft={setSelectedNft} setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <div></div>
                   ) : (
@@ -348,10 +349,8 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     onWheel={handleScroll}
                   >
                     <Link to="/allNftList/">
-                      <div className="overlap-group-profile">
-                        <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
-                        <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                      </div>
+                      <img className="otherUserProfileBuyNFt" src = {"img/leaderboard/NftMarketplaceBanner.png"}>
+                      </img>
                     </Link>
                     {loadingNft === true ? (
                       <>
@@ -383,7 +382,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                           onClick={() => {
                             setIsPopUpIcon(true);
                             setSelectedNft(MyNft.imageAddress);
-                            setReward(MyNft.rewardPercentage)
+                            setRewardPercentage(MyNft.rewardPercentage)
                           }}
                           imgAddress={MyNft.imageAddress}
                           style={{
@@ -416,7 +415,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
               <div className="x16206">
                 <div className="lv-1">LV 1</div>
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD + {reward}%</div>
+                <div className="reward-10">REWARD + {rewardPercentage}%</div>
               </div>
               <div className="x0-signa">$0 SIGNA</div>
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />

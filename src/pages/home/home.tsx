@@ -51,7 +51,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
-  const [reward,setReward] = useState<string>();
+  const [rewardPercentage,setRewardPercentage] = useState<string>();
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const userAccountPublicKey = useSelector(accountPublicKey);
@@ -140,7 +140,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
           var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
-          setReward(value);
+          setRewardPercentage(value);
           if (nftInfo.description.includes("1") === true) {
             setLevel("1");
           }
@@ -153,7 +153,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         } else {
           setLevel("1");
-          setReward("loading...");
+          setRewardPercentage("");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
 
@@ -226,7 +226,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="x16206">
             <div className="lv-1">LV {level}</div>
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-            <div className="reward-10">REWARD +{reward}%</div>
+            <div className="reward-10">REWARD +{rewardPercentage}%</div>
           </div>
       
           <div className="x0-signa">$0 SIGNA</div>
@@ -259,10 +259,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <h1 className="title-2ZgxSS">Hello ! </h1>
             <div className="lv_-reward-2ZgxSS">
               <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{reward}%</div>
+              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
               <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
             </div>
-            <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId}></UserIcon>
+            <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
             {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           <Link to="/allNftList/">

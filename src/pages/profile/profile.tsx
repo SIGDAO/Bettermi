@@ -105,6 +105,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
               setIsBackButton={setIsBackButton}
               isUpdatingUserSetting={isUpdatingUserSetting}
               setImgAddress={setImgAddress}
+              setRewardPercentage={setRewardPercentage}
             />
           </div>
         </>
