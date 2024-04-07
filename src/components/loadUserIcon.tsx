@@ -1,19 +1,15 @@
 import React from "react";
 import { useState,useRef } from "react";
-import { IsUserSettingUpdating, IsUserUpdatingIcon } from "../NftSystem/updateUserNftStorage";
+import {IsUserUpdatingIcon } from "../NftSystem/updateUserNftStorage";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../redux/useLedger";
-import { accountId } from "../redux/account";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../pages/home/home.css";
 import "../pages/profile/profile.css";
-import IPFSImageComponent from "./ipfsImgComponent";
-import { reEquipNft } from "../NftSystem/displayNft/reequipNft";
-import { AppContext } from "../redux/useContext";
-import { useContext } from "react";
-import { accountPublicKey } from "../redux/account";
+import { fetchIPFSJSON } from "../NftSystem/updateUserNftStorage";
+import { convertWordToNumber } from "../NftSystem/Reward/getRewardPercentage";
 
 export interface IUserIconProps {
   home?: boolean;
@@ -21,6 +17,8 @@ export interface IUserIconProps {
   userAccountId: string;
   setIsPopUpIcon: Function;
   setSelectedNft?:Function;
+  setRewardPercentage:Function;
+  setEnlargeImageAddress:Function;
 }
 export interface ClassNames {
   forEmptyIcon: string;
@@ -36,8 +34,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
     forNftDisplay: "nft_-avatar-2ZgxSS",
   };
   const profileClassNames = { forEmptyIcon: "profile_icon_nft_-avatar_empty", forAddSign: "profile_icon_ic_add", forLoadingSign: "profile_icon_ic_loading", forNftDisplay: "nft_-avatar_empty" };
-  const { home, profile, userAccountId, setIsPopUpIcon,setSelectedNft } = props;
-  const { appName, Wallet, Ledger } = useContext(AppContext);
+  const { home, userAccountId, setIsPopUpIcon,setSelectedNft,setRewardPercentage,setEnlargeImageAddress } = props;
   let finalClassNames: ClassNames = home === true ? homeClassNames : profileClassNames;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,37 +42,40 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const [imgAddress, setImgAddress] = useState<string>("");
-  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const userAccountpublicKey = useSelector(accountPublicKey);
-  const navigate = useNavigate();
+  const [nftIconRewardPercentage,setNftIconRewardPercentage] = useState<string>("");
   const fetchUserIcon = async () => {
-    //const isUserSettingUpdating = await IsUserSettingUpdating(ledger2,userAccountId);
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
     if (isUserSettingUpdating === true) {
       setIsUpdating(true);
       setIsLoading(false);
     } else {
-      ledger2.account
-        .getAccount({ accountId: userAccountId })
-        .then((account) => {
+      try{
+      const account = await ledger2.account.getAccount({ accountId: userAccountId })
+
 
           const description = JSON.parse(account.description);
-
-
-
+          const accountInfo = await ledger2.contract.getContract(description.id);
+          const nftInfo = await fetchIPFSJSON(JSON.parse(accountInfo.description).descriptor);
+          const array = nftInfo.attributes[2].key3;
+          const level = convertWordToNumber(nftInfo.attributes[6].value);
+          if(isNaN(level) === false){
+            console.log((level/3).toString());
+            setNftIconRewardPercentage(((level/3).toFixed(2)).toString());
+          }
+          else{
+            setNftIconRewardPercentage("");
+          }
           setImgAddress(Object.keys(description.av)[0]);
-          //setImgAddress("bafybeifbyw43mxmn3yymgkfpehutftath3qwjhwlzox75l53zrjxfwxhra");
 
           setHaveNft(true);
           setIsLoading(false);
-          //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
-        })
-        .catch((error) => {
+      }
+      catch(e){
+          console.log(e);
           setIsLoading(false);
           //reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountpublicKey,navigate);
+      }
 
-        });
     }
   };
   const nftIconCheck = useRef(false);
@@ -108,6 +108,8 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           if(setSelectedNft != null){
             setSelectedNft(imgAddress);
           }
+          setEnlargeImageAddress(imgAddress);
+          setRewardPercentage(nftIconRewardPercentage);
         }} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
         // <IPFSImageComponent
         //   imgAddress={imgAddress}

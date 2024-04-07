@@ -44,6 +44,7 @@ interface IAnimaGenContentProps {
   setIsNFTiconLoading: Function;
   isNFTiconLoading?: boolean;
   setImgAddress: Function;
+  setRewardPercentage:(rewardPercentage:string) => void;
 }
 interface myNftList {
   level: string;
@@ -65,7 +66,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const dispatch = useDispatch();
   const gender = useSelector(selectCurrentGender);
   const userAccountId = useSelector(accountId);
-  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress } = props;
+  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress ,setRewardPercentage} = props;
   const [name, setName] = useState<string>(username);
   const [haveNft, setHaveNft] = useState<boolean>(false);
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
@@ -335,6 +336,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
+            
             {isUpdatingUserSetting === true || isSettingLoading === true ? (
             <>
               <div className="profile_icon_nft_-avatar_empty">
@@ -354,7 +356,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             </>
             ) : (
               <>
-              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId} setRewardPercentage={ setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
               <div className="profile-content-container">
                 <div className="profile-content">
                   <div className="zoe_li">{fetchName ? fetchName : name || "Enter your name"}</div>
@@ -402,10 +404,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               // onWheel={handleScroll}
             >
               <Link to="/allNftList/">
-                <div className="overlap-group-profile">
-                  <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                  <p className="inter-semi-bold-white-12px ">Buy NFT</p>
-                </div>
+                <img className="profileBuyNft" src = "img/profile/NftMarketplaceBanner.png">
+                  {/* <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" /> */}
+                  {/* <p className="inter-semi-bold-white-12px ">Buy NFT</p> */}
+                </img>
               </Link>
               {loadingNft === true ? (
                 <>
@@ -427,7 +429,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                     onClick={() => {
                       setIsPopUpIcon(true);
                       setImgAddress(MyNft.imageAddress);
-                      
+                      setRewardPercentage(MyNft.rewardPercentage);
                     }}
                     src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
                     style={{
