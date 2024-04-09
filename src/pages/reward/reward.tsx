@@ -128,7 +128,8 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="goal-data">
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
-                <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div>
+                {/* <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
+                <div className="x0 inter-semi-bold-keppel-14px">0</div>
                 <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 50</div>
               </div>
             </div>

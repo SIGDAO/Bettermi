@@ -317,14 +317,15 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                       >
                         {fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || ""}
                       </div>
-
-                      <div
-                        className="copy-icon"
-                        // style={{position: 'absolute',}}
-                        onClick={() => handleCopyDiscordUsername(discordUsername)}
-                      >
-                        <img src="img/profile/file---11690@1x.png" alt="" />
-                      </div>
+                      {fetchDiscordUsername&&
+                        <div
+                          className="copy-icon"
+                          // style={{position: 'absolute',}}
+                          onClick={() => handleCopyDiscordUsername(discordUsername)}
+                        >
+                          <img src="img/profile/file---11690@1x.png" alt="" />
+                        </div>
+                      }
                     </div>
                   )}
                 </div>

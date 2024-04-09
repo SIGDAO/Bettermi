@@ -711,6 +711,9 @@
   line-height: 25px;
   position: absolute;
   top: 23px;
+  width: 314px;
+  overflow:hidden;
+  /* text-overflow: ellipsis; */
   white-space: nowrap;
   margin: 0;
 }
