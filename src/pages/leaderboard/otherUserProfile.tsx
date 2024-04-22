@@ -31,6 +31,10 @@ interface myNftList {
   image: string;
   nftId: string;
 }
+export interface otherUserNftList{
+  imageAddress:string,
+  rewardPercentage:string,
+}
 
 const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props) => {
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -53,6 +57,8 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   const [alert, setAlert] = useState<boolean>(false);
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [selectedNftId,setSelectedNft] = useState<string>("");
+  const [rewardPercentageUserIcon,setRewardPercentageUserIcon] = useState<string>("");
+  const [rewardPercentage,setRewardPercentage] = useState<string>("");
   // const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [count, setCount] = useState(0);
   const location = useLocation();
@@ -67,22 +73,23 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   };
 
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
-  const [myNfts, setMyNfts] = useState<string[]>([]);
+  const [myNfts, setMyNfts] = useState<otherUserNftList[]>([]);
   const nftContractStorage = useSelector(getNftContractStorage);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftListLoaded = useRef(false);
   var nft: myNftList;
-  var userNftList: string[] = [];
+  var userNftList: otherUserNftList[] = [];
   const loadNftList = async () => {
     try {
-      console.log(userAccountId);
+
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
+      console.log("userNftList is ",userNftList);
       setMyNfts(userNftList);
-      console.log(myNfts);
+
       setLoadingNft(false);
-      console.log(userNftList);
-      console.log(userNftList[0]);
+
+
     } catch (e: any) {
       console.log(e);
     }
@@ -90,24 +97,24 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
 
   useEffect(() => {
     if (nftListLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
-      console.log("loading NFT");
+
       nftListLoaded.current = true;
       loadNftList();
     }
   }, [userAccountId]);
 
   const handleScroll = (event: any) => {
-    console.log(event);
+
     const container = document.querySelector("div.profileHorizontalScroll")!;
-    console.log(container);
+
     const scrollAmount = event.deltaY;
 
     // window.onscroll = function() {
     //   window.scrollTo({left:0, top:-scrollAmount});
     // };
-    console.log(container.scrollLeft);
+
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -125,11 +132,11 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   /*Ends here*/
 
   const handleScroll2 = (event: any) => {
-    console.log(event);
+
     const container = event.target!;
-    console.log(container);
+
     const scrollAmount = event.deltaY;
-    console.log(scrollAmount);
+
     container.scrollTo({
       top: 0,
       left: container.scrollLeft + scrollAmount,
@@ -139,7 +146,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
   const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
   const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
   const fetchSetting = async (userAccountId: string) => {
-    console.log(userAccountId);
+
     const isUserSettingUpdating = await IsUserSettingUpdating(ledger2, userAccountId);
     if (isUserSettingUpdating === true) {
       setIsUpdatingUserSetting(true);
@@ -149,40 +156,40 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
     const waitingToBeChangedDescription = await ledger2.account.getAccount({ accountId: userAccountId });
     let newDes = waitingToBeChangedDescription.description === undefined ? {} : JSON.parse(waitingToBeChangedDescription.description);
     if (newDes.nm == null) {
-      console.log("called newDes.nm == null here");
+
       setFetchName("");
     } else {
-      console.log("called newDes.nm else here");
+
       setFetchName(newDes.nm);
     }
     if (newDes.ds == null) {
-      console.log("called newDes.ds == null here");
+
       setFetchDescription("");
     } else {
-      console.log("called newDes.ds else here");
+
       setFetchDescription(newDes.ds);
     }
     if (newDes.sc == null) {
-      console.log("called newDes.sc[0] == null here");
+
       setFetchDiscordUsername("");
     } else {
-      console.log("called newDes.sc[0] else here");
+
       setFetchDiscordUsername(newDes.sc[0]);
     }
     if (newDes.hp == null) {
-      console.log("called newDes.hp == null here");
+
       setFetchAboutYourself("");
     } else {
-      console.log("called newDes.hp else here");
+
       setFetchAboutYourself(newDes.hp);
     }
-    console.log("isSetting");
+
     setIsSettingLoading(false);
   };
 
   useEffect(() => {
     //while(location.state.accountId == null){console.log("waiting for location.state.accountId");}
-    console.log(location.state.userId);
+
     fetchSetting(userAccountId);
   }, []);
 
@@ -254,7 +261,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                 <div className="overlap-group1-profile">
                 <div className="otherUserProfileDescriptionBackground"></div>
                   <div className="button_nft-collections" onClick={() => toUserNftList()}>
-                    <div className="continue-profile inter-semi-bold-white-15px">My NFT Collections</div>
+                    <div className="continue-profile inter-semi-bold-white-15px">NFT Collections</div>
                   </div>
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <>
@@ -299,7 +306,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                   </div>
 
-                  <UserIcon setSelectedNft={setSelectedNft} setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+                  <UserIcon setSelectedNft={setSelectedNft} setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
                   {isSettingLoading === true || isUpdatingUserSetting === true ? (
                     <div></div>
                   ) : (
@@ -310,14 +317,15 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                       >
                         {fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || ""}
                       </div>
-
-                      <div
-                        className="copy-icon"
-                        // style={{position: 'absolute',}}
-                        onClick={() => handleCopyDiscordUsername(discordUsername)}
-                      >
-                        <img src="img/profile/file---11690@1x.png" alt="" />
-                      </div>
+                      {fetchDiscordUsername&&
+                        <div
+                          className="copy-icon"
+                          // style={{position: 'absolute',}}
+                          onClick={() => handleCopyDiscordUsername(discordUsername)}
+                        >
+                          <img src="img/profile/file---11690@1x.png" alt="" />
+                        </div>
+                      }
                     </div>
                   )}
                 </div>
@@ -342,10 +350,8 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     onWheel={handleScroll}
                   >
                     <Link to="/allNftList/">
-                      <div className="overlap-group-profile">
-                        <img className="add" src="img/profile/add-2@1x.png" alt="Add" />
-                        <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                      </div>
+                      <img className="otherUserProfileBuyNFt" src = {"img/leaderboard/NftMarketplaceBanner2.png"}>
+                      </img>
                     </Link>
                     {loadingNft === true ? (
                       <>
@@ -376,9 +382,10 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                         <IPFSImageComponent
                           onClick={() => {
                             setIsPopUpIcon(true);
-                            setSelectedNft(MyNft);
+                            setSelectedNft(MyNft.imageAddress);
+                            setRewardPercentage(MyNft.rewardPercentage)
                           }}
-                          imgAddress={MyNft}
+                          imgAddress={MyNft.imageAddress}
                           style={{
                             width: "152px",
                             height: "217px",
@@ -409,7 +416,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
               <div className="x16206">
                 <div className="lv-1">LV 1</div>
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD +%</div>
+                <div className="reward-10">REWARD + {rewardPercentage}%</div>
               </div>
               <div className="x0-signa">$0 SIGNA</div>
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />

@@ -10,6 +10,8 @@ import { useLedger } from "../../redux/useLedger";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "../../redux/profile";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { useSelector } from "react-redux";
+import { selectCurrentNFTImageAddress } from "../../redux/profile";
 
 interface GenerateFreeNFTProps {}
 
@@ -18,8 +20,10 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
   const location = useLocation();
   const dispatch = useDispatch();
   const Ledger = useLedger();
-  console.log("location.state is ", location.state);
-  const nftId = location.state.nftId;
+  const newNftImageAddress = useSelector(selectCurrentNFTImageAddress);
+
+
+  const nftId = location.state.nftId?location.state.nftId:newNftImageAddress;
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
   const [nftNumber, setNftNumber] = React.useState<number>(0);
@@ -28,7 +32,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
 
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
-        console.log("reslt is ", result);
+
         dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
         setNftIpfsAddress(result.nftImage);
         setNftNumber(result.nftNumber);
@@ -38,7 +42,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
         console.log(e);
       });
-    console.log("nftId is ", nftId);
+
   }, []);
 
 

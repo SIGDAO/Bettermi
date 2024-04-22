@@ -22,13 +22,12 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
   const displayMission = missionList.find((mission, index) => index === parseInt(id)-1) || missionList[0];
-  console.log("display mission is",displayMission);
+
 
 
   const displayTime = (function () {
     const minutes: number = parseInt(displayMission.duration.split(' ')[0]);
     return minutes * 60;
-    //return 3;
   })()
 
   const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);
@@ -42,7 +41,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     setTimeout(() => {
       // setTimeBeforeStart("Start!");
       clearInterval(timer);
-      console.log("Countdown stopped.");
+
     }, 4000);
 
     // Clean up the timer on component unmount
@@ -85,42 +84,28 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
           alt="1HelloBae-GradientBg"
         />
         <div className="challenge-content-oEaurv">
-          <img className="layer-D6xMU2" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/layer@1x.png`} alt="Layer" />
-          <div className="countdown-D6xMU2">
-            <CircularWithValueLabel timeBeforeStart={timeBeforeStart} time={displayTime} reward={parseFloat(displayMission.sigdao)} />
-            {/* <div className="t-countdown-YGwjuf">
-              <div className="bg-C3TEa1"></div>
-              <img className="process-circle-C3TEa1" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/process-circle@1x.png`} alt="Process circle" />
+          <div className="challenge-guide-and-rewards-container">
+            <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
+            <div className="sigdao-score-D6xMU2">
+              <div className="signdao_tokengradient-ajiZIc">
+                <div className="x441-8JkMaQ"></div>
+                <div className="x442-8JkMaQ"></div>
+                <img className="x880-8JkMaQ" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/file---880-1x-png-10@1x.png`} alt="880" />
+              </div>
+              <div className="x10-ajiZIc inter-semi-bold-keppel-14px">{displayMission.sigdao}</div>
             </div>
-            <div className="x0023-YGwjuf inter-semi-bold-white-18px">00:23</div> */}
           </div>
           <p className="straighten-your-arms-D6xMU2 inter-normal-white-14px">
             {/* Straighten your arms &amp; Shake them outwardly. */}
             {displayMission.description}
           </p>
-
-          <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
-          {/* <div className="ic_next-D6xMU2">
-            <img
-              className="ic_chevron_right_24px-0Ajecm"
-              src={`${process.env.PUBLIC_URL}/img/challengeCountdown/ic-chevron-right-24px-1@1x.png`}
-              alt="ic_chevron_right_24px"
-              />
-          </div> */}
-          {/* <div className="ic_previous-D6xMU2">
-            <img className="ic_chevron_left_24px-hZsyDr" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/ic-chevron-left-24px@1x.png`} alt="ic_chevron_left_24px" />
-          </div> */}
-          <div className="sigdao-score-D6xMU2">
-            <div className="x10-ajiZIc inter-semi-bold-keppel-14px">{displayMission.sigdao}</div>
-            <div className="signdao_tokengradient-ajiZIc">
-              <div className="x441-8JkMaQ"></div>
-              <div className="x442-8JkMaQ"></div>
-              <img className="x880-8JkMaQ" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/file---880-1x-png-10@1x.png`} alt="880" />
-            </div>
-          </div>
           <div className="goal-sets-D6xMU2">
-            <div className="x895-ku5xY4"></div>
             <div className="x250-ku5xY4 inter-semi-bold-keppel-14px">10 x 6 sets</div>
+          </div>
+          <div className="countdown-container">
+            <div className="countdown-D6xMU2">
+              <CircularWithValueLabel timeBeforeStart={timeBeforeStart} time={displayTime} reward={parseFloat(displayMission.sigdao)} />
+            </div>
           </div>
         </div>
       </div>

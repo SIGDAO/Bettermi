@@ -32,10 +32,10 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
 
   const checkIsLoading = async () => {
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-    console.log(messages);
+
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
       if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
-        console.log("the user is updating personal info");
+
         setIsUpdatingUserSetting(true);
         setIsSettingLoading(false);
         return;
@@ -61,7 +61,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
         setRewardPercentage(res);
       })
       .catch((err) => {
-        console.log(err);
+
       });
   }, []);
 
@@ -85,13 +85,14 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
               <div className="x16206">
                 <div className="lv-1">LV 1</div>
                 <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD +{rewardPercentage}%</div>
+                <div className="reward-10">REWARD + {rewardPercentage}%</div>
               </div>
               <div className="x0-signa">$0 SIGNA</div>
               <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
               <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
             </div>
-          )}
+          )
+          }
           <div className="screen">
             <AnimaGenContent
               isNFTiconLoading={isNFTiconLoading}
@@ -104,6 +105,7 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
               setIsBackButton={setIsBackButton}
               isUpdatingUserSetting={isUpdatingUserSetting}
               setImgAddress={setImgAddress}
+              setRewardPercentage={setRewardPercentage}
             />
           </div>
         </>

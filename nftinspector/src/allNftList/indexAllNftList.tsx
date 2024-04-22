@@ -63,14 +63,14 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //     accountId: nftDistributor,
     //     machineCodeHash: newNftCodeHashId,
     // });
-    console.log(newNftCodeHashId);
+
     var nftList = await ledger2.contract.getAllContractsByCodeHash({
       machineCodeHash: newNftCodeHashId,
       includeDetails: true,
       firstIndex: 0,
       lastIndex: 500,
     });
-    console.log(nftList);
+
     var nftList2 = await ledger2.contract.getAllContractsByCodeHash({
       machineCodeHash: newNftCodeHashId,
       includeDetails: true,
@@ -84,13 +84,13 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       firstIndex: 1000,
       lastIndex: 1100,
     });
-    console.log(nftList2);
+
     let nftStorages = nftList.ats;
     let nftStorages2 = nftList2.ats;
     let nftStorages3 = nftList3.ats;
     Array.prototype.push.apply(nftStorages, nftStorages2);
     Array.prototype.push.apply(nftStorages, nftStorages3);
-    console.log(nftStorages);
+
     var index = 0;
     var InfoJson: urlObject[] = [];
     for (var i = 0; i < nftStorages.length; i++) {
@@ -99,20 +99,20 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         const info: urlObject = { url: `https://ipfs.io/ipfs/${des}`, nftId: nftStorages[i].at, index: i };
         InfoJson.push(info);
       } catch {
-        console.log(nftStorages[i].description);
+
         const info: urlObject = { url: "", nftId: "123", index: i };
         InfoJson.push(info);
       }
     }
-    console.log(InfoJson);
+
     var urls: string[] = [];
     var nftInfo: nftObject[] = [];
     var mergedArray: nftInfo[] = new Array(nftStorages.length).fill({}) as nftInfo[];
     const requests: Promise<void>[] = [];
     InfoJson.map((nftStorage) => {
-      console.log(nftStorage);
+
       if (nftStorage.nftId !== "123") {
-        console.log(nftStorage);
+
         requests.push(
           ledger2.contract
             .getContract(nftStorage.nftId)
@@ -160,7 +160,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     });
     await Promise.all(requests);
     const requests2: Promise<void>[] = [];
-    console.log(mergedArray);
+
     InfoJson.map((InfoJson) => {
       //if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
         requests2.push(
@@ -169,7 +169,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
             .then((res) => {
               try {
                 const text = JSON.parse(res);
-                console.log(text);
+
                 const levelNumber = text.description.match(/Level (\d+)/)?.[1];
                 var reward = "0"
                 if(levelNumber === "1"){
@@ -188,10 +188,10 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 if (match) {
                   number = parseInt(match[1]); // this is the nft number
                 }
-                console.log(levelNumber);
+
                 mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber: number,nftReward:reward };
               } catch (e) {
-                console.log(res);
+
                 mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1,nftReward:"0" };
               }
             })
@@ -204,7 +204,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     });
 
     await Promise.all(requests2);
-    console.log(mergedArray);
+
     setNftInfo(mergedArray);
     setLoading(false);
 

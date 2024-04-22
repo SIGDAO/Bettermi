@@ -18,13 +18,13 @@ const ConnectSucceed: React.FunctionComponent<IConnectSucceedProps> = (props) =>
   const navigate = useNavigate();
 
   const openCam : () => void = () => {
-    console.log("openCam")
+
     navigate("/takeSelfie")
   }  
 
 
   const takeSelfie = () => {
-    console.log("takeSelfie")
+
   }
   const content : JSX.Element = (
     <div className="connectWallet-layout">

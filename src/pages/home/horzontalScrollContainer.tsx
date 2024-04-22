@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import React from "react";
 
 function handleScrollHorizontally(event: any) {
-    console.log(event);   
+
     const container = document.querySelector("div.missions-scroll-RoXPLo.x-")!;
     //const container = event.target;
     const delta = Math.max(-1, Math.min(1, (event.deltaY || -event.detail)));
-    console.log(container);
+
     const scrollTop = event.pageYOffset || document.documentElement.scrollTop;
     container.scrollLeft -= (delta * 40); // Adjust scrolling speed here
     event.preventDefault();
@@ -33,7 +33,7 @@ function handleScrollHorizontally(event: any) {
               <div className="challengesx-9-hacks-ewZMRw inter-medium-white-15px">Challenges<br />x 9 hacks</div>
               <div className="x1-3mins-each-ewZMRw inter-normal-cadet-blue-12px">1-3mins/ each</div>
               <div className="sigdao-score-ewZMRw sigdao-score">
-                <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+0.875 ~ 2.625</div>
+                <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+5.25 ~ 15.75</div>
                 <div className="signdao_tokengradient-HEHiSw signdao_tokengradient">
                   <div className="x441-giFx9O x441"></div>
                   <div className="x442-giFx9O x442"></div>

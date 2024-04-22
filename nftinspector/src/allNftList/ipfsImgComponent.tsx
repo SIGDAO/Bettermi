@@ -14,9 +14,9 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
     // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
-    `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
-    `https://${imgAddress}.ipfs.dweb.link/`,
-    `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+    // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+    // `https://${imgAddress}.ipfs.dweb.link/`,
+    // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
   ];
   if (className === "allNftImage") {
     const domains = [
@@ -24,9 +24,9 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
       // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
       // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
       `https://ipfs.io/ipfs/${imgAddress}`,
-      `https://${imgAddress}.ipfs.dweb.link/`,
-      `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
-      `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+      // `https://${imgAddress}.ipfs.dweb.link/`,
+      // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+      // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     ];
   }
   const [src, setSrc] = useState(domains[0]);
@@ -46,8 +46,8 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
 
   const switchDomain = () => {
     // const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
-    console.log("switching domain", (currentDomainIndex + 1) % domains.length);
-    console.log(currentDomainIndex, "indexNum");
+
+
     setSrc(domains[(currentDomainIndex + 1) % domains.length]);
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
@@ -68,13 +68,13 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
 
   useEffect(() => {
     const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
-    console.log("switching domain", nextDomainIndex);
+
     setSrc(domains[nextDomainIndex]);
   }, [currentDomainIndex]);
 
   const handleImageError = () => {
     // setTimeout(switchDomain, 3000);
-    console.log("image error");
+
     // switchDomain();
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };

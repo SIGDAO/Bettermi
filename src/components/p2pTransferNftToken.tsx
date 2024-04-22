@@ -21,10 +21,10 @@ export async function P2PTransferNftToken(Wallet:any,nodeHost:any,accountId:any,
 
     });
     const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
-    console.log(nodeHost, "nodeHost");
-    console.log(assetId);
-    console.log(publicKey);
-    console.log(accountId);
+
+
+
+
 
     if(ledger2 != null){
       try {

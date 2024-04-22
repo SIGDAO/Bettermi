@@ -72,7 +72,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
   const [answer, setAnswer] = React.useState('');
   const handleExportAns = (questionIndex: number) => {
     setAnswer(questionList[questionIndex].ans);
-    console.log(answer);
+
     // setShowQuestion((prev) => !prev);
     setshowQuestion((prev) => {
       const newArray = [...prev];

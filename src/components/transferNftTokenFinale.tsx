@@ -24,32 +24,32 @@ export const TransferNftTokenOwnershipFinale = async (nodeHost: any, recipientId
   const walletNodeHost: string = nodeHost ? nodeHost : window.localStorage.getItem("nodeHost");
   const Ledger2 = LedgerClientFactory.createClient({ nodeHost: walletNodeHost });
   const nftStorageAccount: string = process.env.REACT_APP_NFT_TOKEN_STORAGE!;
-  console.log("nftStorageAccount is ", nftStorageAccount);
+
   const accountInfo = await Ledger2.account.getAccount({ accountId: nftStorageAccount });
-  console.log("accountInfo is ", accountInfo);
+
   const nftToBeDistributed = accountInfo.assetBalances[Math.floor(Math.random() * accountInfo.assetBalances.length)];
-  console.log("nftToBeDistributed is ", nftToBeDistributed);
+
 
   // const assets = await Ledger2.asset.getAssetsByOwner({
   //     accountId: nftStorageAccount,
   // });
-  // console.log("assets is ",assets);
+
   //     assets.assets.map((asset)=>{
   //       if(asset.issuer === nftStorageAccount && asset.name === "BetterMi"){
-  //         console.log(JSON.parse(asset.description));
-  //         console.log(JSON.parse(asset.description).descriptor);
-  //         console.log(typeof(JSON.parse(asset.description).descriptor));
+
+
+
   //         userNftToken.push({level:1,image:JSON.parse(asset.description).descriptor,assetId:asset.asset,name:JSON.parse(asset.description).Name});
   //         index.push(assets.assets.indexOf(asset));
   //       }
   //     });
-  // console.log(userNftToken);
+
   // const nftToBeDistributed = userNftToken[Math.floor(Math.random() * userNftToken.length)];
-  // console.log(nftToBeDistributed);
-  // console.log(nftToBeDistributed.assetId);
-  // console.log(recipientId);
-  // console.log(publicKey);
-  // console.log(privateKey);
+
+
+
+
+
   
   await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/transferAsset", {
     assetId: nftToBeDistributed.asset,
@@ -58,5 +58,5 @@ export const TransferNftTokenOwnershipFinale = async (nodeHost: any, recipientId
     feePlanck: "1000000",
     skipAdditionalSecurityCheck: true,
   });
-  console.log("token transferred");
+
 };

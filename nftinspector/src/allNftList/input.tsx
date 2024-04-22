@@ -22,7 +22,7 @@ interface ICustomTextAreaProps {
 export const CustomTextArea: React.FC<ICustomTextAreaProps> = (props) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const { text, setText, width, importClassName, height, placeholder, activeClassName } = props;
-  console.log("hi");
+
   const handleTextChange = (value:any) => {
     setText(value)
     if (value.length === 0) 

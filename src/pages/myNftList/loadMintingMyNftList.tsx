@@ -39,7 +39,7 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
   //const ledger = useLedger();
   const userAccountId = useSelector(accountId);
   const Id = userId == null?userAccountId:userId;
-  //console.log("Id is ",Id);
+
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, ''); // the code hash of the BMI contract 
   const [count, setCount] = useState(1);
   const trialMyNftArray = 
@@ -115,7 +115,7 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
 //         machineCodeHash: codeHashId,
 
 //         });
-//       console.log(ourContract);
+
 //     }
 //     setCount(100)
 //     setIsLoading(false);
@@ -160,7 +160,7 @@ const loadNftList = async() => {
     const contractInfoArray = await Promise.all(promiseArray);
     for (var i = 0;i < contractInfoArray.length;i++){
       try{
-      console.log(contractInfoArray[i].description);
+
         const trial = JSON.parse(contractInfoArray[i].description);
         nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
         //nft = {level:trial.version,image:trial.descriptor,nftId:nftAddressList[i]};
@@ -196,7 +196,7 @@ const loadNftList = async() => {
 
 useEffect(() => {
   if(nftLoaded.current ===true){
-    console.log("loaded nft");
+
   }
   else{
     nftLoaded.current = true;
@@ -217,8 +217,8 @@ useEffect(() => {
     const incrementInterval = 50000 / 100;
     if(count < 99){
         const timer = setInterval(() => {
-            console.log(count);
-                console.log("count is ",count);
+
+
                 setCount((prevCount) => prevCount + 1);
         }, incrementInterval);
 

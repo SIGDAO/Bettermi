@@ -21,22 +21,16 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
             console.log(nftInfo.attributes)
             const array = nftInfo.attributes[2].key3;
             console.log("array is",array);
-            if (nftInfo.description.includes("1") === true) {
-                console.log("called if");
-                return"5";
-              }
-              else if (nftInfo.description.includes("2") === true) {
-                console.log("called else if");
-                return "10";
-              }
-              else if (nftInfo.description.includes("3") === true) {
-                console.log("called else if")
-                    return "15";
-              }
-              else{
-                console.log("called else");
-                return "0";
-              }
+            const level = convertWordToNumber(nftInfo.attributes[6].value);
+            console.log("level is",level);
+            if(isNaN(level) === false){
+              console.log((level/3).toString());
+              return ((level/3).toFixed(2)).toString();
+            }
+            else{
+              return "";
+            }
+
         }
     // }).catch((error) =>{
     //     console.log(error);
@@ -44,7 +38,8 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
     // })
     ;
         }
-        catch(e){return "0";}
+        catch(e){return "";}
+        return "";
         
   };
 

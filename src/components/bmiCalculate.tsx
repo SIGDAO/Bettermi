@@ -34,7 +34,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
   if (!contractAddress) return []
   try {
-    console.log(contract.ats[0]?.description, 'contract.ats[0]?.description')
+
     description = JSON.parse(contract.ats[0]?.description);
     description.time = new Date(description.time);
   } catch (error) {
@@ -55,8 +55,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
-  console.log(message, 'message');
-  console.log(description, 'description');
+
+
 
 
 
@@ -79,47 +79,69 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         if (typeof content === 'number') continue;
         content.time = new Date(content.time);
         processedBMIRecord.push(content);
-        console.log(description, 'description')  
+
       } catch (error) {
         alert("Cannot fetch the record, please contact core team through discord!")
       }
     }
   }
 
-  console.log(processedBMIRecord, "processedBMIRecord")
+
   
   return processedBMIRecord;
 }
+const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
+  if (!record1) return false;
+  const date1 = record1.toDateString();
+  const date2 = record2.toDateString();
+
+  console.log(date1, date2)
+  
+  return date1 === date2;
+};
 
 // find all the BMI record
 // output: [] || [ {time: time, value: value} ]
 export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boolean | undefined) => {
-  let BMI: SeriesDataItemTypeMap['Area'][]= [];
+  // let BMI: SeriesDataItemTypeMap['Area'][]= [];
+  let BMI: { time: UTCTimestamp, value: Number, prev: Number }[] = [];
 
   if(Ledger2 == null) return [];
 
   const bmiDataObject = await findBMIblockchainContract(tempAccountId, Ledger2);
-  console.log(bmiDataObject, 'bmiDataObject');
+
 
   if (!bmiDataObject) return [];
 
   // handle bmi contract message
   const message = bmiDataObject || null;
-  console.log(message, 'bmiDataObject message');
+
   // if (!message) return [];
   let content: any;
-  for(let i = message.length - 1; i >= 0 ;i--){
+  let prev = 0;
+  let prevDate: Date | null = null;
+  for(let i = 0; i < message.length ;i++){
     content = message[i];
     let tempDate = content.time
-    console.log(typeof tempDate, 'tempDate');
+
     let dateFormat: UTCTimestamp  = Math.floor((tempDate.getTime() / 1000)) as UTCTimestamp;
+    if (prev === 0 || prevDate === null) {
+      BMI.push({time: dateFormat, value: Number(content.bmi), prev: prev});
+    } else if (areRecordsOnSameDay(prevDate, tempDate)) {
+      continue;
+    } else {
+      BMI.push({time: dateFormat, value: Number(content.bmi), prev: Number((Number(content.bmi) - prev).toFixed(1))});
+    }
 
-    BMI.push({time: dateFormat, value: Number(content.bmi)});
-    // sort the BMI value by time asc
-    BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
-
+    prev = content.bmi;
+    prevDate = tempDate;
     // return_Date(Number(obj.timestamp));
+
   }
+  // sort the BMI value by time asc
+  BMI.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
+
+
   return BMI;
 }
 
@@ -132,22 +154,21 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
 
   // if bmi_fetchedData, check if today have record
   if (bmi_fetchedData) {    
-    console.log("bmi_fetchedData", bmi_fetchedData);
+
     for (let i = 0; i < bmi_fetchedData.length; i++) {
       const element = bmi_fetchedData[i];
       const elementDate = new Date(element.time * 1000);
       if (elementDate.getDate() === today.getDate() && elementDate.getMonth() === today.getMonth() && elementDate.getFullYear() === today.getFullYear()) {
-        console.log('hihi')
         return true;
       };
     }
     return false;
   }
-  console.log("here");
+
 
   // if no bmi_fetchedData, fetch data from blockchain and check if today have record
   const contract = await findBMIblockchainContract(tempAccountId, Ledger2);
-  console.log("there");
+
   if (!contract) return false;
 
   const message = contract;
@@ -161,9 +182,9 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
 
     let tempDate = content.time
 
-    console.log(tempDate.getDate(), today.getDate(), 'today', 'tmr');
+
     if (tempDate.getDate() === today.getDate() && tempDate.getMonth() === today.getMonth() && tempDate.getFullYear() === today.getFullYear()) {
-      console.log('today have record');
+
       return true;
     };
   }
@@ -173,7 +194,7 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
 
 export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
   const message = await findBMIblockchainContract(tempAccountId, Ledger2)
-  console.log(message, 'message');
+
   // if no ledger, return false
   if (message.length === 0) return false;//Strange?
   return true;
@@ -181,7 +202,7 @@ export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
 
 export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
   const message = await findBMIblockchainContract(tempAccountId, Ledger2)
-  console.log(message, 'message');
+
 
   if (message.length === 0) {
     return 0;
@@ -216,7 +237,7 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
 
 export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {
   const message = await findBMIblockchainContract(tempAccountId, Ledger2)
-  console.log(message, 'message');
+
   // if no ledger, return false
   if (message.length === 0) return false;
 

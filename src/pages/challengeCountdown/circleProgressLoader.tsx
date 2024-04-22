@@ -102,7 +102,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   }, [progress, timeBeforeStart]);
   
   // React.useEffect(() => {
-  //   console.log((progress / time) * 100);
+
   // }, [progress]);
   
   // const progressInPercent = ((time - progress) / time) * 100;

@@ -15,6 +15,7 @@ import { ContractDataView } from "@signumjs/contracts";
 import PopupModal from "./modelTrial";
 import AllNftLoading from "./allNftLoading";
 import NftDetails from "../../components/nftDetails";
+import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 
 interface IINDEXAllNftListProps {
 
@@ -82,34 +83,34 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //     accountId: nftDistributor,
     //     machineCodeHash: newNftCodeHashId,
     // });
-    console.log(newNftCodeHashId);
+
     var nftList = await ledger2.contract.getAllContractsByCodeHash({
       machineCodeHash: newNftCodeHashId,
       includeDetails: true,
       firstIndex: 0,
       lastIndex: 500,
     });
-    console.log(nftList);
-    var nftList2 = await ledger2.contract.getAllContractsByCodeHash({
-      machineCodeHash: newNftCodeHashId,
-      includeDetails: true,
-      firstIndex: 500,
-      lastIndex: 1000,
-    });
-    //await sleep(2000);
-    var nftList3 = await ledger2.contract.getAllContractsByCodeHash({
-      machineCodeHash: newNftCodeHashId,
-      includeDetails: true,
-      firstIndex: 1000,
-      lastIndex: 1100,
-    });
-    console.log(nftList2);
+
+    // var nftList2 = await ledger2.contract.getAllContractsByCodeHash({
+    //   machineCodeHash: newNftCodeHashId,
+    //   includeDetails: true,
+    //   firstIndex: 500,
+    //   lastIndex: 1000,
+    // });
+    // //await sleep(2000);
+    // var nftList3 = await ledger2.contract.getAllContractsByCodeHash({
+    //   machineCodeHash: newNftCodeHashId,
+    //   includeDetails: true,
+    //   firstIndex: 1000,
+    //   lastIndex: 1100,
+    // });
+
     let nftStorages = nftList.ats;
-    let nftStorages2 = nftList2.ats;
-    let nftStorages3 = nftList3.ats;
-    Array.prototype.push.apply(nftStorages, nftStorages2);
-    Array.prototype.push.apply(nftStorages, nftStorages3);
-    console.log(nftStorages);
+    // let nftStorages2 = nftList2.ats;
+    // let nftStorages3 = nftList3.ats;
+    // Array.prototype.push.apply(nftStorages, nftStorages2);
+    // Array.prototype.push.apply(nftStorages, nftStorages3);
+
     var index = 0;
     var InfoJson: urlObject[] = [];
     for (var i = 0; i < nftStorages.length; i++) {
@@ -118,20 +119,20 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         const info: urlObject = { url: `https://ipfs.io/ipfs/${des}`, nftId: nftStorages[i].at, index: i };
         InfoJson.push(info);
       } catch {
-        console.log(nftStorages[i].description);
+
         const info: urlObject = { url: "", nftId: "123", index: i };
         InfoJson.push(info);
       }
     }
-    console.log(InfoJson);
+
     var urls: string[] = [];
     var nftInfo: nftObject[] = [];
     var mergedArray: nftInfo[] = new Array(nftStorages.length).fill({}) as nftInfo[];
     const requests: Promise<void>[] = [];
     InfoJson.map((nftStorage) => {
-      console.log(nftStorage);
+
       if (nftStorage.nftId !== "123") {
-        console.log(nftStorage);
+
         requests.push(
           ledger2.contract
             .getContract(nftStorage.nftId)
@@ -179,27 +180,27 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     });
     await Promise.all(requests);
     const requests2: Promise<void>[] = [];
-    console.log(mergedArray);
+
     InfoJson.map((InfoJson) => {
-      if (mergedArray[InfoJson.index].contractOwner !== nftDistributor) {
-        // if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
+       if (mergedArray[InfoJson.index].contractOwner === nftDistributor) {
+      //if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
         requests2.push(
           fetch(InfoJson.url)
             .then((res) => res.text())
             .then((res) => {
               try {
                 const text = JSON.parse(res);
-                console.log(text);
+
                 const levelNumber = text.description.match(/Level (\d+)/)?.[1];
-                var reward = "0"
-                if(levelNumber === "1"){
-                  reward = "5"
+                var reward = "0";
+                const level = convertWordToNumber(text.attributes[6].value);
+                console.log("level is",level);
+                if(isNaN(level) === false){
+                  console.log((level/3).toString());
+                   reward = ((level/3).toFixed(2)).toString();
                 }
-                if(levelNumber === "2"){
-                  reward = "10"
-                }
-                if(levelNumber === "3"){
-                  reward = "15"
+                else{
+                   reward = "";
                 }
                 const string = text.name;
                 const regex = /#(\d+)/;
@@ -208,15 +209,15 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 if (match) {
                   number = parseInt(match[1]); // this is the nft number
                 }
-                console.log(levelNumber);
+
                 mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber: number,nftReward:reward };
               } catch (e) {
-                console.log(res);
+
                 mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1,nftReward:"0" };
               }
             })
             .catch((err) => {
-              console.log(err);
+
               mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1,nftReward:"0" };
             })
         );
@@ -224,13 +225,13 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     });
 
     await Promise.all(requests2);
-    console.log(mergedArray);
+
     setNftInfo(mergedArray);
     setLoading(false);
 
     // try {
     //   InfoJson.forEach((info) => {
-    //     console.log(info);
+
     //     if (info != null && info != "error") {
     //       urls.push(`https://ipfs.io/ipfs/${info}`);
     //     } else {
@@ -245,14 +246,14 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //         try {
     //           const text = JSON.parse(res);
     //           const levelNumber = text.description.match(/Level (\d+)/)?.[1];
-    //           console.log(levelNumber);
+
     //           imageUrl.push({ imageUrl: text.media[0].social, nftLevel: levelNumber });
     //         } catch (e) {
-    //           console.log(res);
+
     //           imageUrl.push({ imageUrl: "", nftLevel: "" });
     //         }
     //       }).catch((err) => {
-    //         console.log(err);
+
     //         imageUrl.push({ imageUrl: "", nftLevel: "" });
     //       })
     //   );
@@ -300,18 +301,18 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
 
     //   // requests.push(
     //   //     const account = ledger2.contract.getContract(nftStorages[0].at);
-    //   //     console.log(account);
+
     //   //     var nftContract = new ContractDataView(account);
-    //   //     console.log(nftContract.getVariableAsDecimal(6));
+
     //   // );
     //   await Promise.all(requests);
-    //   console.log(nftInfo);
-    //   console.log(imageUrl);
-    //   //console.log(nftStorages);
+
+
+
     //   const account = await ledger2.contract.getContract(nftStorages[0].at);
-    //   console.log(account);
+
     //   var nftContract = new ContractDataView(account);
-    //   console.log(nftContract.getVariableAsDecimal(6));
+
     //   //const results = await Promise.all(promises);
     //   //const array = getContract(ledger2,nftStorages);
     //   const mergedArray: nftInfo[] = [];
@@ -325,8 +326,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //       nftStatus:nftInfo[i].contractStatus,
     //     });
     //   }
-    //   //console.log("results:",results);
-    //   console.log(imageUrl);
+
+
     //   setNftInfo(mergedArray);
     //   setLoading(false);
     //   // responses.forEach(res => console.log(res));
@@ -340,9 +341,9 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //         accountId: nftDistributor,
     //         machineCodeHash: newNftCodeHashId,
     //     }).then((nftList) => {
-    //         console.log(nftList);
+
     //     }).catch((err)=>{
-    //         console.log(err);
+
     //     });
     if (hasRendered.current === false) {
       hasRendered.current = true;
@@ -366,7 +367,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       )}
       {/* {openModel?(
         <>
-            {console.log(openModel)}
+
             <CustomModel level = {"1"} openModel={openModel} setOpenModel={setOpenModel}></CustomModel>
         </>
         ):(

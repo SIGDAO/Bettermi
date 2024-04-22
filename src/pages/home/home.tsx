@@ -5,42 +5,29 @@ import { CenterLayout } from "../../components/layout";
 import MenuBar from "../../components/menuBar";
 import { useSelector } from "react-redux";
 import { selectCurrentUsername } from "../../redux/profile";
-import { accountPublicKey, accountToken } from "../../redux/account";
+import {  accountPublicKey, accountToken } from "../../redux/account";
 import { store } from "../../redux/reducer";
 import { useState } from "react";
-import { useAppSelector } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { useEffect } from "react";
 import { accountSlice } from "../../redux/account";
-import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
-import { useLedger } from "../../redux/useLedger";
 import { accountId } from "../../redux/account";
-import { testing } from "../../redux/characteraiAPI";
-import { selectCurrentGender } from "../../redux/profile";
 import { NavigateToTakeSelfieButton } from "../../components/button";
-import ImageSlider, { Carousel, CarouselItem } from "./Carousel";
-import { accountLevel } from "../../redux/account";
-import { calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
-import { TransferToken } from "../../components/transferToken";
+import ImageSlider from "./Carousel";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
-import HorizontalScrollContainerMission from "./horzontalScrollContainer";
-import { CheckNftOwnerId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
+import {  IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
-import { type } from "os";
-import IPFSImageComponent from "../../components/ipfsImgComponent";
-import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
-import { FindLatestTransactionArray,FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
-import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
+import { reEquipNft } from "../../NftSystem/displayNft/reequipNft";
 
 interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const slides = [
-    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.gg/C7rdyPqUZ8", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
     { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
@@ -64,9 +51,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
-  const [reward,setReward] = useState<string>();
+  const [rewardPercentage,setRewardPercentage] = useState<string>();
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+  const userAccountPublicKey = useSelector(accountPublicKey);
 
   // useEffect(() => {
   //   testing();
@@ -110,17 +98,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log("imageaddress", Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
         .catch(async(error) => {
           setIsNFTiconLoading(false);
-          console.log("need to equip nft");
+
         });
     }
   };
@@ -130,11 +118,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   useEffect(() => {
     // Function to fetch data from the APIc
     if (nftIconCheck.current) {
-      console.log("called");
+
       return;
     }
     nftIconCheck.current = true;
-    
+    reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountPublicKey,navigate);
     ledger2.account
       .getAccount({ accountId: userAccountId })
       .then(async (account) => {
@@ -152,7 +140,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
           var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
-          setReward(value);
+          setRewardPercentage(value);
           if (nftInfo.description.includes("1") === true) {
             setLevel("1");
           }
@@ -165,7 +153,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         } else {
           setLevel("1");
-          setReward("loading...");
+          setRewardPercentage("");
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
 
@@ -175,16 +163,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         setLoading(false);
       })
       .catch(async(error) => {
-        console.log("need to equip nft");
+
         console.log(error);
-        console.log("imgAddress bug", imgAddress);
-        console.log(typeof imgAddress);
+
+
         setLoading(false);
       });
     fetchUserIcon()
     // TransferToken(nodeHost,userId,"10");
 
-    // console.log(calRewardSigdaoOnSelfie(22.9), "calRewardSigdaoOnSelfie(22.9)");
+
   }, []);
 
   // todo: map
@@ -205,7 +193,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const nftContractChecked = useRef(false);
   useEffect(() => {
     if (nftContractChecked.current) {
-      console.log("called");
+
       return;
     }
     nftContractChecked.current = true;
@@ -238,7 +226,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           <div className="x16206">
             <div className="lv-1">LV {level}</div>
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-            <div className="reward-10">REWARD +{reward}%</div>
+            <div className="reward-10">REWARD +{rewardPercentage}%</div>
           </div>
       
           <div className="x0-signa">$0 SIGNA</div>
@@ -271,10 +259,10 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <h1 className="title-2ZgxSS">Hello ! </h1>
             <div className="lv_-reward-2ZgxSS">
               <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{reward}%</div>
+              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
               <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
             </div>
-            <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId}></UserIcon>
+            <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
             {/* {imgAddress === ""?gender === "Female"?
           // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
           <Link to="/allNftList/">
@@ -338,7 +326,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                 </div>
                 <div className="x1-3mins-each-ewZMRw inter-normal-cadet-blue-12px">1-3mins/ each</div>
                 <div className="sigdao-score-ewZMRw sigdao-score">
-                  <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+0.875 ~ 2.625</div>
+                  <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+5.25 ~ 15.75</div>
                   <div className="signdao_tokengradient-HEHiSw signdao_tokengradient">
                     <div className="x441-giFx9O x441"></div>
                     <div className="x442-giFx9O x442"></div>

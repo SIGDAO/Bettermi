@@ -26,7 +26,7 @@ const Leaderboard = (props: Props) => {
   const [isLeaderBoardLoading, setIsLeaderBoardLoading] = React.useState<boolean>(true);
   const userRankingListFromRedux = useSelector(userRankingListRedux);
   const navigate = useNavigate();
-  console.log(userRankingListFromRedux);
+
 
   const imageLoadForTop3 = (index: number) => {
     return (
@@ -127,10 +127,10 @@ const Leaderboard = (props: Props) => {
     GetTokenRanking(ledger2)
       .then((userRankingList) => {
         setUserRankingList(userRankingList);
-        console.log(userRankingList);
+
         setIsLeaderBoardLoading(false);
         let state: userRanking = { userRankingList: userRankingList };
-        console.log(state);
+
         store.dispatch(userRankingSlice.actions.setUserRanking(state));
       })
       .catch((e: any) => {
@@ -142,7 +142,7 @@ const Leaderboard = (props: Props) => {
 
   useEffect(() => {
     if (nftLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
       nftLoaded.current = true;
       //if(userRankingListFromRedux == null ){

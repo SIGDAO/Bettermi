@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./generateBMIDaily.css";
 import { CenterLayout } from "../../components/layout";
-import { BackButton } from "../../components/button";
+import { BackButton, DisabledButton } from "../../components/button";
 import { Link, useNavigate } from "react-router-dom";
 import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, profileSlice } from "../../redux/profile";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,10 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH;
   const nodeHost = useSelector(walletNodeHost);
   const BMI = useSelector(selectCurrentBMI);
+  const [isTransferToken, setIsTransferToken] = React.useState(false);
+  const [isTransferBMI, setIsTransferBMI] = React.useState(false);
+  const [minted, setMinted] = React.useState(false);
+  
 
   const navigate = useNavigate();
   const ledger = useLedger();
@@ -37,17 +41,21 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const handleImport = async () => {
     if (!ledger) return;
     var encrypted: string = "";
+    if (isTransferBMI) return;
+    setIsTransferBMI(true)  
+    setMinted(true);
     // const startTime: number = Date.now(); // get the current time in milliseconds
+
 
     let storeNftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
       machineCodeHash:codeHashIdForNft,
     });
-    console.log(storeNftContract);
+
     try {
       if (storeNftContract.ats[0] == null) {
-        console.log(storeNftContract.ats[0]);
-        console.log("called storeNftContract.ats.length", typeof process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH);
+
+
         const initializeNftContract = (await ledger.contract.publishContractByReference({
           name: "NFT",
           description: "storage_space_for_your_nft",
@@ -56,11 +64,13 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
           senderPublicKey: publicKey,
           deadline: 1440,
         })) as UnsignedTransaction;
-        console.log(initializeNftContract);
+
         await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
       }
     } catch (error) {
       if (error.name !== "ExtensionWalletError") {
+        setIsTransferBMI(false)
+        setMinted(false)
         navigate("/errorGenerateNFT");
       }
     }
@@ -82,21 +92,32 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
       })
       encrypted = encrypted.data
     } catch (error) {
+      setMinted(false);
       alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page")
       navigate('/')
     }
     
-    const sendBMI = (await ledger.message.sendMessage({
-      message: encrypted,
-      messageIsText: true,
-      recipientId: ourContract.ats[0]?.at,
-      feePlanck: "1000000",
-      senderPublicKey: publicKey,
-      deadline: 1440,
-    })) as UnsignedTransaction;
+
+    try {
+      const sendBMI = (await ledger.message.sendMessage({
+        message: encrypted,
+        messageIsText: true,
+        recipientId: ourContract.ats[0]?.at,
+        feePlanck: "1000000",
+        senderPublicKey: publicKey,
+        deadline: 1440,
+      })) as UnsignedTransaction;
+
+      await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+    } catch (error) {
+      setMinted(false);
+      setIsTransferBMI(false);
+
+      return
+    }
 
 
-    await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+
 
     //Code inserted by Anderson, to transfer the token to the user
     await TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString());
@@ -125,10 +146,15 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
         <BackButton />
         <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-6@1x`} alt="Photo" />
         <div className="bottom-controls-Fd1por" onClick={handleImport}>
-          <div className="button_-mint-FZh05Y">
-            <div className="button1-WZiHbv"></div>
-            <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
-          </div>
+        {minted ? (
+          <DisabledButton text="connecting..." height="56px" width="248px" />
+          ) : (
+            <div className="button_-mint-FZh05Y">
+              <div className="button1-WZiHbv"></div>
+              <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
+            </div>
+          )}
+
         </div>
         <div className="bmi-bar-Fd1por">
           <div

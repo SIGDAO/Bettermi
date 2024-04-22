@@ -27,6 +27,11 @@ import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
 
+
+interface myNftProfile{
+  imageAddress:string,
+  rewardPercentage:string,
+}
 interface IAnimaGenContentProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -39,6 +44,7 @@ interface IAnimaGenContentProps {
   setIsNFTiconLoading: Function;
   isNFTiconLoading?: boolean;
   setImgAddress: Function;
+  setRewardPercentage:(rewardPercentage:string) => void;
 }
 interface myNftList {
   level: string;
@@ -60,7 +66,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const dispatch = useDispatch();
   const gender = useSelector(selectCurrentGender);
   const userAccountId = useSelector(accountId);
-  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress } = props;
+  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress ,setRewardPercentage} = props;
   const [name, setName] = useState<string>(username);
   const [haveNft, setHaveNft] = useState<boolean>(false);
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
@@ -104,7 +110,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const handleSave = async () => {
-    console.log("called handle save");
+
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
       setShowStar(true);
       return;
@@ -131,21 +137,21 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   };
 
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
-  const [myNfts, setMyNfts] = useState<string[]>([]);
+  const [myNfts, setMyNfts] = useState<myNftProfile[]>([]);
   const nftContractStorage = useSelector(getNftContractStorage);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const nftLoaded = useRef(false);
   var nft: myNftList;
-  var userNftList: string[] = [];
+  var userNftList: myNftProfile[] = [];
   const loadNftList = async () => {
     try {
-      console.log(userAccountId);
+
       userNftList = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
       setMyNfts(userNftList);
       setLoadingNft(false);
-      console.log(userNftList);
-      console.log(userNftList[0]);
+
+
     } catch (e: any) {
       console.log(e);
     }
@@ -153,7 +159,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
 
   useEffect(() => {
     if (nftLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
       nftLoaded.current = true;
       loadNftList();
@@ -161,7 +167,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   }, [nftContractStorage]);
 
   const handleScroll = (event: any) => {
-    console.log(event);
+
     const container = document.querySelector("div.profileHorizontalScroll")!;
     const scrollAmount = event.deltaY;
 
@@ -190,17 +196,17 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log("imageaddress", Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
         .catch((error) => {
           setIsNFTiconLoading(false);
-          console.log("need to equip nft");
+
         });
     }
   };
@@ -209,7 +215,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
     const account = await ledger2.account.getAccount({
       accountId: userAccountId,
     });
-    console.log(account);
+
     //    let newDes =waitingToBeChangedDescription.description===undefined?"":JSON.parse(waitingToBeChangedDescription.description);
     if (account.description === undefined) {
       setIsLoading(false);
@@ -227,7 +233,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   /*Ends here*/
 
   const handleScroll2 = (event: any) => {
-    console.log(event);
+
     const container = event.target!;
     const scrollAmount = event.deltaY;
     container.scrollTo({
@@ -264,33 +270,33 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
       accountId: userAccountId,
     });
     let newDes = waitingToBeChangedDescription.description === undefined ? {} : JSON.parse(waitingToBeChangedDescription.description);
-    console.log(newDes);
+
     if (newDes.nm == null) {
-      console.log("called newDes.nm == null here");
+
       setFetchName("");
     } else {
-      console.log("called newDes.nm else here");
+
       setFetchName(newDes.nm);
     }
     if (newDes.ds == null) {
-      console.log("called newDes.ds == null here");
+
       setFetchDescription("");
     } else {
-      console.log("called newDes.ds else here");
+
       setFetchDescription(newDes.ds);
     }
     if (newDes.sc == null) {
-      console.log("called newDes.sc[0] == null here");
+
       setFetchDiscordUsername("");
     } else {
-      console.log("called newDes.sc[0] else here");
+
       setFetchDiscordUsername(newDes.sc[0]);
     }
     if (newDes.hp == null) {
-      console.log("called newDes.hp == null here");
+
       setFetchAboutYourself("");
     } else {
-      console.log("called newDes.hp else here");
+
       setFetchAboutYourself(newDes.hp);
     }
     setIsSettingLoading(false);
@@ -330,6 +336,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
               <img className="ic_edit-content" src="img/profile/ic-edit-1@1x.png" alt="" />
             </div>
+            
             {isUpdatingUserSetting === true || isSettingLoading === true ? (
             <>
               <div className="profile_icon_nft_-avatar_empty">
@@ -349,10 +356,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             </>
             ) : (
               <>
-              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId}></UserIcon>
+              <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId} setRewardPercentage={ setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
               <div className="profile-content-container">
                 <div className="profile-content">
-                  <div className="zoe_li">{fetchName ? fetchName : name || "zoe_li"}</div>
+                  <div className="zoe_li">{fetchName ? fetchName : name || "Enter your name"}</div>
                   <div className="perso-container">
                     <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
                       {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
@@ -367,7 +374,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
                 <div className="discord-card-container">
-                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "zoeeeee#1234"}</div>
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "Signum#1234"}</div>
                   <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
                     <img src="img/profile/file---11690@1x.png" alt="" />
                   </div>
@@ -397,10 +404,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               // onWheel={handleScroll}
             >
               <Link to="/allNftList/">
-                <div className="overlap-group-profile">
-                  <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                  <p className="inter-semi-bold-white-12px ">Buy NFT</p>
-                </div>
+                <img className="profileBuyNft" src = "img/profile/NftMarketplaceBanner2.png">
+                  {/* <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" /> */}
+                  {/* <p className="inter-semi-bold-white-12px ">Buy NFT</p> */}
+                </img>
               </Link>
               {loadingNft === true ? (
                 <>
@@ -421,9 +428,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   <img
                     onClick={() => {
                       setIsPopUpIcon(true);
-                      setImgAddress(MyNft);
+                      setImgAddress(MyNft.imageAddress);
+                      setRewardPercentage(MyNft.rewardPercentage);
                     }}
-                    src={`https://ipfs.io/ipfs/${MyNft}`}
+                    src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
                     style={{
                       width: "152px",
                       height: "217px",
@@ -531,7 +539,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                   text={discordUsernameText}
                   setText={setDiscordUsernameText}
                   width={300}
-                  placeholder="zoeeeee#1234"
+                  placeholder="Signum#1234"
                   // ref={(el) => (inputRefs.current[3] = el)}
                 />
                 {/* <div className="card-number-5 inter-normal-white-15px">zoeeeee#1234</div> */}

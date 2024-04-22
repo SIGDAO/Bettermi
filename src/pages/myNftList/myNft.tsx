@@ -1,15 +1,7 @@
 import * as React from 'react';
  import './myNftList.css'
- import { CenterLayout } from '../../components/layout';
- import { Link } from 'react-router-dom';
- import { BackButton } from '../../components/button';
- import { GetToken } from '../../components/getToken';
  import { useSelector } from 'react-redux';
  import { accountId, accountPublicKey } from '../../redux/account';
- import CSS from 'csstype';
- import { ShortTitleBar } from '../../components/titleBar';
- import { Col,Row,Card,CardText,CardTitle,Button,CardImg,} from 'reactstrap';
- import { useLedger } from '../../redux/useLedger';
  import { useState } from 'react';
  import { useEffect } from 'react';
  import { useAppSelector } from '../../redux/useLedger';
@@ -24,6 +16,7 @@ import * as React from 'react';
 import { selectCurrentUsername } from '../../redux/profile';
 import { selectedNftInfo } from '../allNftList/indexAllNftList';
 import IPFSImageComponent from '../../components/ipfsImgComponent';
+import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage';
 
  interface MyNftProps {
     image:string;
@@ -54,59 +47,38 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
      const [nftNumber,setNftNumber] = useState<string>("");
      const [reward,setReward] = useState<string>("");
      const name = useAppSelector(selectCurrentUsername);
-     const navigate = useNavigate();
-     var nftImgAddress:string = "";
-     var addressSuffix:string ="https://ipfs.io/ipfs/"; 
      useEffect(() => {
-      //console.log(nftId);
-         // Function to fetch data from the APIc
-         //console.log(`ipfs.io/ipfs/${image}`);
          fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
              res.text().then((text)=>{
-                 //console.log(text); 
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);
-                 //console.log(matches[0]);
                  const nftNumber:string = matches[0].toString().padStart(8, '0');
                  setNftNumber(nftNumber);
-                //  setNftLevel(nftInfo.attributes[0].level);
-                //  console.log(nftInfo.attributes.description);
                  if(nftInfo.description.includes("1") === true){
                   setNftLevel("1");
-                  setReward("10"); //To be confirmed
                  }
                  if(nftInfo.description.includes("2") === true){
                   setNftLevel("2");
-                  setReward("15");//To be confirmed
                  }
                  if(nftInfo.description.includes("3") === true){
                   setNftLevel("3");
-                  setReward("20");//To be confirmed
                  }
-                 //console.log(nftInfo); 
-                 //console.log(typeof(nftInfo.media[0].social));
+                 const level = convertWordToNumber(nftInfo.attributes[6].value);
+                 console.log("level is",level);
+                 if(isNaN(level) === false){
+                   console.log((level/3).toString());
+                  setReward(((level/3).toFixed(2)).toString());
+                 }
+                 else{
+                   setReward("");
+                 }
                  setImgAddress(nftInfo.media[0].social);
-                 nftImgAddress = nftInfo.media[0].social; 
-                 //console.log(nftImgAddress);
-                 //console.log(imgAddress);
-                 nftImgAddress = addressSuffix.concat(nftImgAddress);
-                 //console.log(nftImgAddress);
                  setLoading(false);
              }).catch((e:any) => {console.log(e);});
 
          }).catch((e:any) => {console.log(e);});
 
-         // Call the fetchData function
-
-         // Optional cleanup function (not needed in this case)
-         // If you had any subscription or timers, you'd clean them up here
-
-         // Since we want the effect to run only once (on mount), we pass an empty dependency array
        }, [image]);
-     const test = (abc:string) => {
-         //console.log(abc);
-         return 1;
-     }
      const equipNft = async() => {
       try{
             const nftOwner = await CheckNftOwnerId(ledger2,nftId);
@@ -137,13 +109,13 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           imageUrl:imgAddress,
                           nftLevel:nftLevel,
                           nftPrice:"0",
-                          nftReward:"5",
+                          nftReward:reward,
                           nftNumber:nftNumber?nftNumber:"-1",
                         }
-                        console.log(nftInfo);
+
                         setSelectedNft(nftInfo);
                       }
-                      } className = "myNftImage" imgAddress = {`https://ipfs.io/ipfs/${imgAddress}`}></IPFSImageComponent>
+                      } className = "myNftImage" imgAddress = {imgAddress}></IPFSImageComponent>
 
                     <div className = "myNftDescription">
                     <div className = "myNftNumber">#{nftNumber}</div>
@@ -152,8 +124,8 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           Lv{nftLevel}       
                           </div>
                           <div className = "myNftVerticalLine"></div>  
-                          <div  className = "inter-normal-white-12px">
-                            Reward + 5%
+                          <div  className = "myNftListRewardPercentage">
+                            Reward + {reward}%
                             </div>
                       </div>
                       <div className = "myNftPrice">
@@ -168,7 +140,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           onClick={() => {
                             setIsOpenPopup((prev) => !prev);
                             setSelectedAssetId(nftId);
-                            console.log("nftID is ",nftId);
+
                             setLevel(nftLevel);
   
                           }} 
@@ -182,7 +154,7 @@ import IPFSImageComponent from '../../components/ipfsImgComponent';
                           <img 
                             onClick={() => {
                               setIsOpenPopup((prev) => !prev);
-                              console.log("nftID is ",nftId);
+
                               setSelectedAssetId(nftId);
                               setLevel(nftLevel);
 

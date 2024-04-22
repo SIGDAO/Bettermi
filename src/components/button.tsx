@@ -185,7 +185,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       //   setIsMidnight(true);
       // }
 
-      console.log('is', isSelfie)
+
 
       setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     };
@@ -200,20 +200,20 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
     accountId :tempAccountId,
     machineCodeHash: bmiHashId,
   });
-  console.log(contract,"contract");
+
 }
   React.useEffect(() => {
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
-        console.log('result', result)
+
         setIsActive(result);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+
         checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', ''));
       })
-    console.log(isActive)
+
   }, [])
 
   async function handleTakeASelfie() {
@@ -233,7 +233,7 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
           <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
         </div>
         <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
-          <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+          <img className="ic_selfie-u8P1YH" src="/img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
           <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
           <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
         </div>
@@ -242,7 +242,7 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
   } else {
     return isLoading ? null : (
       <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
-        <img className="ic_selfie-u8P1YH" src="img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
+        <img className="ic_selfie-u8P1YH" src="/img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
         <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
         <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
       </div>

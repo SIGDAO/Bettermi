@@ -711,6 +711,9 @@
   line-height: 25px;
   position: absolute;
   top: 23px;
+  width: 314px;
+  overflow:hidden;
+  /* text-overflow: ellipsis; */
   white-space: nowrap;
   margin: 0;
 }
@@ -794,6 +797,23 @@
   text-decoration: none;
 }
 
+.otherUserProfileBuyNFt{
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  border-color: var(--royal-blue);
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 217px;
+  position: relative;
+  width: 152px;
+  cursor: pointer;
+  margin-left: 38px;
+  margin-right: 12px;
+}
 
 .bettermidapp-profile-3 .overlap-group-profile {
   background: linear-gradient(90deg, #0d0d0d 0%, #4136f1 102.54%);

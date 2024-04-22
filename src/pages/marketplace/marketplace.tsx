@@ -58,12 +58,12 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
             <HorizontalScrollContainer inputClassName="x7-vbUx2m">
-              <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Toget.png`} alt="Zoe Fitness" />
-              <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/Flower.png`} alt="Vitev" />
-              <img className="zoe-fitness-HI0Hnc zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Ruto.png`} />
+              <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/zomate-fitness-logo-nft-436x436.png`} alt="Zoe Fitness" />
+              <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/ichio-logo-nft-436x436.png`} alt="Vitev" />
+              <img className="zoe-fitness-HI0Hnc zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/ycy-logo-nft.png`} />
               <img className="zoe-fitness-eRgkx7 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Era.png`} />
-              <img className="zoe-fitness-u91zz4 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/ALC.png`} />
-              <img className="zoe-fitness-aEJ33D zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/FlavourHouse.png`} />
+              <img className="zoe-fitness-u91zz4 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/philo-logo-nft-436x436.png`} />
+              <img className="zoe-fitness-aEJ33D zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/together-matching-logo-nft-436x436.png`} />
               <img className="zoe-fitness-Jc5OoT zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/BPSAA-Logo-NFT.png`} />
               <img className="zoe-fitness-SxtrzH zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Chuen-Yik-Logo-NFT.png`} />
               <img className="zoe-fitness-ppgU72 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Fourcheer-Logo-NFT.png`} />
@@ -121,7 +121,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-4xB4wg goal">
-                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div>
+                    {/* <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
+                    <div className="x0-mOFaDT x0-marketplace inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-mOFaDT x3 inter-semi-bold-white-14px">/ 50</div>
                   </div>
                 </div>
@@ -142,7 +143,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="goal-data">
                   <div className="x893"></div>
                   <div className="goal-0yTxuU goal">
-                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
+                    {/* <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div> */}
+                    <div className="x0-T9m1oI x0 inter-semi-bold-keppel-14px">0</div>
                     <div className="x3-T9m1oI x3 inter-semi-bold-white-14px">/ 1</div>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ interface IChallengeCompletedProps {
 const displayReawrd = ( pathname: string ): string | undefined => {
   if (pathname) {
     const pathList = pathname.split('/');
-    console.log("pathList", pathList);
+
     const reward = pathList[pathList.length - 1];
     
     return missionList.find((mission, index) => index === parseInt(reward) - 1)?.sigdao || undefined
@@ -63,18 +63,18 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const TransferTokenToUser = async (nodeHost: string, userAccountId: string, reward: string,ledger2:any) => {
     var rewardString:string|undefined = displayReawrd(location.state?.reward);
     const challengeNumber:string[]|null = location.state?.reward.split('/');
-    console.log(challengeNumber);
-    console.log();
+
+
     if(rewardString == undefined || !challengeNumber) { return; }
     else{
       const index:number = Number(challengeNumber[2]);
       const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
-      console.log("number of challenges played", numChallengesPlayed);
-      console.log("reward string is",rewardString)
-      console.log("index is ", index);
+
+
+
       //await TransferToken(nodeHost, userAccountId, rewardString);
       const rewardPercentage = await GetRewardPercentage(ledger2,userAccountId);
-      console.log("rewardPercentage is",rewardPercentage);
+
       var reward:string;
       if(rewardPercentage!=null){
        reward = String(parseFloat(rewardString!)*(100+parseInt(rewardPercentage))/100);
@@ -82,11 +82,11 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
       else{
         reward = String(parseFloat(rewardString!))
       }
-      console.log(reward);      
+
       setReward(reward);
       if(numChallengesPlayed[index-1] < 3 && rewardPercentage!= null){
-        console.log("called this argument")
-        console.log(numChallengesPlayed[index])
+
+
 
       await TransferTokenWithMessage(nodeHost, userAccountId, reward, parseInt(challengeNumber![challengeNumber!.length-1]));
       }

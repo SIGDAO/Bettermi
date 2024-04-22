@@ -44,10 +44,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleMint = async () => {
   }
 
-  console.log(ledger);
+
   const confirm = async () => {
     if (minted){
-      console.log('not minted');
+
       return
     }
 
@@ -65,27 +65,27 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         if(obj.account == userAccountId){
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
-            console.log(obj.quantityQNT);
+
         }
       });
-      console.log(store.getState());
+
       let ourContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: codeHashId,
       });
-      // console.log(ourContract);
-      // console.log(ourContract.ats[0]);
+
+
       let storeNftContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
       });
-      // console.log(storeNftContract);
-      // console.log(storeNftContract.ats[0]);
-      // console.log(typeof(storeNftContract.ats[0]));
+
+
+
 
       try {
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
+
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
@@ -93,12 +93,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
-            console.log(initializeNftContract);
+
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
 
         }
         if(ourContract.ats[0] == null){
-          //console.log("called ourContract.ats[0] == null");
+
           const initializeContract = await ledger.contract.publishContractByReference({
             name: "BMI",
             description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
@@ -106,7 +106,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
-            console.log(initializeContract);
+
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           // while(ourContract.ats[0] == null){
           //   setTimeout( async function(){
@@ -115,7 +115,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
           //       machineCodeHash: codeHashId,
     
           //       });
-          //     console.log(ourContract);
+
           //   }, 15000 );
           // }
     /*
@@ -145,7 +145,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         }) as UnsignedTransaction;
         await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-        console.log('confirm');
+
         //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/generateFreeNFT');
       } catch (error) {

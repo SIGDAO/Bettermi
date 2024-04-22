@@ -35,12 +35,12 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             //   setIsOpenPopup((prev) => !prev);
             //   setSelectedAssetId(nftId);
             //   setLevel(nftLevel);
-            console.log("testing");
+
             if (setOpenModel) {
               setOpenModel(!openModel);
             }
             if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
-              console.log(parseInt(String(nftIndex).padStart(8, "0")));
+
               const selectedNftInfo: selectedNftInfo = {
                 imageUrl: imageAddress,
                 nftLevel: nftLevel,
@@ -60,12 +60,12 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             //   setIsOpenPopup((prev) => !prev);
             //   setSelectedAssetId(nftId);
             //   setLevel(nftLevel);
-            console.log("testing");
+
             if (setOpenModel) {
               setOpenModel(!openModel);
             }
             if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
-              console.log(parseInt(String(nftIndex).padStart(8, "0")));
+
               const selectedNftInfo: selectedNftInfo = {
                 imageUrl: imageAddress,
                 nftLevel: nftLevel,
@@ -112,7 +112,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
                 //   setIsOpenPopup((prev) => !prev);
                 //   setSelectedAssetId(nftId);
                 //   setLevel(nftLevel);
-                console.log("testing");
+
                 if (setOpenModel) {
                   setOpenModel(!openModel);
                 }

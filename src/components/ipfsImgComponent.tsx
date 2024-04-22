@@ -46,8 +46,8 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
 
   const switchDomain = () => {
     // const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
-    console.log("switching domain", (currentDomainIndex + 1) % domains.length);
-    console.log(currentDomainIndex, "indexNum");
+
+
     setSrc(domains[(currentDomainIndex + 1) % domains.length]);
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
@@ -68,13 +68,13 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
 
   useEffect(() => {
     const nextDomainIndex = (currentDomainIndex + 1) % domains.length;
-    console.log("switching domain", nextDomainIndex);
+
     setSrc(domains[nextDomainIndex]);
   }, [currentDomainIndex]);
 
   const handleImageError = () => {
     // setTimeout(switchDomain, 3000);
-    console.log("image error");
+
     // switchDomain();
     // setIsLoading(true)
     setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
