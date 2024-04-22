@@ -94,7 +94,7 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
     <>
       {isLoading === true || loadingNft === true ? (
         <>
-          <ShortTitleBar title="My NFT Collection" setting={false} addSign={false} aiCoach={false} filter={false} importButton={false} />
+          <ShortTitleBar title="Loading NFT collections..." setting={false} addSign={false} aiCoach={false} filter={false} importButton={false} />
           <LoadingMintingMyNftList loadingNft={loadingNft} userId={userId} setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts={setMyNfts} isOtherUser={isOtherUser}></LoadingMintingMyNftList>
         </>
       ) : 

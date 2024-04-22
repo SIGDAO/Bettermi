@@ -350,7 +350,7 @@ const OtherUserProfile: React.FunctionComponent<IAnimaGenContentProps> = (props)
                     onWheel={handleScroll}
                   >
                     <Link to="/allNftList/">
-                      <img className="otherUserProfileBuyNFt" src = {"img/leaderboard/NftMarketplaceBanner.png"}>
+                      <img className="otherUserProfileBuyNFt" src = {"img/leaderboard/NftMarketplaceBanner2.png"}>
                       </img>
                     </Link>
                     {loadingNft === true ? (
