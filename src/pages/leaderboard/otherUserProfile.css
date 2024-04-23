@@ -9,10 +9,9 @@
   overflow: hidden auto;
   width: 390px;
 }
-
+/* 
 .bettermidapp-profile-3 .overlap-group5 {
   align-items: flex-end;
-  /* background-image: url(../img/bg-3@1x.png); */
   background-position: 50% 50%;
   background-size: cover;
   display: flex;
@@ -20,23 +19,22 @@
   flex-direction: column;
   gap: 40px;
   margin-top: -47.48px;
-  /* : 810px; */
   padding: 0px 23px;
   padding-top: 155.5px;
   width: 480px;
   z-index: 1;
   overflow-y:auto;
   overflow-x: hidden;
-}
+} */
 
-.overlap-design-layout {
+/* .overlap-design-layout {
   display: flex;
   flex-direction: column;
   justify-content: start;
   gap: 40px;
   min-height: 674px;
   align-items: center;
-}
+} */
 
 .bettermidapp-profile-3::-webkit-scrollbar {
   display: none;
@@ -57,13 +55,13 @@
   width: 107px;
 }
 
-.bettermidapp-profile-3 .overlap-group1-profile {
+/* .bettermidapp-profile-3 .overlap-group1-profile {
   align-self: center;
   height: 333px;
   margin-right: 0;
   position: relative;
   width: 418px;
-}
+} */
 
 .bettermidapp-profile-3 .continue-profile {
   letter-spacing: 0;
@@ -74,8 +72,7 @@
   white-space: nowrap;
 }
 
-.bettermidapp-profile-3 .ic_edit {
-  /* background-image: url(../img/ic-edit-1@1x.png); */
+/* .bettermidapp-profile-3 .ic_edit {
   background-position: 50% 50%;
   background-size: cover;
   cursor: pointer;
@@ -84,7 +81,7 @@
   position: absolute;
   top: 62px;
   width: 18px;
-}
+} */
 
 .ic_edit-content {
   height: 100%;
@@ -649,7 +646,7 @@
   width: 418px;
 }
 
-.bettermidapp-profile-3 .button_nft-collections {
+.bettermidapp-profile-3 .otherprofile-button_nft-collections {
   align-items: flex-end;
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   border-radius: 10px;
@@ -692,7 +689,7 @@
 }
 
 .bettermidapp-profile-3 .perso-container {
-  height: 42px;
+  /* height: 42px; */
   position: relative;
   width: 296px;
 }
@@ -700,7 +697,7 @@
 .bettermidapp-profile-3 .perso-container p{
   margin: 0;
 }
-
+/* 
 .bettermidapp-profile-3 .im-a-positive-perso {
   color: var(--white);
   font-family: var(--font-family-inter);
@@ -713,12 +710,11 @@
   top: 23px;
   width: 314px;
   overflow:hidden;
-  /* text-overflow: ellipsis; */
   white-space: nowrap;
   margin: 0;
-}
+} */
 
-.bettermidapp-profile-3 .x29-personal-trainer {
+/* .bettermidapp-profile-3 .x29-personal-trainer {
   left: 0;
   letter-spacing: 0;
   line-height: 15px;
@@ -726,7 +722,7 @@
   text-align: center;
   top: 0;
   white-space: nowrap;
-}
+} */
 
 .bettermidapp-profile-3 .nft_-avatar {
   border-radius: 6px;
@@ -739,7 +735,7 @@
   clip: rect(0, 80px, 80px, 0);
 }
 
-.bettermidapp-profile-3 .nft_-avatar_empty {
+/* .bettermidapp-profile-3 .nft_-avatar_empty {
   border-radius: 6px;
   height: 125px;
   left: 52px;
@@ -749,9 +745,8 @@
   width: 80px;
   clip: rect(0, 80px, 80px, 0);
   background-color: #221D4B;
- /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
-}
-.profile_icon_nft_-avatar_empty {
+} */
+.otherUserProfile-profile_icon_nft_-avatar_empty {
   border-radius: 6px;
   height: 80px;
   left: 52px;
@@ -763,7 +758,6 @@
   display:flex;
   align-items: center;
   justify-content: center;
- /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
 }
 .profile_icon_ic_add {
   height: 28px;
@@ -835,13 +829,13 @@
 }
 
 
-.bettermidapp-profile-3 .copy-icon {
+.bettermidapp-profile-3 .other-copy-icon {
   /* background-image: url(.bettermidapp-profile-3 ..bettermidapp-profile-3 ./img/file---11690@1x.bettermidapp-profile-3 .png); */
   /* background-position: 50% 50%; */
   background-size: cover;
   height: 18px;
   left: 250px;
-  /* position: absolute; */
+  position: absolute;
   top: 228px;
   width: 17px;
   cursor: pointer;
