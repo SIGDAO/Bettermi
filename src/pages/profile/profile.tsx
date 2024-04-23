@@ -10,10 +10,14 @@ import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
+import ProfileTemplate from "./profileTemplate";
 
-interface IProfileProps {}
+interface IProfileProps {
 
-const Profile: React.FunctionComponent<IProfileProps> = (props) => {
+}
+
+const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isBackButton, setIsBackButton] = useState<boolean>(true);
   const { state } = useLocation();
@@ -94,18 +98,17 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
           )
           }
           <div className="screen">
-            <AnimaGenContent
+            <ProfileTemplate
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
               isNFTiconLoading={isNFTiconLoading}
               setIsNFTiconLoading={setIsNFTiconLoading}
               setIsPopUpIcon={setIsPopUpIcon}
               isPopUpIcon={isPopUpIcon}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              isBackButton={isBackButton}
-              setIsBackButton={setIsBackButton}
-              isUpdatingUserSetting={isUpdatingUserSetting}
               setImgAddress={setImgAddress}
               setRewardPercentage={setRewardPercentage}
+              isMyProfile={true}
+              userAccountId={userAccountId}
             />
           </div>
         </>
@@ -116,4 +119,4 @@ const Profile: React.FunctionComponent<IProfileProps> = (props) => {
   );
 };
 
-export default Profile;
+export default ProfileTesting;

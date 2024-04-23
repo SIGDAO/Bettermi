@@ -1,5 +1,5 @@
 import { checkEquippedBettermiNFT } from "../UserLevel/checkUserLevel";
-import { FindLatestTransactionArray,FindLatestTransactionNumber } from "../updateUserNftStorage";
+import { FindLatestTransactionArray,FindLatestTransactionNumber, fetchIPFSJSON } from "../updateUserNftStorage";
 import { UpdateUserIconNewVersion } from "../updateUserNftStorage";
 export async function reEquipNft (ledger2:any,Wallet:any,userAccountId:string,codeHashIdForNft:string,nftDistributor:string,userAccountpublicKey:string,navigate:(url:string) => void){
     const equippedBettermiNft = await checkEquippedBettermiNFT(ledger2,userAccountId);
@@ -28,9 +28,9 @@ export async function reEquipNft (ledger2:any,Wallet:any,userAccountId:string,co
       //   const imgAddress = text.media[0].social
       //   UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
       // })
-      const ipfsJson = await fetch(`https://ipfs.io/ipfs/${ipfsAddress}`);
-      const text = await ipfsJson.text();
-      const imgAddress = JSON.parse(text).media[0].social;
+      const ipfsJson = await fetchIPFSJSON(ipfsAddress);
+      // const text = await ipfsJson.text();
+      const imgAddress = ipfsJson.media[0].social;
       await  UpdateUserIconNewVersion(ledger2,imgAddress,nftId,userAccountId,userAccountpublicKey,Wallet,name);
     }
 }

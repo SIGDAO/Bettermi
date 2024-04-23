@@ -10,13 +10,7 @@ interface IPFSImageComponentProps {
 
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT", style }) => {
   const domains = [
-    // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
-    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
     `https://ipfs.io/ipfs/${imgAddress}`,
-    // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
-    // `https://${imgAddress}.ipfs.dweb.link/`,
-    // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
   ];
   if (className === "allNftImage") {
     const domains = [

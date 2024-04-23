@@ -26,9 +26,9 @@ export async function fetchIPFSJSON(address: string) {
         `https://gateway.pinata.cloud/ipfs/${address}`,
         `https://${address}.ipfs.dweb.link/`,
         `https://cloudflare-ipfs.com/ipfs/${address}`,
-        `https://pfs.eth.aragon.network/ipfs/${address}`,
-        `https://video.oneloveipfs.com/ipfs/${address}`,
-        `https://ipfs.eth.aragon.network/ipfs/${address}`,
+        // `https://pfs.eth.aragon.network/ipfs/${address}`,
+        // `https://video.oneloveipfs.com/ipfs/${address}`,
+        // `https://ipfs.eth.aragon.network/ipfs/${address}`,
     ];
     let index = 0;
     while (true) {
