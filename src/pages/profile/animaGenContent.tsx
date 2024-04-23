@@ -379,7 +379,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               // onWheel={handleScroll}
             >
               <Link to="/allNftList/">
-                <img className="profileBuyNft" src="img/profile/NftMarketplaceBanner.png">
+                <img className="profileBuyNft" src = "img/profile/NftMarketplaceBanner2.png">
                   {/* <img className="ic_add" src="img/profile/ic-add-2@1x.png" alt="ic_add" /> */}
                   {/* <p className="inter-semi-bold-white-12px ">Buy NFT</p> */}
                 </img>
