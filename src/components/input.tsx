@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { profileSlice } from '../redux/profile';
 import { store } from '../redux/reducer';
-import generateName from '../components/generateName';
+import { generateName } from './randomGenerater';
 import { useNavigate } from 'react-router-dom';
 import './input.css'
 
