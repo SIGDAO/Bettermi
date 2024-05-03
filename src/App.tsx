@@ -65,35 +65,35 @@ const theme = createTheme({
 });
 
 const titleList = {
-  "/": "BetterMi",
-  "/connectWallet": "Connect Wallet - BetterMi",
-  "/generateBMI": "Generate BMI - BetterMi",
-  "/takeSelfie": "Take Selfie - BetterMi",
-  "/connectSucceed": "Connect Succeed - BetterMi",
-  "/generateFreeNFT": "Generate Free NFT - BetterMi",
-  "/customizeYourProfile": "Customize Your Profile - BetterMi",
-  "/home": "Home - BetterMi",
-  "/featureMissions": "Feature Missions - BetterMi",
-  "/challengeCompleted": "Challenge Completed - BetterMi",
-  "/challengeCountdown": "Challenge Countdown - BetterMi",
-  "/missionChallenge": "Mission Challenge - BetterMi",
-  "/myNftList": "My NFT List - BetterMi",
-  "/reward": "Reward - BetterMi",
-  "/rewardDetail": "Reward Detail - BetterMi",
-  "/selfieToEarn": "Selfie To Earn - BetterMi",
-  "/profile": "Profile - BetterMi",
-  "/marketplace": "Marketplace - BetterMi",
-  "/previewNFTImg": "NFT detail - BetterMi",
-  "/generateBMIDaily": "Generate BMI Daily - BetterMi",
-  "/generateBMINFTImport": "Generate BMI NFT Import - BetterMi",
-  "/aiCoachSelect": "AI Coach Select - BetterMi",
-  "/aiCoachDetail": "AI Coach Detail - BetterMi",
-  "/errorGenerateNFT": "Error Generate NFT - BetterMi",
-  "/errorTakeSelfie": "Error Take Selfie - BetterMi",
-  "/errorCustomizeYourProfile": "Error Customize Your Profile - BetterMi",
-  "/loadingMinting": "Loading Minting - BetterMi",
-  "/setting": "Setting - BetterMi",
-  "/NFTTransferCompleted": "NFT Transfer Completed - BetterMi",
+  "/": "Bettermi",
+  "/connectWallet": "Connect Wallet - Bettermi",
+  "/generateBMI": "Generate BMI - Bettermi",
+  "/takeSelfie": "Take Selfie - Bettermi",
+  "/connectSucceed": "Connect Succeed - Bettermi",
+  "/generateFreeNFT": "Generate Free NFT - Bettermi",
+  "/customizeYourProfile": "Customize Your Profile - Bettermi",
+  "/home": "Home - Bettermi",
+  "/featureMissions": "Feature Missions - Bettermi",
+  "/challengeCompleted": "Challenge Completed - Bettermi",
+  "/challengeCountdown": "Challenge Countdown - Bettermi",
+  "/missionChallenge": "Mission Challenge - Bettermi",
+  "/myNftList": "My NFT List - Bettermi",
+  "/reward": "Reward - Bettermi",
+  "/rewardDetail": "Reward Detail - Bettermi",
+  "/selfieToEarn": "Selfie To Earn - Bettermi",
+  "/profile": "Profile - Bettermi",
+  "/marketplace": "Marketplace - Bettermi",
+  "/previewNFTImg": "NFT detail - Bettermi",
+  "/generateBMIDaily": "Generate BMI Daily - Bettermi",
+  "/generateBMINFTImport": "Generate BMI NFT Import - Bettermi",
+  "/aiCoachSelect": "AI Coach Select - Bettermi",
+  "/aiCoachDetail": "AI Coach Detail - Bettermi",
+  "/errorGenerateNFT": "Error Generate NFT - Bettermi",
+  "/errorTakeSelfie": "Error Take Selfie - Bettermi",
+  "/errorCustomizeYourProfile": "Error Customize Your Profile - Bettermi",
+  "/loadingMinting": "Loading Minting - Bettermi",
+  "/setting": "Setting - Bettermi",
+  "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
 };
 
   
@@ -128,7 +128,7 @@ function App() {
 
   const location = useLocation();
   useEffect(() => {
-    document.title = titleList[location.pathname] ?? "BetterMi";
+    document.title = titleList[location.pathname] ?? "Bettermi";
   }, [location]);
 
 

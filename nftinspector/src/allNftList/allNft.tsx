@@ -52,7 +52,8 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             }
           }}
           className="myNftImage"
-          src={`https://ipfs.io/ipfs/${imageAddress}`}
+          // src={`https://ipfs.io/ipfs/${imageAddress}`}
+          src={`https://fuchsia-magnificent-koala-653.mypinata.cloud/ipfs/QmXXwAZtz1x6DwpbQGFXkfbbiHcurs7xmfh6kNo9uMcfkU?pinataGatewayToken=ocyauUQ6QJQEcidhvbp6MDqNJayYP20yaSIVcAh7142GuV2ColRsR-RfbMjZ8NnU`}
         ></img>
         {/* <IPFSImageComponent
           imgAddress={imageAddress}

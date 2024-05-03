@@ -19,7 +19,6 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../redux/useContext";
 import { accountPublicKey } from "../../redux/account";
 import { accountId } from "../../redux/account";
-import { TransferNFTOwnership } from "./transferNFTOwnership";
 import { accountSlice } from "../../redux/account";
 import { store } from "../../redux/reducer";
 import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/rewardCalculate";

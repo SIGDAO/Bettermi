@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getApiUrls } from "./constants/constant";
 
 interface IPFSImageComponentProps {
   imgAddress: string;
@@ -20,6 +21,8 @@ interface IPFSImageComponentProps {
 
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT", style }) => {
   const domains = [
+    getApiUrls(imgAddress).imgAddress,
+    `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
     `https://ipfs.io/ipfs/${imgAddress}`,
     `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
@@ -27,6 +30,8 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
   ];
   if (className === "allNftImage") {
     const domains = [
+      getApiUrls(imgAddress).imgAddress,
+      `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
       `https://ipfs.io/ipfs/${imgAddress}`,
     ];
   }
