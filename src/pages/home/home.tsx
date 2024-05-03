@@ -22,6 +22,7 @@ import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 import { reEquipNft } from "../../NftSystem/displayNft/reequipNft";
+import { getApiUrls } from "../../components/constants/constant";
 
 interface IHomeProps {}
 
@@ -136,7 +137,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         if (description.id != null) {
           const accountInfo = await ledger2.contract.getContract(description.id);
           setIpfsAddress(JSON.parse(accountInfo.description).descriptor);
-          const ipfsJson = await fetch(`https://ipfs.io/ipfs/${JSON.parse(accountInfo.description).descriptor}`);
+          //const ipfsJson = await fetch(`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${JSON.parse(accountInfo.description).descriptor}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`);
+          const ipfsJson = await fetch(getApiUrls(JSON.parse(accountInfo.description).descriptor).imgAddress);
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
           var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
@@ -218,7 +220,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="x0"></div>
           ) : (
             <>
-              <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+              <img className="x0-generateFreeNFT" src={getApiUrls(imgAddress).imgAddress} alt="0" />
               {/* <h1 className="text-1">#{nftNumber}</h1> */}
               {/* <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress} /> */}
             </>

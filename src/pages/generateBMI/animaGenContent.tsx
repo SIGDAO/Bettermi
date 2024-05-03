@@ -10,7 +10,6 @@ import { AppContext } from '../../redux/useContext';
 import { accountPublicKey } from '../../redux/account';
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
-import { TransferNFTOwnership } from './transferNFTOwnership';
 import { accountSlice } from '../../redux/account';
 import { store } from '../../redux/reducer';
 import { selectCurrentGender } from '../../redux/profile';
@@ -146,7 +145,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
 
-        //await TransferNFTOwnership(ledger,userAccountId,Wallet);
         navigate('/generateFreeNFT');
       } catch (error) {
         console.log(error);

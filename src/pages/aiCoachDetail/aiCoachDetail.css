@@ -245,10 +245,8 @@
 .bettermidapp-ai-coach-mimi .ic_casino_24px-dF0TP0 {
   background-color: transparent;
   height: 15px;
-  left: calc(50.00% - 8px);
   object-fit: cover;
-  position: absolute;
-  top: 0px;
+
   width: 15px;
 }
 
@@ -261,11 +259,9 @@
 }
 
 .bettermidapp-ai-coach-mimi .ic_send-qbYILs {
-  height: 100%;
-  left: 0px;
+  height: 18px;
   object-fit: cover;
-  top: 0px;
-  width: 100%;
+  width: 21px;
 }
 
 .bettermidapp-ai-coach-mimi .i-need-help-Jhcaae {
@@ -597,4 +593,61 @@
   position: relative;
   top: 0px;
   width: 220px;
+}
+
+
+.coach-chat-container {
+  width: 390px;
+  min-height: 533px;
+  border: 1px solid var(--royal-blue);
+  background: #171717;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  position: absolute;
+  top: 312px;
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-input-area {
+  width: 300px;
+  height: 36px;
+  border: 1px solid var(--royal-blue);
+  border-radius: 100px;
+  background: #221D4B;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.coach-name {
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxl);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.chat-message-input::placeholder {
+  color: var(--royal-blue);
+}
+
+.chat-message-input {
+  /* background: ; */
+  width: 230px;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: white;
+  height: 100%;
+  font-size: var(--font-size-m);
+}
+
+.message-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

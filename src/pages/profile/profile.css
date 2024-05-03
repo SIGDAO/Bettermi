@@ -22,7 +22,7 @@
   margin-top: -47.48px;
   /* : 810px; */
   padding: 0px 23px;
-  padding-top: 155.5px;
+  padding-top: 185px;
   width: 480px;
   z-index: 1;
   overflow-y:auto;
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 40px;
+  gap: 68px;
   min-height: 674px;
   align-items: center;
 }
@@ -75,14 +75,13 @@
 }
 
 .bettermidapp-profile-3 .ic_edit {
-  /* background-image: url(../img/ic-edit-1@1x.png); */
   background-position: 50% 50%;
   background-size: cover;
   cursor: pointer;
   height: 18px;
-  left: 342px;
+  right: 28px;
   position: absolute;
-  top: 62px;
+  top: 23px;
   width: 18px;
 }
 
@@ -143,15 +142,19 @@
 }
 
 .profile-description-bg {
-  height: 261px;
+  /* height: 261px; */
   width: 358px;
+  padding: 60px 22px 43px 22px;
   background: var(--woodsmoke);
   border: 1px solid var(--royal-blue);
   border-radius: 20px;
   box-shadow: 0px 3px 20px var(--royal-blue);
-  position: absolute;
-  top: 39px;
-  left: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
 }
 
 
@@ -657,11 +660,11 @@
   display: flex;
   height: 56px;
   justify-content: flex-end;
-  left: 30px;
+  left: 0px;
   min-width: 248px;
   padding: 13.5px 48px;
   position: absolute;
-  top: 272px;
+  bottom: -28px;
 }
 
 .bettermidapp-profile-3 .profile-content {
@@ -692,9 +695,11 @@
 }
 
 .bettermidapp-profile-3 .perso-container {
-  height: 42px;
   position: relative;
   width: 296px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .bettermidapp-profile-3 .perso-container p{
@@ -706,23 +711,20 @@
   font-family: var(--font-family-inter);
   font-size: var(--font-size-l);
   font-weight: 400;
-  left: 0;
   letter-spacing: 0;
-  line-height: 25px;
-  position: absolute;
-  top: 23px;
-  white-space: nowrap;
+  /* line-height: 25px; */
+  white-space: wrap;
   margin: 0;
 }
 
 .bettermidapp-profile-3 .x29-personal-trainer {
-  left: 0;
+  /* left: 0; */
   letter-spacing: 0;
   line-height: 15px;
-  position: absolute;
+  /* position: absolute;
   text-align: center;
-  top: 0;
-  white-space: nowrap;
+  top: 0; */
+  /* white-space: nowrap; */
 }
 
 .bettermidapp-profile-3 .nft_-avatar {
@@ -739,10 +741,10 @@
 .bettermidapp-profile-3 .nft_-avatar_empty {
   border-radius: 6px;
   height: 125px;
-  left: 52px;
+  left: 22px;
   object-fit: cover;
   position: absolute;
-  top: -5;
+  top: -40px;
   width: 80px;
   clip: rect(0, 80px, 80px, 0);
   background-color: #221D4B;
@@ -751,10 +753,10 @@
 .profile_icon_nft_-avatar_empty {
   border-radius: 6px;
   height: 80px;
-  left: 52px;
+  left: 22px;
   object-fit: cover;
   position: absolute;
-  top: -5;
+  top: -40px;
   width: 80px;
   background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);;
   display:flex;
@@ -1422,11 +1424,11 @@
 }
 
 .profile-content-container {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  top: 100px;
-  left: 52px;
+  /* top: 100px; */
+  /* left: 52px; */
   height: 147px;
 }

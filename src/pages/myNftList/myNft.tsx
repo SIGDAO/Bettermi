@@ -17,6 +17,7 @@ import { selectCurrentUsername } from '../../redux/profile';
 import { selectedNftInfo } from '../allNftList/indexAllNftList';
 import IPFSImageComponent from '../../components/ipfsImgComponent';
 import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage';
+import { getApiUrls } from '../../components/constants/constant';
 
  interface MyNftProps {
     image:string;
@@ -48,7 +49,8 @@ import { convertWordToNumber } from '../../NftSystem/Reward/getRewardPercentage'
      const [reward,setReward] = useState<string>("");
      const name = useAppSelector(selectCurrentUsername);
      useEffect(() => {
-         fetch(`https://ipfs.io/ipfs/${image}`).then((res)=>{
+         //fetch(`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${image}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`).then((res)=>{
+          fetch(getApiUrls(image).imgAddress).then((res)=>{
              res.text().then((text)=>{
                  var nftInfo = JSON.parse(text);
                  let matches = nftInfo.name.match(/(\d+)/);

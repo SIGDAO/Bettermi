@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import MenuBar from "../../components/menuBar";
 import { Link, useNavigate } from "react-router-dom";
 import { ShortTitleBar } from "../../components/titleBar";
@@ -89,6 +90,17 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const [fetchName, setFetchName] = useState<string>("");
   const [fetchAboutYourself, setFetchAboutYourself] = useState<string>("");
   const [fetchDiscordUsername, setFetchDiscordUsername] = useState<string>("");
+  const nullInfoDisplay = isMyProfile ? {
+    nullNameString: "Enter Your Name",
+    nullDescriptString: "Please enter DESCRIPTION TO FRIENDS",
+    nullAboutyourself: "♉️  |  29  |  PERSONAL TRAINER",
+    nullDiscordUsername: "Signum#1234"
+  } : {
+    nullNameString: "Anonymous",
+    nullDescriptString: "",
+    nullAboutyourself: "",
+    nullDiscordUsername: ""
+  }
 
   // user hold NFTs
   const [myNfts, setMyNfts] = useState<NftProfile[]>([]);
@@ -217,6 +229,13 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     navigate("/indexMyNftList");
   };
 
+  const displayName = () => {
+    if (isMyProfile) {
+      return fetchName || name || "Enter Your Name"
+    }
+    return 
+  }
+
   // useEffect
   useEffect(() => {
     const countdown = () => {
@@ -289,11 +308,11 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
                 {/* <div className="profile-content-container">
             </div> */}
                 <div className="profile-content">
-                  <div className="zoe_li">{fetchName ? fetchName : name || "Enter your name"}</div>
+                  <div className="zoe_li">{fetchName ? fetchName : name || nullInfoDisplay.nullNameString }</div>
                   <div className="perso-container">
-                    <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || `♉️  |  29  |  PERSONAL TRAINER`}</p>
+                    <p className="x29-personal-trainer inter-semi-bold-keppel-15px">{fetchAboutYourself ? fetchAboutYourself : aboutYourselfText || nullInfoDisplay.nullAboutyourself}</p>
                     <p className="im-a-positive-perso" style={description ? {} : { color: "#8e8e8e" }}>
-                      {fetchDescription ? fetchDescription : descriptionText || "Please enter DESCRIPTION TO FRIENDS"}
+                      {fetchDescription ? fetchDescription : descriptionText || nullInfoDisplay.nullDescriptString}
                     </p>
                   </div>
                 </div>
@@ -304,10 +323,11 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
                   <div className="discord inter-bold-royal-blue-15px">DISCORD</div>
                 </div>
                 <div className="discord-card-container">
-                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || "Signum#1234"}</div>
+                  <div className="card-number inter-normal-white-15px">{fetchDiscordUsername ? fetchDiscordUsername : discordUsernameText || nullInfoDisplay.nullDiscordUsername }</div>
+                  {fetchDiscordUsername && 
                   <div className="copy-icon" onClick={() => handleCopyDiscordUsername(discordUsername)}>
                     <img src="img/profile/file---11690@1x.png" alt="" />
-                  </div>
+                  </div>}
                 </div>
               </>
             )}
@@ -358,20 +378,34 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
                 </>
               ) : (
                 myNfts.map((MyNft) => (
-                  <img
+                  <IPFSImageComponent
                     onClick={() => {
                       setIsPopUpIcon(true);
                       setImgAddress(MyNft.imageAddress);
                       setRewardPercentage(MyNft.rewardPercentage);
                     }}
-                    src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
+                    imgAddress={MyNft.imageAddress}
                     style={{
                       width: "152px",
                       height: "217px",
                       objectFit: "cover",
                       marginRight: "10px",
                     }}
-                  />
+                    />
+                  // <img
+                  //   onClick={() => {
+                  //     setIsPopUpIcon(true);
+                  //     setImgAddress(MyNft.imageAddress);
+                  //     setRewardPercentage(MyNft.rewardPercentage);
+                  //   }}
+                  //   src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
+                  //   style={{
+                  //     width: "152px",
+                  //     height: "217px",
+                  //     objectFit: "cover",
+                  //     marginRight: "10px",
+                  //   }}
+                  // />
                 ))
               )}
             </div>

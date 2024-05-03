@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getApiUrls } from "./constants/constant";
 
 interface IPFSImageComponentProps {
   imgAddress: string;
@@ -7,26 +8,31 @@ interface IPFSImageComponentProps {
   alt?: string;
   style?: React.CSSProperties;
 }
+// const domains = [
+  // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+  // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+  // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+  // `https://ipfs.io/ipfs/${imgAddress}`,
+  // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+  // `https://${imgAddress}.ipfs.dweb.link/`,
+  // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+// ];
+
 
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT", style }) => {
   const domains = [
-    // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
-    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-    // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+    getApiUrls(imgAddress).imgAddress,
+    `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
     `https://ipfs.io/ipfs/${imgAddress}`,
-    // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
-    // `https://${imgAddress}.ipfs.dweb.link/`,
-    // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+    `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+    `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+
   ];
   if (className === "allNftImage") {
     const domains = [
-      // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
-      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+      getApiUrls(imgAddress).imgAddress,
+      `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
       `https://ipfs.io/ipfs/${imgAddress}`,
-      // `https://${imgAddress}.ipfs.dweb.link/`,
-      // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
-      // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
     ];
   }
   const [src, setSrc] = useState(domains[0]);
@@ -75,9 +81,9 @@ const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onC
   const handleImageError = () => {
     // setTimeout(switchDomain, 3000);
 
-    // switchDomain();
-    // setIsLoading(true)
-    setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
+    switchDomain();
+    setIsLoading(true)
+    // setCurrentDomainIndex((prevDomainIndex) => prevDomainIndex + 1);
   };
 
   // return !isLoading ? (

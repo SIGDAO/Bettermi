@@ -13,6 +13,7 @@ import { sendMessage } from "./updateUserNftList";
 import { myNftList } from "../pages/myNftList/myNftList";
 import { convertWordToNumber } from "./Reward/getRewardPercentage";
 import { otherUserNftList } from "../pages/leaderboard/otherUserProfile";
+import { getApiUrls } from "../components/constants/constant";
 
 
 export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDistributed:string){
@@ -22,14 +23,18 @@ export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDis
 export async function fetchIPFSJSON(address: string) {
     let res, text;
     const domains = [
+        getApiUrls(address).imgAddress,
+        `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${address}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
         `https://ipfs.io/ipfs/${address}`,
         `https://gateway.pinata.cloud/ipfs/${address}`,
         `https://${address}.ipfs.dweb.link/`,
         `https://cloudflare-ipfs.com/ipfs/${address}`,
-        `https://pfs.eth.aragon.network/ipfs/${address}`,
-        `https://video.oneloveipfs.com/ipfs/${address}`,
-        `https://ipfs.eth.aragon.network/ipfs/${address}`,
+        // `https://pfs.eth.aragon.network/ipfs/${address}`,
+        // `https://video.oneloveipfs.com/ipfs/${address}`,
+        // `https://ipfs.eth.aragon.network/ipfs/${address}`,
     ];
+    const url = getApiUrls(address).imgAddress;
+    console.log("testing url is",url)
     let index = 0;
     while (true) {
         const ipfsAddress = domains[index];

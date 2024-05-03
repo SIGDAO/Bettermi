@@ -10,6 +10,7 @@ import "../pages/home/home.css";
 import "../pages/profile/profile.css";
 import { fetchIPFSJSON } from "../NftSystem/updateUserNftStorage";
 import { convertWordToNumber } from "../NftSystem/Reward/getRewardPercentage";
+import { getApiUrls } from "./constants/constant";
 
 export interface IUserIconProps {
   home?: boolean;
@@ -56,6 +57,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           const description = JSON.parse(account.description);
           const accountInfo = await ledger2.contract.getContract(description.id);
           const nftInfo = await fetchIPFSJSON(JSON.parse(accountInfo.description).descriptor);
+          console.log("nftInfo is",nftInfo)
           const array = nftInfo.attributes[2].key3;
           const level = convertWordToNumber(nftInfo.attributes[6].value);
           if(isNaN(level) === false){
@@ -110,7 +112,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           }
           setEnlargeImageAddress(imgAddress);
           setRewardPercentage(nftIconRewardPercentage);
-        }} className={finalClassNames.forNftDisplay} src={`https://ipfs.io/ipfs/${imgAddress}`} alt="NFT_Avatar" />
+        }} className={finalClassNames.forNftDisplay} src={getApiUrls(imgAddress).imgAddress} alt="NFT_Avatar" />
         // <IPFSImageComponent
         //   imgAddress={imgAddress}
         //   onClick={() => {

@@ -34,6 +34,7 @@ import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
 import { selectedNftInfo } from "../allNftList/indexAllNftList";
 import { ContractDataView } from "@signumjs/contracts";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
+import { getApiUrls } from "../../components/constants/constant";
 
 interface IMyNftListProps {
   isUpdatingDescription: boolean;
@@ -142,7 +143,8 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
     const equippedNftIDDescription = await ledger2.contract.getContract(equippedNftId);
     const equippedNftDescription = JSON.parse(equippedNftIDDescription.description);
     const image = equippedNftDescription.descriptor;
-    fetch(`https://ipfs.io/ipfs/${image}`)
+    // fetch(`https://ipfs.io/ipfs/${image}`)
+    fetch(getApiUrls(image).imgAddress)
       .then((res) => {
         res.text().then((text) => {
           var nftInfo = JSON.parse(text);
@@ -526,7 +528,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
                           nftNumber:nftNumber!,
                         }
                         setSelectedNft(nftInfo);
-                      }} className="myNftImage" src={`https://ipfs.io/ipfs/${onDuty}`}></img>
+                      }} className="myNftImage" src={getApiUrls(onDuty).imgAddress}></img>
                     )}
                     <div className="myNftDescription">
                       <div className="myNftNumber">#{nftNumber}</div>
