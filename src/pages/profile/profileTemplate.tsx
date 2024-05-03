@@ -378,20 +378,34 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
                 </>
               ) : (
                 myNfts.map((MyNft) => (
-                  <img
+                  <IPFSImageComponent
                     onClick={() => {
                       setIsPopUpIcon(true);
                       setImgAddress(MyNft.imageAddress);
                       setRewardPercentage(MyNft.rewardPercentage);
                     }}
-                    src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
+                    imgAddress={MyNft.imageAddress}
                     style={{
                       width: "152px",
                       height: "217px",
                       objectFit: "cover",
                       marginRight: "10px",
                     }}
-                  />
+                    />
+                  // <img
+                  //   onClick={() => {
+                  //     setIsPopUpIcon(true);
+                  //     setImgAddress(MyNft.imageAddress);
+                  //     setRewardPercentage(MyNft.rewardPercentage);
+                  //   }}
+                  //   src={`https://ipfs.io/ipfs/${MyNft.imageAddress}`}
+                  //   style={{
+                  //     width: "152px",
+                  //     height: "217px",
+                  //     objectFit: "cover",
+                  //     marginRight: "10px",
+                  //   }}
+                  // />
                 ))
               )}
             </div>

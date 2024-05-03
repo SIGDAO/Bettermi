@@ -120,6 +120,12 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
 
   const SmallTitle = NFT ? 'Your NFT has been transferred.' : 'You have earned:';
 
+  const doneClickHandler = () => {
+    if (loading) {
+      navigate(pathname);
+    }
+  }
+
 
   const content: JSX.Element = (
     <div className="screen">
@@ -158,12 +164,10 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
           )
           }
         </div>
-        <Link to={pathname} >
-          <div className="button_-done-iwUDzs">
+          <div className="button_-done-iwUDzs" onClick={doneClickHandler}>
             <div className="button1-UidXYK button1"></div>
             <div className="continue-UidXYK inter-semi-bold-white-15px">Done</div>
           </div>
-        </Link>
       </div>
     </div>
   )
