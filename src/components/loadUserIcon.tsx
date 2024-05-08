@@ -52,8 +52,6 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
     } else {
       try{
       const account = await ledger2.account.getAccount({ accountId: userAccountId })
-
-
           const description = JSON.parse(account.description);
           const accountInfo = await ledger2.contract.getContract(description.id);
           const nftInfo = await fetchIPFSJSON(JSON.parse(accountInfo.description).descriptor);
@@ -101,9 +99,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
             <img className={finalClassNames.forLoadingSign} src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="ic_add" />
           </div>
         </Link>
-      ) : // <div
-      //   className="nft_-avatar_empty"
-      // />
+      ) :
       haveNft === true ? (
         <img onClick={() => {
           setIsPopUpIcon(true);
@@ -113,16 +109,6 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
           setEnlargeImageAddress(imgAddress);
           setRewardPercentage(nftIconRewardPercentage);
         }} className={finalClassNames.forNftDisplay} src={getApiUrls(imgAddress).imgAddress} alt="NFT_Avatar" />
-        // <IPFSImageComponent
-        //   imgAddress={imgAddress}
-        //   onClick={() => {
-        //     setIsPopUpIcon(true);
-        //     if (setSelectedNft != null) {
-        //       setSelectedNft(imgAddress);
-        //     }
-        //   }}
-        //   className={finalClassNames.forNftDisplay}
-        // />
       ) : (
         <Link to="/allNftList/">
           <div className={finalClassNames.forEmptyIcon}>

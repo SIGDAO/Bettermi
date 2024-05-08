@@ -6,6 +6,8 @@ import { BackButton } from "../../components/button";
 import { ShortTitleBar } from "../../components/titleBar";
 import { useEffect } from "react";
 import { RandomGenNameInput } from "../../components/input";
+import Chatbox from "./chatbox";
+import { generateDotIoMessage, generateMimiMessage } from "../../components/randomGenerater";
 
 interface IAiCoachDetailListProps {
   coachName: string;
@@ -44,13 +46,23 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
   const displayCoach: IAiCoachDetailListProps = coachList.find((coach) => coach.coachID === id) || coachList[0];
   const [chatRecordList, setChatRecordList] = React.useState<ChatRecord[]>();
   const [name, setName] = React.useState<string>("");
+  const [msgInput, setMsgInput] = React.useState<string>("");
+
+
+  const handleRandomQuestion = () => {
+    if (id === "1") {
+      setMsgInput(generateMimiMessage)    
+    } else if (id === "2") {
+      setMsgInput(generateDotIoMessage)
+    }
+  }
 
   const chatMessageInput: JSX.Element = (
     <div className="message-input-container">
       <div className="coach-typing-reminder"></div>
       <div className="message-input-area">
-        <input className="chat-message-input" type="text" placeholder="I need help..."/>
-        <div className="random-message-generate">
+        <input className="chat-message-input" value={msgInput} onChange={(e) => setMsgInput(e.target.value)} type="text" placeholder="I need help..."/>
+        <div className="random-message-generate" onClick={handleRandomQuestion}>
           <img className="ic_casino_24px-dF0TP0" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/ic-casino-24px-1@1x.png`} alt="ic_casino_24px" />
         </div>
       </div>
@@ -67,12 +79,22 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
         <div className="coach-chat-container">
           <div className="coach-detail-container">
             <div className="coach-name">{displayCoach.coachName} coach</div>
-            <div className="coach-detaill inter-normal-white-15px">@{displayCoach.coachUserName}</div>
+            <div className="coach-detaill inter-normal-grey-18px">@{displayCoach.coachUserName}</div>
+          </div>
+          <div className="ai-chat-msg-history-container">
+            <div className="ai-chat-msg-history">
+              <Chatbox text={"Hi, I am your Mimi coach\nhow can I help?"} time="12:31" isUser={false} />
+              {/* <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} />
+              <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} />
+              <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} />
+              <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} />
+              <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} />
+              <Chatbox text={"user\ntest\nteiosjfdiojfosjdfojsfdofjiosdfsdf\nsodfjosdjojjdsidfjosjdfojdsojfosdjfjsodjfisdjfosdfjoisdiofjosjsadhisaduhiuahdiuhdfojsdfiojdsofijodsijfoijsdiofji"} time="12:31" isUser={true} /> */}
+            </div>
           </div>
           <div className="message-container">{chatMessageInput}</div>
-          {/* <RandomGenNameInput name={name} setName={setName} /> */}
         </div>
-        <div className="write-msg-QyTK2J">
+        {/* <div className="write-msg-QyTK2J">
           <div className="chat-input-Jhcaae">
             <div className="x123-5CVdzB"></div>
             <div className="random-dice-5CVdzB">
@@ -128,7 +150,7 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
         </div>
         <h1 className="title-QyTK2J">{displayCoach.coachName} coach</h1>
         <div className="mental-coach-QyTK2J inter-normal-white-15px">@{displayCoach.coachUserName}</div>
-        <div className="mimi-is-typing-QyTK2J inter-normal-white-15px">{displayCoach.coachName} is typing……</div>
+        <div className="mimi-is-typing-QyTK2J inter-normal-white-15px">{displayCoach.coachName} is typing……</div> */}
       </div>
     </div>
   );

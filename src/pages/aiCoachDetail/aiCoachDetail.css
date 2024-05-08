@@ -598,7 +598,7 @@
 
 .coach-chat-container {
   width: 390px;
-  min-height: 533px;
+  height: 533px;
   border: 1px solid var(--royal-blue);
   background: #171717;
   box-shadow: 0px 3px 20px var(--royal-blue);
@@ -606,7 +606,9 @@
   top: 312px;
   border-radius: 10px 10px 0px 0px;
   display: flex;
+  padding: 34px 0px;
   flex-direction: column;
+  /* justify-content: space-between; */
 }
 
 .message-input-area {
@@ -625,7 +627,7 @@
   background-color: transparent;
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xxxxxl);
   font-style: normal;
   font-weight: 600;
 }
@@ -647,7 +649,96 @@
 }
 
 .message-input-container {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.coach-typing-reminder {
+  position: absolute;
+}
+
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+
+.ai-chat-msg-history-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* flex-direction: column;
+  gap: 20px; */
+  height: 490px;
+  padding: 15px 16px;
+  overflow: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+}
+
+.ai-chat-msg-history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: auto;
+}
+
+.ai-chatbox-container {
+  min-width: 220px;
+  max-width: 346px;
+  min-height: 68px;
+  border: 1px solid var(--royal-blue);
+  padding: 12px 19px 27px;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.user-chatbox-container {
+  min-width: 220px;
+  max-width: 346px;
+  min-height: 68px;
+  border: 1px solid var(--royal-blue);
+  padding: 12px 19px 27px;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+
+.ai-chat-content {
+  width: 100%;
+  height: 100%;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.ai-chat-content-time {
+  position: absolute;
+  right: 19px;
+  bottom: 12px;
+}
+
+.coach-detail-container {
+  padding-left: 25px;
+}
+
+.message-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  align-items: center;
+}
+
+.random-message-generate {
+  cursor: pointer;
 }
