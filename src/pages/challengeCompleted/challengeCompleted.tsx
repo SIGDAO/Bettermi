@@ -121,7 +121,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
   const SmallTitle = NFT ? 'Your NFT has been transferred.' : 'You have earned:';
 
   const doneClickHandler = () => {
-    if (loading) {
+    if (!loading) {
       navigate(pathname);
     }
   }
