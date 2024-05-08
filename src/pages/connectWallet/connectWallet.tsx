@@ -193,7 +193,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           Connect Your Wallet
         </h1>
         <p id="connectWalletDisciption" className="default-font-setting">
-          Connect your crypto wallet <br />
+          Connect your Signum wallet <br />
           &amp; Start your Bettermi Journey!
         </p>
         <div id="img-slider">
