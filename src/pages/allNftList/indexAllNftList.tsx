@@ -116,7 +116,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     for (var i = 0; i < nftStorages.length; i++) {
       try {
         const des = JSON.parse(nftStorages[i].description).descriptor;
-        const info: urlObject = { url: `https://ipfs.io/ipfs/${des}`, nftId: nftStorages[i].at, index: i };
+        const info: urlObject = { url: `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${des}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`, nftId: nftStorages[i].at, index: i };
         InfoJson.push(info);
       } catch {
 
