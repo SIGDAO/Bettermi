@@ -15,9 +15,10 @@ interface IChatboxProps {
 const Chatbox: React.FunctionComponent<IChatboxProps> = ({ text, time, isUser, id, streamPath, pageId }) => {
   const dispatch = useDispatch();
   const [streamMsg, setStreamMsg] = useState<string>("");
+  const [isStreamStart, setIsStreamStart] = useState<boolean>(false);
+  const [isStreamDone, setIsStreamDone] = useState<boolean>(false);
   const [isStreamMsgInit, setStreamIsStreamMsgInit] = useState<boolean>(false);
   const stringTime: string = time?.toTimeString().split(' ')[0].substring(0, 5);
-  const [isStreamDone, setIsStreamDone] = useState<boolean>(false);
 
 
   const handleStreamDoneMsg = () => {
@@ -52,7 +53,8 @@ const Chatbox: React.FunctionComponent<IChatboxProps> = ({ text, time, isUser, i
   }, [isStreamDone, streamMsg])
 
   useEffect(() => {
-    if (!streamPath || text ) return;
+    if (!streamPath || text || isStreamStart) return;
+    setIsStreamStart(true);
 
     const eventSource = new EventSource(streamPath);
     console.log(streamPath, "thePath");
@@ -64,8 +66,13 @@ const Chatbox: React.FunctionComponent<IChatboxProps> = ({ text, time, isUser, i
 
     eventSource.addEventListener("done", () => {
       setIsStreamDone(true);
+      setIsStreamStart(false);
       eventSource.close();
     });
+
+    return () => {
+      eventSource.close();
+    };
   }, []);
 
   const handleTextDisplay = (): string => {

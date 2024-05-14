@@ -120,11 +120,18 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
   useEffect(() => {
     if (!isMsgStartSend) return;
 
+
     if (id === "1") {
-      sendMimiMsg(chatHistory);
+      sendMimiMsg(chatHistory)
+        .then(()=> {
+          scrollToBottom();
+        });
     }
     if (id === "2") {
-      sendIoMsg(chatHistory);
+      sendIoMsg(chatHistory)
+        .then(()=> {
+          scrollToBottom();
+        });
     }
 
     setIsMsgStartSend(false)
