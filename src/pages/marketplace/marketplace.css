@@ -98,16 +98,13 @@
   height: 43px;
   left: 0px;
   mix-blend-mode: normal;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   position: absolute;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.bettermidapp-marketplace-1 .zoe-fitness-8cjGPE {
-  background-color: transparent;
-  left: 0px;
-  object-fit: cover;
-}
 
 .bettermidapp-marketplace-1 .vitev-8cjGPE {
   background-color: transparent;
@@ -118,55 +115,6 @@
   position: absolute;
   top: 0px;
   width: 40px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-HI0Hnc {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 120px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-eRgkx7 {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 180px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-u91zz4 {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 240px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-aEJ33D {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 300px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-Jc5OoT {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 360px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-SxtrzH {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 420px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-ppgU72 {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 480px;
 }
 
 .bettermidapp-marketplace-1 .redeem-rewards-oobbG1 {
@@ -658,9 +606,26 @@
 }
 
 .bettermidapp-marketplace-1 .zoe-fitness {
-  border-radius: 20px;
+  height: 46px;
+  width: 46px;
+  object-fit: cover;
+  /* transform: scale(1.2); */
+}
+
+.zoe-fitness-not-scaleup {
   height: 40px;
-  position: absolute;
-  top: 0px;
   width: 40px;
+  object-fit: cover;
+}
+
+.zoe-fitness-container {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  border: 1px solid #3D454B80;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

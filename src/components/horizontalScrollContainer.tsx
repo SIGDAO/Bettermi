@@ -48,7 +48,6 @@ const HorizontalScrollContainer: React.FunctionComponent<IHorizontalScrollContai
         {props.children}
       </div>
     );
-  return HorizontalScrollContainer;
 };
 
 export default HorizontalScrollContainer;

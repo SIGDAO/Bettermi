@@ -28,10 +28,10 @@ export function generateName(): string {
 }
 
 export function generateMimiMessage(): string {
-  return mimiRandomMessage[Math.floor(Math.random() * firstNames.length)];
+  return mimiRandomMessage[Math.floor(Math.random() * mimiRandomMessage.length)];
 }
 
 export function generateDotIoMessage(): string {
-  return mimiRandomMessage[Math.floor(Math.random() * firstNames.length)];
+  return dotIoRandomMessage[Math.floor(Math.random() * dotIoRandomMessage.length)];
 }
 

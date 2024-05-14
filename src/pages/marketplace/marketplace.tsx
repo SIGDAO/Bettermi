@@ -14,6 +14,18 @@ import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 
 interface IMarketplaceProps {}
 
+const sponsorImageList = [
+  "/img/marketplace/zomate-fitness-logo-nft-436x436.png",
+  "/img/marketplace/ichio-logo-nft-436x436.png",
+  "/img/marketplace/ycy-logo-nft.png",
+  // "/img/marketplace/Era.png",
+  "/img/marketplace/philo-logo-nft-436x436.png",
+  "/img/marketplace/together-matching-logo-nft-436x436.png",
+  "/img/marketplace/BPSAA-Logo-NFT.png",
+  "/img/marketplace/Chuen-Yik-Logo-NFT.png",
+  "/img/marketplace/Fourcheer-Logo-NFT.png",
+]
+
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
@@ -23,7 +35,14 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
-  // const [totalChallengesTimes, setTotalChallengesTimes] = React.useState<number>();
+
+  const sponsorImageDisplay: JSX.Element[] = sponsorImageList.map((imagePath) => {
+    return (
+      <div className="zoe-fitness-container">
+        <img className={imagePath ==="/img/marketplace/Era.png" ? "zoe-fitness-not-scaleup" : "zoe-fitness"} src={`${process.env.PUBLIC_URL + imagePath}`} alt="Zoe Fitness" />
+      </div>
+    )
+  })
 
   React.useEffect(() => {
     getBMIRecordDay(tempAccountId, Ledger2).then((res) => {
@@ -58,15 +77,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
             <HorizontalScrollContainer inputClassName="x7-vbUx2m">
-              <img className="zoe-fitness-8cjGPE zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/zomate-fitness-logo-nft-436x436.png`} alt="Zoe Fitness" />
-              <img className="vitev-8cjGPE" src={`${process.env.PUBLIC_URL}/img/marketplace/ichio-logo-nft-436x436.png`} alt="Vitev" />
-              <img className="zoe-fitness-HI0Hnc zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/ycy-logo-nft.png`} />
-              <img className="zoe-fitness-eRgkx7 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Era.png`} />
-              <img className="zoe-fitness-u91zz4 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/philo-logo-nft-436x436.png`} />
-              <img className="zoe-fitness-aEJ33D zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/together-matching-logo-nft-436x436.png`} />
-              <img className="zoe-fitness-Jc5OoT zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/BPSAA-Logo-NFT.png`} />
-              <img className="zoe-fitness-SxtrzH zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Chuen-Yik-Logo-NFT.png`} />
-              <img className="zoe-fitness-ppgU72 zoe-fitness" src={`${process.env.PUBLIC_URL}/img/marketplace/Fourcheer-Logo-NFT.png`} />
+              {sponsorImageDisplay}
             </HorizontalScrollContainer>
           </div>
           <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>

@@ -262,6 +262,7 @@
   height: 18px;
   object-fit: cover;
   width: 21px;
+  cursor: pointer;
 }
 
 .bettermidapp-ai-coach-mimi .i-need-help-Jhcaae {
@@ -410,13 +411,14 @@
   width: 12px;
 }
 
-.bettermidapp-ai-coach-mimi .time-indicator-QyTK2J {
+.bettermidapp-ai-coach-mimi .time-indicator {
   background-color: transparent;
   height: 15px;
-  left: 24px;
-  position: absolute;
-  top: 343px;
-  width: 342px;
+  width: 390px;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bettermidapp-ai-coach-mimi .x15-QfL0xm {
@@ -425,33 +427,18 @@
   height: 1px;
   left: 0px;
   object-fit: cover;
-  position: absolute;
   width: 114px;
 }
 
 .bettermidapp-ai-coach-mimi .today-QfL0xm {
   background-color: transparent;
-  bottom: 0px;
   height: 17px;
-  letter-spacing: 0.00px;
-  line-height: 16px;
   opacity: 0.4;
-  position: absolute;
-  right: calc(49.55% - 31px);
   text-align: center;
   white-space: nowrap;
   width: 62px;
 }
 
-.bettermidapp-ai-coach-mimi .x16-QfL0xm {
-  background-color: transparent;
-  bottom: 35.71%;
-  height: 1px;
-  object-fit: cover;
-  position: absolute;
-  right: 0px;
-  width: 114px;
-}
 
 .bettermidapp-ai-coach-mimi .size-QyTK2J {
   left: 154px;
@@ -471,19 +458,19 @@
   width: calc(100.00% - 36px);
 }
 
-.bettermidapp-ai-coach-mimi .icon-read-JihrCh {
-  bottom: calc(23.49% - 2px);
+.bettermidapp-ai-coach-mimi .icon-read {
   height: 9px;
-  right: calc(24.64% - 2px);
   width: 9px;
 }
 
-.bettermidapp-ai-coach-mimi .icon-read-c002x0 {
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  top: 1px;
-  width: 100%;
+.icon-read-container {
+  height: 14.5px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 54px;
+  bottom: 12px;
+
 }
 
 .bettermidapp-ai-coach-mimi .size-xQomhb {
@@ -503,20 +490,6 @@
   width: calc(100.00% - 36px);
 }
 
-.bettermidapp-ai-coach-mimi .icon-read-oKUDMc {
-  bottom: calc(23.49% - 2px);
-  height: 9px;
-  right: calc(24.64% - 2px);
-  width: 9px;
-}
-
-.bettermidapp-ai-coach-mimi .icon-read-EwLvtX {
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  top: 1px;
-  width: 100%;
-}
 
 .bettermidapp-ai-coach-mimi .title-QyTK2J {
   background-color: transparent;
@@ -606,8 +579,11 @@
   top: 312px;
   border-radius: 10px 10px 0px 0px;
   display: flex;
-  padding: 34px 0px;
+  /* padding: 34px 0px; */
+  padding-top: 15px;
+  padding-bottom: 34px;
   flex-direction: column;
+  gap: 15px;
   /* justify-content: space-between; */
 }
 
@@ -644,8 +620,8 @@
   border: 0;
   outline: 0;
   color: white;
-  height: 100%;
-  font-size: var(--font-size-m);
+  min-height: 19px;
+  resize: none;
 }
 
 .message-input-container {
@@ -673,7 +649,7 @@
   /* flex-direction: column;
   gap: 20px; */
   height: 490px;
-  padding: 15px 16px;
+  padding: 0px 16px;
   overflow: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
@@ -685,7 +661,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: auto;
+  min-height: 370px;
 }
 
 .ai-chatbox-container {
@@ -741,4 +717,7 @@
 
 .random-message-generate {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
