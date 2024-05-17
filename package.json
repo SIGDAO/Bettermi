@@ -27,6 +27,7 @@
     "jsencrypt": "^3.3.2",
     "lightweight-charts": "^4.0.1",
     "lightweight-charts-react-wrapper": "^2.0.0",
+    "llama-tokenizer-js": "^1.2.1",
     "moment": "^2.30.1",
     "node_characterai": "^1.1.9",
     "react": "^18.2.0",

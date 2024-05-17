@@ -163,11 +163,18 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
             </div>
           )
           }
-        </div>
+          </div>
+          {loading?(
+              <div className="buttonLoadingNotDone" onClick={doneClickHandler}>
+                <div className="button1-UidXYK button1"></div>
+                <div className="continue-UidXYK inter-semi-bold-white-15px">Done</div>
+              </div>
+          ):(
           <div className="button_-done-iwUDzs" onClick={doneClickHandler}>
             <div className="button1-UidXYK button1"></div>
             <div className="continue-UidXYK inter-semi-bold-white-15px">Done</div>
           </div>
+          )}
       </div>
     </div>
   )

@@ -8,6 +8,7 @@
   --keppel: #39b3af;
   --neon-carrot: #ff9f3e;
   --royal-blue: #4136f1;
+  --grey: #747474;
   --white: #ffffff;
   --white-2: rgba(255, 255, 255, 0);
   --white-3: rgba(255, 255, 255, 0.349);
@@ -25,7 +26,7 @@
   --font-size-s: 14px;
   --font-size-m: 15px;
   /* --font-size-l: 16px; */
-  --font-size-xl: 28px;
+  /* --font-size-xl: 28px; */
 
 
  
@@ -106,6 +107,14 @@ html, body {
   margin: 0;
 }
 
+.inter-normal-grey-12px {
+  color: var(--grey);
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-semi-bold-keppel-14px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
@@ -120,6 +129,14 @@ html, body {
   font-size: var(--font-size-xxxl);
   font-style: normal;
   font-weight: 600;
+}
+
+.inter-normal-grey-18px {
+  color: var(--grey);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 400;
 }
 
 .inter-normal-cadet-blue-15px {
