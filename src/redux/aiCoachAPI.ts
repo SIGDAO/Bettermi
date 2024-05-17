@@ -12,13 +12,30 @@ interface Reply {
   url: string;
 }
 
+const Llama3Template = (defaultSystemPrompt = "") => {
+  return function (messages: ChatHistory[]) {
+    let parts: string[] = []; // Specify the type of 'parts' as an array of strings
+    for (let message of messages) {
+      if (message.isUser) {
+        parts.push("<|start_header_id|>user<|end_header_id|> " + message.text + "<|eot_id|>");
+      } else {
+        parts.push("<|start_header_id|>assistant<|end_header_id|>" + message.text + "<|eot_id|>"); // Fixed: Updated 'turn.content' to 'message.content'      
+      }
+
+    }
+
+    return parts.join("");
+  };
+};
 
 export const countTokens = (text) => {
   return llamaTokenizer.encode(text).length;
 };
 
 const generatePrompt = (messages: ChatHistory[]): Message => {
-  const returnMsg = messages.map((message) => (message.isUser ? `[INST] ${message.text} [/INST]` : `${message.text}`)).join("\n");
+  const llama3Template = Llama3Template()
+  const returnMsg = llama3Template(messages)
+  // const returnMsg = messages.map((message) => (message.isUser ? `[INST] ${message.text} [/INST]` : `${message.text}`)).join("\n");
   const tokenLimit = 100;
   const token = countTokens(returnMsg)
 
