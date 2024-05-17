@@ -83,23 +83,25 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
         BMIRecord.push(message.transactions[i].attachment.message)
         content = content.data
         // for encrypt fail situation
-        if (content == "error") continue;
-        if (typeof content === 'number') continue;
-        content.time = new Date(content.time);
-        BMIRecord.push(content);
+        // if (content == "error") continue;
+        // if (typeof content === 'number') continue;
+        // content.time = new Date(content.time);
+        // BMIRecord.push(content);
 
       } catch (error) {
         alert("Cannot fetch the record, please contact core team through discord!")
       }
     }
   }
-  console.log("BMIRecord is ",BMIRecord);
-        // const processedBMIRecord = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-        //   data: BMIRecord
-        // })
+  const { data } = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+    data: BMIRecord
+  })
+
+  console.log("BMIRecord is ",data);
+
 
   
-  //return processedBMIRecord;
+  return data ;
 }
 const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
   if (!record1) return false;
