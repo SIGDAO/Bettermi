@@ -179,6 +179,18 @@
   position: absolute;
   top: 671px;
   width: 248px;
+
+
+}
+.buttonLoadingNotDone{
+  opacity: 0.3;
+  background-color: transparent;
+  cursor: pointer;
+  height: 56px;
+  left: 71px;
+  position: absolute;
+  top: 671px;
+  width: 248px;
 }
 
 .bettermidapp-challenge-finished-1 .button1-UidXYK {

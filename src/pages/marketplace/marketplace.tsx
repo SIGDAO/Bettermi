@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import "./marketplace.css";
 import { CenterLayout } from "../../components/layout";
 import MenuBar from "../../components/menuBar";
@@ -43,8 +44,14 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       </div>
     )
   })
-
+  const BMIRecordChecked = useRef(false);
   React.useEffect(() => {
+    if (BMIRecordChecked.current) {
+
+      return;
+    }
+    BMIRecordChecked.current = true;
+    console.log("called twice");
     getBMIRecordDay(tempAccountId, Ledger2).then((res) => {
       setBmiRecordTimes(res);
     });
