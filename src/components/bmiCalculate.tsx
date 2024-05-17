@@ -85,9 +85,6 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     decryptedBMIRecord.push(content);
   }
 
-  console.log("BMIRecord is ", data.data.length);
-
-
   
   return data.data ;
 }
