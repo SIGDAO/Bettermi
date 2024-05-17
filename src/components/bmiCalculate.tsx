@@ -13,13 +13,17 @@ export interface UserBMIState {
   userBMI: BMI_Day[] | undefined;
 }
 
+export interface UserBMIData{
+  data:string[]
+}
+
 // find BMI contract content
 // output: [] || [description || {time: time, value: value}]
 const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) => {
   var contractAddress:string = '';
   var description: any;
   var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
-  const processedBMIRecord: Array<any> = [];
+  const BMIRecord: Array<any> = [];
   const bmiHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/"/g, '');
   // var contractData: any;
   const contract = await Ledger2.contract.getContractsByAccount({ 
@@ -31,6 +35,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
 
   contractAddress = contract.ats[0]?.at;
 
+  const BMIData:string[] = [];
 
   if (!contractAddress) return []
   try {
@@ -39,9 +44,10 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     description.time = new Date(description.time);
   } catch (error) {
     try {
-      description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-        data: contract.ats[0]?.description
-      })
+      // description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+      //   data: contract.ats[0]?.description
+      // })
+      BMIRecord.push(contract.ats[0]?.description)
       description = description.data
       if (description !== "error") {
         description.time = new Date(description.time); 
@@ -51,41 +57,44 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     }
   }
 
-  processedBMIRecord.push(description);
+  BMIRecord.push(description);
 
 
   const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
 
 
 
-
-
+  console.log(message,"message is")
+  
   for(let i = message.transactions.length - 1; i >= 0 ;i--){
     let content:any;
     try {
       let tempRecord = JSON.parse(message.transactions[i].attachment.message);
       if (typeof tempRecord === 'number') continue;
       tempRecord.time = new Date(tempRecord.time);
-      processedBMIRecord.push(tempRecord);
+      BMIRecord.push(tempRecord);
     } catch (error) {
       // let content = decrypt(message.transactions[i].attachment.message);
       try {
-        content = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-          data: message.transactions[i].attachment.message
-        })
+        // content = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+        //   data: message.transactions[i].attachment.message
+        // })
+        BMIRecord.push(message.transactions[i].attachment.message)
         content = content.data
         // for encrypt fail situation
         if (content == "error") continue;
         if (typeof content === 'number') continue;
         content.time = new Date(content.time);
-        processedBMIRecord.push(content);
+        BMIRecord.push(content);
 
       } catch (error) {
         alert("Cannot fetch the record, please contact core team through discord!")
       }
     }
   }
-
+        const processedBMIRecord = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+          data: BMIRecord
+        })
 
   
   return processedBMIRecord;
