@@ -395,8 +395,6 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                       marginRight: "10px",
                     }}
                   />
-                  {/* <div className="minting-JdJl2l inter-normal-white-15px">loading your NFTs</div>
-              <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div> */}
                 </>
               ) : (
                 myNfts.map((MyNft) => (

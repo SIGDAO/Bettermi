@@ -94,14 +94,19 @@
 
 .bettermidapp-marketplace-1 .x7-vbUx2m {
   background-color: transparent;
-  bottom: 0px;
   height: 43px;
-  left: 0px;
   mix-blend-mode: normal;
-  position: absolute;
   display: flex;
   align-items: center;
   gap: 20px;
+  min-width: 460px;
+}
+
+.sponser-image-container {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 352px;
 }
 
 

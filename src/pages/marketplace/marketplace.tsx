@@ -76,8 +76,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
               <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">Partner</div>
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
-            <HorizontalScrollContainer inputClassName="x7-vbUx2m">
-              {sponsorImageDisplay}
+            <HorizontalScrollContainer inputClassName="sponser-image-container">
+              <div className="x7-vbUx2m">
+                {sponsorImageDisplay}
+              </div>
             </HorizontalScrollContainer>
           </div>
           <div className="redeem-rewards-oobbG1">REWARD REDEEM</div>

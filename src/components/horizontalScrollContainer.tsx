@@ -1,5 +1,5 @@
 import { useRef } from "react";
-
+import './horizontalScrollContainer.css';
 import * as React from 'react';
 
 interface IHorizontalScrollContainerProps {
@@ -40,9 +40,9 @@ const HorizontalScrollContainer: React.FunctionComponent<IHorizontalScrollContai
   
     return (
       <div
-        className={inputClassName}
+        className={`${inputClassName} horizontal-scroll-ontainer`}
         ref={containerRef}
-        style={{ overflowX: 'auto', overflowY: 'hidden' , ...props.style}}
+        style={{ overflowX: 'auto', overflowY: 'hidden', msOverflowStyle: `none`, scrollbarWidth: `none`, ...props.style}}
         onWheel={handleScrollHorizontally}
       >
         {props.children}
