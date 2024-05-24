@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { walletNodeHost } from '../../redux/wallet';
 import { TransferToken } from '../../components/transferToken';
-import { missionList } from '../../data/featureMissionList';
+import { challengeList } from '../../data/challengeList';
 import { useParams } from 'react-router-dom';
 
 interface IChallengeCountdownProps {
@@ -21,7 +21,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const [time, setTime] = React.useState(32);
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
-  const displayMission = missionList.find((mission, index) => index === parseInt(id)-1) || missionList[0];
+  const displayMission = challengeList.find((mission, index) => index === parseInt(id)-1) || challengeList[0];
 
 
 

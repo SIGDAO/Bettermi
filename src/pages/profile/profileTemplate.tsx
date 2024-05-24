@@ -77,7 +77,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const [isUpdatingUserIcon, setIsUpdatingUserIcon] = useState<boolean>(false);
   const [isUserIconLoading, setIsUserIconLoading] = useState<boolean>(true);
 
-  //
 
   // profile info related variable
   const discordUsername = useSelector(selectCurrentDiscordUsername);

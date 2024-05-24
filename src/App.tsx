@@ -51,6 +51,7 @@ import OtherUserProfile from "./pages/leaderboard/otherUserProfile";
 import RoleRoute from "./route/roleRoute";
 import AllNftList from "./pages/allNftList/allNftList";
 import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
+import { profileSlice } from "./redux/profile";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -66,7 +67,7 @@ const theme = createTheme({
 
 const titleList = {
   "/": "Bettermi",
-  "/connectWallet": "Connect Wallet - Bettermi",
+  // "/connectWallet": "Connect Wallet - Bettermi",
   "/generateBMI": "Generate BMI - Bettermi",
   "/takeSelfie": "Take Selfie - Bettermi",
   "/connectSucceed": "Connect Succeed - Bettermi",
@@ -96,30 +97,46 @@ const titleList = {
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
 };
 
+const guestAllowedPath = [
+  "/", 
+  // "/connectWallet", 
+  // "/home"
+]
+
   
 
 const CheckStore: React.FC = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const fetchSetting = async () => {}
-  // try {
-  //   return <Outlet />;
-  // } catch (error) {
-  //   console.log(error);
+
+
+  if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+    dispatch(profileSlice.actions.authenticated());
+  } else if (!guestAllowedPath.includes(currentPath)) {
+    return <Navigate to="/" />;
+  } else {
+    dispatch(profileSlice.actions.unauthenticated());
+  }
+
+  return <Outlet />;
+
+
+
+  // if (currentPath === "/" || currentPath === "/connectWallet") {
   //   return <Outlet />;
   // }
 
 
-  if (currentPath === "/" || currentPath === "/connectWallet") {
-    return <Outlet />;
-  }
+  // if (Wallet.Extension.connection == null || sessionStorage.getItem("state") === null) {
+  //   return <Navigate to="/" />
+  // }
 
-  if (Wallet.Extension.connection == null) {
-    return <Navigate to="/" />
-  }
+  // dispatch(profileSlice.actions.authenticated());
 
-  return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
+  // return <Outlet />;
 };
 
 function App() {
@@ -154,9 +171,9 @@ function App() {
               }
             >
               {/* all user */}
-              <Route path="/" element={<LogoPage />} />
+              {/* <Route path="/" element={<LogoPage />} /> */}
               <Route path="*" element={<Navigate to="/home" />} />
-              <Route path="/connectWallet" element={<ConnectWallet />} />
+              <Route path="/" element={<ConnectWallet />} />
               {/* need to have its own logined setting */}
               <Route path="/takeSelfie" element={<TakeSelfie />} />
               <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
@@ -179,7 +196,7 @@ function App() {
                 <Route path="/missionChallenge" element={<MissionChallenge />} />
                 {/* account that can only access in certain time */}
                 <Route path="/myNftList" element={<MyNftList/>} />
-                <Route path = "/allNftList" element={<IndexAllNftList/>} />
+                <Route path="/allNftList" element={<IndexAllNftList/>} />
                 <Route path="/indexMyNftList" element={<IndexMyNftList />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/rewardDetail">

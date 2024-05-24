@@ -46,6 +46,20 @@ html, body {
   height: 100%;
 }
 
+a:link { 
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+a:hover { 
+  text-decoration: none; 
+} 
+a:active { 
+  text-decoration: none; 
+}
+
+
 /* p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 } */
@@ -281,6 +295,15 @@ html, body {
   font-style: normal;
   font-weight: 600;
 }
+
+.inter-bold-royal-blue-15px {
+  color: #5146FF;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
+}
+
 
 .inter-normal-keppel-12px {
   color: var(--keppel);

@@ -41,10 +41,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
     let key: string;
 
-
-
-
-
     Wallet.Extension.connect({ appName, networkName: Ledger.Network })
       .then(async (wallet: any) => {
 
@@ -116,9 +112,6 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         }
 
         if (ourContract.ats[0] != null && senderNftStorage.ats[0] != null) {
-
-
-
             store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
           
 
@@ -189,31 +182,24 @@ export default function ConnectWallet (props: IConnectWalletProps) {
   const content: JSX.Element = (
     <div className="connectWallet-layout">
       <div id="connectWallet-container">
-        <h1 id="connectWalletTopic" className="default-font-setting">
-          Connect Your Wallet
-        </h1>
-        <p id="connectWalletDisciption" className="default-font-setting">
-          Connect your Signum wallet <br />
-          &amp; Start your Bettermi Journey!
-        </p>
-        <div id="img-slider">
-          <img className="connect-profilePic-side" src={process.env.PUBLIC_URL + "/img/connectWallet/photo-6@1x.png"} alt="Photo" />
-          <img className="connect-profilePic" src={process.env.PUBLIC_URL + "/img/mimi.png"} alt="Photo" />
-          <img className="connect-profilePic-side" src={process.env.PUBLIC_URL + "/img/connectWallet/photo-7@1x.png"} alt="photo" />
-        </div>
-        <div id="collectWallet-button-container">
-          <Link to="https://phoenix-wallet.rocks/">
-            <DisabledButton text="Phoenix wallet" height="56px" width="150px" />
-          </Link>
-          <ButtonWithAction
-            text="XT wallet"
-            action={
-              () => {
-                connectWallet(appName, Wallet, Ledger)
-              }} // TODO: add action to connect wallet
-            height="56px"
-            width="150px"
-          />
+        <img id="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation.gif"}/>
+        <div className="collectWallet-option-container">
+          <div id="collectWallet-button-container">
+            <ButtonWithAction
+              text="XT wallet"
+              action={
+                () => {
+                  connectWallet(appName, Wallet, Ledger)
+                }} // TODO: add action to connect wallet
+              height="56px"
+              width="248px"
+            />
+            <Link to="https://phoenix-wallet.rocks/">
+              <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
+            </Link>
+          </div>
+          <p className="inter-normal-white-15px" >or</p>
+          <div className="inter-bold-royal-blue-15px guest-explore-button" onClick={() => navigate("/home")} >Explore as a guest</div>
         </div>
       </div>
     </div>

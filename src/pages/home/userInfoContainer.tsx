@@ -1,0 +1,80 @@
+import * as React from "react";
+import "./home.css";
+import UserIcon from "../../components/loadUserIcon";
+import { Link } from "react-router-dom";
+import { Dispatch } from "react";
+
+interface IUserInfoContainerProps {
+  isGuest: boolean;
+  setIsPopUpIcon: Dispatch<React.SetStateAction<boolean>>;
+  userAccountId: string;
+  setRewardPercentage: Dispatch<React.SetStateAction<string>>;
+  setImgAddress: Dispatch<React.SetStateAction<string>>;
+  level: string;
+  rewardPercentage: string;
+  loading: boolean;
+  Token: string;
+}
+
+const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
+  isGuest,
+  setIsPopUpIcon,
+  userAccountId,
+  setRewardPercentage,
+  setImgAddress,
+  level,
+  rewardPercentage,
+  loading,
+  Token,
+}) => {
+  const activeUserInfo = (
+    <div className="greetings-RoXPLo">
+      <div className="home-user-icon-container">
+        <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress} />
+      </div>
+      <div className="home-user-info-container">
+        <div className="home-info-first-row">
+          <div className="hello-msg-container">
+            <h1 className="title-2ZgxSS">Hello ! </h1>
+            <Link to="/profile">
+              <div className="ic_next-2ZgxSS">
+                <img className="ic_chevron_right_24px-LRB8nH" src={`${process.env.PUBLIC_URL}/img/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
+              </div>
+            </Link>
+          </div>
+          <div className="home-user-info-nav">
+            <Link to="/aiCoachSelect">
+              <img className="home-ai-select-icon" src={`${process.env.PUBLIC_URL}/img/home/bxs-Aicoach.svg`} />
+            </Link>
+            <Link to="/setting">
+              <img className="home-setting-icon" src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />
+            </Link>
+          </div>
+        </div>
+        <div className="lv_-reward-2ZgxSS">
+          <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
+          <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
+          <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
+        </div>
+        <div className="home-sigdao-display-container">
+          <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
+
+          <div className="score-bar_3-2ZgxSS">
+            <div className="sigdao-score-iPTNDG sigdao-score">
+              <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading ? <div>loading...</div> : Token}</div>
+              <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
+                <div className="x441-e5x8kp x441"></div>
+                <div className="x442-e5x8kp x442"></div>
+                <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return activeUserInfo;
+};
+
+export default UserInfoContainer;

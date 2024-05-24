@@ -11,7 +11,7 @@ interface IAiCoachSelectProps {
 const questionList = [
   {
     question: 'Q:  What is Bettermi.io?',
-    ans: "A:  Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
+    ans: "A: Bettermi.io is a Web3 lifestyle dAPP that rewards users for fitness. Users equipped with Bettermi 'green' NFTs can earn token by selfies (Selfie to Earn), fitness and matching in metaverse."
   },
   {
     question: 'Q:  How does Bettermi.io work?',

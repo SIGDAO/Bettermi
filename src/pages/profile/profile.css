@@ -51,8 +51,6 @@
   height: calc(100.00% - 8px);
   left: 0px;
   object-fit: cover;
-  position: absolute;
-  top: 8px;
   cursor: pointer;
   width: 107px;
 }

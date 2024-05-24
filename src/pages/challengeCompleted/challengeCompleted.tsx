@@ -3,7 +3,7 @@ import './challengeCompleted.css'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { CenterLayout } from '../../components/layout';
 import { ShortTitleBar } from '../../components/titleBar';
-import { missionList } from '../../data/featureMissionList';
+import { challengeList } from '../../data/challengeList';
 import { TransferToken } from '../../components/transferToken';
 import { useSelector } from 'react-redux';
 import { selectWalletNodeHost } from '../../redux/useLedger';
@@ -24,7 +24,7 @@ const displayReawrd = ( pathname: string ): string | undefined => {
 
     const reward = pathList[pathList.length - 1];
     
-    return missionList.find((mission, index) => index === parseInt(reward) - 1)?.sigdao || undefined
+    return challengeList.find((mission, index) => index === parseInt(reward) - 1)?.sigdao || undefined
   }
 
   return ""

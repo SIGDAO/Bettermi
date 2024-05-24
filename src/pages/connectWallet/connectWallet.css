@@ -17,7 +17,8 @@
   /* left: calc((100% - 820px) / 2); */
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom right, #221D4B, #171717);
+  /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+  background: #1b192b;
   overflow-x: hidden;
   display: flex;
 }
@@ -60,9 +61,26 @@
 
 #collectWallet-button-container {
   display: flex;
-  /* flex-direction: row; */
+  flex-direction: column;
   justify-content: center;
+  gap: 10px;
+}
+
+.guest-explore-button {
+  cursor: pointer;
+}
+
+.collectWallet-option-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
   gap: 20px;
+}
+
+#connectWallet-bg-img {
+  /* position: absolute; */
+  width: 390px;
 }
 
 @media screen and (max-height: 594px) {
@@ -90,3 +108,4 @@
     flex-direction: column-reverse;
   }
 }
+

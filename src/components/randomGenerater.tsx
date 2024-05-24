@@ -7,17 +7,17 @@ const mimiRandomMessage = ["I need help in improving communication with my partn
                            "I need help in knowing if I'm in a healthy and fulfilling relationship",
                            "I need help in navigating conflicts and disagreements in a productive way",
                            "I need help in keeping the spark alive in a long-term relationship",
-                           "I need help in improve my sexual and intimacy relationship",
+                           "I need help in improving my sexual and intimacy relationship",
                            "I need help when I'm unsure about the future of my relationship",
                            "I need help in balancing personal goals with my relationship",
                            "I need help setting healthy boundaries in my relationship",
                            "I need help knowing harmful patterns to relationships and how to avoid them"]
 
-const dotIoRandomMessage = ["I need help designing an exercise program to lose weight",
-                            "I need help designing an exercise program to tone up the body",
-                            "I need help designing an exercise program to gain weight",
-                            "I need help designing an exercise program to ",
-                            "I need help designing an diet program to "]
+const dotIoRandomMessage = ["I need help in designing an exercise program to lose weight",
+                            "I need help in designing an exercise program to tone up the body",
+                            "I need help in designing an exercise program to gain weight",
+                            "I need help in designing an exercise program to ",
+                            "I need help in designing an diet program to "]
 
 export function generateName(): string {
 

@@ -10,7 +10,7 @@ import { Button } from "@mui/material";
 import { walletNodeHost } from "../../redux/wallet";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { missionList } from "../../data/featureMissionList";
+import { challengeList } from "../../data/challengeList";
 import { CheckIsUserFirstDayOfRegistration } from "../../NftSystem/BMISelfieSystem";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
@@ -105,7 +105,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
         //Anderson disabled this 2023/11/12
         // setisOverDailyPlayTimesLimit(
-        //   missionList.map((mission) => {
+        //   challengeList.map((mission) => {
         //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
 
         //       return true;
@@ -121,7 +121,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
         //Anderson disabled till here
         // setTimedifference(
-        //   missionList.map((mission) => {
+        //   challengeList.map((mission) => {
         //     const { timeslot } = mission;
         //     const timedifferentInFormat = timeslot.map((slot) => {
         //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
@@ -170,7 +170,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
     return () => clearInterval(interval);
 
     // setisOverDailyPlayTimesLimit(
-    //   missionList.map((mission) => {
+    //   challengeList.map((mission) => {
     //     return true;
     //   })
     // );
@@ -187,7 +187,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   //     minute: '2-digit',
   //   });
 
-  //   for (const mission of missionList) {
+  //   for (const mission of challengeList) {
   //     for (const time of mission.timeslot) {
   //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
   //         setisOverDailyPlayTimesLimit(true);
@@ -219,7 +219,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               {isLoading ? (
                 <div></div>
               ) : (
-                missionList.map((mission, index) => {
+                challengeList.map((mission, index) => {
                   return (
                     <Button
                       onClick={async () => {
@@ -303,7 +303,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
 export default MissionChallenge;
 
-// const cardContent = missionList.map((mission) => (
+// const cardContent = challengeList.map((mission) => (
 //   <div className="challenge-cards-Ic1qil">
 //     <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
 //     <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>

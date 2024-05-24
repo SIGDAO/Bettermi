@@ -37,13 +37,13 @@ import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage"
 import { getApiUrls } from "../../components/constants/constant";
 
 interface IMyNftListProps {
-  isUpdatingDescription: boolean;
-  myNfts: myNftList[];
-  setIsUpdatingDescription: (isUpdatingDescription: boolean) => void;
-  isOtherUser: boolean;
+  isUpdatingDescription?: boolean;
+  myNfts?: myNftList[];
+  setIsUpdatingDescription?: (isUpdatingDescription: boolean) => void;
+  isOtherUser?: boolean;
   equippedNftIpfsAddress?: string;
-  setOpenModel: (openModel: boolean) => void;
-  setSelectedNft: (selectedNft: selectedNftInfo) => void;
+  setOpenModel?: (openModel: boolean) => void;
+  setSelectedNft?: (selectedNft: selectedNftInfo) => void;
 }
 
 // interface myNftList{
