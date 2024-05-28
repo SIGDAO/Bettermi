@@ -19,22 +19,6 @@
 }
 
 
-.hidden-content {
-  width: 100vw;
-  height: 100vh;
-  background:#0d0d0da8;
-  z-index: 200;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow-y: auto;
-}
-
-.click-the-area-to-make-it-hidden-again {
-  width: 100%;
-  height: 100%;
-}
-
 .text-1 {
   color: var(--royal-blue);
   font-family: var(--font-family-inter);

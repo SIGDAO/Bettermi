@@ -111,7 +111,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const nftIconCheck = useRef(false);
   useEffect(() => {
     // Function to fetch data from the APIc
-    if (nftIconCheck.current) {
+    if (nftIconCheck.current || isGuest) {
       return;
     }
     nftIconCheck.current = true;
@@ -184,36 +184,45 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   const content: JSX.Element = (
     <>
-      <NFTDetailPopUpWindow isPopUpIcon={isPopUpIcon} isNFTiconLoading={isNFTiconLoading} imgAddress={imgAddress} level={level} rewardPercentage={rewardPercentage} setIsPopUpIcon={setIsPopUpIcon} />
-      <div className="screen">
-        <div className="bettermidapp-home-1">
-          <Link to="/featureMissions">
-            <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
-          </Link>
-          <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
+      <NFTDetailPopUpWindow
+        isGuest={isGuest}
+        isPopUpIcon={isPopUpIcon}
+        isNFTiconLoading={isNFTiconLoading}
+        imgAddress={imgAddress}
+        level={level}
+        rewardPercentage={rewardPercentage}
+        setIsPopUpIcon={setIsPopUpIcon}
+      >
+        <div className="screen">
+          <div className="bettermidapp-home-1">
+            <Link to="/featureMissions">
+              <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
+            </Link>
+            <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
 
-          <Link to="/leaderboard"></Link>
-          <ImageSlider slides={slides} />
-          <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
-          <div className="nav-to-take-selfie-content">
-            <NavigateToTakeSelfieButton />
+            <Link to="/leaderboard"></Link>
+            <ImageSlider slides={slides} />
+            <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
+            <div className="nav-to-take-selfie-content">
+              <NavigateToTakeSelfieButton />
+            </div>
+            <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
+            <UserInfoContainer
+              isGuest={isGuest}
+              setIsPopUpIcon={setIsPopUpIcon}
+              userAccountId={userAccountId}
+              setRewardPercentage={setRewardPercentage}
+              setImgAddress={setImgAddress}
+              level={level}
+              rewardPercentage={rewardPercentage}
+              loading={loading}
+              Token={Token}
+            />
+            <HomeMissionList />
+            <MenuBar />
           </div>
-          <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
-          <UserInfoContainer
-            isGuest={isGuest}
-            setIsPopUpIcon={setIsPopUpIcon}
-            userAccountId={userAccountId}
-            setRewardPercentage={setRewardPercentage}
-            setImgAddress={setImgAddress}
-            level={level}
-            rewardPercentage={rewardPercentage}
-            loading={loading}
-            Token={Token}
-          />
-          <HomeMissionList />
-          <MenuBar />
         </div>
-      </div>
+      </NFTDetailPopUpWindow>
     </>
   );
 

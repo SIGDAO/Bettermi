@@ -51,7 +51,7 @@ import OtherUserProfile from "./pages/leaderboard/otherUserProfile";
 import RoleRoute from "./route/roleRoute";
 import AllNftList from "./pages/allNftList/allNftList";
 import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
-import { profileSlice } from "./redux/profile";
+import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -100,43 +100,31 @@ const titleList = {
 const guestAllowedPath = [
   "/", 
   // "/connectWallet", 
-  // "/home"
+  "/home",
+  "/takeSelfie",
+  "/generateBMINFTImport",
+  "/profile",
 ]
 
-  
 
 const CheckStore: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const currentPath: string = location.pathname;
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const fetchSetting = async () => {}
+  const isGuest = useSelector(selectCurrentIsGuest);
 
 
   if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
     dispatch(profileSlice.actions.authenticated());
-  } else if (!guestAllowedPath.includes(currentPath)) {
+  } else if (!guestAllowedPath.includes(currentPath) || !isGuest) {
+    sessionStorage.clear();
     return <Navigate to="/" />;
   } else {
     dispatch(profileSlice.actions.unauthenticated());
   }
 
   return <Outlet />;
-
-
-
-  // if (currentPath === "/" || currentPath === "/connectWallet") {
-  //   return <Outlet />;
-  // }
-
-
-  // if (Wallet.Extension.connection == null || sessionStorage.getItem("state") === null) {
-  //   return <Navigate to="/" />
-  // }
-
-  // dispatch(profileSlice.actions.authenticated());
-
-  // return <Outlet />;
 };
 
 function App() {

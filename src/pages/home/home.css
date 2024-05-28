@@ -670,11 +670,11 @@ color
 
 .bettermidapp-home-1 .greetings-RoXPLo {
   background-color: transparent;
-  height: 115px;
+  height: 113px;
   left: 32px;
   position: absolute;
-  top: 50px;
-  width: 316px;
+  top: 58px;
+  width: 331px;
   display: flex;
   gap: 17px;
   /* justify-content: space-between; */
@@ -682,7 +682,7 @@ color
 
 .home-user-info-container {
   width: 209px;
-  height: 105px;
+  height: 113px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -701,6 +701,7 @@ color
 
 .home-user-info-nav {
   display: flex;
+  align-items: start;
   gap: 16px;
 }
 
@@ -1080,8 +1081,9 @@ color
 }
 
 .home-ai-select-icon {
-  width: 24px;
+  width: 56px;
   height: 20px;
+  clip: rect(0, 24px, 20px, 0)
 }
 
 .home-setting-icon {
@@ -1104,4 +1106,14 @@ color
   top: 327px;
   right: 62px;
   color: #5146ff;
+}
+
+.guest-user-icon {
+  width: 100px;
+}
+
+.home-ai-select-icon-container {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
 }

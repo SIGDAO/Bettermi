@@ -1,28 +1,29 @@
-import { Button } from '@mui/material';
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { Button } from "@mui/material";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import CSS from 'csstype';
-import exp from 'constants';
-import './button.css'
-import { isTodayHaveSelfieRecord } from './bmiCalculate';
-import { accountId } from '../redux/account';
-import { useSelector } from 'react-redux';
-import { useLedger } from '../redux/useLedger';
-import { selectCurrentBMI, selectCurrentIsSelfie } from '../redux/profile';
-import { selectBMI } from '../redux/userBMI';
-import { useEffect, useState } from 'react';
-
-
+import CSS from "csstype";
+import exp from "constants";
+import "./button.css";
+import { isTodayHaveSelfieRecord } from "./bmiCalculate";
+import { accountId } from "../redux/account";
+import { useDispatch, useSelector } from "react-redux";
+import { useLedger } from "../redux/useLedger";
+import { profileSlice, selectCurrentBMI, selectCurrentIsGuest, selectCurrentIsSelfie } from "../redux/profile";
+import { selectBMI } from "../redux/userBMI";
+import { useEffect, useState } from "react";
 
 interface IButtonProps {
-  text: string;
+  text?: string;
   height: string;
   width: string;
   fontSize?: string;
   fontWeight?: string;
   action?: () => void;
   navigation?: string;
+  style?: CSS.Properties;
+  imagePath?: string;
+  className?: string;
 }
 
 // DefaultButton css style
@@ -32,31 +33,32 @@ interface IBackButtonProps {
   top?: string;
 }
 
-
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
-  const {text, height, width, navigation} = props;
+  const { text, height, width, navigation, style, imagePath, className } = props;
   const customStyle: CSS.Properties = {
-    'display': 'flex',
-    'justifyContent': 'center',
-    'alignItems': 'center',
-    'height': height,
-    'width': width,
-    'color': 'white',
-    'background': 'linear-gradient(-90deg, #8743ff 0%, #4136f1 100%)',
-    'borderRadius': '10px',
-    'boxShadow': '0px 15px 30px #1466cc29',
-  }
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: height,
+    width: width,
+    color: "white",
+    background: "linear-gradient(-90deg, #8743ff 0%, #4136f1 100%)",
+    borderRadius: "10px",
+    boxShadow: "0px 15px 30px #1466cc29",
+  };
 
   return (
-    <Link to={navigation || '/'} style={customStyle}>
-      {text}
+    <Link to={navigation || "/"}>
+      <div className={className || ""} style={style || customStyle}>
+        {text}
+        {imagePath && <img src={`${process.env.PUBLIC_URL}/${imagePath}`} alt="" />}
+      </div>
     </Link>
-  )
+  );
 };
 
-
 export const ButtonWithAction: React.FunctionComponent<IButtonProps> = (props) => {
-  const {text, height, width, action} = props;
+  const { text, height, width, action } = props;
 
   const CustomButton = styled(Button)`
     display: flex;
@@ -65,25 +67,21 @@ export const ButtonWithAction: React.FunctionComponent<IButtonProps> = (props) =
     height: ${height};
     width: ${width};
     font-family: var(--font-family-inter);
-    font-size: ${props.fontSize ||"var(--font-size-m)"};
-    font-weight: ${props.fontWeight || "600" };
+    font-size: ${props.fontSize || "var(--font-size-m)"};
+    font-weight: ${props.fontWeight || "600"};
     background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
     border-radius: 10px;
     color: white;
     box-shadow: 0px 15px 30px #1466cc29;
     padding: 14.5px 21px;
-  `
+  `;
 
-  return (
-    <CustomButton onClick={action}>
-      {text}
-    </CustomButton>
-  )
-}
+  return <CustomButton onClick={action}>{text}</CustomButton>;
+};
 
 export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => {
-  const {text, height, width} = props;
-//I commented out display: flex as it draws a red line under the button on hover and onClick.
+  const { text, height, width } = props;
+  //I commented out display: flex as it draws a red line under the button on hover and onClick.
   const CustomButton = styled(Button)`
     //display: flex;
     justify-content: center;
@@ -97,8 +95,8 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     height: ${height};
     width: ${width};
     font-family: var(--font-family-inter);
-    font-size: ${props.fontSize ||"var(--font-size-m)"};
-    font-weight: ${props.fontWeight || "600" };
+    font-size: ${props.fontSize || "var(--font-size-m)"};
+    font-weight: ${props.fontWeight || "600"};
     color: #4136f1;
     padding: 14.5px 21px;
     font-weight: 600;
@@ -108,7 +106,7 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     min-width: 108px;
     text-align: center;
     white-space: nowrap;
-  `
+  `;
 
   // .continue {
   //   color: var(--royal-blue);
@@ -122,53 +120,48 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
   //   text-align: center;
   //   white-space: nowrap;
   // }
-  return (
-    <CustomButton>
-      {text}
-    </CustomButton>
-  )
-}
+  return <CustomButton>{text}</CustomButton>;
+};
 
 export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
-  const {top} = props;
+  const { top } = props;
 
   const customStyle: CSS.Properties = {
-    'alignItems': 'flex-start',
-    'cursor': 'pointer',
-    'display': 'flex',
-    'height': '44px',
-    'left': '16px',
-    'minWidth': '44px',
-    'paddingLeft': '14px',
-    'position': 'absolute',
-    'top': top || '44px',
-    'zIndex': 9999,
-  }
-// isdofidjsoaf, difisdf  
+    alignItems: "flex-start",
+    cursor: "pointer",
+    display: "flex",
+    height: "44px",
+    left: "16px",
+    minWidth: "44px",
+    paddingLeft: "14px",
+    position: "absolute",
+    top: top || "44px",
+    zIndex: 9999,
+  };
+  // isdofidjsoaf, difisdf
 
   return (
     <a href="javascript:history.back()">
-      <div className="icon-arrow-left" style={customStyle} >
+      <div className="icon-arrow-left" style={customStyle}>
         <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
       </div>
     </a>
-  )
-}
-
-
+  );
+};
 
 export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const tempAccountId = useSelector(accountId);
   // const bmi_fetchedData = useSelector(selectBMI);
   const Ledger2 = useLedger();
   const [isActive, setIsActive] = React.useState<boolean>(false);
-  const [timeDifference, setTimeDifference] = useState('');
+  const [timeDifference, setTimeDifference] = useState("");
   const isSelfie = useSelector(selectCurrentIsSelfie);
+  const isGuest = useSelector(selectCurrentIsGuest);
   // const isSelfie = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState(true);
   // const [isMidnight, setIsMidnight] = useState(false);
-  
 
   useEffect(() => {
     const calculateTimeDifference = () => {
@@ -184,10 +177,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       // if (hours === 0 && minutes === 0 && seconds === 0) {
       //   setIsMidnight(true);
       // }
-
-
-
-      setTimeDifference(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      setTimeDifference(`${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`);
     };
 
     const interval = setInterval(calculateTimeDifference, 1000);
@@ -195,42 +185,40 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
     return () => clearInterval(interval);
   }, []);
 
-async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
-  const contract = await Ledger2.contract.getContractsByAccount({ 
-    accountId :tempAccountId,
-    machineCodeHash: bmiHashId,
-  });
-
-}
+  async function checking(Ledger2: any, tempAccountId: string, bmiHashId: string) {
+    const contract = await Ledger2.contract.getContractsByAccount({
+      accountId: tempAccountId,
+      machineCodeHash: bmiHashId,
+    });
+  }
   React.useEffect(() => {
+    if (isGuest) {
+      setIsLoading(false);
+      return;
+    }
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)
       .then((result) => {
-
+        // dispatch(profileSlice.actions.setIsSelfie(result));
         setIsActive(result);
         setIsLoading(false);
       })
       .catch((err) => {
-
-        checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', ''));
-      })
-
-  }, [])
+        checking(Ledger2, tempAccountId, process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', ""));
+      });
+  }, []);
 
   async function handleTakeASelfie() {
-    if (!isActive) navigate('/takeSelfie');
+    if (!isActive) navigate("/takeSelfie");
   }
-
 
   if (isSelfie || isActive) {
     return (
       <div className="lock-button-cover">
         <div className="lock-button">
           <div className="selfie-time-countdown-container">
-            <p className="selfie-time-countdown inter-semi-bold-white-15px">
-              {timeDifference}
-            </p>
+            <p className="selfie-time-countdown inter-semi-bold-white-15px">{timeDifference}</p>
           </div>
-          <img className='lock-icon-NavigateToTakeSelfieButton' src="/img/ic-locked-1@1x.png" alt="" />
+          <img className="lock-icon-NavigateToTakeSelfieButton" src="/img/ic-locked-1@1x.png" alt="" />
         </div>
         <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
           <img className="ic_selfie-u8P1YH" src="/img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
@@ -238,15 +226,38 @@ async function checking(Ledger2:any, tempAccountId: string, bmiHashId: string){
           <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
         </div>
       </div>
-    )
+    );
   } else {
     return isLoading ? null : (
-      <div className="button_-selfie-to-earn-MUU5YC" onClick={() => handleTakeASelfie()}>
+      <div className="button_-selfie-to-earn-MUU5YC">
         <img className="ic_selfie-u8P1YH" src="/img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
         <p className="take-a-selfie-to-earn-u8P1YH inter-semi-bold-white-15px">Take a Selfie to Earn!</p>
         <img className="ic_arrow_forward-u8P1YH" src="img/selfieToEarn/ic-arrow-forward-1@1x.png" alt="ic_arrow_forward" />
       </div>
-    )
+    );
+  }
+};
+
+export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, width, className }) => {
+  const guestButtonStyle: CSS.Properties = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: height,
+    width: width,
+    background: "transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box",
+    boxShadow: "0px 15px 30px #1466CC29",
+    borderRadius: "10px",
 
   }
-}
+
+  return <ButtonWithNavigation 
+            text="Connect Wallet" 
+            height={height} 
+            width={width} 
+            imagePath="img/wallet.svg" 
+            navigation="/" 
+            className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
+            style={guestButtonStyle}
+          />;
+};

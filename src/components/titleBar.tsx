@@ -141,7 +141,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         importButton === false ? null :
           setIsOpenImport === undefined ? null :
         (
-          <Button className = "importButton inter-semi-bold-white-12px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import NFT</Button>
+          <Button className = "importButton inter-semi-bold-white-15px" onClick = {() => setIsOpenImport(!isOpenImport)}>Import NFT</Button>
         )
       }
 

@@ -4,20 +4,18 @@ import { CenterLayout } from "../../components/layout";
 import AnimaGenContent from "./animaGenContent";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { selectCurrentGender } from "../../redux/profile";
+import { selectCurrentGender, selectCurrentIsGuest } from "../../redux/profile";
 import { accountId } from "../../redux/account";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
 import ProfileTemplate from "./profileTemplate";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 
-interface IProfileProps {
-
-}
+interface IProfileProps {}
 
 const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isBackButton, setIsBackButton] = useState<boolean>(true);
   const { state } = useLocation();
@@ -32,14 +30,13 @@ const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-
+  const isGuest = useSelector(selectCurrentIsGuest);
 
   const checkIsLoading = async () => {
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
 
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
       if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
-
         setIsUpdatingUserSetting(true);
         setIsSettingLoading(false);
         return;
@@ -64,9 +61,7 @@ const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
       .then((res) => {
         setRewardPercentage(res);
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   }, []);
 
   /* Function to check whether we are updating personal information*/
@@ -75,28 +70,15 @@ const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
     <CenterLayout
       noScroll={true}
       content={
-        <>
-          {isPopUpIcon && (
-            <div className="hidden-content">
-              {isNFTiconLoading ? (
-                <div className="x0"></div>
-              ) : (
-                <>
-                  <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
-                  {/* <h1 className="text-1">#{nftNumber}</h1> */}
-                </>
-              )}
-              <div className="x16206">
-                <div className="lv-1">LV 1</div>
-                <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD + {rewardPercentage}%</div>
-              </div>
-              <div className="x0-signa">$0 SIGNA</div>
-              <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-              <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
-            </div>
-          )
-          }
+        <NFTDetailPopUpWindow
+          isGuest={isGuest}
+          isPopUpIcon={isPopUpIcon}
+          isNFTiconLoading={isNFTiconLoading}
+          imgAddress={imgAddress}
+          level={""}
+          rewardPercentage={rewardPercentage}
+          setIsPopUpIcon={setIsPopUpIcon}
+        >
           <div className="screen">
             <ProfileTemplate
               isOpen={isOpen}
@@ -111,7 +93,7 @@ const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
               userAccountId={userAccountId}
             />
           </div>
-        </>
+        </NFTDetailPopUpWindow>
       }
       bgImg={false}
       // noScroll={isOpen}

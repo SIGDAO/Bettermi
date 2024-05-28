@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./connectWallet.css";
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CenterLayout } from "../../components/layout";
 import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from "../../components/button";
 import { store } from "../../redux/reducer";
@@ -25,25 +26,22 @@ import { FindLatestTransactionArray } from "../../NftSystem/updateUserNftStorage
 
 export interface IConnectWalletProps {}
 
-export default function ConnectWallet (props: IConnectWalletProps) {
-  localStorage.clear();//Guess we need to clear out all local storage after connecting account
+export default function ConnectWallet(props: IConnectWalletProps) {
+  localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', '');
-  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ''); // the code hash of the NFT contract
-  const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', '');
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', '');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
+  const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', "");
   store.dispatch({ type: "USER_LOGOUT" });
 
-
-
   const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
-
     let key: string;
 
     Wallet.Extension.connect({ appName, networkName: Ledger.Network })
       .then(async (wallet: any) => {
-
         key = wallet.publicKey;
         const import_account: Address = Address.fromPublicKey(key, Ledger.AddressPrefix);
         const accountinfo: userAccount = {
@@ -69,7 +67,7 @@ export default function ConnectWallet (props: IConnectWalletProps) {
 
         let ourContract = await ledger.contract.getContractsByAccount({
           accountId: accountinfo.accountId,
-          machineCodeHash: codeHashId.replace(/['"]+/g, ''),
+          machineCodeHash: codeHashId.replace(/['"]+/g, ""),
         });
         ledger.asset.getAssetHolders({ assetId: assetId }).then((asset) => {
           for (var i = 0; i < asset.accountAssets.length; i++) {
@@ -99,31 +97,27 @@ export default function ConnectWallet (props: IConnectWalletProps) {
         });
 
         // set the redux for if needed to recreate the BMI and NFT contract
-        store.dispatch(contractSlice.actions.setIsBMIContractBuild((ourContract.ats[0] != null || openedBmiContract === true)))
-        store.dispatch(contractSlice.actions.setIsNFTContractBuild((senderNftStorage.ats[0] != null || openedNftContract === true)))
-
-
-
+        store.dispatch(contractSlice.actions.setIsBMIContractBuild(ourContract.ats[0] != null || openedBmiContract === true));
+        store.dispatch(contractSlice.actions.setIsNFTContractBuild(senderNftStorage.ats[0] != null || openedNftContract === true));
 
         // if both contract is created
         if ((openedBmiContract === true && senderNftStorage.ats[0]) || (ourContract.ats[0] != null && openedNftContract === true)) {
-          navigate('/loadingMinting')
-          return
+          navigate("/loadingMinting");
+          return;
         }
 
         if (ourContract.ats[0] != null && senderNftStorage.ats[0] != null) {
-            store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
-          
+          store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
 
-            var description = ourContract.ats[0].description;
+          var description = ourContract.ats[0].description;
 
-            if (description.includes("Female") === true) {
-              store.dispatch(profileSlice.actions.setGender("Female"));
-            } else if (description.includes("Male") === true) {
-              store.dispatch(profileSlice.actions.setGender("Male"));
-            } else {
-              store.dispatch(profileSlice.actions.setGender("Male"));
-            }
+          if (description.includes("Female") === true) {
+            store.dispatch(profileSlice.actions.setGender("Female"));
+          } else if (description.includes("Male") === true) {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          } else {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          }
           // const equippedBettermiNft = await checkEquippedBettermiNFT(ledger,accountinfo.accountId);
           //   if(equippedBettermiNft === false){
           //     alert("please equip a Bettermi NFT, we will shortly prompt a notification to help you change it");
@@ -154,23 +148,21 @@ export default function ConnectWallet (props: IConnectWalletProps) {
           //     const text = await ipfsJson.text();
           //     const imgAddress = JSON.parse(text).media[0].social;
           //     await  UpdateUserIconNewVersion(ledger,imgAddress,nftId, accountinfo.accountId,accountinfo.publicKey,Wallet,name);
-            //   navigate("/connectWallet");
-            // }
-            // else{
-            //   navigate("/home");
-            // };
-            navigate("/home");
+          //   navigate("/connectWallet");
+          // }
+          // else{
+          //   navigate("/home");
+          // };
+          navigate("/home");
         } else {
-
           navigate("/connectSucceed");
         }
       })
       // todo: add error handling, and show it to user
       .catch((error: any) => {
-
         if (error.name === "InvalidNetworkError") {
           alert(
-            "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
+            "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",
           );
         }
         if (error.name === "NotFoundWalletError") {
@@ -179,18 +171,29 @@ export default function ConnectWallet (props: IConnectWalletProps) {
       });
   };
 
+  const logo: JSX.Element = (
+    <div className="connectWallet-bg-img-container">
+      {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/freeze_bettermi_logo.png"} />}
+      <img 
+        className="connectWallet-bg-img" 
+        src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed.gif"} 
+        onLoad={() => setIsLoading(false)} 
+        style={{ display: isLoading ? 'none' : 'inline-block' }}  
+      />
+    </div>
+  );
+
   const content: JSX.Element = (
     <div className="connectWallet-layout">
       <div id="connectWallet-container">
-        <img id="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation.gif"}/>
+        {logo}
         <div className="collectWallet-option-container">
           <div id="collectWallet-button-container">
             <ButtonWithAction
               text="XT wallet"
-              action={
-                () => {
-                  connectWallet(appName, Wallet, Ledger)
-                }} // TODO: add action to connect wallet
+              action={() => {
+                connectWallet(appName, Wallet, Ledger);
+              }} // TODO: add action to connect wallet
               height="56px"
               width="248px"
             />
@@ -198,8 +201,10 @@ export default function ConnectWallet (props: IConnectWalletProps) {
               <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
             </Link>
           </div>
-          <p className="inter-normal-white-15px" >or</p>
-          <div className="inter-bold-royal-blue-15px guest-explore-button" onClick={() => navigate("/home")} >Explore as a guest</div>
+          <p className="inter-normal-white-15px">or</p>
+          <div className="inter-semi-bold-keppel-15px guest-explore-button" onClick={() => navigate("/home")}>
+            Explore as a guest
+          </div>
         </div>
       </div>
     </div>

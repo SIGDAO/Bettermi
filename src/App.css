@@ -88,6 +88,15 @@ a:active {
   font-weight: 600;
 }
 
+
+.inter-semi-bold-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 600;
+}
+
 .inter-semi-bold-white-28px {
   color: var(--white);
   font-family: var(--font-family-inter);
@@ -210,10 +219,10 @@ a:active {
   font-weight: 600;
 }
 
-.inter-semi-bold-white-12px {
+.inter-semi-bold-white-15px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
 }
@@ -294,6 +303,14 @@ a:active {
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
+}
+
+.inter-bold-keppel-15px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
 }
 
 .inter-bold-royal-blue-15px {

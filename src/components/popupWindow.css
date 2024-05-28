@@ -1,0 +1,65 @@
+.guest-nft-detail-popup-window-container {
+  width: 332px;
+  height: 330px;
+  background: transparent linear-gradient(135deg, #221D4B 0%, #171717 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  border: 1px solid var(--royal-blue);  
+  border-radius: 10px;
+  z-index: 201;
+  position: relative;
+}
+
+.guest-nft-detail-popup-window-connect-wallet-button {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+}
+
+.guest-nft-detail-popup-window-content {
+  width: 100%;
+  padding-top: 20.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.guest-nft-detail-popup-window-content > div {
+  text-align: center;
+}
+
+.guest-nft-detail-popup-window-mimi {
+  width: 118px;
+  height: 118px;
+}
+
+.guest-nft-detail-popup-window-title {
+  border-bottom: 1px solid var(--royal-blue);
+  width: 100%;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden-content {
+  width: 100vw;
+  height: 100vh;
+  background:#0d0d0da8;
+  z-index: 200;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.click-the-area-to-make-it-hidden-again {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+

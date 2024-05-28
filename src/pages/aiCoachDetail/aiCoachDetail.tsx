@@ -54,13 +54,8 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
   }  
 
   const handleRandomQuestion = () => {
-    if (id === "1") {
-      setMsgInput(generateMimiMessage)    
-    }
-    
-    if (id === "2") {
-      setMsgInput(generateDotIoMessage)
-    }
+    if (id === "1") setMsgInput(generateMimiMessage);
+    if (id === "2") setMsgInput(generateDotIoMessage);
   }
 
   const handleUserSendMsg = async () => {

@@ -50,10 +50,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const [isTransferToken, setIsTransferToken] = React.useState(false);
   const [isTransferNFT, setIsTransferNFT] = React.useState(false);
   const [isTransferBMI, setIsTransferBMI] = React.useState(false);
-  const isTransferBMIBefore = useSelector(selectCurrentIsBMIContractBuild)
-  const isTransferNFTBefore = useSelector(selectCurrentIsNFTContractBuild)
-
-
+  const isTransferBMIBefore = useSelector(selectCurrentIsBMIContractBuild);
+  const isTransferNFTBefore = useSelector(selectCurrentIsNFTContractBuild);
 
   // add a validation function to see if the user has already minted the NFT
   // check the
@@ -65,27 +63,20 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   var nftsWaitedToBeDistributed: string[] = [];
   var nftsToBeDistributed: string;
 
-  React.useEffect(() => {
-
-  }, []);
-
-
   const confirm = async () => {
     let encrypted: any;
 
     if (minted) {
-
       return;
     }
 
     if (ledger) {
       setMinted(true);
-      const asset = await ledger.asset.getAssetHolders({ assetId:  assetId});
+      const asset = await ledger.asset.getAssetHolders({ assetId: assetId });
       asset.accountAssets.map((obj) => {
         if (obj.account == userAccountId) {
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT) / 1000000));
           localStorage.setItem("token", obj.quantityQNT);
-
         }
       });
 
@@ -94,20 +85,13 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         machineCodeHash: codeHashId,
       });
 
-
       let storeNftContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
       });
 
-
-
-
       try {
-
-        // todo: check if user has finished all smart contract build up
         if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
-
           const initializeNftContract = (await ledger.contract.publishContractByReference({
             name: "NFT",
             description: "storage_space_for_your_nft",
@@ -122,24 +106,24 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         }
 
         // check if the user has minted the NFT
-        if (ourContract.ats[0] == null &&  isTransferBMI== false && isTransferBMIBefore == false) {
-          let bmiMessage = JSON.stringify({ 
-            bmi: BMI, 
-            gender: gender, 
-            birthday: birthday, 
-            time: new Date() 
+        if (ourContract.ats[0] == null && isTransferBMI == false && isTransferBMIBefore == false) {
+          let bmiMessage = JSON.stringify({
+            bmi: BMI,
+            gender: gender,
+            birthday: birthday,
+            time: new Date(),
           });
-              
-          try {
-            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , {
-              data: bmiMessage
-            })
 
-            encrypted = encrypted.data
+          try {
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", {
+              data: bmiMessage,
+            });
+
+            encrypted = encrypted.data;
           } catch (error) {
-            console.log(error)
-            alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page")
-            navigate('/')
+            console.log(error);
+            alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page");
+            navigate("/");
           }
 
           const initializeContract = (await ledger.contract.publishContractByReference({
@@ -162,17 +146,14 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             time: new Date(),
           });
 
-
-          
           try {
-            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt" , bmiMessage)
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", bmiMessage);
 
-            encrypted = encrypted.data
+            encrypted = encrypted.data;
           } catch (error) {
-            alert("Cannot fetch the record, please core team through discord!\nWill return to home page")
-            navigate('/')
+            alert("Cannot fetch the record, please core team through discord!\nWill return to home page");
+            navigate("/");
           }
-
 
           const sendBMI = (await ledger.message.sendMessage({
             message: encrypted,
@@ -253,12 +234,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
     </div>
   );
 
-  return (
-    isSelfie ? 
-      <Navigate to="/home" />
-       :   
-      <CenterLayout content={content} bgImg={false} />
-  )
+  return isSelfie ? <Navigate to="/home" /> : <CenterLayout content={content} bgImg={false} />;
 };
 
 export default GenerateBMINFTImport;

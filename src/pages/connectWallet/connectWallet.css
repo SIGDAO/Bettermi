@@ -78,9 +78,21 @@
   gap: 20px;
 }
 
-#connectWallet-bg-img {
+.connectWallet-bg-img-container {
+  width: 280px;
+  height: 394px;
+  /* padding-bottom: 20px; */
+  /* margin-bottom: 20px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.connectWallet-bg-img {
   /* position: absolute; */
-  width: 390px;
+  width: 280px;
+  height: 344px;
+  object-fit: cover;
 }
 
 @media screen and (max-height: 594px) {
