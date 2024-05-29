@@ -59,7 +59,7 @@
   height: 198px;
 }
 
-#collectWallet-button-container {
+#connectWallet-button-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,7 +70,7 @@
   cursor: pointer;
 }
 
-.collectWallet-option-container {
+.connectWallet-option-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +99,7 @@
   #img-slider {
     margin-bottom: 20px;
   }
-  #collectWallet-button-container {
+  #connectWallet-button-container {
     /* position: fixed; */
     /* bottom: 20px; */
   }
@@ -114,10 +114,10 @@
     margin-bottom: 20px;
   }
 
-  #collectWallet-button-container {
+  #connectWallet-button-container {
 
     gap: 20px;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 
