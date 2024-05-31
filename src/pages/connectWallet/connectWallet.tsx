@@ -187,8 +187,8 @@ export default function ConnectWallet(props: IConnectWalletProps) {
     <div className="connectWallet-layout">
       <div id="connectWallet-container">
         {logo}
-        <div className="collectWallet-option-container">
-          <div id="collectWallet-button-container">
+        <div className="connectWallet-option-container">
+          <div id="connectWallet-button-container">
             <ButtonWithAction
               text="XT wallet"
               action={() => {
