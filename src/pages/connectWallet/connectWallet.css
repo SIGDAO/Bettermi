@@ -117,7 +117,7 @@
   #collectWallet-button-container {
 
     gap: 20px;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 

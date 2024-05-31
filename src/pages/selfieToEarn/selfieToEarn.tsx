@@ -219,8 +219,8 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
           </div>
           <img className="bmi-goal-C5Ye0d bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
           <img className="bmi-goal-HuKS2x bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
-          <div className="x255-C5Ye0d">{data && data[data?.length - 1]?.value}</div>
-          <div className="x265-C5Ye0d">{data && data[0]?.value}</div>
+          <div className="x255-C5Ye0d">{data && String(data[data?.length - 1]?.value)}</div>
+          <div className="x265-C5Ye0d">{data && String(data[0]?.value)}</div>
           <img className="x598-C5Ye0d" src="img/selfieToEarn/file---598@1x.png" alt="598" />
         </div>
         <div className="x6-MUU5YC x6">

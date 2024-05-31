@@ -5,19 +5,22 @@ import "./popupWindow.css";
 import IPFSImageComponent from "./ipfsImgComponent";
 import { Outlet } from "react-router-dom";
 import { GuestConnectWallectButton } from "./button";
+import { useSelector } from "react-redux";
+import { selectCurrentIsGuest } from "../redux/profile";
 
 interface INFTDetailPopUpProp {
-  isGuest: boolean;
-  isPopUpIcon: boolean;
+  isPopUpNFTDetailWinodow: boolean;
   isNFTiconLoading: boolean;
   imgAddress: string;
   level: string;
   rewardPercentage: string;
-  setIsPopUpIcon: Dispatch<React.SetStateAction<boolean>>;
+  setIsPopUpNFTDetailWinodow: Dispatch<React.SetStateAction<boolean>>;
   children?: React.ReactNode;
 }
 
-export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> = ({ isGuest, isPopUpIcon, isNFTiconLoading, imgAddress, level, rewardPercentage, setIsPopUpIcon, children }) => {
+export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> = ({ isPopUpNFTDetailWinodow, isNFTiconLoading, imgAddress, level, rewardPercentage, setIsPopUpNFTDetailWinodow, children }) => {
+  const isGuest = useSelector(selectCurrentIsGuest);
+  
   const nftDetailpopupWindowDisplay: JSX.Element = isGuest ? (
     // interface for guest
     <>
@@ -33,7 +36,7 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
         </div>
         <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" />
       </div>
-      <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
+      <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
     </>
   ) : (
     // interface for login user
@@ -53,13 +56,13 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
 
       <div className="x0-signa">$0 SIGNA</div>
       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-      <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
+      <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
     </>
   );
 
   return (
     <div>
-      {isPopUpIcon && <div className="hidden-content">{nftDetailpopupWindowDisplay}</div>}
+      {isPopUpNFTDetailWinodow && <div className="hidden-content">{nftDetailpopupWindowDisplay}</div>}
       {children}
     </div>
   );

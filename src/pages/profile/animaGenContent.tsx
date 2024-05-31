@@ -38,8 +38,8 @@ interface IAnimaGenContentProps {
   setIsBackButton: (isBackButton: boolean) => void;
   isUpdating?: boolean;
   isUpdatingUserSetting?: boolean;
-  setIsPopUpIcon: Function;
-  isPopUpIcon?: boolean;
+  setIsPopUpNFTDetailWinodow: Function;
+  isPopUpNFTDetailWinodow?: boolean;
   setIsNFTiconLoading: Function;
   isNFTiconLoading?: boolean;
   setImgAddress: Function;
@@ -65,7 +65,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const dispatch = useDispatch();
   const gender = useSelector(selectCurrentGender);
   const userAccountId = useSelector(accountId);
-  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpIcon, setIsPopUpIcon, isNFTiconLoading, setIsNFTiconLoading, setImgAddress, setRewardPercentage } = props;
+  const { isOpen, setIsOpen, isBackButton, setIsBackButton, isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow, isNFTiconLoading, setIsNFTiconLoading, setImgAddress, setRewardPercentage } = props;
   const [name, setName] = useState<string>(username);
   const [haveNft, setHaveNft] = useState<boolean>(false);
   const [aboutYourselfText, setAboutYourselfText] = useState<string>(aboutYourself);
@@ -324,7 +324,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               </>
             ) : (
               <>
-                <UserIcon setIsPopUpIcon={setIsPopUpIcon} profile={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
+                <UserIcon setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} profile={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
                 {/* <div className="profile-content-container">
               </div> */}
                 <div className="profile-content">
@@ -400,7 +400,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
                 myNfts.map((MyNft) => (
                   <img
                     onClick={() => {
-                      setIsPopUpIcon(true);
+                      setIsPopUpNFTDetailWinodow(true);
                       setImgAddress(MyNft.imageAddress);
                       setRewardPercentage(MyNft.rewardPercentage);
                     }}

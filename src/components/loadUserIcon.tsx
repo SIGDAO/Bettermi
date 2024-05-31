@@ -17,7 +17,7 @@ export interface IUserIconProps {
   home?: boolean;
   profile?: boolean;
   userAccountId: string;
-  setIsPopUpIcon: Function;
+  setIsPopUpNFTDetailWinodow: Function;
   setSelectedNft?: Function;
   setRewardPercentage: Function;
   setEnlargeImageAddress: Function;
@@ -45,7 +45,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
     forNftDisplay: "nft_-avatar_empty",
   };
 
-  const { home, userAccountId, setIsPopUpIcon, setSelectedNft, setRewardPercentage, setEnlargeImageAddress } = props;
+  const { home, userAccountId, setIsPopUpNFTDetailWinodow, setSelectedNft, setRewardPercentage, setEnlargeImageAddress } = props;
   let finalClassNames: ClassNames = home === true ? homeClassNames : profileClassNames;
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -112,7 +112,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
       ) : haveNft === true ? (
         // <img
         //   onClick={() => {
-        //     setIsPopUpIcon(true);
+        //     setIsPopUpNFTDetailWinodow(true);
         //     if (setSelectedNft != null) {
         //       setSelectedNft(imgAddress);
         //     }
@@ -125,7 +125,7 @@ const UserIcon: React.FC<IUserIconProps> = (props) => {
         // />
         <IPFSImageComponent
           onClick={() => {
-            setIsPopUpIcon(true);
+            setIsPopUpNFTDetailWinodow(true);
             if (setSelectedNft != null) {
               setSelectedNft(imgAddress);
             }

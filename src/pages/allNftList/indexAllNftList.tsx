@@ -67,7 +67,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   const [openModel, setOpenModel] = useState<boolean>(false);
   const [nftSelectedImage, setNftSelectedImage] = useState<string>("");
   const [selectedImageAddress,setSelectImageAddress] = useState<string>("");
-  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+  const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
 
 
   const hasRendered = useRef(false);
@@ -362,7 +362,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         </>
       ) : (
         <>
-          <AllNftList setSelectedImageAddress={setSelectedNftInfo} isPopUpIcon={isPopUpIcon} setIsPopUpIcon={setIsPopUpIcon} nftInfoArray={nftInfo} CustomModel={PopupModal} setOpenModel={setOpenModel} openModel={openModel}></AllNftList>
+          <AllNftList setSelectedImageAddress={setSelectedNftInfo} isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow} setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} nftInfoArray={nftInfo} CustomModel={PopupModal} setOpenModel={setOpenModel} openModel={openModel}></AllNftList>
         </>
       )}
       {/* {openModel?(

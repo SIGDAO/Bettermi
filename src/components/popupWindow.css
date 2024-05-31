@@ -48,11 +48,12 @@
   height: 100vh;
   background:#0d0d0da8;
   z-index: 200;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

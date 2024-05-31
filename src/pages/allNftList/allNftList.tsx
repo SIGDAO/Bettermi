@@ -13,13 +13,13 @@ export interface IAllNftListProps{
     setOpenModel?:(openModel:boolean) => void;
     nftInfoArray:nftInfo[];
     setSelectedNftId?:(nftId:string) => void;
-    isPopUpIcon?:boolean;
-    setIsPopUpIcon:(isPopUpIcon:boolean) => void;
+    isPopUpNFTDetailWinodow?:boolean;
+    setIsPopUpNFTDetailWinodow:(isPopUpNFTDetailWinodow:boolean) => void;
     setSelectedImageAddress?:(selectedImageAddress:selectedNftInfo) => void;
 }
 
 const AllNftList:React.FC <IAllNftListProps>= (props) => {
-    const {CustomModel,openModel,setOpenModel,nftInfoArray,isPopUpIcon,setIsPopUpIcon,setSelectedImageAddress} = props;
+    const {CustomModel,openModel,setOpenModel,nftInfoArray,isPopUpNFTDetailWinodow,setIsPopUpNFTDetailWinodow,setSelectedImageAddress} = props;
     //const{myNfts} = props;
     const mobile = process.env.REACT_APP_MOBILE === 'true';
     const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;

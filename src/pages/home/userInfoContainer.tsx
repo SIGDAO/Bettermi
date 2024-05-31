@@ -6,7 +6,7 @@ import { Dispatch } from "react";
 
 interface IUserInfoContainerProps {
   isGuest: boolean;
-  setIsPopUpIcon: Dispatch<React.SetStateAction<boolean>>;
+  setIsPopUpNFTDetailWinodow: Dispatch<React.SetStateAction<boolean>>;
   userAccountId: string;
   setRewardPercentage: Dispatch<React.SetStateAction<string>>;
   setImgAddress: Dispatch<React.SetStateAction<string>>;
@@ -18,7 +18,7 @@ interface IUserInfoContainerProps {
 
 const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
   isGuest,
-  setIsPopUpIcon,
+  setIsPopUpNFTDetailWinodow,
   userAccountId,
   setRewardPercentage,
   setImgAddress,
@@ -31,9 +31,9 @@ const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
     <div className="greetings-RoXPLo">
       <div className="home-user-icon-container">
         {isGuest ? (
-          <img onClick={() => setIsPopUpIcon(true)} className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/mimi_guest_sample_stamp_small.png`} alt="" />
+          <img onClick={() => setIsPopUpNFTDetailWinodow(true)} className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/mimi_guest_sample_stamp_small.png`} alt="" />
         ) : (
-          <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress} />
+          <UserIcon setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress} />
         )}
       </div>
       <div className="home-user-info-container">

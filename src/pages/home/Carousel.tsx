@@ -82,7 +82,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
         </button>
         <button className="special_button-hH9Cww">
           <div className="ic_reservation-nXPAX5 ic_reservation">
-            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`} alt="ic_reservation" />
+            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/Reservation_button.svg`} alt="ic_reservation" />
           </div>
           <div className="ic_locked-nXPAX5 ic_locked">
             <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
@@ -105,7 +105,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
         </button> */}
         <button className={onholdPage[1] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(1)}>
           <div className="ic_leaderboard-IgToMG ic_leaderboard">
-            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/bxs-Leaderboard.svg`} alt="ic_leaderboard" />
+            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/Leaderboard_button.svg`} alt="ic_leaderboard" />
           </div>
         </button>
       </div>

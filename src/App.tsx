@@ -191,7 +191,7 @@ function App() {
                   <Route path=":id" element={<RewardDetail />} />
                 </Route>
                 <Route path="/selfieToEarn" element={<SelfieToEarn />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<Profile previousPath={previousPath} />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/previewNFTImg" element={<Testing />} />
                 <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />

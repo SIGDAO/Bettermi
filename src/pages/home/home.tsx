@@ -72,7 +72,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [level, setLevel] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+  const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [rewardPercentage, setRewardPercentage] = useState<string>("");
@@ -186,12 +186,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     <>
       <NFTDetailPopUpWindow
         isGuest={isGuest}
-        isPopUpIcon={isPopUpIcon}
+        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         isNFTiconLoading={isNFTiconLoading}
         imgAddress={imgAddress}
         level={level}
         rewardPercentage={rewardPercentage}
-        setIsPopUpIcon={setIsPopUpIcon}
+        setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
       >
         <div className="screen">
           <div className="bettermidapp-home-1">
@@ -209,7 +209,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
             <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
             <UserInfoContainer
               isGuest={isGuest}
-              setIsPopUpIcon={setIsPopUpIcon}
+              setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
               userAccountId={userAccountId}
               setRewardPercentage={setRewardPercentage}
               setImgAddress={setImgAddress}

@@ -3,114 +3,71 @@ import "../profile/profile.css";
 import { CenterLayout } from "../../components/layout";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { selectCurrentGender } from "../../redux/profile";
+import { selectCurrentGender, selectCurrentIsGuest } from "../../redux/profile";
 import { accountId } from "../../redux/account";
 import { useSelector } from "react-redux";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
 import ProfileTemplate from "../profile/profileTemplate";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 
-interface IProfileProps {
-
-}
+interface IProfileProps {}
 
 const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isBackButton, setIsBackButton] = useState<boolean>(true);
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const { state } = useLocation();
-  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+  const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
   const [rewardPercentage, setRewardPercentage] = useState<string>("0");
 
   /* Function to check whether we are updating personal information*/
-  const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
-  const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
+  // const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
+  // const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
   const userAccountId = state.userId;
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const isGuest = useSelector(selectCurrentIsGuest);
 
 
-  const checkIsLoading = async () => {
-    const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-
-    for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
-      if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
-
-        setIsUpdatingUserSetting(true);
-        setIsSettingLoading(false);
-        return;
-      }
-    }
-
-    setIsUpdatingUserSetting(false);
-    setIsSettingLoading(false);
-  };
 
   useEffect(() => {
-    checkIsLoading();
-  }, []);
-
-  useEffect(() => {
-    if (state?.previousPath === "/customizeYourProfile") {
-      setIsOpen(true);
-      setIsBackButton(false);
-      window.history.replaceState({}, document.title);
-    }
     GetRewardPercentage(ledger2, userAccountId)
       .then((res) => {
         setRewardPercentage(res);
       })
       .catch((err) => {
-
+        console.log(err);
       });
   }, []);
 
-  /* Function to check whether we are updating personal information*/
-
   return (
     <CenterLayout
-      noScroll={true}
       content={
-        <>
-          {isPopUpIcon && (
-            <div className="hidden-content">
-              {isNFTiconLoading ? (
-                <div className="x0"></div>
-              ) : (
-                <>
-                  <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
-                  {/* <h1 className="text-1">#{nftNumber}</h1> */}
-                </>
-              )}
-              <div className="x16206">
-                <div className="lv-1">LV 1</div>
-                <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-                <div className="reward-10">REWARD + {rewardPercentage}%</div>
-              </div>
-              <div className="x0-signa">$0 SIGNA</div>
-              <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-              <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
-            </div>
-          )
-          }
+        <NFTDetailPopUpWindow
+          isGuest={isGuest}
+          isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
+          isNFTiconLoading={isNFTiconLoading}
+          imgAddress={imgAddress}
+          level={""}
+          rewardPercentage={rewardPercentage}
+          setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+        >
           <div className="screen">
             <ProfileTemplate
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
+              isGuest={isGuest}
               isNFTiconLoading={isNFTiconLoading}
               setIsNFTiconLoading={setIsNFTiconLoading}
-              setIsPopUpIcon={setIsPopUpIcon}
-              isPopUpIcon={isPopUpIcon}
+              setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+              isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
               setImgAddress={setImgAddress}
               setRewardPercentage={setRewardPercentage}
               isMyProfile={false}
               userAccountId={userAccountId}
             />
           </div>
-        </>
+        </NFTDetailPopUpWindow>
       }
       bgImg={false}
       // noScroll={isOpen}
