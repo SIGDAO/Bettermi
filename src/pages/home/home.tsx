@@ -185,7 +185,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const content: JSX.Element = (
     <>
       <NFTDetailPopUpWindow
-        isGuest={isGuest}
+        // isGuest={isGuest}
         isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         isNFTiconLoading={isNFTiconLoading}
         imgAddress={imgAddress}

@@ -67,6 +67,7 @@ const ProfileTesting: React.FunctionComponent<IProfileProps> = (props) => {
     <CenterLayout
       // noScroll={true}
       content={
+        // pop up window for displaying NFT detail
         <NFTDetailPopUpWindow
           isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
           isNFTiconLoading={isNFTiconLoading}

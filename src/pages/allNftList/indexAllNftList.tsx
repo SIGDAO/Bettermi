@@ -17,9 +17,7 @@ import AllNftLoading from "./allNftLoading";
 import NftDetails from "../../components/nftDetails";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 
-interface IINDEXAllNftListProps {
-
-}
+interface IINDEXAllNftListProps {}
 export interface nftImage {
   imageUrl: string;
   nftLevel: any;
@@ -39,19 +37,19 @@ export interface nftInfo {
   nftLevel: string;
   nftStatus: string;
   nftNumber: number;
-  nftReward:string;
+  nftReward: string;
 }
 export interface urlObject {
   url: string;
   nftId: string;
   index: number;
 }
-export interface selectedNftInfo{
-  imageUrl:string,
-  nftLevel:string,
-  nftPrice:string,
-  nftReward:string,
-  nftNumber:string,
+export interface selectedNftInfo {
+  imageUrl: string;
+  nftLevel: string;
+  nftPrice: string;
+  nftReward: string;
+  nftNumber: string;
 }
 
 export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
@@ -66,9 +64,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [openModel, setOpenModel] = useState<boolean>(false);
   const [nftSelectedImage, setNftSelectedImage] = useState<string>("");
-  const [selectedImageAddress,setSelectImageAddress] = useState<string>("");
+  const [selectedImageAddress, setSelectImageAddress] = useState<string>("");
   const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
-
 
   const hasRendered = useRef(false);
   const sleep = (delay: number) => {
@@ -116,10 +113,13 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     for (var i = 0; i < nftStorages.length; i++) {
       try {
         const des = JSON.parse(nftStorages[i].description).descriptor;
-        const info: urlObject = { url: `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${des}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`, nftId: nftStorages[i].at, index: i };
+        const info: urlObject = {
+          url: `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${des}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
+          nftId: nftStorages[i].at,
+          index: i,
+        };
         InfoJson.push(info);
       } catch {
-
         const info: urlObject = { url: "", nftId: "123", index: i };
         InfoJson.push(info);
       }
@@ -130,9 +130,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     var mergedArray: nftInfo[] = new Array(nftStorages.length).fill({}) as nftInfo[];
     const requests: Promise<void>[] = [];
     InfoJson.map((nftStorage) => {
-
       if (nftStorage.nftId !== "123") {
-
         requests.push(
           ledger2.contract
             .getContract(nftStorage.nftId)
@@ -173,8 +171,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
               // });
             })
             .catch((err) => {
-              mergedArray[nftStorage.index] = { ...mergedArray[nftStorage.index], contractId: nftStorage.nftId, contractPrice: "0", contractOwner: "0", nftStatus: "15",nftReward:"0" };
-            })
+              mergedArray[nftStorage.index] = { ...mergedArray[nftStorage.index], contractId: nftStorage.nftId, contractPrice: "0", contractOwner: "0", nftStatus: "15", nftReward: "0" };
+            }),
         );
       }
     });
@@ -182,8 +180,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     const requests2: Promise<void>[] = [];
 
     InfoJson.map((InfoJson) => {
-       if (mergedArray[InfoJson.index].contractOwner === nftDistributor) {
-      //if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
+      if (mergedArray[InfoJson.index].contractOwner === nftDistributor) {
+        //if (mergedArray[InfoJson.index].contractOwner == nftDistributor) {
         requests2.push(
           fetch(InfoJson.url)
             .then((res) => res.text())
@@ -194,13 +192,12 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 const levelNumber = text.description.match(/Level (\d+)/)?.[1];
                 var reward = "0";
                 const level = convertWordToNumber(text.attributes[6].value);
-                console.log("level is",level);
-                if(isNaN(level) === false){
-                  console.log((level/3).toString());
-                   reward = ((level/3).toFixed(2)).toString();
-                }
-                else{
-                   reward = "";
+                console.log("level is", level);
+                if (isNaN(level) === false) {
+                  console.log((level / 3).toString());
+                  reward = (level / 3).toFixed(2).toString();
+                } else {
+                  reward = "";
                 }
                 const string = text.name;
                 const regex = /#(\d+)/;
@@ -210,16 +207,14 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                   number = parseInt(match[1]); // this is the nft number
                 }
 
-                mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber: number,nftReward:reward };
+                mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: text.media[0].social, nftLevel: levelNumber, nftNumber: number, nftReward: reward };
               } catch (e) {
-
-                mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1,nftReward:"0" };
+                mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1, nftReward: "0" };
               }
             })
             .catch((err) => {
-
-              mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1,nftReward:"0" };
-            })
+              mergedArray[InfoJson.index] = { ...mergedArray[InfoJson.index], imageUrl: "", nftLevel: "1", nftNumber: -1, nftReward: "0" };
+            }),
         );
       }
     });
@@ -307,8 +302,6 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //   // );
     //   await Promise.all(requests);
 
-
-
     //   const account = await ledger2.contract.getContract(nftStorages[0].at);
 
     //   var nftContract = new ContractDataView(account);
@@ -326,7 +319,6 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     //       nftStatus:nftInfo[i].contractStatus,
     //     });
     //   }
-
 
     //   setNftInfo(mergedArray);
     //   setLoading(false);
@@ -353,7 +345,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   return (
     <>
       {loading ? (
-        <AllNftLoading></AllNftLoading>
+        <AllNftLoading />
       ) : openModel ? (
         <>
           {/* <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel> */}
@@ -362,7 +354,15 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         </>
       ) : (
         <>
-          <AllNftList setSelectedImageAddress={setSelectedNftInfo} isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow} setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} nftInfoArray={nftInfo} CustomModel={PopupModal} setOpenModel={setOpenModel} openModel={openModel}></AllNftList>
+          <AllNftList
+            setSelectedImageAddress={setSelectedNftInfo}
+            isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
+            setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+            nftInfoArray={nftInfo}
+            CustomModel={PopupModal}
+            setOpenModel={setOpenModel}
+            openModel={openModel}
+          ></AllNftList>
         </>
       )}
       {/* {openModel?(

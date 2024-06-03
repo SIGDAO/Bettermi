@@ -15,22 +15,6 @@
 
 }
 
-.importButton{
-  position:relative;
-  left:250px;
-  height:25px;
-  width:100px;
-  top:54px;
-  background-color:inherit;
-  border:none;
-  color:#FFFFFF;
-}
-
-.importButton:hover{
-  cursor:pointer;
-  opacity:0.6;
-}
-
 .transparent-title-bar-container {
   /* background: linear-gradient(112deg, #221D4B 0%, #171717 100%);
   box-shadow: 0px 3px 30px var(--royal-blue); */
@@ -48,382 +32,67 @@
 
 }
 
-
-
-.bg-MY4xZJ {
-  background-color: transparent;
-  height: calc(100.00% + 90px);
-  left: -45px;
-  object-fit: cover;
-  position: absolute;
-  top: -45px;
-  width: calc(100.00% + 90px);
-  /* z-index: 0; */
-}
-
-.icon-arrow-left-container {
-  bottom: 0px;
+.title-bar-content {
+  margin-top: 44px;
   height: 44px;
-  left: 16px;
-  width: 44px;
-}
-
-.icon-arrow-left-img {
-  height: 35.44%;
-  left: 31.82%;
-  object-fit: cover;
-  top: 31.82%;
-  width: 36.36%;
-}
-
-.bars-status-bar-i-phone-light-MY4xZJ {
-  background-color: transparent;
-  height: 41px;
-  left: 0px;
-  position: absolute;
-  top: 1px;
   width: 100%;
+  padding: 0px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.frame-TQo4S1 {
-  background-color: var(--white);
-  height: 100%;
-  left: 0px;
-  opacity: 0.0;
-  position: absolute;
-  top: 0px;
-  width: 100%;
+.title-bar-back-button-container {
+  /* height: 44px;
+  width: 44px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.status-bar-TQo4S1 {
-  background-color: transparent;
-  bottom: calc(47.83% - 9px);
-  height: 18px;
-  left: 18px;
-  position: absolute;
-  width: calc(100.00% - 35px);
-}
-
-.battery-NQEgns {
-  background-color: transparent;
-  height: 11px;
-  position: absolute;
-  right: 0px;
-  top: calc(42.50% - 5px);
-  width: 24px;
-}
-
-.border-jh35Vw {
-  background-color: transparent;
-  border: 1px solid;
-  border-color: var(--white);
-  border-radius: 2.67px;
-  height: 100%;
-  left: 0px;
-  opacity: 0.35;
-  position: absolute;
-  top: 0px;
-  width: calc(100.00% - 2px);
-}
-
-.cap-jh35Vw {
-  background-color: transparent;
-  bottom: calc(50.00% - 2px);
-  height: 4px;
+.title-bar-back-button-image {
   object-fit: cover;
-  position: absolute;
-  right: 0px;
-  width: 1px;
-}
-
-.capacity-jh35Vw {
-  background-color: var(--white);
-  border-radius: 1.33px;
-  height: calc(100.00% - 4px);
-  left: 2px;
-  position: absolute;
-  top: 2px;
-  width: 18px;
-}
-
-.wifi-NQEgns {
-  background-color: transparent;
-  height: calc(100.00% - 7px);
-  object-fit: cover;
-  position: absolute;
-  right: 29px;
-  top: 3px;
-  width: 15px;
-}
-
-.cellular-connection-NQEgns {
-  background-color: transparent;
-  height: calc(100.00% - 7px);
-  object-fit: cover;
-  position: absolute;
-  right: 50px;
-  top: 3px;
-  width: 17px;
-}
-
-.time-style-NQEgns {
-  background-color: transparent;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 54px;
-}
-
-.time-yRfD0k {
-  background-color: transparent;
-  color: var(--white);
-  font-family: var(--font-family-sfpro_text-semibold);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  height: 20px;
-  left: 0px;
-  letter-spacing: -0.30px;
-  line-height: 15px;
-  position: absolute;
-  text-align: center;
-  top: 0px;
-  width: calc(100.00% + 2px);
+  height: 16px;
+  width: 16px;
 }
 
 .title-bar-title {
-  background-color: transparent;
-  bottom: 8px;
-  height: 23px;
-  left: calc(25.00% - 27px);
-  letter-spacing: 0.00px;
-  line-height: 20px;
-  position: absolute;
   text-align: left;
   white-space: nowrap;
   width: 110px;
 }
 
-.title-bar-seperat-line {
-  bottom: 0px;
-}
-
-.title-bar-ic_help_24px {
-  bottom: 12px;
+.title-bar-ai-coach-icon-container {
   height: 20px;
-  right: 29px;
   width: 20px;
-}
-
-.title-bar-ic_help_24px-img {
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  top: 0px;
-  width: 100%;
-}
-
-.icon-arrow-left-lNR2sp {
-  bottom: 0px;
-  cursor: pointer;
-  height: 44px;
-  left: 16px;
-  width: 44px;
-}
-
-.icon-arrow-left-06U3fF {
-  height: 35.44%;
-  left: 31.82%;
-  object-fit: cover;
-  top: 31.82%;
-  width: 36.36%;
-}
-
-.ic_settings_24px-container {
-  bottom: 12px;
-  height: 20px !important;
-  right: calc(18.62% - 4px);
-  width: 28px !important;
-}
-
-.ic_settings_24px-img {
-  height: 20px;
-  left: 1px;
-  object-fit: cover;
-  top: 0px;
-  width: 24px;
-}
-
-
-.ic_help_24px {
-  background-color: transparent;
-  position: absolute;
-}
-
-.ic_home {
-  background-color: transparent;
-  position: absolute;
-}
-
-.ic_next {
-  background-color: transparent;
-  bottom: 17px;
-  height: 44px;
-  position: absolute;
-  right: 22px;
-  width: 44px;
-}
-
-.ic_profile {
-  background-color: transparent;
-  position: absolute;
-}
-
-.ic_settings_24px {
-  background-color: transparent;
-  position: absolute;
-}
-
-.icon-arrow-left {
-  background-color: transparent;
-  position: absolute;
-}
-
-.seperat-line {
-  background-color: transparent;
-  height: 1px;
-  left: 1px;
-  object-fit: cover;
-  position: absolute;
-  width: calc(100.00% - 1px);
-}
-
-.titleBarAddSign{
-  height: 20px;
-  right: 30px;
-  width: 19px;
-  background-color: transparent;
-  position: absolute;
-  bottom: 12px;
-}
-.titleBarAddSignImg{
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  top: 0px;
-  width: 100%;
-}
-.titleBarFilter{
-  height:20px;
-  width:63px;
-  background-color: #96e71c;
-  position: relative;
-  bottom: 12px;
-  right: calc(20.62% - 4px);
-  border-color: transparent;
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-.titleBarFilterName{
-  color:#FFFFFF;
-
-
-}
-.titleBarFilterArrow{
-  height: 5px;
-  width: 10px;
-  background-color: transparent;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
-
-
-/* Dropdown Content (Hidden by Default) */
-.titleBarDropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.titleBarDropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropbtnArrow a:hover {background-color: #ddd;}
-
-/* Show the dropdown menu on hover */
-.dropbtnArrow:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.titleBarFilter:hover .dropbtn {background-color: #3e8e41;}
-
-.dropbtn {
-  background-color: transparent;
-  color: white;
-  font-size: 12px;
-  border: none;
-  width:100%;
-  flex-direction: row;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height:20px;
+  justify-content: flex-start;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  left:263px;
-  height:25px;
-  width:60px;
-  top:57px;
+.title-bar-left-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
 }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right:1px;
-  background-color: #0D0D0D;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+.title-bar-right-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color:#FFFFFF;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  font-size: 12px;
-}
-.dropdown-content a:hover {
-background-color: #221D4B;
-cursor: pointer;
-}
-.dropbtnArrow{
-  width:10px;
-  height:6px;
+.title-bar-ai-coach-icon {
+  width: 56px;
+  height: 20px;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover { background-color:transparent;}
+.title-bar-setting-button-image {
+  height: 20px;
+  width: 20px;
+  object-fit: cover;
+}
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #0D0D0D}

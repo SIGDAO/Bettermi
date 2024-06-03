@@ -12,6 +12,7 @@ import { useLedger } from "../../redux/useLedger";
 import { useEffect } from "react";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 interface IRewardProps {}
 
@@ -24,8 +25,16 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
+  const isGuest = useSelector(selectCurrentIsGuest);
   
   useEffect(() => {
+    if (isGuest) {
+      setBmiRecordTimes(0);
+      setNftAcquireNumber(0);
+      setBmiHitHealthyNumber(0);
+      return;
+    }
+
     getBMIRecordDay(tempAccountId, Ledger2)
       .then((res) => {
         setBmiRecordTimes(res);
@@ -72,7 +81,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-rewards-2">
-        <ShortTitleBar title="Redeem Rewards" />
+        <ShortTitleBar title="Redeem Rewards" aiCoach={true} setting={true} />
         {/* <img className="bg-kQlY8S bg" src={`${process.env.PUBLIC_URL}/img/reward/bg-14-1x-png@1x.png`} alt="BG" /> */}
         {/* <div className="reward-list-container"> */}
           {/* {redeemCard} */}

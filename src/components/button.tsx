@@ -24,6 +24,7 @@ interface IButtonProps {
   style?: CSS.Properties;
   imagePath?: string;
   className?: string;
+  imageClassName?: string;
 }
 
 // DefaultButton css style
@@ -34,7 +35,7 @@ interface IBackButtonProps {
 }
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
-  const { text, height, width, navigation, style, imagePath, className } = props;
+  const { text, height, width, navigation, style, imagePath, className, imageClassName } = props;
   const customStyle: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
@@ -51,7 +52,7 @@ export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (prop
     <Link to={navigation || "/"}>
       <div className={className || ""} style={style || customStyle}>
         {text}
-        {imagePath && <img src={`${process.env.PUBLIC_URL}/${imagePath}`} alt="" />}
+        {imagePath && <img src={`${process.env.PUBLIC_URL}/${imagePath}`} className={imageClassName} alt="" />}
       </div>
     </Link>
   );
@@ -248,8 +249,11 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
     background: "transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 15px 30px #1466CC29",
     borderRadius: "10px",
-
+    gap: "10px",
   }
+
+  // const connectWalletButton: CSS.Properties = {
+  //   dis
 
   return <ButtonWithNavigation 
             text="Connect Wallet" 
@@ -259,5 +263,6 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
             navigation="/" 
             className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
             style={guestButtonStyle}
+            imageClassName="wallet-icon"
           />;
 };

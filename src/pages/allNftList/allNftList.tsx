@@ -87,7 +87,7 @@ const AllNftList:React.FC <IAllNftListProps>= (props) => {
     return (
         <div style={bgStyle}>
             <div style={centerLayoutStyle} className='bettermidapp-mimi-nfts-send-address-1'>
-            <ShortTitleBar title='NFT Marketplace' addSign = {false} aiCoach = {false} filter = {false} backButton = {true} />
+            <ShortTitleBar title='NFT Marketplace' setting={true} />
               <div className = "containerMyNftList">
                 <div className = "containerMyNftList2">
                     {displayMyNft}     

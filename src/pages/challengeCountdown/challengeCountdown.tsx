@@ -73,7 +73,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
-        <ShortTitleBar title={displayMission.pageTitle} backButton={true} aiCoach={false}  addSign = {false}setting = {false}/>
+        <ShortTitleBar title={displayMission.pageTitle} aiCoach={true} setting ={true}/>
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
         <div style={timerStyles}>{showTimeBeforeStart()}</div>
         <img

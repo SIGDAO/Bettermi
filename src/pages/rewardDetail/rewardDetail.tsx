@@ -132,7 +132,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-rewards-redeem-master-collector-1">
-        <ShortTitleBar title={displayRewardDetail?.title} />
+        <ShortTitleBar title={displayRewardDetail?.title} aiCoach={true} setting={true} />
         <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
         <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
         <div className={classNameList[4] || "button_-redeem-P2i95W"}>

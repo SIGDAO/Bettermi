@@ -502,15 +502,6 @@
   position: absolute;
 }
 
-.bettermidapp-marketplace-1 .ic_chevron_right_24px {
-  background-color: transparent;
-  height: 12px;
-  left: calc(49.19% - 4px);
-  object-fit: cover;
-  position: absolute;
-  top: calc(50.00% - 6px);
-  width: 7px;
-}
 
 
 .bettermidapp-marketplace-1 .nft_-avatar {
@@ -632,4 +623,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.marketplace_ic_next {
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 17.5px;
+  right: 22px;
+
+}
+
+.bettermidapp-marketplace-1 .marketplace_ic_chevron_right_24px {
+  background-color: transparent;
+  height: 12px;
+  object-fit: cover;
+  width: 7px;
 }

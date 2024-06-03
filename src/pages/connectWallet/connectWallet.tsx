@@ -171,12 +171,17 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       });
   };
 
+  const guestExplore = (): void => {
+
+    navigate("/home");
+  }
+
   const logo: JSX.Element = (
     <div className="connectWallet-bg-img-container">
-      {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/freeze_bettermi_logo.png"} />}
+      {/* {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/freeze_bettermi_logo.png"} />} */}
       <img 
         className="connectWallet-bg-img" 
-        src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed.gif"} 
+        src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed_addition_ver2.gif"} 
         onLoad={() => setIsLoading(false)} 
         style={{ display: isLoading ? 'none' : 'inline-block' }}  
       />
@@ -184,9 +189,10 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   );
 
   const content: JSX.Element = (
-    <div className="connectWallet-layout">
+    <div className="connectWallet-layout" >
+      {logo}
       <div id="connectWallet-container">
-        {logo}
+        {/* {logo} */}
         <div className="connectWallet-option-container">
           <div id="connectWallet-button-container">
             <ButtonWithAction

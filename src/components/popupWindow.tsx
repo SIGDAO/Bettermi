@@ -18,11 +18,20 @@ interface INFTDetailPopUpProp {
   children?: React.ReactNode;
 }
 
-export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> = ({ isPopUpNFTDetailWinodow, isNFTiconLoading, imgAddress, level, rewardPercentage, setIsPopUpNFTDetailWinodow, children }) => {
+// pop up window for displaying NFT detail
+// can display different NFT detail by changing the imgAddress / rewardPercentage / level
+export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> = ({
+  isPopUpNFTDetailWinodow,
+  isNFTiconLoading,
+  imgAddress,
+  level,
+  rewardPercentage,
+  setIsPopUpNFTDetailWinodow,
+  children,
+}) => {
   const isGuest = useSelector(selectCurrentIsGuest);
-  
-  const nftDetailpopupWindowDisplay: JSX.Element = isGuest ? (
-    // interface for guest
+
+  const guestNFTDetailpopupWindowDisplay: JSX.Element = (
     <>
       <div className="guest-nft-detail-popup-window-container">
         <div className="guest-nft-detail-popup-window-title inter-semi-bold-white-18px">Get your FREE NFT now !</div>
@@ -38,8 +47,9 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
       </div>
       <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
     </>
-  ) : (
-    // interface for login user
+  );
+
+  const loginUserNFTDetailpopupWindowDisplay: JSX.Element = (
     <>
       {isNFTiconLoading ? (
         <div className="x0"></div>
@@ -62,7 +72,11 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
 
   return (
     <div>
-      {isPopUpNFTDetailWinodow && <div className="hidden-content">{nftDetailpopupWindowDisplay}</div>}
+      {isPopUpNFTDetailWinodow && 
+        <div className="hidden-content">
+          {isGuest ? guestNFTDetailpopupWindowDisplay : loginUserNFTDetailpopupWindowDisplay}
+        </div>
+      }
       {children}
     </div>
   );

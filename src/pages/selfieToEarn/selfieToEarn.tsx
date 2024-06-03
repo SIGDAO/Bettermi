@@ -206,7 +206,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-selfie-to-earn-1">
-        <ShortTitleBar title="Selfie to Earn" />
+        <ShortTitleBar title="Selfie to Earn" aiCoach={true} setting={true} />
         <div className="take-a-selfie-button-container">
           <NavigateToTakeSelfieButton />
         </div>

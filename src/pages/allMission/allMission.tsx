@@ -64,7 +64,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
   return (
     <div style={bgStyle}>
       <div style={centerLayoutStyle}>
-        <ShortTitleBar title="Feature Missions" customiseBackButton={true} customiseBackButtonLink="/home" />
+        <ShortTitleBar title="Feature Missions" aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/home" />
         {/* The body part, which are the buttons */}
         <div className="mission-body-container">
           <div className="mission-body">

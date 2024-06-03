@@ -104,6 +104,12 @@ const guestAllowedPath = [
   "/takeSelfie",
   "/generateBMINFTImport",
   "/profile",
+  "/allNftList",
+  "/setting",
+  // "/leaderboard",
+  "/reward",
+  "/marketplace",
+  "rewardDetail",
 ]
 
 

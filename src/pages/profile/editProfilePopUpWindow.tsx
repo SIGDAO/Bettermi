@@ -1,12 +1,13 @@
 import * as React from "react";
 import { CustomInput, CustomTextArea, RandomGenNameInput } from "../../components/input";
 import { Dispatch, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { profileSlice } from "../../redux/profile";
 import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import { Api } from "@signumjs/core";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
 import { BackButton } from "../../components/button";
+import { accountPublicKey } from "../../redux/account";
 
 interface IEditProfilePopUpWindowProps {
   isOpen: boolean;
@@ -20,7 +21,6 @@ interface IEditProfilePopUpWindowProps {
   displayPopUpMessage: (message: string) => void;
   ledger2: Api;
   userAccountId: string;
-  userAccountpublicKey: string;
   Wallet: {
     Extension: GenericExtensionWallet;
     Deeplink: DeeplinkableWallet;
@@ -40,10 +40,11 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
     displayPopUpMessage,
     ledger2,
     userAccountId,
-    userAccountpublicKey,
     Wallet,
   } = props;
   const dispatch = useDispatch();
+
+  const userAccountpublicKey = useSelector(accountPublicKey);
 
   const [name, setName] = useState<string>("");
   const [aboutYourselfText, setAboutYourselfText] = useState<string>("");
@@ -112,12 +113,12 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
           <div className="edit-profile">
             {isBackButton && (
               <div className="icon-arrow-left-popup-container" onClick={() => setIsOpen((prev) => !prev)}>
-                <img className="icon-arrow-left-popup-image" src="img/profile/icon-arrow-left-1@1x.png" alt="icon-arrow-left" />
+                <img className="icon-arrow-left-popup-image" src={`${process.env.PUBLIC_URL}/img/profile/icon-arrow-left-1@1x.png`} alt="icon-arrow-left" />
               </div>
             )}
             <div className="edit-profile-popup-window-container inter-bold-royal-blue-15px">
               <div className="edit-profile-popup-window-title-container ">
-                <img className="ic_edit-1-content" src="img/profile/ic-edit-1@1x.png" alt="" />
+                <img className="ic_edit-1-content" src={`${process.env.PUBLIC_URL}/img/profile/ic-edit-1@1x.png"`} alt="" />
                 <div className="inter-semi-bold-white-18px">Edit Profile</div>
               </div>
               <div className="edit-profile-popup-window-content">

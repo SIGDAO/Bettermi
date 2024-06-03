@@ -8,16 +8,9 @@ import { useAppSelector } from "../../redux/useLedger";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useEffect } from "react";
-import { accountId, accountPublicKey } from "../../redux/account";
 import { useDispatch, useSelector } from "react-redux";
 import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentIsGuest, selectCurrentUsername } from "../../redux/profile";
-import { CustomInput, RandomGenNameInput } from "../../components/input";
-import { CustomTextArea } from "../../components/input";
-import { selectCurrentGender } from "../../redux/profile";
 import { Alert } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
-import { FindLatestTransactionArray, FindLatestTransactionNumber, IsUserSettingUpdating, p2pTransferNft } from "../../NftSystem/updateUserNftStorage";
-import { getNftContractStorage } from "../../redux/account";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
 import UserIcon from "../../components/loadUserIcon";
@@ -29,6 +22,7 @@ import HorizontalScrollContainer from "../../components/horizontalScrollContaine
 import IPFSImageComponent from "../../components/ipfsImgComponent";
 import EditProfilePopUpWindow from "./editProfilePopUpWindow";
 import ProfileUserInfoContainer from "./profileUserInfoContainer";
+import UserNFTList from "./userNFTList";
 
 interface IProfileTemplateProps {
   previousPath?: string;
@@ -75,9 +69,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
-  const userAccountpublicKey = useSelector(accountPublicKey);
 
   // initialize hooks from library
   const dispatch = useDispatch();
@@ -94,7 +85,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   // fetch data boolean
   const [isSettingLoading, setIsSettingLoading] = useState<boolean>(true);
   const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
-  const [loadingNft, setLoadingNft] = useState<boolean>(true);
+  // const [loadingNft, setLoadingNft] = useState<boolean>(true);
 
   // profile info related variable
   const fetchDescription = useSelector(selectCurrentDescription);
@@ -173,16 +164,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     }
   };
 
-  const loadNftList = async () => {
-    try {
-      const userNftList: NftProfile[] = await GetUserNftList(ledger2, userAccountId, nftDistributor, codeHashIdForNft);
-      console.log("userNftList is ", userNftList);
-      setMyNfts(userNftList);
-      setLoadingNft(false);
-    } catch (e: any) {
-      console.log(e);
-    }
-  };
 
   const displayPopUpMessage = (message: string): void => {
     setAlertWarningString(message);
@@ -217,16 +198,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     return () => clearInterval(timer);
   }, [copyAlertCount]);
 
-  // fetch user setting
-  useEffect(() => {
-    try {
-      if (userAccountId && loadingNft) {
-        loadNftList();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [userAccountId]);
 
   useEffect(() => {
     // don't fetch data if user is guest
@@ -237,63 +208,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     checkIsPrevPathIsCustomizeYourProfile();
   }, []);
 
-  const userNFTDisplay: JSX.Element = (
-    <>
-      <HorizontalScrollContainer
-        inputClassName="profileHorizontalScroll"
-        style={{
-          backgroundColor: "inherit",
-          width: "390px",
-          height: "45%",
-          overflowY: "scroll",
-        }}
-        // onWheel={handleScroll}
-      >
-        <div
-          style={{
-            width: "152px",
-            height: "217px",
-            display: "flex",
-          }}
-          // onWheel={handleScroll}
-        >
-          <Link to="/allNftList/">
-            <img className="profileBuyNft" src="img/profile/NftMarketplaceBanner.png"></img>
-          </Link>
-          {loadingNft === true ? (
-            <>
-              <img
-                src={"/img/loadingMinting/mimi-dancing-for-loadin-page.gif"}
-                style={{
-                  width: "152px",
-                  height: "217px",
-                  objectFit: "cover",
-                  marginRight: "10px",
-                }}
-              />
-            </>
-          ) : (
-            myNfts.map((MyNft) => (
-              <IPFSImageComponent
-                onClick={() => {
-                  setIsPopUpNFTDetailWinodow(true);
-                  setImgAddress(MyNft.imageAddress);
-                  setRewardPercentage(MyNft.rewardPercentage);
-                }}
-                imgAddress={MyNft.imageAddress}
-                style={{
-                  width: "152px",
-                  height: "217px",
-                  objectFit: "cover",
-                  marginRight: "10px",
-                }}
-              />
-            ))
-          )}
-        </div>
-      </HorizontalScrollContainer>
-    </>
-  );
 
   const alertDisplay: JSX.Element = (
     <Alert
@@ -313,7 +227,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
         overflowY: `${isOpen ? "hidden" : "scroll"}`,
       }}
     >
-      <ShortTitleBar title="Profile" />
+      <ShortTitleBar title="Profile" aiCoach={true} setting={true} />
       {alert && alertDisplay}
       <div className="overlap-design-layout">
         <ProfileUserInfoContainer
@@ -332,10 +246,16 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
           displayPopUpMessage={displayPopUpMessage}
           isMyProfile={isMyProfile}
         />
-        {userNFTDisplay}
+        <UserNFTList
+          userAccountId={userAccountId}
+          ledger2={ledger2}
+          setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+          setImgAddress={setImgAddress}
+          setRewardPercentage={setRewardPercentage}
+        />
       </div>
-      {/* render the EditProfilePopUpWindow only when this is in user own profile */}
-      {isMyProfile && (
+      {/* render the EditProfilePopUpWindow only when this is login user and this is not other user profile */}
+      {!isGuest && isMyProfile && (
         <EditProfilePopUpWindow
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -348,7 +268,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
           displayPopUpMessage={displayPopUpMessage}
           ledger2={ledger2}
           userAccountId={userAccountId}
-          userAccountpublicKey={userAccountpublicKey}
           Wallet={Wallet}
         />
       )}

@@ -100,8 +100,11 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
     console.log("fetchDiscordUsername", fetchDiscordUsername);
   }, [fetchDiscordUsername]);
 
+  // view for login user
   const loginUserDisplay: JSX.Element = (
     <div className="profile-description-login-user-bg">
+      {/* display loading icon when not fetch the user info and userIcon */}
+      {/* reminder: fetch the user info and userIcon is going on profileTemplate.tsx */}
       {isUpdatingUserSetting || isSettingLoading ? (
         <>{loadingIcon}</>
       ) : (
@@ -150,10 +153,11 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
     </div>
   );
 
+  // view for guest
   const guestDisplay: JSX.Element = (
     <div className="profile-description-guest-bg">
-      <div className="profile-guest-user-info-image-container">
-      <img src={process.env.PUBLIC_URL + "/img/mimi_guest_sample_stamp_small.png"} alt="" className="profile-guest-user-info-image" />
+      <div className="profile-guest-user-info-image-container" onClick={() => setIsPopUpNFTDetailWinodow(true)}>
+        <img src={process.env.PUBLIC_URL + "/img/mimi_guest_sample_stamp_small.png"} alt="" className="profile-guest-user-info-image" />
       </div>
       <div className="inter-semi-bold-white-23px">Get your FREE NFT now !</div>
       <div className="inter-normal-cadet-blue-16px">Receive a FREE NFT membership !</div>

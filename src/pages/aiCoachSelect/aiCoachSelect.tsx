@@ -122,15 +122,15 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
         </div>
       </div>
       <div className="user-O0wesW">
-        {/* <Link to="/aiCoachDetail/1"> */}
+        <Link to="/aiCoachDetail/1">
           <div className="ai-chatbot_-mmi-NgcGm6">
             <div className="bg-Kcwf64"></div>
             <img className="ai-chatbot_-mimi-Kcwf64" src="img/aiCoachSelect/ai-chatbot-mimi-2@1x.png" alt="Ai Chatbot_Mimi" />
             <div className="mental-coach-Kcwf64 inter-normal-white-12px">Mental coach</div>
             <div className="mimi-Kcwf64 inter-semi-bold-white-15px">mimi</div>
           </div>
-        {/* </Link>
-        <Link to="/aiCoachDetail/2"> */}
+        </Link>
+        {/* <Link to="/aiCoachDetail/2"> */}
           <div className="ai-chatbot_io-NgcGm6 ai-chatbot_io">
             <div className="bg-aeJf5z"></div>
             <img className="ai-chatbot_io-aeJf5z ai-chatbot_io" src="img/aiCoachSelect/ai-chatbot-io@1x.png" alt="Ai Chatbot_io" />

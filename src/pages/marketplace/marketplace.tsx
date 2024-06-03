@@ -12,6 +12,7 @@ import { useLedger } from "../../redux/useLedger";
 import { getBMIRecordDay, isHitFirstHealthyBMIRange } from "../../components/bmiCalculate";
 import { CountChallenges, countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 interface IMarketplaceProps {}
 
@@ -30,6 +31,8 @@ const sponsorImageList = [
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const tempAccountId = useSelector(accountId);
   const Ledger2 = useLedger();
+  const isGuest = useSelector(selectCurrentIsGuest);
+
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>();
@@ -46,8 +49,11 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   })
   const BMIRecordChecked = useRef(false);
   React.useEffect(() => {
-    if (BMIRecordChecked.current) {
-
+    if (isGuest || BMIRecordChecked.current) {
+      setBmiHitHealthyNumber(0);
+      setBmiRecordTimes(0);
+      setChallengeCompletedTimes(0);
+      setNftAcquireNumber(0);
       return;
     }
     BMIRecordChecked.current = true;
@@ -74,7 +80,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-marketplace-1">
-        <ShortTitleBar title="Marketplace" />
+        <ShortTitleBar title="Marketplace" aiCoach={true} setting={true} />
         <div className="partner-company-y1jIXk partner-company">
           <img className="bg-oobbG1" src={`${process.env.PUBLIC_URL}/img/marketplace/bg-23@1x.png`} alt="bg" />
           <div className="partner-company-oobbG1 partner-company">
@@ -99,8 +105,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="master-collector-YV3xtK inter-semi-bold-white-18px">Master Collector</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-4@1x.png`} alt="NFT_Avatar" />
                 <p className="acquire-3-nf-ts-from-our-collection-YV3xtK inter-normal-cadet-blue-12px">Acquire 3 NFTs from our collection.</p>
-                <div className="ic_next">
-                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
+                <div className="marketplace_ic_next">
+                  <img className="marketplace_ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="marketplace_ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -116,8 +122,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="selfie-champion-gKPNC7 inter-semi-bold-white-18px">Selfie Champion</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-5@1x.png`} alt="NFT_Avatar" />
                 <p className="selfies-for-60-consecutive-days-gKPNC7 inter-normal-cadet-blue-12px">Selfies for 60 consecutive days</p>
-                <div className="ic_next">
-                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
+                <div className="marketplace_ic_next">
+                  <img className="marketplace_ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="marketplace_ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -135,8 +141,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="social-butterfly-00FLo4 inter-semi-bold-white-18px">Elite Challenger</div>
                 <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/img/marketplace/nft-avatar-7@1x.png`} alt="NFT_Avatar" />
                 <p className="build-a-thriving-network-of-75-friends-00FLo4 inter-normal-cadet-blue-12px">Complete 50 challenges</p>
-                <div className="ic_next">
-                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
+                <div className="marketplace_ic_next">
+                  <img className="marketplace_ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="marketplace_ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>
@@ -157,8 +163,8 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
                 <div className="elite-challenger-VtU7WE inter-semi-bold-white-18px">Wellness Milestone</div>
                 <img className="nft_-avatar-new" src={`${process.env.PUBLIC_URL}/img/reward/Wellness_Milestone_Square.png`} alt="NFT_Avatar" />
                 <div className="complete-50-challenges-VtU7WE inter-normal-cadet-blue-12px">Hit the first healthy BMI range</div>
-                <div className="ic_next">
-                  <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
+                <div className="marketplace_ic_next">
+                  <img className="marketplace_ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="marketplace_ic_chevron_right_24px" />
                 </div>
                 <div className="goal-data">
                   <div className="x893"></div>

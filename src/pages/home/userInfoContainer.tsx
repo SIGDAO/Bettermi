@@ -70,7 +70,9 @@ const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
         </div>
         <div className="home-sigdao-display-container">
           {isGuest ? (
+          <Link to="/">
             <div className="inter-semi-bold-keppel-15px">CONNECT WALLET &gt;&gt;&gt;</div>
+          </Link>
           ) : (
             <>
               <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>

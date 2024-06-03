@@ -134,7 +134,7 @@
 }
 
 .bettermidapp-settings-1 .settings-7DUKxJ {
-  height: 656px;
+  min-height: 656px;
   left: 16px;
   top: 107px;
   width: 358px;
@@ -307,7 +307,8 @@
 
 .bettermidapp-settings-1 .x16184-6XzBK0 {
   right: 19px;
-  width: 53px;
+  width: 100px;
+  text-align: right;
 }
 
 .bettermidapp-settings-1 .signum-qeaPIP {
