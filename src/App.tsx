@@ -53,6 +53,10 @@ import AllNftList from "./pages/allNftList/allNftList";
 import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
 import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
 
+//Testing
+import ReferralCode from "./pages/referralCode/referralCode";
+import DiscordVerification from "./pages/discordVerification/discordVerification";
+
 store.subscribe(() => {
   saveState(store.getState());
 });
@@ -95,6 +99,7 @@ const titleList = {
   "/loadingMinting": "Loading Minting - Bettermi",
   "/setting": "Setting - Bettermi",
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
+  "/referralCode": "NFT referral code",
 };
 
 const guestAllowedPath = [
@@ -104,12 +109,16 @@ const guestAllowedPath = [
   "/takeSelfie",
   "/generateBMINFTImport",
   "/profile",
+<<<<<<< HEAD
+  "/referralCode"
+=======
   "/allNftList",
   "/setting",
   // "/leaderboard",
   "/reward",
   "/marketplace",
   "rewardDetail",
+>>>>>>> cd848b97962518d9648aa953b57a2b03c9e7f89d
 ]
 
 
@@ -123,7 +132,7 @@ const CheckStore: React.FC = () => {
 
   if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
     dispatch(profileSlice.actions.authenticated());
-  } else if (!guestAllowedPath.includes(currentPath) || !isGuest) {
+  } else if (!guestAllowedPath.some(route => currentPath.includes(route)) || !isGuest) {
     sessionStorage.clear();
     return <Navigate to="/" />;
   } else {
@@ -202,7 +211,7 @@ function App() {
                 <Route path="/previewNFTImg" element={<Testing />} />
                 <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
                 <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
-                <Route path="/aiCoachDetail">
+                <Route path="/aiCoachDetail" >
                   <Route path=":id" element={<AiCoachDetail />} />
                 </Route>
                 <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
@@ -214,6 +223,12 @@ function App() {
                 <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
+                <Route path="/referralCode" element = {<ReferralCode/>}>
+                  <Route path=":referralCode" element={<ReferralCode />} />
+                </Route>
+                <Route path="/discordVerification" element = {<DiscordVerification/>}>
+                  <Route path=":referralCode" element={<DiscordVerification />} />
+                </Route>
               </Route>
             {/* </Route> */}
           </Routes>

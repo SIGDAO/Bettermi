@@ -18,6 +18,7 @@ env_final.txt
 # misc
 .DS_Store
 .env.local
+.envV1
 .env.development.local
 .env.test.local
 .env.production.local
