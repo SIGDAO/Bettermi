@@ -188,6 +188,14 @@ a:active {
   font-weight: 600;
 }
 
+.inter-normal-keppel-15px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-semi-bold-keppel-15px {
   color: var(--keppel);
   font-family: var(--font-family-inter);

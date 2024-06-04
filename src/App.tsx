@@ -9,7 +9,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { loadState, saveState } from "./redux/sessionStorage";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-
 // setting
 import { store } from "./redux/reducer";
 import { appConfig } from "./redux/useContext";
@@ -98,8 +97,7 @@ const titleList = {
 };
 
 const guestAllowedPath = [
-  "/", 
-  // "/connectWallet", 
+  // "/connectWallet",
   "/home",
   "/takeSelfie",
   "/generateBMINFTImport",
@@ -109,9 +107,17 @@ const guestAllowedPath = [
   // "/leaderboard",
   "/reward",
   "/marketplace",
-  "rewardDetail",
-]
+  "/rewardDetail",
+  "/featureMissions",
+  "/missionChallenge",
+  "/challengeCountdown",
+];
 
+const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
+  if (currentPath === "/") return true;
+
+  return guestAllowedPath.some((path) => currentPath.startsWith(path));
+}
 
 const CheckStore: React.FC = () => {
   const location = useLocation();
@@ -120,10 +126,20 @@ const CheckStore: React.FC = () => {
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const isGuest = useSelector(selectCurrentIsGuest);
 
+  console.log("currentPath", currentPath);
+  // console.log("isGuest", "/rewardDetail".)
+  console.log(
+    "hih",
+    guestAllowedPath.some((path) => {
+      console.log("path", path);
+      console.log("currentPath.startsWith(path)", currentPath.startsWith(path));
+      return currentPath.startsWith(path);
+    }),
+  );
 
   if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
     dispatch(profileSlice.actions.authenticated());
-  } else if (!guestAllowedPath.includes(currentPath) || !isGuest) {
+  } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
     sessionStorage.clear();
     return <Navigate to="/" />;
   } else {
@@ -141,7 +157,6 @@ function App() {
   useEffect(() => {
     document.title = titleList[location.pathname] ?? "Bettermi";
   }, [location]);
-
 
   useEffect(() => {
     if (location.pathname !== currentPath) {
@@ -173,48 +188,48 @@ function App() {
               <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
               {/* user that not yet created acct */}
               {/* <Route element={<RoleRoute role="unregisteredUser" />}> */}
-                <Route path="/connectSucceed" element={<ConnectSucceed />} />
-                <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
-                <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
-                {/* the login for this page should be if no name then can access, if have name cannot access */}
-                <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
+              <Route path="/connectSucceed" element={<ConnectSucceed />} />
+              <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
+              <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
+              {/* the login for this page should be if no name then can access, if have name cannot access */}
+              <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
               {/* </Route> */}
               {/* user that created acct */}
               {/* <Route element={<RoleRoute role="registeredUser" />}> */}
-                <Route path="/home" element={<Home />} />
-                <Route path="/featureMissions" element={<AllMission />} />
-                <Route path="/challengeCompleted" element={<ChallengeCompleted />} />
-                <Route path="/challengeCountdown">
-                  <Route path=":id" element={<ChallengeCountdown />} />
-                </Route>
-                <Route path="/missionChallenge" element={<MissionChallenge />} />
-                {/* account that can only access in certain time */}
-                <Route path="/myNftList" element={<MyNftList/>} />
-                <Route path="/allNftList" element={<IndexAllNftList/>} />
-                <Route path="/indexMyNftList" element={<IndexMyNftList />} />
-                <Route path="/reward" element={<Reward />} />
-                <Route path="/rewardDetail">
-                  <Route path=":id" element={<RewardDetail />} />
-                </Route>
-                <Route path="/selfieToEarn" element={<SelfieToEarn />} />
-                <Route path="/profile" element={<Profile previousPath={previousPath} />} />
-                <Route path="/marketplace" element={<Marketplace />} />
-                <Route path="/previewNFTImg" element={<Testing />} />
-                <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
-                <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
-                <Route path="/aiCoachDetail">
-                  <Route path=":id" element={<AiCoachDetail />} />
-                </Route>
-                <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
-                <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
-                <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
-                <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
-                <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
-                <Route path="/setting" element={<Setting />} />
-                <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
-                <Route path="/leaderboard" element={<Leaderboard />} />
-                <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/featureMissions" element={<AllMission />} />
+              <Route path="/challengeCompleted" element={<ChallengeCompleted />} />
+              <Route path="/challengeCountdown">
+                <Route path=":id" element={<ChallengeCountdown />} />
               </Route>
+              <Route path="/missionChallenge" element={<MissionChallenge />} />
+              {/* account that can only access in certain time */}
+              <Route path="/myNftList" element={<MyNftList />} />
+              <Route path="/allNftList" element={<IndexAllNftList />} />
+              <Route path="/indexMyNftList" element={<IndexMyNftList />} />
+              <Route path="/reward" element={<Reward />} />
+              <Route path="/rewardDetail">
+                <Route path=":id" element={<RewardDetail />} />
+              </Route>
+              <Route path="/selfieToEarn" element={<SelfieToEarn />} />
+              <Route path="/profile" element={<Profile previousPath={previousPath} />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+              <Route path="/previewNFTImg" element={<Testing />} />
+              <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
+              <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
+              <Route path="/aiCoachDetail">
+                <Route path=":id" element={<AiCoachDetail />} />
+              </Route>
+              <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
+              <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
+              <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
+              <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
+              <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
+              <Route path="/setting" element={<Setting />} />
+              <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
+            </Route>
             {/* </Route> */}
           </Routes>
         </ReduxProvider>

@@ -51,12 +51,12 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             >
               <div className="x16186-VD8XDI">
                 <div className="x31">
-                  <div className="invite-friends-MxX0D6 inter-normal-white-15px">Account Id</div>
+                  <div className={`invite-friends-MxX0D6 inter-normal-white-15px ${isGuest && "brightness-0-5" }`}>Account ID</div>
                 </div>
                 <div className="x16184-QxO6IE x16184">
                   <div className="x12345678-lPJi7x inter-normal-white-15px ">{userAccountId}</div>
                 </div>
-                <img className="icon-ionic-ios-arrow-forward" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+                <img className={"icon-ionic-ios-arrow-forward"} src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
                 <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
               </div>
             </Link>
@@ -66,7 +66,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
                 <div className="wallet-HTBhsQ inter-normal-white-15px">Wallet</div>
               </div>
               <div className="x16184-a64QJA x16184">
-                <div className="xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5">XT wallet</div>
+                <div className="xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5">{isGuest? "Connect Wallet" : "XT wallet"}</div>
               </div>
               <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
@@ -130,6 +130,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               <div className="x16184-OCPXoe x16184">
                 <div className="x0004-pzNHOH inter-normal-white-15px">{!isGuest && "0.0.04"}</div>
               </div>
+              {isGuest && <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />}
             
               <div className="x31">
                 <div className={isGuest ? "version-xPcu6a inter-normal-white-15px brightness-0-5" : "version-xPcu6a inter-normal-white-15px"}>{isGuest ? "Disable" : "Version"}</div>

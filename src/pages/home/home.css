@@ -685,13 +685,20 @@ color
   height: 113px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 8px;
 }
 
 .home-info-first-row {
   display: flex;
   gap: 7px;
   align-items: center;
+}
+
+.home-info-second-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .hello-msg-container {
@@ -752,7 +759,7 @@ color
 
 .home-user-icon-container {
   display: flex;
-  width: 100px;
+  width: 107px;
   height: 100px;
   display: flex;
   align-items: start;
@@ -764,11 +771,12 @@ color
 .bettermidapp-home-1 .nft_-avatar-2ZgxSS {
   background-color: transparent;
   border-radius: 10px;
-  height: 155px;
+  /* height: 155px; */
   object-fit: cover;
   cursor: pointer;
   width: 107px;
-  clip: rect(0, 110px, 100px, 0);
+  
+  /* clip: rect(0, 110px, 100px, 0); */
 }
 
 .bettermidapp-home-1 .ic_next-2ZgxSS {

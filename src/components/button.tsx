@@ -46,6 +46,7 @@ export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (prop
     background: "linear-gradient(-90deg, #8743ff 0%, #4136f1 100%)",
     borderRadius: "10px",
     boxShadow: "0px 15px 30px #1466cc29",
+    textTransform: "none", // Add an initializer for the 'textTransform' property
   };
 
   return (
@@ -68,13 +69,14 @@ export const ButtonWithAction: React.FunctionComponent<IButtonProps> = (props) =
     height: ${height};
     width: ${width};
     font-family: var(--font-family-inter);
-    font-size: ${props.fontSize || "var(--font-size-m)"};
+    font-size: ${props.fontSize || "15px"};
     font-weight: ${props.fontWeight || "600"};
     background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
     border-radius: 10px;
     color: white;
     box-shadow: 0px 15px 30px #1466cc29;
     padding: 14.5px 21px;
+    text-transform: none;
   `;
 
   return <CustomButton onClick={action}>{text}</CustomButton>;
@@ -96,7 +98,7 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     height: ${height};
     width: ${width};
     font-family: var(--font-family-inter);
-    font-size: ${props.fontSize || "var(--font-size-m)"};
+    font-size: ${props.fontSize || "15px"};
     font-weight: ${props.fontWeight || "600"};
     color: #4136f1;
     padding: 14.5px 21px;
@@ -107,6 +109,7 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
     min-width: 108px;
     text-align: center;
     white-space: nowrap;
+    text-transform: none;
   `;
 
   // .continue {

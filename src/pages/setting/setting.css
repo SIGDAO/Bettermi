@@ -267,20 +267,22 @@
 
 .bettermidapp-settings-1 .x16184-a64QJA {
   right: 19px;
-  width: 65px;
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .bettermidapp-settings-1 .xt-wallet-u2WLwG {
   background-color: transparent;
   height: 21px;
-  left: 0px;
+  right: 0px;
   letter-spacing: 0.00px;
   line-height: 20px;
   position: absolute;
   text-align: right;
   top: -2.63%;
   white-space: nowrap;
-  width: 103.08%;
+  /* width: 103.08%; */
 }
 
 .bettermidapp-settings-1 .x16189-VD8XDI {
@@ -568,22 +570,23 @@
 
 .bettermidapp-settings-1 .icon-ionic-ios-arrow-forward {
   background-color: transparent;
-  height: 33.52%;
+  height: 13px;
   left: 97.29%;
   object-fit: cover;
   position: absolute;
   top: 10.67%;
-  width: 2.55%;
+  width: 7px;
+
 }
 
 .bettermidapp-settings-1 .icon-ionic-ios-arrow-forward-inactive {
   background-color: transparent;
-  height: 33.52%;
+  height: 13px;
   left: 97.29%;
   object-fit: cover;
   position: absolute;
   top: 10.67%;
-  width: 2.55%;
+  width: 7px;
   filter: brightness(0.5);
 }
 

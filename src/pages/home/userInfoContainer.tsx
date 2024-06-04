@@ -33,7 +33,13 @@ const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
         {isGuest ? (
           <img onClick={() => setIsPopUpNFTDetailWinodow(true)} className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/mimi_guest_sample_stamp_small.png`} alt="" />
         ) : (
-          <UserIcon setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress} />
+          <UserIcon
+            setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+            home={true}
+            userAccountId={userAccountId}
+            setRewardPercentage={setRewardPercentage}
+            setEnlargeImageAddress={setImgAddress}
+          />
         )}
       </div>
       <div className="home-user-info-container">
@@ -57,37 +63,39 @@ const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
             </Link>
           </div>
         </div>
-        <div className="lv_-reward-2ZgxSS">
-          {isGuest ? (
-            <div className="inter-semi-bold-white-15px">Get your FREE NFT now !</div>
-          ) : (
-            <>
-              <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-              <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
-              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
-            </>
-          )}
-        </div>
-        <div className="home-sigdao-display-container">
-          {isGuest ? (
-          <Link to="/">
-            <div className="inter-semi-bold-keppel-15px">CONNECT WALLET &gt;&gt;&gt;</div>
-          </Link>
-          ) : (
-            <>
-              <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
-              <div className="score-bar_3-2ZgxSS">
-                <div className="sigdao-score-iPTNDG sigdao-score">
-                  <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading ? <div>loading...</div> : Token}</div>
-                  <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
-                    <div className="x441-e5x8kp x441"></div>
-                    <div className="x442-e5x8kp x442"></div>
-                    <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+        <div className="home-info-second-row">
+          <div className="lv_-reward-2ZgxSS">
+            {isGuest ? (
+              <div className="inter-semi-bold-white-15px">Get your FREE NFT now !</div>
+            ) : (
+              <>
+                <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
+                <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
+                <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
+              </>
+            )}
+          </div>
+          <div className="home-sigdao-display-container">
+            {isGuest ? (
+              <Link to="/">
+                <div className="inter-semi-bold-keppel-15px">CONNECT WALLET &gt;&gt;&gt;</div>
+              </Link>
+            ) : (
+              <>
+                <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
+                <div className="score-bar_3-2ZgxSS">
+                  <div className="sigdao-score-iPTNDG sigdao-score">
+                    <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading ? <div>loading...</div> : Token}</div>
+                    <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
+                      <div className="x441-e5x8kp x441"></div>
+                      <div className="x442-e5x8kp x442"></div>
+                      <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

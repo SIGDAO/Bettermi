@@ -17,6 +17,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { CountChallenges } from "../../NftSystem/Token/countChallenges";
 import { findNFTLevel } from "../../NftSystem/FindNFTLevel";
 import { checkUserLevel } from "../../NftSystem/UserLevel/checkUserLevel";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 interface IMissionChallengeProps {}
 
@@ -31,10 +32,11 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const [allowedChallengeList, setAllowedChallengeList] = useState<boolean[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [Timedifference, setTimedifference] = useState<string[]>([]);
-  const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, '');
+  const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, "");
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const updated = useRef(false);
   let isNew = false;
+  const isGuest = useSelector(selectCurrentIsGuest);
 
   // to use CountChallenges to count
   // display as 0/3 as text
@@ -66,6 +68,14 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
   useEffect(() => {
     const checkTimeSlot = async () => {
+      // guest user
+      if (isGuest) {
+        setIsLoading(false);
+        setAllowedChallengeList([true, true, true, false, false, false, false, false, false]);
+
+        return;
+      }
+
       //Anderson's code starts here
       //findNFTLevel(ledger2,userAccountId);
       if (updated.current === false) {
@@ -88,16 +98,13 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
         setUserChallengeTimes(playedChallenge);
 
-
-
-
         setisOverDailyPlayTimesLimit(
           playedChallenge.map((numChallengesPlayed) => {
             if (numChallengesPlayed >= 2) {
               return false;
             }
             return true;
-          })
+          }),
         );
         setIsLoading(false);
 
@@ -139,7 +146,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       return date > 0;
         //     });
 
-
         //     filteredtimedifferentInFormat.sort((a, b) => a - b);
 
         //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
@@ -150,7 +156,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       .padStart(2, "0");
         //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
 
-
         //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
         //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
         //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
@@ -160,8 +165,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //     // return '';
         //   })
         // );
-
-
       }
     };
 
@@ -179,6 +182,33 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const getTimeInMinutes = (time: string): number => {
     const [hours, minutes] = time.split(":").map(Number);
     return hours * 60 + minutes;
+  };
+
+  const challengeTimesDisplay = (index): JSX.Element => {
+    if (!allowedChallengeList[index]) {
+      return <div className="score-bar_2-inactive inter-semi-bold-white-15px">LOCKED</div>;
+    }
+
+    if (isOverDailyPlayTimesLimit[index]) {
+      return (
+        <div className="score-bar_2">
+          <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
+        </div>
+      );
+    }
+
+    if (isGuest) {
+      return <div className="score-bar_2-completed inter-semi-bold-white-15px">STARTING</div>;
+    }
+
+
+    return (
+      <div className="score-bar_2-completed inter-semi-bold-white-15px">
+        {/* {mission.timeslot[0].startingTime} */}
+        COMPLETED
+        {/* {Timedifference[index]} */}
+      </div>
+    );
   };
 
   // const checkTimeSlot = () => {
@@ -210,7 +240,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton = {true} customiseBackButtonLink="/featureMissions"/>
+        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/featureMissions" />
         <img className="photo-7K5ObS" src="img/missionChallenge/photo@1x.png" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -223,35 +253,21 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                   return (
                     <Button
                       onClick={async () => {
-                        
+                        // go to challengeCountdown page
+                        if (allowedChallengeList[index] && isGuest) {
+                          navigate(`/challengeCountdown/${index + 1}`);
+                          return;
+                        }
                         const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
 
-                        if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
+                        if (isOverDailyPlayTimesLimit[index] && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
                           navigate(`/challengeCountdown/${index + 1}`);
                         }
                       }}
                       className="challenge-cards-Ic1qil"
                     >
                       <>
-                        {allowedChallengeList[index] === false? (
-                          <div className="score-bar_2-inactive inter-semi-bold-white-15px">
-                            {/* {mission.timeslot[0].startingTime} */}
-                            LOCKED
-                            {/* {Timedifference[index]} */}
-                          </div>
-                        ) : (isOverDailyPlayTimesLimit[index] ? (
-                          <div className="score-bar_2">
-                            <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
-                          </div>
-                        ) : (
-                          <div className="score-bar_2-completed inter-semi-bold-white-15px">
-                            {/* {mission.timeslot[0].startingTime} */}
-                            COMPLETED
-                            {/* {Timedifference[index]} */}
-                          </div>
-                        )
-                        )
-                      }
+                        {challengeTimesDisplay(index)}
                         <div
                           className="inner-mission-container"
                           // style={isOverDailyPlayTimesLimit[index] ? {opacity: '1'} : {opacity: '0.4'}}

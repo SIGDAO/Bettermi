@@ -69,8 +69,20 @@
   gap: 20px;
 }
 
+.guest-explore-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.guest-explore-container > p {
+  margin: 0;
+}
+
 .guest-explore-button {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .connectWallet-option-container {
@@ -78,7 +90,7 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  gap: 20px;
+  gap: 36px;
   z-index: 2;
 }
 

@@ -196,7 +196,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         <div className="connectWallet-option-container">
           <div id="connectWallet-button-container">
             <ButtonWithAction
-              text="XT wallet"
+              text="XT Wallet"
               action={() => {
                 connectWallet(appName, Wallet, Ledger);
               }} // TODO: add action to connect wallet
@@ -204,13 +204,20 @@ export default function ConnectWallet(props: IConnectWalletProps) {
               width="248px"
             />
             <Link to="https://phoenix-wallet.rocks/">
-              <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
+              <DisabledButton text="Phoenix Wallet" height="56px" width="248px" />
             </Link>
           </div>
-          <p className="inter-normal-white-15px">or</p>
+          <div className="guest-explore-container">
+            <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
+            <div className="inter-normal-keppel-12px guest-explore-button" onClick={() => navigate("/home")}>
+              Explore as a guest
+            </div>
+          </div>
+
+          {/* <p className="inter-normal-white-15px">or</p>
           <div className="inter-semi-bold-keppel-15px guest-explore-button" onClick={() => navigate("/home")}>
             Explore as a guest
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

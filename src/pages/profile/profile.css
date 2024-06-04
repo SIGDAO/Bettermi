@@ -49,7 +49,7 @@
 .nft_-avatar-2ZgxSS {
   background-color: transparent;
   border-radius: 10px;
-  height: calc(100.00% - 8px);
+  /* height: calc(100.00% - 8px); */
   left: 0px;
   object-fit: cover;
   cursor: pointer;
