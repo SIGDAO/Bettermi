@@ -55,6 +55,7 @@ import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
 //Testing
 import ReferralCode from "./pages/referralCode/referralCode";
 import DiscordVerification from "./pages/discordVerification/discordVerification";
+import ReferralCodeTesting from "./pages/referralCodeTesting.tsx/referralCodeTesting";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -114,6 +115,7 @@ const guestAllowedPath = [
   "/reward",
   "/marketplace",
   "rewardDetail",
+  "/ReferralCodeTesting",
   "/rewardDetail",
   "/featureMissions",
   "/missionChallenge",
@@ -241,6 +243,9 @@ function App() {
                 </Route>
                 <Route path="/discordVerification" element = {<DiscordVerification/>}>
                   <Route path=":referralCode" element={<DiscordVerification />} />
+                </Route>
+                <Route path="/ReferralCodeTesting" element = {<ReferralCodeTesting/>}>
+                  <Route path=":referralCode" element={<ReferralCodeTesting />} />
                 </Route>
               </Route>
             {/* </Route> */}
