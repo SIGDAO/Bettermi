@@ -55,6 +55,7 @@ import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
 //Testing
 import ReferralCode from "./pages/referralCode/referralCode";
 import DiscordVerification from "./pages/discordVerification/discordVerification";
+import ReferralCodeTesting from "./pages/referralCodeTesting.tsx/referralCodeTesting";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -112,6 +113,8 @@ const guestAllowedPath = [
   "/setting",
   "/reward",
   "/marketplace",
+  "rewardDetail",
+  "/ReferralCodeTesting",
   "/rewardDetail",
   "/featureMissions",
   "/missionChallenge",
@@ -197,46 +200,49 @@ function App() {
               {/* </Route> */}
               {/* user that created acct */}
               {/* <Route element={<RoleRoute role="registeredUser" />}> */}
-              <Route path="/home" element={<Home />} />
-              <Route path="/featureMissions" element={<AllMission />} />
-              <Route path="/challengeCompleted" element={<ChallengeCompleted />} />
-              <Route path="/challengeCountdown">
-                <Route path=":id" element={<ChallengeCountdown />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/featureMissions" element={<AllMission />} />
+                <Route path="/challengeCompleted" element={<ChallengeCompleted />} />
+                <Route path="/challengeCountdown">
+                  <Route path=":id" element={<ChallengeCountdown />} />
+                </Route>
+                <Route path="/missionChallenge" element={<MissionChallenge />} />
+                {/* account that can only access in certain time */}
+                <Route path="/myNftList" element={<MyNftList/>} />
+                <Route path="/allNftList" element={<IndexAllNftList/>} />
+                <Route path="/indexMyNftList" element={<IndexMyNftList />} />
+                <Route path="/reward" element={<Reward />} />
+                <Route path="/rewardDetail">
+                  <Route path=":id" element={<RewardDetail />} />
+                </Route>
+                <Route path="/selfieToEarn" element={<SelfieToEarn />} />
+                <Route path="/profile" element={<Profile previousPath={previousPath} />} />
+                <Route path="/marketplace" element={<Marketplace />} />
+                <Route path="/previewNFTImg" element={<Testing />} />
+                <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
+                <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
+                <Route path="/aiCoachDetail" >
+                  <Route path=":id" element={<AiCoachDetail />} />
+                </Route>
+                <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
+                <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
+                <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
+                <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
+                <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
+                <Route path="/setting" element={<Setting />} />
+                <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
+                <Route path="/referralCode" element = {<ReferralCode/>}>
+                  <Route path=":referralCode" element={<ReferralCode />} />
+                </Route>
+                <Route path="/discordVerification" element = {<DiscordVerification/>}>
+                  <Route path=":referralCode" element={<DiscordVerification />} />
+                </Route>
+                <Route path="/ReferralCodeTesting" element = {<ReferralCodeTesting/>}>
+                  <Route path=":referralCode" element={<ReferralCodeTesting />} />
+                </Route>
               </Route>
-              <Route path="/missionChallenge" element={<MissionChallenge />} />
-              {/* account that can only access in certain time */}
-              <Route path="/myNftList" element={<MyNftList />} />
-              <Route path="/allNftList" element={<IndexAllNftList />} />
-              <Route path="/indexMyNftList" element={<IndexMyNftList />} />
-              <Route path="/reward" element={<Reward />} />
-              <Route path="/rewardDetail">
-                <Route path=":id" element={<RewardDetail />} />
-              </Route>
-              <Route path="/selfieToEarn" element={<SelfieToEarn />} />
-              <Route path="/profile" element={<Profile previousPath={previousPath} />} />
-              <Route path="/marketplace" element={<Marketplace />} />
-              <Route path="/previewNFTImg" element={<Testing />} />
-              <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
-              <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
-              <Route path="/aiCoachDetail">
-                <Route path=":id" element={<AiCoachDetail />} />
-              </Route>
-              <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
-              <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
-              <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
-              <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
-              <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
-              <Route path="/setting" element={<Setting />} />
-              <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
-              <Route path="/referralCode" element={<ReferralCode />}>
-                <Route path=":referralCode" element={<ReferralCode />} />
-              </Route>
-              <Route path="/discordVerification" element={<DiscordVerification />}>
-                <Route path=":referralCode" element={<DiscordVerification />} />
-              </Route>
-            </Route>
             {/* </Route> */}
           </Routes>
         </ReduxProvider>
