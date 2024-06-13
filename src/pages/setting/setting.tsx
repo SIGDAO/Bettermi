@@ -11,6 +11,7 @@ import { accountId } from "../../redux/account";
 import { useSelector } from "react-redux";
 import { ShortTitleBar } from "../../components/titleBar";
 import { selectCurrentIsGuest } from "../../redux/profile";
+import { GuestConnectWallectButton } from "../../components/button";
 interface ISettingProps {}
 
 const Setting: React.FunctionComponent<ISettingProps> = (props) => {
@@ -48,15 +49,16 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               to={`https://${process.env.REACT_APP_NETWORK === "Signum" ? "explorer.signum.network/address" : "testnet.explorer.signum.network/address"}/${userAccountId}`}
               target="_blank"
               rel="noopener noreferrer"
+              className={isGuest && "disabled-link"}
             >
               <div className="x16186-VD8XDI">
                 <div className="x31">
-                  <div className={`invite-friends-MxX0D6 inter-normal-white-15px ${isGuest && "brightness-0-5" }`}>Account ID</div>
+                  <div className={`invite-friends-MxX0D6 inter-normal-white-15px ${isGuest && "brightness-0-5"}`}>Account ID</div>
                 </div>
                 <div className="x16184-QxO6IE x16184">
                   <div className="x12345678-lPJi7x inter-normal-white-15px ">{userAccountId}</div>
                 </div>
-                <img className={"icon-ionic-ios-arrow-forward"} src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+                <img className={isGuest? "icon-ionic-ios-arrow-forward brightness-0-5" : "icon-ionic-ios-arrow-forward"} src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
                 <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
               </div>
             </Link>
@@ -66,14 +68,21 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
                 <div className="wallet-HTBhsQ inter-normal-white-15px">Wallet</div>
               </div>
               <div className="x16184-a64QJA x16184">
-                <div className="xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5">{isGuest? "Connect Wallet" : "XT wallet"}</div>
+                {isGuest ? (
+                  <div onClick={() => navigate("/")} className={"xt-wallet-u2WLwG inter-normal-white-15px"} style={{ cursor: "pointer" }}>
+                    Connect Wallet
+                  </div>
+                ) : (
+                  <div className={"xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5"}>XT wallet"</div>
+                )}
+                {/* <div className={"xt-wallet-u2WLwG inter-normal-white-15px brightness-0-5"}>{isGuest? "Connect Wallet" : "XT wallet"}</div> */}
               </div>
-              <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+              <img className={isGuest? "icon-ionic-ios-arrow-forward" : "icon-ionic-ios-arrow-forward-inactive"} src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>
             <div className="x16189-VD8XDI">
               <div className="x31">
-                <div className="multi-chain-switch-tbbzDm inter-normal-white-15px">Invite Friends</div>
+                <div className={isGuest ? "multi-chain-switch-tbbzDm inter-normal-white-15px brightness-0-5" : "multi-chain-switch-tbbzDm inter-normal-white-15px"}>Invite Friends</div>
               </div>
               <div className="x16184-6XzBK0 x16184">
                 <div className="sigppnum-qeaPIP inter-normal-white-15px brightness-0-5">Show code</div>
@@ -81,11 +90,11 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
               <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>
-            <div className="x16190-VD8XDI">
+            <div className="x16190-VD8XDI" onClick={() => navigate("/allNftList")}>
               <div className="x31">
                 <div className="nf-ts-marketplace-aBwqob inter-normal-white-15px ">NFTs Marketplace</div>
               </div>
-              <img className="icon-ionic-ios-arrow-forward brightness-0-5" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
+              <img className="icon-ionic-ios-arrow-forward" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />
             </div>
             <Link to="https://www.signumswap.com/tokens/5453974739826751020" target="_blank" rel="noopener noreferrer">
@@ -131,7 +140,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
                 <div className="x0004-pzNHOH inter-normal-white-15px">{!isGuest && "0.0.04"}</div>
               </div>
               {isGuest && <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />}
-            
+
               <div className="x31">
                 <div className={isGuest ? "version-xPcu6a inter-normal-white-15px brightness-0-5" : "version-xPcu6a inter-normal-white-15px"}>{isGuest ? "Disable" : "Version"}</div>
               </div>
@@ -144,17 +153,23 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
             <img className="icon-arrow-left-trdL9a icon-arrow-left" src="img/setting/icon-arrow-left-10@1x.png" alt="icon-arrow-left" />
           </div>
         </a> */}
-        <Button
-          className="bottom-controls-7DUKxJ"
-          onClick={() => {
-            logout();
-          }}
-        >
-          <div className="button_-logout-ChdhUr">
-            <div className="button1-GdXCBJ"></div>
-            <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
+        {isGuest ? (
+          <div className="setting-connect-wallet-container">
+            <GuestConnectWallectButton height={"56px"} width={"248px"} />
           </div>
-        </Button>
+        ) : (
+          <Button
+            className="bottom-controls-7DUKxJ"
+            onClick={() => {
+              logout();
+            }}
+          >
+            <div className="button_-logout-ChdhUr">
+              <div className="button1-GdXCBJ"></div>
+              <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
+            </div>
+          </Button>
+        )}
         {/* <a href="bettermidapp-ai-coach.html">
         <div className="ic_sentiment_very_satisfied_24px-7DUKxJ ic_sentiment_very_satisfied_24px">
           <img

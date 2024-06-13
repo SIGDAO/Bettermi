@@ -13,6 +13,7 @@ interface IUserNFTListProps {
   setIsPopUpNFTDetailWinodow: React.Dispatch<React.SetStateAction<boolean>>;
   setImgAddress: React.Dispatch<React.SetStateAction<string>>;
   setRewardPercentage: React.Dispatch<React.SetStateAction<string>>;
+  isMyProfile: boolean;
 }
 
 interface NftProfile {
@@ -21,7 +22,7 @@ interface NftProfile {
 }
 
 const UserNFTList: React.FunctionComponent<IUserNFTListProps> = (props) => {
-  const { userAccountId, ledger2, setIsPopUpNFTDetailWinodow, setImgAddress, setRewardPercentage } = props;
+  const { userAccountId, ledger2, setIsPopUpNFTDetailWinodow, setImgAddress, setRewardPercentage, isMyProfile } = props;
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
   const [myNfts, setMyNfts] = useState<NftProfile[]>([]);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
@@ -50,11 +51,11 @@ const UserNFTList: React.FunctionComponent<IUserNFTListProps> = (props) => {
     }
   }, [userAccountId]);
 
-  const userOwnNftDisplay = isGuest ? (
+  const userOwnNftDisplay = isGuest && isMyProfile ? (
     // Guest user view
     <>
       <Link to="/allNftList">
-        <img className="profileBuyNft" src={`${process.env.PUBLIC_URL}/img/profile/NFT_Marketplace_button.svg`} />
+        <img className="profileBuyNft" src={`${process.env.PUBLIC_URL}/img/profile/NFT_Marketplace_button.png`} />
       </Link>
       <img
         src={`${process.env.PUBLIC_URL}/img/profile/SampleNFT.svg`}
@@ -72,7 +73,7 @@ const UserNFTList: React.FunctionComponent<IUserNFTListProps> = (props) => {
     // logged in user view
     <>
       <Link to="/allNftList/">
-        <img className="profileBuyNft" src={`${process.env.PUBLIC_URL}/img/profile/NFT_Marketplace_button.svg`} />
+        <img className="profileBuyNft" src={`${process.env.PUBLIC_URL}/img/profile/NFT_Marketplace_button.png`} />
       </Link>
       {loadingNft === true ? (
         <img

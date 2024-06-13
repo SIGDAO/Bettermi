@@ -64,3 +64,20 @@
   position: absolute;
 }
 
+.guest-take-selfie-button-container {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+  width: 248px;
+  height: 56px;
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  gap: 20px;
+  cursor: pointer;
+
+}

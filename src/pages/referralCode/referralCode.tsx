@@ -86,7 +86,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
     <div className="referralCode-layout">
       <div id="referralCode-container">
         {logo}
-        <BackButton></BackButton>
+        <BackButton/>
         <div className="referralCode-option-container">
           <div id="referralCode-button-container">
             <ButtonWithAction

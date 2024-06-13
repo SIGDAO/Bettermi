@@ -272,6 +272,7 @@
   justify-content: flex-end;
 }
 
+
 .bettermidapp-settings-1 .xt-wallet-u2WLwG {
   background-color: transparent;
   height: 21px;
@@ -283,6 +284,7 @@
   top: -2.63%;
   white-space: nowrap;
   /* width: 103.08%; */
+  cursor: pointer;
 }
 
 .bettermidapp-settings-1 .x16189-VD8XDI {
@@ -332,6 +334,7 @@
   left: 0px;
   position: absolute;
   width: 100%;
+  cursor: pointer;
 }
 
 .bettermidapp-settings-1 .nf-ts-marketplace-aBwqob {
@@ -620,4 +623,14 @@
   position: absolute;
   top: 0px;
   width: 186px;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+.setting-connect-wallet-container {
+  position: absolute;
+  top: 735px;
+  left: 71px;
 }

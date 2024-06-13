@@ -20,22 +20,24 @@ import { NavigateToTakeSelfieButton } from "../../components/button";
 import { calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
 import { CheckTakenSelfie } from "../../NftSystem/BMISelfieSystem";
 import { LedgerClientFactory } from "@signumjs/core";
+import { selectCurrentIsGuest } from "../../redux/profile";
+import { TakeSelfieWindow } from "../../components/popupWindow";
 // import { useFindBMI } from '../../components/findBMI';
 
 export type ISelfieToEarnProps = {
   // children?: Promise<Element>;
 };
 
-interface BMIData { 
-  time: UTCTimestamp,
-  value: Number, 
-  prev: Number
+interface BMIData {
+  time: UTCTimestamp;
+  value: Number;
+  prev: Number;
 }
 
 const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const [value, setValue] = useState<Date>(); // selected day on calendar
   // const [data, setData] = useState<SeriesDataItemTypeMap["Area"][]>();
-  const [data, setData] = useState<BMIData[]>()
+  const [data, setData] = useState<BMIData[]>();
   const [daySelectedData, setDaySelectedData] = useState<any>();
   const [weekOption, setweekOption] = useState(true);
   const [monthOption, setmonthOption] = useState(false);
@@ -52,7 +54,8 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   const Ledger2 = useLedger();
   const userAccountId = useSelector(accountId);
   const BMIContractHashId = process.env.REACT_APP_BMI_CONTRACT_HASH_ID!;
-  useEffect(() => {}, []);
+  const isGuest = useSelector(selectCurrentIsGuest);
+
   // var data: BMI_Day[];
 
   const optionList = [
@@ -107,6 +110,9 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
   // todo: export a button as take a selfie component
 
   useEffect(() => {
+    if (isGuest) {
+      return;
+    }
     // testing data
     // let res = genBMIlist("1W")
     // setData([
@@ -181,7 +187,13 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         return (
           <div key={index} className="display-selected-data-record-container">
             <div className="trending-container">
-              {item.prev !== 0 && <img className={`${item.prev> 0 ? "icon-arrow-left-XaN6DJ-up" : "icon-arrow-left-XaN6DJ"} icon-arrow-left-img`} src="img/selfieToEarn/icon-arrow-left-6@1x.png" alt="icon-arrow-left" />}
+              {item.prev !== 0 && (
+                <img
+                  className={`${item.prev > 0 ? "icon-arrow-left-XaN6DJ-up" : "icon-arrow-left-XaN6DJ"} icon-arrow-left-img`}
+                  src="img/selfieToEarn/icon-arrow-left-6@1x.png"
+                  alt="icon-arrow-left"
+                />
+              )}
               <div className="trending-text-container inter-normal-keppel-12px">{item.prev === 0 ? "-" : item.prev + "kg/m²"}</div>
             </div>
             <div className="day-and-bmi-data-container">
@@ -203,9 +215,72 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
       <div className="no-record-container inter-medium-white-15px">No record today.</div>
     );
 
+  const registeredUserView: JSX.Element = (
+    <>
+      <div className="bmi_-status-MUU5YC">
+        <div className="current-kgm2-C5Ye0d inter-normal-cadet-blue-12px-2">
+          <span className="span0-b6eiBJ inter-normal-cadet-blue-12px">CURRENT (KG/M²)</span>
+        </div>
+        <div className="start-kgm2-C5Ye0d inter-normal-cadet-blue-12px-2">
+          <span className="span0-OeIZvd inter-normal-cadet-blue-12px">START (KG/M²)</span>
+        </div>
+        <img className="bmi-goal-C5Ye0d bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
+        <img className="bmi-goal-HuKS2x bmi-goal" src="img/selfieToEarn/bmi-goal-1@1x.png" alt="BMI Goal" />
+        <div className="x255-C5Ye0d">{data && String(data[data?.length - 1]?.value)}</div>
+        <div className="x265-C5Ye0d">{data && String(data[0]?.value)}</div>
+        <img className="x598-C5Ye0d" src="img/selfieToEarn/file---598@1x.png" alt="598" />
+      </div>
+      <div className="x6-MUU5YC x6">
+        {/* orignal chat */}
+        <div className="mean-bmi-discription-container">
+          <div className="mean-bmi-discription inter-normal-white-12px">Mean BMI (kg/m²)</div>
+          <ul className="mean-bmi-setting">
+            {optionList.map((option) => {
+              return (
+                <li
+                  className={option.option ? "mean-bmi-setting-item-selected inter-normal-cadet-blue-12px-3" : "mean-bmi-setting-item inter-normal-cadet-blue-12px-3"}
+                  key={option.text}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option.text}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <CustomTradingViewChart data={data} height={323} width={390} setValue={onChange} />
+      </div>
+      <div className="calender-MUU5YC">
+        <Calendar
+          calendarType="Arabic"
+          onChange={onChange}
+          value={value}
+          locale="en-US"
+          minDetail="decade"
+          // allowPartialRange={true}
+          // selectRange={true}
+        />
+      </div>
+      <div className="x16212-MUU5YC">
+        <div className="rewards_card-container">{displaySelectedDateRecord}</div>
+      </div>
+    </>
+  );
+
+  const guestUserView = (
+    <>
+      <div className="bg-locked-selfieToEarn"></div>
+      <div className="take-selfie-window-guest-container">
+        <TakeSelfieWindow />
+      </div>
+    </>
+  );
+
   const content: JSX.Element = (
     <div className="screen">
-      <div className="bettermidapp-selfie-to-earn-1">
+      <div className={isGuest ? "bettermidapp-selfie-to-earn-1-inactive" : "bettermidapp-selfie-to-earn-1"}>
+      {/* <div className={"bettermidapp-selfie-to-earn-1"}> */}
+
         <ShortTitleBar title="Selfie to Earn" aiCoach={true} setting={true} />
         <div className="take-a-selfie-button-container">
           <NavigateToTakeSelfieButton />
@@ -257,6 +332,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
         <div className="x16212-MUU5YC">
           <div className="rewards_card-container">{displaySelectedDateRecord}</div>
         </div>
+        {isGuest && guestUserView}
         <MenuBar />
       </div>
     </div>

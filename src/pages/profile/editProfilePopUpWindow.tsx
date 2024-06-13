@@ -118,7 +118,7 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
             )}
             <div className="edit-profile-popup-window-container inter-bold-royal-blue-15px">
               <div className="edit-profile-popup-window-title-container ">
-                <img className="ic_edit-1-content" src={`${process.env.PUBLIC_URL}/img/profile/ic-edit-1@1x.png"`} alt="" />
+                <img className="ic_edit-1-content" src={`${process.env.PUBLIC_URL}/img/profile/ic-edit-1@1x.png`} alt="" />
                 <div className="inter-semi-bold-white-18px">Edit Profile</div>
               </div>
               <div className="edit-profile-popup-window-content">

@@ -15,6 +15,7 @@ import { userRanking } from "../../redux/userRanking";
 import { userRankingListRedux } from "../../redux/userRanking";
 import { useNavigate } from "react-router-dom";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 type Props = {};
 
@@ -26,6 +27,7 @@ const Leaderboard = (props: Props) => {
   const [isLeaderBoardLoading, setIsLeaderBoardLoading] = React.useState<boolean>(true);
   const userRankingListFromRedux = useSelector(userRankingListRedux);
   const navigate = useNavigate();
+  const isGuest = useSelector(selectCurrentIsGuest);
 
 
   const imageLoadForTop3 = (index: number) => {
@@ -141,6 +143,7 @@ const Leaderboard = (props: Props) => {
   };
 
   useEffect(() => {
+
     if (nftLoaded.current === true) {
 
     } else {

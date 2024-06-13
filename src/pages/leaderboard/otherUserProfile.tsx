@@ -46,7 +46,6 @@ const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) 
     <CenterLayout
       content={
         <NFTDetailPopUpWindow
-          isGuest={isGuest}
           isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
           isNFTiconLoading={isNFTiconLoading}
           imgAddress={imgAddress}
@@ -56,7 +55,6 @@ const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) 
         >
           <div className="screen">
             <ProfileTemplate
-              isGuest={isGuest}
               isNFTiconLoading={isNFTiconLoading}
               setIsNFTiconLoading={setIsNFTiconLoading}
               setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}

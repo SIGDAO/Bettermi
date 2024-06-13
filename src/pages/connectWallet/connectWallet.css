@@ -3,11 +3,14 @@
 #connectWallet-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   /* margin: auto; */
   /* height: 100%; */
-  margin-top: 545px;
+  /* for big gif */
+  /* margin-top: 545px;  */
+  /* margin-top: 100px; */
+
   width: 100%;
   min-height: auto;
   /* overflow-y: auto; */
@@ -95,7 +98,8 @@
 }
 
 .connectWallet-bg-img-container {
-  width: 390px;
+  /* width: 390px; */
+  width: 260px;
   /* max-height: 1; */
   overflow-x: hidden;
   position: absolute;
@@ -110,7 +114,10 @@
 
 .connectWallet-bg-img {
   /* position: absolute; */
-  width: 390px;
+  /* width: 390px; */
+  width: 290px;
+  margin-bottom: 40px;
+  
   /* height: 344px; */
   object-fit: cover;
 }

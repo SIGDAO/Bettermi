@@ -165,7 +165,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   const nftContractChecked = useRef(false);
   useEffect(() => {
-    if (nftContractChecked.current) {
+    if (nftContractChecked.current || isGuest) {
       return;
     }
     nftContractChecked.current = true;

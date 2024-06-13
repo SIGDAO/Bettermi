@@ -89,6 +89,15 @@ a:active {
   font-weight: 600;
 }
 
+.inter-semi-bold-white-10px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+
 .inter-normal-cadet-blue-14px {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
@@ -306,6 +315,13 @@ a:active {
   font-weight: 700;
 }
 
+.inter-normal-hot-magenta-14px {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
 
 .inter-normal-keppel-12px {
   color: var(--keppel);
@@ -422,4 +438,16 @@ a:active {
   font-style: normal;
   font-weight: 400;
   margin: 0;
+}
+
+.inter-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.line-height-21px {
+  line-height: 21px;
 }

@@ -170,7 +170,7 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
     </div>
   );
 
-  return isGuest ? guestDisplay : loginUserDisplay;
+  return isGuest && isMyProfile ? guestDisplay : loginUserDisplay;
 };
 
 export default ProfileUserInfoContainer;

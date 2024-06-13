@@ -94,11 +94,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-YBUPcf goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
-                <div className="x3-XEqJB9 x3 inter-semi-bold-white-14px">/ 3</div>
+                <div className={isGuest ? "x3-XEqJB9 x3 inter-semi-bold-keppel-14px" :"x3-XEqJB9 x3 inter-semi-bold-white-14px"}>/ 3</div>
               </div>
             </div>
           </div>
@@ -111,11 +111,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-hfcLyr goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiRecordTimes}</div>
-                <div className="x3-eZrkM2 x3 inter-semi-bold-white-14px">/ 60</div>
+                <div className={isGuest ? "x3-eZrkM2 x3 inter-semi-bold-keppel-14px" :"x3-eZrkM2 x3 inter-semi-bold-white-14px"}>/ 60</div>
               </div>
             </div>
           </div>
@@ -134,12 +134,12 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
                 {/* <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
                 <div className="x0 inter-semi-bold-keppel-14px">0</div>
-                <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 50</div>
+                <div className={isGuest ? "x3-E0cPgC x3 inter-semi-bold-keppel-14px" : "x3-E0cPgC x3 inter-semi-bold-white-14px"}>/ 50</div>
               </div>
             </div>
           </div>
@@ -158,11 +158,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             s</div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-hu1xkO goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
-                <div className="x3-SJHvta x3 inter-semi-bold-white-14px">/ 1</div>
+                <div className={isGuest ? "x3-SJHvta x3 inter-semi-bold-keppel-14px" : "x3-SJHvta x3 inter-semi-bold-white-14px"}>/ 1</div>
               </div>
             </div>
           </div>

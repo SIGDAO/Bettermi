@@ -19,6 +19,7 @@ import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
 import { selectedNftInfo } from "../allNftList/indexAllNftList";
 import NftDetails from "../../components/nftDetails";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 
 interface MyNftProps {
   userId?: string;
@@ -38,14 +39,12 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   const userAccountId: string = useSelector(accountId);
   const userId = location.state == null ? userAccountId : location.state.userAccountId;
 
-
-
   const navigate = useNavigate();
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
   const [selectedNft, setSelectedNft] = useState<selectedNftInfo>();
-  const [openModel,setOpenModel] = useState<boolean>(false);
+  const [openModel, setOpenModel] = useState<boolean>(false);
   const nftLoaded = useRef(false);
   const dataFetchedRef = useRef(false);
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
@@ -54,7 +53,6 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   if (location.state == null) {
     isOtherUser = false;
   }
-
 
   const checkIsLoading = async () => {
     // const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
@@ -68,12 +66,10 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
     //     }
     // }
     try {
-
       const equippedNftId = await GetEquippedNftId(ledger2, userId);
       setEquippedNftIpfsAddress(equippedNftId);
       const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2, userId);
       if (isUserUpdatingIcon === true) {
-
         setIsUpdating(true);
         setIsLoading(false);
         return;
@@ -97,21 +93,52 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
           <ShortTitleBar title="Loading NFT collections..." />
           <LoadingMintingMyNftList loadingNft={loadingNft} userId={userId} setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts={setMyNfts} isOtherUser={isOtherUser}></LoadingMintingMyNftList>
         </>
-      ) : 
-        openModel?
-        (
-          <NftDetails disabled = {true}imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon = {openModel}></NftDetails>
-        )
-        :(
-          isOtherUser === true ? (
-            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel} setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={true}></MyNftList>
-          ) : (
-            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel}  setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={false} equippedNftIpfsAddress={equippedNftIpfsAddress}></MyNftList>
-          )
-      )
-      }
+      ) : (
+        <NFTDetailPopUpWindow
+          isPopUpNFTDetailWinodow={openModel}
+          isNFTiconLoading={isUpdating}
+          imgAddress={selectedNft?.imageUrl || ""}
+          level={selectedNft?.nftLevel || ""}
+          rewardPercentage={selectedNft?.nftReward || ""}
+          setIsPopUpNFTDetailWinodow={setOpenModel}
+        >
+          <MyNftList
+            setSelectedNft={setSelectedNft}
+            setOpenModel={setOpenModel}
+            setIsUpdatingDescription={setIsUpdating}
+            isUpdatingDescription={isUpdating}
+            myNfts={myNfts}
+            isOtherUser={isOtherUser}
+            equippedNftIpfsAddress={equippedNftIpfsAddress || ""}
+          />
+        </NFTDetailPopUpWindow>
+      )}
     </>
   );
+  // ) : openModel ? (
+  //   <NftDetails disabled={true} imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon={openModel}></NftDetails>
+  // ) : (
+  // // ) : isOtherUser === true ? (
+  // //   <MyNftList
+  // //     setSelectedNft={setSelectedNft}
+  // //     setOpenModel={setOpenModel}
+  // //     setIsUpdatingDescription={setIsUpdating}
+  // //     isUpdatingDescription={isUpdating}
+  // //     myNfts={myNfts}
+  // //     isOtherUser={isOtherUser}
+  // //   ></MyNftList>
+  // // ) : (
+  // //   <MyNftList
+  // //     setSelectedNft={setSelectedNft}
+  // //     setOpenModel={setOpenModel}
+  // //     setIsUpdatingDescription={setIsUpdating}
+  // //     isUpdatingDescription={isUpdating}
+  // //     myNfts={myNfts}
+  // //     isOtherUser={false}
+  // //     equippedNftIpfsAddress={equippedNftIpfsAddress}
+  // //   ></MyNftList>
+  // )}
+  // </>
 
   // return (
   //   <CenterLayout

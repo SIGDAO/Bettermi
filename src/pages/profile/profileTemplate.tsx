@@ -201,7 +201,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
 
   useEffect(() => {
     // don't fetch data if user is guest
-    if (isGuest) return;
+    if (isGuest && isMyProfile) return;
 
     fetchSetting();
     fetchUserIcon();
@@ -252,6 +252,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
           setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
           setImgAddress={setImgAddress}
           setRewardPercentage={setRewardPercentage}
+          isMyProfile={isMyProfile}
         />
       </div>
       {/* render the EditProfilePopUpWindow only when this is login user and this is not other user profile */}

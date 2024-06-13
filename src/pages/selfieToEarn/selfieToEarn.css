@@ -11,13 +11,26 @@
   width: 390px;
 }
 
+.bettermidapp-selfie-to-earn-1-inactive {
+  background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
+  background-color: rgba(255,255,255,1.0);
+  height: 100vh;
+  /* height: 1553px; */
+  /* overflow: hidden;
+  overflow-x: hidden; */
+  position: relative;
+  width: 390px;
+  overflow-y: hidden;
+
+} 
+
 .bettermidapp-selfie-to-earn-1 .bg-MUU5YC {
   height: 934px;
   top: -47px;
   width: 480px;
 }
 
-.bettermidapp-selfie-to-earn-1 .bmi_-status-MUU5YC {
+.bmi_-status-MUU5YC {
   background-color: transparent;
   height: 74px;
   left: 1px;
@@ -26,7 +39,7 @@
   width: 389px;
 }
 
-.bettermidapp-selfie-to-earn-1 .current-kgm2-C5Ye0d {
+.current-kgm2-C5Ye0d {
   background-color: transparent;
   bottom: calc(24.78% - 4px);
   height: 17px;
@@ -39,16 +52,8 @@
   width: 106px;
 }
 
-.bettermidapp-selfie-to-earn-1 .span0-b6eiBJ {
-}
 
-.bettermidapp-selfie-to-earn-1 .span1-b6eiBJ {
-}
-
-.bettermidapp-selfie-to-earn-1 .span2-b6eiBJ {
-}
-
-.bettermidapp-selfie-to-earn-1 .start-kgm2-C5Ye0d {
+.start-kgm2-C5Ye0d {
   background-color: transparent;
   bottom: calc(23.89% - 4px);
   height: 17px;
@@ -61,16 +66,8 @@
   width: 88px;
 }
 
-.bettermidapp-selfie-to-earn-1 .span0-OeIZvd {
-}
 
-.bettermidapp-selfie-to-earn-1 .span1-OeIZvd {
-}
-
-.bettermidapp-selfie-to-earn-1 .span2-OeIZvd {
-}
-
-.bettermidapp-selfie-to-earn-1 .bmi-goal-C5Ye0d {
+.bmi-goal-C5Ye0d {
   height: 1px;
   left: 1px;
   object-fit: cover;
@@ -78,7 +75,7 @@
   width: 100%;
 }
 
-.bettermidapp-selfie-to-earn-1 .bmi-goal-HuKS2x {
+.bmi-goal-HuKS2x {
   bottom: 0px;
   height: 1px;
   left: 1px;
@@ -86,7 +83,7 @@
   width: 100%;
 }
 
-.bettermidapp-selfie-to-earn-1 .x255-C5Ye0d {
+.x255-C5Ye0d {
   background-color: transparent;
   color: var(--keppel);
   font-family: var(--font-family-inter);
@@ -104,7 +101,7 @@
   width: 46px;
 }
 
-.bettermidapp-selfie-to-earn-1 .x265-C5Ye0d {
+.x265-C5Ye0d {
   background-color: transparent;
   color: var(--white);
   font-family: var(--font-family-inter);
@@ -122,7 +119,7 @@
   width: 46px;
 }
 
-.bettermidapp-selfie-to-earn-1 .x598-C5Ye0d {
+.x598-C5Ye0d {
   background-color: transparent;
   height: 100%;
   left: 50.00%;
@@ -132,18 +129,19 @@
   width: 1px;
 }
 
-.bettermidapp-selfie-to-earn-1 .x6-MUU5YC::-webkit-scrollbar {
+.x6-MUU5YC::-webkit-scrollbar {
   display: none;
   width: 0;
   margin: 0;
 }
 
-.bettermidapp-selfie-to-earn-1 .x6-MUU5YC {
+.x6-MUU5YC {
   height: 403px;
   /* left: -34px; */
   mix-blend-mode: normal;
   overflow-x: scroll;
   overflow-y: hidden;
+  position: absolute;
   background-color: #171717 !important;
   top: 260px;
   width: 390px;
@@ -675,7 +673,7 @@
   width: 27px;
 }
 
-.bettermidapp-selfie-to-earn-1 .calender-MUU5YC {
+.calender-MUU5YC {
   background-color: transparent;
   min-height: 339px;
   left: 0px;
@@ -1686,7 +1684,7 @@
   width: 100%;
 }
 
-.bettermidapp-selfie-to-earn-1 .x16212-MUU5YC {
+.x16212-MUU5YC {
   background-color: transparent;
   /* max-height: calc(434px + 95px); */
   max-height: 434px;
@@ -2594,7 +2592,7 @@
   position: absolute;
 }
 
-.bettermidapp-selfie-to-earn-1 .bmi-goal {
+.bmi-goal {
   background-color: transparent;
   position: absolute;
 }
@@ -2908,3 +2906,21 @@
   align-items: center;
   height: 100%;
 }
+
+.take-selfie-window-guest-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+}
+
+.bg-locked-selfieToEarn {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 3;
+  background: #0D0D0DCB;
+  }

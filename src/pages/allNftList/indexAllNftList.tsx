@@ -16,6 +16,7 @@ import PopupModal from "./modelTrial";
 import AllNftLoading from "./allNftLoading";
 import NftDetails from "../../components/nftDetails";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 
 interface IINDEXAllNftListProps {}
 export interface nftImage {
@@ -346,14 +347,37 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     <>
       {loading ? (
         <AllNftLoading />
-      ) : openModel ? (
-        <>
-          {/* <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel> */}
-          {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
-          <NftDetails imgAddress={selectedNftInfo} setPopUpIcon={setOpenModel} popUpIcon={openModel}></NftDetails>
-        </>
       ) : (
-        <>
+        // ) : openModel ? (
+        //   <>
+        //     {/* <CustomModel level={"1"} setOpenModel={setOpenModel} openModel={openModel}></CustomModel> */}
+        //     {/* <PopupModal level = {"1"} isOpen={openModel} setIsOpen={setOpenModel}></PopupModal> */}
+        //     {/* <NftDetails imgAddress={selectedNftInfo} setPopUpIcon={setOpenModel} popUpIcon={openModel}></NftDetails> */}
+
+        //   </>
+        // ) : (
+        //   <>
+        //     <AllNftList
+        //       setSelectedImageAddress={setSelectedNftInfo}
+        //       isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
+        //       setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+        //       nftInfoArray={nftInfo}
+        //       CustomModel={PopupModal}
+        //       setOpenModel={setOpenModel}
+        //       openModel={openModel}
+        //     ></AllNftList>
+        //   </>
+        // )}
+        //     {/* <NftDetails imgAddress={selectedNftInfo} setPopUpIcon={setOpenModel} popUpIcon={openModel}></NftDetails> */}
+
+        <NFTDetailPopUpWindow
+          isPopUpNFTDetailWinodow={openModel}
+          isNFTiconLoading={false}
+          imgAddress={selectedNftInfo?.imageUrl ?? ""}
+          level={selectedNftInfo?.nftLevel ?? ""}
+          rewardPercentage={selectedNftInfo?.nftReward ?? ""}
+          setIsPopUpNFTDetailWinodow={setOpenModel}
+        >
           <AllNftList
             setSelectedImageAddress={setSelectedNftInfo}
             isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
@@ -362,8 +386,8 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
             CustomModel={PopupModal}
             setOpenModel={setOpenModel}
             openModel={openModel}
-          ></AllNftList>
-        </>
+          />
+        </NFTDetailPopUpWindow>
       )}
       {/* {openModel?(
         <>

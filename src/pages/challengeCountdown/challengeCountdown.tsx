@@ -1,34 +1,32 @@
-import React, { useEffect } from 'react';
-import './challengeCountdown.css';
-import { CenterLayout } from '../../components/layout';
-import { ShortTitleBar } from '../../components/titleBar';
+import React, { useEffect } from "react";
+import "./challengeCountdown.css";
+import { CenterLayout } from "../../components/layout";
+import { ShortTitleBar } from "../../components/titleBar";
 // import { CircularProgress } from '@mui/material';
-import CircularWithValueLabel from './circleProgressLoader';
-import { useSelector } from 'react-redux';
-import { accountId } from '../../redux/account';
-import { walletNodeHost } from '../../redux/wallet';
-import { TransferToken } from '../../components/transferToken';
-import { challengeList } from '../../data/challengeList';
-import { useParams } from 'react-router-dom';
+import CircularWithValueLabel from "./circleProgressLoader";
+import { useSelector } from "react-redux";
+import { accountId } from "../../redux/account";
+import { walletNodeHost } from "../../redux/wallet";
+import { TransferToken } from "../../components/transferToken";
+import { challengeList } from "../../data/challengeList";
+import { useParams } from "react-router-dom";
 
 interface IChallengeCountdownProps {
   taskName?: string;
 }
 
-
 const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (props) => {
-  const id = useParams().id?.toString() || '1';
+  const id = useParams().id?.toString() || "1";
   const [time, setTime] = React.useState(32);
   const userAccountId = useSelector(accountId);
   const userWalletNodeHost = useSelector(walletNodeHost);
-  const displayMission = challengeList.find((mission, index) => index === parseInt(id)-1) || challengeList[0];
-
-
+  const displayMission = challengeList.find((mission, index) => index === parseInt(id) - 1) || challengeList[0];
 
   const displayTime = (function () {
-    const minutes: number = parseInt(displayMission.duration.split(' ')[0]);
+    const minutes: number = parseInt(displayMission.duration.split(" ")[0]);
     return minutes * 60;
-  })()
+    // return 3;
+  })();
 
   const [timeBeforeStart, setTimeBeforeStart] = React.useState(3);
 
@@ -41,7 +39,6 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     setTimeout(() => {
       // setTimeBeforeStart("Start!");
       clearInterval(timer);
-
     }, 4000);
 
     // Clean up the timer on component unmount
@@ -59,25 +56,24 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
     margin: "100px auto",
     position: "absolute",
     zIndex: 99,
-    top: "116px", 
+    top: "116px",
     color: "#cdcdcd",
   };
-  
-  const showTimeBeforeStart = () => {
-    if (timeBeforeStart === 0) return "Start!"
-    if (timeBeforeStart < 0) return ""
-    return timeBeforeStart
-  }
 
+  const showTimeBeforeStart = () => {
+    if (timeBeforeStart === 0) return "Start!";
+    if (timeBeforeStart < 0) return "";
+    return timeBeforeStart;
+  };
 
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-countdown-1">
-        <ShortTitleBar title={displayMission.pageTitle} aiCoach={true} setting ={true}/>
+        <ShortTitleBar title={displayMission.pageTitle} aiCoach={true} setting={true} />
         {/* <img className="bg-oEaurv" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/bg-10@1x.png`} alt="BG" /> */}
         <div style={timerStyles}>{showTimeBeforeStart()}</div>
         <img
-          style={timeBeforeStart >= 0? {opacity: 0.2} : {opacity: 1}}
+          style={timeBeforeStart >= 0 ? { opacity: 0.2 } : { opacity: 1 }}
           className="x1-hello-bae-gradient-bg-oEaurv"
           // src={`${process.env.PUBLIC_URL}/img/challengeCountdown/1hellobae-gradientbg@1x.png`}
           src={displayMission.missionImgPath}
@@ -110,13 +106,8 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
         </div>
       </div>
     </div>
-  )
-  return (
-    <CenterLayout 
-      content={content}
-      bgImg={false}
-    />
   );
+  return <CenterLayout content={content} bgImg={false} />;
 };
 
 export default ChallengeCountdown;
