@@ -1,9 +1,6 @@
 import * as React from "react";
 import "../myNftList/myNftList.css";
 import "./allNftList.css";
-import { useEffect } from "react";
-import { generateMethodCall } from "@signumjs/contracts";
-import { AttachmentMessage } from "@signumjs/core";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
 import { useSelector } from "react-redux";
@@ -69,13 +66,37 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
       </button>
     );
   };
+
   return (
     <>
       {/* {loading?(<div>loading</div>):(
           imgAddress === ""?(<div>loading</div>):( */}
 
-      <div className="myNftList">
-        <img
+      <div className="myNftList" key={nftId}> 
+        <IPFSImageComponent
+          className="myNftImage"
+          onClick={() => {
+            //   setIsOpenPopup((prev) => !prev);
+            //   setSelectedAssetId(nftId);
+            //   setLevel(nftLevel);
+
+            if (setOpenModel) {
+              setOpenModel((prev) => !prev);
+            }
+            if (setNftSelectedImage && nftLevel && nftPrice && nftIndex && nftReward) {
+              const selectedNftInfo: selectedNftInfo = {
+                imageUrl: imageAddress,
+                nftLevel: nftLevel,
+                nftPrice: (parseInt(nftPrice) / 1000000).toString(),
+                nftReward: nftReward,
+                nftNumber: String(nftIndex).padStart(8, "0"),
+              };
+              setNftSelectedImage(selectedNftInfo);
+            }
+          }}
+          imgAddress={imageAddress}
+        />
+        {/* <img
           onClick={() => {
             //   setIsOpenPopup((prev) => !prev);
             //   setSelectedAssetId(nftId);
@@ -97,7 +118,7 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
           }}
           className="myNftImage"
           src={`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imageAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`}
-        ></img>
+        ></img> */}
         {/* <IPFSImageComponent
           imgAddress={imageAddress}
           onClick={() => {

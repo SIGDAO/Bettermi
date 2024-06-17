@@ -37,15 +37,14 @@ import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage"
 import { getApiUrls } from "../../components/constants/constant";
 
 interface IMyNftListProps {
-  isUpdatingDescription?: boolean;
-  myNfts?: myNftList[];
-  setIsUpdatingDescription?: (isUpdatingDescription: boolean) => void;
-  isOtherUser?: boolean;
+  isUpdatingDescription: boolean;
+  myNfts: myNftList[];
+  setIsUpdatingDescription: React.Dispatch<React.SetStateAction<boolean>>;
+  isOtherUser: boolean;
   equippedNftIpfsAddress?: string;
-  setOpenModel: (openModel: boolean) => void;
-  setSelectedNft?: (selectedNft: selectedNftInfo) => void;
+  setOpenModel: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedNft: React.Dispatch<React.SetStateAction<selectedNftInfo>>;
 }
-
 // interface myNftList{
 //   image:string;
 //   assetId:string;
@@ -477,21 +476,12 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
               <div className="containerMyNftList2">
                 {onDuty === "" ? (
                   <div className="myNftList">
-                    {gender === "Female" ? (
-                      <Link to="/allNftList/">
-                        <div className="myNftListEmptyNft">
-                          <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
-                          <img className="myNftListadd2" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                        </div>
-                      </Link>
-                    ) : (
-                      <Link to="/allNftList/">
-                        <div className="myNftListEmptyNft">
-                          <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
-                          <img className="myNftListadd2" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
-                        </div>
-                      </Link>
-                    )}
+                    <Link to="/allNftList/">
+                      <div className="myNftListEmptyNft">
+                        <img className="myNftListAdd" src="img/profile/add-2@1x.png" alt="Add" />
+                        <img className="myNftListadd2" src="img/profile/ic-add-2@1x.png" alt="ic_add" />
+                      </div>
+                    </Link>
                     <div className="myNftDescription">
                       <div className="myNftNumber">#{nftNumber}</div>
                       <div className="myNftBar">

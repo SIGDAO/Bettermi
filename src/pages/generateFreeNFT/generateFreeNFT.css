@@ -120,7 +120,7 @@
   font-weight: 500;
   letter-spacing: 0;
   line-height: 16px;
-  position: relative;
+  position: absolute;
   text-align: center;
   top: 697px;
   white-space: nowrap;

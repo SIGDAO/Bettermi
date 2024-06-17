@@ -23,15 +23,15 @@ interface MyNftProps {
   image: string;
   level: string;
   isOpenPopup: boolean;
-  setIsOpenPopup: (isOpenPopup: boolean) => void;
+  setIsOpenPopup: React.Dispatch<React.SetStateAction<boolean>>;
   nftId: string;
-  setSelectedAssetId: (nftId: string) => void;
-  setLevel: (level: string) => void;
+  setSelectedAssetId: React.Dispatch<React.SetStateAction<string>>;
+  setLevel: React.Dispatch<React.SetStateAction<string>>;
   isUpdatingDescription: boolean;
-  setIsUpdatingDescription: (isUpdatingDescription: boolean) => void;
+  setIsUpdatingDescription: React.Dispatch<React.SetStateAction<boolean>>;
   isOtherUser: boolean;
-  setOpenModel: (openModel: boolean) => void;
-  setSelectedNft: (selectedNft: selectedNftInfo) => void;
+  setOpenModel: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedNft: React.Dispatch<React.SetStateAction<selectedNftInfo>>;
   isGuest?: boolean;
 }
 
@@ -50,44 +50,40 @@ const MyNft: React.FunctionComponent<MyNftProps> = (props) => {
   const name = useAppSelector(selectCurrentUsername);
 
   useEffect(() => {
-    //fetch(`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${image}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`).then((res)=>{
-    fetch(getApiUrls(image).imgAddress)
-      .then((res) => {
-        res
-          .text()
-          .then((text) => {
-            var nftInfo = JSON.parse(text);
-            let matches = nftInfo.name.match(/(\d+)/);
-            const nftNumber: string = matches[0].toString().padStart(8, "0");
-            setNftNumber(nftNumber);
-            if (nftInfo.description.includes("1") === true) {
-              setNftLevel("1");
-            }
-            if (nftInfo.description.includes("2") === true) {
-              setNftLevel("2");
-            }
-            if (nftInfo.description.includes("3") === true) {
-              setNftLevel("3");
-            }
-            const level = convertWordToNumber(nftInfo.attributes[6].value);
-            console.log("level is", level);
-            if (isNaN(level) === false) {
-              console.log((level / 3).toString());
-              setReward((level / 3).toFixed(2).toString());
-            } else {
-              setReward("");
-            }
-            setImgAddress(nftInfo.media[0].social);
-            setLoading(false);
-          })
-          .catch((e: any) => {
-            console.log(e);
-          });
-      })
-      .catch((e: any) => {
-        console.log(e);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(getApiUrls(image).imgAddress);
+        const text = await response.text();
+        const nftInfo = JSON.parse(text);
+        const matches = nftInfo.name.match(/(\d+)/);
+        const nftNumber = matches[0].toString().padStart(8, "0");
+        setNftNumber(nftNumber);
+
+        if (nftInfo.description.includes("1")) {
+          setNftLevel("1");
+        } else if (nftInfo.description.includes("2")) {
+          setNftLevel("2");
+        } else if (nftInfo.description.includes("3")) {
+          setNftLevel("3");
+        }
+
+        const level = convertWordToNumber(nftInfo.attributes[6].value);
+        if (!isNaN(level)) {
+          setReward((level / 3).toFixed(2).toString());
+        } else {
+          setReward("");
+        }
+
+        setImgAddress(nftInfo.media[0].social);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, [image]);
+  
   const equipNft = async () => {
     if (isOtherUser) return;
 
@@ -139,9 +135,7 @@ const MyNft: React.FunctionComponent<MyNftProps> = (props) => {
 
   return (
     <>
-      {loading ? (
-        <div>loading</div>
-      ) : imgAddress === "" ? (
+      {loading || imgAddress === "" ? (
         <div>loading</div>
       ) : (
         <div className="myNftList">
