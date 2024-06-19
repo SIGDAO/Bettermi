@@ -33,17 +33,20 @@ export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
         <div className="guest-nft-detail-popup-window-title inter-semi-bold-white-18px">Earn SIGDAO now !</div>
         <div className="guest-nft-detail-popup-window-content">
           <div className="inter-bold-royal-blue-15px">TAKE A SELFIE TO EARN</div>
-          <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_Tipping_Hand.svg`} alt="" />
+          <div className="guest-nft-detail-popup-window-mimi-container">
+            <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_popup_window.png`} alt="" />
+          </div>
+          {/* mimi-showing-SIGDAO-token.png */}
           <div className="inter-normal-hot-magenta-14px line-height-21px">
           * We value your privacy, 
             <br />your selfie will NOT be stored
           </div>
         </div>
-        {/* <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" /> */}
-        <div className="guest-take-selfie-button-container" onClick={() => navigate("/takeSelfie")}>
+        <GuestConnectWallectButton className="guest-take-selfie-button-container" height="56px" width="248px" />
+        {/* <div className="guest-take-selfie-button-container" onClick={() => navigate("/takeSelfie")}>
         <img className="ic_selfie-u8P1YH" src="/img/selfieToEarn/ic-selfie-1@1x.png" alt="ic_selfie" />
           <div className="guest-take-selfie-title inter-semi-bold-white-15px">Selfie to Earn</div>
-        </div>
+        </div> */}
       </div>
     </>
   );
@@ -89,7 +92,7 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
         <div className="guest-nft-detail-popup-window-title inter-semi-bold-white-18px">Get your FREE NFT now !</div>
         <div className="guest-nft-detail-popup-window-content">
           <div className="inter-bold-royal-blue-15px">START EARNING SIGDAO</div>
-          <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_Tipping_Hand.svg`} alt="" />
+          <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_popup_window.png`} alt="" />
           <div className="guest-nft-detail-description inter-normal-cadet-blue-14px line-height-21px">
             Connect your Signum wallet
             <br />& Receive a FREE NFT membership !

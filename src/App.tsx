@@ -1,7 +1,7 @@
 // package
 import React from "react";
 import { useEffect, useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { Fragment } from "react";
@@ -133,26 +133,35 @@ const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
   return guestAllowedPath.some((path) => currentPath.startsWith(path));
 };
 
-const InitSetting: React.FC = () => {
+const CheckSetting: React.FC = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentPath: string = location.pathname;
+  const [isRendering, setIsRendering] = useState<boolean>(true);
   const { Wallet } = useContext(AppContext);
   const isGuest = useSelector(selectCurrentIsGuest);
 
   // check if user is authenticated
   // or user is in guest allowed path
   // or user is guest
-  if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
-    dispatch(profileSlice.actions.authenticated());
-  } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
-    sessionStorage.clear();
-    return <Navigate to="/" />;
-  } else {
-    dispatch(profileSlice.actions.unauthenticated());
-  }
+  useEffect(() => {
+    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+      dispatch(profileSlice.actions.authenticated());
+    } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
+      store.dispatch({ type: "USER_LOGOUT" });
+      navigate('/');
+      // return <></>;
+      // return <Navigate replace to="/"  />;
+    } else {
+      dispatch(profileSlice.actions.unauthenticated());
+    }
 
-  return <Outlet />;
+    setIsRendering(false);
+  }, [currentPath, isGuest]);  
+
+  console.log("currentPath", currentPath);
+  return isRendering ? <></> :  <Outlet />;
 };
 
 function App() {
@@ -178,7 +187,7 @@ function App() {
             <Route
               element={
                 <Fragment>
-                  <InitSetting />
+                  <CheckSetting />
                   <Analytics />
                 </Fragment>
               }
