@@ -147,6 +147,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           });
 
           try {
+            console.log("bmi Message",bmiMessage)
             encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", bmiMessage);
 
             encrypted = encrypted.data;

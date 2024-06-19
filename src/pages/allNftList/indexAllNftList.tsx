@@ -207,7 +207,6 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       try {
         const des = JSON.parse(nftStorages[i].description).descriptor;
         const info: urlObject = {
-          // url: `${des}`,
           url: `https://rose-peaceful-badger-310.mypinata.cloud/ipfs/${des}?pinataGatewayToken=ucHcjsImiqy6ENBl5X8Q7kTG3IwrFohD1r_s6qhqhMPkUZpAOiIhCFZ70Cgp-k6L`,
           nftId: nftStorages[i].at,
           index: i,

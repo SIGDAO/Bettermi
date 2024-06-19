@@ -13,6 +13,7 @@ export const getDomains = (imgAddress: string): string[] => {
   return [
     // getApiUrls(imgAddress).imgAddress,
     `https://rose-peaceful-badger-310.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=ucHcjsImiqy6ENBl5X8Q7kTG3IwrFohD1r_s6qhqhMPkUZpAOiIhCFZ70Cgp-k6L`,
+    `rose-peaceful-badger-310.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
     // `https://ipfs.io/ipfs/${imgAddress}/`,
     // `https://gateway.pinata.cloud/ipfs/${imgAddress}/`,
     // `https://cloudflare-ipfs.com/ipfs/${imgAddress}/`,

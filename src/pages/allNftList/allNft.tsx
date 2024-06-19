@@ -117,8 +117,8 @@ const AllNft: React.FunctionComponent<AllNftProps> = (props) => {
             }
           }}
           className="myNftImage"
-          src={`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imageAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`}
-        ></img> */}
+          src={`https://rose-peaceful-badger-310.mypinata.cloud/ipfs/${imageAddress}?pinataGatewayToken=ucHcjsImiqy6ENBl5X8Q7kTG3IwrFohD1r_s6qhqhMPkUZpAOiIhCFZ70Cgp-k6L`}
+        ></img>
         {/* <IPFSImageComponent
           imgAddress={imageAddress}
           onClick={() => {

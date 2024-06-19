@@ -13,6 +13,7 @@ import { accountSlice } from "../../redux/account";
 import { profileSlice } from "../../redux/profile";
 import { checkIfUserExists } from "../../NftSystem/verifyUser/checkIfUserAccountExists";
 import { LedgerClientFactory } from "@signumjs/core";
+import { accountPublicKey } from "../../redux/account";
 
 export interface IReferralCodeProps {}
 
@@ -28,6 +29,8 @@ export default function ReferralCodeTesting(props: IReferralCodeProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   const walletConnected = useRef(false);
+  const [userPublicKey,setUserPublicKey] = useState<string>("");
+  const [loading,setLoading] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -35,24 +38,29 @@ export default function ReferralCodeTesting(props: IReferralCodeProps) {
     //     return;
     //   }
     //   walletConnected.current = true;
-    connectWallet(appName, Wallet, Ledger,codeHashId,codeHashIdForNft,assetId);
+     connectWallet(appName, Wallet, Ledger,codeHashId,codeHashIdForNft,assetId).then(info => {
+      console.log(info);
+      setUserPublicKey(info!.userPublicKey);
+      setLoading(true);
+     }).catch((e) => {console.log("error is",e)});
   }, []); 
 
 
   const Buy = async () => {
     try{
-        await ledger2.message.sendMessage({
+      console.log(userPublicKey)
+        const transaction = await ledger2.message.sendMessage({
             message: JSON.stringify({
               'bmi': "123",
               'time': new Date(),
             }) ,
             messageIsText: true,
-            recipientId: "8886251522354342618",
+            recipientId: "7549602679371582747",
             feePlanck: "1000000",
-            senderPublicKey: "041f3b333d93ba9b24eaf324d1090f763f7c78ed0b7922d2d3eaeecaf440501c",
-            senderPrivateKey:"83a4a4e95bc8da68a9c00b7b86523d576b967236ac67a7c0bfb98b3c5d19df0e",
+            senderPublicKey: userPublicKey,
             deadline: 1440,
           }) ;
+        await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
     }
     catch(error:any){
         console.log("error is",error);
@@ -78,6 +86,7 @@ export default function ReferralCodeTesting(props: IReferralCodeProps) {
         <BackButton></BackButton>
         <div className="referralCode-option-container">
           <div id="referralCode-button-container">
+            {loading === true?
             <ButtonWithAction
               text="Buy"
               action={() => {
@@ -93,9 +102,18 @@ export default function ReferralCodeTesting(props: IReferralCodeProps) {
               height="56px"
               width="248px"
             />
-            <Link to="https://phoenix-wallet.rocks/">
-              <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
-            </Link>
+            :(
+              <div></div>
+            )
+          }
+            <ButtonWithAction
+              text="Connect Wallet"
+              action={() => {
+                connectWallet(appName, Wallet, Ledger,codeHashId,codeHashIdForNft,assetId); 
+            }} // TODO: add action to connect wallet
+              height="56px"
+              width="248px"
+            />
           </div>
         </div>
       </div>
