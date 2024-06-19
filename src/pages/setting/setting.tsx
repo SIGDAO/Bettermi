@@ -85,7 +85,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
                 <div className={isGuest ? "multi-chain-switch-tbbzDm inter-normal-white-15px brightness-0-5" : "multi-chain-switch-tbbzDm inter-normal-white-15px"}>Invite Friends</div>
               </div>
               <div className="x16184-6XzBK0 x16184">
-                <div className="sigppnum-qeaPIP inter-normal-white-15px brightness-0-5">Show code</div>
+                <div className="sigppnum-qeaPIP inter-normal-white-15px brightness-0-5">Show link</div>
               </div>
               <img className="icon-ionic-ios-arrow-forward-inactive" src="img/setting/icon-ionic-ios-arrow-forward-1@1x.png" alt="Icon ionic-ios-arrow-forward" />
               <img className="x15" src="img/setting/file---15@1x.png" alt="15" />

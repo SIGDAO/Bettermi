@@ -228,6 +228,7 @@ function App() {
                 <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
                 <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
                 <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
+                <Route path="/errorNotEnoughFunds" element={<ErrorGenerateNFT />} />
                 <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
                 <Route path="/setting" element={<Setting />} />
                 <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />

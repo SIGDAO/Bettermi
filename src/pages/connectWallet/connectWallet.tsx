@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./connectWallet.css";
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CenterLayout } from "../../components/layout";
@@ -17,13 +17,14 @@ import { profileSlice } from "../../redux/profile";
 import { CheckUnconfirmedNewNFTContract } from "../myNftList/checkNewContract";
 import { CheckUnconfirmedNewBMIContract } from "../myNftList/checkNewContract";
 import { Link } from "react-router-dom";
-import { contractSlice } from "../../redux/contract";
+import { contractSlice, selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
 import axios from "axios";
 import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
 import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
 import { FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
 import { FindLatestTransactionArray } from "../../NftSystem/updateUserNftStorage";
 import { connectWallet } from "../../NftSystem/connectWallet/connectWallet";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface IConnectWalletProps {}
 
@@ -36,7 +37,13 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', "");
-  store.dispatch({ type: "USER_LOGOUT" });
+  const isBMIContractBuild = useSelector(selectCurrentIsBMIContractBuild);
+  const isNFtContractBuild = useSelector(selectCurrentIsNFTContractBuild);
+  // store.dispatch({ type: "USER_LOGOUT" });
+
+  useEffect(() => {
+    store.dispatch({ type: "USER_LOGOUT" });
+  }, []);
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
     try {
@@ -46,8 +53,20 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       }
 
       console.log("userInfo is ", userInfo);
-      // if both contract is created
-      if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
+      console.log("isBMIContractBuild is ", isBMIContractBuild);
+      console.log("isNFtContractBuild is ", isNFtContractBuild);
+
+
+      // if only one contract is created
+      if (isBMIContractBuild || isNFtContractBuild) {
+        console.log("only one contract is created");
+        navigate("/generateBMINFTImport")
+        return; 
+      }
+
+      // if all contract is created, but one or more contract still unconfirmed
+      // if (userInfo!.openedBmiContract === true || userInfo!.openedNftContract === true) {
+      if (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true || userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true || userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) {
         navigate("/loadingMinting");
         return;
       }
@@ -66,6 +85,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         }
         navigate("/home");
       } else {
+        console.log("no contract is created");
         navigate("/connectSucceed");
       }
     } catch (error: any) {

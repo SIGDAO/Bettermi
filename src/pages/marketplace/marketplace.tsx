@@ -111,9 +111,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           <div className="rewards-title inter-semi-bold-white-18px">{reward.title}</div>
           <div className="rewards-description inter-normal-cadet-blue-12px">{reward.shortDescription}</div>
           <div className="marketplace-rewards-goal-container">
-            <div className="rewards-goal">
+            <div className={isGuest ? "rewards-goal opacity-0-5" : "rewards-goal"}>
               <div className="rewards-goal-number inter-semi-bold-keppel-14px">{implementReward(reward)}</div>
-              <div className={isGuest ? "rewards-goal-text inter-semi-bold-keppel-14px" : "rewards-goal-text inter-semi-bold-white-14px"}>/ {reward.requireTimes}</div>
+              <div className={"rewards-goal-text inter-semi-bold-white-14px"}>/ {reward.requireTimes}</div>
             </div>
             <div className="marketplace_ic_next">
               <img className="marketplace_ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/marketplace/ic-chevron-right-24px-1@1x.png`} alt="marketplace_ic_chevron_right_24px" />

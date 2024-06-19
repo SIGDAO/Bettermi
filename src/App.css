@@ -57,6 +57,12 @@ a:hover {
 } 
 a:active { 
   text-decoration: none; 
+  border: none;
+  outline: none;
+}
+
+a:focus-visible {
+  outline: none;
 }
 
 
@@ -259,13 +265,6 @@ a:active {
   font-size: 12px;
 }
 
-.inter-normal-cadet-blue-14px {
-  color: var(--cadet-blue-2);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-l);
-  font-style: normal;
-  font-weight: 400;
-}
 
 .inter-semi-bold-white-14px {
   color: var(--white);
@@ -450,4 +449,12 @@ a:active {
 
 .line-height-21px {
   line-height: 21px;
+}
+
+.brightness-0-5 {
+  filter: brightness(0.5);
+}
+
+.opacity-0-5 {
+  opacity: 0.5;
 }

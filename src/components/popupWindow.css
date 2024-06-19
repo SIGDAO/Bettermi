@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .guest-nft-detail-popup-window-content > div {
@@ -80,4 +80,8 @@
   gap: 20px;
   cursor: pointer;
 
+}
+
+.guest-nft-detail-description {
+  margin-top: 2px;
 }

@@ -175,8 +175,14 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         // store.dispatch(profileSlice.actions.setIsSelfie);
         navigate("/loadingMinting");
       } catch (error) {
-        console.log(error);
-        if (error.name !== "ExtensionWalletError") {
+        console.log(error.data);
+
+        if (error.data.errorDescription.includes("Not enough funds")) {
+          navigate("/errorNotEnoughFunds");
+          return;
+        }
+
+        if (error.name && error.name !== "ExtensionWalletError") {
           navigate("/errorGenerateNFT");
         }
         setMinted(false);

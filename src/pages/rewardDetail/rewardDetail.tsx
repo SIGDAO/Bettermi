@@ -170,7 +170,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
           {/* <div className="x893-LfPhsf"></div> */}
           <div className={classNameList[1] || "goal-LfPhsf"}>
             <div className={`${classNameList[2] || "x0-ucGgAD"} inter-semi-bold-keppel-14px`}>{isGuest ? "0" : BMIRecordTimes}</div>
-            <div className={`${classNameList[3] || "x3-ucGgAD"} ${isGuest ? "inter-semi-bold-keppel-14px" : "inter-semi-bold-white-14px"}`}>/ {displayRewardDetail?.requireTimes}</div>
+            <div className={`${classNameList[3] || "x3-ucGgAD"} inter-semi-bold-white-14px`}>/ {displayRewardDetail?.requireTimes}</div>
           </div>
         </div>
       </div>

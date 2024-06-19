@@ -840,9 +840,12 @@
   margin: 0;
   text-decoration: none;
 }
+.profileBuyNft:focus-visible {
+  outline: none;
+}
 
 .profileBuyNft{ 
-  border: 1px solid;
+  border: 1px solid var(--royal-blue);
   display: flex;
   flex-direction: column;
   gap: 10px;

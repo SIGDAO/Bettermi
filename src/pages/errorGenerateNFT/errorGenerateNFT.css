@@ -53,7 +53,7 @@
   position: absolute;
   text-align: center;
   width: calc(100.00% + 2px);
-  white-space: pre;
+  white-space: pre-wrap;
 
 }
 

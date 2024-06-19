@@ -29,14 +29,28 @@ import UserInfoContainer from "./userInfoContainer";
 
 interface IHomeProps {}
 
-const slides = [
-  { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
-  // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
-  // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
-  { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
-  // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
-  // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
-];
+const checkSlides = (isGuest: boolean) => {
+  if (isGuest) {
+    return [
+      { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // { src: `${process.env.PUBLIC_URL}/img/home/Take-a-Selfie-Banner.png`, link: "/takeSelfie", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
+      { src: `${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
+    ];
+  }
+
+  return [
+    { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+    // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
+    { src: `${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
+    // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
+    // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
+  ];
+};
 
 const disableRefresh = (e: any) => {
   e.preventDefault();
@@ -76,6 +90,8 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [rewardPercentage, setRewardPercentage] = useState<string>("");
+
+  const slides = checkSlides(isGuest);
 
   useEffect(() => {
     // Add event listeners to disable refreshing

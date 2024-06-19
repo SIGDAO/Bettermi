@@ -98,7 +98,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               <div className="x893"></div>
               <div className="goal-YBUPcf goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
-                <div className={isGuest ? "x3-XEqJB9 x3 inter-semi-bold-keppel-14px" :"x3-XEqJB9 x3 inter-semi-bold-white-14px"}>/ 3</div>
+                <div className={"x3-XEqJB9 x3 inter-semi-bold-white-14px"}>/ 3</div>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               <div className="x893"></div>
               <div className="goal-hfcLyr goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiRecordTimes}</div>
-                <div className={isGuest ? "x3-eZrkM2 x3 inter-semi-bold-keppel-14px" :"x3-eZrkM2 x3 inter-semi-bold-white-14px"}>/ 60</div>
+                <div className={"x3-eZrkM2 x3 inter-semi-bold-white-14px"}>/ 60</div>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               <div className="goal-1TY7aZ goal">
                 {/* <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
                 <div className="x0 inter-semi-bold-keppel-14px">0</div>
-                <div className={isGuest ? "x3-E0cPgC x3 inter-semi-bold-keppel-14px" : "x3-E0cPgC x3 inter-semi-bold-white-14px"}>/ 50</div>
+                <div className={"x3-E0cPgC x3 inter-semi-bold-white-14px"}>/ 50</div>
               </div>
             </div>
           </div>
@@ -162,7 +162,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
               <div className="x893"></div>
               <div className="goal-hu1xkO goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
-                <div className={isGuest ? "x3-SJHvta x3 inter-semi-bold-keppel-14px" : "x3-SJHvta x3 inter-semi-bold-white-14px"}>/ 1</div>
+                <div className={"x3-SJHvta x3 inter-semi-bold-white-14px"}>/ 1</div>
               </div>
             </div>
           </div>

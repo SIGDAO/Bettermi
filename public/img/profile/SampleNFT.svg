@@ -6,6 +6,6 @@
   </defs>
   <g id="SampleNFT" stroke="#4136f1" stroke-width="1" fill="url(#pattern)">
     <rect width="152" height="217" rx="10" stroke="none"/>
-    <rect x="0.5" y="0.5" width="151" height="216" rx="9.5" fill="none"/>
+    <!-- <rect x="0.5" y="0.5" width="151" height="216" rx="9.5" fill="none"/> -->
   </g>
 </svg>
