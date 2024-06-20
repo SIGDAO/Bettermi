@@ -25,6 +25,7 @@ import { FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorag
 import { FindLatestTransactionArray } from "../../NftSystem/updateUserNftStorage";
 import { connectWallet } from "../../NftSystem/connectWallet/connectWallet";
 import { useDispatch, useSelector } from "react-redux";
+import { selectWalletNodeHost } from "../../redux/useLedger";
 
 export interface IConnectWalletProps {}
 
@@ -51,9 +52,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       if (userInfo == null) {
         alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
       }
-
-
-      const equippedBettermiNft = await checkEquippedBettermiNFT(Ledger, userInfo!.loginedAcctID);
+      const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
 
       // situation:
