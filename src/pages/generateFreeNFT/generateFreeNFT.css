@@ -24,7 +24,7 @@
   font-family: var(--font-family-inter);
   font-size: var(--font-size-xl);
   font-weight: 700;
-  left: calc((100% - 167px)/ 2);
+  left: 50%;
   letter-spacing: 0;
   line-height: 28px;
   position: absolute;
@@ -32,6 +32,7 @@
   top: 105px;
   white-space: nowrap;
   margin: 0;
+  transform: translateX(-50%);
   z-index: 200;
 }
 

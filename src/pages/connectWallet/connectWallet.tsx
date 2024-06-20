@@ -37,8 +37,6 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', "");
-  const isBMIContractBuild = useSelector(selectCurrentIsBMIContractBuild);
-  const isNFtContractBuild = useSelector(selectCurrentIsNFTContractBuild);
   const userAccountId = useSelector(accountId);
 
   // store.dispatch({ type: "USER_LOGOUT" });
@@ -54,24 +52,14 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
       }
 
-      console.log("userInfo is ", userInfo);
-      console.log("isBMIContractBuild is ", isBMIContractBuild);
-      console.log("isNFtContractBuild is ", isNFtContractBuild);
 
-
-      // if only one contract is created
-      if (isBMIContractBuild || isNFtContractBuild) {
-        console.log("only one contract is created");
-        navigate("/generateBMINFTImport")
-        return; 
-      }
-      const equippedBettermiNft = await checkEquippedBettermiNFT(Ledger,userAccountId);
+      const equippedBettermiNft = await checkEquippedBettermiNFT(Ledger, userInfo!.loginedAcctID);
 
 
       // situation:
       // all contract is created, but one or more contract still unconfirmed
       // or, not enqiuped NFT, then navigate to loadingMinting
-      if (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true || userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true || userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null || equippedBettermiNft) {
+      if (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true || userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true || userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null || !equippedBettermiNft) {
         navigate("/loadingMinting");
         return;
       }
@@ -90,7 +78,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         }
         navigate("/home");
       } else {
-        console.log("no contract is created");
+        console.log("no contract or only one contract is created");
         navigate("/connectSucceed");
       }
     } catch (error: any) {

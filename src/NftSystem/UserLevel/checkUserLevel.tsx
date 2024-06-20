@@ -33,27 +33,25 @@ export async function checkUserLevel(ledger2: any, userAccountId: string) {
 
 export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: string) {
   try {
+    console.log("userAccountId", userAccountId);
+
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-    for (var i = 0; i < messages.unconfirmedTransactions.length;i++){
-      if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-        let description = messages.unconfirmedTransactions[i].attachment.description==null?{}:JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
-        if(description.id != null){
+    for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
+      if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
+        let description = messages.unconfirmedTransactions[i].attachment.description == null ? {} : JSON.parse(messages.unconfirmedTransactions[i].attachment.description);
+        if (description.id != null) {
           const accountInfo = await ledger2.contract.getContract(description.id);
           const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
-          console.log("ipfsAddress",ipfsAddress);
+          console.log("ipfsAddress", ipfsAddress);
           const nftInfo = await fetchIPFSJSON(ipfsAddress);
-          console.log("nftInfo is",nftInfo);
-          if(nftInfo.collection.name.includes("Bettermi.io") === true){
+          console.log("nftInfo is", nftInfo);
+          if (nftInfo.collection.name.includes("Bettermi.io") === true) {
             console.log("returned true");
             return true;
           }
         }
       }
     }
-
-
-
-
 
     const account = await ledger2.account.getAccount({ accountId: userAccountId });
     const description = JSON.parse(account.description);
@@ -65,8 +63,8 @@ export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: stri
       // const text = await ipfsJson.text();
       // const nftInfo = JSON.parse(text);
       const nftInfo = await fetchIPFSJSON(ipfsAddress);
-      console.log("nftInfo is",nftInfo);
-      if(nftInfo.collection.name.includes("Bettermi.io") === true){
+      console.log("nftInfo is", nftInfo);
+      if (nftInfo.collection.name.includes("Bettermi.io") === true) {
         console.log("returned true");
         return true;
       }

@@ -151,8 +151,6 @@ const CheckSetting: React.FC = () => {
     } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
       store.dispatch({ type: "USER_LOGOUT" });
       navigate('/');
-      // return <></>;
-      // return <Navigate replace to="/"  />;
     } else {
       dispatch(profileSlice.actions.unauthenticated());
     }
@@ -160,7 +158,6 @@ const CheckSetting: React.FC = () => {
     setIsRendering(false);
   }, [currentPath, isGuest]);  
 
-  console.log("currentPath", currentPath);
   return isRendering ? <></> :  <Outlet />;
 };
 
@@ -173,6 +170,7 @@ function App() {
     document.title = titleList[location.pathname] ?? "Bettermi";
 
     if (location.pathname !== currentPath) {
+      console.log("ioijsdoifjsodifjiosd", currentPath);
       setPreviousPath(currentPath);
       setCurrentPath(location.pathname);
     }
