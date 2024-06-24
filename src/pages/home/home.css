@@ -62,18 +62,22 @@
 } */
 
 
-.bettermidapp-home-1 .missions-scroll-RoXPLo {
+.bettermidapp-home-1 .home-missions-scroll-container {
   background-color: transparent;
-  /* height: 110px; */ /* for scrolling exist */
   height: 100px;
   left: 38px;
   mix-blend-mode: normal;
-  /* overflow-x: scroll; */
-
+  overflow-x: scroll;
   overflow-y: hidden;
   position: absolute;
   top: 631px;
   width: 352px;
+}
+
+.home-missions-scroll {
+  display: flex;
+  gap: 15px;
+  width: max-content;
 }
 
 /* .x-scrolling-container {
@@ -86,55 +90,63 @@
   transform: rotate(90deg);
 } */
 
-.bettermidapp-home-1 .challenges-x9-hacks-GEWAL1 {
+.bettermidapp-home-1 .home-mission-container-inactive {
+  background: #171717CC;
+  height: 80px;
+  position: relative;
+  box-sizing: border-box;
+
+  width: 202px !important;
+  border: 1px solid #4136F1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
+.home-mission-content-inactive {
+  width: 100%;
+  height: 100%;
+  background: #171717CC;
+  display: flex;
+  gap: 10px;
+  /* opacity: 0.4; */
+}
+
+
+
+.bettermidapp-home-1 .home-mission-container {
   cursor: pointer;
   background-color: transparent;
+  display: flex;
+  gap: 10px;
   height: 80px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
   width: 202px;
 }
 
-.bettermidapp-home-1 .challenge-x9_banner-UqALvc {
+.bettermidapp-home-1 .home-challenge-image {
   background-color: transparent;
   border-radius: 6px;
   height: 100%;
-  left: 0px;
   object-fit: cover;
-  position: absolute;
-  top: 0px;
   width: 100%;
 }
 
-.bettermidapp-home-1 .challengesx-9-hacks-ewZMRw {
-  background-color: transparent;
-  height: 40px;
-  letter-spacing: 0.00px;
+.bettermidapp-home-1 .home-mission-title {
   line-height: 19px;
-  position: absolute;
-  right: 15px;
-  text-align: left;
-  top: -2px;
-  width: 97px;
+  white-space: pre-line;
 }
 
-.bettermidapp-home-1 .x1-3mins-each-ewZMRw {
-  background-color: transparent;
-  bottom: calc(35.16% - 6px);
-  height: 17px;
-  letter-spacing: 0.00px;
-  line-height: 14px;
-  position: absolute;
-  right: 15px;
-  text-align: left;
-  width: 97px;
+.home-mission-info-container {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  gap: 5px;
+  /* justify-content: space-between; */
 }
 
-.bettermidapp-home-1 .sigdao-score-ewZMRw {
-  bottom: 0px;
+.bettermidapp-home-1 .home-mission-sigdao-score {
+  position: relative;
   height: 17px;
-  right: 0px;
   width: 112px;
 }
 
@@ -162,19 +174,7 @@
   height: 54.69%;
 }
 
-.bettermidapp-home-1 .meditations-GEWAL1 {
-  background: #171717CC;
-  height: 80px;
-  left: 217px;
-  position: relative;
-  top: 0px;
-  width: 187px;
-  border: 1px solid #4136F1;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.meditations-overlay {  
+.home-locked-image-overlay {  
   position: absolute;
   width: 100%;
   height: 78px;
@@ -185,61 +185,7 @@
   /* opacity: 0.4; */
 }
 
-.home-meditation-content {
-  width: 100%;
-  height: 100%;
-  background: #171717CC;
-  /* opacity: 0.4; */
-}
 
-.bettermidapp-home-1 .meditation_banner-dLbFgX {
-  background-color: transparent;
-  border-radius: 6px;
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-}
-
-.bettermidapp-home-1 .weekly-meditation-3kbxqV {
-  background-color: transparent;
-  height: 40px;
-  letter-spacing: 0.00px;
-  line-height: 19px;
-  position: absolute;
-  right: -2px;
-  text-align: left;
-  top: -2px;
-  width: 97px;
-}
-
-.bettermidapp-home-1 .saturday-only-3kbxqV {
-  background-color: transparent;
-  bottom: calc(33.58% - 6px);
-  height: 17px;
-  letter-spacing: 0.00px;
-  line-height: 14px;
-  position: absolute;
-  right: 0px;
-  text-align: left;
-  width: 97px;
-}
-
-.bettermidapp-home-1 .sigdao-score-3kbxqV {
-  bottom: 0px;
-  height: 17px;
-  right: calc(35.93% - 17px);
-  width: 47px;
-}
-
-.bettermidapp-home-1 .x10-UyxTRp {
-  height: calc(100.00% + 2px);
-  line-height: 14px;
-  top: 2px;
-  width: 29px;
-}
 
 .bettermidapp-home-1 .signdao_tokengradient-UyxTRp {
   top: 1px;
@@ -264,10 +210,7 @@
   align-items: center;
   border-radius: 10px;
   height: 100px;
-  left: 0px;
   object-fit: cover;
-  position: absolute;
-  top: 8px;
   width: 107px;
   display:flex;
   align-items: center;
@@ -285,59 +228,7 @@
   cursor: pointer;
 }
 
-.bettermidapp-home-1 .step-counts-GEWAL1 {
-  background-color: transparent;
-  height: 80px;
-  left: 417px;
-  position: absolute;
-  top: 0px;
-  width: 187px;
-  border: 1px solid #4136F1;
-  border-radius: 5px;
-  overflow: hidden;
-}
 
-.bettermidapp-home-1 .step_count_banner-45Wblr {
-  background-color: transparent;
-  border-radius: 6px;
-  height: 100%;
-  left: 0px;
-  object-fit: cover;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-}
-
-.bettermidapp-home-1 .walking-mission-7hGHU0 {
-  background-color: transparent;
-  height: 40px;
-  letter-spacing: 0.00px;
-  line-height: 19px;
-  position: absolute;
-  right: -2px;
-  text-align: left;
-  top: -2px;
-  width: 97px;
-}
-
-.bettermidapp-home-1 .step-count-7hGHU0 {
-  background-color: transparent;
-  bottom: calc(33.58% - 6px);
-  height: 17px;
-  letter-spacing: 0.00px;
-  line-height: 14px;
-  position: absolute;
-  right: 0px;
-  text-align: left;
-  width: 97px;
-}
-
-.bettermidapp-home-1 .sigdao-score-7hGHU0 {
-  bottom: 0px;
-  height: 17px;
-  right: calc(35.93% - 17px);
-  width: 47px;
-}
 
 .bettermidapp-home-1 .x10-SMcg87 {
   height: calc(100.00% + 2px);
@@ -412,8 +303,8 @@
 }
 
 .bettermidapp-home-1 .ic_reservation-nXPAX5 {
-  height: 20px;
-  width: 18px;
+  width: 26px;
+  height: 21px;
 }
 
 .bettermidapp-home-1 .ic_reservation-p9BhAR {
@@ -468,8 +359,8 @@
 }
 
 .bettermidapp-home-1 .ic_leaderboard-IgToMG {
-  height: 21px;
-  width: 16px;
+  width: 22px;
+  height: 24px;
 }
 
 .bettermidapp-home-1 .ic_leaderboard-6DxnCN {
@@ -500,6 +391,8 @@
   position: absolute;
   top: 369px;
   width: 326px;
+  display: flex;
+  gap: 21px
 }
 
 .bettermidapp-home-1 .special-scroll-hH9Cww::-webkit-scrollbar {
@@ -513,8 +406,8 @@
   height: 185px;
   mix-blend-mode: normal;
   overflow: hidden;
-  position: absolute;
-  right: 0px;
+  /* position: absolute;
+  right: 0px; */
   width: 250px;
   display: flex;
   flex: 1;
@@ -777,11 +670,53 @@ color
 
 .bettermidapp-home-1 .greetings-RoXPLo {
   background-color: transparent;
-  height: 115px;
+  height: 113px;
   left: 32px;
   position: absolute;
-  top: 50px;
-  width: 316px;
+  top: 58px;
+  width: 331px;
+  display: flex;
+  gap: 17px;
+  /* justify-content: space-between; */
+}
+
+.home-user-info-container {
+  width: 209px;
+  height: 113px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 8px;
+}
+
+.home-info-first-row {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.home-info-second-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hello-msg-container {
+  display: flex;
+  align-items: center;
+}
+
+.home-user-info-nav {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+}
+
+.home-sigdao-display-container {
+  display: flex;
+  height: 22px;
+  align-items: center;
+  gap: 10px;
 }
 
 .bettermidapp-home-1 .title-2ZgxSS {
@@ -792,109 +727,83 @@ color
   font-size: var(--font-size-xxxxxl);
   font-style: normal;
   font-weight: 600;
-  height: 36px;
-  letter-spacing: 0.00px;
-  line-height: 20px;
-  position: absolute;
-  right: calc(29.94% - 42px);
   text-align: left;
-  top: 12px;
   white-space: nowrap;
-  width: 139px;
 }
 
 .bettermidapp-home-1 .lv_-reward-2ZgxSS {
   background-color: transparent;
-  bottom: calc(40.62% - 8px);
   height: 19px;
-  position: absolute;
-  right: 0px;
   width: 192px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .bettermidapp-home-1 .lv-1-b5x63m {
-  background-color: transparent;
-  height: calc(100.00% + 2px);
-  left: 0px;
-  letter-spacing: 0.00px;
-  line-height: 15px;
-  position: absolute;
   text-align: center;
-  top: 2px;
   white-space: nowrap;
-  width: 32px;
 }
 
 .bettermidapp-home-1 .nft-reward-10-b5x63m {
-  background-color: transparent;
-  height: calc(100.00% + 2px);
-  letter-spacing: 0.00px;
-  line-height: 15px;
-  position: absolute;
-  right: -2px;
   text-align: center;
-  top: 2px;
   white-space: nowrap;
-  width: 144px;
 }
 
 .bettermidapp-home-1 .seperate-line-b5x63m {
   background-color: transparent;
-  height: calc(100.00% - 4px);
-  left: 20.47%;
+  height: 15px;
   object-fit: cover;
-  position: absolute;
-  top: 2px;
   width: 1px;
+}
+
+.home-user-icon-container {
+  display: flex;
+  width: 107px;
+  height: 100px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  overflow: hidden;
 }
 
 
 .bettermidapp-home-1 .nft_-avatar-2ZgxSS {
   background-color: transparent;
   border-radius: 10px;
-  height: 155px;
-  left: 0px;
+  /* height: 155px; */
   object-fit: cover;
-  position: absolute;
   cursor: pointer;
-  top: 8px;
   width: 107px;
-  clip: rect(0, 110px, 100px, 0);
+  
+  /* clip: rect(0, 110px, 100px, 0); */
 }
 
 .bettermidapp-home-1 .ic_next-2ZgxSS {
   background-color: transparent;
   cursor: pointer;
   height: 44px;
-  position: absolute;
-  left: 220px;
-  top: 0px;
-  width: 20px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bettermidapp-home-1 .ic_chevron_right_24px-LRB8nH {
   background-color: transparent;
   height: 12px;
-  left: calc(49.19% - 4px);
   object-fit: cover;
-  position: absolute;
-  top: calc(50.00% - 6px);
   width: 7px;
 }
 
 .bettermidapp-home-1 .score-bar_3-2ZgxSS {
   background-color: transparent;
-  bottom: 1px;
   height: 22px;
-  position: absolute;
-  right: calc(20.80% - 14px);
   width: 69px;
 }
 
 .bettermidapp-home-1 .sigdao-score-iPTNDG {
   height: 22px;
-  right: 0px;
-  top: calc(50.00% - 11px);
   width: 69px;
 }
 
@@ -906,7 +815,6 @@ color
 }
 
 .bettermidapp-home-1 .signdao_tokengradient-kxjIEt {
-  top: 0px;
   width: 22px;
 }
 
@@ -921,20 +829,6 @@ color
 .bettermidapp-home-1 .x880-e5x8kp {
   height: 54.68%;
 }
-
-.bettermidapp-home-1 .sigdao-2ZgxSS {
-  background-color: transparent;
-  bottom: -2px;
-  height: 21px;
-  left: calc(49.21% - 31px);
-  letter-spacing: 0.00px;
-  line-height: 15px;
-  position: absolute;
-  text-align: center;
-  white-space: nowrap;
-  width: 64px;
-}
-
 .bettermidapp-home-1 .bars-status-bar-i-phone-light-RoXPLo {
   background-color: transparent;
   height: 41px;
@@ -1087,9 +981,6 @@ color
 .bettermidapp-home-1 .small-image {
   background-color: transparent;
   height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
   width: 80px;
 }
 
@@ -1198,20 +1089,14 @@ color
 }
 
 .home-ai-select-icon {
-  position: absolute;
-  top: 12px;
-  left: 257px;
-  width: 24px;
+  width: 56px;
   height: 20px;
+  clip: rect(0, 24px, 20px, 0)
 }
 
 .home-setting-icon {
-  position: absolute;
-
   width: 20px;
   height: 20px;
-  top: 12px;
-  left: 297px
 }
 
 .nav-to-take-selfie-content {
@@ -1229,4 +1114,14 @@ color
   top: 327px;
   right: 62px;
   color: #5146ff;
+}
+
+.guest-user-icon {
+  width: 100px;
+}
+
+.home-ai-select-icon-container {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
 }

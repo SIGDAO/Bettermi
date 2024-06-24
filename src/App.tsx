@@ -1,14 +1,13 @@
 // package
 import React from "react";
 import { useEffect, useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Provider as ReduxProvider } from "react-redux";
 import { Fragment } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { loadState, saveState } from "./redux/sessionStorage";
 import { createTheme, ThemeProvider } from "@mui/material";
-
 
 // setting
 import { store } from "./redux/reducer";
@@ -51,6 +50,12 @@ import OtherUserProfile from "./pages/leaderboard/otherUserProfile";
 import RoleRoute from "./route/roleRoute";
 import AllNftList from "./pages/allNftList/allNftList";
 import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
+import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
+
+//Testing
+import ReferralCode from "./pages/referralCode/referralCode";
+import DiscordVerification from "./pages/discordVerification/discordVerification";
+import ReferralCodeTesting from "./pages/referralCodeTesting.tsx/referralCodeTesting";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -66,7 +71,7 @@ const theme = createTheme({
 
 const titleList = {
   "/": "Bettermi",
-  "/connectWallet": "Connect Wallet - Bettermi",
+  // "/connectWallet": "Connect Wallet - Bettermi",
   "/generateBMI": "Generate BMI - Bettermi",
   "/takeSelfie": "Take Selfie - Bettermi",
   "/connectSucceed": "Connect Succeed - Bettermi",
@@ -89,37 +94,81 @@ const titleList = {
   "/aiCoachSelect": "AI Coach Select - Bettermi",
   "/aiCoachDetail": "AI Coach Detail - Bettermi",
   "/errorGenerateNFT": "Error Generate NFT - Bettermi",
+  "/errorTakeSelfieNoFace": "Error Take Selfie - Bettermi",
+  "/errorTakeSelfieTooManyFace": "Error Take Selfie - Bettermi",
   "/errorTakeSelfie": "Error Take Selfie - Bettermi",
   "/errorCustomizeYourProfile": "Error Customize Your Profile - Bettermi",
   "/loadingMinting": "Loading Minting - Bettermi",
   "/setting": "Setting - Bettermi",
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
+  "/referralCode": "NFT referral code",
 };
 
-  
+const guestAllowedPath = [
+  // "/connectWallet",
+  "/home",
+  "/takeSelfie",
+  "/generateBMIDaily",
+  "/profile",
+  "/referralCode",
+  "/allNftList",
+  "/setting",
+  "/reward",
+  "/marketplace",
+  "rewardDetail",
+  "/ReferralCodeTesting",
+  "/rewardDetail",
+  "/featureMissions",
+  "/missionChallenge",
+  "/challengeCountdown",
+  "/challengeCompleted",
+  "/leaderboard",
+  "/selfieToEarn",
+  "/OtherUserProfile",
+  "/aiCoachSelect",
+  "/indexMyNftList",
+  // error page
+  "/errorGenerateNFT",
+  "/errorTakeSelfieNoFace",
+  "/errorTakeSelfieTooManyFace",
+  "/errorTakeSelfie",
+  "/errorCustomizeYourProfile",
+  "/errorWalletNotConnected",
+  "/errorNotEnoughFunds",
+];
 
-const CheckStore: React.FC = () => {
+const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
+  if (currentPath === "/") return true;
+
+  return guestAllowedPath.some((path) => currentPath.startsWith(path));
+};
+
+const CheckSetting: React.FC = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currentPath: string = location.pathname;
-  const { appName, Wallet, Ledger } = useContext(AppContext);
-  const fetchSetting = async () => {}
-  // try {
-  //   return <Outlet />;
-  // } catch (error) {
-  //   console.log(error);
-  //   return <Outlet />;
-  // }
+  const [isRendering, setIsRendering] = useState<boolean>(true);
+  const { Wallet } = useContext(AppContext);
+  const isGuest = useSelector(selectCurrentIsGuest);
 
+  // check if user is authenticated
+  // or user is in guest allowed path
+  // or user is guest
+  useEffect(() => {
+    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+      dispatch(profileSlice.actions.authenticated());
+    } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
+      store.dispatch({ type: "USER_LOGOUT" });
+      navigate('/');
+    } else {
+      dispatch(profileSlice.actions.unauthenticated());
+    }
 
-  if (currentPath === "/" || currentPath === "/connectWallet") {
-    return <Outlet />;
-  }
+    setIsRendering(false);
+  }, [currentPath, isGuest]);  
 
-  if (Wallet.Extension.connection == null) {
-    return <Navigate to="/" />
-  }
-
-  return sessionStorage.getItem("state") === null ? <Navigate to="/" /> : <Outlet />;
+  return isRendering ? <></> :  <Outlet />;
 };
 
 function App() {
@@ -129,15 +178,13 @@ function App() {
   const location = useLocation();
   useEffect(() => {
     document.title = titleList[location.pathname] ?? "Bettermi";
-  }, [location]);
 
-
-  useEffect(() => {
     if (location.pathname !== currentPath) {
+      console.log("ioijsdoifjsodifjiosd", currentPath);
       setPreviousPath(currentPath);
       setCurrentPath(location.pathname);
     }
-  }, [location.pathname]);
+  }, [location, location.pathname]);
 
   return (
     // path
@@ -148,25 +195,25 @@ function App() {
             <Route
               element={
                 <Fragment>
-                  <CheckStore />
+                  <CheckSetting />
                   <Analytics />
                 </Fragment>
               }
             >
               {/* all user */}
-              <Route path="/" element={<LogoPage />} />
+              {/* <Route path="/" element={<LogoPage />} /> */}
               <Route path="*" element={<Navigate to="/home" />} />
-              <Route path="/connectWallet" element={<ConnectWallet />} />
+              <Route path="/" element={<ConnectWallet />} />
               {/* need to have its own logined setting */}
               <Route path="/takeSelfie" element={<TakeSelfie />} />
               <Route path="/loadingMinting" element={<LoadingMinting pathname="/loadingMinting" />} />
               {/* user that not yet created acct */}
               {/* <Route element={<RoleRoute role="unregisteredUser" />}> */}
-                <Route path="/connectSucceed" element={<ConnectSucceed />} />
-                <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
-                <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
-                {/* the login for this page should be if no name then can access, if have name cannot access */}
-                <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
+              <Route path="/connectSucceed" element={<ConnectSucceed />} />
+              <Route path="/generateBMINFTImport" element={<GenerateBMINFTImport />} />
+              <Route path="/generateFreeNFT" element={<GenerateFreeNFT />} />
+              {/* the login for this page should be if no name then can access, if have name cannot access */}
+              <Route path="/customizeYourProfile" element={<CustomizeYourProfile />} />
               {/* </Route> */}
               {/* user that created acct */}
               {/* <Route element={<RoleRoute role="registeredUser" />}> */}
@@ -179,30 +226,42 @@ function App() {
                 <Route path="/missionChallenge" element={<MissionChallenge />} />
                 {/* account that can only access in certain time */}
                 <Route path="/myNftList" element={<MyNftList/>} />
-                <Route path = "/allNftList" element={<IndexAllNftList/>} />
+                <Route path="/allNftList" element={<IndexAllNftList/>} />
                 <Route path="/indexMyNftList" element={<IndexMyNftList />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/rewardDetail">
                   <Route path=":id" element={<RewardDetail />} />
                 </Route>
                 <Route path="/selfieToEarn" element={<SelfieToEarn />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<Profile previousPath={previousPath} />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/previewNFTImg" element={<Testing />} />
                 <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
                 <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
-                <Route path="/aiCoachDetail">
+                <Route path="/aiCoachDetail" >
                   <Route path=":id" element={<AiCoachDetail />} />
                 </Route>
                 <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
+                <Route path="/errorTakeSelfieNoFace" element={<ErrorGenerateNFT />} />
+                <Route path="/errorTakeSelfieTooManyFace" element={<ErrorGenerateNFT />} />
                 <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
                 <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
                 <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
+                <Route path="/errorNotEnoughFunds" element={<ErrorGenerateNFT />} />
                 <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
                 <Route path="/setting" element={<Setting />} />
                 <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/OtherUserProfile" element={<OtherUserProfile />} />
+                <Route path="/referralCode" element = {<ReferralCode/>}>
+                  <Route path=":referralCode" element={<ReferralCode />} />
+                </Route>
+                <Route path="/discordVerification" element = {<DiscordVerification/>}>
+                  <Route path=":referralCode" element={<DiscordVerification />} />
+                </Route>
+                <Route path="/ReferralCodeTesting" element = {<ReferralCodeTesting/>}>
+                  <Route path=":referralCode" element={<ReferralCodeTesting />} />
+                </Route>
               </Route>
             {/* </Route> */}
           </Routes>

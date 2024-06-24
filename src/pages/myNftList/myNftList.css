@@ -860,6 +860,14 @@ opacity: 0.5;
   width:100%;
 }
 
+.myNftBottom-guest {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+
+}
+
 .myNftButtomArrow{
   align-self: center;
   width:21px;

@@ -12,6 +12,7 @@ import { useLedger } from "../../redux/useLedger";
 import { useEffect } from "react";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 interface IRewardProps {}
 
@@ -24,8 +25,16 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
+  const isGuest = useSelector(selectCurrentIsGuest);
   
   useEffect(() => {
+    if (isGuest) {
+      setBmiRecordTimes(0);
+      setNftAcquireNumber(0);
+      setBmiHitHealthyNumber(0);
+      return;
+    }
+
     getBMIRecordDay(tempAccountId, Ledger2)
       .then((res) => {
         setBmiRecordTimes(res);
@@ -72,7 +81,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-rewards-2">
-        <ShortTitleBar title="Redeem Rewards" />
+        <ShortTitleBar title="Redeem Rewards" aiCoach={true} setting={true} />
         {/* <img className="bg-kQlY8S bg" src={`${process.env.PUBLIC_URL}/img/reward/bg-14-1x-png@1x.png`} alt="BG" /> */}
         {/* <div className="reward-list-container"> */}
           {/* {redeemCard} */}
@@ -85,11 +94,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-YBUPcf goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
-                <div className="x3-XEqJB9 x3 inter-semi-bold-white-14px">/ 3</div>
+                <div className={"x3-XEqJB9 x3 inter-semi-bold-white-14px"}>/ 3</div>
               </div>
             </div>
           </div>
@@ -102,11 +111,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-hfcLyr goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiRecordTimes}</div>
-                <div className="x3-eZrkM2 x3 inter-semi-bold-white-14px">/ 60</div>
+                <div className={"x3-eZrkM2 x3 inter-semi-bold-white-14px"}>/ 60</div>
               </div>
             </div>
           </div>
@@ -125,12 +134,12 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
                 {/* <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
                 <div className="x0 inter-semi-bold-keppel-14px">0</div>
-                <div className="x3-E0cPgC x3 inter-semi-bold-white-14px">/ 50</div>
+                <div className={"x3-E0cPgC x3 inter-semi-bold-white-14px"}>/ 50</div>
               </div>
             </div>
           </div>
@@ -149,11 +158,11 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             s</div>
-            <div className="goal-data">
+            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
               <div className="x893"></div>
               <div className="goal-hu1xkO goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>
-                <div className="x3-SJHvta x3 inter-semi-bold-white-14px">/ 1</div>
+                <div className={"x3-SJHvta x3 inter-semi-bold-white-14px"}>/ 1</div>
               </div>
             </div>
           </div>

@@ -54,13 +54,8 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
   }  
 
   const handleRandomQuestion = () => {
-    if (id === "1") {
-      setMsgInput(generateMimiMessage)    
-    }
-    
-    if (id === "2") {
-      setMsgInput(generateDotIoMessage)
-    }
+    if (id === "1") setMsgInput(generateMimiMessage);
+    if (id === "2") setMsgInput(generateDotIoMessage);
   }
 
   const handleUserSendMsg = async () => {
@@ -143,7 +138,7 @@ const AiCoachDetail: React.FunctionComponent<IAiCoachDetailProps> = (props) => {
     <div className="screen">
       <div className="bettermidapp-ai-coach-mimi">
         <img className="ai-chatbot_-mimi-QyTK2J" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/${displayCoach.coachImagePath}`} alt="Ai Chatbot_Mimi" />
-        <ShortTitleBar title="" aiCoach={false} transparent={true} />
+        <ShortTitleBar title="" setting={true} aiCoach={false} transparent={true} />
         <div className="coach-chat-container">
           <div className="time-indicator">
             <img className="x15-QfL0xm" src={`${process.env.PUBLIC_URL}/img/aiCoachDetail/file---16@1x.png`} alt="15" />

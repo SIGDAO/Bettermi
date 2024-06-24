@@ -3,7 +3,7 @@
 .bettermidapp-challenge-finished-1 {
   /* background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
   /* background-color: rgba(255,255,255,1.0); */
-  height: 827px;
+  min-height: 730px;
   overflow: hidden;
   overflow-x: hidden;
   position: relative;
@@ -175,10 +175,12 @@
   background-color: transparent;
   cursor: pointer;
   height: 56px;
-  left: 71px;
   position: absolute;
   top: 671px;
   width: 248px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
 
 
 }
@@ -287,4 +289,22 @@
   left: 0px;
   top: 0px;
   width: 100%;
+}
+
+.bg-locked-challenge-completed {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(-155deg,  rgba(34, 29, 75, 0.5) 0%, rgba(23, 23, 23, 0.5) 100%);
+
+}
+
+.earn-sigdao-challenge-completed {
+  position: absolute;
+  top: 628px;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, 0%);
 }

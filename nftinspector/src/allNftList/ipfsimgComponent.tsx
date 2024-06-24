@@ -8,20 +8,24 @@ interface IPFSImageComponentProps {
   style?: React.CSSProperties;
 }
 
+const domains = [
+  // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
+  // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+  // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
+  `https://ipfs.io/ipfs/${imgAddress}`,
+  `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imageAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
+  // `https://${imgAddress}.ipfs.dweb.link/`,
+  // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
+  // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
+];
+
+
 const IPFSImageComponent: React.FC<IPFSImageComponentProps> = ({ imgAddress, onClick, className, alt = "NFT", style }) => {
   const domains = [
     `https://ipfs.io/ipfs/${imgAddress}`,
+
   ];
   if (className === "allNftImage") {
-    const domains = [
-      // `https://pfs.eth.aragon.network/ipfs/${imgAddress}`,
-      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-      // `https://video.oneloveipfs.com/ipfs/${imgAddress}`,
-      `https://ipfs.io/ipfs/${imgAddress}`,
-      // `https://${imgAddress}.ipfs.dweb.link/`,
-      // `https://cloudflare-ipfs.com/ipfs/${imgAddress}`,
-      // `https://gateway.pinata.cloud/ipfs/${imgAddress}`,
-    ];
   }
   const [src, setSrc] = useState(domains[0]);
   const [currentDomainIndex, setCurrentDomainIndex] = useState(0);

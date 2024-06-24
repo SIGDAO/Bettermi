@@ -30,16 +30,8 @@ const Chatbox: React.FunctionComponent<IChatboxProps> = ({ text, time, isUser, i
       streamPath: streamPath,
     }
 
-    console.log(changedObject, "testtest test");
-
-    if (pageId === "1") {
-
-      dispatch(aiCoachSlice.actions.changeMimiMsg(changedObject))
-    }
-    if (pageId === "2") {
-
-      dispatch(aiCoachSlice.actions.changeIoMsg(changedObject))
-    }
+    if (pageId === "1") dispatch(aiCoachSlice.actions.changeMimiMsg(changedObject))
+    if (pageId === "2") dispatch(aiCoachSlice.actions.changeIoMsg(changedObject))
 
   }
 

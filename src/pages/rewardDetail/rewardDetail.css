@@ -213,6 +213,8 @@
   position: absolute;
   top: 555px;
   width: 65px;
+  background: #171717;
+  border-radius: 5px;
 }
 
 .bettermidapp-rewards-redeem-master-collector-1 .x893-LfPhsf {
@@ -247,6 +249,8 @@
   white-space: nowrap;
   width: 11px;
 }
+
+
 
 .bettermidapp-rewards-redeem-master-collector-1 .x3-ucGgAD {
   background-color: transparent;

@@ -96,3 +96,14 @@
   margin-top: 15px;
   cursor: pointer;
 }
+
+.all-nft-list-connect-wallet-button {
+  width: 100px;
+  height: 31px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  cursor: pointer;
+}

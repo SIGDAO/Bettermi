@@ -15,6 +15,7 @@ import { userRanking } from "../../redux/userRanking";
 import { userRankingListRedux } from "../../redux/userRanking";
 import { useNavigate } from "react-router-dom";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { selectCurrentIsGuest } from "../../redux/profile";
 
 type Props = {};
 
@@ -26,6 +27,7 @@ const Leaderboard = (props: Props) => {
   const [isLeaderBoardLoading, setIsLeaderBoardLoading] = React.useState<boolean>(true);
   const userRankingListFromRedux = useSelector(userRankingListRedux);
   const navigate = useNavigate();
+  const isGuest = useSelector(selectCurrentIsGuest);
 
 
   const imageLoadForTop3 = (index: number) => {
@@ -141,6 +143,7 @@ const Leaderboard = (props: Props) => {
   };
 
   useEffect(() => {
+
     if (nftLoaded.current === true) {
 
     } else {
@@ -190,7 +193,7 @@ const Leaderboard = (props: Props) => {
               <div className="ic_settings_24px"></div>
             </div>
             <div className="overlap-group-leader7">
-              <img className="photo" src="img/leaderboard/Leaderboard_Banner_test.png" alt="Photo" />
+              <img className="photo" src={`${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`} alt="Photo" />
               <div className="leaderboard-top3">
                 {Top3displayContainer(1)}
                 {Top3displayContainer(0)}
@@ -199,50 +202,6 @@ const Leaderboard = (props: Props) => {
             </div>
             <div className="x26">
               {leaderBoardBanner()}
-              {/* <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-3 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-4 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-5 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-6 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div> */}
             </div>
           </div>
         </>

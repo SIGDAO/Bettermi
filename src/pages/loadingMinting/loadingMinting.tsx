@@ -92,20 +92,25 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     } catch (error) {
       try {
         const bmiEncrypteddata = bmiContract.ats[0].description;
-
+        console.log("bmiEncryptedData is",bmiEncrypteddata);
         description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-          data: bmiEncrypteddata,
+          data: [bmiEncrypteddata],
         })
-        description = description.data
+        console.log("description before equalling is",description);
+        description = description.data.data;
+        console.log("description is",description)
       } catch (error) {
         alert("Cannot fetch the record, please contact core team through discord!")
         navigate('/')
       }
     }
 
-
+    console.log("description is",description);
+    console.log("description[0] is",description[0]);
+    console.log("description.gender is",description[0].gender);
+    console.log("description.gender.includes is",description[0].gender.includes("Female"));
     var gender = "Male";
-    if (description.gender.includes("Female")) {
+    if (description[0].gender.includes("Female")) {
       gender = "Female";
     }
     if (gender === "Male") {

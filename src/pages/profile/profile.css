@@ -7,35 +7,36 @@
   display: flex;
   justify-content: center;
   overflow: hidden auto;
+  min-height: 100vh;
   width: 390px;
 }
 
-.bettermidapp-profile-3 .overlap-group5 {
-  align-items: flex-end;
-  /* background-image: url(../img/bg-3@1x.png); */
-  background-position: 50% 50%;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 40px;
-  margin-top: -47.48px;
-  /* : 810px; */
-  padding: 0px 23px;
-  padding-top: 185px;
-  width: 480px;
-  z-index: 1;
-  overflow-y:auto;
-  overflow-x: hidden;
-}
 
 .overlap-design-layout {
   display: flex;
   flex-direction: column;
   justify-content: start;
   gap: 68px;
-  min-height: 674px;
+  /* min-height: 674px; */
+  margin-top: 147px;
+  margin-bottom: 105px;
   align-items: center;
+}
+
+.profile-guest-user-info-image-container {
+  position: absolute;
+  top: -37.5px;
+  width: 80px;
+  height: 75px;
+  overflow: hidden;
+}
+
+.profile-guest-user-info-image {
+  background-color: transparent;
+  border-radius: 10px;
+  object-fit: cover;
+  cursor: pointer;
+  width: 80px;
 }
 
 .bettermidapp-profile-3::-webkit-scrollbar {
@@ -48,11 +49,9 @@
 .nft_-avatar-2ZgxSS {
   background-color: transparent;
   border-radius: 10px;
-  height: calc(100.00% - 8px);
+  /* height: calc(100.00% - 8px); */
   left: 0px;
   object-fit: cover;
-  position: absolute;
-  top: 8px;
   cursor: pointer;
   width: 107px;
 }
@@ -141,7 +140,23 @@
   width: 30px;
 }
 
-.profile-description-bg {
+.profile-description-guest-bg {
+  width: 358px;
+  padding: 64px 22px 135px 22px;
+  background: var(--woodsmoke);
+  border: 1px solid var(--royal-blue);
+  border-radius: 20px;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-description-login-user-bg {
   /* height: 261px; */
   width: 358px;
   padding: 60px 22px 43px 22px;
@@ -239,10 +254,35 @@
   width: 389px;
 }
 
-.bettermidapp-profile-3 .icon-arrow-left-1-popup {
-  height: 16px;
-  object-fit: cover;
-  width: 16px;
+.edit-profile-popup-window-title-container {
+  width: 100%;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--royal-blue);
+  gap: 20px;
+}
+
+.edit-profile-popup-window-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20.5px 16px 58px 16px;
+}
+
+.bettermidapp-profile-3 .icon-arrow-left-popup-container {
+  /* align-items: flex-start; */
+  display: flex;
+  /* height: 44px;
+  min-width: 44px; */
+  top: -40px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  /* width: 16px; */
 }
 
 .bettermidapp-profile-3 .seperat-line-1 {
@@ -613,15 +653,6 @@
   width: 75px;
 }
 
-.bettermidapp-profile-3 .icon-arrow-left-3-popup {
-  align-items: flex-start;
-  display: flex;
-  height: 44px;
-  min-width: 44px;
-  padding: 14.0px 14.0px;
-  margin-left: 16px;
-
-}
 
 .bettermidapp-profile-3 .x3::-webkit-scrollbar {
   display: none;
@@ -665,6 +696,20 @@
   padding: 13.5px 48px;
   position: absolute;
   bottom: -28px;
+  cursor: pointer;
+}
+
+.bettermidapp-profile-3 .button_nft-guest-collections {
+  align-items: flex-end;
+  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
+  border-radius: 10px;
+  box-shadow: 0px 15px 30px #1466cc29;
+  display: flex;
+  height: 56px;
+  justify-content: flex-end;
+  min-width: 248px;
+  padding: 13.5px 48px;
+  cursor: pointer;
 }
 
 .bettermidapp-profile-3 .profile-content {
@@ -795,9 +840,12 @@
   margin: 0;
   text-decoration: none;
 }
+.profileBuyNft:focus-visible {
+  outline: none;
+}
 
 .profileBuyNft{ 
-  border: 1px solid;
+  border: 1px solid var(--royal-blue);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1002,11 +1050,11 @@
 
 
 .bettermidapp-profile-3 .edit-profile-layer {
-  background-color: #0d0d0dcb;
+  /* background-color: #0d0d0dcb; */
   display: flex;
   flex-direction: column;
   gap: 28.7px;
-  height: 844px;
+  /* height: 844px; */
   /* left: 45px; */
   position: absolute;
   /* top: 47px; */
@@ -1020,29 +1068,45 @@
   margin-top: 44px;
 } */
 
-.bettermidapp-profile-3 .icon-arrow-left-popup {
+.bettermidapp-profile-3 .icon-arrow-left-popup-image {
   height: 16px;
   object-fit: cover;
   width: 16px;
-  cursor: pointer;
 } 
 
 .bettermidapp-profile-3 .edit-profile {
-  align-items: flex-start;
   display: flex;
   flex: 1;
-  margin-bottom: 116.7px;
-  margin-left: 28.8px;
-  margin-right: 28.8px;
-  min-width: calc(100.00% - 58px);
+  height: max-content;
+
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* margin-bottom: 116.7px; */
+  /* margin-left: 28.8px;
+  margin-right: 28.8px; */
+  /* min-width: calc(100.00% - 58px); */
 }
 
-.bettermidapp-profile-3 .overlap-group-1-popup {
-  height: 643px;
-  margin-left: -45px;
-  margin-top: -27.0px;
-  position: relative;
-  width: 422px;
+.edit-profile-popup-window-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bettermidapp-profile-3 .edit-profile-popup-window-container {
+  width: 332px;
+  min-height: 583px;
+  background: transparent linear-gradient(150deg, #221D4B 0%, #171717 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px #4136F1;
+  border: 1px solid #4136F1;
+  flex-direction: column;
+  border-radius: 13px;
+  display: flex;
+  gap: 0px;
+  flex-direction: column;
 }
 
 .bettermidapp-profile-3 .seperate-line {
@@ -1251,11 +1315,12 @@
   display: flex;
   height: 56px;
   justify-content: flex-end;
-  left: 87px;
   min-width: 248px;
   padding: 13.5px 104px;
   position: absolute;
-  top: 582px;
+  bottom: -28px;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 .bettermidapp-profile-3 .continue-1 {
@@ -1303,8 +1368,9 @@
   scrollbar-width: none;  /* Firefox */
 }
 .copied-alert {
-  width: 200px;
-  z-index: 999;
+  min-width: 200px;
+  z-index: 3000;
+  white-space: pre;
   position: absolute;
   top: 100px;
   background-color: rgb(13 13 13) !important;
@@ -1431,4 +1497,14 @@
   /* top: 100px; */
   /* left: 52px; */
   height: 147px;
+}
+
+.profile-guest-user-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -28px;
 }

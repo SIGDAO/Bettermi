@@ -9,6 +9,7 @@ import './input.css'
 interface IRandomGenNameInputProps {
   name : string;
   setName : React.Dispatch<React.SetStateAction<string>>;
+  width? : number;
 }
 
 interface ICustomTextAreaProps {

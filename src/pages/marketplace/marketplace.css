@@ -160,9 +160,13 @@
   width: calc(100.00% - 25px);
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-PbMWvx {
-  left: 0px;
+.reward-card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: fit-content;
 }
+
 
 .bettermidapp-marketplace-1 .master-collector-YV3xtK {
   background-color: transparent;
@@ -209,10 +213,6 @@
   width: 20px;
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-dMXoGx {
-  cursor: pointer;
-  left: 350px;
-}
 
 .bettermidapp-marketplace-1 .selfie-champion-gKPNC7 {
   background-color: transparent;
@@ -256,11 +256,6 @@
 
 .bettermidapp-marketplace-1 .x3-KUFXm3 {
   width: 29px;
-}
-
-.bettermidapp-marketplace-1 .rewards-cards-YuvWOM {
-  cursor: pointer;
-  left: 700px;
 }
 
 .bettermidapp-marketplace-1 .social-butterfly-00FLo4 {
@@ -307,17 +302,9 @@
   width: 28px;
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-DNKKjx {
-  cursor: pointer;
-  left: 1050px;
-  background-color: #0D0D0D;
-}
 
 .rewards-cards-disable-content {
   opacity: 0.5;
-  height: 100%;
-  width: 100%;
-
 }
 
 .bettermidapp-marketplace-1 .elite-challenger-VtU7WE {
@@ -502,15 +489,6 @@
   position: absolute;
 }
 
-.bettermidapp-marketplace-1 .ic_chevron_right_24px {
-  background-color: transparent;
-  height: 12px;
-  left: calc(49.19% - 4px);
-  object-fit: cover;
-  position: absolute;
-  top: calc(50.00% - 6px);
-  width: 7px;
-}
 
 
 .bettermidapp-marketplace-1 .nft_-avatar {
@@ -544,11 +522,16 @@
 .bettermidapp-marketplace-1 .rewards-cards {
   background-color: #0D0D0D;
   height: 150px;
-  position: absolute;
-  top: 0px;
+  /* position: absolute;
+  top: 0px; */
   width: 340px;
   border: 1px solid #4136F1;
   border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 21.5px 20.5px;
+  position: relative;
 }
 
 .bettermidapp-marketplace-1 .see-all {
@@ -632,4 +615,71 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.marketplace_ic_next {
+  height: 30px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute;
+  bottom: 17.5px;
+  right: 22px; */
+
+}
+
+.bettermidapp-marketplace-1 .marketplace_ic_chevron_right_24px {
+  background-color: transparent;
+  height: 12px;
+  object-fit: cover;
+  width: 7px;
+}
+
+.marketplace-rewards-information {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rewards-goal {
+  display: flex;
+  width: 65px;
+  height: 35px;
+  background: #171717;
+  flex-direction: row;
+  gap: 4.5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketplace-rewards-image-container {
+  width: 107px;
+  height: 107px;
+  /* overflow: hidden; */
+  justify-content: center;
+  align-items: center;
+}
+
+.marketplace-rewards-image-container-border {
+  width: 107px;
+  height: 107px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--royal-blue);
+
+}
+
+.marketplace-rewards-image {
+  width: 107px;
+  height: 107px;
+  object-fit: cover;
+}
+
+.marketplace-rewards-goal-container {
+  display: flex;
+  flex-direction: row;
+  gap: 66.5px;
 }

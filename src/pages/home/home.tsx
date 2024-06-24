@@ -4,8 +4,8 @@ import "./home.css";
 import { CenterLayout } from "../../components/layout";
 import MenuBar from "../../components/menuBar";
 import { useSelector } from "react-redux";
-import { selectCurrentUsername } from "../../redux/profile";
-import {  accountPublicKey, accountToken } from "../../redux/account";
+import { selectCurrentIsGuest, selectCurrentUsername } from "../../redux/profile";
+import { accountPublicKey, accountToken } from "../../redux/account";
 import { store } from "../../redux/reducer";
 import { useState } from "react";
 import { LedgerClientFactory } from "@signumjs/core";
@@ -17,113 +17,121 @@ import { NavigateToTakeSelfieButton } from "../../components/button";
 import ImageSlider from "./Carousel";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
-import {  IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
+import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import UserIcon from "../../components/loadUserIcon";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { convertWordToNumber } from "../../NftSystem/Reward/getRewardPercentage";
 import { reEquipNft } from "../../NftSystem/displayNft/reequipNft";
 import { getApiUrls } from "../../components/constants/constant";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
+import HomeMissionList from "./horzontalScrollContainer";
+import UserInfoContainer from "./userInfoContainer";
 
 interface IHomeProps {}
 
-const Home: React.FunctionComponent<IHomeProps> = (props) => {
-  const slides = [
+const checkSlides = (isGuest: boolean) => {
+  if (isGuest) {
+    return [
+      { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // { src: `${process.env.PUBLIC_URL}/img/home/Take-a-Selfie-Banner.png`, link: "/takeSelfie", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
+      { src: `${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
+      // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
+    ];
+  }
+
+  return [
     { src: `${process.env.PUBLIC_URL}/img/home/Get-Signa-Banner.png`, link: "https://discord.com/invite/MATW3Dcdcw", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // { src: `${process.env.PUBLIC_URL}/img/home/News-Banner.png`, link: "https://www.bettermi.io/", icon: `${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Blockchain-Forum-Banner.png`, 'link': '', 'icon': `${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`},
-    { src: `${process.env.PUBLIC_URL}/img/home/Leader-Board-Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
+    { src: `${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`, link: "/leaderboard", icon: `${process.env.PUBLIC_URL}/img/home/ic_leaderboard.png` },
     // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-io-Banner.png`, 'link': ''},
     // {'src': `${process.env.PUBLIC_URL}/img/home/Secret-Coach-mimi-Banner.png`, 'link': ''},
   ];
+};
 
-  // info
+const disableRefresh = (e: any) => {
+  e.preventDefault();
+  e.returnValue = "";
+};
+
+const handleBeforeUnload = (e: any) => {
+  disableRefresh(e);
+};
+
+const handleUnload = (e: any) => {
+  disableRefresh(e);
+};
+
+const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
+  const tokenId = process.env.REACT_APP_TOKEN_ID!;
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+  const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
+
+  const navigate = useNavigate();
+
+  const isGuest = useSelector(selectCurrentIsGuest);
+
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const name = useSelector(selectCurrentUsername);
   const Token: string = useSelector(accountToken);
-  const userAccountId = useSelector(accountId);
+  const userAccountId: string = useSelector(accountId);
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const userAccountPublicKey = useSelector(accountPublicKey);
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+
+  const [level, setLevel] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
-  const nodeHost = useSelector(selectWalletNodeHost);
-  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const navigate = useNavigate();
-  const [level, setLevel] = useState<string>("");
-  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
-  const tokenId = process.env.REACT_APP_TOKEN_ID!;
-  const [isPopUpIcon, setIsPopUpIcon] = useState<boolean>(false);
+  const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
-  const [rewardPercentage,setRewardPercentage] = useState<string>();
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const userAccountPublicKey = useSelector(accountPublicKey);
+  const [rewardPercentage, setRewardPercentage] = useState<string>("");
 
-  // useEffect(() => {
-  //   testing();
-  // }, []);
+  const slides = checkSlides(isGuest);
 
-    //Trying disabling refresh
+  useEffect(() => {
+    // Add event listeners to disable refreshing
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
 
+    return () => {
+      // Remove event listeners when component unmounts
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
+    };
+  }, []);
+  //ends here
 
-
-    useEffect(() => {
-      const disableRefresh = (e:any) => {
-        e.preventDefault();
-        e.returnValue = '';
-      };
-  
-      const handleBeforeUnload = (e:any) => {
-        disableRefresh(e);
-      };
-  
-      const handleUnload = (e:any) => {
-        disableRefresh(e);
-      };
-  
-      // Add event listeners to disable refreshing
-      window.addEventListener('beforeunload', handleBeforeUnload);
-      window.addEventListener('unload', handleUnload);
-  
-      return () => {
-        // Remove event listeners when component unmounts
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-        window.removeEventListener('unload', handleUnload);
-      };
-    }, []);
-    //ends here
-  
   const fetchUserIcon = async () => {
     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
-    if (isUserSettingUpdating === true) {
+    if (isUserSettingUpdating) {
       setIsNFTiconLoading(false);
     } else {
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-
           const description = JSON.parse(account.description);
-
-
-
           setImgAddress(Object.keys(description.av)[0]);
           setIsNFTiconLoading(false);
         })
-        .catch(async(error) => {
+        .catch(async (error) => {
           setIsNFTiconLoading(false);
-
         });
     }
   };
 
-
   const nftIconCheck = useRef(false);
   useEffect(() => {
     // Function to fetch data from the APIc
-    if (nftIconCheck.current) {
-
+    if (nftIconCheck.current || isGuest) {
       return;
     }
     nftIconCheck.current = true;
-    reEquipNft(ledger2,Wallet,userAccountId,codeHashIdForNft,nftDistributor,userAccountPublicKey,navigate);
+    reEquipNft(ledger2, Wallet, userAccountId, codeHashIdForNft, nftDistributor, userAccountPublicKey, navigate);
     ledger2.account
       .getAccount({ accountId: userAccountId })
       .then(async (account) => {
@@ -141,15 +149,15 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           const ipfsJson = await fetch(getApiUrls(JSON.parse(accountInfo.description).descriptor).imgAddress);
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
-          var value = (convertWordToNumber(nftInfo.attributes[6].value)/3).toFixed(2).toString();
+          var value = (convertWordToNumber(nftInfo.attributes[6].value) / 3).toFixed(2).toString();
           setRewardPercentage(value);
-          if (nftInfo.description.includes("1") === true) {
+          if (nftInfo.description.includes("1")) {
             setLevel("1");
           }
-          if (nftInfo.description.includes("2") === true) {
+          if (nftInfo.description.includes("2")) {
             setLevel("2");
           }
-          if (nftInfo.description.includes("3") === true) {
+          if (nftInfo.description.includes("3")) {
             setLevel("3");
           }
           store.dispatch(accountSlice.actions.setLevel(description.ds));
@@ -159,43 +167,21 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
           store.dispatch(accountSlice.actions.setLevel(description.ds));
         }
 
-
-
         // setImgAddress(Object.keys(description.av)[0]);
         setLoading(false);
       })
-      .catch(async(error) => {
-
+      .catch(async (error) => {
         console.log(error);
-
 
         setLoading(false);
       });
-    fetchUserIcon()
+    fetchUserIcon();
     // TransferToken(nodeHost,userId,"10");
-
-
   }, []);
 
-  // todo: map
-  // const userSIGDAO =
-
-  // todo: export a button as take a selfie component
-  async function handleTakeASelfie() {
-    // if (await isTodayHaveSelfieRecord(tempAccountId, Ledger2)) {
-    //   alert('already taken a selfie, since we are in demo mode, click comfirm for another selfie')
-    //   navigate('/takeSelfie')
-    // }
-    navigate("/takeSelfie");
-  }
-
-  // const testing = async () => {
-  //   await TransferToken(nodeHost,userId, calRewardSigdaoOnSelfie(22.9).toString())
-  // }
   const nftContractChecked = useRef(false);
   useEffect(() => {
-    if (nftContractChecked.current) {
-
+    if (nftContractChecked.current || isGuest) {
       return;
     }
     nftContractChecked.current = true;
@@ -214,179 +200,45 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   const content: JSX.Element = (
     <>
-      {isPopUpIcon && (
-        <div className="hidden-content">
-          {isNFTiconLoading ? (
-            <div className="x0"></div>
-          ) : (
-            <>
-              <img className="x0-generateFreeNFT" src={getApiUrls(imgAddress).imgAddress} alt="0" />
-              {/* <h1 className="text-1">#{nftNumber}</h1> */}
-              {/* <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress} /> */}
-            </>
-          )}
-          <div className="x16206">
-            <div className="lv-1">LV {level}</div>
-            <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-            <div className="reward-10">REWARD +{rewardPercentage}%</div>
+      <NFTDetailPopUpWindow
+        // isGuest={isGuest}
+        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
+        isNFTiconLoading={isNFTiconLoading}
+        imgAddress={imgAddress}
+        level={level}
+        rewardPercentage={rewardPercentage}
+        setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+      >
+        <div className="screen">
+          <div className="bettermidapp-home-1">
+            <Link to="/featureMissions">
+              <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
+            </Link>
+            <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
+
+            <Link to="/leaderboard"></Link>
+            <ImageSlider slides={slides} />
+            <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
+            <div className="nav-to-take-selfie-content">
+              <NavigateToTakeSelfieButton />
+            </div>
+            <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
+            <UserInfoContainer
+              isGuest={isGuest}
+              setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+              userAccountId={userAccountId}
+              setRewardPercentage={setRewardPercentage}
+              setImgAddress={setImgAddress}
+              level={level}
+              rewardPercentage={rewardPercentage}
+              loading={loading}
+              Token={Token}
+            />
+            <HomeMissionList />
+            <MenuBar />
           </div>
-      
-          <div className="x0-signa">$0 SIGNA</div>
-          <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-          <div onClick={() => setIsPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
         </div>
-      )}
-
-      <div className="screen">
-        <div className="bettermidapp-home-1">
-          <Link to="/featureMissions">
-            <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
-          </Link>
-          <div className="feature-missions-RoXPLo inter-semi-bold-white-21px">Feature Missions</div>
-
-          <Link to="/leaderboard"></Link>
-          <ImageSlider slides={slides} />
-          {/* <Link to="https://discord.gg/MATW3Dcdcw">
-            <img src={`${process.env.PUBLIC_URL}/img/home/bxl-discord-alt.svg`} alt="" className="discord-RoXPLo" />
-          </Link> */}
-          <div className="our-community-RoXPLo inter-semi-bold-white-21px">Social Events</div>
-          {/* <div className="alert-get-signa inter-semi-bold-white-15px">GET SIGNA:</div> */}
-          <div className="nav-to-take-selfie-content">
-            <NavigateToTakeSelfieButton />
-          </div>
-          {/* </Link> */}
-          <div className="quick-actions-RoXPLo inter-semi-bold-white-21px">Selfie To Earn</div>
-          <div className="greetings-RoXPLo">
-            {/* <h1 className="title-2ZgxSS">Hi ! </h1> */}
-            <h1 className="title-2ZgxSS">Hello ! </h1>
-            <div className="lv_-reward-2ZgxSS">
-              <div className="lv-1-b5x63m inter-semi-bold-keppel-15px">LV {level}</div>
-              <div className="nft-reward-10-b5x63m inter-semi-bold-white-15px">REWARD +{rewardPercentage}%</div>
-              <img className="seperate-line-b5x63m" src={`${process.env.PUBLIC_URL}/img/seperate-line-1@1x.png`} alt="seperate line" />
-            </div>
-            <UserIcon setIsPopUpIcon={setIsPopUpIcon} home={true} userAccountId={userAccountId} setRewardPercentage={setRewardPercentage} setEnlargeImageAddress={setImgAddress}></UserIcon>
-            {/* {imgAddress === ""?gender === "Female"?
-          // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/nft-avatar-13@1x.png`} alt="NFT_Avatar" />
-          <Link to="/allNftList/">
-              <div className="home_nft_-avatar">
-                  <img
-                    className="home_icon_ic_add"
-                    src="img/profile/ic-add-2@1x.png"
-                    alt="ic_add"
-                  />
-              </div>
-            </Link>
-          :(
-            <Link to="/allNftList/">
-              <div className="home_nft_-avatar">
-                <img
-                  className="home_icon_ic_add"
-                  src="img/profile/ic-add-2@1x.png"
-                  alt="ic_add"
-                />
-              </div>
-            </Link>
-              // <img className="nft_-avatar-2ZgxSS" src={`${process.env.PUBLIC_URL}/img/home/1.png`} alt="NFT_Avatar" />
-          )
-          :(
-            <img className = "nft_-avatar-2ZgxSS" src = {`https://ipfs.io/ipfs/${imgAddress}`}></img>
-          )
-          } */}
-            <Link to="/profile">
-              <div className="ic_next-2ZgxSS">
-                <img className="ic_chevron_right_24px-LRB8nH" src={`${process.env.PUBLIC_URL}/img/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
-              </div>
-            </Link>
-            <Link to="/aiCoachSelect">
-              <img className="home-ai-select-icon" src={`${process.env.PUBLIC_URL}/img/home/bxs-Aicoach.svg`} />
-            </Link>
-            <Link to="/setting">
-              <img className="home-setting-icon" src={`${process.env.PUBLIC_URL}/img/ic-settings-24px-1@1x.png`} alt="" />
-            </Link>
-            <div className="score-bar_3-2ZgxSS">
-              <div className="sigdao-score-iPTNDG sigdao-score">
-                <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading ? <div>loading...</div> : Token}</div>
-                <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
-                  <div className="x441-e5x8kp x441"></div>
-                  <div className="x442-e5x8kp x442"></div>
-                  <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                </div>
-              </div>
-            </div>
-            <div className="sigdao-2ZgxSS inter-semi-bold-white-15px">SIGDAO:</div>
-          </div>
-          {/* <HorizontalScrollContainerMission></HorizontalScrollContainerMission> */}
-          <HorizontalScrollContainer inputClassName="missions-scroll-RoXPLo x-">
-            <Link to="/missionChallenge">
-              <div className="challenges-x9-hacks-GEWAL1">
-                <div className="small-image">
-                  <img className="challenge-x9_banner-UqALvc" src={`${process.env.PUBLIC_URL}/img/home/challengex9-banner@1x.png`} alt="ChallengeX9_banner" />
-                </div>
-                <div className="challengesx-9-hacks-ewZMRw inter-medium-white-15px">
-                  Challenges
-                  <br />x 9 hacks
-                </div>
-                <div className="x1-3mins-each-ewZMRw inter-normal-cadet-blue-12px">1-3mins/ each</div>
-                <div className="sigdao-score-ewZMRw sigdao-score">
-                  <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">+5.25 ~ 15.75</div>
-                  <div className="signdao_tokengradient-HEHiSw signdao_tokengradient">
-                    <div className="x441-giFx9O x441"></div>
-                    <div className="x442-giFx9O x442"></div>
-                    <img className="x880-giFx9O x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <div className="meditations-GEWAL1">
-              <div className="home-meditation-content">
-                <div className="small-image">
-                  <img className="meditation_banner-dLbFgX" src={`${process.env.PUBLIC_URL}/img/home/meditation-banner@1x.png`} alt="Meditation_banner" />
-                </div>
-                <div className="weekly-meditation-3kbxqV inter-medium-white-15px">Weekly Meditation</div>
-                {/* <div className="saturday-only-3kbxqV inter-normal-cadet-blue-12px">coming soon..</div> */}
-                <div className="saturday-only-3kbxqV inter-semi-bold-keppel-12px">coming soon..</div>
-                <div className="sigdao-score-3kbxqV sigdao-score">
-                  {/* <div className="x10-UyxTRp x10 inter-semi-bold-keppel-14px">coming soon...</div> */}
-                  {/* <div className="signdao_tokengradient-UyxTRp signdao_tokengradient">
-                    <div className="x441-ozHgg7 x441"></div>
-                    <div className="x442-ozHgg7 x442"></div>
-                    <img className="x880-ozHgg7 x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                  </div> */}
-                </div>
-              </div>
-              <div className="meditations-overlay">
-                <img src="/img/ic-locked-1@1x.png" className="lock-image" alt="" />
-              </div>
-            </div>
-            <div className="step-counts-GEWAL1">
-              <div className="home-meditation-content">
-                <div className="small-image">
-                  <img className="step_count_banner-45Wblr" src={`${process.env.PUBLIC_URL}/img/allMission/Talk-to-mi-Square-Cover.png`} alt="Step_count_banner" />
-                </div>
-                <div className="walking-mission-7hGHU0 inter-medium-white-15px">Secret Coach - Talk To mi</div>
-                {/* <div className="step-count-7hGHU0 inter-normal-cadet-blue-12px">Coming Soon...</div> */}
-                <div className="step-count-7hGHU0 inter-semi-bold-keppel-12px">Coming Soon...</div>
-                <div className="sigdao-score-7hGHU0 sigdao-score">
-                  {/* <div className="x10-SMcg87 x10 inter-semi-bold-keppel-14px">coming soon...</div> */}
-                  {/* <div className="signdao_tokengradient-SMcg87 signdao_tokengradient">
-                    <div className="x441-JHyhgs x441"></div>
-                    <div className="x442-JHyhgs x442"></div>
-                    <img className="x880-JHyhgs x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                  </div> */}
-                </div>
-              </div>
-              <div className="meditations-overlay">
-                <img src="/img/ic-locked-1@1x.png" className="lock-image" alt="" />
-              </div>
-            </div>
-          </HorizontalScrollContainer>
-          {/* <BackButton /> */}
-
-          {/* <div className="missions-scroll-RoXPLo">
-        </div> */}
-          <MenuBar />
-        </div>
-      </div>
+      </NFTDetailPopUpWindow>
     </>
   );
 

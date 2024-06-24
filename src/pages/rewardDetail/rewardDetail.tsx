@@ -11,6 +11,8 @@ import { selectWalletNodeHost, useLedger } from "../../redux/useLedger";
 import { countTotalChallengesTimes } from "../../NftSystem/Token/countChallenges";
 import { LedgerClientFactory } from "@signumjs/core";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
+import { selectCurrentIsGuest } from "../../redux/profile";
+import { GuestConnectWallectButton } from "../../components/button";
 
 interface IRewardDetailProps {}
 
@@ -66,6 +68,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const isSigdaoReward = typeof displayRewardDetail?.reward === "number";
   const classNameList = determinePageClass(id as string);
   const tempAccountId = useSelector(accountId);
+  const isGuest = useSelector(selectCurrentIsGuest);
   const Ledger2 = useLedger();
   const [BMIRecordTimes, setBMIRecordTimes] = React.useState<number>();
   const nodeHost = useSelector(selectWalletNodeHost);
@@ -79,20 +82,16 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   //     setMyNfts(userNftList);
   //     setLoadingNft(false);
 
-
   //   } catch (e: any) {
   //     console.log(e);
   //   }
   // };
-
-
 
   const getrewardDetailTimes = async () => {
     if (id === "1") {
       // setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
       GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
         .then((res) => {
-
           setBMIRecordTimes(res.length);
         })
         .catch((err) => {
@@ -103,10 +102,9 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
       setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
     }
     if (id === "3") {
-      isHitFirstHealthyBMIRange(tempAccountId, Ledger2)
-        .then((ans) => {
-          setBMIRecordTimes(ans ? 1 : 0);
-        });
+      isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
+        setBMIRecordTimes(ans ? 1 : 0);
+      });
     }
     if (id === "4") {
       setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
@@ -114,16 +112,13 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   };
   const getReward = async () => {
     if (displayRewardDetail?.requireTimes === BMIRecordTimes) {
-      
     }
-  }
-
+  };
 
   useEffect(() => {
+    if (isGuest) return;
     getrewardDetailTimes();
   }, []);
-
-
 
   // todo: get user's implement times or other data from blockchain
   const implementTimes = 0;
@@ -132,13 +127,19 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-rewards-redeem-master-collector-1">
-        <ShortTitleBar title={displayRewardDetail?.title} />
+        <ShortTitleBar title={displayRewardDetail?.title} aiCoach={true} setting={true} />
         <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
         <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
-        <div className={classNameList[4] || "button_-redeem-P2i95W"}>
-          <div className={classNameList[5] || "button1-r8fHLz"} />
-          <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
+        {isGuest ? (
+        <div className="button_-redeem-P2i95W">
+          <GuestConnectWallectButton height={"56px"} width={"248px"} />
         </div>
+        ) : (
+          <div className={classNameList[4] || "button_-redeem-P2i95W"}>
+            <div className={classNameList[5] || "button1-r8fHLz"} />
+            <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
+          </div>
+        )}
         <div className="profile-content-P2i95W">
           <div className="master-collector-tOBH5R master-collector">{displayRewardDetail?.title}</div>
           <p className={isSigdaoReward ? "unlocked-by-users-wh-tOBH5R inter-normal-white-14px" : "earned-by-users-who-B1MGte inter-normal-white-14px"}>{displayRewardDetail?.description}</p>
@@ -165,10 +166,10 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
           )}
         </div>
 
-        <div className={classNameList[0] || "goal-data-P2i95W"}>
+        <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest && {opacity: "0.5"}}>
           {/* <div className="x893-LfPhsf"></div> */}
           <div className={classNameList[1] || "goal-LfPhsf"}>
-            <div className={`${classNameList[2] || "x0-ucGgAD"} inter-semi-bold-keppel-14px`}>{BMIRecordTimes}</div>
+            <div className={`${classNameList[2] || "x0-ucGgAD"} inter-semi-bold-keppel-14px`}>{isGuest ? "0" : BMIRecordTimes}</div>
             <div className={`${classNameList[3] || "x3-ucGgAD"} inter-semi-bold-white-14px`}>/ {displayRewardDetail?.requireTimes}</div>
           </div>
         </div>

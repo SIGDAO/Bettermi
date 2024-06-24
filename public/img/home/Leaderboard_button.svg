@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <filter id="Button_bg" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse">
+      <feOffset dy="15" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feFlood flood-opacity="0.031"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Leaderboard_button">
+    <g id="ic-Leaderboard" transform="translate(1 0)" >
+      <path id="Path_11744" data-name="Path 11744" d="M37.583,30.964a2.547,2.547,0,1,1,2.547,2.547A2.547,2.547,0,0,1,37.583,30.964Z" transform="translate(-29.131 -22.051)" fill="#fff"/>
+      <path id="Path_11745" data-name="Path 11745" d="M14.117,17.967a8.8,8.8,0,1,1,16.246,4.692L33.79,28.6a.943.943,0,0,1-1,1.4L29.5,29.338l-1.078,3.175a.943.943,0,0,1-1.709.168l-3.42-5.923q-.188.008-.377.008t-.377-.008l-3.42,5.923a.943.943,0,0,1-1.709-.166l-1.084-3.169-3.286.646a.943.943,0,0,1-1-1.4l3.428-5.937A8.759,8.759,0,0,1,14.117,17.967Zm2.622,6.267a8.791,8.791,0,0,0,3.805,2.209l-2.02,3.5-.679-1.984a.943.943,0,0,0-1.074-.62l-2.058.4Zm8.55,2.209,2.017,3.494.675-1.988a.943.943,0,0,1,1.077-.622l2.059.409-2.023-3.5A8.791,8.791,0,0,1,25.289,26.443ZM22.917,13.881A4.086,4.086,0,1,0,27,17.967,4.086,4.086,0,0,0,22.917,13.881Z" transform="translate(-11.917 -9.167)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

@@ -11,7 +11,7 @@ export interface WalletState {
 }
 
 const initialState: WalletState = {
-  walletNodeHost: "",
+  walletNodeHost: process.env.REACT_APP_NETWORK_URL || "",
   walletPublicKey: "",
   isWalletConnected: false,
   watchOnly: false,
