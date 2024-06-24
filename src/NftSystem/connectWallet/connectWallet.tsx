@@ -68,7 +68,7 @@ export const connectWallet = async (appName: any, Wallet: any, Ledger: any, code
     // set the redux for if needed to recreate the BMI and NFT contract
     store.dispatch(contractSlice.actions.setIsBMIContractBuild(typeof userBMIStorage.ats[0] !== "undefined" || openedBmiContract === true));
     store.dispatch(contractSlice.actions.setIsNFTContractBuild(typeof userNftStorage.ats[0] !== "undefined" || openedNftContract === true));
-    return { userNftStorage: userNftStorage, userBMIStorage: userBMIStorage, openedBmiContract: openedBmiContract, openedNftContract: openedNftContract, userPublicKey: key, loginedAcctID: accountinfo.accountId};
+    return { userNftStorage: userNftStorage, userBMIStorage: userBMIStorage, openedBmiContract: openedBmiContract, openedNftContract: openedNftContract, userPublicKey: key, loginedAcctID: accountinfo.accountId,ledger:ledger};
   } catch (error: any) {
     // todo: add error handling, and show it to user
     console.log(error);
