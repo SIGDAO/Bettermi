@@ -142,6 +142,10 @@
   border: 1px solid var(--royal-blue);
   border-radius: 20px;
   box-shadow: 0px 3px 20px var(--royal-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25.5px 38.25px 57px;
 }
 
 .bettermidapp-settings-1 .layer-azNBHQ {
@@ -567,9 +571,6 @@
   width: 100%;
 }
 
-.brightness-0-5 {
-  filter: brightness(0.5);
-}
 
 .bettermidapp-settings-1 .icon-ionic-ios-arrow-forward {
   background-color: transparent;
@@ -633,4 +634,27 @@
   position: absolute;
   top: 735px;
   left: 71px;
+}
+
+.setting-option-container {
+  width: 100%;
+  height: 55.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  border-bottom: 1px solid #3D454B80;
+}
+
+.setting-option-arrow {
+  width: 7px;
+  height: 13px;
+}
+
+.setting-option-right-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 11px;
 }

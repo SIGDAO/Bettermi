@@ -330,6 +330,15 @@ a:focus-visible {
   font-weight: 400;
 }
 
+.inter-normal-cadet-blue-2-15px {
+  color: var(--cadet-blue-2);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+
+}
+
 .inter-normal-cadet-blue-12px-3 {
   color: var(--cadet-blue-2);
   font-family: var(--font-family-inter);
@@ -457,4 +466,12 @@ a:focus-visible {
 
 .opacity-0-5 {
   opacity: 0.5;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+a[disabled] {
+  pointer-events: none;
 }
