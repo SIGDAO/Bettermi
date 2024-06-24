@@ -30,9 +30,9 @@ export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
   return (
     <>
       <div className="guest-nft-detail-popup-window-container">
-        <div className="guest-nft-detail-popup-window-title inter-semi-bold-white-18px">Earn SIGDAO now !</div>
+        <div className="guest-nft-detail-popup-window-title inter-semi-bold-white-18px">Selfie to track BMI now !</div>
         <div className="guest-nft-detail-popup-window-content">
-          <div className="inter-bold-royal-blue-15px">TAKE A SELFIE TO EARN</div>
+          <div className="inter-bold-royal-blue-15px">START EARNING SIGDAO</div>
           <div className="guest-nft-detail-popup-window-mimi-container">
             <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_popup_window.png`} alt="" />
           </div>

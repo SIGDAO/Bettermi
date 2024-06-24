@@ -94,6 +94,8 @@ const titleList = {
   "/aiCoachSelect": "AI Coach Select - Bettermi",
   "/aiCoachDetail": "AI Coach Detail - Bettermi",
   "/errorGenerateNFT": "Error Generate NFT - Bettermi",
+  "/errorTakeSelfieNoFace": "Error Take Selfie - Bettermi",
+  "/errorTakeSelfieTooManyFace": "Error Take Selfie - Bettermi",
   "/errorTakeSelfie": "Error Take Selfie - Bettermi",
   "/errorCustomizeYourProfile": "Error Customize Your Profile - Bettermi",
   "/loadingMinting": "Loading Minting - Bettermi",
@@ -125,6 +127,14 @@ const guestAllowedPath = [
   "/OtherUserProfile",
   "/aiCoachSelect",
   "/indexMyNftList",
+  // error page
+  "/errorGenerateNFT",
+  "/errorTakeSelfieNoFace",
+  "/errorTakeSelfieTooManyFace",
+  "/errorTakeSelfie",
+  "/errorCustomizeYourProfile",
+  "/errorWalletNotConnected",
+  "/errorNotEnoughFunds",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -232,6 +242,8 @@ function App() {
                   <Route path=":id" element={<AiCoachDetail />} />
                 </Route>
                 <Route path="/errorGenerateNFT" element={<ErrorGenerateNFT />} />
+                <Route path="/errorTakeSelfieNoFace" element={<ErrorGenerateNFT />} />
+                <Route path="/errorTakeSelfieTooManyFace" element={<ErrorGenerateNFT />} />
                 <Route path="/errorTakeSelfie" element={<ErrorGenerateNFT />} />
                 <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
                 <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />

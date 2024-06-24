@@ -136,8 +136,15 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       dispatch(profileSlice.actions.setBMI(bmi.toFixed(1).toString()));
 
       navigate(navigatePath);
-    } else if (data) {
-      navigate("/errorTakeSelfie");
+    } else if (data && "error" in data) {
+      if ((data as { error: string }).error === "Face not found in Image") {
+        navigate("/errorTakeSelfieNoFace");
+      }
+
+      if ((data as { error: string }).error === "More than one face found in Image") {
+        navigate("/errorTakeSelfieTooManyFace");
+      }
+
     }
   }, [data]);
 
