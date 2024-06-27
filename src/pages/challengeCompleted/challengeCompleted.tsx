@@ -160,7 +160,7 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         <div className="bettermidapp-challenge-finished-1">
           {isGuest && <BackButton />}
           {/* <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} /> */}
-          <div className="x16219-iwUDzs" style={isGuest && { opacity: 0.6 }}>
+          <div className="x16219-iwUDzs" style={isGuest ? { opacity: 0.6 } : {}}>
             <div className="you-have-earned-75VOY2">{SmallTitle}</div>
             <h1 className="title-75VOY2">Congratulations !</h1>
             <div className="finished-75VOY2">

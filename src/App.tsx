@@ -56,6 +56,7 @@ import { profileSlice, selectCurrentIsGuest } from "./redux/profile";
 import ReferralCode from "./pages/referralCode/referralCode";
 import DiscordVerification from "./pages/discordVerification/discordVerification";
 import ReferralCodeTesting from "./pages/referralCodeTesting.tsx/referralCodeTesting";
+import InviteFriend from "./pages/inviteFriend/inviteFriend";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -180,7 +181,6 @@ function App() {
     document.title = titleList[location.pathname] ?? "Bettermi";
 
     if (location.pathname !== currentPath) {
-      console.log("ioijsdoifjsodifjiosd", currentPath);
       setPreviousPath(currentPath);
       setCurrentPath(location.pathname);
     }
@@ -262,6 +262,7 @@ function App() {
                 <Route path="/ReferralCodeTesting" element = {<ReferralCodeTesting/>}>
                   <Route path=":referralCode" element={<ReferralCodeTesting />} />
                 </Route>
+                <Route path="/inviteFriend" element={<InviteFriend />} />
               </Route>
             {/* </Route> */}
           </Routes>

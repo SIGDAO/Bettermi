@@ -1,0 +1,109 @@
+.bettermi-invite-friend-layout {
+  /* background: transparent; */
+  /* background-color: rgba(255, 255, 255, 1.0); */
+  min-height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 29px;
+  padding-top: 148px;
+}
+
+.invite-friend-icon-description-container {
+  width: 280px;
+  height: 248px;
+}
+
+.invite-friend-mimi-icon {
+  width: 118px;
+  height: 118px;  
+}
+
+.invite-friend-icon-description-container {
+  width: 280px;
+  height: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 39px;
+  align-items: center;
+
+}
+
+.invite-friend-description-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+
+
+.invite-friend-description {
+  width: 280px;
+  text-align: center;
+}
+
+.invite-friend-copy-invite-link {
+  background: transparent;
+  border: none;
+}
+
+.invite-friend-copy-invite-link-container {
+  background: #FFFFFF08 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  width: 300px;
+  height: 56px;
+  display: flex;
+
+  gap: 23px;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-friend-copy-invite-link-button {
+  width: 17px;
+  height: 18px;  
+}
+
+.invite-friend-copy-invite-link {
+  width: 212px;
+  height: 19px;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+}
+
+.invite-friend-referral-program-description-container {
+  background: #FFFFFF08 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  width: 300px;
+  height: 171px;
+  padding: 8px 11.5px;
+}
+
+.invite-friend-referral-program-description-line {
+  display: flex;
+}
+
+.invite-friend-referral-program-description-line p {
+  margin: 0;
+  white-space: pre;
+}
+
+.invite-friend-refer-friends-description {
+  width: 280px;
+  text-align: center;
+  color: #FFFFFF80;
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.signdao_tokengradient-kxjIEt {
+  width: 22px;
+}

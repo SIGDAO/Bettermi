@@ -35,35 +35,34 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
         <ShortTitleBar title="Settings" transparent={true} />
         <div className="settings-7DUKxJ settings">
           <SettingOption title={"Membership"} description={"Discord"} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://discord.com/invite/MATW3Dcdcw"} />
-          <SettingOption title={"Account ID"} description={userAccountId ?? ""} disabled={isGuest} arrow={true} inBettermiPath={false} navigatePath={ Config.Explorer + "address/" + userAccountId} />
-          <SettingOption title={"Wallet"} description={isGuest ? "Connect Wallet" : "XT wallet"} disabled={false} arrow={true} inBettermiPath={true} navigatePath={isGuest ? "/" : undefined } />
-          <SettingOption title={"Invite Friends"} description={"Show link"} disabled={isGuest} arrow={true} inBettermiPath={false} />
+          <SettingOption title={"Account ID"} description={userAccountId ?? ""} disabled={isGuest} arrow={true} inBettermiPath={false} navigatePath={Config.Explorer + "address/" + userAccountId} />
+          <SettingOption title={"Wallet"} description={isGuest ? "Connect Wallet" : "XT wallet"} disabled={false} arrow={true} inBettermiPath={true} navigatePath={isGuest ? "/" : undefined} />
+          <SettingOption title={"Invite Friends"} description={"Show link"} disabled={isGuest} arrow={true} inBettermiPath={true} navigatePath={"/inviteFriend"} />
           <SettingOption title={"Get SIGDAO Token"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.signumswap.com/tokens/5453974739826751020"} />
           <SettingOption title={"NFTs Marketplace"} description={""} disabled={false} arrow={true} inBettermiPath={true} navigatePath={"/allNftList"} />
-          <SettingOption title={"Terms of Use"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/termsofservice.html"} />
+          <SettingOption title={"Terms of Service"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/termsofservice.html"} />
           <SettingOption title={"Privacy Policy"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/privacypolicy.html"} />
           <SettingOption title={"Help"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/#content3-gm"} />
           <SettingOption title={"Disable"} description={isGuest ? "" : "0.0.04"} disabled={isGuest} arrow={isGuest} inBettermiPath={false} />
           {isGuest ? (
-          <div className="setting-connect-wallet-container">
-            <GuestConnectWallectButton height={"56px"} width={"248px"} />
-          </div>
-        ) : (
-          <Button
-            className="bottom-controls-7DUKxJ"
-            onClick={() => {
-              logout();
-            }}
-          >
-            <div className="button_-logout-ChdhUr">
-              <div className="button1-GdXCBJ"></div>
-              <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
+            <div className="setting-connect-wallet-container">
+              <GuestConnectWallectButton height={"56px"} width={"248px"} />
             </div>
-          </Button>
-        )}
-
+          ) : (
+            <Button
+              className="bottom-controls-7DUKxJ"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <div className="button_-logout-ChdhUr">
+                <div className="button1-GdXCBJ"></div>
+                <div className="mintagain-GdXCBJ inter-semi-bold-white-15px">Logout</div>
+              </div>
+            </Button>
+          )}
         </div>
-{/* <div className="settings-7DUKxJ settings">
+        {/* <div className="settings-7DUKxJ settings">
   <div className="cards-azNBHQ">
     <div className="x16185-VD8XDI">
       <div className="x31">

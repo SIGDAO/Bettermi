@@ -90,7 +90,7 @@ a:focus-visible {
 .inter-semi-bold-white-28px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
+  font-size: 28px;
   font-style: normal;
   font-weight: 600;
 }
@@ -136,6 +136,15 @@ a:focus-visible {
   font-style: normal;
   font-weight: 400;
 }
+
+.inter-normal-keppel-14px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 
 .inter-semi-bold-keppel-14px {
   color: var(--keppel);
@@ -241,6 +250,14 @@ a:focus-visible {
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
+}
+
+.inter-bold-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .inter-bold-royal-blue-14px {

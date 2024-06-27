@@ -526,6 +526,7 @@ export async function UpdateUserIcon(ledger2:any,imgAddress:string,nftId:string,
 
     newDescriptionObj = Object.assign(newDescriptionObj,{av:obj});       
     newDescriptionObj = Object.assign(newDescriptionObj,{id:nftId});
+    newDescriptionObj = Object.assign(newDescriptionObj,{nm:name});
     //console.log("newDescriptionObj is ",newDescriptionObj);
     //console.log("nftID is ",nftId);
 

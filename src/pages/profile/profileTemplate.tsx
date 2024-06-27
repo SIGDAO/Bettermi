@@ -9,7 +9,7 @@ import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentIsGuest, selectCurrentUsername } from "../../redux/profile";
+import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentIsGuest, selectCurrentIsNewUser, selectCurrentUsername } from "../../redux/profile";
 import { Alert } from "@mui/material";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
@@ -64,6 +64,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const { previousPath, userAccountId, isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow, isNFTiconLoading, setIsNFTiconLoading, setImgAddress, setRewardPercentage, isMyProfile } = props;
 
   const isGuest = useAppSelector(selectCurrentIsGuest);
+  const isNewUsser = useSelector(selectCurrentIsNewUser)
 
   // signum related
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -173,9 +174,11 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
 
   // open the profile edit pop up window if the previous path is customizeYourProfile
   const checkIsPrevPathIsCustomizeYourProfile = () => {
-    if (previousPath && previousPath === "/customizeYourProfile") {
+    // if (previousPath && previousPath === "/customizeYourProfile") {
+    if (isNewUsser) {
       setIsOpen(true);
       setIsBackButton(false);
+      dispatch(profileSlice.actions.clearIsNewUser());
       return;
       // window.history.replaceState({}, document.title);
     }

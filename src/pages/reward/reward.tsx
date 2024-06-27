@@ -78,6 +78,10 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   //   </div>
   // ));
 
+  const handleRewardDetailDisplayStyle = (isGuest: boolean) => {
+    return isGuest ? {opacity: 0.5} : {};
+  }
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-rewards-2">
@@ -94,7 +98,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
+            <div className="goal-data" style={handleRewardDetailDisplayStyle(isGuest)}>
               <div className="x893"></div>
               <div className="goal-YBUPcf goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{nftAcquireNumber}</div>
@@ -111,7 +115,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
+            <div className="goal-data" style={handleRewardDetailDisplayStyle(isGuest)}>
               <div className="x893"></div>
               <div className="goal-hfcLyr goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiRecordTimes}</div>
@@ -134,7 +138,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             </div>
-            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
+            <div className="goal-data" style={handleRewardDetailDisplayStyle(isGuest)}>
               <div className="x893"></div>
               <div className="goal-1TY7aZ goal">
                 {/* <div className="x0 inter-semi-bold-keppel-14px">{challengeCompletedTimes}</div> */}
@@ -158,7 +162,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
             <div className="ic_next">
               <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
             s</div>
-            <div className="goal-data" style={isGuest && {opacity: 0.5}}>
+            <div className="goal-data" style={handleRewardDetailDisplayStyle(isGuest)}>
               <div className="x893"></div>
               <div className="goal-hu1xkO goal">
                 <div className="x0 inter-semi-bold-keppel-14px">{bmiHitHealthyNumber}</div>

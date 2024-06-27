@@ -32,6 +32,8 @@ interface IButtonProps {
 
 interface IBackButtonProps {
   top?: string;
+  customiseBackButtonLink?: string;
+  className?: string;
 }
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
@@ -128,7 +130,8 @@ export const DisabledButton: React.FunctionComponent<IButtonProps> = (props) => 
 };
 
 export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => {
-  const { top } = props;
+  const { top, customiseBackButtonLink, className } = props;
+  const navigate = useNavigate();
 
   const customStyle: CSS.Properties = {
     alignItems: "flex-start",
@@ -142,14 +145,19 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
     top: top || "44px",
     zIndex: 9999,
   };
-  // isdofidjsoaf, difisdf
+
+  const handleBackButtonOnClick = (): void => {
+    if (customiseBackButtonLink) {
+      navigate(customiseBackButtonLink);
+      return;
+    }
+    navigate(-1);
+  };
 
   return (
-    <a href="javascript:history.back()">
-      <div className="icon-arrow-left" style={customStyle}>
-        <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
-      </div>
-    </a>
+    <div className={className ?? "icon-arrow-left"} style={className ? undefined : customStyle} onClick={() => handleBackButtonOnClick()}>
+      <img className="icon-arrow-left-1" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-arrow-left-8@1x.png`} alt="icon-arrow-left" />
+    </div>
   );
 };
 
@@ -254,19 +262,21 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
     boxShadow: "0px 15px 30px #1466CC29",
     borderRadius: "10px",
     gap: "10px",
-  }
+  };
 
   // const connectWalletButton: CSS.Properties = {
   //   dis
 
-  return <ButtonWithNavigation 
-            text="Connect Wallet" 
-            height={height} 
-            width={width} 
-            imagePath="img/wallet.svg" 
-            navigation="/" 
-            className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
-            style={guestButtonStyle}
-            imageClassName="wallet-icon"
-          />;
+  return (
+    <ButtonWithNavigation
+      text="Connect Wallet"
+      height={height}
+      width={width}
+      imagePath="img/wallet.svg"
+      navigation="/"
+      className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
+      style={guestButtonStyle}
+      imageClassName="wallet-icon"
+    />
+  );
 };

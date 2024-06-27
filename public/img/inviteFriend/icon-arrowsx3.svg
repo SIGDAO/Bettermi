@@ -1,0 +1,20 @@
+<svg id="icon-arrowsx3" xmlns="http://www.w3.org/2000/svg" width="66" height="44" viewBox="0 0 66 44">
+  <g id="Group_16290" data-name="Group 16290">
+    <g id="ic_next">
+      <path id="ic_chevron_right_24px" d="M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z" transform="translate(9.41 10)" fill="#4136f1"/>
+      <rect id="square" width="44" height="44" fill="#4136f1" opacity="0"/>
+    </g>
+    <g id="Group_16288" data-name="Group 16288" transform="translate(11)">
+      <g id="Group_16287" data-name="Group 16287">
+        <g id="ic_next-2" data-name="ic_next">
+          <path id="ic_chevron_right_24px-2" data-name="ic_chevron_right_24px" d="M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z" transform="translate(9.41 10)" fill="#4136f1"/>
+          <rect id="square-2" data-name="square" width="44" height="44" fill="#4136f1" opacity="0"/>
+        </g>
+      </g>
+      <g id="ic_next-3" data-name="ic_next" transform="translate(11)">
+        <path id="ic_chevron_right_24px-3" data-name="ic_chevron_right_24px" d="M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z" transform="translate(9.41 10)" fill="#4136f1"/>
+        <rect id="square-3" data-name="square" width="44" height="44" fill="#4136f1" opacity="0"/>
+      </g>
+    </g>
+  </g>
+</svg>

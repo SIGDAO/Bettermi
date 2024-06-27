@@ -131,32 +131,18 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
       setCount(100);
       setIsLoading(false);
+      store.dispatch(profileSlice.actions.setNFTId("error"));
       navigate("/generateFreeNFT", { state: { nftId: "error" } });
     } else {
       setCount(100);
       setIsLoading(false);
-      store.dispatch(profileSlice.actions.setNFTImageAddress(latestTransactionList[0]));
+      console.log("latestTransactionList[0] is",latestTransactionList[0]);
+      store.dispatch(profileSlice.actions.setNFTId(latestTransactionList[0]));
       navigate("/generateFreeNFT", { state: { nftId: latestTransactionList[0] } });
     }
   };
 
-  useEffect(() => {
-    if (nftLoaded.current === true) {
 
-    } else {
-      nftLoaded.current = true;
-      if (pathname === "/loadingBMIDaily") {
-        checkIfBMIcreated()
-          .catch((err) => {
-            console.error(err);
-          })
-        return;
-      }
-      checkIfNFTMinted().catch((err) => {
-        console.error(err);
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
@@ -188,6 +174,27 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       clearInterval(timer);
     };
   }, []);
+
+
+    // main function
+    useEffect(() => {
+      if (nftLoaded.current === true) {
+  
+      } else {
+        nftLoaded.current = true;
+        if (pathname === "/loadingBMIDaily") {
+          checkIfBMIcreated()
+            .catch((err) => {
+              console.error(err);
+            })
+          return;
+        }
+        checkIfNFTMinted().catch((err) => {
+          console.error(err);
+        });
+      }
+    }, []);
+  
 
   // useEffect(() => {
   //   if (count >= 100) {
