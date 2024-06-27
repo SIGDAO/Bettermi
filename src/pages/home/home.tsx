@@ -27,7 +27,9 @@ import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 import HomeMissionList from "./horzontalScrollContainer";
 import UserInfoContainer from "./userInfoContainer";
 
-interface IHomeProps {}
+interface IHomeProps {
+  pathname?:string
+}
 
 const checkSlides = (isGuest: boolean) => {
   if (isGuest) {
@@ -66,6 +68,8 @@ const handleUnload = (e: any) => {
 };
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const pathname: string|undefined = props.pathname;
+  console.log("pathname is",pathname);
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
@@ -127,7 +131,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const nftIconCheck = useRef(false);
   useEffect(() => {
     // Function to fetch data from the APIc
-    if (nftIconCheck.current || isGuest) {
+    if (nftIconCheck.current || isGuest || pathname === '/referralGiveReward') {
       return;
     }
     nftIconCheck.current = true;
@@ -181,7 +185,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   const nftContractChecked = useRef(false);
   useEffect(() => {
-    if (nftContractChecked.current || isGuest) {
+    if (nftContractChecked.current || isGuest || pathname == '/referralGiveReward') {
       return;
     }
     nftContractChecked.current = true;

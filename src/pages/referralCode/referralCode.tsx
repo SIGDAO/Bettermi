@@ -10,6 +10,9 @@ import { connectWallet } from "../../NftSystem/connectWallet/connectWallet";
 import { accountSlice } from "../../redux/account";
 import { profileSlice } from "../../redux/profile";
 import { checkIfUserExists } from "../../NftSystem/verifyUser/checkIfUserAccountExists";
+import { Store } from "redux";
+import { referrer, referrerSlice } from "../../redux/referrer";
+import EntranceScreenTemplate from "../entranceScreenTemplate/entranceScreenTemplate";
 
 export interface IReferralCodeProps {}
 
@@ -25,7 +28,6 @@ export default function ReferralCode(props: IReferralCodeProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   store.dispatch({ type: "USER_LOGOUT" });
-
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any,codeHashId:string,codeHashIdForNft:string,assetId:string,navigate:any,referralCode:string ) => {
     try{
         const userInfo = await connectWallet(appName, Wallet, Ledger,codeHashId,codeHashIdForNft,assetId);
@@ -54,7 +56,9 @@ export default function ReferralCode(props: IReferralCodeProps) {
             navigate("/home");
           } 
           else {
-            console.log("called once")
+            console.log("called once");
+            const referrerObj:referrer = {referrerAccountId:referralCode};
+            store.dispatch(referrerSlice.actions.setReferrerAccountId(referrerObj))
             navigate(`/discordVerification/${referralCode}`);
           }
     }
@@ -70,47 +74,43 @@ export default function ReferralCode(props: IReferralCodeProps) {
     }
   }
 
-  const logo: JSX.Element = (
-    <div className="referralCode-bg-img-container">
-      {isLoading && <img className="referralCode-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/freeze_bettermi_logo.png"} />}
-      <img 
-        className="referralCode-bg-img" 
-        src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed.gif"} 
-        onLoad={() => setIsLoading(false)} 
-        style={{ display: isLoading ? 'none' : 'inline-block' }}  
-      />
-    </div>
-  );
 
   const content: JSX.Element = (
-    <div className="referralCode-layout">
-      <div id="referralCode-container">
-        {logo}
-        <BackButton/>
-        <div className="referralCode-option-container">
-          <div id="referralCode-button-container">
-            <ButtonWithAction
-              text="XT wallet"
-              action={() => {
-                // if(referralCode){
-                    userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate,referralCode!);
-                // }
-                // else{
-                //     alert("Its not a valid referral link")
-                //     navigate("/");
-                // }
+    <EntranceScreenTemplate 
+      upperButtonFunction={() =>userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate,referralCode!)} 
+      lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
+      setIsLoading = {setIsLoading}
+      isLoading = {isLoading}
+    
+    ></EntranceScreenTemplate>
+    // <div className="referralCode-layout">
+    //   <div id="referralCode-container">
+    //     {logo}
+    //     <BackButton/>
+    //     <div className="referralCode-option-container">
+    //       <div id="referralCode-button-container">
+    //         <ButtonWithAction
+    //           text="XT wallet"
+    //           action={() => {
+    //             // if(referralCode){
+    //                 userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate,referralCode!);
+    //             // }
+    //             // else{
+    //             //     alert("Its not a valid referral link")
+    //             //     navigate("/");
+    //             // }
                 
-            }} // TODO: add action to connect wallet
-              height="56px"
-              width="248px"
-            />
-            <Link to="https://phoenix-wallet.rocks/">
-              <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+    //         }} // TODO: add action to connect wallet
+    //           height="56px"
+    //           width="248px"
+    //         />
+    //         <Link to="http://localhost:8080/auth/discord">
+    //           <DisabledButton text="testing original flow" height="56px" width="248px" />
+    //         </Link>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 
   return content;

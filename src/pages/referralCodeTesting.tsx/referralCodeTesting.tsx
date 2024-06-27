@@ -42,7 +42,9 @@ export default function ReferralCodeTesting(props: IReferralCodeProps) {
       console.log(info);
       setUserPublicKey(info!.userPublicKey);
       setLoading(true);
-     }).catch((e) => {console.log("error is",e)});
+     }).catch((e) => {
+      setLoading(true);
+      console.log("error is",e)});
   }, []); 
 
 

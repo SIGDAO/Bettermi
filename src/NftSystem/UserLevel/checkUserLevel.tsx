@@ -34,7 +34,6 @@ export async function checkUserLevel(ledger2: any, userAccountId: string) {
 export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: string) {
   try {
     console.log("userAccountId", userAccountId);
-
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
       if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {

@@ -12,6 +12,7 @@ import { tokenAPI } from "./tokenAPI";
 import { aiCoachAPI } from "./aiCoachAPI"
 import { contractSlice } from "./contract";
 import { aiCoachSlice } from "./aiCoach";
+import { referrerSlice } from "./referrer";
 
 const appReducer = combineReducers({
   wallet: walletSlice.reducer,
@@ -22,6 +23,7 @@ const appReducer = combineReducers({
   selectedNft: selectedNftSlice.reducer,
   contract: contractSlice.reducer,
   aiCoachMsg: aiCoachSlice.reducer,
+  referrer:referrerSlice.reducer,
   [userBMIApi.reducerPath]: userBMIApi.reducer,
   [tokenAPI.reducerPath]: tokenAPI.reducer,
   [aiCoachAPI.reducerPath]: aiCoachAPI.reducer,

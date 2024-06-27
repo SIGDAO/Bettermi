@@ -57,6 +57,7 @@ import ReferralCode from "./pages/referralCode/referralCode";
 import DiscordVerification from "./pages/discordVerification/discordVerification";
 import ReferralCodeTesting from "./pages/referralCodeTesting.tsx/referralCodeTesting";
 import InviteFriend from "./pages/inviteFriend/inviteFriend";
+import AuthorizationDone from "./pages/AuthorizationDone/AuthorizationDone";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -103,6 +104,7 @@ const titleList = {
   "/setting": "Setting - Bettermi",
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
   "/referralCode": "NFT referral code",
+  "/AuthorizationDone" : "discord Authorization"
 };
 
 const guestAllowedPath = [
@@ -136,6 +138,7 @@ const guestAllowedPath = [
   "/errorCustomizeYourProfile",
   "/errorWalletNotConnected",
   "/errorNotEnoughFunds",
+  "/AuthorizationDone",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -157,9 +160,20 @@ const CheckSetting: React.FC = () => {
   // or user is in guest allowed path
   // or user is guest
   useEffect(() => {
-    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null && currentPath !== '/referralGiveReward') {
       dispatch(profileSlice.actions.authenticated());
-    } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
+    } 
+    else if(currentPath === '/referralGiveReward'){
+      dispatch(profileSlice.actions.unauthenticated());
+    }
+    else if (currentPath === '/AuthorizationDone' && !isGuest){
+      console.log("called this")
+    }
+    else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
+      console.log("isGuest",isGuest)
+      console.log("current path is",currentPath);
+      console.log("isGuest",isGuest);
+      console.log("checkCurrentPathIsGuestAllowed(currentPath)",checkCurrentPathIsGuestAllowed(currentPath))
       store.dispatch({ type: "USER_LOGOUT" });
       navigate('/');
     } else {
@@ -181,6 +195,7 @@ function App() {
     document.title = titleList[location.pathname] ?? "Bettermi";
 
     if (location.pathname !== currentPath) {
+      console.log("ioijsdoifjsodifjiosd", currentPath);
       setPreviousPath(currentPath);
       setCurrentPath(location.pathname);
     }
@@ -263,6 +278,10 @@ function App() {
                   <Route path=":referralCode" element={<ReferralCodeTesting />} />
                 </Route>
                 <Route path="/inviteFriend" element={<InviteFriend />} />
+                <Route path="/AuthorizationDone" element = {<AuthorizationDone/>}>
+                  <Route path=":referralCode" element={<AuthorizationDone />} />
+                </Route>
+                <Route path="/referralGiveReward" element={<Home pathname="/referralGiveReward" />} />
               </Route>
             {/* </Route> */}
           </Routes>

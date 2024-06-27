@@ -11,7 +11,9 @@ export default function DiscordVerification(props: IReferralCodeProps) {
   const navigate = useNavigate();
   const { id } = useParams();
   console.log("id is",123);
-
+  const CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID!;
+  const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
+  console.log("redirect uri is",REDIRECT_URI);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [buttonText,setButtonText] = useState<string>("Verification");
 
@@ -35,13 +37,15 @@ export default function DiscordVerification(props: IReferralCodeProps) {
         <BackButton></BackButton>
         <div className="newUserDiscordVerification-option-container">
           <div id="newUserDiscordVerification-button-container">
-            <ButtonWithAction
-              text = {buttonText}
-              action={() => {
-              }} // TODO: add action to connect wallet
-              height="56px"
-              width="248px"
-            />
+            <Link to={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}>
+              <ButtonWithAction
+                text = {buttonText}
+                action={() => {
+                }} // TODO: add action to connect wallet
+                height="56px"
+                width="248px"
+              />
+            </Link>
             <Link to="https://phoenix-wallet.rocks/">
               <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
             </Link>
