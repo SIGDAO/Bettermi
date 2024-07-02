@@ -28,7 +28,7 @@ export default function EntranceScreenTemplate(props: IEntranceScreenTemplatePro
             <DisabledButton text="Phoenix Wallet" height="56px" width="248px" />
             {/* </Link> */}
           </div>
-          <div className="guest-explore-container">
+          <div className="entranceScreen-explore-container">
             <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
             <div className="inter-normal-keppel-12px EntranceScreenTemplate-explore-button" onClick={() => {lowerButtonFunction()}}>
               Explore as a guest
