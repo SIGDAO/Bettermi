@@ -51,7 +51,7 @@
     margin-bottom: 86px;
   }
   
-  .photo {
+  .entranceScreenPhoto {
     width: 100%;
   }
   
@@ -83,7 +83,7 @@
     margin: 0;
   }
   
-  .guest-explore-button {
+  .EntranceScreenTemplate-explore-button {
     cursor: pointer;
     text-decoration: underline;
   }

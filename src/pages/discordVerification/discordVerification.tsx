@@ -5,6 +5,12 @@ import { store } from "../../redux/reducer";
 import { useNavigate,useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BackButton } from "../../components/button";
+import { useSelector } from "react-redux";
+import { accountPublicKey } from "../../redux/account";
+import { selectWalletNodeHost } from "../../redux/useLedger";
+import { LedgerClientFactory } from "@signumjs/core";
+import { useContext } from "react";
+import { AppContext } from "../../redux/useContext";
 export interface IReferralCodeProps {}
 
 export default function DiscordVerification(props: IReferralCodeProps) {
@@ -16,8 +22,31 @@ export default function DiscordVerification(props: IReferralCodeProps) {
   console.log("redirect uri is",REDIRECT_URI);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [buttonText,setButtonText] = useState<string>("Verification");
+  const userPublicKey = useSelector(accountPublicKey);
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
 
-
+  const { appName, Wallet, Ledger } = useContext(AppContext);
+  const Buy = async () => {
+    try{
+      console.log(userPublicKey)
+        const transaction = await ledger2.message.sendMessage({
+            message: JSON.stringify({
+              'bmi': "123",
+              'time': new Date(),
+            }) ,
+            messageIsText: true,
+            recipientId: "7847330972893902412",
+            feePlanck: "1000000",
+            senderPublicKey: userPublicKey,
+            deadline: 1440,
+          }) ;
+        await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
+    }
+    catch(error:any){
+        console.log("error is",error);
+    }
+  }
   const logo: JSX.Element = (
     <div className="newUserDiscordVerification-bg-img-container">
       {isLoading && <img className="newUserDiscordVerification-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/freeze_bettermi_logo.png"} />}
@@ -46,9 +75,14 @@ export default function DiscordVerification(props: IReferralCodeProps) {
                 width="248px"
               />
             </Link>
-            <Link to="https://phoenix-wallet.rocks/">
-              <DisabledButton text="Phoenix wallet" height="56px" width="248px" />
-            </Link>
+            <ButtonWithAction
+                text = {"Test Buy"}
+                action={() => {
+                  Buy();
+                }} // TODO: add action to connect wallet
+                height="56px"
+                width="248px"
+              />
           </div>
         </div>
       </div>

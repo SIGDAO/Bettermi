@@ -132,3 +132,5 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
     </div>
   );
 };
+
+

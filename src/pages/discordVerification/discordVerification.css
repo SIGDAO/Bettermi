@@ -39,15 +39,6 @@
     width: 100%;
   }
   
-  .connect-profilePic {
-    width: 262px;
-    height: 288px;
-  }
-  
-  .connect-profilePic-side {
-    width: 180px;
-    height: 198px;
-  }
   
   #newUserDiscordVerification-button-container {
     display: flex;
@@ -56,7 +47,7 @@
     gap: 10px;
   }
   
-  .guest-explore-button {
+  .EntranceScreenTemplate-explore-button {
     cursor: pointer;
   }
   
