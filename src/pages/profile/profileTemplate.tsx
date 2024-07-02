@@ -9,7 +9,15 @@ import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { profileSlice, selectCurrentAboutYourself, selectCurrentDescription, selectCurrentDiscordUsername, selectCurrentIsGuest, selectCurrentIsNewUser, selectCurrentUsername } from "../../redux/profile";
+import {
+  profileSlice,
+  selectCurrentAboutYourself,
+  selectCurrentDescription,
+  selectCurrentDiscordUsername,
+  selectCurrentIsGuest,
+  selectCurrentIsNewUser,
+  selectCurrentUsername,
+} from "../../redux/profile";
 import { Alert } from "@mui/material";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
@@ -23,6 +31,7 @@ import IPFSImageComponent from "../../components/ipfsImgComponent";
 import EditProfilePopUpWindow from "./editProfilePopUpWindow";
 import ProfileUserInfoContainer from "./profileUserInfoContainer";
 import UserNFTList from "./userNFTList";
+import { BlackAlert } from "../../components/alert";
 
 interface IProfileTemplateProps {
   previousPath?: string;
@@ -64,7 +73,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const { previousPath, userAccountId, isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow, isNFTiconLoading, setIsNFTiconLoading, setImgAddress, setRewardPercentage, isMyProfile } = props;
 
   const isGuest = useAppSelector(selectCurrentIsGuest);
-  const isNewUsser = useSelector(selectCurrentIsNewUser)
+  const isNewUsser = useSelector(selectCurrentIsNewUser);
 
   // signum related
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -165,7 +174,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     }
   };
 
-
   const displayPopUpMessage = (message: string): void => {
     setAlertWarningString(message);
     setAlert(true);
@@ -185,23 +193,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     setIsBackButton(true);
   };
 
-  // countdown for alert message show
-  useEffect(() => {
-    const countdown = () => {
-      if (copyAlertCount > 0) {
-        setCopyAlertCount((prevCount) => prevCount - 1);
-      }
-      if (copyAlertCount === 0) {
-        setAlert(false);
-      }
-    };
-
-    const timer = setInterval(countdown, 1000);
-
-    return () => clearInterval(timer);
-  }, [copyAlertCount]);
-
-
   useEffect(() => {
     // don't fetch data if user is guest
     if (isGuest && isMyProfile) return;
@@ -212,17 +203,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   }, []);
 
 
-  const alertDisplay: JSX.Element = (
-    <Alert
-      className="copied-alert"
-      icon={false}
-      // icon={<CheckIcon fontSize="inherit" />}
-      severity="success"
-    >
-      {alertWarningString}
-    </Alert>
-  );
-
   return (
     <div
       className="bettermidapp-profile-3"
@@ -231,7 +211,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
       }}
     >
       <ShortTitleBar title="Profile" aiCoach={true} setting={true} />
-      {alert && alertDisplay}
+      <BlackAlert alertWarningString={alertWarningString} copyAlertCount={copyAlertCount} setCopyAlertCount={setCopyAlertCount} alert={alert} setAlert={setAlert} />
       <div className="overlap-design-layout">
         <ProfileUserInfoContainer
           isUpdatingUserSetting={isUpdatingUserSetting}
