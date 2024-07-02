@@ -100,6 +100,7 @@ const titleList = {
   "/errorTakeSelfieTooManyFace": "Error Take Selfie - Bettermi",
   "/errorTakeSelfie": "Error Take Selfie - Bettermi",
   "/errorCustomizeYourProfile": "Error Customize Your Profile - Bettermi",
+  "/errorReferralCode": "Error Referral Code - Bettermi",
   "/loadingMinting": "Loading Minting - Bettermi",
   "/setting": "Setting - Bettermi",
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
@@ -138,6 +139,7 @@ const guestAllowedPath = [
   "/errorCustomizeYourProfile",
   "/errorWalletNotConnected",
   "/errorNotEnoughFunds",
+  "/errorReferralCode",
   "/AuthorizationDone",
 ];
 
@@ -263,6 +265,7 @@ function App() {
                 <Route path="/errorCustomizeYourProfile" element={<ErrorGenerateNFT />} />
                 <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
                 <Route path="/errorNotEnoughFunds" element={<ErrorGenerateNFT />} />
+                <Route path="/errorReferralCode" element={<ErrorGenerateNFT />} />
                 <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
                 <Route path="/setting" element={<Setting />} />
                 <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />

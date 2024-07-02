@@ -11,7 +11,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
   const location = useLocation();
   const [errorMsg, setErrorMsg] = React.useState<string>("");
   const [buttonText, setButtonText] = React.useState<string>("");
-  const [navigatePath, setNavigatePath] = React.useState<string>("");
+  const [navigatePath, setNavigatePath] = React.useState<string | number>("");
 
   useEffect(() => {
     switch (location.pathname) {
@@ -45,6 +45,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setButtonText("Get tokens");
         setNavigatePath("https://discord.com/invite/MATW3Dcdcw");
         break;
+      case "/errorReferralCode":
+        setErrorMsg("Looks like something went wrong.\n Let's try again!");
+        setButtonText("Try again");
+        setNavigatePath(-1);
+        break;
       default:
         break;
     }
@@ -57,12 +62,12 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         <div className="bg_2-FumncE">
           <img className="bg-lme0fw" src="img/errorGenerateNFT/bg-10@1x.png" alt="BG" />
           <div className="x16220-lme0fw">
-            <p className="this-nft-has-been-sn-RYas9d">{errorMsg}</p>
-            <h1 className="title-RYas9d inter-semi-bold-white-28px">すみません!</h1>
+            <p className="inter-normal-hot-magenta-15px this-nft-has-been-sn-RYas9d">{errorMsg}</p>
+            <h1 className="title-RYas9d inter-semi-bold-white-28px">Oh Dear…</h1>
             <div className="ic_sentiment_very_dissatisfied_24px-RYas9d ic_sentiment_very_dissatisfied_24px">
               <img
                 className="ic_sentiment_very_dissatisfied_24px-TVetTD ic_sentiment_very_dissatisfied_24px"
-                src="img/errorGenerateNFT/mimi_for_error_page.png"
+                src={process.env.PUBLIC_URL + "/img/errorGenerateNFT/mimi_error_.png"}
                 alt="ic_sentiment_very_dissatisfied_24px"
               />
             </div>

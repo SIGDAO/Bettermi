@@ -339,6 +339,14 @@ a:focus-visible {
   font-weight: 400;
 }
 
+.inter-normal-hot-magenta-15px {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-normal-keppel-12px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
