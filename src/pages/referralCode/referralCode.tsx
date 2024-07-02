@@ -15,7 +15,7 @@ import { referrer, referrerSlice } from "../../redux/referrer";
 import EntranceScreenTemplate from "../entranceScreenTemplate/entranceScreenTemplate";
 import EntranceLogo from "../entranceScreenTemplate/EntranceLogo";
 import ReferralCodeLogo from "../entranceScreenTemplate/referralCodeLogo";
-import { DiscordVerification } from "../entranceScreenTemplate/discordVerification";
+import { DiscordVerificationPopUp } from "../entranceScreenTemplate/discordVerification";
 
 export interface IReferralCodeProps {}
 
@@ -79,6 +79,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
   };
 
   const content: JSX.Element = (
+    <DiscordVerificationPopUp isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow} setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} content={screenContent}>
     <div className="referralCode-layout">
       <div id="referralCode-container">
         <div className="referralCodeTitle">
@@ -88,15 +89,19 @@ export default function ReferralCode(props: IReferralCodeProps) {
         {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
         <ReferralCodeLogo></ReferralCodeLogo>
         <div className="referralCodeButtonContainter">
-          <EntranceScreenTemplate
+
+
+        <EntranceScreenTemplate
             // upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
             upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
             lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
           ></EntranceScreenTemplate>
-          <DiscordVerification isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow} setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} content={screenContent}></DiscordVerification>
+
+
         </div>
       </div>
     </div>
+    </DiscordVerificationPopUp>
 
     // <div className="referralCode-layout">
     //   <div id="referralCode-container">
