@@ -42,28 +42,11 @@
     color: rgba(255, 255, 255, 0.7);
   }
   
-  #img-slider {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 86px;
-  }
   
   .entranceScreenPhoto {
     width: 100%;
   }
   
-  .connect-profilePic {
-    width: 262px;
-    height: 288px;
-  }
-  
-  .connect-profilePic-side {
-    width: 180px;
-    height: 198px;
-  }
   
   #entranceScreenTemplate-button-container {
     display: flex;
@@ -72,14 +55,14 @@
     gap: 20px;
   }
   
-  .guest-explore-container {
+  .entranceScreen-explore-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 10px;
   }
   
-  .guest-explore-container > p {
+  .entranceScreen-explore-container > p {
     margin: 0;
   }
   
@@ -123,9 +106,6 @@
   }
   
   @media screen and (max-height: 594px) {
-    #img-slider {
-      margin-bottom: 20px;
-    }
     #entranceScreenTemplate-button-container {
       /* position: fixed; */
       /* bottom: 20px; */
@@ -137,9 +117,6 @@
   }
   
   @media screen and (max-width: 320px) {
-    #img-slider {
-      margin-bottom: 20px;
-    }
   
     #entranceScreenTemplate-button-container {
   

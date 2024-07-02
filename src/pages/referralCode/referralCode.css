@@ -27,28 +27,12 @@
     color: rgba(255, 255, 255, 0.7);
   }
   
-  #img-slider {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 86px;
-  }
   
   .referralCode-layout .photo {
     width: 100%;
   }
   
-  .connect-profilePic {
-    width: 262px;
-    height: 288px;
-  }
   
-  .connect-profilePic-side {
-    width: 180px;
-    height: 198px;
-  }
   
   #referralCode-button-container {
     display: flex;
@@ -87,9 +71,6 @@
   }
   
   @media screen and (max-height: 594px) {
-    #img-slider {
-      margin-bottom: 20px;
-    }
     #referralCode-button-container {
       /* position: fixed; */
       /* bottom: 20px; */
@@ -102,9 +83,7 @@
   
   
   @media screen and (max-width: 320px) {
-    #img-slider {
-      margin-bottom: 20px;
-    }
+
   
     #referralCode-button-container {
   
@@ -114,12 +93,6 @@
   }
   
   @media (min-width: 768px) {
-    .element {
-      /* Styles for mobile devices */
-      font-size: 14px;
-      margin: 10px;
-      padding: 5px;
-    }
     #referralCode-container {
         display: flex;
         flex-direction: column;
@@ -142,12 +115,6 @@
     min-height: auto;
   } */
   @media (max-width: 768px) {
-    .element {
-      /* Styles for mobile devices */
-      font-size: 14px;
-      margin: 10px;
-      padding: 5px;
-    }
     #referralCode-container {
         display: flex;
         flex-direction: column;
