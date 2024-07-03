@@ -1,7 +1,9 @@
 import React from "react";
 import { Dispatch, useEffect } from "react";
 import { GuestConnectWallectButton } from "../../components/button";
-interface IDiscordVerificationProp {
+
+
+interface IDiscordVerificationPopUpProp {
     isPopUpNFTDetailWinodow: boolean;
     setIsPopUpNFTDetailWinodow: Dispatch<React.SetStateAction<boolean>>;
     children?: React.ReactNode;
@@ -9,7 +11,7 @@ interface IDiscordVerificationProp {
     buttonComponent?: React.ReactNode;
 }
   
-export const DiscordVerification: React.FunctionComponent<IDiscordVerificationProp> = ({
+export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificationPopUpProp> = ({
   content,
     isPopUpNFTDetailWinodow,
     setIsPopUpNFTDetailWinodow,
@@ -43,13 +45,13 @@ export const DiscordVerification: React.FunctionComponent<IDiscordVerificationPr
             }
            {buttonComponent?buttonComponent:<></>}
           </div>
+          </div>
           <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
-        </div>
         </>
       );
     return(
     <>{isPopUpNFTDetailWinodow && <div className="hidden-content">{ guestNFTDetailpopupWindowDisplay }</div>}
-
+      {children}
     </>
     );
   }

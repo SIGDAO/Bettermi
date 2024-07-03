@@ -23,6 +23,14 @@ interface IPopupWindowTemplateProp {
   // hideUseState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface IDiscordVerificationProp {
+  isPopUpNFTDetailWinodow: boolean;
+  setIsPopUpNFTDetailWinodow: Dispatch<React.SetStateAction<boolean>>;
+  children?: React.ReactNode;
+  content: string[];
+  buttonComponent?: React.ReactNode;
+}
+
 export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
   const navigate = useNavigate();
   const isGuest = useSelector(selectCurrentIsGuest);
@@ -132,5 +140,3 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
     </div>
   );
 };
-
-

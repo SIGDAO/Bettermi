@@ -251,7 +251,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   }
 };
 
-export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, width, className }) => {
+export const  GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, width, className }) => {
   const guestButtonStyle: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
@@ -274,6 +274,37 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
       width={width}
       imagePath="img/wallet.svg"
       navigation="/"
+      className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
+      style={guestButtonStyle}
+      imageClassName="wallet-icon"
+    />
+  );
+};
+
+export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, width, className }) => {
+  const guestButtonStyle: CSS.Properties = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: height,
+    width: width,
+    background: "transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box",
+    boxShadow: "0px 15px 30px #1466CC29",
+    borderRadius: "10px",
+    gap: "10px",
+  };
+  const CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID!;
+  const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
+  // const connectWalletButton: CSS.Properties = {
+  //   dis
+
+  return (
+    <ButtonWithNavigation
+      text="Continue"
+      height={height}
+      width={width}
+      imagePath="img/wallet.svg"
+      navigation={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}
       className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
       style={guestButtonStyle}
       imageClassName="wallet-icon"

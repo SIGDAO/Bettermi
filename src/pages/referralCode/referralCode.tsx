@@ -15,7 +15,8 @@ import { referrer, referrerSlice } from "../../redux/referrer";
 import EntranceScreenTemplate from "../entranceScreenTemplate/entranceScreenTemplate";
 import EntranceLogo from "../entranceScreenTemplate/EntranceLogo";
 import ReferralCodeLogo from "../entranceScreenTemplate/referralCodeLogo";
-import { DiscordVerification } from "../entranceScreenTemplate/discordVerification";
+import { DiscordVerificationPopUp } from "../entranceScreenTemplate/discordVerification";
+import { GuestConnectWallectButton,DiscordVerificationButton } from "../../components/button";
 
 export interface IReferralCodeProps {}
 
@@ -32,7 +33,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   store.dispatch({ type: "USER_LOGOUT" });
-  const screenContent:string[] = ["Discord Verification","","Use connected wallet for Discord API.", "Ensure you have a Discord account"];
+  const screenContent: string[] = ["Discord Verification", "", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any, referralCode: string) => {
     try {
@@ -64,7 +65,8 @@ export default function ReferralCode(props: IReferralCodeProps) {
         console.log("called once");
         const referrerObj: referrer = { referrerAccountId: referralCode };
         store.dispatch(referrerSlice.actions.setReferrerAccountId(referrerObj));
-        navigate(`/discordVerification/${referralCode}`);
+        setIsPopUpNFTDetailWinodow(true)
+        // navigate(`/discordVerification/${referralCode}`);
       }
     } catch (error: any) {
       if (error.name === "InvalidNetworkError") {
@@ -79,24 +81,30 @@ export default function ReferralCode(props: IReferralCodeProps) {
   };
 
   const content: JSX.Element = (
-    <div className="referralCode-layout">
-      <div id="referralCode-container">
-        <div className="referralCodeTitle">
-          <h1 className="EntranceTitle">Lucky You!</h1>
-          <div className="EntranceContent">Get Sigdao Reward From Your Friend !</div>
-        </div>
-        {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
-        <ReferralCodeLogo></ReferralCodeLogo>
-        <div className="referralCodeButtonContainter">
-          <EntranceScreenTemplate
-            // upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
-            upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
-            lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
-          ></EntranceScreenTemplate>
-          <DiscordVerification isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow} setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow} content={screenContent}></DiscordVerification>
+    <DiscordVerificationPopUp
+      isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
+      setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
+      content={screenContent}
+      buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
+    >
+      <div className="referralCode-layout">
+        <div id="referralCode-container">
+          <div className="referralCodeTitle">
+            <h1 className="EntranceTitle">Lucky You!</h1>
+            <div className="EntranceContent">Get Sigdao Reward From Your Friend !</div>
+          </div>
+          {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
+          <ReferralCodeLogo></ReferralCodeLogo>
+          <div className="referralCodeButtonContainter">
+            <EntranceScreenTemplate
+              upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
+              // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
+              lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
+            ></EntranceScreenTemplate>
+          </div>
         </div>
       </div>
-    </div>
+    </DiscordVerificationPopUp>
 
     // <div className="referralCode-layout">
     //   <div id="referralCode-container">
