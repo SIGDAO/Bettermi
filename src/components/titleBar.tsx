@@ -18,6 +18,7 @@ interface IShortTitleBarProps {
   isOpenImport?: boolean;
   customiseBackButton?: boolean;
   customiseBackButtonLink?: string;
+  // isPositionNotFixed?: boolean;
 }
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
@@ -51,16 +52,17 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   );
 
   return (
-    <div className="title-bar-layout">
+    // <div className="title-bar-layout">
       <div
         className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
-        style={
-          {
-            // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
-            // backgroundPosition: 'center',
-            // backgroundSize: 'cover',
-          }
-        }
+        // style={isPositionNotFixed ? {position: "relative"} : {}}
+        // style={
+        //   {
+        //     // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
+        //     // backgroundPosition: 'center',
+        //     // backgroundSize: 'cover',
+        //   }
+        // }
       >
         <div className="title-bar-content">
           <div className="title-bar-left-container">
@@ -74,7 +76,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         </div>
         {/* {keepAsReference} */}
       </div>
-    </div>
+    // </div>
   );
 };
 

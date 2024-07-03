@@ -10,8 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 29px;
-  padding-top: 148px;
 }
 
 .invite-friend-icon-description-container {
@@ -45,7 +43,8 @@
 
 .invite-friend-description {
   width: 280px;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 33px;
 }
 
 .invite-friend-copy-invite-link {
@@ -59,7 +58,7 @@
   width: 300px;
   height: 56px;
   display: flex;
-
+  margin-bottom: 29px;
   gap: 23px;
   align-items: center;
   justify-content: center;
@@ -143,4 +142,42 @@
 
 .invite-friend-sigdao-earn {
   margin-bottom: 21px;
+}
+
+.bettermi-invite-friend-layout-below {
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+  height: 526px;
+  border: 1px solid var(--royal-blue);
+  background: var(--woodsmoke);
+  border-radius: 20px 20px 0 0;
+  /* justify-content: center; */
+  align-items: center;
+  padding-top: 37px;
+}
+
+.referral-program-banner {
+  width: 390px;
+}
+
+.referral-program-banner-container {
+  width: 390px;
+  height: 230px;
+  overflow: hidden;
+  margin-top: 88px;
+  display: flex;
+  align-items: center;
+}
+
+.bettermi-invite-friend-content {
+  width: 300px;
+  height: 372px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.invite-friend-referral-program-container .inter-bold-royal-blue-15px {
+  padding-left: 11.5px;
 }
