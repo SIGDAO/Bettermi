@@ -2,6 +2,7 @@ import React from "react";
 import { Dispatch, useEffect } from "react";
 import { GuestConnectWallectButton } from "../../components/button";
 
+
 interface IDiscordVerificationPopUpProp {
     isPopUpNFTDetailWinodow: boolean;
     setIsPopUpNFTDetailWinodow: Dispatch<React.SetStateAction<boolean>>;
