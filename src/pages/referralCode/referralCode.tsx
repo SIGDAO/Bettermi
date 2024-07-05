@@ -32,11 +32,12 @@ export default function ReferralCode(props: IReferralCodeProps) {
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
-  store.dispatch({ type: "USER_LOGOUT" });
-  const screenContent: string[] = ["Discord Verification", "", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
+  // store.dispatch({ type: "USER_LOGOUT" });
+  const screenContent: string[] = ["Discord Verification", "","img/referralCode/discordLogo.png", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any, referralCode: string) => {
     try {
+      store.dispatch({ type: "USER_LOGOUT" });
       const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
       if (userInfo == null) {
         alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
@@ -65,6 +66,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
         console.log("called once");
         const referrerObj: referrer = { referrerAccountId: referralCode };
         store.dispatch(referrerSlice.actions.setReferrerAccountId(referrerObj));
+        console.log("referrerObj is",referrerObj)
         setIsPopUpNFTDetailWinodow(true)
         // navigate(`/discordVerification/${referralCode}`);
       }
@@ -100,6 +102,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
               upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
               // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
               lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
+              haveButton = {true}
             ></EntranceScreenTemplate>
           </div>
         </div>
