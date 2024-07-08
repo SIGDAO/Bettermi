@@ -3,12 +3,19 @@
 .bettermidapp-rewards-2 {
   background: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%);
   background-color: rgba(255,255,255,1.0);
-  height: 844px;
-  overflow: hidden;
+  height: 100vh;
   overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   width: 390px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+.bettermidapp-rewards-2::-webkit-scrollbar {
+  display: none;
+}
+
 
 .bettermidapp-rewards-2 .bg-kQlY8S {
   height: 936px;
@@ -16,9 +23,6 @@
   width: 480px;
 }
 
-.bettermidapp-rewards-2 .rewards-cards-kQlY8S {
-  top: 108px;
-}
 
 .bettermidapp-rewards-2 .master-collector-5RWzHs {
   background-color: transparent;
@@ -55,9 +59,6 @@
   width: 20px;
 }
 
-.bettermidapp-rewards-2 .rewards-cards-TttECi {
-  top: 273px;
-}
 
 .bettermidapp-rewards-2 .selfie-champion-O07kH5 {
   background-color: transparent;
@@ -94,9 +95,6 @@
   width: 29px;
 }
 
-.bettermidapp-rewards-2 .rewards-cards-xzgu34 {
-  top: 438px;
-}
 
 .bettermidapp-rewards-2 .social-butterfly-nGgOF5 {
   background-color: transparent;
@@ -133,9 +131,7 @@
   width: 28px;
 }
 
-.bettermidapp-rewards-2 .rewards-cards-C55ruw {
-  top: 603px;
-}
+
 
 .bettermidapp-rewards-2 .elite-challenger-yvS2xN {
   background-color: transparent;
@@ -442,7 +438,7 @@
   cursor: pointer;
   height: 150px;
   left: 25px;
-  position: absolute;
+  position: relative;
   width: 340px;
   border: 1px solid #4136F1;
   border-radius: 20px;
@@ -472,4 +468,11 @@
   text-align: left;
   top: 2px;
   white-space: nowrap;
+}
+
+.reward-cards-container {
+  padding-top: 108px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

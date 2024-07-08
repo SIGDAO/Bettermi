@@ -1,0 +1,48 @@
+.sigdao-icon-container {
+  position: relative;
+}
+
+
+.sigdao-icon-container div {
+  border-radius: 10.76px;
+}
+
+.sigdao-icon-white-bg {
+  background-color: var(--white);
+  border-radius: 8.26px;
+  height: 100%;
+  /* left: 0px; */
+  position: absolute;
+  /* top: 0px; */
+  width: 100%;
+}
+
+.sigdao-icon-bg {
+  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
+  background-color: transparent;
+  border-radius: 8.03px;
+  height: 97.18%;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  /* left: 1.41%; */
+  position: absolute;
+  /* top: 1.41%; */
+  width: 97.18%;
+}
+
+.sigdao-icon {  
+  background-color: transparent;
+  height: 54.68%;
+  /* left: 25.90%; */
+  object-fit: cover;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 47.30%;
+}

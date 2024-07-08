@@ -3,6 +3,7 @@ import "./home.css";
 import UserIcon from "../../components/loadUserIcon";
 import { Link } from "react-router-dom";
 import { Dispatch } from "react";
+import SigdaoIcon from "../../components/icon";
 
 interface IUserInfoContainerProps {
   isGuest: boolean;
@@ -86,11 +87,7 @@ const UserInfoContainer: React.FunctionComponent<IUserInfoContainerProps> = ({
                 <div className="score-bar_3-2ZgxSS">
                   <div className="sigdao-score-iPTNDG sigdao-score">
                     <div className="x10-kxjIEt x10 inter-semi-bold-keppel-15px">{loading ? <div>loading...</div> : Token}</div>
-                    <div className="signdao_tokengradient-kxjIEt signdao_tokengradient">
-                      <div className="x441-e5x8kp x441"></div>
-                      <div className="x442-e5x8kp x442"></div>
-                      <img className="x880-e5x8kp x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-                    </div>
+                    <SigdaoIcon />
                   </div>
                 </div>
               </>

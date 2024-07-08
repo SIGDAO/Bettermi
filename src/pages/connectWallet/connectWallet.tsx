@@ -54,11 +54,15 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       }
       const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
-
       // situation:
       // all contract is created, but one or more contract still unconfirmed
       // or, not enqiuped NFT, then navigate to loadingMinting
-      if (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true || userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true || userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null || !equippedBettermiNft) {
+      if (
+        !equippedBettermiNft &&
+        ((userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
+          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null))
+      ) {
         navigate("/loadingMinting");
         return;
       }
@@ -108,7 +112,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
     //   />
     // </div>
     // <div className="connectWallet-bg-img-container">
-      <>
+    <>
       {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
       <img
         className="connectWallet-bg-img"
@@ -116,7 +120,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         onLoad={() => setIsLoading(false)}
         style={{ display: isLoading ? "none" : "inline-block" }}
       />
-      </>
+    </>
     // </div>
   );
 

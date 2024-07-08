@@ -31,6 +31,8 @@ interface IDiscordVerificationProp {
   buttonComponent?: React.ReactNode;
 }
 
+// const 
+
 export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
   const navigate = useNavigate();
   const isGuest = useSelector(selectCurrentIsGuest);

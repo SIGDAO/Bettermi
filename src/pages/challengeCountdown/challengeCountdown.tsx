@@ -10,6 +10,7 @@ import { walletNodeHost } from "../../redux/wallet";
 import { TransferToken } from "../../components/transferToken";
 import { challengeList } from "../../data/challengeList";
 import { useParams } from "react-router-dom";
+import SigdaoIcon from "../../components/icon";
 
 interface IChallengeCountdownProps {
   taskName?: string;
@@ -83,11 +84,7 @@ const ChallengeCountdown: React.FunctionComponent<IChallengeCountdownProps> = (p
           <div className="challenge-guide-and-rewards-container">
             <div className="challenge-guide-D6xMU2 inter-semi-bold-royal-blue-15px">CHALLENGE GUIDE</div>
             <div className="sigdao-score-D6xMU2">
-              <div className="signdao_tokengradient-ajiZIc">
-                <div className="x441-8JkMaQ"></div>
-                <div className="x442-8JkMaQ"></div>
-                <img className="x880-8JkMaQ" src={`${process.env.PUBLIC_URL}/img/challengeCountdown/file---880-1x-png-10@1x.png`} alt="880" />
-              </div>
+              <SigdaoIcon width="17px" height="17px" />
               <div className="x10-ajiZIc inter-semi-bold-keppel-14px">{displayMission.sigdao}</div>
             </div>
           </div>

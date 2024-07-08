@@ -157,22 +157,6 @@
   width: 94px;
 }
 
-.bettermidapp-home-1 .signdao_tokengradient-HEHiSw {
-  top: 1px;
-  width: 17px;
-}
-
-.bettermidapp-home-1 .x441-giFx9O {
-  border-radius: 8.26px;
-}
-
-.bettermidapp-home-1 .x442-giFx9O {
-  border-radius: 8.03px;
-}
-
-.bettermidapp-home-1 .x880-giFx9O {
-  height: 54.69%;
-}
 
 .home-locked-image-overlay {  
   position: absolute;
@@ -187,22 +171,6 @@
 
 
 
-.bettermidapp-home-1 .signdao_tokengradient-UyxTRp {
-  top: 1px;
-  width: 17px;
-}
-
-.bettermidapp-home-1 .x441-ozHgg7 {
-  border-radius: 8.26px;
-}
-
-.bettermidapp-home-1 .x442-ozHgg7 {
-  border-radius: 8.03px;
-}
-
-.bettermidapp-home-1 .x880-ozHgg7 {
-  height: 54.69%;
-}
 .home_nft_-avatar{
   background: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);
   text-align: center;
@@ -235,23 +203,6 @@
   line-height: 14px;
   top: 2px;
   width: 29px;
-}
-
-.bettermidapp-home-1 .signdao_tokengradient-SMcg87 {
-  top: 1px;
-  width: 17px;
-}
-
-.bettermidapp-home-1 .x441-JHyhgs {
-  border-radius: 8.26px;
-}
-
-.bettermidapp-home-1 .x442-JHyhgs {
-  border-radius: 8.03px;
-}
-
-.bettermidapp-home-1 .x880-JHyhgs {
-  height: 54.69%;
 }
 
 .bettermidapp-home-1 .view-all-RoXPLo {
@@ -814,10 +765,6 @@ color
   width: 44px;
 }
 
-.bettermidapp-home-1 .signdao_tokengradient-kxjIEt {
-  width: 22px;
-}
-
 .bettermidapp-home-1 .x441-e5x8kp {
   border-radius: 10.76px;
 }
@@ -971,13 +918,6 @@ color
   position: absolute;
 }
 
-.bettermidapp-home-1 .signdao_tokengradient {
-  background-color: transparent;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-}
-
 .bettermidapp-home-1 .small-image {
   background-color: transparent;
   height: 100%;
@@ -1002,34 +942,6 @@ color
   right: -2px;
   text-align: left;
   white-space: nowrap;
-}
-
-.bettermidapp-home-1 .x441 {
-  background-color: var(--white);
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-}
-
-.bettermidapp-home-1 .x442 {
-  background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
-  background-color: transparent;
-  height: 97.18%;
-  left: 1.41%;
-  position: absolute;
-  top: 1.41%;
-  width: 97.18%;
-}
-
-.bettermidapp-home-1 .x880 {
-  background-color: transparent;
-  left: 25.90%;
-  object-fit: cover;
-  position: absolute;
-  top: 22.14%;
-  width: 47.30%;
 }
 
 

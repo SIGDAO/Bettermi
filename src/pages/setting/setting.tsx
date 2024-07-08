@@ -43,7 +43,7 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
           <SettingOption title={"Terms of Service"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/termsofservice.html"} />
           <SettingOption title={"Privacy Policy"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/privacypolicy.html"} />
           <SettingOption title={"Help"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/#content3-gm"} />
-          <SettingOption title={"Disable"} description={isGuest ? "" : "0.0.04"} disabled={isGuest} arrow={isGuest} inBettermiPath={false} />
+          <SettingOption title={"Disable"} description={""} disabled={true} arrow={isGuest} inBettermiPath={false} />
           {isGuest ? (
             <div className="setting-connect-wallet-container">
               <GuestConnectWallectButton height={"56px"} width={"248px"} />

@@ -16,6 +16,7 @@ import { userRankingListRedux } from "../../redux/userRanking";
 import { useNavigate } from "react-router-dom";
 import IPFSImageComponent from "../../components/ipfsImgComponent";
 import { selectCurrentIsGuest } from "../../redux/profile";
+import SigdaoIcon from "../../components/icon";
 
 type Props = {};
 
@@ -114,11 +115,7 @@ const Leaderboard = (props: Props) => {
           <div className="inter-medium-white-12px">{userRankingList[index]?.displayAccountId.substring(0, 11)}</div>
         </div>
         <div className="sigdao-score-3 sigdao-score-4">
-          <div className="sigdao_tokengradient">
-            <div className="x441"></div>
-            <div className="x442"></div>
-            <img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" />
-          </div>
+          <SigdaoIcon width="17px" height="17px" />
           <div className="x10-2 x10-7 inter-semi-bold-keppel-14px">{userRankingList[index]?.tokenBalance}</div>
         </div>
       </div>

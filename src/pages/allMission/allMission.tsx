@@ -5,6 +5,7 @@ import { BackButton } from "../../components/button";
 import { useNavigate } from "react-router-dom";
 import MenuBar from "../../components/menuBar";
 import { ShortTitleBar } from "../../components/titleBar";
+import SigdaoIcon from "../../components/icon";
 
 interface IAllMissionProps {}
 
@@ -75,11 +76,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
                 <div className="descriptionTitleChallengeCompleted">Challenge X9 Hacks</div>
                 <div className="descriptionBodyChallengeCompleted">1-3 Mins Each</div>
                 <div className="descriptionBottomBodyChallengeCompleted">
-                  <div className="sigdao_tokengradient">
-                    <div className="x441"></div>
-                    <div className="x442"></div>
-                    <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                  </div>
+                  <SigdaoIcon width="16px" height="16px" />
                   <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div>
                   <img className="arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img>
                 </div>
@@ -115,11 +112,6 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
                   </div>
                   <div className="descriptionBodyChallengeCompleted">{/* Secret Coach - Talk To mi  */}</div>
                   <div className="descriptionBottomBodyChallengeCompleted">
-                    {/* <div className="sigdao_tokengradient">
-                                  <div className="x441"></div>
-                                  <div className="x442"></div>
-                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                          </div> */}
                     <div className="sigdaoChallengeCompleted">coming soon...</div>
                     {/* <img className = "arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img> */}
                   </div>

@@ -15,6 +15,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { BackButton, GuestConnectWallectButton } from "../../components/button";
+import SigdaoIcon from "../../components/icon";
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -173,20 +174,12 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
             {NFT ? null : loading ? (
               <div className="sigdao-score-75VOY2">
                 <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ loading...</div>
-                <div className="signdao_tokengradient-VOfFBB">
-                  <div className="x441-gxWo6F"></div>
-                  <div className="x442-gxWo6F"></div>
-                  <img className="x880-gxWo6F" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/file---880-1x-png-10@1x.png`} alt="880" />
-                </div>
+                <SigdaoIcon width="17px" height="17px" />
               </div>
             ) : (
               <div className="sigdao-score-75VOY2">
                 <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ {userReward}</div>
-                <div className="signdao_tokengradient-VOfFBB">
-                  <div className="x441-gxWo6F"></div>
-                  <div className="x442-gxWo6F"></div>
-                  <img className="x880-gxWo6F" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/file---880-1x-png-10@1x.png`} alt="880" />
-                </div>
+                <SigdaoIcon width="17px" height="17px" />
               </div>
             )}
           </div>

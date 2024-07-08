@@ -13,6 +13,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { GuestConnectWallectButton } from "../../components/button";
+import SigdaoIcon from "../../components/icon";
 
 interface IRewardDetailProps {}
 
@@ -88,26 +89,32 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   // };
 
   const getrewardDetailTimes = async () => {
-    if (id === "1") {
-      // setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
-      GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
-        .then((res) => {
-          setBMIRecordTimes(res.length);
-        })
-        .catch((err) => {
-          alert(err);
+    switch (id) {
+      case "1":
+        GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
+          .then((res) => {
+            setBMIRecordTimes(res.length);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+        break;
+      case "2":
+        setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
+        break;
+      case "3":
+        setBMIRecordTimes(0)
+        break;
+      case "4":
+        isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
+          setBMIRecordTimes(ans ? 1 : 0);
         });
-    }
-    if (id === "2") {
-      setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
-    }
-    if (id === "3") {
-      isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
-        setBMIRecordTimes(ans ? 1 : 0);
-      });
-    }
-    if (id === "4") {
-      setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
+        break;
+      case "5":
+        setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
+        break;
+      default:
+        break;
     }
   };
   const getReward = async () => {
@@ -152,11 +159,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
               <div className="score-bar_3-tOBH5R">
                 <div className="sigdao-score-oG1yRx">
                   <div className="x10-ZdA7kA inter-semi-bold-keppel-15px">+{displayRewardDetail?.reward}</div>
-                  <div className="signdao_tokengradient-ZdA7kA">
-                    <div className="x441-hzgF5j"></div>
-                    <div className="x442-hzgF5j"></div>
-                    <img className="x880-hzgF5j" src={`${process.env.PUBLIC_URL}/img/rewardDetail/file---880@1x.png`} alt="880" />
-                  </div>
+                  <SigdaoIcon />
                 </div>
               </div>
               <div className="sigdao-tOBH5R inter-semi-bold-white-15px">SIGDAO:</div>
