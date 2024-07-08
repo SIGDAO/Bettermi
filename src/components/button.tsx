@@ -288,7 +288,7 @@ export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, widt
     alignItems: "center",
     height: height,
     width: width,
-    background: "transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box",
+    background: "transparent linear-gradient(270deg, #8743FF 0%, ##4136F1 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 15px 30px #1466CC29",
     borderRadius: "10px",
     gap: "10px",
@@ -303,11 +303,10 @@ export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, widt
       text="Continue"
       height={height}
       width={width}
-      imagePath="img/wallet.svg"
       navigation={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}
       className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
       style={guestButtonStyle}
-      imageClassName="wallet-icon"
+      
     />
   );
 };

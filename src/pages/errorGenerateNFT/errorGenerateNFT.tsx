@@ -4,6 +4,8 @@ import { CenterLayout } from "../../components/layout";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { BackButton } from "../../components/button";
+import { useSelector } from "react-redux";
+import { referrer } from "../../redux/referrer";
 
 interface IErrorGenerateNFTProps {}
 
@@ -12,6 +14,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
   const [errorMsg, setErrorMsg] = React.useState<string>("");
   const [buttonText, setButtonText] = React.useState<string>("");
   const [navigatePath, setNavigatePath] = React.useState<string | number>("");
+  const referrerAccountID = useSelector(referrer);
+  const bettermiUrl = process.env.REACT_APP_BETTERMI_URL!;
+  console.log("referrerAccountID is",referrerAccountID);
+  console.log("bettermiURL is",bettermiUrl);
+  console.log("navigate url is",bettermiUrl + "/referralCode/" + referrerAccountID);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -48,7 +55,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       case "/errorReferralCode":
         setErrorMsg("Looks like something went wrong.\n Let's try again!");
         setButtonText("Try again");
-        setNavigatePath(-1);
+        setNavigatePath(bettermiUrl + "/referralCode/" + referrerAccountID);
         break;
       default:
         break;
