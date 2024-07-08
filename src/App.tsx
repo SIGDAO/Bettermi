@@ -60,6 +60,7 @@ import InviteFriend from "./pages/inviteFriend/inviteFriend";
 import AuthorizationDone from "./pages/AuthorizationDone/AuthorizationDone";
 import LoadingDiscordAuthorization from "./pages/loadingDiscordAuthorization/loadingDiscordAuthorization";
 import DiscordStart from "./pages/discordStart/discordStart";
+import DiscordStartLoading from "./pages/discordStartLoading/discordStartLoading";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -289,6 +290,7 @@ function App() {
                 <Route path=":referralCode" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />} />
               </Route>
               <Route path="/discordStart" element={<DiscordStart></DiscordStart>}></Route>
+              <Route path="/discordStartLoading" element={<DiscordStartLoading></DiscordStartLoading>}></Route>
             </Route>
             {/* </Route> */}
           </Routes>

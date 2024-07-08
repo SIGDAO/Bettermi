@@ -8,17 +8,51 @@ import { BackButton } from "../../components/button";
 export interface IEntranceScreenTemplateProps {
   upperButtonFunction: (...args: any[]) => void;
   lowerButtonFunction: (...args: any[]) => void;
-  haveButton?: boolean;
+  haveLowerButton?: boolean;
+  haveGuestEntrance?: boolean;
+  upperButtonText :string;
+  lowerButtonText:string;
 }
 
 export default function EntranceScreenTemplate(props: IEntranceScreenTemplateProps) {
-  const { upperButtonFunction, lowerButtonFunction, haveButton } = props;
+  const { upperButtonFunction, lowerButtonFunction, haveLowerButton, haveGuestEntrance,upperButtonText,lowerButtonText } = props;
+  function LowerButton(haveButton: boolean | undefined): JSX.Element {
+    let component: JSX.Element = <></>;
+    if (haveButton) {
+      component = <DisabledButton text = {lowerButtonText} height="56px" width="248px" />;
+    } else {
+      component = <></>;
+    }
+    return component;
+  }
+
+  function GuestEntrance(haveGuestEntrance: boolean | undefined): JSX.Element {
+    let component: JSX.Element = <></>;
+    if (haveGuestEntrance) {
+      component = (
+        <div className="entranceScreen-explore-container">
+          <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
+          <div
+            className="inter-normal-keppel-12px EntranceScreenTemplate-explore-button"
+            onClick={() => {
+              lowerButtonFunction();
+            }}
+          >
+            Explore as a guest
+          </div>
+        </div>
+      );
+    } else {
+      component = <></>;
+    }
+    return component;
+  }
 
   const content: JSX.Element = (
     <div className="entranceScreenTemplate-option-container">
       <div id="entranceScreenTemplate-button-container">
         <ButtonWithAction
-          text="XT Wallet"
+          text={upperButtonText}
           action={() => {
             upperButtonFunction();
           }} // TODO: add action to connect wallet
@@ -26,10 +60,11 @@ export default function EntranceScreenTemplate(props: IEntranceScreenTemplatePro
           width="248px"
         />
         {/* <Link to="https://phoenix-wallet.rocks/"> */}
-        {haveButton ? <DisabledButton text="Phoenix Wallet" height="56px" width="248px" /> : <></>}
+        {LowerButton(haveLowerButton)}
         {/* </Link> */}
       </div>
-      <div className="entranceScreen-explore-container">
+      {GuestEntrance(haveGuestEntrance)}
+      {/* <div className="entranceScreen-explore-container">
         <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
         <div
           className="inter-normal-keppel-12px EntranceScreenTemplate-explore-button"
@@ -39,7 +74,7 @@ export default function EntranceScreenTemplate(props: IEntranceScreenTemplatePro
         >
           Explore as a guest
         </div>
-      </div>
+      </div> */}
 
       {/* <p className="inter-normal-white-15px">or</p>
           <div className="inter-semi-bold-keppel-15px EntranceScreenTemplate-explore-button" onClick={() => navigate("/home")}>

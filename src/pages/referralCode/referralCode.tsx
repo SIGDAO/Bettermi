@@ -96,13 +96,16 @@ export default function ReferralCode(props: IReferralCodeProps) {
             <div className="EntranceContent">Get Sigdao Reward From Your Friend !</div>
           </div>
           {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
-          <ReferralCodeLogo></ReferralCodeLogo>
+          <ReferralCodeLogo imagePath = {"/img/entranceScreenTemplate/mimi_io_inviting.png"}></ReferralCodeLogo>
           <div className="referralCodeButtonContainter">
             <EntranceScreenTemplate
               upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
               // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
               lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
-              haveButton = {true}
+              haveLowerButton = {true}
+              haveGuestEntrance = {true}
+              upperButtonText="XT Wallet"
+              lowerButtonText="Phoenix Wallet"
             ></EntranceScreenTemplate>
           </div>
         </div>
