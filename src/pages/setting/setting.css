@@ -631,7 +631,7 @@
   pointer-events: none;
 }
 
-.setting-connect-wallet-container {
+.setting-button-container {
   position: absolute;
   bottom: -28px;
   left: 50%;

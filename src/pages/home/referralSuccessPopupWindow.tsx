@@ -39,7 +39,7 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
 
         </div>
       </div>
-      <div className="click-the-area-to-make-it-hidden-again"></div>
+      <div className="click-the-area-to-make-it-hidden-again" onClick={() => alert("You must equip a Bettermi.io NFT to enter")}/>
     </>
   );
 

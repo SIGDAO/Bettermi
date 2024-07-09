@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from "react";
 import "./AuthorizationDone.css";
-import { ButtonWithAction, DisabledButton } from "../../components/button";
+import { ButtonWithAction, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { useNavigate,useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -107,7 +107,7 @@ console.log(code); // Output: RwBjn8D9IuuukeT8EvBUQUGX2fVCPG
         <BackButton></BackButton>
         <div className="newUserdiscordAuthorization-option-container">
           <div id="newUserdiscordAuthorization-button-container">
-              <ButtonWithAction
+              <PurpleButton
                 text = {"Next"}
                 action={async () => {
                   if(!loading){

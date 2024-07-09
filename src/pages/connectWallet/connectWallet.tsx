@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./connectWallet.css";
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CenterLayout } from "../../components/layout";
-import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from "../../components/button";
+import { ButtonWithAction, ButtonWithNavigation, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { walletSlice } from "../../redux/wallet";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
@@ -131,11 +131,19 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         {logo}
         <div className="connectWallet-option-container">
           <div id="connectWallet-button-container">
-            <ButtonWithAction
+            {/* <ButtonWithAction
               text="XT Wallet"
               action={() => {
                 userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
               }} // TODO: add action to connect wallet
+              height="56px"
+              width="248px"
+            /> */}
+            <PurpleButton
+              text="XT Wallet"
+              action={() => {
+                userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
+              }}
               height="56px"
               width="248px"
             />
