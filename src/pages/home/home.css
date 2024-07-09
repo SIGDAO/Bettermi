@@ -1037,3 +1037,10 @@ color
   height: 20px;
   overflow: hidden;
 }
+
+.referral-nav-to-take-selfie-button-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -28px;
+}

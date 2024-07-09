@@ -25,6 +25,8 @@ interface IButtonProps {
   imagePath?: string;
   className?: string;
   imageClassName?: string;
+  leftImage?: JSX.Element;
+  rightImage?: JSX.Element;
 }
 
 // DefaultButton css style
@@ -35,6 +37,34 @@ interface IBackButtonProps {
   customiseBackButtonLink?: string;
   className?: string;
 }
+
+export const PurpleButton: React.FunctionComponent<IButtonProps> = (props) => {
+  const { text, height, width, action, navigation, style, leftImage, rightImage } = props;
+  const navigate = useNavigate();
+
+  const handleClick = (): void => {
+    if (action) {
+      action();
+    } else if (navigation) {
+      navigate(navigation);
+    }
+  };
+  return (
+    <div className="purple-button-container" style={style || { height: height, width: width }} onClick={handleClick}>
+      {leftImage}
+      <p className="inter-semi-bold-white-15px">{text}</p>
+      {rightImage}
+    </div>
+  );
+};
+
+export const ReferralNavToTakeSelfieButton: React.FunctionComponent<IButtonProps> = (props) => {
+  const { height, width, action } = props;
+
+  const cameraIcon = <img src={process.env.PUBLIC_URL + "/img/selfieToEarn/ic-selfie-1@1x.png"} className="referral-take-selfie-button-icon" />;
+
+  return <PurpleButton text="Take a Selfie and Start !" width={width} height={height} leftImage={cameraIcon} action={action} />;
+};
 
 export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {
   const { text, height, width, navigation, style, imagePath, className, imageClassName } = props;
@@ -251,7 +281,7 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   }
 };
 
-export const  GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, width, className }) => {
+export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, width, className }) => {
   const guestButtonStyle: CSS.Properties = {
     display: "flex",
     justifyContent: "center",
@@ -306,7 +336,6 @@ export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, widt
       navigation={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}
       className={className ? "inter-semi-bold-white-15px " + className : "inter-semi-bold-white-15px"}
       style={guestButtonStyle}
-      
     />
   );
 };

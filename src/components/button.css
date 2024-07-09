@@ -172,3 +172,28 @@
   display: flex;
   align-items: center;
 }
+
+.purple-button-container {
+  background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px #1466CC29;
+  height: 56px;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 108px; */
+  width: 326px;
+  cursor: pointer;
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  /* width: calc(326px - 37.25px - 33.04px); */
+  /* padding-left: 37.25px; */
+  /* padding-right: 33.04px; */
+}
+
+.referral-take-selfie-button-icon {
+  width: 25px;
+  height: 23px;
+}
