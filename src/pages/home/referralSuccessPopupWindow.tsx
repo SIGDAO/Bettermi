@@ -1,6 +1,7 @@
 import * as React from "react";
 import { GuestConnectWallectButton } from "../../components/button";
 import SigdaoIcon from "../../components/icon";
+import { DiscordVerificationButton } from "../../components/button";
 
 interface IReferralSuccessPopupWindowProps {
   isPopUpReferralSuccessWindow: boolean;
@@ -31,7 +32,8 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
             Limited NFT & Web3 Membership.
           </div>
         </div>
-        <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" />
+        {/* <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" /> */}
+        <DiscordVerificationButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px"></DiscordVerificationButton>
       </div>
       <div className="click-the-area-to-make-it-hidden-again"></div>
     </>

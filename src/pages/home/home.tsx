@@ -217,10 +217,17 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       >
         <div className="screen">
           <div className="bettermidapp-home-1">
+            {pathname === "/referralGiveReward"?
             <ReferralSuccessPopupWindow 
-              isPopUpReferralSuccessWindow={isPopUpReferralSuccessWindow} 
+              isPopUpReferralSuccessWindow={true} 
               setIsPopUpReferralSuccessWindow={setIsPopUpReferralSuccessWindow} 
             />
+            :
+            <ReferralSuccessPopupWindow 
+            isPopUpReferralSuccessWindow={false} 
+            setIsPopUpReferralSuccessWindow={setIsPopUpReferralSuccessWindow} 
+          />
+}
             <Link to="/featureMissions">
               <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
             </Link>

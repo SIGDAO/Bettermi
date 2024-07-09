@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import "./discordStartLoading.css";
 import { store } from "../../redux/reducer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { LedgerClientFactory } from "@signumjs/core";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { accountPublicKey } from "../../redux/account";
+import { DisabledButton } from "../../components/button";
 
 export interface IDiscordStartLoadingProps {}
 
@@ -26,19 +27,39 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     const referralCode = useSelector(referrer);
     const userPublicKey = useSelector(accountPublicKey);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [count, setCount] = useState<number>(1);
     const nodeHost = useSelector(selectWalletNodeHost);
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+
+    useEffect(() => {
+      //const incrementInterval = 240000 / 96; // Time divided by the number of increments
+      const incrementInterval = 5000 / 1000;
+      const timer = setInterval(() => {
+        if (count <= 100) {
+          setCount((prevCount) => {
+            if (prevCount <= 99) {
+              return prevCount + 1;
+            }
+            return prevCount;
+          });
+        }
+        // if (count => 100 ) {
+        // } else {
+        //   setIsLoading(false);
+        //   navigate('/generateFreeNFT');
+        //   clearInterval(timer);
+        // }
+      }, incrementInterval);
+      return () => {
+        // setIsLoading(false);
+        // navigate('/generateFreeNFT');
+        clearInterval(timer);
+      };
+    }, []);
+
+
+
     const logo: JSX.Element = (
-      // <div className="connectWallet-bg-img-container">
-      //   {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-LandingAnimation-ScreenSize.jpg"} />}
-      //   <img
-      //     className="connectWallet-bg-img"
-      //     src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed_addition_ver2.gif"}
-      //     onLoad={() => setIsLoading(false)}
-      //     style={{ display: isLoading ? 'none' : 'inline-block' }}
-      //   />
-      // </div>
-      // <div className="connectWallet-bg-img-container">
         <>
         {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
         <img
@@ -58,10 +79,12 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     <div id="discord-start-loading-container">
       {logo}
       {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
-      <div className = "discord-start-loading-progress">50%</div>
+      <div className = "discord-start-loading-progress">{count}%</div>
       <div className="discord-start-loading-button-container">
+        {count === 100?
+              <div className="discord-start-loading-button-container">
         <EntranceScreenTemplate
-          upperButtonFunction={() => {}}
+          upperButtonFunction={() => {navigate("/referralGiveReward")}}
           // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
           lowerButtonFunction={() => {}}
           haveLowerButton = {false}
@@ -69,6 +92,12 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
           upperButtonText="Start"
           lowerButtonText="Phoenix Wallet"
         ></EntranceScreenTemplate>
+        </div>
+        :
+        (
+          <DisabledButton text = {"start"} height = {"56px"} width = {"248px"}></DisabledButton>
+        )
+}
       </div>
       <div className = "discord-start-loading-instruction inter-normal-white-15px">Please wait patiently</div>
       <div className = "inter-normal-white-15px">and do not refresh the page...</div>
