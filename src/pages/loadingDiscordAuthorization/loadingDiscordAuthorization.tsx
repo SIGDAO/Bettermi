@@ -13,6 +13,7 @@ import { accountSlice } from "../../redux/account";
 import { profileSlice } from "../../redux/profile";
 import { referrerSlice } from "../../redux/referrer";
 import { referrer } from "../../redux/referrer";
+import { useSelector } from "react-redux";
 
 export interface ILoadingDiscordAuthorizationProps {
   pathname: string;
@@ -32,7 +33,7 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET!;
-
+  const referrerAccountId = useSelector(referrer);
   console.log("redirect URL is", REDIRECT_URI);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -42,19 +43,6 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   const [loading, setLoading] = useState<boolean>(false);
   const [ledger, setLedger] = useState<any>({});
   const [count, setCount] = useState<number>(1);
-
-  const verification = async () => {
-    console.log(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth");
-    console.log("the referral code is", code);
-    const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code });
-    await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
-    console.log(isNewUser.data);
-    if (isNewUser.data === false) {
-      navigate("/errorReferralCode");
-    } else {
-      navigate("/discordStart");
-    }
-  };
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
     try {
       const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
@@ -81,6 +69,11 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
         alert("account registered");
         navigate("/errorReferralCode");
       }
+      if(userInfo?.loginedAcctID == null){
+        navigate("/errorReferralCode");
+      }
+      return userInfo?.loginedAcctID
+      
     } catch (error: any) {
       if (error.name === "InvalidNetworkError") {
         alert(
@@ -92,26 +85,33 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
       }
     }
   };
-  const Buy = async () => {
-    try {
-      console.log(userPublicKey);
-      console.log("ledger is", ledger);
-      const transaction = await ledger.message.sendMessage({
-        message: JSON.stringify({
-          bmi: "123",
-          time: new Date(),
-        }),
-        messageIsText: true,
-        recipientId: "4572964086056463895",
-        feePlanck: "1000000",
-        senderPublicKey: userPublicKey,
-        deadline: 1440,
-      });
-      await Wallet.Extension.confirm(transaction.unsignedTransactionBytes);
-    } catch (error: any) {
-      console.log("error is", error);
+
+  const verification = async () => {
+    try{
+    console.log(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth");
+    console.log("the referral code is", code);
+    const refereeAccountId:string = await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)?? "";
+    const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code , referrerAccountId:referrerAccountId,refereeAccountId:refereeAccountId!});
+    console.log("return value from server is",isNewUser)
+    console.log(isNewUser.data);
+    console.log(isNewUser.status);
+    console.log(typeof(isNewUser.status));
+
+    if (isNewUser.status === 403 || isNewUser.status === 404) {
       navigate("/errorReferralCode");
     }
+    else if(isNewUser.status === 200){
+      navigate("/discordStart");
+    } 
+    else {
+      navigate("/errorReferralCode");
+    }
+  }
+  catch(e){
+    alert(e)
+    console.log("error is",e);
+    navigate("/errorReferralCode");
+  }
   };
 
   const isAuthorized = useRef(false);
@@ -119,13 +119,11 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   const discordAuthorization = async () => {
     try {
       await verification();
+       
       setLoading(false);
-      if (!code) {
-        alert("seems authorization failed, returning to home");
-        navigate("/");
-      }
     } catch (e) {
       setLoading(false);
+      navigate("/errorReferralCode");
       console.log("error is", e);
     }
   };

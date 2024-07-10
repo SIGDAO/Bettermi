@@ -40,7 +40,7 @@ export default function DiscordStart(props: IDiscordStartProps) {
               upperButtonFunction={() => {navigate("/discordStartLoading")}}
               // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
               lowerButtonFunction={ () => {}}
-              haveButton = {false}
+              haveLowerButton = {false}
               haveGuestEntrance = {false}
               upperButtonText="Start"
               lowerButtonText="Phoenix Wallet"

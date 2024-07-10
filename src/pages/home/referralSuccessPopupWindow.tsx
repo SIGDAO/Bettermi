@@ -2,6 +2,8 @@ import * as React from "react";
 import { GuestConnectWallectButton, ReferralNavToTakeSelfieButton } from "../../components/button";
 import SigdaoIcon from "../../components/icon";
 import { DiscordVerificationButton } from "../../components/button";
+import { Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IReferralSuccessPopupWindowProps {
   isPopUpReferralSuccessWindow: boolean;
@@ -11,6 +13,7 @@ interface IReferralSuccessPopupWindowProps {
 
 const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupWindowProps> = (props) => {
   const { isPopUpReferralSuccessWindow, setIsPopUpReferralSuccessWindow, children } = props;
+  const navigate = useNavigate();
   const referralSuccessSigdao = 3;
 
   const guestNFTDetailpopupWindowDisplay: JSX.Element = (
@@ -35,7 +38,7 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
         {/* <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" /> */}
         {/* <DiscordVerificationButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px"></DiscordVerificationButton> */}
         <div className="referral-nav-to-take-selfie-button-container">
-        <ReferralNavToTakeSelfieButton height="56px" width="248px" action={() => console.log("hi")} />
+        <ReferralNavToTakeSelfieButton height="56px" width="248px" action={() => navigate("/takeSelfie")} />
 
         </div>
       </div>

@@ -112,10 +112,12 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   const handleSetNavigatePath = (): void => {
     if (isGuest) {
+      console.log("called is guest",isGuest)
       setNavigatePath("/generateBMIDaily");
       return;
     }
     isSelfieRecord(tempAccountId, Ledger2).then((result) => {
+      console.log("result is ",result);
       if (!result) {
         setNavigatePath("/generateBMINFTImport");
       }
