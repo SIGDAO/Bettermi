@@ -14,6 +14,7 @@ import { profileSlice } from "../../redux/profile";
 import { referrerSlice } from "../../redux/referrer";
 import { referrer } from "../../redux/referrer";
 import { useSelector } from "react-redux";
+import { referee } from "../../redux/referrer";
 
 export interface ILoadingDiscordAuthorizationProps {
   pathname: string;
@@ -34,6 +35,7 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET!;
   const referrerAccountId = useSelector(referrer);
+  const refereeAccountId = useSelector(referee);
   console.log("redirect URL is", REDIRECT_URI);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -90,8 +92,9 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
     try{
     console.log(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth");
     console.log("the referral code is", code);
-    const refereeAccountId:string = await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)?? "";
-    const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code , referrerAccountId:referrerAccountId,refereeAccountId:refereeAccountId!});
+    //const refereeAccountId:string = await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)?? "";
+    console.log("Referee account ID is",refereeAccountId);
+    const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code , referrerAccountId:referrerAccountId,refereeAccountId:refereeAccountId});
     console.log("return value from server is",isNewUser)
     console.log(isNewUser.data);
     console.log(isNewUser.status);

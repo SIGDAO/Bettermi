@@ -64,8 +64,13 @@ export default function ReferralCode(props: IReferralCodeProps) {
         navigate("/home");
       } else {
         console.log("called once");
-        const referrerObj: referrer = { referrerAccountId: referralCode };
+        if(!userInfo?.loginedAcctID){
+          alert("User's AccountId does not exist");
+          navigate("/errorReferralCode");
+        }
+        const referrerObj: referrer = { referrerAccountId: referralCode,refereeAccountId:userInfo?.loginedAcctID!};
         store.dispatch(referrerSlice.actions.setReferrerAccountId(referrerObj));
+        store.dispatch(referrerSlice.actions.setRefereeAccountId(referrerObj));
         console.log("referrerObj is",referrerObj)
         setIsPopUpNFTDetailWinodow(true)
         // navigate(`/discordVerification/${referralCode}`);

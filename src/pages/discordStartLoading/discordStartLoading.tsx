@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext,useEffect,useRef } from "react";
 import "./discordStartLoading.css";
 import { store } from "../../redux/reducer";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,14 +30,68 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     const [count, setCount] = useState<number>(1);
     const nodeHost = useSelector(selectWalletNodeHost);
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+    const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
+      try {
+        const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
+        if (userInfo == null) {
+          alert("seems like the wallet lost connection. We would be grateful if you could report to core team at discord");
+        }
+  
+        if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
+          navigate("/errorReferralCode");
+          return;
+        }
+        if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
+          store.dispatch(accountSlice.actions.setNftContractStorage(userInfo!.userNftStorage.ats[0].at));
+  
+          var description = userInfo!.userBMIStorage.ats[0].description;
+  
+          if (description.includes("Female") === true) {
+            store.dispatch(profileSlice.actions.setGender("Female"));
+          } else if (description.includes("Male") === true) {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          } else {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          }
+          alert("account registered");
+          navigate("/errorReferralCode");
+        }
+        if(userInfo?.loginedAcctID == null){
+          navigate("/errorReferralCode");
+        }
+        // return userInfo?.loginedAcctID
+        setCount(100);
+        
+      } catch (error: any) {
+        if (error.name === "InvalidNetworkError") {
+          alert(
+            "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
+          );
+        }
+        if (error.name === "NotFoundWalletError") {
+          window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
+        }
+      }
+    };
+
+
+  const nftIconCheck = useRef(false);
+
+  useEffect(() => {
+    if (nftIconCheck.current) {
+      return;
+    }
+    nftIconCheck.current = true;
+    userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate);
+  }, []);
 
     useEffect(() => {
       //const incrementInterval = 240000 / 96; // Time divided by the number of increments
       const incrementInterval = 5000 / 1000;
       const timer = setInterval(() => {
-        if (count <= 100) {
+        if (count < 100) {
           setCount((prevCount) => {
-            if (prevCount <= 99) {
+            if (prevCount < 99) {
               return prevCount + 1;
             }
             return prevCount;
@@ -56,7 +110,7 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
         clearInterval(timer);
       };
     }, []);
-
+ 
 
 
     const logo: JSX.Element = (
@@ -85,7 +139,6 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
               <div className="discord-start-loading-button-container">
         <EntranceScreenTemplate
           upperButtonFunction={() => {navigate("/referralGiveReward")}}
-          // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
           lowerButtonFunction={() => {}}
           haveLowerButton = {false}
           haveGuestEntrance = {false}
