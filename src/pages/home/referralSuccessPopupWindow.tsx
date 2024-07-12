@@ -36,13 +36,12 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
           </div>
         </div>
         {/* <GuestConnectWallectButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" /> */}
-        {/* <DiscordVerificationButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px"></DiscordVerificationButton> */}
+        {/* <DiscordVerificationButton className="guest-nft-detail-popup-window-connect-wallet-button" height="56px" width="248px" /> */}
         <div className="referral-nav-to-take-selfie-button-container">
-        <ReferralNavToTakeSelfieButton height="56px" width="248px" action={() => navigate("/takeSelfie")} />
-
+          <ReferralNavToTakeSelfieButton height="56px" width="248px" action={() => navigate("/takeSelfie")} />
         </div>
       </div>
-      <div className="click-the-area-to-make-it-hidden-again" onClick={() => alert("You must equip a Bettermi.io NFT to enter")}/>
+      <div className="click-the-area-to-make-it-hidden-again" onClick={() => alert("You must equip a Bettermi.io NFT to enter")} />
     </>
   );
 

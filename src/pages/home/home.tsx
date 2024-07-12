@@ -208,11 +208,11 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     <>
       <NFTDetailPopUpWindow
         // isGuest={isGuest}
-        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         isNFTiconLoading={isNFTiconLoading}
         imgAddress={imgAddress}
         level={level}
         rewardPercentage={rewardPercentage}
+        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
       >
         <div className="screen">

@@ -146,7 +146,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 20;
+  z-index: 1;
   background: #171717E5;
   border-radius: 15px;
   border: 1px solid #4136F1;
@@ -175,25 +175,42 @@
 
 .purple-button-container {
   background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0px 10px 30px #1466CC29;
   height: 56px;
-  /* left: 30px; */
-  /* position: absolute; */
-  /* top: 108px; */
   width: 326px;
   cursor: pointer;
   display: flex;
-  /* justify-content: space-between; */
   gap: 9px;
   align-items: center;
   justify-content: center;
+  /* left: 30px; */
+  /* position: absolute; */
+  /* top: 108px; */
   /* width: calc(326px - 37.25px - 33.04px); */
   /* padding-left: 37.25px; */
   /* padding-right: 33.04px; */
+  /* justify-content: space-between; */
 }
 
 .referral-take-selfie-button-icon {
   width: 25px;
   height: 23px;
+}
+
+.purple-button-container p, .green-button-container p {
+  margin: 0;
+}
+
+.green-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 248px;
+  width: 56px;
+  background: transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 15px 30px #1466CC29;
+  border-radius: 10px;
+  gap: 10px;
+  cursor: pointer;
 }

@@ -16,7 +16,7 @@
   transform: translate(-50%, 0%);
 }
 
-.guest-nft-detail-popup-window-content {
+.guest-nft-detail-popup-window-lower-content {
   width: 100%;
   padding-top: 20.5px;
   display: flex;
@@ -25,7 +25,7 @@
   gap: 8px;
 }
 
-.guest-nft-detail-popup-window-content > div {
+.guest-nft-detail-popup-window-lower-content > div {
   text-align: center;
 }
 
@@ -34,7 +34,7 @@
   height: 118px;
 }
 
-.guest-nft-detail-popup-window-title {
+.guest-nft-detail-popup-window-upper-content {
   border-bottom: 1px solid var(--royal-blue);
   width: 100%;
   height: 66px;
@@ -72,15 +72,7 @@
   transform: translate(-50%, 0%);
   width: 248px;
   height: 56px;
-  padding: 0 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%);
-  border-radius: 10px;
-  gap: 20px;
-  cursor: pointer;
-
+  /* background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%); */
 }
 
 .guest-nft-detail-description {
@@ -91,4 +83,56 @@
   display: flex;
   gap: 3.3px;
   align-items: center;
+}
+
+
+/* template */
+.standard-popup-window-container {
+  width: 332px;
+  height: 330px;
+  background: transparent linear-gradient(135deg, #221D4B 0%, #171717 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  border: 1px solid var(--royal-blue);  
+  border-radius: 10px;
+  z-index: 201;
+  position: relative;
+}
+
+.standard-popup-window-connect-wallet-button {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+}
+
+.standard-popup-window-lower-content {
+  width: 100%;
+  padding-top: 20.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.standard-popup-window-lower-content > p {
+  margin: 0;
+}
+
+.standard-popup-window-lower-content > div {
+  text-align: center;
+}
+
+.standard-popup-window-mimi {
+  /* width: 118px; */
+  height: 118px;
+}
+
+.standard-popup-window-upper-content {
+  border-bottom: 1px solid var(--royal-blue);
+  width: 100%;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
 }

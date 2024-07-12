@@ -6,7 +6,7 @@ import { profileSlice } from "../../redux/profile";
 import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import { Api } from "@signumjs/core";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
-import { BackButton } from "../../components/button";
+import { BackButton, PurpleButton } from "../../components/button";
 import { accountPublicKey } from "../../redux/account";
 
 interface IEditProfilePopUpWindowProps {
@@ -165,8 +165,11 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
                   />
                 </div>
               </div>
-              <div className="button_save" onClick={() => handleSave()}>
+              {/* <div className="button_save" onClick={() => handleSave()}>
                 <div className="continue-1 inter-semi-bold-white-15px">Done!</div>
+              </div> */}
+              <div className="edit-profile-save-container">
+                <PurpleButton text="Done!" action={() => handleSave()} height="56px" width="248px" />
               </div>
             </div>
           </div>

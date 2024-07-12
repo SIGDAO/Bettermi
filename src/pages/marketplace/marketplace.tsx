@@ -49,8 +49,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       case 2:
         return bmiRecordTimes;
       case 3:
-        return challengeCompletedTimes;
+        return 0;
       case 4:
+        return challengeCompletedTimes;
+      case 5:
         return bmiHitHealthyNumber;
       default:
         return 0;

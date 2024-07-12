@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./discordVerification.css";
-import { ButtonWithAction, DisabledButton } from "../../components/button";
+import { ButtonWithAction, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { useNavigate,useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -63,26 +63,26 @@ export default function DiscordVerification(props: IReferralCodeProps) {
     <div className="newUserDiscordVerification-layout">
       <div id="newUserDiscordVerification-container">
         {logo}
-        <BackButton></BackButton>
+        <BackButton/>
         <div className="newUserDiscordVerification-option-container">
           <div id="newUserDiscordVerification-button-container">
-            <Link to={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}>
-              <ButtonWithAction
+            {/* <Link to={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}> */}
+              {/* <ButtonWithAction
                 text = {buttonText}
                 action={() => {
                 }} // TODO: add action to connect wallet
                 height="56px"
                 width="248px"
-              />
-            </Link>
-            <ButtonWithAction
-                text = {"Test Buy"}
-                action={() => {
-                  Buy();
-                }} // TODO: add action to connect wallet
-                height="56px"
-                width="248px"
-              />
+              /> */}
+            {/* </Link> */}
+            <PurpleButton
+              text = {"Test Buy"}
+              action={() => {
+                navigate(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`)
+              }} // TODO: add action to connect wallet
+              height="56px"
+              width="248px"
+            />
           </div>
         </div>
       </div>

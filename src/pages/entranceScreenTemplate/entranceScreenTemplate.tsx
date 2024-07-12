@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./entranceScreenTemplate.css";
-import { ButtonWithAction, DisabledButton } from "../../components/button";
+import { ButtonWithAction, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -51,7 +51,15 @@ export default function EntranceScreenTemplate(props: IEntranceScreenTemplatePro
   const content: JSX.Element = (
     <div className="entranceScreenTemplate-option-container">
       <div id="entranceScreenTemplate-button-container">
-        <ButtonWithAction
+        {/* <ButtonWithAction
+          text={upperButtonText}
+          action={() => {
+            upperButtonFunction();
+          }} // TODO: add action to connect wallet
+          height="56px"
+          width="248px"
+        /> */}
+        <PurpleButton
           text={upperButtonText}
           action={() => {
             upperButtonFunction();

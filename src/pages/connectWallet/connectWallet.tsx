@@ -146,6 +146,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
               }}
               height="56px"
               width="248px"
+              // style={{ borderRadius: "10px" }}
             />
             {/* <Link to="https://phoenix-wallet.rocks/"> */}
             <DisabledButton text="Phoenix Wallet" height="56px" width="248px" />

@@ -1,6 +1,6 @@
 import React, { useState,useContext,useEffect } from "react";
 import "./discordAuthorization.css";
-import { ButtonWithAction, DisabledButton } from "../../components/button";
+import { ButtonWithAction, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { useNavigate,useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -107,7 +107,7 @@ console.log(code); // Output: RwBjn8D9IuuukeT8EvBUQUGX2fVCPG
         <BackButton></BackButton>
         <div className="newUserdiscordAuthorization-option-container">
           <div id="newUserdiscordAuthorization-button-container">
-              <ButtonWithAction
+              {/* <ButtonWithAction
                 text = {"Next"}
                 action={async () => {
                   if(!loading){
@@ -121,11 +121,34 @@ console.log(code); // Output: RwBjn8D9IuuukeT8EvBUQUGX2fVCPG
                 }} // TODO: add action to connect wallet
                 height="56px"
                 width="248px"
-              />
+              /> */}
+              <PurpleButton
+                text = {"Next"}
+                action={async () => {
+                  if(!loading){
+                    const info = await connectWallet(appName, Wallet, Ledger,codeHashId,codeHashIdForNft,assetId)
+
+                    console.log("connected wallet",info);
+                    setUserPublicKey(info!.userPublicKey);
+                    setLedger(info!.ledger);
+                    
+                  }
+                }} // TODO: add action to connect wallet
+                height="56px"
+                width="248px"
+              />                  
             {/* <Link to="https://phoenix-wallet.rocks/">
               <DisabledButton text="hihihihi" height="56px" width="248px" />
             </Link> */}
-              <ButtonWithAction
+              {/* <ButtonWithAction
+                text = {buttonText}
+                action={() => {
+                  Buy();
+                }} // TODO: add action to connect wallet
+                height="56px"
+                width="248px"
+              /> */}
+              <PurpleButton
                 text = {buttonText}
                 action={() => {
                   Buy();
@@ -133,6 +156,7 @@ console.log(code); // Output: RwBjn8D9IuuukeT8EvBUQUGX2fVCPG
                 height="56px"
                 width="248px"
               />
+                  
           </div>
         </div>
       </div>
