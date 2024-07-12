@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./referralCode.css"
 import { PopupWindowTemplate } from "../../components/popupWindow";
 import { DarkGreenButton, PurpleButton } from "../../components/button";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const ReferralWarningPopupWindow: React.FunctionComponent<IReferralWarningPopupW
         <img src={process.env.PUBLIC_URL + "/img/referralCode/mimi_error.png"} alt="" />
 
       </div>
-      <div className="inter-normal-hot-magenta-14px line-height-21px">
+      <div className="inter-normal-hot-magenta-14px line-height-21px referral-pop-up-warn-description">
         Connect wallet to get SIGDAO,
         <br />
         or You will miss out the reward !
