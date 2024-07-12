@@ -91,20 +91,18 @@
       flex-direction: column-reverse;
     }
   }
-  
+/*   
   @media (min-width: 768px) {
     #referralCode-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin:auto;
-        /* height: 100%; */
+        margin: auto;
         width: 100%;
         min-height: auto;
-        /* overflow-y: auto; */
     }
-  }
+  } */
   /* #referralCode-container {
     display: flex;
     flex-direction: column;
@@ -114,19 +112,18 @@
     width: 100%;
     min-height: auto;
   } */
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     #referralCode-container {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
-        /* height: 100%; */
         width: 100%;
         min-height: auto;
         margin-bottom: 20%;
     }
   }
-
+ */
   .referralCodeTitle{
     display:flex;
     align-items: center;
@@ -142,4 +139,25 @@
   }
   .referralCodeButtonContainter{
     margin-top: 25px;
+  }
+
+
+  .referral-pop-up-warn-lower-content {
+    display: flex;
+    flex-direction: column;
+    gap: 7.5px;
+  }
+
+  .referral-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    bottom: -28px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .referral-warning-mimi-icon-container {
+    
   }
