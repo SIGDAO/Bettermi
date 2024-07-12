@@ -30,7 +30,7 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
   const referralSuccessPopupWindowLowerContent: JSX.Element = (
     <>
       {/* <div className="inter-bold-royal-blue-15px">START EARNING SIGDAO</div> */}
-      <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/home/mimi-lying-taking-selfie-2-big-nft-at-back.png`} alt="" />
+      <img className="referral-congrat-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/home/mimi-lying-taking-selfie-2-big-nft-at-back.png`} alt="" />
       <div className="guest-nft-detail-description inter-normal-white-14px line-height-21px">
         Selfie to Earn your FREE
         <br />

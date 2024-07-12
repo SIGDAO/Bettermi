@@ -48,14 +48,14 @@ export const PopupWindowTemplate: React.FunctionComponent<IPopupWindowTemplatePr
   );
 };
 
-export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
+export const TakeSelfieWindow: React.FC = (props) => {
   const navigate = useNavigate();
   const isGuest = useSelector(selectCurrentIsGuest);
 
   const upperContent: JSX.Element = <p>Selfie to track BMI now !</p>;
 
   const lowerContent: JSX.Element = (
-    <>
+    <div className="guest-nft-detail-popup-lower-content">
       <p className="inter-bold-royal-blue-15px">START EARNING SIGDAO</p>
       <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_popup_window.png`} alt="" />
       <div className="inter-normal-hot-magenta-14px line-height-21px">
@@ -63,7 +63,7 @@ export const TakeSelfieWindow: React.FC<IPopupWindowTemplateProp> = (props) => {
         <br />
         your selfie will NOT be stored
       </div>
-    </>
+    </div>
   );
 
   return (
@@ -91,14 +91,14 @@ export const NFTDetailPopUpWindow: React.FunctionComponent<INFTDetailPopUpProp> 
   const guestNFTDetailPopupWindowUpperContent: JSX.Element = <p>Get your FREE NFT now !</p>;
 
   const guestNFTDetailPopupWindowLowerContent: JSX.Element = (
-    <>
+    <div className="guest-nft-detail-popup-lower-content">
       <p className="inter-bold-royal-blue-15px">START EARNING SIGDAO</p>
       <img className="guest-nft-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/mimi_popup_window.png`} alt="" />
       <div className="guest-nft-detail-description inter-normal-cadet-blue-14px line-height-21px">
         Connect your Signum wallet
         <br />& Receive a FREE NFT membership !
       </div>
-    </>
+    </div>
   );
 
   const guestNFTDetailpopupWindowDisplay: JSX.Element = (
