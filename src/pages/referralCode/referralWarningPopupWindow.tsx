@@ -16,7 +16,10 @@ const ReferralWarningPopupWindow: React.FunctionComponent<IReferralWarningPopupW
 
   const lowerContent: JSX.Element = (
     <div className="referral-pop-up-warn-lower-content">
-      <img src={process.env.PUBLIC_URL + "/img/errorGenerateNFT/mimi_error_.png"} alt="" />
+      <div className="referral-warning-mimi-icon-container">
+        <img src={process.env.PUBLIC_URL + "/img/referralCode/mimi_error.png"} alt="" />
+
+      </div>
       <div className="inter-normal-hot-magenta-14px line-height-21px">
         Connect wallet to get SIGDAO,
         <br />

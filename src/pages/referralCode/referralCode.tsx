@@ -17,6 +17,7 @@ import EntranceLogo from "../entranceScreenTemplate/EntranceLogo";
 import ReferralCodeLogo from "../entranceScreenTemplate/referralCodeLogo";
 import { DiscordVerificationPopUp } from "../entranceScreenTemplate/discordVerification";
 import { GuestConnectWallectButton,DiscordVerificationButton } from "../../components/button";
+import ReferralWarningPopupWindow from "./referralWarningPopupWindow";
 
 export interface IReferralCodeProps {}
 
@@ -28,6 +29,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
+  const [isPopupReferralWarning, setIsPopupReferralWarning] = useState<boolean>(false);
 
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
@@ -96,6 +98,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
       buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
     >    
     </DiscordVerificationPopUp>
+    <ReferralWarningPopupWindow isPopupReferralWarning={isPopupReferralWarning} setIsPopupReferralWarning={setIsPopupReferralWarning} />
       <div className="referralCode-layout">
         <div id="referralCode-container">
           <div className="referralCodeTitle">
@@ -108,7 +111,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
             <EntranceScreenTemplate
               upperButtonFunction={() => userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate, referralCode!)}
               // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
-              lowerButtonFunction={() => navigate("http://localhost:8080/auth/discord")}
+              lowerButtonFunction={() => setIsPopupReferralWarning(true)}
               haveLowerButton = {true}
               haveGuestEntrance = {true}
               upperButtonText="XT Wallet"
