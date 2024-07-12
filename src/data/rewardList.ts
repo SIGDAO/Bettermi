@@ -43,7 +43,7 @@ export const rewardDetailList: rewardDetailListProps[] = [
     reward: 5,
     shortDescription: "Refer 5 new users to Bettermi.io",
     description: `Refer 5 new users to our platform, and you'll unlock “Super Connector” status. This elite tier grants you 15 fat stacks of SIGDAO as a reward for your evangelism.`,
-    bgImagePath: "Wellness-Milestone-Cover.png",
+    bgImagePath: "Super_Connector_Banner.png",
     previewImagePath: "img/reward/super_connector_square.png",
     previewImagePathBig: "img/reward/super_connector_square.png",
     requireTimes: 5,

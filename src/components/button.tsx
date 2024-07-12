@@ -91,11 +91,11 @@ export const GreenButton: React.FunctionComponent<IButtonProps> = (props) => {
 }
 
 export const ReferralNavToTakeSelfieButton: React.FunctionComponent<IButtonProps> = (props) => {
-  const { height, width, action } = props;
+  const { height, width, action, className } = props;
 
   const cameraIcon = <img src={process.env.PUBLIC_URL + "/img/selfieToEarn/ic-selfie-1@1x.png"} className="referral-take-selfie-button-icon" />;
 
-  return <PurpleButton text="Take a Selfie and Start !" width={width} height={height} leftImage={cameraIcon} action={action} />;
+  return <PurpleButton text="Take a Selfie and Start !" className={className} width={width} height={height} leftImage={cameraIcon} action={action} />;
 };
 
 // export const ButtonWithNavigation: React.FunctionComponent<IButtonProps> = (props) => {

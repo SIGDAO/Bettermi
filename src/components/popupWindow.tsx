@@ -36,7 +36,7 @@ interface IPopupWindowTemplateProp {
   width?: string;
 }
 
-const PopupWindowTemplate: React.FunctionComponent<IPopupWindowTemplateProp> = ({ upperContent, lowerContent, buttonComponent, height = "330px", width = "332px", style = {} }) => {
+export const PopupWindowTemplate: React.FunctionComponent<IPopupWindowTemplateProp> = ({ upperContent, lowerContent, buttonComponent, height = "330px", width = "332px", style = {} }) => {
   // <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
 
   return (

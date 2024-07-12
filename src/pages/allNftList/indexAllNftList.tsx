@@ -310,9 +310,12 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
       }
     });
 
-    await Promise.all(requests2);
+    try {
+      await Promise.all(requests2);
+    } catch (error) {
+      console.log(error);
+    }
 
-    console.log(mergedArray, "dsiiodsjifojdsoifji");
     
 
     setNftInfo(mergedArray);
