@@ -35,7 +35,6 @@ export default function ReferralCode(props: IReferralCodeProps) {
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
   // store.dispatch({ type: "USER_LOGOUT" });
-  const screenContent: string[] = ["Discord Verification", "", "img/referralCode/discordLogo.png", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any, referralCode: string) => {
     try {
@@ -94,7 +93,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
       <DiscordVerificationPopUp
         isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
-        content={screenContent}
+        // content={screenContent}
         buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
       ></DiscordVerificationPopUp>
       <ReferralWarningPopupWindow isPopupReferralWarning={isPopupReferralWarning} setIsPopupReferralWarning={setIsPopupReferralWarning} />
