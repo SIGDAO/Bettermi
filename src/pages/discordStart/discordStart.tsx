@@ -28,7 +28,49 @@ export default function DiscordStart(props: IDiscordStartProps) {
  
     const nodeHost = useSelector(selectWalletNodeHost);
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-
+    const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
+      try {
+        const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
+        if (userInfo == null) {
+          alert("seems like the wallet lost connection. We would be grateful if you could report to core team at discord");
+        }
+  
+        if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
+          navigate("/errorReferralCode");
+          return;
+        }
+        if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
+          store.dispatch(accountSlice.actions.setNftContractStorage(userInfo!.userNftStorage.ats[0].at));
+  
+          var description = userInfo!.userBMIStorage.ats[0].description;
+  
+          if (description.includes("Female") === true) {
+            store.dispatch(profileSlice.actions.setGender("Female"));
+          } else if (description.includes("Male") === true) {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          } else {
+            store.dispatch(profileSlice.actions.setGender("Male"));
+          }
+          alert("account registered");
+          navigate("/errorReferralCode");
+        }
+        if(userInfo?.loginedAcctID == null){
+          navigate("/errorReferralCode");
+        }
+        // return userInfo?.loginedAcctID
+        navigate("/discordStartLoading")
+        
+      } catch (error: any) {
+        if (error.name === "InvalidNetworkError") {
+          alert(
+            "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
+          );
+        }
+        if (error.name === "NotFoundWalletError") {
+          window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
+        }
+      }
+    };
 
   const content: JSX.Element = (
       <div className="referralCode-layout">
@@ -38,6 +80,7 @@ export default function DiscordStart(props: IDiscordStartProps) {
           <div className="discord-start-button-containter">
             <EntranceScreenTemplate
               upperButtonFunction={() => {navigate("/discordStartLoading")}}
+              // upperButtonFunction={() => {userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)}}
               // upperButtonFunction={() => setIsPopUpNFTDetailWinodow(true)}
               lowerButtonFunction={ () => {}}
               haveLowerButton = {false}

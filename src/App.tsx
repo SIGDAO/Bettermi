@@ -145,6 +145,8 @@ const guestAllowedPath = [
   "/errorReferralCode",
   "/AuthorizationDone",
   "/loadingDiscordAuthorization",
+  "/discordStart",
+  "/discordStartLoading",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -166,8 +168,6 @@ const CheckSetting: React.FC = () => {
   // or user is in guest allowed path
   // or user is guest
   useEffect(() => {
-    console.log("wallet connection is",Wallet.Extension.connection)
-    console.log("session storage is",sessionStorage.getItem("state"))
     if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
       dispatch(profileSlice.actions.authenticated());
     } else if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
