@@ -107,14 +107,14 @@
 
 .standard-popup-window-lower-content {
   width: 100%;
-  padding-top: 20.5px;
+  /* padding-top: 20.5px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
 
-.standard-popup-window-lower-content > p {
+.standard-popup-window-lower-content p {
   margin: 0;
 }
 
@@ -135,4 +135,12 @@
   justify-content: center;
   align-items: center;
   gap: 9px;
+}
+
+.guest-nft-detail-popup-lower-content {
+  margin-top: 20.5px;
+}
+
+.guest-nft-detail-popup-lower-content > p {
+  margin: 0;
 }

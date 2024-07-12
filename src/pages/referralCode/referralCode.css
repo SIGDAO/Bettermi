@@ -146,6 +146,7 @@
     display: flex;
     flex-direction: column;
     gap: 7.5px;
+    margin-top: 10px;
   }
 
   .referral-button-container {
@@ -158,6 +159,6 @@
     transform: translateX(-50%);
   }
 
-  .referral-warning-mimi-icon-container {
+  .standard-popup-window-lower-content {
     
   }
