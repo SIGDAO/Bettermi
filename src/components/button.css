@@ -214,3 +214,17 @@
   gap: 10px;
   cursor: pointer;
 }
+
+.dark-green-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 248px;
+  width: 56px;
+  background: #182221;
+  border: 1px solid var(--keppel);
+  border-radius: 10px;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0px 15px 30px #1466CC29;
+}

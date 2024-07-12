@@ -28,7 +28,6 @@ interface IButtonProps {
   leftImage?: JSX.Element;
   rightImage?: JSX.Element;
   externalLink?:string;
-  
 }
 
 // DefaultButton css style
@@ -98,6 +97,32 @@ export const GreenButton: React.FunctionComponent<IButtonProps> = (props) => {
     <div className={className ? `green-button-container ${className}` : "green-button-container" } style={style ? {height: height, width: width, ...style} : { height: height, width: width }} onClick={handleClick}>
       {leftImage}
       <p className="inter-semi-bold-white-15px">{text}</p>
+      {rightImage}
+    </div>
+  );
+}
+
+export const DarkGreenButton: React.FunctionComponent<IButtonProps> = (props) => {
+  const { text, height, width, action, navigation, style, leftImage, rightImage, className } = props;
+  const navigate = useNavigate();
+
+  const handleClick = (): void => {
+    if (action && navigation) {
+      action();
+      navigate(navigation);
+      return;
+    }
+
+    if (action) {
+      action();
+    } else if (navigation) {
+      navigate(navigation);
+    }
+  };
+  return (
+    <div className={className ? `dark-green-button-container ${className}` : "dark-green-button-container" } style={style ? {height: height, width: width, ...style} : { height: height, width: width }} onClick={handleClick}>
+      {leftImage}
+      <p className="inter-semi-bold-keppel-15px">{text}</p>
       {rightImage}
     </div>
   );

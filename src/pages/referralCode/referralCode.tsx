@@ -111,7 +111,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
               haveGuestEntrance = {true}
               upperButtonText="XT Wallet"
               lowerButtonText="Phoenix Wallet"
-            ></EntranceScreenTemplate>
+            />
           </div>
         </div>
       </div>
