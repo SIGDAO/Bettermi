@@ -52,7 +52,6 @@ export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificat
       );
     return(
     <>{isPopUpNFTDetailWinodow && <div className="hidden-content">{ guestNFTDetailpopupWindowDisplay }</div>}
-      {children}
     </>
     );
   }
