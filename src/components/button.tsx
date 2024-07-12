@@ -27,6 +27,8 @@ interface IButtonProps {
   imageClassName?: string;
   leftImage?: JSX.Element;
   rightImage?: JSX.Element;
+  externalLink?:string;
+  
 }
 
 // DefaultButton css style
@@ -39,7 +41,7 @@ interface IBackButtonProps {
 }
 
 export const PurpleButton: React.FunctionComponent<IButtonProps> = (props) => {
-  const { text, height, width, action, navigation, style, leftImage, rightImage, className } = props;
+  const { text, height, width, action, navigation, style, leftImage, rightImage, className,externalLink } = props;
   const navigate = useNavigate();
 
   const handleClick = (): void => {
@@ -55,6 +57,17 @@ export const PurpleButton: React.FunctionComponent<IButtonProps> = (props) => {
       navigate(navigation);
     }
   };
+  if(externalLink != undefined){
+    return(
+      <Link to = {externalLink}>
+      <div className={className ? `purple-button-container ${className}` : "purple-button-container" } style={style ? {height: height, width: width, ...style} : { height: height, width: width }}>
+      {leftImage}
+      <p className="inter-semi-bold-white-15px">{text}</p>
+      {rightImage}
+    </div>
+    </Link>
+    );
+  }
   return (
     <div className={className ? `purple-button-container ${className}` : "purple-button-container" } style={style ? {height: height, width: width, ...style} : { height: height, width: width }} onClick={handleClick}>
       {leftImage}
@@ -358,15 +371,16 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
 export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, width, className }) => {
   const CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID!;
   const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
+  console.log(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`)
 
   return (
     <PurpleButton
       text="Continue"
       height={height}
       width={width}
-      navigation={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}
       className={className}
       style={{ gap: "10px" }}
+      externalLink={`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`}
     />
   );
 };
