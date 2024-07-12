@@ -133,6 +133,8 @@
 
 .lock-button-cover {
   position: relative;
+  width: 326px;
+  height: 56px;
 }
 
 .selfie-time-countdown {

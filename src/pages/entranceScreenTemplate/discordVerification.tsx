@@ -12,14 +12,10 @@ interface IDiscordVerificationPopUpProp {
   // buttonComponent?: React.ReactNode;
 }
 
-export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificationPopUpProp> = ({ content, isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow }) => {
+export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificationPopUpProp> = ({ isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow }) => {
   const screenContent: string[] = ["Discord Verification", "", "img/referralCode/discordLogo.png", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
 
-  const upperContent: JSX.Element = (
-    <>
-      <p className="inter-semi-bold-white-18px">Discord Verification</p>
-    </>
-  );
+  const upperContent: JSX.Element = <p className="inter-semi-bold-white-18px">Discord Verification</p>;
 
   const lowerContent: JSX.Element = (
     <div className="discord-verification-detail-popup-window-below-content">
@@ -46,31 +42,5 @@ export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificat
     </>
   );
 
-  // const guestNFTDetailpopupWindowDisplay: JSX.Element = (
-  //   <>
-  //     <div className="discord-verification-detail-popup-window-container">
-  //       {content[0] !== "" ? ( //if the content array[0] is empty, show nothing, otherwise show title
-  //         <div className="discord-verification-detail-popup-window-title inter-semi-bold-white-18px">{content[0]}</div>
-  //       ) : (
-  //         <></>
-  //       )}
-  //       <div className="discord-verification-detail-popup-window-content">
-  //         {content[1] !== "" ? <div className="inter-bold-royal-blue-15px">{content[1]}</div> : <></>}
-  //         {content[2] !== "" ? <img className="discord-verification-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/${content[2]}`} alt="" /> : <></>}
-  //         {content[3] !== "" && content[4] !== "" ? (
-  //           <div className="discord-verification-detail-description inter-normal-cadet-blue-14px line-height-21px">
-  //             {content[3]}
-  //             <br />
-  //             {content[4]}
-  //           </div>
-  //         ) : (
-  //           <></>
-  //         )}
-  //         {buttonComponent ? buttonComponent : <></>}
-  //       </div>
-  //     </div>
-  //     <div onClick={() => setIsPopUpNFTDetailWinodow(false)} className="click-the-area-to-make-it-hidden-again"></div>
-  //   </>
-  // );
   return <>{isPopUpNFTDetailWinodow && <div className="hidden-content">{guestNFTDetailpopupWindowDisplay}</div>}</>;
 };

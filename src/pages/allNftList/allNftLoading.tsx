@@ -104,7 +104,7 @@ const content: JSX.Element = (
             </div>
           </div>
       </div> */}
-      <div className="minting-JdJl2l inter-normal-white-15px">Loading Marketplace</div>
+      <div className="minting-JdJl2l inter-normal-white-15px">Loading Marketplace...</div>
       <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div>
       {/* <div className="reminder-text-2 inter-normal-white-15px">and do not refresh the page</div> */}
     </div>
