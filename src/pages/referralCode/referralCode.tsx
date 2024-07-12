@@ -88,12 +88,14 @@ export default function ReferralCode(props: IReferralCodeProps) {
   };
 
   const content: JSX.Element = (
+    <>
     <DiscordVerificationPopUp
       isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
       setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
       content={screenContent}
       buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
-    >
+    >    
+    </DiscordVerificationPopUp>
       <div className="referralCode-layout">
         <div id="referralCode-container">
           <div className="referralCodeTitle">
@@ -115,8 +117,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
           </div>
         </div>
       </div>
-    </DiscordVerificationPopUp>
-
+</>
     // <div className="referralCode-layout">
     //   <div id="referralCode-container">
     //     {logo}
