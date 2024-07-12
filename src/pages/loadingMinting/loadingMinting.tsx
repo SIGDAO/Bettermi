@@ -242,7 +242,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   }, []);
   //ends here
 
-  return<LoadingScreen pathname = {pathname} count = {count}></LoadingScreen>;
+  return <LoadingScreen pathname = {pathname} count = {count}></LoadingScreen>;
 };
 
 export default LoadingMinting;

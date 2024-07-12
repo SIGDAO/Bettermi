@@ -94,7 +94,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
         isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
         // content={screenContent}
-        buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
+        // buttonComponent={<DiscordVerificationButton className="guest-take-selfie-button-container" height="56px" width="248px" />}
       ></DiscordVerificationPopUp>
       <ReferralWarningPopupWindow isPopupReferralWarning={isPopupReferralWarning} setIsPopupReferralWarning={setIsPopupReferralWarning} />
       <div className="referralCode-layout">

@@ -335,7 +335,8 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
           <div className="selfie-time-countdown-container">
             <p className="selfie-time-countdown inter-semi-bold-white-15px">{timeDifference}</p>
           </div>
-          <PurpleButton 
+        </div>
+        <PurpleButton 
             text="Take a Selfie to Earn !" 
             leftImage={takeSelfieIcon} 
             rightImage={arrowIcon} 
@@ -344,7 +345,6 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
             action={handleTakeASelfie} 
             style={{ borderRadius: "15px", gap: "29px"}}
           />
-        </div>
       </div>
     );
   } else if (!isLoading) {
