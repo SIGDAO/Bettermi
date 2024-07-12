@@ -17,7 +17,7 @@ export default function LoadingScreen(props: ILoadingScreenProps) {
     let component: JSX.Element = <></>;
     if (pathname === "/loadingBMIDaily") {
       component = <div className="loading-screen inter-normal-white-15px">Importing...</div>;
-    } else if (pathname === "loadingDiscordAuthorization") {
+    } else if (pathname === "/loadingDiscordAuthorization") {
       component = <div className="loading-screen inter-normal-white-15px">Loading...</div>;
     } else {
       component = <div className="loading-screen inter-normal-white-15px">Minting…</div>;
