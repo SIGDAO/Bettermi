@@ -200,7 +200,6 @@ function App() {
     document.title = titleList[location.pathname] ?? "Bettermi";
 
     if (location.pathname !== currentPath) {
-      console.log("ioijsdoifjsodifjiosd", currentPath);
       setPreviousPath(currentPath);
       setCurrentPath(location.pathname);
     }

@@ -78,6 +78,15 @@ a:focus-visible {
   font-weight: 400;
 }
 
+.inter-normal-white-16px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+
 .inter-normal-15px {
   /* color: var(--white); */
   font-family: var(--font-family-inter);

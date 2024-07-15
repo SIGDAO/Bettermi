@@ -30,8 +30,9 @@ import { selectWalletNodeHost } from "../../redux/useLedger";
 export interface IConnectWalletProps {}
 
 export default function ConnectWallet(props: IConnectWalletProps) {
-  localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
@@ -44,6 +45,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
 
   useEffect(() => {
     store.dispatch({ type: "USER_LOGOUT" });
+    localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   }, []);
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
@@ -79,6 +81,8 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         } else {
           store.dispatch(profileSlice.actions.setGender("Male"));
         }
+
+        dispatch(profileSlice.actions.authenticated());
         navigate("/home");
       } else {
         console.log("no contract or only one contract is created");
