@@ -227,7 +227,7 @@ const LoadingMintingMyNftList: React.FunctionComponent<ILoadingMintingProps> = (
           </div>
           <div className="x50-7ckAMs">{count}%</div>
         </div>
-        <div className="minting-JdJl2l inter-normal-white-15px">Loading NFTs</div>
+        <div className="minting-JdJl2l inter-normal-white-15px">Loading NFTs...</div>
         <div className="reminder-text-1 inter-normal-white-15px">
           Please wait patiently
           <br />

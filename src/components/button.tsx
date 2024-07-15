@@ -267,12 +267,12 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
   const tempAccountId = useSelector(accountId);
   // const bmi_fetchedData = useSelector(selectBMI);
   const Ledger2 = useLedger();
-  const [isActive, setIsActive] = React.useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [timeDifference, setTimeDifference] = useState("");
   const isSelfie = useSelector(selectCurrentIsSelfie);
   const isGuest = useSelector(selectCurrentIsGuest);
   // const isSelfie = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [isMidnight, setIsMidnight] = useState(false);
 
         
@@ -307,10 +307,12 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
       machineCodeHash: bmiHashId,
     });
   }
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (isGuest) {
       setIsLoading(false);
       setIsActive(false);
+      console.log("Guest testing");
       return;
     }
     isTodayHaveSelfieRecord(tempAccountId, Ledger2)

@@ -161,32 +161,28 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         <div className="bettermidapp-challenge-finished-1">
           {isGuest && <BackButton />}
           {/* <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} /> */}
-          <div className="x16219-iwUDzs" style={isGuest ? { opacity: 0.6 } : {}}>
-            <div className="you-have-earned-75VOY2">{SmallTitle}</div>
-            <h1 className="title-75VOY2">Congratulations !</h1>
-            <div className="finished-75VOY2">
+          <div className="challenge-completed-congratulations-message-container" style={isGuest ? { opacity: 0.6 } : {}}>
+            <div className="finished-container">
               <img src="img/challengeCompleted/completed-mimi.png" alt="" className="mimi-heart-challenge-completed" />
-              {/* <div className="button3-copy-3oZEl3">
-              <div className="button1-vX3ONf button1"></div>
+              <h1 className="challenge-completed-congratulations-message inter-semi-bold-white-28px">Congratulations !</h1>
             </div>
-            <img className="icon-awesome-check-3oZEl3" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/icon-awesome-check@1x.png`} alt="Icon awesome-check" /> */}
-            </div>
+            <div className="inter-normal-white-16px">{SmallTitle}</div>
             {NFT ? null : loading ? (
               <div className="sigdao-score-75VOY2">
-                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ loading...</div>
                 <SigdaoIcon width="17px" height="17px" />
+                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ loading...</div>
               </div>
             ) : (
               <div className="sigdao-score-75VOY2">
-                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ {userReward}</div>
                 <SigdaoIcon width="17px" height="17px" />
+                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+{userReward}</div>
               </div>
             )}
           </div>
           {isGuest ? guestUserView : registeredUserView}
         </div>
       </div>
-      <div className="bg-locked-challenge-completed"></div>
+      {isGuest && <div className="bg-locked-challenge-completed"/>}
     </>
   );
 
