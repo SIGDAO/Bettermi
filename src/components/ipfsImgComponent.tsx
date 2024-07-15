@@ -12,6 +12,7 @@ interface IPFSImageComponentProps {
 export const getDomains = (imgAddress: string): string[] => {
   return [
     // getApiUrls(imgAddress).imgAddress,
+    `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=4Xd22JeatBUeiw90FqP9O044hSoEdTDkOMPp7ZhYKdSGqBvjvzt5P9ttl_ov82Wj`,
     `https://rose-peaceful-badger-310.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=ucHcjsImiqy6ENBl5X8Q7kTG3IwrFohD1r_s6qhqhMPkUZpAOiIhCFZ70Cgp-k6L`,
     `https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${imgAddress}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`,
     // `https://ipfs.io/ipfs/${imgAddress}/`,
