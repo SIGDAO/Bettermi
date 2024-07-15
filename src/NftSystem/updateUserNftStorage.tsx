@@ -24,13 +24,21 @@ export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDis
 export async function fetchIPFSJSON(address: string) {
     let res, text;
     const domains = getDomains(address);
-    const url = getApiUrls(address).imgAddress;
-    console.log("testing url is",url)
+    let count = 3;
     let index = 0;
     while (true) {
         const ipfsAddress = domains[index];
         try {
+            if (count === 0) {
+                break;
+            }
             res = await fetch(ipfsAddress);
+
+            if (res.status !== 200) {
+                index = (index + 1) % domains.length;
+                count--;
+                continue;
+            }
             text = await res.text();
             break;
         }
