@@ -86,6 +86,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         navigate("/home");
       } else {
         console.log("no contract or only one contract is created");
+        dispatch(profileSlice.actions.setIsNewUser(true));
         navigate("/connectSucceed");
       }
     } catch (error: any) {

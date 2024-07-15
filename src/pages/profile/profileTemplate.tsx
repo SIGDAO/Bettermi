@@ -73,7 +73,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   const { previousPath, userAccountId, isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow, isNFTiconLoading, setIsNFTiconLoading, setImgAddress, setRewardPercentage, isMyProfile } = props;
 
   const isGuest = useAppSelector(selectCurrentIsGuest);
-  const isNewUsser = useSelector(selectCurrentIsNewUser);
+  const isNewUser = useSelector(selectCurrentIsNewUser);
 
   // signum related
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -183,7 +183,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   // open the profile edit pop up window if the previous path is customizeYourProfile
   const checkIsPrevPathIsCustomizeYourProfile = () => {
     // if (previousPath && previousPath === "/customizeYourProfile") {
-    if (isNewUsser) {
+    if (isNewUser) {
       setIsOpen(true);
       setIsBackButton(false);
       dispatch(profileSlice.actions.clearIsNewUser());

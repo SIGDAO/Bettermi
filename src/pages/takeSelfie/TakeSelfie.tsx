@@ -229,7 +229,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   const content: JSX.Element = (
     <div className="selfie-content-container">
-      <BackButton customiseBackButtonLink={"/home"} />
+      <BackButton customiseBackButtonLink={isSelfie ? "/home" : "/connectSucceed"} />
       {/* <div className="disclaimer inter-normal-white-15px">
       We super care your privacy, your selfie will not be stored
       </div> */}
