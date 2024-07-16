@@ -22,34 +22,40 @@ export async function AddNftToAccount(ledger2:any, recipientId:string,nftToBeDis
 }
 
 export async function fetchIPFSJSON(address: string) {
-    let res, text;
     const domains = getDomains(address);
     let count = 3;
     let index = 0;
-    while (true) {
-        const ipfsAddress = domains[index];
-        try {
-            if (count === 0) {
-                break;
-            }
-            res = await fetch(ipfsAddress);
+  
+    while (count > 0) {
+      const ipfsAddress = domains[index];
+      try {
+        const responsePromise = fetch(ipfsAddress);
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => {
+            reject(new Error("Fetch IPFS JSON timeout"));
+          }, 2000); // 20 seconds timeout
+        });
+  
+        const res: Response = await Promise.race([responsePromise, timeoutPromise]) as Response;
 
-            if (res.status !== 200) {
-                index = (index + 1) % domains.length;
-                count--;
-                continue;
-            }
-            text = await res.text();
-            break;
+  
+        if (res.status !== 200) {
+          index = (index + 1) % domains.length;
+          count--;
+          continue;
         }
-        catch (error){
-            console.log(error);
-            index = (index + 1) % domains.length
-        }    
+  
+        const text = await res.text();
+        return JSON.parse(text);
+      } catch (error) {
+        console.log(error);
+        index = (index + 1) % domains.length;
+        count--;
+      }
     }
-    return JSON.parse(text);
-}
-
+  
+    throw new Error("Failed to fetch IPFS JSON");
+  }
 export async function FindLatestTransactionNumber(ledger2:any,recipient:string,nftDistributor:string){//Takes the account id of recipient but not the contrat Id
     console.log(ledger2);
     console.log(recipient);

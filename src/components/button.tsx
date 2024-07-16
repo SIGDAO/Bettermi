@@ -397,7 +397,8 @@ export const GuestConnectWallectButton: React.FC<IButtonProps> = ({ height, widt
 
 export const DiscordVerificationButton: React.FC<IButtonProps> = ({ height, width, className }) => {
   const CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID!;
-  const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
+  // const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
+  const REDIRECT_URI = window.location.origin + "/loadingDiscordAuthorization";
   console.log(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`)
 
   return (
