@@ -5,14 +5,15 @@ import { DiscordVerificationButton } from "../../components/button";
 import { Navigate } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { PopupWindowTemplate } from "../../components/popupWindow";
+import { useDispatch, useSelector } from "react-redux";
+import { profileSlice } from "../../redux/profile";
 
-interface IReferralSuccessPopupWindowProps {
-
-}
+interface IReferralSuccessPopupWindowProps {}
 
 const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupWindowProps> = (props) => {
   // const { isPopUpReferralSuccessWindow, setIsPopUpReferralSuccessWindow, children } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const referralSuccessSigdao = 3;
 
   const referralSuccessPopupWindowUpperContent: JSX.Element = (
@@ -42,7 +43,17 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
       <PopupWindowTemplate
         upperContent={referralSuccessPopupWindowUpperContent}
         lowerContent={referralSuccessPopupWindowLowerContent}
-        buttonComponent={<ReferralNavToTakeSelfieButton className="referral-nav-to-take-selfie-button-container" height="56px" width="248px" action={() => navigate("/takeSelfie")} />}
+        buttonComponent={
+          <ReferralNavToTakeSelfieButton
+            className="referral-nav-to-take-selfie-button-container"
+            height="56px"
+            width="248px"
+            action={() => {
+              dispatch(profileSlice.actions.authenticated());
+              navigate("/takeSelfie");
+            }}
+          />
+        }
       />
       <div className="click-the-area-to-make-it-hidden-again" onClick={() => alert("You must equip a Bettermi.io NFT to enter")} />
     </>
