@@ -167,10 +167,11 @@ const CheckSetting: React.FC = () => {
   // or user is in guest allowed path
   // or user is guest
   useEffect(() => {
-    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
-      dispatch(profileSlice.actions.authenticated());
-    } else if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
+    if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
       dispatch(profileSlice.actions.unauthenticated());
+    } else if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+      console.log("123123123");
+      dispatch(profileSlice.actions.authenticated());
     } else if (currentPath === "/AuthorizationDone" && !isGuest) {
       console.log("called this");
     } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
