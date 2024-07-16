@@ -145,7 +145,6 @@ const guestAllowedPath = [
   "/errorReferralCode",
   "/AuthorizationDone",
   "/loadingDiscordAuthorization",
-  "/discordStart",
   "/discordStartLoading",
 ];
 
@@ -168,11 +167,13 @@ const CheckSetting: React.FC = () => {
   // or user is in guest allowed path
   // or user is guest
   useEffect(() => {
-    if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
-      console.log("called this, dsfuidhfiushdifuhsdiuhfui");
-      dispatch(profileSlice.actions.authenticated());
-    } else if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
+    if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
+      console.log("wallet connection before dispatch is",Wallet.Extension.connection)
       dispatch(profileSlice.actions.unauthenticated());
+      console.log("wallet connection is",Wallet.Extension.connection)
+    } else if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+      console.log("123123123");
+      dispatch(profileSlice.actions.authenticated());
     } else if (currentPath === "/AuthorizationDone" && !isGuest) {
       console.log("called this");
     } else if (!checkCurrentPathIsGuestAllowed(currentPath) || !isGuest) {
@@ -291,7 +292,6 @@ function App() {
               <Route path="/loadingDiscordAuthorization" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />}>
                 <Route path=":referralCode" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />} />
               </Route>
-              <Route path="/discordStart" element={<DiscordStart></DiscordStart>}></Route>
               <Route path="/discordStartLoading" element={<DiscordStartLoading></DiscordStartLoading>}></Route>
             </Route>
             {/* </Route> */}

@@ -28,6 +28,7 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     const userPublicKey = useSelector(accountPublicKey);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [count, setCount] = useState<number>(1);
+    const [clicked,setClicked] = useState<boolean>(false);
     const nodeHost = useSelector(selectWalletNodeHost);
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
     const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
@@ -61,6 +62,7 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
         }
         // return userInfo?.loginedAcctID
         setCount(100);
+        navigate("/referralGiveReward")
         
       } catch (error: any) {
         if (error.name === "InvalidNetworkError") {
@@ -75,21 +77,21 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     };
 
 
-  const nftIconCheck = useRef(false);
+  // const nftIconCheck = useRef(false);
 
-  useEffect(() => {
-    if (nftIconCheck.current) {
-      return;
-    }
-    nftIconCheck.current = true;
-    userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate);
-  }, []);
+  // useEffect(() => {
+  //   if (nftIconCheck.current) {
+  //     return;
+  //   }
+  //   nftIconCheck.current = true;
+  //   userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate);
+  // }, []);
 
     useEffect(() => {
       //const incrementInterval = 240000 / 96; // Time divided by the number of increments
-      const incrementInterval = 5000 / 1000;
+      const incrementInterval = 50000 / 1000;
       const timer = setInterval(() => {
-        if (count < 100) {
+        if (count < 100 && clicked === true) {
           setCount((prevCount) => {
             if (prevCount < 99) {
               return prevCount + 1;
@@ -109,7 +111,7 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
         // navigate('/generateFreeNFT');
         clearInterval(timer);
       };
-    }, []);
+    }, [clicked]);
  
 
 
@@ -133,12 +135,20 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     <div id="discord-start-loading-container">
       {logo}
       {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
+      {
+        clicked === true?
       <div className = "discord-start-loading-progress">{count}%</div>
+      :
+      (
+        <></>
+      )
+      }
       <div className="discord-start-loading-button-container">
-        {count === 100?
+        {clicked === false?
               <div className="discord-start-loading-button-container">
         <EntranceScreenTemplate
-          upperButtonFunction={() => {navigate("/referralGiveReward")}}
+          // upperButtonFunction={() => {navigate("/referralGiveReward")}}
+          upperButtonFunction={() => { setClicked(true);userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate)}}
           lowerButtonFunction={() => {}}
           haveLowerButton = {false}
           haveGuestEntrance = {false}
@@ -152,8 +162,17 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
         )
 }
       </div>
+      {
+        clicked?
+        <>
       <div className = "discord-start-loading-instruction inter-normal-white-15px">Please wait patiently</div>
       <div className = "inter-normal-white-15px">and do not refresh the page...</div>
+      </>
+      : 
+      (
+        <></>
+      )
+}
     </div>
   </div>
 
