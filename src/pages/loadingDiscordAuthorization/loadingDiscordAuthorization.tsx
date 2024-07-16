@@ -104,7 +104,7 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
       navigate("/errorReferralCode");
     }
     else if(isNewUser.status === 200){
-      navigate("/discordStart");
+      navigate("/discordStartLoading");
     } 
     else {
       navigate("/errorReferralCode");

@@ -145,7 +145,6 @@ const guestAllowedPath = [
   "/errorReferralCode",
   "/AuthorizationDone",
   "/loadingDiscordAuthorization",
-  "/discordStart",
   "/discordStartLoading",
 ];
 
@@ -290,7 +289,6 @@ function App() {
               <Route path="/loadingDiscordAuthorization" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />}>
                 <Route path=":referralCode" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />} />
               </Route>
-              <Route path="/discordStart" element={<DiscordStart></DiscordStart>}></Route>
               <Route path="/discordStartLoading" element={<DiscordStartLoading></DiscordStartLoading>}></Route>
             </Route>
             {/* </Route> */}

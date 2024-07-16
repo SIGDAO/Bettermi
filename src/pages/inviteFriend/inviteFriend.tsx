@@ -20,7 +20,18 @@ const InviteFriend: React.FunctionComponent<IInviteFriendProps> = (props) => {
   const [alert, setAlert] = React.useState<boolean>(false); // copy alert
   const [alertWarningString, setAlertWarningString] = React.useState<string>("");
   const [copyAlertCount, setCopyAlertCount] = React.useState<number>(0);
+  const [isLoading,setLoading] = React.useState<boolean>(true);
   const inviteFriendLink: string = window.location.origin + "/referralCode/" + userAccountId;
+  
+  const loadedCheck = React.useRef(false);
+
+  React.useEffect(() => {
+    if (loadedCheck.current) {
+      return;
+    }
+    loadedCheck.current = true;
+
+  }, []);
 
   const handleCopyDiscordUsername = (): void => {
     navigator.clipboard.writeText(inviteFriendLink);
