@@ -77,8 +77,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
 
   const navigate = useNavigate();
+  const reduxIsGuest = useSelector(selectCurrentIsGuest);
 
-  const isGuest = useSelector(selectCurrentIsGuest);
+  const isGuest = pathname === "/referralGiveReward" ? true : reduxIsGuest;
 
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const name = useSelector(selectCurrentUsername);

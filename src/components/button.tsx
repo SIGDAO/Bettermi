@@ -247,7 +247,7 @@ export const BackButton: React.FunctionComponent<IBackButtonProps> = (props) => 
   };
 
   const handleBackButtonOnClick = (): void => {
-    if (customiseBackButtonLink) {
+    if (customiseBackButtonLink && customiseBackButtonLink !== "") {
       navigate(customiseBackButtonLink);
       return;
     }
