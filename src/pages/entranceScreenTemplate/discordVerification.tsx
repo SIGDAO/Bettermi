@@ -13,13 +13,13 @@ interface IDiscordVerificationPopUpProp {
 }
 
 export const DiscordVerificationPopUp: React.FunctionComponent<IDiscordVerificationPopUpProp> = ({ isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow }) => {
-  const screenContent: string[] = ["Discord Verification", "", "img/referralCode/discordLogo.png", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
+  const screenContent: string[] = ["Discord Verification", "", "img/referralCode/discordpng.png", "Use connected wallet for Discord API.", "Ensure you have a Discord account"];
 
   const upperContent: JSX.Element = <p className="inter-semi-bold-white-18px">Discord Verification</p>;
 
   const lowerContent: JSX.Element = (
     <div className="discord-verification-detail-popup-window-below-content">
-      <img className="discord-verification-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/referralCode/discordLogo.png`} alt="" />
+      <img className="discord-verification-detail-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/referralCode/discordpng.png`} alt="" />
       <div className="inter-normal-white-14px line-height-21px">
         Use connected wallet for Discord API.
         <br />

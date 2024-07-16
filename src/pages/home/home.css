@@ -1046,6 +1046,13 @@ color
 }
 
 .referral-congrat-popup-window-mimi {
-  height: 118px;
-  margin-top: 20.5px;
+  height: 108px;
+  margin-top: 37.5px;
+}
+
+.referral-congrat-popup-window-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 27.5px;
 }

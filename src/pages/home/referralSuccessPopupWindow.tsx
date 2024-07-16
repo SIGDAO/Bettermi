@@ -7,13 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { PopupWindowTemplate } from "../../components/popupWindow";
 
 interface IReferralSuccessPopupWindowProps {
-  isPopUpReferralSuccessWindow: boolean;
-  setIsPopUpReferralSuccessWindow: React.Dispatch<React.SetStateAction<boolean>>;
-  children?: React.ReactNode;
+
 }
 
 const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupWindowProps> = (props) => {
-  const { isPopUpReferralSuccessWindow, setIsPopUpReferralSuccessWindow, children } = props;
+  // const { isPopUpReferralSuccessWindow, setIsPopUpReferralSuccessWindow, children } = props;
   const navigate = useNavigate();
   const referralSuccessSigdao = 3;
 
@@ -28,15 +26,15 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
   );
 
   const referralSuccessPopupWindowLowerContent: JSX.Element = (
-    <>
+    <div className="referral-congrat-popup-window-container">
       {/* <div className="inter-bold-royal-blue-15px">START EARNING SIGDAO</div> */}
       <img className="referral-congrat-popup-window-mimi" src={`${process.env.PUBLIC_URL}/img/home/mimi-lying-taking-selfie-2-big-nft-at-back.png`} alt="" />
-      <div className="guest-nft-detail-description inter-normal-white-14px line-height-21px">
+      <div className="inter-normal-white-14px line-height-21px">
         Selfie to Earn your FREE
         <br />
         Limited NFT & Web3 Membership.
       </div>
-    </>
+    </div>
   );
 
   const guestNFTDetailpopupWindowDisplay: JSX.Element = (
@@ -50,7 +48,7 @@ const ReferralSuccessPopupWindow: React.FunctionComponent<IReferralSuccessPopupW
     </>
   );
 
-  return <>{isPopUpReferralSuccessWindow && <div className="hidden-content">{guestNFTDetailpopupWindowDisplay}</div>}</>;
+  return <div className="hidden-content">{guestNFTDetailpopupWindowDisplay}</div>;
 };
 
 export default ReferralSuccessPopupWindow;
