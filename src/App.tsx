@@ -169,6 +169,7 @@ const CheckSetting: React.FC = () => {
   // or user is guest
   useEffect(() => {
     if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
+      console.log("called this, dsfuidhfiushdifuhsdiuhfui");
       dispatch(profileSlice.actions.authenticated());
     } else if (currentPath === "/referralGiveReward" || currentPath.includes("/referralCode")) {
       dispatch(profileSlice.actions.unauthenticated());

@@ -91,6 +91,11 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       }
     } catch (error: any) {
       // todo: add error handling, and show it to user
+
+      if (error.message === "Failed to fetch IPFS JSON") {
+        alert("Cannot connect wallet, failed to fetch IPFS JSON, . Please try again!\nIf the problem persists, please contact core team through discord!");
+      }
+
       if (error.name === "InvalidNetworkError") {
         alert(
           "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",

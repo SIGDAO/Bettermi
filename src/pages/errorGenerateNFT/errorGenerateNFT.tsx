@@ -15,11 +15,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
   const [buttonText, setButtonText] = React.useState<string>("");
   const [navigatePath, setNavigatePath] = React.useState<string | number>("");
   const referrerAccountID = useSelector(referrer);
-  const bettermiUrl = process.env.REACT_APP_BETTERMI_URL!;
   console.log("referrerAccountID is",referrerAccountID);
-  console.log("bettermiURL is",bettermiUrl);
-  console.log("navigate url is",bettermiUrl + "/referralCode/" + referrerAccountID);
-
   useEffect(() => {
     switch (location.pathname) {
       case "/errorGenerateNFT":
@@ -55,7 +51,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
       case "/errorReferralCode":
         setErrorMsg("Looks like something went wrong.\n Let's try again!");
         setButtonText("Try again");
-        setNavigatePath(bettermiUrl + "/referralCode/" + referrerAccountID);
+        setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
         break;
       default:
         break;

@@ -113,7 +113,6 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   const handleSetNavigatePath = (): void => {
     if (isGuest) {
-      console.log("called is guest",isGuest)
       setNavigatePath("/generateBMIDaily");
       return;
     }
