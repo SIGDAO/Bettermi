@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./referralCode.css";
 import { ButtonWithAction, DisabledButton } from "../../components/button";
 import { store } from "../../redux/reducer";
@@ -87,6 +87,12 @@ export default function ReferralCode(props: IReferralCodeProps) {
       }
     }
   };
+
+
+  useEffect(() => {
+    store.dispatch({ type: "USER_LOGOUT" });
+    localStorage.clear(); //Guess we need to clear out all local storage after connecting account
+  }, []);
 
   const content: JSX.Element = (
     <>

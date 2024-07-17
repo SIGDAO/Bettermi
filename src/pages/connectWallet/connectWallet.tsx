@@ -56,6 +56,9 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       }
       const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
+      console.log("equippedBettermiNft: ", equippedBettermiNft);
+      console.log("userInfo: ", userInfo);
+
       // situation:
       // all contract is created, but one or more contract still unconfirmed
       // or, not enqiuped NFT, then navigate to loadingMinting
@@ -63,7 +66,8 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         !equippedBettermiNft &&
         ((userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
           (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
-          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null))
+          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null))
       ) {
         navigate("/loadingMinting");
         return;
