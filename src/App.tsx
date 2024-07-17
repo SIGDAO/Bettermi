@@ -109,6 +109,7 @@ const titleList = {
   "/NFTTransferCompleted": "NFT Transfer Completed - Bettermi",
   "/referralCode": "NFT referral code",
   "/AuthorizationDone": "discord Authorization",
+  "/errorGenerateNFTNotGrantedWallet": "Error Generate NFT - Bettermi",
 };
 
 const guestAllowedPath = [
@@ -134,7 +135,7 @@ const guestAllowedPath = [
   "/OtherUserProfile",
   "/aiCoachSelect",
   "/indexMyNftList",
-  // error page
+  // error pages
   "/errorGenerateNFT",
   "/errorTakeSelfieNoFace",
   "/errorTakeSelfieTooManyFace",
@@ -143,6 +144,8 @@ const guestAllowedPath = [
   "/errorWalletNotConnected",
   "/errorNotEnoughFunds",
   "/errorReferralCode",
+  "/errorGenerateNFTNotGrantedWallet",
+  // referral related pages
   "/AuthorizationDone",
   "/loadingDiscordAuthorization",
   "/discordStartLoading",
@@ -273,6 +276,7 @@ function App() {
               <Route path="/errorWalletNotConnected" element={<ErrorGenerateNFT />} />
               <Route path="/errorNotEnoughFunds" element={<ErrorGenerateNFT />} />
               <Route path="/errorReferralCode" element={<ErrorGenerateNFT />} />
+              <Route path="/errorGenerateNFTNotGrantedWallet" element={<ErrorGenerateNFT />} />
               <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
               <Route path="/setting" element={<Setting />} />
               <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />

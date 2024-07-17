@@ -23,6 +23,11 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setButtonText("Mint again");
         setNavigatePath("/generateBMINFTImport");
         break;
+      case "/errorGenerateNFTNotGrantedWallet":
+        setErrorMsg("Looks like something went wrong. Let's try again!");
+        setButtonText("Try again");
+        setNavigatePath("/generateBMINFTImport");
+        break;
       case "/errorTakeSelfieNoFace":
         setErrorMsg("Please make sure that your face is visible in the frame.");
         setButtonText("Selfie again");

@@ -51,6 +51,7 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
   const [descriptionText, setDescriptionText] = useState<string>("");
   const [discordUsernameText, setDiscordUsernameText] = useState<string>("");
   const [isShowStar, setIsShowStar] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const uploadToChain = async () => {
     // upload the changed user info to chain
@@ -72,14 +73,19 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
   };
 
   const handleSave = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
       setIsShowStar(true);
+      setIsLoading(false);
       return;
     }
 
     if (name === fetchName && aboutYourselfText === fetchAboutYourself && descriptionText === fetchDescription && discordUsernameText === fetchDiscordUsername) {
       setIsOpen((prev) => !prev);
       setIsBackButton(true);
+      setIsLoading(false);
       return;
     }
 
@@ -95,6 +101,8 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
       .catch((e) => {
         displayPopUpMessage(e.message);
       });
+
+    setIsLoading(false);
   };
 
   // get the fetch value to useState

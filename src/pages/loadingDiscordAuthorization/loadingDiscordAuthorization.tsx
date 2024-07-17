@@ -29,7 +29,9 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
 
   console.log(code); // Output: RwBjn8D9IuuukeT8EvBUQUGX2fVCPG
   const CLIENT_ID = process.env.DISCORD_CLIENT_ID!;
-  const REDIRECT_URI = process.env.BETTERMI_ENTRANCE_POINT!;
+  // const REDIRECT_URI = process.env.BETTERMI_ENTRANCE_POINT!;
+  const REDIRECT_URI = `${window.location.origin}/loadingDiscordAuthorization`;
+
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");

@@ -19,8 +19,8 @@ export default function DiscordVerification(props: IReferralCodeProps) {
   console.log("id is",123);
   const CLIENT_ID = process.env.REACT_APP_DISCORD_CLIENT_ID!;
   // const REDIRECT_URI = process.env.REACT_APP_BETTERMI_ENTRANCE_POINT!;
-  const REDIRECT_URI = window.location.origin + "/discordVerification";
-  console.log("redirect uri is",REDIRECT_URI);
+  const REDIRECT_URI = `${window.location.origin}/loadingDiscordAuthorization`;
+  console.log("redirect uri is",window.location.origin);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [buttonText,setButtonText] = useState<string>("Verification");
   const userPublicKey = useSelector(accountPublicKey);

@@ -9,6 +9,7 @@ import { ShortTitleBar } from "../../components/titleBar";
 import { LinkDisplayInput } from "../../components/input";
 import { useNavigate } from "react-router-dom";
 import SigdaoIcon from "../../components/icon";
+import { rewardDetailList } from "../../data/rewardList";
 
 interface IInviteFriendProps {}
 
@@ -72,12 +73,12 @@ const InviteFriend: React.FunctionComponent<IInviteFriendProps> = (props) => {
                     <div className="inter-semi-bold-keppel-15px">6</div>
                   </div>
                 </div>
-                <div className="invite-friend-referral-program-description-line invite-friend-refer-friends-description">Refer 3 friends to unlock Super Connector</div>
+                <div className="invite-friend-referral-program-description-line invite-friend-refer-friends-description">Refer {rewardDetailList[2].requireTimes} friends to unlock Super Connector</div>
                 <div className="invite-friend-referral-program-description-line">
                   <div className="invite-friend-reward-display">
                     <div className={"rewards-goal"}>
                       <div className="rewards-goal-number inter-semi-bold-keppel-14px">0</div>
-                      <div className={"rewards-goal-text inter-semi-bold-white-14px"}>/ 3</div>
+                      <div className={"rewards-goal-text inter-semi-bold-white-14px"}>/ {rewardDetailList[2].requireTimes}</div>
                     </div>
                   </div>
                   <img src={process.env.PUBLIC_URL + "/img/inviteFriend/icon-arrowsx3.svg"} alt="" className="invite-friend-arrow" onClick={() => navigate("/rewardDetail/3")} />

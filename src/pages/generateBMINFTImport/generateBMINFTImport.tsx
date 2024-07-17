@@ -91,6 +91,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
       });
 
       try {
+        // check if the user has NFT contract
+        // if not, create one
         if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
           const initializeNftContract = (await ledger.contract.publishContractByReference({
             name: "NFT",
@@ -105,7 +107,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           dispatch(contractSlice.actions.setIsNFTContractBuild(true));
         }
 
-        // check if the user has minted the NFT
+        // check if the user has BMI contract
+        // if not, create one
         if (ourContract.ats[0] == null && isTransferBMI == false && isTransferBMIBefore == false) {
           let bmiMessage = JSON.stringify({
             bmi: BMI,
@@ -138,35 +141,36 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           setIsTransferBMI(true);
           dispatch(contractSlice.actions.setIsBMIContractBuild(true));
-        } else {
-          //check whether the user has registered an account
-          //testing
-          let bmiMessage = JSON.stringify({
-            bmi: BMI,
-            time: new Date(),
-          });
-
-          try {
-            console.log("bmi Message",bmiMessage)
-            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", bmiMessage);
-
-            encrypted = encrypted.data;
-          } catch (error) {
-            alert("Cannot fetch the record, please core team through discord!\nWill return to home page");
-            navigate("/");
-          }
-
-          const sendBMI = (await ledger.message.sendMessage({
-            message: encrypted,
-            messageIsText: true,
-            recipientId: ourContract.ats[0].at,
-            feePlanck: "1000000",
-            senderPublicKey: publicKey,
-            deadline: 1440,
-          })) as UnsignedTransaction;
-          await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
-          setIsTransferBMI(true);
         }
+        // } else {
+        //   //check whether the user has registered an account
+        //   //testing
+        //   let bmiMessage = JSON.stringify({
+        //     bmi: BMI,
+        //     time: new Date(),
+        //   });
+
+        //   try {
+        //     console.log("bmi Message",bmiMessage)
+        //     encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", bmiMessage);
+
+        //     encrypted = encrypted.data;
+        //   } catch (error) {
+        //     alert("Cannot fetch the record, please core team through discord!\nWill return to home page");
+        //     navigate("/");
+        //   }
+
+        //   const sendBMI = (await ledger.message.sendMessage({
+        //     message: encrypted,
+        //     messageIsText: true,
+        //     recipientId: ourContract.ats[0].at,
+        //     feePlanck: "1000000",
+        //     senderPublicKey: publicKey,
+        //     deadline: 1440,
+        //   })) as UnsignedTransaction;
+        //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+        //   setIsTransferBMI(true);
+        // }
         if (!isTransferToken) {
           TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString()).then((result) => {
             setIsTransferToken(true);
@@ -175,17 +179,22 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         // store.dispatch(profileSlice.actions.setIsSelfie);
         navigate("/loadingMinting");
       } catch (error) {
-        console.log(error.data);
+        console.log("error is: ", error);
+        setMinted(false);
 
-        if (error.data.errorDescription.includes("Not enough funds")) {
+        if (error.data && error.data.errorDescription.includes("Not enough funds")) {
           navigate("/errorNotEnoughFunds");
           return;
         }
 
-        if (error.name && error.name !== "ExtensionWalletError") {
+        if (error.name && error.name === "NotGrantedWalletError") {
+          navigate("/errorGenerateNFTNotGrantedWallet");
+          return;
+        }
+
+        if (error.name && error.name !== "ExtensionWalletError" && error.name === "NotGrantedWalletError") {
           navigate("/errorGenerateNFT");
         }
-        setMinted(false);
       }
     }
   };
@@ -227,7 +236,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         </div>
         <div className="bottom-controls-pqhvJT" onClick={confirm}>
           {minted ? (
-            <DisabledButton text="connecting..." height="56px" width="248px" />
+            <DisabledButton text="Connecting..." height="56px" width="248px" />
           ) : (
             <div className="button_-mint-RUzxTX">
               <div className="button1-T8l3Om"></div>

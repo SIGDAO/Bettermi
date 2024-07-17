@@ -18,6 +18,7 @@ import ReferralCodeLogo from "../entranceScreenTemplate/referralCodeLogo";
 import { DiscordVerificationPopUp } from "../entranceScreenTemplate/discordVerification";
 import { GuestConnectWallectButton, DiscordVerificationButton } from "../../components/button";
 import ReferralWarningPopupWindow from "./referralWarningPopupWindow";
+import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
 
 export interface IReferralCodeProps {}
 
@@ -45,6 +46,8 @@ export default function ReferralCode(props: IReferralCodeProps) {
       }
 
       console.log(checkIfUserExists(Ledger, referralCode));
+
+      const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
       if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
         navigate("/loadingMinting");

@@ -34,7 +34,8 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   const dispatch = useDispatch();
 
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isIconLoading, setIsIconLoading] = useState<boolean>(true);
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
@@ -50,14 +51,15 @@ export default function ConnectWallet(props: IConnectWalletProps) {
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
     try {
+      if (isLoading) return;
+
+      setIsLoading(true);
+
       const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
       if (userInfo == null) {
         alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
       }
       const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
-
-      console.log("equippedBettermiNft: ", equippedBettermiNft);
-      console.log("userInfo: ", userInfo);
 
       // situation:
       // all contract is created, but one or more contract still unconfirmed
@@ -85,11 +87,12 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         } else {
           store.dispatch(profileSlice.actions.setGender("Male"));
         }
+        setIsLoading(false);
 
         dispatch(profileSlice.actions.authenticated());
         navigate("/home");
       } else {
-        console.log("no contract or only one contract is created");
+        setIsLoading(false);
         dispatch(profileSlice.actions.setIsNewUser(true));
         navigate("/connectSucceed");
       }
@@ -105,6 +108,8 @@ export default function ConnectWallet(props: IConnectWalletProps) {
           "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",
         );
       }
+
+      setIsLoading(false);
       if (error.name === "NotFoundWalletError") {
         window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
       }
@@ -116,23 +121,13 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   };
 
   const logo: JSX.Element = (
-    // <div className="connectWallet-bg-img-container">
-    //   {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-LandingAnimation-ScreenSize.jpg"} />}
-    //   <img
-    //     className="connectWallet-bg-img"
-    //     src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed_addition_ver2.gif"}
-    //     onLoad={() => setIsLoading(false)}
-    //     style={{ display: isLoading ? 'none' : 'inline-block' }}
-    //   />
-    // </div>
-    // <div className="connectWallet-bg-img-container">
     <>
-      {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
+      {isIconLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
       <img
         className="connectWallet-bg-img"
         src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-Landing-Animation-V2_compressed.gif"}
-        onLoad={() => setIsLoading(false)}
-        style={{ display: isLoading ? "none" : "inline-block" }}
+        onLoad={() => setIsIconLoading(false)}
+        style={{ display: isIconLoading ? "none" : "inline-block" }}
       />
     </>
     // </div>
@@ -168,7 +163,15 @@ export default function ConnectWallet(props: IConnectWalletProps) {
           </div>
           <div className="guest-explore-container">
             <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
-            <div className="inter-normal-keppel-12px guest-explore-button" onClick={() => navigate("/home")}>
+            <div
+              className="inter-normal-keppel-12px guest-explore-button"
+              onClick={() => {
+                if (isLoading) return;
+                setIsLoading(true);
+                setIsLoading(false);
+                navigate("/home");
+              }}
+            >
               Explore as a guest
             </div>
           </div>
