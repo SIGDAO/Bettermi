@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import "./rewardDetail.css";
 import { CenterLayout } from "../../components/layout";
@@ -14,6 +14,8 @@ import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { GuestConnectWallectButton } from "../../components/button";
 import SigdaoIcon from "../../components/icon";
+import { countReferredUser } from "../../NftSystem/Reward/calculateReferralReward";
+import axios from "axios";
 
 interface IRewardDetailProps {}
 
@@ -103,6 +105,10 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
         break;
       case "3":
+        const referredNum = countReferredUser(ledger2,tempAccountId);
+        await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/distributeRedeemReward", {
+          userAccountId: tempAccountId
+        });
         setBMIRecordTimes(0)
         break;
       case "4":
@@ -121,9 +127,13 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
     if (displayRewardDetail?.requireTimes === BMIRecordTimes) {
     }
   };
-
+  const isRunned = useRef(false);
   useEffect(() => {
     if (isGuest) return;
+    if (isRunned.current) {
+      return;
+    }
+    isRunned.current = true;
     getrewardDetailTimes();
   }, []);
 
