@@ -2,7 +2,7 @@ import * as React from "react";
 import { CustomInput, CustomTextArea, RandomGenNameInput } from "../../components/input";
 import { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { profileSlice } from "../../redux/profile";
+import { profileSlice, selectCurrentIsNewUser } from "../../redux/profile";
 import { UpdateUserDescription } from "../../NftSystem/updateUserNftStorage";
 import { Api } from "@signumjs/core";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
@@ -53,6 +53,8 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
   const [isShowStar, setIsShowStar] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const isNewUser = useSelector(selectCurrentIsNewUser);
+
   const uploadToChain = async () => {
     // upload the changed user info to chain
     try {
@@ -97,6 +99,10 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
         dispatch(profileSlice.actions.setDiscordUsername(discordUsernameText));
         setIsOpen((prev) => !prev);
         setIsBackButton(true);
+
+        if (isNewUser)  {
+          dispatch(profileSlice.actions.setIsNewUser(false));
+        }
       })
       .catch((e) => {
         displayPopUpMessage(e.message);

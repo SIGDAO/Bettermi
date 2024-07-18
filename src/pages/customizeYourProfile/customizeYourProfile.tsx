@@ -76,7 +76,6 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
         localStorage.setItem("name", name);
         store.dispatch(profileSlice.actions.setUsername(name));
       }
-      store.dispatch(profileSlice.actions.setIsNewUser(false));
       navigate("/profile");
     } catch (error) {
       console.log(error);

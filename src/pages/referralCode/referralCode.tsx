@@ -148,36 +148,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
         </div>
       </div>
     </>
-    // <div className="referralCode-layout">
-    //   <div id="referralCode-container">
-    //     {logo}
-    //     <BackButton/>
-    //     <div className="referralCode-option-container">
-    //       <div id="referralCode-button-container">
-    //         <ButtonWithAction
-    //           text="XT wallet"
-    //           action={() => {
-    //             // if(referralCode){
-    //                 userConnectWallet(appName,Wallet,Ledger,codeHashId,codeHashIdForNft,assetId,navigate,referralCode!);
-    //             // }
-    //             // else{
-    //             //     alert("Its not a valid referral link")
-    //             //     navigate("/");
-    //             // }
-
-    //         }} // TODO: add action to connect wallet
-    //           height="56px"
-    //           width="248px"
-    //         />
-    //         <Link to="http://localhost:8080/auth/discord">
-    //           <DisabledButton text="testing original flow" height="56px" width="248px" />
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 
   return content;
-  // return <CenterLayout bgImg={false} content={content} />;
 }

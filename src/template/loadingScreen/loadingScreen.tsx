@@ -20,7 +20,7 @@ export default function LoadingScreen(props: ILoadingScreenProps) {
     } else if (pathname === "/loadingDiscordAuthorization") {
       component = <div className="loading-screen inter-normal-white-15px">Loading...</div>;
     } else {
-      component = <div className="loading-screen inter-normal-white-15px">Minting…</div>;
+      component = <div className="loading-screen inter-normal-white-15px">Minting...</div>;
     }
     return component;
   }

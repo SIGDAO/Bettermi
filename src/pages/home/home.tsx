@@ -152,7 +152,6 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         if (description.id != null) {
           const accountInfo = await ledger2.contract.getContract(description.id);
           setIpfsAddress(JSON.parse(accountInfo.description).descriptor);
-          //const ipfsJson = await fetch(`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${JSON.parse(accountInfo.description).descriptor}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`);
           const ipfsJson = await fetch(getApiUrls(JSON.parse(accountInfo.description).descriptor).imgAddress);
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
