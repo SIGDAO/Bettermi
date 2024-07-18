@@ -58,6 +58,21 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setButtonText("Try again");
         setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
         break;
+      case "/errorReferralCodeUsedAccount":
+        setErrorMsg("Looks like this account has been registered.\n Let's try again !");
+        setButtonText("Try again");
+        setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
+        break;
+      case "/errorReferralCodeNetworkError":
+        setErrorMsg("Looks like we have failed to authenticate.\n Let's try again !");
+        setButtonText("Try again");
+        setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
+        break;
+      case "/errorReferralCodeIncorrectRecipient":
+        setErrorMsg("Looks like we have an incorrect recipient.\n Let's try again !");
+        setButtonText("Try again");
+        setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
+        break;
       default:
         break;
     }
