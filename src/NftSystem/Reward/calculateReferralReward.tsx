@@ -10,7 +10,7 @@ export async function countReferredUser(ledger2: Api, userAccountId: string) {
   console.log("accountTransaction is ", accountTransaction);
   var referredCount = 0;
   accountTransaction.transactions.forEach((transaction) => {
-    if (!transaction.attachment.message) {
+    if (!transaction.attachment || !transaction.attachment.hasOwnProperty("message")){
       return; // Exit the current iteration of the loop
     }
     console.log("the transaction is ", transaction);
