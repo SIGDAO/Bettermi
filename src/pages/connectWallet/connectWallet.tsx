@@ -100,7 +100,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
       // todo: add error handling, and show it to user
 
       if (error.message === "Failed to fetch IPFS JSON") {
-        alert("Cannot connect wallet, failed to fetch IPFS JSON, . Please try again!\nIf the problem persists, please contact core team through discord!");
+        alert("Cannot connect wallet, failed to fetch IPFS JSON. Please try again !\nIf the problem persists, please contact core team through discord !");
       }
 
       if (error.name === "InvalidNetworkError") {

@@ -93,7 +93,7 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
 
   const handleCopyDiscordUsername = (discordUsername) => {
     navigator.clipboard.writeText(discordUsername);
-    displayPopUpMessage("Copied!");
+    displayPopUpMessage("Copied !");
   };
 
   React.useEffect(() => {

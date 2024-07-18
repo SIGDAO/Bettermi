@@ -90,7 +90,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         });
         description = description.data.data;
       } catch (error) {
-        alert("Cannot fetch the record, please contact core team through discord!");
+        alert("Cannot fetch the record, please contact core team through discord !");
         navigate("/");
       }
     }

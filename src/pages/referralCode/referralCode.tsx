@@ -19,12 +19,15 @@ import { DiscordVerificationPopUp } from "../entranceScreenTemplate/discordVerif
 import { GuestConnectWallectButton, DiscordVerificationButton } from "../../components/button";
 import ReferralWarningPopupWindow from "./referralWarningPopupWindow";
 import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
+import { useDispatch } from "react-redux";
 
 export interface IReferralCodeProps {}
 
 export default function ReferralCode(props: IReferralCodeProps) {
   localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { referralCode } = useParams();
   console.log("referral code is", referralCode);
   const { appName, Wallet, Ledger } = useContext(AppContext);
@@ -49,10 +52,20 @@ export default function ReferralCode(props: IReferralCodeProps) {
 
       const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
-      if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
+      // situation:
+      // all contract is created, but one or more contract still unconfirmed
+      // or, not enqiuped NFT, then navigate to loadingMinting
+      if (
+        !equippedBettermiNft &&
+        ((userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
+          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null))
+      ) {
         navigate("/loadingMinting");
         return;
       }
+
       if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
         store.dispatch(accountSlice.actions.setNftContractStorage(userInfo!.userNftStorage.ats[0].at));
 
@@ -65,6 +78,8 @@ export default function ReferralCode(props: IReferralCodeProps) {
         } else {
           store.dispatch(profileSlice.actions.setGender("Male"));
         }
+
+        dispatch(profileSlice.actions.authenticated());
         navigate("/home");
       } else {
         console.log("called once");
@@ -76,10 +91,15 @@ export default function ReferralCode(props: IReferralCodeProps) {
         store.dispatch(referrerSlice.actions.setReferrerAccountId(referrerObj));
         store.dispatch(referrerSlice.actions.setRefereeAccountId(referrerObj));
         console.log("referrerObj is", referrerObj);
+        dispatch(profileSlice.actions.setIsNewUser(true));
         setIsPopUpNFTDetailWinodow(true);
         // navigate(`/discordVerification/${referralCode}`);
       }
     } catch (error: any) {
+      if (error.message === "Failed to fetch IPFS JSON") {
+        alert("Cannot connect wallet, failed to fetch IPFS JSON. Please try again !\nIf the problem persists, please contact core team through discord !");
+      }
+
       if (error.name === "InvalidNetworkError") {
         alert(
           "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",

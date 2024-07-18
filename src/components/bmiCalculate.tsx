@@ -51,7 +51,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       // })
       BMIRecord.push(contract.ats[0]?.description)
     } catch (error) {
-      alert("Cannot fetch the record, please contact core team through discord!")
+      alert("Cannot fetch the record, please contact core team through discord !")
     }
   }
 

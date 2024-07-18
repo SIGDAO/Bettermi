@@ -24,7 +24,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setNavigatePath("/generateBMINFTImport");
         break;
       case "/errorGenerateNFTNotGrantedWallet":
-        setErrorMsg("Looks like something went wrong. Let's try again!");
+        setErrorMsg("Looks like something went wrong. Let's try again !");
         setButtonText("Try again");
         setNavigatePath("/generateBMINFTImport");
         break;
@@ -39,12 +39,12 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setNavigatePath("/takeSelfie");
         break;
       case "/errorTakeSelfie":
-        setErrorMsg("Looks like something went wrong. Let's try again!");
+        setErrorMsg("Looks like something went wrong. Let's try again !");
         setButtonText("Selfie again");
         setNavigatePath("/takeSelfie");
         break;
       case "/errorCustomizeYourProfile":
-        setErrorMsg("Looks like something went wrong.\n Let's try again!");
+        setErrorMsg("Looks like something went wrong.\n Let's try again !");
         setButtonText("Try again");
         setNavigatePath("/customizeYourProfile");
         break;
@@ -54,7 +54,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setNavigatePath("https://discord.com/invite/MATW3Dcdcw");
         break;
       case "/errorReferralCode":
-        setErrorMsg("Looks like something went wrong.\n Let's try again!");
+        setErrorMsg("Looks like something went wrong.\n Let's try again !");
         setButtonText("Try again");
         setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
         break;
