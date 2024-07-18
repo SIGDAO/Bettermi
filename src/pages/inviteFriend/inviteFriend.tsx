@@ -10,27 +10,55 @@ import { LinkDisplayInput } from "../../components/input";
 import { useNavigate } from "react-router-dom";
 import SigdaoIcon from "../../components/icon";
 import { rewardDetailList } from "../../data/rewardList";
+import { LedgerClientFactory } from "@signumjs/core";
+import { selectWalletNodeHost } from "../../redux/useLedger";
+import { Api } from "@signumjs/core";
+import axios from "axios";
 
 interface IInviteFriendProps {}
 
 const InviteFriend: React.FunctionComponent<IInviteFriendProps> = (props) => {
   const navigate = useNavigate();
   const userAccountId = useSelector(accountId);
+  const nodeHost = useSelector(selectWalletNodeHost);
+  const ledger = LedgerClientFactory.createClient({ nodeHost });
 
   // alert related
   const [alert, setAlert] = React.useState<boolean>(false); // copy alert
   const [alertWarningString, setAlertWarningString] = React.useState<string>("");
   const [copyAlertCount, setCopyAlertCount] = React.useState<number>(0);
+  const [referredCount,setReferredCount] = React.useState<number>(0);
   const [isLoading,setLoading] = React.useState<boolean>(true);
   const inviteFriendLink: string = window.location.origin + "/referralCode/" + userAccountId;
-  
   const loadedCheck = React.useRef(false);
+  async function countReferredUser(ledger2:Api,userAccountId:string){
+    // ledger2.account
+    // .getAccount({ accountId: userAccountId })
+    // .then(async (account) => {
+    const TokenDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
+    const accountTransaction = await ledger2.account.getAccountTransactions({accountId:userAccountId});
+    console.log("accountTransaction is ",accountTransaction);
+    var referredCount = 0;
+    accountTransaction.transactions.map((transaction) => {
+      const message = transaction.attachment.message
+      if(transaction.sender === TokenDistributor && message != null &&message.includes("Congrats! You have referred user")){
+        console.log("the message is true ",message);
+        referredCount = referredCount + 1;
+      }
 
+    })
+    console.log("referredCount is",referredCount);
+    setReferredCount(referredCount);
+    setReferredCount(referredCount);
+    setLoading(false);
+        
+  };
   React.useEffect(() => {
     if (loadedCheck.current) {
       return;
     }
     loadedCheck.current = true;
+    countReferredUser(ledger,userAccountId);
 
   }, []);
 
@@ -63,21 +91,42 @@ const InviteFriend: React.FunctionComponent<IInviteFriendProps> = (props) => {
               <div className="invite-friend-referral-program-description-container">
                 <div className="invite-friend-referral-program-description-first-line">
                   <p className="inter-normal-white-14px">You've referred </p>
-                  <p className="inter-normal-keppel-14px">00</p>
+                  {
+                    isLoading?
+                  <p className="inter-normal-keppel-14px"></p>
+                  :
+                  (
+                    <p className="inter-normal-keppel-14px">{referredCount}</p>
+                  )
+
+                  }
                   <p className="inter-normal-white-14px"> friends !</p>
                 </div>
                 <div className="invite-friend-sigdao-earn invite-friend-referral-program-description-line">
                   <p className="inter-normal-white-14px">SIGDAO Earned:</p>
                   <div className="invite-friend-referral-program-reward-container">
                     <SigdaoIcon />
-                    <div className="inter-semi-bold-keppel-15px">6</div>
+                    {isLoading?
+                    <div className="inter-semi-bold-keppel-15px"></div>
+                    :
+                    (
+                      <div className="inter-semi-bold-keppel-15px">{referredCount*3}</div>
+                    )
+}
                   </div>
                 </div>
                 <div className="invite-friend-referral-program-description-line invite-friend-refer-friends-description">Refer {rewardDetailList[2].requireTimes} friends to unlock Super Connector</div>
                 <div className="invite-friend-referral-program-description-line">
                   <div className="invite-friend-reward-display">
                     <div className={"rewards-goal"}>
-                      <div className="rewards-goal-number inter-semi-bold-keppel-14px">0</div>
+                      {
+                        isLoading?
+                      <div className="rewards-goal-number inter-semi-bold-keppel-14px"></div>
+                      :
+                      (
+                        <div className="rewards-goal-number inter-semi-bold-keppel-14px">{referredCount}</div>
+                      )
+                      }
                       <div className={"rewards-goal-text inter-semi-bold-white-14px"}>/ {rewardDetailList[2].requireTimes}</div>
                     </div>
                   </div>
