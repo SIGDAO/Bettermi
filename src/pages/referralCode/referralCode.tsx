@@ -130,7 +130,7 @@ export default function ReferralCode(props: IReferralCodeProps) {
         <div id="referralCode-container">
           <div className="referralCodeTitle">
             <h1 className="EntranceTitle">Lucky You !</h1>
-            <div className="EntranceContent">Get Sigdao Reward From Your Friend !</div>
+            <div className="EntranceContent">Get Sigdao Rewards From Your Friend !</div>
           </div>
           {/* <EntranceLogo setIsLoading={setIsLoading} isLoading = {isLoading}></EntranceLogo> */}
           <ReferralCodeLogo imagePath={"/img/entranceScreenTemplate/mimi_io_inviting.png"}></ReferralCodeLogo>

@@ -66,7 +66,7 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
     } catch (error: any) {
       if (error.name === "InvalidNetworkError") {
         alert(
-          "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",
+          "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
         );
       }
       if (error.name === "NotFoundWalletError") {
@@ -147,14 +147,16 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
               ></EntranceScreenTemplate>
             </div>
           ) : (
-            <DisabledButton text={"Start"} height={"56px"} width={"248px"}></DisabledButton>
+            <div className="discord-start-loading-button-container">
+              <DisabledButton text={"Start"} height={"56px"} width={"248px"}></DisabledButton>
+            </div>
           )}
         </div>
         {clicked ? (
           <>
             <div className="discord-start-loading-instruction inter-normal-white-15px">
               Please wait patiently
-              <br/>
+              <br />
               and do not refresh the page...
             </div>
           </>
