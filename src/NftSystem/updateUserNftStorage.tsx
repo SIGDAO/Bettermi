@@ -33,7 +33,7 @@ export async function fetchIPFSJSON(address: string) {
         const timeoutPromise = new Promise((_, reject) => {
           setTimeout(() => {
             reject(new Error("Fetch IPFS JSON timeout"));
-          }, 2000); // 20 seconds timeout
+          }, 5000); // 20 seconds timeout
         });
   
         const res: Response = await Promise.race([responsePromise, timeoutPromise]) as Response;
