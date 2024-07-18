@@ -145,10 +145,13 @@ const guestAllowedPath = [
   "/errorNotEnoughFunds",
   "/errorReferralCode",
   "/errorGenerateNFTNotGrantedWallet",
+  "/errorReferralCodeUsedAccount",
   // referral related pages
   "/AuthorizationDone",
   "/loadingDiscordAuthorization",
   "/discordStartLoading",
+  "/errorReferralCodeNetworkError",
+  "/errorReferralCodeIncorrectRecipient",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -277,6 +280,9 @@ function App() {
               <Route path="/errorNotEnoughFunds" element={<ErrorGenerateNFT />} />
               <Route path="/errorReferralCode" element={<ErrorGenerateNFT />} />
               <Route path="/errorGenerateNFTNotGrantedWallet" element={<ErrorGenerateNFT />} />
+              <Route path="/errorReferralCodeUsedAccount" element={<ErrorGenerateNFT />} />
+              <Route path="/errorReferralCodeNetworkError" element={<ErrorGenerateNFT />} />
+              <Route path="/errorReferralCodeIncorrectRecipient" element={<ErrorGenerateNFT />} />
               <Route path="/loadingBMIDaily" element={<LoadingMinting pathname="/loadingBMIDaily" />} />
               <Route path="/setting" element={<Setting />} />
               <Route path="/NFTTransferCompleted" element={<ChallengeCompleted NFT={true} />} />

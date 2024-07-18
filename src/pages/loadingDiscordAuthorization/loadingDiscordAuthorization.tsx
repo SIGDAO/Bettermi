@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./loadingDiscordAuthorization.css";
-import { ButtonWithAction, DisabledButton } from "../../components/button";
+import { DisabledButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -73,11 +73,10 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
         alert("account registered");
         navigate("/errorReferralCode");
       }
-      if(userInfo?.loginedAcctID == null){
+      if (userInfo?.loginedAcctID == null) {
         navigate("/errorReferralCode");
       }
-      return userInfo?.loginedAcctID
-      
+      return userInfo?.loginedAcctID;
     } catch (error: any) {
       if (error.name === "InvalidNetworkError") {
         alert(
@@ -91,32 +90,42 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   };
 
   const verification = async () => {
-    try{
-    console.log(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth");
-    console.log("the referral code is", code);
-    //const refereeAccountId:string = await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)?? "";
-    console.log("Referee account ID is",refereeAccountId);
-    const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code , referrerAccountId:referrerAccountId,refereeAccountId:refereeAccountId});
-    console.log("return value from server is",isNewUser)
-    console.log(isNewUser.data);
-    console.log(isNewUser.status);
-    console.log(typeof(isNewUser.status));
+    try {
+      console.log(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth");
+      console.log("the referral code is", code);
+      //const refereeAccountId:string = await userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate)?? "";
+      console.log("Referee account ID is", refereeAccountId);
+      const isNewUser = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/getUserIdAndAuth", { code: code, referrerAccountId: referrerAccountId, refereeAccountId: refereeAccountId });
+      console.log("return value from server is", isNewUser);
+      console.log(isNewUser.data);
+      console.log(isNewUser.status);
+      console.log(typeof isNewUser.status);
 
-    if (isNewUser.status === 403 || isNewUser.status === 404) {
-      navigate("/errorReferralCode");
+      if (isNewUser.status === 403 || isNewUser.status === 404) {
+        navigate("/errorReferralCode");
+      } else if (isNewUser.status === 200) {
+        navigate("/discordStartLoading");
+      } else {
+        navigate("/errorReferralCode");
+      }
+    } catch (e) {
+      console.log("error is", e);
+      console.log("e.code is",e.code,"type is",typeof(e.code));
+      if(e.message === 'Network Error'){
+        navigate("/errorReferralCodeNetworkError");
+      }
+      else if (e.response && e.response.status && e.response.status === 403) {
+        console.log("calles this");
+        navigate("/errorReferralCodeUsedAccount");
+      } 
+      else if (e.response && e.response.status && e.response.status === 400) {
+        console.log("calles this");
+        navigate("/errorReferralCodeIncorrectRecipient");
+      }
+      else {
+        navigate("/errorReferralCode");
+      }
     }
-    else if(isNewUser.status === 200){
-      navigate("/discordStartLoading");
-    } 
-    else {
-      navigate("/errorReferralCode");
-    }
-  }
-  catch(e){
-    alert(e)
-    console.log("error is",e);
-    navigate("/errorReferralCode");
-  }
   };
 
   const isAuthorized = useRef(false);
@@ -124,12 +133,12 @@ export default function LoadingDiscordAuthorization(props: ILoadingDiscordAuthor
   const discordAuthorization = async () => {
     try {
       await verification();
-       
+
       setLoading(false);
     } catch (e) {
+      console.log("error is", e);
       setLoading(false);
       navigate("/errorReferralCode");
-      console.log("error is", e);
     }
   };
 
