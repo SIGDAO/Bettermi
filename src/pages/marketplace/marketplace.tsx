@@ -14,6 +14,8 @@ import { CountChallenges, countTotalChallengesTimes } from "../../NftSystem/Toke
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { rewardDetailList, rewardDetailListProps } from "../../data/rewardList";
+import { countReferredUser } from "../../NftSystem/Reward/calculateReferralReward";
+import { LedgerClientFactory } from "@signumjs/core";
 
 interface IMarketplaceProps {}
 
@@ -41,6 +43,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
+  const [referredCount, setReferredCount] = React.useState<number>();
 
   const implementReward = (reward: rewardDetailListProps) => {
     switch (reward.id) {
@@ -49,7 +52,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       case 2:
         return bmiRecordTimes;
       case 3:
-        return 0;
+        return referredCount;
       case 4:
         return challengeCompletedTimes;
       case 5:
@@ -85,6 +88,14 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
     });
     countTotalChallengesTimes(tempAccountId, Ledger2).then((res) => {
       setChallengeCompletedTimes(res);
+    });
+    countReferredUser(Ledger2!, tempAccountId)
+    .then((result) => {
+      console.log("referredCount", result);
+      setReferredCount(result);
+    })
+    .catch((e) => {
+      console.error(e);
     });
     GetUserNftList(Ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
       .then((res) => {

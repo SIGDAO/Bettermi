@@ -71,6 +71,7 @@ export default function ConnectWallet(props: IConnectWalletProps) {
           (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
           (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null))
       ) {
+        dispatch(profileSlice.actions.setIsNewUser(true));
         navigate("/loadingMinting");
         return;
       }

@@ -345,7 +345,10 @@
   position: absolute;
   top: 601px;
   width: 248px;
-}...button1-HGc5Lx {
+  cursor: pointer;
+}
+
+.button1-HGc5Lx {
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   background-color: transparent;
   border-radius: 10px;
@@ -447,6 +450,7 @@
   position: absolute;
   top: 580px;
   width: 248px;
+  cursor: pointer;
 }
 
 .button1-H7SwXN {
@@ -525,6 +529,7 @@
   position: absolute;
   top: 601px;
   width: 248px;
+  cursor: pointer;
 }
 
 .button1-diHELh {

@@ -182,6 +182,8 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
 
   // open the profile edit pop up window if the previous path is customizeYourProfile
   const checkIsPrevPathIsCustomizeYourProfile = () => {
+
+    console.log("isNewUser", isNewUser);
     // if (previousPath && previousPath === "/customizeYourProfile") {
     if (isNewUser) {
       setIsOpen(true);

@@ -105,11 +105,8 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
         break;
       case "3":
-        const referredNum = countReferredUser(ledger2,tempAccountId);
-        await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/distributeRedeemReward", {
-          userAccountId: tempAccountId
-        });
-        setBMIRecordTimes(0)
+        const referredNum = await countReferredUser(ledger2,tempAccountId);
+        setBMIRecordTimes(referredNum);
         break;
       case "4":
         isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
@@ -125,6 +122,27 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   };
   const getReward = async () => {
     if (displayRewardDetail?.requireTimes === BMIRecordTimes) {
+      switch (id) {
+        case "1":
+          // alert("You have already redeemed this reward");
+          break;
+        case "2":
+          // alert("You have already redeemed this reward");
+          break;
+        case "3":
+          await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/distributeRedeemReward", {
+            userAccountId: tempAccountId
+          });
+          break;
+        case "4":
+          // alert("You have already redeemed this reward");
+          break;
+        case "5":
+          // alert("You have already redeemed this reward");
+          break;
+        default:
+          break;
+      }
     }
   };
   const isRunned = useRef(false);
@@ -147,16 +165,6 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         <ShortTitleBar title={displayRewardDetail?.title} aiCoach={true} setting={true} />
         <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
         <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
-        {isGuest ? (
-        <div className="button_-redeem-P2i95W">
-          <GuestConnectWallectButton height={"56px"} width={"248px"} />
-        </div>
-        ) : (
-          <div className={classNameList[4] || "button_-redeem-P2i95W"}>
-            <div className={classNameList[5] || "button1-r8fHLz"} />
-            <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
-          </div>
-        )}
         <div className="profile-content-P2i95W">
           <div className="master-collector-tOBH5R master-collector">{displayRewardDetail?.title}</div>
           <p className={isSigdaoReward ? "unlocked-by-users-wh-tOBH5R inter-normal-white-14px" : "earned-by-users-who-B1MGte inter-normal-white-14px"}>{displayRewardDetail?.description}</p>
@@ -178,6 +186,16 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             <p className="x250-FtIem3">{displayRewardDetail?.reward}</p>
           )}
         </div>
+        {isGuest ? (
+        <div className="button_-redeem-P2i95W">
+          <GuestConnectWallectButton height={"56px"} width={"248px"} />
+        </div>
+        ) : (
+          <div className={classNameList[4] || "button_-redeem-P2i95W"} onClick={() => getReward()}>
+            <div className={classNameList[5] || "button1-r8fHLz"} />
+            <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
+          </div>
+        )}
 
         <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest ? {opacity: "0.5"} : {}}>
           {/* <div className="x893-LfPhsf"></div> */}

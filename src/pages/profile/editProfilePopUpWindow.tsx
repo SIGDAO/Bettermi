@@ -99,16 +99,17 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
         dispatch(profileSlice.actions.setDiscordUsername(discordUsernameText));
         setIsOpen((prev) => !prev);
         setIsBackButton(true);
+        setIsLoading(false);
 
         if (isNewUser)  {
           dispatch(profileSlice.actions.setIsNewUser(false));
         }
       })
       .catch((e) => {
+        setIsLoading(false);
         displayPopUpMessage(e.message);
       });
 
-    setIsLoading(false);
   };
 
   // get the fetch value to useState
