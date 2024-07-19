@@ -88,7 +88,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
   const [nftSelectedImage, setNftSelectedImage] = useState<string>("");
   const [selectedImageAddress, setSelectImageAddress] = useState<string>("");
   const [isPopUpNFTDetailWinodow, setIsPopUpNFTDetailWinodow] = useState<boolean>(false);
-
+  const isTestnet = process.env.REACT_APP_NODE_ADDRESS?.includes("testnet");
   const hasRendered = useRef(false);
   const sleep = (delay: number) => {
     return new Promise<void>((resolve) => {
@@ -201,7 +201,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     // let nftStorages3 = nftList3.ats;
     // Array.prototype.push.apply(nftStorages, nftStorages2);
     // Array.prototype.push.apply(nftStorages, nftStorages3);
-
+    console.log("nft Storages is",nftStorages);
     var index = 0;
     var InfoJson: urlObject[] = [];
     for (var i = 0; i < nftStorages.length; i++) {
@@ -218,13 +218,12 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
         InfoJson.push(info);
       }
     }
-
+    console.log("infoJson is",InfoJson);
     var urls: string[] = [];
     var nftInfo: nftObject[] = [];
     var mergedArray: nftInfo[] = new Array(nftStorages.length).fill({}) as nftInfo[];
     const requests: Promise<void>[] = [];
 
-    console.log(InfoJson, "dsiiodsjifojdsoifji");
     InfoJson.map((nftStorage) => {
       if (nftStorage.nftId !== "123") {
         requests.push(
@@ -233,7 +232,21 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
             .then((res) => {
               var nftContract = new ContractDataView(res);
               var nftStatus = nftContract.getVariableAsDecimal(10);
+              console.log("isTestnet",isTestnet);
+              console.log("process is",process.env.REACT_APP_NODE_ADDRESS);
+              console.log("is testnet",process.env.REACT_APP_NODE_ADDRESS?.includes("testnet"));
               // add the nft info to the merged array
+              if(isTestnet === true ){
+                mergedArray[nftStorage.index] = {
+                  ...mergedArray[nftStorage.index],
+                  contractId: nftStorage.nftId,
+                  contractPrice: nftContract.getVariableAsDecimal(9),
+                  contractOwner: process.env.REACT_APP_NFT_DISTRIBUTOR!,
+                  nftStatus: "Not For Sale",
+                  nftNumber: nftStorage.index,
+                };
+              }
+              else{
               mergedArray[nftStorage.index] = {
                 ...mergedArray[nftStorage.index],
                 contractId: nftStorage.nftId,
@@ -242,6 +255,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
                 nftStatus: getNFTstatus(nftStatus),
                 nftNumber: nftStorage.index,
               };
+            }
               // nftInfo.push({
               //   contractId: nftStorage.nftId,
               //   contractPrice: nftContract.getVariableAsDecimal(10),
@@ -311,7 +325,7 @@ export const IndexAllNftList: React.FC<IINDEXAllNftListProps> = (props) => {
     } catch (error) {
       console.log(error);
     }
-
+    console.log("merged Array is",mergedArray);
     setNftInfo(mergedArray);
     setLoading(false);
 

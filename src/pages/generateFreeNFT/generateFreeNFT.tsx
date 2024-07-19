@@ -27,10 +27,12 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
   const [nftNumber, setNftNumber] = React.useState<number>(0);
+  const [rewardPercentage,setRewardPercentage] = React.useState<string>("");
   useEffect(() => {
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
         dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
+        setRewardPercentage(result.rewardPercentage);
         setNftIpfsAddress(result.nftImage);
         setNftNumber(result.nftNumber);
         setIsLoading(false);
@@ -66,7 +68,7 @@ const GenerateFreeNFT: React.FunctionComponent<GenerateFreeNFTProps> = (props) =
         <div className="x16206">
           <div className="lv-1">LV 1</div>
           <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-          <div className="reward-10">REWARD +10%</div>
+          <div className="reward-10">REWARD +{rewardPercentage}%</div>
         </div>
         <div className="x0-signa">$0 SIGNA</div>
         <div

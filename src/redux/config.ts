@@ -12,7 +12,7 @@ const Networks = {
   // Explorer URL
   const explorerUrl =
     selectedNetwork === Networks.TestNet
-      ? "https://testnet.explorer.signum.network/"
+      ? "https://t-chain.signum.network/"
       : "https://explorer.signum.network/";
   
   
