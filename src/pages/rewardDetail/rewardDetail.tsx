@@ -125,6 +125,17 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
       switch (id) {
         case "1":
           // alert("You have already redeemed this reward");
+          await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/transferAsset/", {
+            assetId: tokenId,
+            quantity: reward,
+            accountId: accountId,
+            skipAdditionalSecurityCheck: true,
+            feePlanck: "1000000",
+            attachment: hi,
+            type:"Challenge",
+            challengeNum:challengeNum,
+          });
+    
           break;
         case "2":
           // alert("You have already redeemed this reward");

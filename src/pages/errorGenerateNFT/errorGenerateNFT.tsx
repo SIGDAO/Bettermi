@@ -3,7 +3,7 @@ import "./errorGenerateNFT.css";
 import { CenterLayout } from "../../components/layout";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { BackButton } from "../../components/button";
+import { BackButton, PurpleButton } from "../../components/button";
 import { useSelector } from "react-redux";
 import { referrer } from "../../redux/referrer";
 
@@ -15,7 +15,7 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
   const [buttonText, setButtonText] = React.useState<string>("");
   const [navigatePath, setNavigatePath] = React.useState<string | number>("");
   const referrerAccountID = useSelector(referrer);
-  console.log("referrerAccountID is",referrerAccountID);
+  console.log("referrerAccountID is", referrerAccountID);
   useEffect(() => {
     switch (location.pathname) {
       case "/errorGenerateNFT":
@@ -82,36 +82,19 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
     <div className="screen">
       <div className="bettermidapp-generate-free-nft-error">
         {location.pathname === "/errorNotEnoughFunds" && <BackButton />}
-        <div className="bg_2-FumncE">
-          <img className="bg-lme0fw" src="img/errorGenerateNFT/bg-10@1x.png" alt="BG" />
-          <div className="x16220-lme0fw">
-            <p className="inter-normal-hot-magenta-15px this-nft-has-been-sn-RYas9d">{errorMsg}</p>
+        <div className="x16220-lme0fw">
+          <img className="ic_sentiment_very_dissatisfied_24px" src={process.env.PUBLIC_URL + "/img/errorGenerateNFT/mimi_error_.png"} alt="ic_sentiment_very_dissatisfied_24px" />
+          <div className="error-message-container">
             <h1 className="title-RYas9d inter-semi-bold-white-28px">Oh Dear…</h1>
-            <div className="ic_sentiment_very_dissatisfied_24px-RYas9d ic_sentiment_very_dissatisfied_24px">
-              <img
-                className="ic_sentiment_very_dissatisfied_24px-TVetTD ic_sentiment_very_dissatisfied_24px"
-                src={process.env.PUBLIC_URL + "/img/errorGenerateNFT/mimi_error_.png"}
-                alt="ic_sentiment_very_dissatisfied_24px"
-              />
-            </div>
+            <p className="inter-normal-hot-magenta-15px this-nft-has-been-sn-RYas9d">{errorMsg}</p>
           </div>
         </div>
-        <a href="javascript:history.back()">
-          <div className="icon-arrow-left-FumncE icon-arrow-left">
-            <img className="icon-arrow-left-xF1oog icon-arrow-left" src="img/errorGenerateNFT/icon-arrow-left-10@1x.png" alt="icon-arrow-left" />
-          </div>
-        </a>
         <Link
           to={navigatePath}
           target={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "_blank" : undefined}
           rel={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "noopener noreferrer" : undefined}
         >
-          <div className="bottom-controls-FumncE">
-            <div className="button_-mintagain-QHnb0b">
-              {/* <div className="button1-7FeCxk"></div> */}
-              <div className="mintagain-7FeCxk inter-semi-bold-white-15px">{buttonText}</div>
-            </div>
-          </div>
+          <PurpleButton text={buttonText} height="56px" width="248px" />
         </Link>
       </div>
     </div>

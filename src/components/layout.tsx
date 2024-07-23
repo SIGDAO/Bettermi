@@ -47,7 +47,7 @@ export function CenterLayout(props: ICenterLayoutProps) {
   const centerLayoutStyle: CSS.Properties = {
     // 'backgroundPosition': 'center',
     // 'minHeight': `${height}`, // ipad size
-    minHeight: "730px",
+    minHeight: "430px",
     width: `${width}`, // ipad size
     height: "100%",
 
