@@ -1,4 +1,4 @@
-import React, { useEffect,useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import "./rewardDetail.css";
 import { CenterLayout } from "../../components/layout";
@@ -77,6 +77,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const nodeHost = useSelector(selectWalletNodeHost);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
+  const tokenId: string = process.env.REACT_APP_TOKEN_ID!;
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   // const loadNftList = async () => {
   //   try {
@@ -105,7 +106,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
         break;
       case "3":
-        const referredNum = await countReferredUser(ledger2,tempAccountId);
+        const referredNum = await countReferredUser(ledger2, tempAccountId);
         setBMIRecordTimes(referredNum);
         break;
       case "4":
@@ -121,10 +122,15 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
     }
   };
   const getReward = async () => {
-    if (displayRewardDetail?.requireTimes === BMIRecordTimes) {
-      switch (id) {
-        case "1":
-          // alert("You have already redeemed this reward");
+    console.log("displayRewardDetail", displayRewardDetail);
+    console.log("BMIRecordTimes", BMIRecordTimes);
+    try {
+      if (!BMIRecordTimes) return;
+
+      if (displayRewardDetail!.requireTimes <= BMIRecordTimes!) {
+        switch (id) {
+          case "1":
+            // alert("You have already redeemed this reward");
           await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/transferAsset/", {
             assetId: tokenId,
             quantity: reward,
@@ -136,24 +142,29 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             challengeNum:challengeNum,
           });
     
-          break;
-        case "2":
-          // alert("You have already redeemed this reward");
-          break;
-        case "3":
-          await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/distributeRedeemReward", {
-            userAccountId: tempAccountId
-          });
-          break;
-        case "4":
-          // alert("You have already redeemed this reward");
-          break;
-        case "5":
-          // alert("You have already redeemed this reward");
-          break;
-        default:
-          break;
+            break;
+          case "2":
+            // alert("You have already redeemed this reward");
+            break;
+          case "3":
+            console.log("calles distribute reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/superConnectorRedeemReward", {
+              userAccountId: tempAccountId,
+              assetId:tokenId,
+            });
+            break;
+          case "4":
+            // alert("You have already redeemed this reward");
+            break;
+          case "5":
+            // alert("You have already redeemed this reward");
+            break;
+          default:
+            break;
+        }
       }
+    } catch (e) {
+      alert("an error has occured during connection to server. Please try again or contact us.");
     }
   };
   const isRunned = useRef(false);
@@ -198,9 +209,9 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
           )}
         </div>
         {isGuest ? (
-        <div className="button_-redeem-P2i95W">
-          <GuestConnectWallectButton height={"56px"} width={"248px"} />
-        </div>
+          <div className="button_-redeem-P2i95W">
+            <GuestConnectWallectButton height={"56px"} width={"248px"} />
+          </div>
         ) : (
           <div className={classNameList[4] || "button_-redeem-P2i95W"} onClick={() => getReward()}>
             <div className={classNameList[5] || "button1-r8fHLz"} />
@@ -208,7 +219,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
           </div>
         )}
 
-        <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest ? {opacity: "0.5"} : {}}>
+        <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest ? { opacity: "0.5" } : {}}>
           {/* <div className="x893-LfPhsf"></div> */}
           <div className={classNameList[1] || "goal-LfPhsf"}>
             <div className={`${classNameList[2] || "x0-ucGgAD"} inter-semi-bold-keppel-14px`}>{isGuest ? "0" : BMIRecordTimes}</div>
