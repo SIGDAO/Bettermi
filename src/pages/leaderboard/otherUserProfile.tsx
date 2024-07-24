@@ -21,6 +21,7 @@ const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) 
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [imgAddress, setImgAddress] = useState<string>("");
   const [rewardPercentage, setRewardPercentage] = useState<string>("0");
+  const [level,setNFTLevel] = useState<number>(1);
 
   /* Function to check whether we are updating personal information*/
   // const [isUpdatingUserSetting, setIsUpdatingUserSetting] = useState<boolean>(false);
@@ -35,7 +36,8 @@ const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) 
   useEffect(() => {
     GetRewardPercentage(ledger2, userAccountId)
       .then((res) => {
-        setRewardPercentage(res);
+        setRewardPercentage(res.rewardPercentage);
+        setNFTLevel(res.level);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +51,7 @@ const OtherUserProfileTesting: React.FunctionComponent<IProfileProps> = (props) 
           isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
           isNFTiconLoading={isNFTiconLoading}
           imgAddress={imgAddress}
-          level={""}
+          level={level.toString()}
           rewardPercentage={rewardPercentage}
           setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
         >

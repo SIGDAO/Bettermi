@@ -21,14 +21,22 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
             console.log(nftInfo.attributes)
             const array = nftInfo.attributes[2].key3;
             console.log("array is",array);
-            const level = convertWordToNumber(nftInfo.attributes[6].value);
-            console.log("level is",level);
-            if(isNaN(level) === false){
-              console.log((level/3).toString());
-              return ((level/3).toFixed(2)).toString();
+            const rewardPercentage = convertWordToNumber(nftInfo.attributes[6].value);
+            console.log("rewardPercentage is",rewardPercentage);
+            var level = 1;
+            if (nftInfo.description.includes("2") === true) {
+              level = 2;
+            }
+            if (nftInfo.description.includes("3") === true) {
+              level = 3;
+            }
+          
+            if(isNaN(rewardPercentage) === false){
+              console.log((rewardPercentage/3).toString());
+              return {level:level,rewardPercentage:((rewardPercentage/3).toFixed(2)).toString()};
             }
             else{
-              return "";
+              return {level:1,rewardPercentage:((1/3).toFixed(2)).toString()};
             }
 
         }
@@ -38,8 +46,8 @@ export async function GetRewardPercentage(ledger2:any,userAccountId:string){
     // })
     ;
         }
-        catch(e){return "";}
-        return "";
+        catch(e){return {level:1,rewardPercentage:((1/3).toFixed(2)).toString()};}
+        return {level:1,rewardPercentage:((1/3).toFixed(2)).toString()};
         
   };
 

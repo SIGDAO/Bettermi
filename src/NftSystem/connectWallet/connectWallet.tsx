@@ -12,6 +12,14 @@ export const connectWallet = async (appName: any, Wallet: any, Ledger: any, code
     let key: string;
 
     const wallet = await Wallet.Extension.connect({ appName, networkName: Ledger.Network });
+    console.log("wallet is",wallet);
+    console.log("wallet mode is",wallet.watchOnly);
+    if(wallet.watchOnly){
+      alert(
+        "It looks like you are using the watch only mode. Please import the wallet again using the private key.",
+      );
+      return null;
+    }
     key = wallet.publicKey;
     const import_account: Address = Address.fromPublicKey(key, Ledger.AddressPrefix);
     const accountinfo: userAccount = {
