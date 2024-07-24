@@ -7,7 +7,7 @@ export async function countReferredUser(ledger2: Api, userAccountId: string) {
   // .then(async (account) => {
   const TokenDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR;
   const unconfirmedTransaction = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-  console.log(unconfirmedTransaction);
+  console.log("unconfirmed Transaction is",unconfirmedTransaction);
   var distributedReward = false;
   var referredCount = 0;
   unconfirmedTransaction.unconfirmedTransactions.map((transaction)=>{

@@ -148,7 +148,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             break;
           case "3":
             console.log("calles distribute reward");
-            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/distributeRedeemReward", {
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/superConnectorRedeemReward", {
               userAccountId: tempAccountId,
               assetId:tokenId,
             });
