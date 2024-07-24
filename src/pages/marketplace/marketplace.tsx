@@ -76,6 +76,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       setBmiRecordTimes(0);
       setChallengeCompletedTimes(0);
       setNftAcquireNumber(0);
+      setReferredCount(0);
       return;
     }
     BMIRecordChecked.current = true;

@@ -23,7 +23,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
   const Ledger2 = useLedger();
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
-  const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>(0);
+  const [bmiRecordTimes, setBmiRecordTimes] = React.useState<number>();
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
@@ -35,6 +35,8 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
       setBmiRecordTimes(0);
       setNftAcquireNumber(0);
       setBmiHitHealthyNumber(0);
+      setChallengeCompletedTimes(0);
+      setReferredCount(0);
       return;
     }
 
@@ -56,7 +58,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
       .catch((e) => {
         console.error(e);
       });
-  
+
     isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
       setBmiHitHealthyNumber(ans ? 1 : 0);
     });
@@ -64,7 +66,6 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
       setChallengeCompletedTimes(res);
     });
   }, []);
-
 
   const handleRewardDetailDisplayStyle = (isGuest: boolean) => {
     return isGuest ? { opacity: 0.5 } : {};
@@ -87,7 +88,6 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
     }
   };
 
-
   const displayRewardList = (isGuest: boolean): JSX.Element[] =>
     rewardDetailList.map((reward) => {
       const { id, title, shortDescription, previewImagePathBig, requireTimes, active } = reward;
@@ -103,7 +103,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
           {!active && <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />}
 
           <div className="master-collector-5RWzHs inter-semi-bold-white-18px">{title}</div>
-          <img className="nft_-avatar" src={`${process.env.PUBLIC_URL}/${previewImagePathBig}`} alt="NFT_Avatar" />
+          <img className={id === 3 || id === 5 ? "nft_-avatar nft_-avatar-border" :"nft_-avatar"} src={`${process.env.PUBLIC_URL}/${previewImagePathBig}`} alt="NFT_Avatar" />
           <p className="acquire-3-nf-ts-from-our-collection-5RWzHs inter-normal-cadet-blue-12px">{shortDescription}</p>
           <div className="ic_next">
             <img className="ic_chevron_right_24px" src={`${process.env.PUBLIC_URL}/img/reward/ic-chevron-right-24px-1@1x.png`} alt="ic_chevron_right_24px" />
@@ -123,9 +123,7 @@ const Reward: React.FunctionComponent<IRewardProps> = (props) => {
     <div className="screen">
       <div className="bettermidapp-rewards-2">
         <ShortTitleBar title="Redeem Rewards" aiCoach={true} setting={true} />
-        <div className="reward-cards-container">
-          {displayRewardList(isGuest)}
-        </div>
+        <div className="reward-cards-container">{displayRewardList(isGuest)}</div>
       </div>
     </div>
   );
