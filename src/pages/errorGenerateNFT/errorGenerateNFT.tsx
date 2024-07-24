@@ -1,16 +1,20 @@
 import * as React from "react";
 import "./errorGenerateNFT.css";
 import { CenterLayout } from "../../components/layout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { BackButton, PurpleButton } from "../../components/button";
-import { useSelector } from "react-redux";
+import { BackButton, PurpleButton, ReferralNavToTakeSelfieButton } from "../../components/button";
+import { useDispatch, useSelector } from "react-redux";
 import { referrer } from "../../redux/referrer";
+import { profileSlice } from "../../redux/profile";
 
 interface IErrorGenerateNFTProps {}
 
 const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props) => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [errorMsg, setErrorMsg] = React.useState<string>("");
   const [buttonText, setButtonText] = React.useState<string>("");
   const [navigatePath, setNavigatePath] = React.useState<string | number>("");
@@ -59,8 +63,8 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
         break;
       case "/errorReferralCodeUsedAccount":
-        setErrorMsg("Seems that this Discord account has already been used. \nLet's start earning !");
-        setButtonText("Try again");
+        setErrorMsg("The Discord account is already in use. \nLet's start earning !");
+        setButtonText("Continue");
         setNavigatePath(window.location.origin + "/referralGiveReward");
         break;
       case "/errorReferralCodeNetworkError":
@@ -89,13 +93,26 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
             <p className="inter-normal-hot-magenta-15px this-nft-has-been-sn-RYas9d">{errorMsg}</p>
           </div>
         </div>
-        <Link
-          to={navigatePath}
-          target={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "_blank" : undefined}
-          rel={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "noopener noreferrer" : undefined}
-        >
-          <PurpleButton text={buttonText} height="56px" width="248px" />
-        </Link>
+        {/* change it to selfie button */}
+        {location.pathname === "/errorReferralCodeUsedAccount" ? (
+          <ReferralNavToTakeSelfieButton
+            // className="referral-nav-to-take-selfie-button-container"
+            height="56px"
+            width="248px"
+            action={() => {
+              dispatch(profileSlice.actions.authenticated());
+              navigate("/takeSelfie");
+            }}
+          />
+        ) : (
+          <Link
+            to={navigatePath}
+            target={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "_blank" : undefined}
+            rel={navigatePath === "https://discord.com/invite/MATW3Dcdcw" ? "noopener noreferrer" : undefined}
+          >
+            <PurpleButton text={buttonText} height="56px" width="248px" />
+          </Link>
+        )}
       </div>
     </div>
   );
