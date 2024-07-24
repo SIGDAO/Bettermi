@@ -88,6 +88,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
   
   return data.data ;
 }
+
 const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
   if (!record1) return false;
   const date1 = record1.toDateString();

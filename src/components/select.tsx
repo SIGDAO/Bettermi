@@ -96,7 +96,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
   useEffect(() => {
     if (value && !isFirstClick){
-
       dispatch(profileSlice.actions.setBirthday(value))
     }
   }, [value])
@@ -139,7 +138,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
             locale='en-US'
             minDetail='decade'
           />
-
         </div>
       )}
 

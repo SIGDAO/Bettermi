@@ -54,14 +54,14 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
         setNavigatePath("https://discord.com/invite/MATW3Dcdcw");
         break;
       case "/errorReferralCode":
-        setErrorMsg("Looks like something went wrong.\n Let's try again !");
+        setErrorMsg("Looks like something went wrong. \nLet's try again !");
         setButtonText("Try again");
         setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
         break;
       case "/errorReferralCodeUsedAccount":
-        setErrorMsg("Looks like this account has been registered.\n Let's try again !");
+        setErrorMsg("Seems that this Discord account has already been used. \nLet's start earning !");
         setButtonText("Try again");
-        setNavigatePath(window.location.origin + "/referralCode/" + referrerAccountID);
+        setNavigatePath(window.location.origin + "/referralGiveReward");
         break;
       case "/errorReferralCodeNetworkError":
         setErrorMsg("Looks like we have failed to authenticate.\n Let's try again !");

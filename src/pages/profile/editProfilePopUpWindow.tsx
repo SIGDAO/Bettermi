@@ -80,6 +80,7 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
     
     if (name.length === 0 || aboutYourselfText.length === 0 || descriptionText.length === 0 || discordUsernameText.length === 0) {
       setIsShowStar(true);
+      displayPopUpMessage("Please fill in all the column !");
       setIsLoading(false);
       return;
     }

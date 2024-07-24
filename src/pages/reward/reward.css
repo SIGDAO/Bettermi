@@ -425,12 +425,15 @@
 .bettermidapp-rewards-2 .nft_-avatar {
   background-color: transparent;
   border-radius: 10px;
-  height: calc(100.00% - 43px);
   left: 20px;
   object-fit: cover;
   position: absolute;
   top: 22px;
   width: 107px;
+}
+
+.bettermidapp-rewards-2 .nft_-avatar-border {
+  border: 1px solid var(--royal-blue);
 }
 
 .bettermidapp-rewards-2 .rewards-cards {
