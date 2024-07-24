@@ -895,12 +895,13 @@ opacity: 0.5;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  color:#FFFFFF
+  color:#FFFFFF;
+  margin-left: 30px;
 }
-.myNftButtonOnDuty:hover{
+/* .myNftButtonOnDuty:hover{
   opacity: 0.5;
   cursor: pointer;
-}
+} */
 
 .bettermidapp-mimi-nfts-send-address-1 .edit-profile-layer {
   background-color: #0d0d0dcb;

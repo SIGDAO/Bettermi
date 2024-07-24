@@ -76,8 +76,8 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
       const rewardPercentage = await GetRewardPercentage(ledger2, userAccountId);
 
       var reward: string;
-      if (rewardPercentage != null) {
-        reward = String((parseFloat(rewardString!) * (100 + parseInt(rewardPercentage))) / 100);
+      if (rewardPercentage != null ) {
+        reward = String((parseFloat(rewardString!) * (100 + parseInt(rewardPercentage.rewardPercentage))) / 100);
       } else {
         reward = String(parseFloat(rewardString!));
       }
