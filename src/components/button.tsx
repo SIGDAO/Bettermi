@@ -344,7 +344,6 @@ export const NavigateToTakeSelfieButton: React.FunctionComponent = () => {
             rightImage={arrowIcon} 
             width="326px" 
             height="56px" 
-            action={handleTakeASelfie} 
             style={{ borderRadius: "15px", gap: "29px"}}
           />
       </div>

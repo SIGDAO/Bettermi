@@ -100,7 +100,6 @@ const ErrorGenerateNFT: React.FunctionComponent<IErrorGenerateNFTProps> = (props
             height="56px"
             width="248px"
             action={() => {
-              dispatch(profileSlice.actions.authenticated());
               navigate("/takeSelfie");
             }}
           />

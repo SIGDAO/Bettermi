@@ -14,7 +14,7 @@ export interface UserBMIState {
 }
 
 export interface UserBMIData{
-  data:string[]
+  data:string[];
 }
 
 // find BMI contract content
@@ -72,21 +72,27 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       BMIRecord.push(message.transactions[i].attachment.message)
     }
   }
-  const { data } = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-    data: BMIRecord
-  })
 
-  let { data: decryptedArray } = data
+  try {
+    const { data } = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+      data: BMIRecord
+    })
 
-  for ( let i = 0; i < decryptedArray.length; i++ ) {
-    let content = decryptedArray[i]
+    let { data: decryptedArray } = data;
 
-    content.time = new Date(content.time);
-    decryptedBMIRecord.push(content);
-  }
-
+    for ( let i = 0; i < decryptedArray.length; i++ ) {
+      let content = decryptedArray[i]
   
-  return data.data ;
+      content.time = new Date(content.time);
+      decryptedBMIRecord.push(content);
+    }
+  
+    
+    return data.data ;  
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 }
 
 const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
@@ -216,9 +222,13 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
     const previousDate = message[i - 1].time;
 
     const isConsecutive =
-      currentDate.getDate() - previousDate.getDate() === 1 &&
+      previousDate.getDate() - currentDate.getDate()  === 1 &&
       currentDate.getMonth() === previousDate.getMonth() &&
       currentDate.getFullYear() === previousDate.getFullYear();
+
+    console.log("previousDate", previousDate);
+    console.log("currentDate", currentDate);
+    console.log("isConsecutive", isConsecutive);
 
     if (isConsecutive) {
       currentConsecutiveDays++;
@@ -231,7 +241,7 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
     }
   }
 
-  return currentConsecutiveDays;
+  return maxConsecutiveDays;
 }
 
 export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {
