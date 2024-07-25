@@ -131,20 +131,18 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         switch (id) {
           case "1":
             // alert("You have already redeemed this reward");
-          await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/transferAsset/", {
-            assetId: tokenId,
-            quantity: reward,
-            accountId: accountId,
-            skipAdditionalSecurityCheck: true,
-            feePlanck: "1000000",
-            attachment: hi,
-            type:"Challenge",
-            challengeNum:challengeNum,
+          await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/masterCollectorRedeemReward/", {
+            accountId: tempAccountId,
+
           });
     
             break;
           case "2":
             // alert("You have already redeemed this reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+              userAccountId: tempAccountId,
+              assetId:tokenId,
+            });
             break;
           case "3":
             console.log("calles distribute reward");
@@ -155,6 +153,10 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             break;
           case "4":
             // alert("You have already redeemed this reward");
+            // await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+            //   userAccountId: tempAccountId,
+            //   assetId:tokenId,
+            // });
             break;
           case "5":
             // alert("You have already redeemed this reward");
