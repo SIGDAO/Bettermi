@@ -79,6 +79,10 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const tokenId: string = process.env.REACT_APP_TOKEN_ID!;
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
+  const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
+  const storageAccounts = [...mimiNftStorageAccounts,...ioNftStorageAccounts];
+  const codeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   // const loadNftList = async () => {
   //   try {
 
@@ -133,6 +137,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             // alert("You have already redeemed this reward");
           await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/masterCollectorRedeemReward/", {
             accountId: tempAccountId,
+            nftStorageAccounts:storageAccounts,
 
           });
     
@@ -141,7 +146,8 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             // alert("You have already redeemed this reward");
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
               userAccountId: tempAccountId,
-              assetId:tokenId,
+              codeHashIdForNFT:codeHashIdForNft,
+              nftStorageAccounts:storageAccounts,
             });
             break;
           case "3":
