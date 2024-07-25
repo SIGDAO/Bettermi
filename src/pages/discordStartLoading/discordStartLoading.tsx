@@ -36,13 +36,19 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
       const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
       if (userInfo == null) {
         alert("seems like the wallet lost connection. We would be grateful if you could report to core team at discord");
-      }
-
-      if ((userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0]) || (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true)) {
-        navigate("/errorReferralCode");
+        setCount(0);
+        setClicked(false);
+      } else if (
+        (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
+        (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
+        (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
+        (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null)
+      ) {
+        alert("seems like the wallet you connected is a registered Bettermi account. Please make sure you are connecting to a correct wallet.");
+        setCount(0);
+        setClicked(false);
         return;
-      }
-      if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
+      } else if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
         store.dispatch(accountSlice.actions.setNftContractStorage(userInfo!.userNftStorage.ats[0].at));
 
         var description = userInfo!.userBMIStorage.ats[0].description;
@@ -54,15 +60,17 @@ export default function DiscordStartLoading(props: IDiscordStartLoadingProps) {
         } else {
           store.dispatch(profileSlice.actions.setGender("Male"));
         }
-        alert("account registered");
-        navigate("/errorReferralCode");
-      }
-      if (userInfo?.loginedAcctID == null) {
+        alert("seems like the wallet you connected is a registered Bettermi account. Please make sure you are connecting to a correct wallet.");
+        setCount(0);
+        setClicked(false);
+      } else if (userInfo?.loginedAcctID == null) {
         navigate("/errorReferralCode");
       }
       // return userInfo?.loginedAcctID
-      setCount(100);
-      navigate("/referralGiveReward");
+      else {
+        setCount(100);
+        navigate("/referralGiveReward");
+      }
     } catch (error: any) {
       if (error.name === "InvalidNetworkError") {
         alert(
