@@ -81,7 +81,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
-  const storageAccounts = [...mimiNftStorageAccounts,...ioNftStorageAccounts];
+  const storageAccounts = [...mimiNftStorageAccounts, ...ioNftStorageAccounts];
   const codeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   // const loadNftList = async () => {
   //   try {
@@ -135,26 +135,24 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         switch (id) {
           case "1":
             // alert("You have already redeemed this reward");
-          await axios.post( process.env.REACT_APP_NODE_ADDRESS +"/masterCollectorRedeemReward/", {
-            accountId: tempAccountId,
-            nftStorageAccounts:storageAccounts,
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/masterCollectorRedeemReward/", {
+              accountId: tempAccountId,
+            });
 
-          });
-    
             break;
           case "2":
             // alert("You have already redeemed this reward");
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
               userAccountId: tempAccountId,
-              codeHashIdForNFT:codeHashIdForNft,
-              nftStorageAccounts:storageAccounts,
+              codeHashIdForNFT: codeHashIdForNft,
+              nftStorageAccounts: storageAccounts,
             });
             break;
           case "3":
             console.log("calles distribute reward");
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/superConnectorRedeemReward", {
               userAccountId: tempAccountId,
-              assetId:tokenId,
+              assetId: tokenId,
             });
             break;
           case "4":

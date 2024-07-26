@@ -5,6 +5,7 @@ import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
 import { calBMIType } from './rewardCalculate';
 import axios from 'axios';
+import { Ledger } from '@signumjs/core';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -19,7 +20,7 @@ export interface UserBMIData{
 
 // find BMI contract content
 // output: [] || [description || {time: time, value: value}]
-const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) => {
+const findBMIblockchainContract = async (tempAccountId: string, Ledger2: Ledger) => {
   var contractAddress:string = '';
   var description: any;
   var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
@@ -31,6 +32,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     accountId :tempAccountId,
     machineCodeHash: bmiHashId,
   });
+
+  // await Ledger2.account.
   if (!contract) return [];
   if (!contract.hasOwnProperty('ats')) return [];
 
