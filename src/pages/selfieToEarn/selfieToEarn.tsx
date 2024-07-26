@@ -22,6 +22,7 @@ import { CheckTakenSelfie } from "../../NftSystem/BMISelfieSystem";
 import { LedgerClientFactory } from "@signumjs/core";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { TakeSelfieWindow } from "../../components/popupWindow";
+import SigdaoIcon from "../../components/icon";
 // import { useFindBMI } from '../../components/findBMI';
 
 export type ISelfieToEarnProps = {
@@ -201,11 +202,7 @@ const SelfieToEarn: React.FunctionComponent<ISelfieToEarnProps> = (props) => {
               <div className="inter-normal-cadet-blue-12px">{item.value} kg/m²</div>
             </div>
             <div className="sigdao-reward-container">
-              <div className="signdao_tokengradient">
-                <div className="x441"></div>
-                <div className="x442"></div>
-                <img className="x880" src="img/selfieToEarn/file---880-1x-png-10@1x.png" alt="880" />
-              </div>
+              <SigdaoIcon height="17px" width="17px" />
               <div className="sigdao-reward-text-container inter-semi-bold-keppel-14px">+{calRewardSigdaoOnSelfie(item?.value) / 10 ** 6}</div>
             </div>
           </div>

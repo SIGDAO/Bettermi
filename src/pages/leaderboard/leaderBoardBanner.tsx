@@ -51,9 +51,3 @@ export const LeaderBoardBanner: React.FunctionComponent<leaderBoardBannerProps> 
     </div>
   );
 };
-
-<div className="signdao_tokengradient">
-  <div className="x441"></div>
-  <div className="x442"></div>
-  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-</div>;

@@ -3,56 +3,48 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 
 interface IBlackAlertProps {
-  alertWarningString: string;
-  copyAlertCount: number;
-  setCopyAlertCount: React.Dispatch<React.SetStateAction<number>>;
-  alert: boolean;
-  setAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  alertWarningString?: string;
 }
 
-export const displayPopUpMessage = (message: string, setAlertWarningString: React.Dispatch<React.SetStateAction<string>>, setAlert: React.Dispatch<React.SetStateAction<boolean>>, setCopyAlertCount: React.Dispatch<React.SetStateAction<number>>): void => {
-  setAlertWarningString(message);
-  setAlert(true);
-  setCopyAlertCount(1);
+// Create a global state to manage the alert
+let globalSetAlert: React.Dispatch<React.SetStateAction<{ show: boolean; message: string }>> | null = null;
+
+export const displayPopUpMessage = (message: string): void => {
+  if (globalSetAlert) {
+    globalSetAlert({ show: true, message });
+  }
 };
 
+export const BlackAlert: React.FunctionComponent<IBlackAlertProps> = () => {
+  const [alert, setAlert] = useState<{ show: boolean; message: string }>({ show: false, message: "" });
 
-export const BlackAlert: React.FunctionComponent<IBlackAlertProps> = ({ alertWarningString, copyAlertCount, setCopyAlertCount, alert, setAlert }) => {
-  // alert related
-  // const [alert, setAlert] = useState<boolean>(false); // copy alert
-
-  // change alert seconds
-  // useEffect(() => {
-  //   setCopyAlertCount(2);
-  //   setAlert(true);
-  // }, [alertWarningString]);
-
-  // countdown for alert message show
+  // Set the global setAlert function
   useEffect(() => {
-    const countdown = () => {
-      if (copyAlertCount > 0) {
-        setCopyAlertCount((prevCount) => prevCount - 1);
-      } else if (copyAlertCount === 0) {
-        setAlert(false);
-        clearInterval(timer);
-      }
+    globalSetAlert = setAlert;
+    return () => {
+      globalSetAlert = null;
     };
+  }, []);
 
-    const timer = setInterval(countdown, 1000);
-
-    return () => clearInterval(timer);
-  }, [copyAlertCount]);
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (alert.show) {
+      timer = setTimeout(() => {
+        setAlert({ show: false, message: "" });
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [alert.show]);
 
   return (
     <>
-      {alert && (
+      {alert.show && (
         <Alert
           className="copied-alert"
           icon={false}
-          // icon={<CheckIcon fontSize="inherit" />}
           severity="success"
         >
-          {alertWarningString}
+          {alert.message}
         </Alert>
       )}
     </>

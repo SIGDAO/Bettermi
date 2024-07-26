@@ -26,6 +26,7 @@ import { TransferToken } from "../../components/transferToken";
 import JSEncrypt from "jsencrypt";
 import axios from "axios";
 import { contractSlice, selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
+import { BlackAlert, displayPopUpMessage } from "../../components/alert";
 
 interface IGenerateBMINFTImportProps {}
 
@@ -66,6 +67,12 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const confirm = async () => {
     let encrypted: any;
 
+    // validate if the user has already minted the NFT and filled in the gender and birthday
+
+    if (!birthday || !gender) {
+      displayPopUpMessage("Please fill in all the column !");
+      return;
+    }
     if (minted) {
       return;
     }
@@ -205,6 +212,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         className="bettermidapp-generate-bmidata-import"
         // onclick="window.open('bettermidapp-generate-bmi-daily.html', '_self');"
       >
+        <BlackAlert />
         <BackButton />
         <p className="import-biological-sex-birth-pqhvJT inter-bold-royal-blue-15px">IMPORT BIOLOGICAL SEX &amp; BIRTH:</p>
         <p className="your-selection-cannot-be-changed-later-pqhvJT">Your selection cannot be changed later.</p>

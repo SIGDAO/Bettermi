@@ -1361,6 +1361,8 @@
   white-space: pre;
   position: absolute;
   top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   background-color: rgb(13 13 13) !important;
   color: white !important;
 

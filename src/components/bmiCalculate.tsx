@@ -220,12 +220,12 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
   let currentConsecutiveDays = 1;
 
   // if no ledger, return false
-  for (let i = 1; i < message.length; i++) {
+  for (let i = 0; i < message.length - 1; i++) {
     const currentDate = message[i].time;
-    const previousDate = message[i - 1].time;
+    const previousDate = message[i + 1].time;
 
     const isConsecutive =
-      currentDate.getDate() - previousDate.getDate() === 1 &&
+      previousDate.getDate() - currentDate.getDate() === 1 &&
       currentDate.getMonth() === previousDate.getMonth() &&
       currentDate.getFullYear() === previousDate.getFullYear();
 

@@ -8,6 +8,7 @@ import { Api } from "@signumjs/core";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
 import { BackButton, PurpleButton } from "../../components/button";
 import { accountPublicKey } from "../../redux/account";
+import { displayPopUpMessage } from "../../components/alert";
 
 interface IEditProfilePopUpWindowProps {
   isOpen: boolean;
@@ -18,7 +19,6 @@ interface IEditProfilePopUpWindowProps {
   fetchName: string;
   fetchAboutYourself: string;
   fetchDiscordUsername: string;
-  displayPopUpMessage: (message: string) => void;
   ledger2: Api;
   userAccountId: string;
   Wallet: {
@@ -37,7 +37,6 @@ const EditProfilePopUpWindow: React.FunctionComponent<IEditProfilePopUpWindowPro
     fetchName,
     fetchAboutYourself,
     fetchDiscordUsername,
-    displayPopUpMessage,
     ledger2,
     userAccountId,
     Wallet,

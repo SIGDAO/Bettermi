@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 import { GuestConnectWallectButton, PurpleButton } from "../../components/button";
+import { displayPopUpMessage } from "../../components/alert";
 
 interface IProfileUserInfoContainerProps {
   isUpdatingUserSetting: boolean;
@@ -20,7 +21,6 @@ interface IProfileUserInfoContainerProps {
   setImgAddress: Dispatch<React.SetStateAction<string>>;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
-  displayPopUpMessage: (message: string) => void;
   isMyProfile: boolean;
 }
 
@@ -63,7 +63,6 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
   setImgAddress,
   setIsOpen,
   isOpen,
-  displayPopUpMessage,
   isMyProfile,
 }) => {
   const navigate = useNavigate();
