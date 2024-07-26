@@ -1,0 +1,128 @@
+/* screen - bettermidapp-create-connect-3 */
+
+#entranceScreenTemplate-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto; */
+    /* height: 100%; */
+    /* for big gif */
+    /* margin-top: 545px;  */
+    /* margin-top: 100px; */
+  
+    width: 100%;
+    min-height: auto;
+    /* overflow-y: auto; */
+  }
+  
+  .entranceScreenTemplate-layout {
+    /* position: absolute; */
+    /* left: calc((100% - 820px) / 2); */
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  
+    /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+    background: #1b192b;
+    overflow-x: hidden;
+    display: flex;
+  }
+  
+  #entranceScreenTemplateTopic {
+    margin-top: 0px;
+    margin-bottom: 27px;
+    text-align: center;
+  }
+  
+  #entranceScreenTemplateDisciption {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 52px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  
+  .entranceScreenPhoto {
+    width: 100%;
+  }
+  
+  
+  #entranceScreenTemplate-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .entranceScreen-explore-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .entranceScreen-explore-container > p {
+    margin: 0;
+  }
+  
+  .EntranceScreenTemplate-explore-button {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .entranceScreenTemplate-option-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 36px;
+    z-index: 2;
+  }
+  
+  .entranceScreenTemplate-bg-img-container {
+    /* width: 390px; */
+    width: 260px;
+    /* max-height: 1; */
+    overflow-x: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);  
+    /* padding-bottom: 20px; */
+    /* margin-bottom: 20px; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+  
+  .entranceScreenTemplate-bg-img {
+    /* position: absolute; */
+    /* width: 390px; */
+    width: 290px;
+    margin-bottom: 40px;
+    
+    /* height: 344px; */
+    object-fit: cover;
+  }
+  
+  @media screen and (max-height: 594px) {
+    #entranceScreenTemplate-button-container {
+      /* position: fixed; */
+      /* bottom: 20px; */
+    }
+  
+    #entranceScreenTemplate-container {
+      justify-content: flex-start;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+  
+    #entranceScreenTemplate-button-container {
+  
+      gap: 20px;
+      flex-direction: column;
+    }
+  }
+  
+  

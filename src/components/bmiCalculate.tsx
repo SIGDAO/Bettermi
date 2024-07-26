@@ -5,6 +5,7 @@ import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
 import { calBMIType } from './rewardCalculate';
 import axios from 'axios';
+import { Ledger } from '@signumjs/core';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -14,12 +15,12 @@ export interface UserBMIState {
 }
 
 export interface UserBMIData{
-  data:string[]
+  data:string[];
 }
 
 // find BMI contract content
 // output: [] || [description || {time: time, value: value}]
-const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) => {
+const findBMIblockchainContract = async (tempAccountId: string, Ledger2: Ledger) => {
   var contractAddress:string = '';
   var description: any;
   var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
@@ -31,6 +32,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
     accountId :tempAccountId,
     machineCodeHash: bmiHashId,
   });
+
+  // await Ledger2.account.
   if (!contract) return [];
   if (!contract.hasOwnProperty('ats')) return [];
 
@@ -51,7 +54,7 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       // })
       BMIRecord.push(contract.ats[0]?.description)
     } catch (error) {
-      alert("Cannot fetch the record, please contact core team through discord!")
+      alert("Cannot fetch the record, please contact core team through discord !")
     }
   }
 
@@ -72,22 +75,29 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: any) =>
       BMIRecord.push(message.transactions[i].attachment.message)
     }
   }
-  const { data } = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
-    data: BMIRecord
-  })
 
-  let { data: decryptedArray } = data
+  try {
+    const { data } = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+      data: BMIRecord
+    })
 
-  for ( let i = 0; i < decryptedArray.length; i++ ) {
-    let content = decryptedArray[i]
+    let { data: decryptedArray } = data;
 
-    content.time = new Date(content.time);
-    decryptedBMIRecord.push(content);
-  }
-
+    for ( let i = 0; i < decryptedArray.length; i++ ) {
+      let content = decryptedArray[i]
   
-  return data.data ;
+      content.time = new Date(content.time);
+      decryptedBMIRecord.push(content);
+    }
+  
+    
+    return data.data ;  
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 }
+
 const areRecordsOnSameDay = (record1: Date | null, record2: Date): boolean => {
   if (!record1) return false;
   const date1 = record1.toDateString();
@@ -215,9 +225,13 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
     const previousDate = message[i - 1].time;
 
     const isConsecutive =
-      currentDate.getDate() - previousDate.getDate() === 1 &&
+      previousDate.getDate() - currentDate.getDate()  === 1 &&
       currentDate.getMonth() === previousDate.getMonth() &&
       currentDate.getFullYear() === previousDate.getFullYear();
+
+    console.log("previousDate", previousDate);
+    console.log("currentDate", currentDate);
+    console.log("isConsecutive", isConsecutive);
 
     if (isConsecutive) {
       currentConsecutiveDays++;
@@ -230,7 +244,7 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
     }
   }
 
-  return currentConsecutiveDays;
+  return maxConsecutiveDays;
 }
 
 export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {

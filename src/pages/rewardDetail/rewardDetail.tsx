@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import "./rewardDetail.css";
 import { CenterLayout } from "../../components/layout";
@@ -13,6 +13,9 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { GuestConnectWallectButton } from "../../components/button";
+import SigdaoIcon from "../../components/icon";
+import { countReferredUser } from "../../NftSystem/Reward/calculateReferralReward";
+import axios from "axios";
 
 interface IRewardDetailProps {}
 
@@ -74,7 +77,12 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const nodeHost = useSelector(selectWalletNodeHost);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const codeHashIdForNft: string = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
+  const tokenId: string = process.env.REACT_APP_TOKEN_ID!;
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+  const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
+  const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
+  const storageAccounts = [...mimiNftStorageAccounts, ...ioNftStorageAccounts];
+  const codeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   // const loadNftList = async () => {
   //   try {
 
@@ -88,35 +96,90 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   // };
 
   const getrewardDetailTimes = async () => {
-    if (id === "1") {
-      // setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
-      GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
-        .then((res) => {
-          setBMIRecordTimes(res.length);
-        })
-        .catch((err) => {
-          alert(err);
+    switch (id) {
+      case "1":
+        GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
+          .then((res) => {
+            setBMIRecordTimes(res.length);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+        break;
+      case "2":
+        setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
+        break;
+      case "3":
+        const referredNum = await countReferredUser(ledger2, tempAccountId);
+        setBMIRecordTimes(referredNum);
+        break;
+      case "4":
+        isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
+          setBMIRecordTimes(ans ? 1 : 0);
         });
-    }
-    if (id === "2") {
-      setBMIRecordTimes(await getBMIRecordDay(tempAccountId, Ledger2));
-    }
-    if (id === "3") {
-      isHitFirstHealthyBMIRange(tempAccountId, Ledger2).then((ans) => {
-        setBMIRecordTimes(ans ? 1 : 0);
-      });
-    }
-    if (id === "4") {
-      setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
+        break;
+      case "5":
+        setBMIRecordTimes(await countTotalChallengesTimes(tempAccountId, Ledger2));
+        break;
+      default:
+        break;
     }
   };
   const getReward = async () => {
-    if (displayRewardDetail?.requireTimes === BMIRecordTimes) {
+    console.log("displayRewardDetail", displayRewardDetail);
+    console.log("BMIRecordTimes", BMIRecordTimes);
+    try {
+      if (!BMIRecordTimes) return;
+
+      if (displayRewardDetail!.requireTimes <= BMIRecordTimes!) {
+        switch (id) {
+          case "1":
+            // alert("You have already redeemed this reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/masterCollectorRedeemReward/", {
+              accountId: tempAccountId,
+            });
+
+            break;
+          case "2":
+            // alert("You have already redeemed this reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+              userAccountId: tempAccountId,
+              codeHashIdForNFT: codeHashIdForNft,
+              nftStorageAccounts: storageAccounts,
+            });
+            break;
+          case "3":
+            console.log("calles distribute reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/superConnectorRedeemReward", {
+              userAccountId: tempAccountId,
+              assetId: tokenId,
+            });
+            break;
+          case "4":
+            // alert("You have already redeemed this reward");
+            // await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+            //   userAccountId: tempAccountId,
+            //   assetId:tokenId,
+            // });
+            break;
+          case "5":
+            // alert("You have already redeemed this reward");
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (e) {
+      alert("an error has occured during connection to server. Please try again or contact us.");
     }
   };
-
+  const isRunned = useRef(false);
   useEffect(() => {
     if (isGuest) return;
+    if (isRunned.current) {
+      return;
+    }
+    isRunned.current = true;
     getrewardDetailTimes();
   }, []);
 
@@ -130,16 +193,6 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
         <ShortTitleBar title={displayRewardDetail?.title} aiCoach={true} setting={true} />
         <img className="photo-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/${displayRewardDetail?.bgImagePath}`} alt="Photo" />
         <img className="layer-P2i95W" src={`${process.env.PUBLIC_URL}/img/rewardDetail/layer-2@1x.png`} alt="Layer" />
-        {isGuest ? (
-        <div className="button_-redeem-P2i95W">
-          <GuestConnectWallectButton height={"56px"} width={"248px"} />
-        </div>
-        ) : (
-          <div className={classNameList[4] || "button_-redeem-P2i95W"}>
-            <div className={classNameList[5] || "button1-r8fHLz"} />
-            <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
-          </div>
-        )}
         <div className="profile-content-P2i95W">
           <div className="master-collector-tOBH5R master-collector">{displayRewardDetail?.title}</div>
           <p className={isSigdaoReward ? "unlocked-by-users-wh-tOBH5R inter-normal-white-14px" : "earned-by-users-who-B1MGte inter-normal-white-14px"}>{displayRewardDetail?.description}</p>
@@ -152,11 +205,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
               <div className="score-bar_3-tOBH5R">
                 <div className="sigdao-score-oG1yRx">
                   <div className="x10-ZdA7kA inter-semi-bold-keppel-15px">+{displayRewardDetail?.reward}</div>
-                  <div className="signdao_tokengradient-ZdA7kA">
-                    <div className="x441-hzgF5j"></div>
-                    <div className="x442-hzgF5j"></div>
-                    <img className="x880-hzgF5j" src={`${process.env.PUBLIC_URL}/img/rewardDetail/file---880@1x.png`} alt="880" />
-                  </div>
+                  <SigdaoIcon />
                 </div>
               </div>
               <div className="sigdao-tOBH5R inter-semi-bold-white-15px">SIGDAO:</div>
@@ -165,8 +214,18 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             <p className="x250-FtIem3">{displayRewardDetail?.reward}</p>
           )}
         </div>
+        {isGuest ? (
+          <div className="button_-redeem-P2i95W">
+            <GuestConnectWallectButton height={"56px"} width={"248px"} />
+          </div>
+        ) : (
+          <div className={classNameList[4] || "button_-redeem-P2i95W"} onClick={() => getReward()}>
+            <div className={classNameList[5] || "button1-r8fHLz"} />
+            <div className={`${classNameList[6] || "continue-r8fHLz"} inter-semi-bold-white-15px`}>Redeem</div>
+          </div>
+        )}
 
-        <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest && {opacity: "0.5"}}>
+        <div className={classNameList[0] || "goal-data-P2i95W"} style={isGuest ? { opacity: "0.5" } : {}}>
           {/* <div className="x893-LfPhsf"></div> */}
           <div className={classNameList[1] || "goal-LfPhsf"}>
             <div className={`${classNameList[2] || "x0-ucGgAD"} inter-semi-bold-keppel-14px`}>{isGuest ? "0" : BMIRecordTimes}</div>

@@ -18,6 +18,7 @@ import { CountChallenges } from "../../NftSystem/Token/countChallenges";
 import { findNFTLevel } from "../../NftSystem/FindNFTLevel";
 import { checkUserLevel } from "../../NftSystem/UserLevel/checkUserLevel";
 import { selectCurrentIsGuest } from "../../redux/profile";
+import SigdaoIcon from "../../components/icon";
 
 interface IMissionChallengeProps {}
 
@@ -291,11 +292,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                               <div className="mission-level inter-semi-bold-keppel-15px">LV {mission.nftLevel}</div>
                               <div className="level-and-sigdao-separate-line"></div>
                               <div className="mission-reward-container">
-                                <div className="signdao_tokengradient">
-                                  <div className="x441"></div>
-                                  <div className="x442"></div>
-                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                                </div>
+                                <SigdaoIcon width="17px" height="17px" />
                                 <p className="inter-semi-bold-keppel-14px">{mission.sigdao}</p>
                               </div>
                               <img className="mission-bar-arrow-right" src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />

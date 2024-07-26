@@ -34,7 +34,7 @@ export async function checkUserLevel(ledger2: any, userAccountId: string) {
 export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: string) {
   try {
     console.log("userAccountId", userAccountId);
-
+    // check unconfirmed transactions
     const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
     for (var i = 0; i < messages.unconfirmedTransactions.length; i++) {
       if (messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId) {
@@ -53,9 +53,9 @@ export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: stri
       }
     }
 
+    // check confirmed transactions
     const account = await ledger2.account.getAccount({ accountId: userAccountId });
     const description = JSON.parse(account.description);
-    console.log(description.id);
     if (description.id != null) {
       const accountInfo = await ledger2.contract.getContract(description.id);
       const ipfsAddress = JSON.parse(accountInfo.description).descriptor;
@@ -63,9 +63,7 @@ export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: stri
       // const text = await ipfsJson.text();
       // const nftInfo = JSON.parse(text);
       const nftInfo = await fetchIPFSJSON(ipfsAddress);
-      console.log("nftInfo is", nftInfo);
       if (nftInfo.collection.name.includes("Bettermi.io") === true) {
-        console.log("returned true");
         return true;
       }
 
@@ -83,7 +81,9 @@ export async function checkEquippedBettermiNFT(ledger2: any, userAccountId: stri
     // console.log(level);
     // return level;
   } catch (e) {
-    console.log(e);
+    if (e.message === "Failed to fetch IPFS JSON") {
+      throw new Error("Failed to fetch IPFS JSON");
+    }
   }
   return false;
 }

@@ -1,0 +1,185 @@
+.bettermi-invite-friend-layout {
+  /* background: transparent; */
+  /* background-color: rgba(255, 255, 255, 1.0); */
+  min-height: 844px;
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  width: 390px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invite-friend-icon-description-container {
+  width: 280px;
+  height: 248px;
+}
+
+.invite-friend-mimi-icon {
+  width: 118px;
+  height: 118px;  
+}
+
+.invite-friend-icon-description-container {
+  width: 280px;
+  height: 248px;
+  display: flex;
+  flex-direction: column;
+  gap: 39px;
+  align-items: center;
+
+}
+
+.invite-friend-description-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+
+
+.invite-friend-description {
+  width: 280px;
+  text-align: left;
+  margin-bottom: 33px;
+}
+
+.invite-friend-copy-invite-link {
+  background: transparent;
+  border: none;
+  text-align: left;
+  display: inline-flex;
+  width: 212px;
+  height: 19px;
+  overflow: clip;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: flex-start;
+  /* pointer-events: none; */
+  /* direction: rtl; */
+}
+
+/* .invite-friend-copy-invite-link:focus-visible, .invite-friend-copy-invite-link:focus, .invite-friend-copy-invite-link:hover, .invite-friend-copy-invite-link:active {
+  pointer-events: auto;
+} */
+
+.invite-friend-copy-invite-link-container {
+  background: #FFFFFF08 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  width: 300px;
+  height: 56px;
+  display: flex;
+  margin-bottom: 29px;
+  gap: 23px;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite-friend-copy-invite-link-button {
+  width: 17px;
+  height: 18px;  
+  cursor: pointer;
+}
+
+
+.invite-friend-referral-program-description-container {
+  background: #FFFFFF08 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  width: 300px;
+  height: 171px;
+  padding: 8px 11.5px;
+  display: flex;
+  flex-direction: column;
+  /* gap: 13px; */
+}
+
+.invite-friend-referral-program-description-first-line {
+  margin-bottom: 20px;
+}
+
+.invite-friend-referral-program-description-line, .invite-friend-referral-program-description-first-line {
+  display: flex;
+}
+
+.invite-friend-referral-program-description-line {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invite-friend-referral-program-description-line p, .invite-friend-referral-program-description-first-line p {
+  margin: 0;
+  white-space: pre;
+}
+
+.invite-friend-refer-friends-description {
+  width: 280px;
+  text-align: center;
+  color: #FFFFFF80;
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 13px;
+}
+
+.invite-friend-referral-program-reward-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-right: 14.5px;
+}
+
+.invite-friend-referral-program-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.invite-friend-sigdao-earn {
+  margin-bottom: 21px;
+}
+
+.bettermi-invite-friend-layout-below {
+  width: 390px;
+  display: flex;
+  flex-direction: column;
+  height: 526px;
+  border: 1px solid var(--royal-blue);
+  background: var(--woodsmoke);
+  border-radius: 20px 20px 0 0;
+  /* justify-content: center; */
+  align-items: center;
+  padding-top: 37px;
+}
+
+.referral-program-banner {
+  width: 390px;
+}
+
+.referral-program-banner-container {
+  width: 390px;
+  height: 230px;
+  overflow: hidden;
+  margin-top: 88px;
+  display: flex;
+  align-items: center;
+}
+
+.bettermi-invite-friend-content {
+  width: 300px;
+  height: 372px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.invite-friend-referral-program-container .inter-bold-royal-blue-15px {
+  padding-left: 11.5px;
+}
+
+.invite-friend-arrow {
+  cursor: pointer;
+}

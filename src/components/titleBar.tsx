@@ -18,20 +18,12 @@ interface IShortTitleBarProps {
   isOpenImport?: boolean;
   customiseBackButton?: boolean;
   customiseBackButtonLink?: string;
+  // isPositionNotFixed?: boolean;
 }
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   // back button default to true
   const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink } = props;
-  const navigate = useNavigate();
-
-  const handleBackButtonOnClick = (): void => {
-    if (customiseBackButtonLink) {
-      navigate(customiseBackButtonLink);
-      return;
-    }
-    navigate(-1);
-  };
 
   // right first button:
   // ai coach
@@ -60,24 +52,21 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   );
 
   return (
-    <div className="title-bar-layout">
+    // <div className="title-bar-layout">
       <div
         className={transparent ? "transparent-title-bar-container" : "title-bar-container"}
-        style={
-          {
-            // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
-            // backgroundPosition: 'center',
-            // backgroundSize: 'cover',
-          }
-        }
+        // style={isPositionNotFixed ? {position: "relative"} : {}}
+        // style={
+        //   {
+        //     // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
+        //     // backgroundPosition: 'center',
+        //     // backgroundSize: 'cover',
+        //   }
+        // }
       >
         <div className="title-bar-content">
           <div className="title-bar-left-container">
-            {backButton && (
-              <div className="title-bar-back-button-container" onClick={() => handleBackButtonOnClick()}>
-                <img src={process.env.PUBLIC_URL + "/img/icon-arrow-left-12@1x.png"} alt="" className="title-bar-back-button-image" />
-              </div>
-            )}
+            {backButton && <BackButton customiseBackButtonLink={customiseBackButtonLink} className={"title-bar-back-button-container"} />}
             <div className="title-bar-title inter-semi-bold-white-18px">{title}</div>
           </div>
           <div className="title-bar-right-container">
@@ -87,7 +76,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         </div>
         {/* {keepAsReference} */}
       </div>
-    </div>
+    // </div>
   );
 };
 

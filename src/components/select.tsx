@@ -88,7 +88,7 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
   const dispatch = useDispatch();
   // const { isOpen, setIsOpen } = props;
   const selectedBirthday = useSelector(selectCurrentBirthday)
-  const [value, setValue] = useState(selectedBirthday || new Date('2023-07-26')); // selected day on calendar
+  const [value, setValue] = useState(selectedBirthday || new Date()); // selected day on calendar
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownRef2 = useRef<HTMLDivElement>(null);
@@ -96,7 +96,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
 
   useEffect(() => {
     if (value && !isFirstClick){
-
       dispatch(profileSlice.actions.setBirthday(value))
     }
   }, [value])
@@ -139,7 +138,6 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
             locale='en-US'
             minDetail='decade'
           />
-
         </div>
       )}
 

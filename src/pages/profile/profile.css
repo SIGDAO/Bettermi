@@ -684,33 +684,21 @@
 }
 
 .bettermidapp-profile-3 .button_nft-collections {
-  align-items: flex-end;
+  /* align-items: flex-end;
   background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
   border-radius: 10px;
   box-shadow: 0px 15px 30px #1466cc29;
   display: flex;
   height: 56px;
   justify-content: flex-end;
-  left: 0px;
   min-width: 248px;
-  padding: 13.5px 48px;
+  padding: 13.5px 48px; */
   position: absolute;
   bottom: -28px;
+  left: 0px;
   cursor: pointer;
 }
 
-.bettermidapp-profile-3 .button_nft-guest-collections {
-  align-items: flex-end;
-  background: linear-gradient(-90deg, #8743ff 0%, #4136f1 100%);
-  border-radius: 10px;
-  box-shadow: 0px 15px 30px #1466cc29;
-  display: flex;
-  height: 56px;
-  justify-content: flex-end;
-  min-width: 248px;
-  padding: 13.5px 48px;
-  cursor: pointer;
-}
 
 .bettermidapp-profile-3 .profile-content {
   align-items: flex-start;
@@ -1507,4 +1495,11 @@
   align-items: center;
   position: absolute;
   bottom: -28px;
+}
+
+.edit-profile-save-container {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }

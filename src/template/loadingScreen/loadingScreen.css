@@ -1,0 +1,69 @@
+.loading-screen {
+    background-color: transparent;
+    height: auto;
+    /* left: 163px; */
+    /* left: calc((100% - 218.21px)/2); */
+    letter-spacing: 0.00px;
+    line-height: 14px;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    top: 698px;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.loading-screen-free-nft-minting {
+    background-color: transparent;
+    height: 844px;
+    overflow: hidden;
+    overflow-x: hidden;
+    position: relative;
+    width: 390px;
+    margin: 0 auto;
+  }
+  .loading-screen-background{
+    background-color: transparent;
+    height: 844px;
+    left: 0px;
+    position: absolute;
+    top: -0px;
+    width: 390px;
+  }
+  .loading-screen-mimi-loading{
+    position: absolute;
+    top: 235px;
+    left: calc(50% - 100px);
+  }
+  .loading-screen-mimi-loading-image{
+    width: 200px;
+    height: 200px
+  }
+  .loading-screen-count{
+    background-color: transparent;
+    bottom: 392px;
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-l);
+    font-style: normal;
+    font-weight: 400;
+    height: 23px;
+    left: calc((100% - 38px)/2);
+    letter-spacing: 0.00px;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+    width: calc(100.00% - 352px);
+  }
+.loading-screen-reminder-text{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    top: calc(698px + 25px);
+    font-size: 14px;
+}
+

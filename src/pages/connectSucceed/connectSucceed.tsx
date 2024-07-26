@@ -29,7 +29,7 @@ const ConnectSucceed: React.FunctionComponent<IConnectSucceedProps> = (props) =>
   const content : JSX.Element = (
     <div className="connectWallet-layout">
       <div id='connectWallet-container' style={tuningGapStyle}>
-        <BackButton />
+        <BackButton customiseBackButtonLink={"/"} />
         <div className="success-box">
           <div className="finished-connect-wallet-icon-container">
             <img className="icon-awesome-check" src={`${process.env.PUBLIC_URL}/img/connectSucceed/icon-awesome-check@1x.png`} alt="Icon awesome-check" />

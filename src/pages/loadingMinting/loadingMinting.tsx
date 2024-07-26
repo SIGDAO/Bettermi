@@ -15,6 +15,7 @@ import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
 import { store } from "../../redux/reducer";
 import { profileSlice } from "../../redux/profile";
 import axios from "axios";
+import LoadingScreen from "../../template/loadingScreen/loadingScreen";
 
 interface ILoadingMintingProps {
   pathname: string;
@@ -26,7 +27,6 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const userAccountId = useSelector(accountId);
   const nftCodeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!; // the code hash of the BMI contract
   const bmiCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
-
 
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -44,7 +44,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-    let isTodayRecord = false
+    let isTodayRecord = false;
 
     while (true) {
       if (await isTodayHaveSelfieRecord(userAccountId, ledger)) break;
@@ -53,14 +53,11 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     setCount(100);
     setIsLoading(false);
     navigate("/selfToEarn");
-  }
-
+  };
 
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
     // const startTime: number = Date.now(); // get the current time in milliseconds
-
-
 
     let nftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
@@ -71,9 +68,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-
-
-    while (bmiContract.ats[0] == null) {
+    while (bmiContract.ats[0] == null || nftContract.ats[0] == null) {
       bmiContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: bmiCodeHashId,
@@ -82,39 +77,28 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         accountId: userAccountId,
         machineCodeHash: nftCodeHashId,
       });
-
-
     }
     var description: any;
-    
+
     try {
-       description = JSON.parse(bmiContract.ats[0].description);
+      description = JSON.parse(bmiContract.ats[0].description);
     } catch (error) {
       try {
         const bmiEncrypteddata = bmiContract.ats[0].description;
-        console.log("bmiEncryptedData is",bmiEncrypteddata);
-        description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + '/decrypt', {
+        description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/decrypt", {
           data: [bmiEncrypteddata],
-        })
-        console.log("description before equalling is",description);
+        });
         description = description.data.data;
-        console.log("description is",description)
       } catch (error) {
-        alert("Cannot fetch the record, please contact core team through discord!")
-        navigate('/')
+        alert("Cannot fetch the record, please contact core team through discord !");
+        navigate("/");
       }
     }
-
-    console.log("description is",description);
-    console.log("description[0] is",description[0]);
-    console.log("description.gender is",description[0].gender);
-    console.log("description.gender.includes is",description[0].gender.includes("Female"));
     var gender = "Male";
     if (description[0].gender.includes("Female")) {
       gender = "Female";
     }
     if (gender === "Male") {
-
       await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor);
     } else {
       await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor);
@@ -123,52 +107,31 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger, nftContract.ats[0].at, nftDistributor);
     const latestTransactionList = await FindLatestTransactionArray(ledger, nftContract.ats[0].at, nftDistributor, latestTransactionNumber);
 
-
     if (nftContract.ats[0] != null) {
       store.dispatch(accountSlice.actions.setNftContractStorage(nftContract.ats[0].at));
     }
-    if (latestTransactionList.length === 0) {
 
+    if (latestTransactionList.length === 0) {
       setCount(100);
       setIsLoading(false);
+      store.dispatch(profileSlice.actions.setNFTId("error"));
       navigate("/generateFreeNFT", { state: { nftId: "error" } });
     } else {
       setCount(100);
       setIsLoading(false);
-      store.dispatch(profileSlice.actions.setNFTImageAddress(latestTransactionList[0]));
+      console.log("latestTransactionList[0] is", latestTransactionList[0]);
+      store.dispatch(profileSlice.actions.setNFTId(latestTransactionList[0]));
       navigate("/generateFreeNFT", { state: { nftId: latestTransactionList[0] } });
     }
   };
 
   useEffect(() => {
-    if (nftLoaded.current === true) {
-
-    } else {
-      nftLoaded.current = true;
-      if (pathname === "/loadingBMIDaily") {
-        checkIfBMIcreated()
-          .catch((err) => {
-            console.error(err);
-          })
-        return;
-      }
-      checkIfNFTMinted().catch((err) => {
-        console.error(err);
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
-
       if (count < 100) {
-
         setCount((prevCount) => {
-
           if (prevCount < 99) {
-
             return prevCount + 1;
           }
           return prevCount;
@@ -187,6 +150,24 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       // navigate('/generateFreeNFT');
       clearInterval(timer);
     };
+  }, []);
+
+  // main function
+  useEffect(() => {
+    if (nftLoaded.current === true) return;
+
+    nftLoaded.current = true;
+    if (pathname === "/loadingBMIDaily") {
+      checkIfBMIcreated().catch((err) => {
+        console.error(err);
+      });
+      return;
+    }
+    
+    checkIfNFTMinted().catch((err) => {
+      console.error(err);
+    });
+
   }, []);
 
   // useEffect(() => {
@@ -209,62 +190,32 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   //Trying disabling refresh
   useEffect(() => {
-    const disableRefresh = (e:any) => {
+    const disableRefresh = (e: any) => {
       e.preventDefault();
-      e.returnValue = '';
+      e.returnValue = "";
     };
 
-    const handleBeforeUnload = (e:any) => {
+    const handleBeforeUnload = (e: any) => {
       disableRefresh(e);
     };
 
-    const handleUnload = (e:any) => {
+    const handleUnload = (e: any) => {
       disableRefresh(e);
     };
 
     // Add event listeners to disable refreshing
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('unload', handleUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
 
     return () => {
       // Remove event listeners when component unmounts
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('unload', handleUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
     };
   }, []);
   //ends here
 
-  const content: JSX.Element = (
-    <div className="screen">
-      <div className="bettermidapp-generate-free-nft-minting">
-        <div className="bg_2-JdJl2l">
-          <div className="mimi-loading">
-            <img className="mimi-loading-image" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="" />
-          </div>
-          <div className="x50-7ckAMs">{count}%</div>
-        </div>
-        {pathname === "/loadingBMIDaily"?
-        (
-          <div className="minting-JdJl2l inter-normal-white-15px">
-          Importing...
-          </div>
-        )
-        :
-        (
-        <div className="minting-JdJl2l inter-normal-white-15px">
-          Minting…
-          </div>
-          )}
-        <div className="reminder-text-1 inter-normal-white-15px">
-          Please wait patiently
-          <br />
-          and do not refresh the page
-        </div>
-      </div>
-    </div>
-  );
-
-  return <CenterLayout content={content} bgImg={false} />;
+  return <LoadingScreen pathname={pathname} count={count}></LoadingScreen>;
 };
 
 export default LoadingMinting;

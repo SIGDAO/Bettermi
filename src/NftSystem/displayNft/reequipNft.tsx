@@ -2,6 +2,7 @@ import { checkEquippedBettermiNFT } from "../UserLevel/checkUserLevel";
 import { FindLatestTransactionArray,FindLatestTransactionNumber, fetchIPFSJSON } from "../updateUserNftStorage";
 import { UpdateUserIconNewVersion } from "../updateUserNftStorage";
 export async function reEquipNft (ledger2:any,Wallet:any,userAccountId:string,codeHashIdForNft:string,nftDistributor:string,userAccountpublicKey:string,navigate:(url:string) => void){
+  try {
     const equippedBettermiNft = await checkEquippedBettermiNFT(ledger2,userAccountId);
     if(equippedBettermiNft === false){
       alert("please equip a Bettermi NFT, we will shortly prompt a notification to help you change it");
@@ -11,7 +12,7 @@ export async function reEquipNft (ledger2:any,Wallet:any,userAccountId:string,co
         accountId: userAccountId,
         machineCodeHash: codeHashIdForNft,
     });
-    console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
+      console.log("receiverNftStorage",receiverNftStorage.ats[0].at);
       const latestTransactionNumber = await FindLatestTransactionNumber(ledger2,receiverNftStorage.ats[0].at,nftDistributor);
       const transactionArray = await FindLatestTransactionArray(ledger2,receiverNftStorage.ats[0].at,nftDistributor,latestTransactionNumber);
       if(transactionArray[0] == "empty"){
@@ -33,4 +34,8 @@ export async function reEquipNft (ledger2:any,Wallet:any,userAccountId:string,co
       const imgAddress = ipfsJson.media[0].social;
       await  UpdateUserIconNewVersion(ledger2,imgAddress,nftId,userAccountId,userAccountpublicKey,Wallet,name);
     }
+
+  } catch (error) {
+    console.log(error);
+  }
 }

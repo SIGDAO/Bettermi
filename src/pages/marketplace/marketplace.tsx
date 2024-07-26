@@ -14,6 +14,8 @@ import { CountChallenges, countTotalChallengesTimes } from "../../NftSystem/Toke
 import { GetUserNftList } from "../../NftSystem/updateUserNftStorage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { rewardDetailList, rewardDetailListProps } from "../../data/rewardList";
+import { countReferredUser } from "../../NftSystem/Reward/calculateReferralReward";
+import { LedgerClientFactory } from "@signumjs/core";
 
 interface IMarketplaceProps {}
 
@@ -41,6 +43,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const [bmiHitHealthyNumber, setBmiHitHealthyNumber] = React.useState<number>();
   const [challengeCompletedTimes, setChallengeCompletedTimes] = React.useState<number>();
   const [nftAcquireNumber, setNftAcquireNumber] = React.useState<number>();
+  const [referredCount, setReferredCount] = React.useState<number>();
 
   const implementReward = (reward: rewardDetailListProps) => {
     switch (reward.id) {
@@ -49,8 +52,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       case 2:
         return bmiRecordTimes;
       case 3:
-        return challengeCompletedTimes;
+        return referredCount;
       case 4:
+        return challengeCompletedTimes;
+      case 5:
         return bmiHitHealthyNumber;
       default:
         return 0;
@@ -71,6 +76,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       setBmiRecordTimes(0);
       setChallengeCompletedTimes(0);
       setNftAcquireNumber(0);
+      setReferredCount(0);
       return;
     }
     BMIRecordChecked.current = true;
@@ -83,6 +89,14 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
     });
     countTotalChallengesTimes(tempAccountId, Ledger2).then((res) => {
       setChallengeCompletedTimes(res);
+    });
+    countReferredUser(Ledger2!, tempAccountId)
+    .then((result) => {
+      console.log("referredCount", result);
+      setReferredCount(result);
+    })
+    .catch((e) => {
+      console.error(e);
     });
     GetUserNftList(Ledger2, tempAccountId, nftDistributor, codeHashIdForNft)
       .then((res) => {
@@ -104,7 +118,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
       <div className={reward.active ? "rewards-cards" : "rewards-cards-disable-content rewards-cards"} onClick={() => determinRewardPath()}>
         {!reward.active && <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />}
 
-        <div className={reward.id === 4 ? "marketplace-rewards-image-container-border" : "marketplace-rewards-image-container"}>
+        <div className={reward.id === 5 || reward.id === 3 ? "marketplace-rewards-image-container-border" : "marketplace-rewards-image-container"}>
           <img className="marketplace-rewards-image" src={`${process.env.PUBLIC_URL}/${reward.previewImagePath}`} alt="NFT_Avatar" />
         </div>
         <div className="marketplace-rewards-information">

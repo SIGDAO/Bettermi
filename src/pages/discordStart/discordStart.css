@@ -1,0 +1,49 @@
+.discord-start-layout{
+    /* position: absolute; */
+    /* left: calc((100% - 820px) / 2); */
+    width: 100vw;
+    height: 100vh;
+    /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+    background: #1b192b;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-height: 594px) {
+  
+    #discord-start-container {
+        justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #discord-start-container  {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin:auto;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        /* overflow-y: auto; */
+    }
+  }
+
+  @media (max-width: 768px) {
+    #discord-start-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        margin-bottom: 20%;
+    }
+  }
+
+  .discord-start-button-containter{
+    margin-top: 25px;
+  }

@@ -631,7 +631,7 @@
   pointer-events: none;
 }
 
-.setting-connect-wallet-container {
+.setting-button-container {
   position: absolute;
   bottom: -28px;
   left: 50%;
@@ -646,7 +646,6 @@
   align-items: center;
   flex-direction: row;
 
-  border-bottom: 1px solid #3D454B80;
 }
 
 .setting-option-arrow {

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import React from "react";
 import HorizontalScrollContainer from "../../components/horizontalScrollContainer";
 import { missionList } from "../../data/featureMissionsList";
+import SigdaoIcon from "../../components/icon";
 
 
 const HomeChallengeList: React.FunctionComponent = (props: any) => {
@@ -23,11 +24,7 @@ const HomeChallengeList: React.FunctionComponent = (props: any) => {
             <div className="inter-normal-cadet-blue-12px">{duration}</div>
             <div className="home-mission-sigdao-score">
               <div className="x10-HEHiSw x10 inter-semi-bold-keppel-14px">{sigdao}</div>
-              <div className="signdao_tokengradient-HEHiSw signdao_tokengradient">
-                <div className="x441-giFx9O x441"></div>
-                <div className="x442-giFx9O x442"></div>
-                <img className="x880-giFx9O x880" src={`${process.env.PUBLIC_URL}/img/file---880-1x-png-10@1x.png`} alt="880" />
-              </div>
+              <SigdaoIcon width="17px" height="17px" />
             </div>
           </div>
         </div>

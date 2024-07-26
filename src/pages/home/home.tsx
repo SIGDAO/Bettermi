@@ -26,8 +26,11 @@ import { getApiUrls } from "../../components/constants/constant";
 import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 import HomeMissionList from "./horzontalScrollContainer";
 import UserInfoContainer from "./userInfoContainer";
+import ReferralSuccessPopupWindow from "./referralSuccessPopupWindow";
 
-interface IHomeProps {}
+interface IHomeProps {
+  pathname?: string;
+}
 
 const checkSlides = (isGuest: boolean) => {
   if (isGuest) {
@@ -66,14 +69,17 @@ const handleUnload = (e: any) => {
 };
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const pathname: string | undefined = props.pathname;
+  console.log("pathname is", pathname);
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
   const tokenId = process.env.REACT_APP_TOKEN_ID!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
   const distributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
 
   const navigate = useNavigate();
+  const reduxIsGuest = useSelector(selectCurrentIsGuest);
 
-  const isGuest = useSelector(selectCurrentIsGuest);
+  const isGuest = pathname === "/referralGiveReward" ? true : reduxIsGuest;
 
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const name = useSelector(selectCurrentUsername);
@@ -90,6 +96,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const [ipfsAddress, setIpfsAddress] = useState<string>("");
   const [isNFTiconLoading, setIsNFTiconLoading] = useState<boolean>(true);
   const [rewardPercentage, setRewardPercentage] = useState<string>("");
+  const [isPopUpReferralSuccessWindow, setIsPopUpReferralSuccessWindow] = useState<boolean>(true);
 
   const slides = checkSlides(isGuest);
 
@@ -127,7 +134,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
   const nftIconCheck = useRef(false);
   useEffect(() => {
     // Function to fetch data from the APIc
-    if (nftIconCheck.current || isGuest) {
+    if (nftIconCheck.current || isGuest || pathname === "/referralGiveReward") {
       return;
     }
     nftIconCheck.current = true;
@@ -145,7 +152,6 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         if (description.id != null) {
           const accountInfo = await ledger2.contract.getContract(description.id);
           setIpfsAddress(JSON.parse(accountInfo.description).descriptor);
-          //const ipfsJson = await fetch(`https://aqua-petite-woodpecker-504.mypinata.cloud/ipfs/${JSON.parse(accountInfo.description).descriptor}?pinataGatewayToken=cL2awO7TOSq6inDgH6nQzP46A38FpRr1voSLTpo14pnO1E6snmmGfJNLZZ41x8h1`);
           const ipfsJson = await fetch(getApiUrls(JSON.parse(accountInfo.description).descriptor).imgAddress);
           const text = await ipfsJson.text();
           const nftInfo = JSON.parse(text);
@@ -181,7 +187,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
   const nftContractChecked = useRef(false);
   useEffect(() => {
-    if (nftContractChecked.current || isGuest) {
+    if (nftContractChecked.current || isGuest || pathname == "/referralGiveReward") {
       return;
     }
     nftContractChecked.current = true;
@@ -202,15 +208,16 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
     <>
       <NFTDetailPopUpWindow
         // isGuest={isGuest}
-        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         isNFTiconLoading={isNFTiconLoading}
         imgAddress={imgAddress}
         level={level}
         rewardPercentage={rewardPercentage}
+        isPopUpNFTDetailWinodow={isPopUpNFTDetailWinodow}
         setIsPopUpNFTDetailWinodow={setIsPopUpNFTDetailWinodow}
       >
         <div className="screen">
           <div className="bettermidapp-home-1">
+            {pathname === "/referralGiveReward" && <ReferralSuccessPopupWindow />}
             <Link to="/featureMissions">
               <div className="view-all-RoXPLo inter-medium-royal-blue-14px">See all</div>
             </Link>

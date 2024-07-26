@@ -1,0 +1,161 @@
+/* screen - bettermidapp-create-connect-3 */
+
+
+  
+.newUserdiscordAuthorization-layout {
+    /* position: absolute; */
+    /* left: calc((100% - 820px) / 2); */
+    width: 100vw;
+    height: 100vh;
+    /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+    background: #1b192b;
+    overflow-x: hidden;
+    display: flex;
+  }
+  
+  #newUserdiscordAuthorizationTopic {
+    margin-top: 0px;
+    margin-bottom: 27px;
+    text-align: center;
+  }
+  
+  #newUserdiscordAuthorizationDisciption {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 52px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  #img-slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 86px;
+  }
+  
+  .newUserdiscordAuthorization-layout .photo {
+    width: 100%;
+  }
+  
+  .connect-profilePic {
+    width: 262px;
+    height: 288px;
+  }
+  
+  .connect-profilePic-side {
+    width: 180px;
+    height: 198px;
+  }
+  
+  #newUserdiscordAuthorization-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .EntranceScreenTemplate-explore-button {
+    cursor: pointer;
+  }
+  
+  .newUserdiscordAuthorization-option-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 20px;
+  }
+  
+  .newUserdiscordAuthorization-bg-img-container {
+    width: 280px;
+    height: 394px;
+    /* padding-bottom: 20px; */
+    /* margin-bottom: 20px; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+  
+  .newUserdiscordAuthorization-bg-img {
+    /* position: absolute; */
+    width: 280px;
+    height: 344px;
+    object-fit: cover;
+  }
+  
+  @media screen and (max-height: 594px) {
+    #img-slider {
+      margin-bottom: 20px;
+    }
+    #newUserdiscordAuthorization-button-container {
+      /* position: fixed; */
+      /* bottom: 20px; */
+    }
+  
+    #newUserdiscordAuthorization-container {
+        justify-content: flex-start;
+    }
+  }
+  
+  
+  @media screen and (max-width: 320px) {
+    #img-slider {
+      margin-bottom: 20px;
+    }
+  
+    #newUserdiscordAuthorization-button-container {
+  
+      gap: 20px;
+      flex-direction: column-reverse;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .element {
+      /* Styles for mobile devices */
+      font-size: 14px;
+      margin: 10px;
+      padding: 5px;
+    }
+    #newUserdiscordAuthorization-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin:auto;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        /* overflow-y: auto; */
+    }
+  }
+  /* #newUserdiscordAuthorization-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    width: 100%;
+    min-height: auto;
+  } */
+  @media (max-width: 768px) {
+    .element {
+      /* Styles for mobile devices */
+      font-size: 14px;
+      margin: 10px;
+      padding: 5px;
+    }
+    #newUserdiscordAuthorization-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        margin-bottom: 20%;
+    }
+  }
+  

@@ -398,30 +398,3 @@ align-self: flex-start;
     height: 17px;
     position: relative;
   }
-  .x441{
-    background-color: var(--white);
-    border-radius: 8.26px;
-    height: 100%;
-    /* left: 0px; */
-    position: absolute;
-    /* top: 0px; */
-    width: 100%;
-  }
-  .x442{
-    background: linear-gradient(224.44deg, #00ffa3 5.74%, #ff00ff 87.84%);
-    background-color: transparent;
-    border-radius: 8.03px;
-    height: 97.18%;
-    /* left: 1.41%; */
-    position: absolute;
-    /* top: 1.41%; */
-    width: 97.18%;
-  }
-  .x880{  background-color: transparent;
-    height: 54.68%;
-    /* left: 25.90%; */
-    object-fit: cover;
-    position: absolute;
-    top: calc((100% - 54.68%) / 2);
-    left: calc((100% - 47.30%) / 2);
-    width: 47.30%;}

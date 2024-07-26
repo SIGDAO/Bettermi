@@ -15,6 +15,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 import { GetRewardPercentage } from "../../NftSystem/Reward/getRewardPercentage";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { BackButton, GuestConnectWallectButton } from "../../components/button";
+import SigdaoIcon from "../../components/icon";
 
 interface IChallengeCompletedProps {
   NFT?: boolean;
@@ -75,8 +76,8 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
       const rewardPercentage = await GetRewardPercentage(ledger2, userAccountId);
 
       var reward: string;
-      if (rewardPercentage != null) {
-        reward = String((parseFloat(rewardString!) * (100 + parseInt(rewardPercentage))) / 100);
+      if (rewardPercentage != null ) {
+        reward = String((parseFloat(rewardString!) * (100 + parseInt(rewardPercentage.rewardPercentage))) / 100);
       } else {
         reward = String(parseFloat(rewardString!));
       }
@@ -160,40 +161,28 @@ const ChallengeCompleted: React.FunctionComponent<IChallengeCompletedProps> = (p
         <div className="bettermidapp-challenge-finished-1">
           {isGuest && <BackButton />}
           {/* <ShortTitleBar title='' setting={false} aiCoach={false} transparent={true} /> */}
-          <div className="x16219-iwUDzs" style={isGuest && { opacity: 0.6 }}>
-            <div className="you-have-earned-75VOY2">{SmallTitle}</div>
-            <h1 className="title-75VOY2">Congratulations !</h1>
-            <div className="finished-75VOY2">
+          <div className="challenge-completed-congratulations-message-container" style={isGuest ? { opacity: 0.6 } : {}}>
+            <div className="finished-container">
               <img src="img/challengeCompleted/completed-mimi.png" alt="" className="mimi-heart-challenge-completed" />
-              {/* <div className="button3-copy-3oZEl3">
-              <div className="button1-vX3ONf button1"></div>
+              <h1 className="challenge-completed-congratulations-message inter-semi-bold-white-28px">Congratulations !</h1>
             </div>
-            <img className="icon-awesome-check-3oZEl3" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/icon-awesome-check@1x.png`} alt="Icon awesome-check" /> */}
-            </div>
+            <div className="inter-normal-white-16px">{SmallTitle}</div>
             {NFT ? null : loading ? (
               <div className="sigdao-score-75VOY2">
+                <SigdaoIcon width="17px" height="17px" />
                 <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ loading...</div>
-                <div className="signdao_tokengradient-VOfFBB">
-                  <div className="x441-gxWo6F"></div>
-                  <div className="x442-gxWo6F"></div>
-                  <img className="x880-gxWo6F" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/file---880-1x-png-10@1x.png`} alt="880" />
-                </div>
               </div>
             ) : (
               <div className="sigdao-score-75VOY2">
-                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+ {userReward}</div>
-                <div className="signdao_tokengradient-VOfFBB">
-                  <div className="x441-gxWo6F"></div>
-                  <div className="x442-gxWo6F"></div>
-                  <img className="x880-gxWo6F" src={`${process.env.PUBLIC_URL}/img/challengeSuccess/file---880-1x-png-10@1x.png`} alt="880" />
-                </div>
+                <SigdaoIcon width="17px" height="17px" />
+                <div className="x10-VOfFBB inter-semi-bold-keppel-14px">+{userReward}</div>
               </div>
             )}
           </div>
           {isGuest ? guestUserView : registeredUserView}
         </div>
       </div>
-      <div className="bg-locked-challenge-completed"></div>
+      {isGuest && <div className="bg-locked-challenge-completed"/>}
     </>
   );
 

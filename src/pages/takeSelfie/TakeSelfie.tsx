@@ -8,7 +8,7 @@ import { BackButton } from "../../components/button";
 import CSS from "csstype";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { profileSlice, selectCurrentIsGuest, selectCurrentIsSelfie } from "../../redux/profile";
+import { profileSlice, selectCurrentIsGuest, selectCurrentIsNewUser, selectCurrentIsSelfie } from "../../redux/profile";
 import { store } from "../../redux/reducer";
 import { userBMISlice } from "../../redux/userBMI";
 import { useGetBMIMutation } from "../../redux/userBMIApi";
@@ -98,6 +98,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
   const [count, setCount] = useState(0);
   var [imageSrc, setImageSrc] = useState<string | null | undefined>();
   const isSelfie = useSelector(selectCurrentIsSelfie);
+  const isNewUser = useSelector(selectCurrentIsNewUser);
   const [mobileWidth, setMobileWidth] = useState<number>(0);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   var [getBMI, { isLoading, data }] = useGetBMIMutation();
@@ -116,6 +117,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
       return;
     }
     isSelfieRecord(tempAccountId, Ledger2).then((result) => {
+      console.log("result is ",result);
       if (!result) {
         setNavigatePath("/generateBMINFTImport");
       }
@@ -227,7 +229,7 @@ const TakeSelfie: React.FunctionComponent<ITakeSelfieProps> = (props) => {
 
   const content: JSX.Element = (
     <div className="selfie-content-container">
-      <BackButton />
+      <BackButton customiseBackButtonLink={!isNewUser ? "/home" : ""} />
       {/* <div className="disclaimer inter-normal-white-15px">
       We super care your privacy, your selfie will not be stored
       </div> */}

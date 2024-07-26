@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./connectWallet.css";
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CenterLayout } from "../../components/layout";
-import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from "../../components/button";
+import { ButtonWithAction, ButtonWithNavigation, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { walletSlice } from "../../redux/wallet";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
@@ -30,10 +30,12 @@ import { selectWalletNodeHost } from "../../redux/useLedger";
 export interface IConnectWalletProps {}
 
 export default function ConnectWallet(props: IConnectWalletProps) {
-  localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isIconLoading, setIsIconLoading] = useState<boolean>(true);
   const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
   const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
@@ -44,21 +46,32 @@ export default function ConnectWallet(props: IConnectWalletProps) {
 
   useEffect(() => {
     store.dispatch({ type: "USER_LOGOUT" });
+    localStorage.clear(); //Guess we need to clear out all local storage after connecting account
   }, []);
 
   const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
     try {
+      if (isLoading) return;
+
+      setIsLoading(true);
+
       const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
       if (userInfo == null) {
         alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
       }
       const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
-
       // situation:
       // all contract is created, but one or more contract still unconfirmed
       // or, not enqiuped NFT, then navigate to loadingMinting
-      if (userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true || userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true || userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null || !equippedBettermiNft) {
+      if (
+        !equippedBettermiNft &&
+        ((userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
+          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null))
+      ) {
+        dispatch(profileSlice.actions.setIsNewUser(true));
         navigate("/loadingMinting");
         return;
       }
@@ -75,18 +88,29 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         } else {
           store.dispatch(profileSlice.actions.setGender("Male"));
         }
+        setIsLoading(false);
+
+        dispatch(profileSlice.actions.authenticated());
         navigate("/home");
       } else {
-        console.log("no contract or only one contract is created");
+        setIsLoading(false);
+        dispatch(profileSlice.actions.setIsNewUser(true));
         navigate("/connectSucceed");
       }
     } catch (error: any) {
       // todo: add error handling, and show it to user
+
+      if (error.message === "Failed to fetch IPFS JSON") {
+        alert("Cannot connect wallet, failed to fetch IPFS JSON. Please try again !\nIf the problem persists, please contact core team through discord !");
+      }
+
       if (error.name === "InvalidNetworkError") {
         alert(
           "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",
         );
       }
+
+      setIsLoading(false);
       if (error.name === "NotFoundWalletError") {
         window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
       }
@@ -98,25 +122,15 @@ export default function ConnectWallet(props: IConnectWalletProps) {
   };
 
   const logo: JSX.Element = (
-    // <div className="connectWallet-bg-img-container">
-    //   {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-LandingAnimation-ScreenSize.jpg"} />}
-    //   <img
-    //     className="connectWallet-bg-img"
-    //     src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io_dAPP_Landing_Animation_compassed_addition_ver2.gif"}
-    //     onLoad={() => setIsLoading(false)}
-    //     style={{ display: isLoading ? 'none' : 'inline-block' }}
-    //   />
-    // </div>
-    // <div className="connectWallet-bg-img-container">
-      <>
-      {isLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
+    <>
+      {isIconLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
       <img
         className="connectWallet-bg-img"
         src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-Landing-Animation-V2_compressed.gif"}
-        onLoad={() => setIsLoading(false)}
-        style={{ display: isLoading ? "none" : "inline-block" }}
+        onLoad={() => setIsIconLoading(false)}
+        style={{ display: isIconLoading ? "none" : "inline-block" }}
       />
-      </>
+    </>
     // </div>
   );
 
@@ -127,13 +141,22 @@ export default function ConnectWallet(props: IConnectWalletProps) {
         {logo}
         <div className="connectWallet-option-container">
           <div id="connectWallet-button-container">
-            <ButtonWithAction
+            {/* <ButtonWithAction
               text="XT Wallet"
               action={() => {
                 userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
               }} // TODO: add action to connect wallet
               height="56px"
               width="248px"
+            /> */}
+            <PurpleButton
+              text="XT Wallet"
+              action={() => {
+                userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
+              }}
+              height="56px"
+              width="248px"
+              // style={{ borderRadius: "10px" }}
             />
             {/* <Link to="https://phoenix-wallet.rocks/"> */}
             <DisabledButton text="Phoenix Wallet" height="56px" width="248px" />
@@ -141,7 +164,15 @@ export default function ConnectWallet(props: IConnectWalletProps) {
           </div>
           <div className="guest-explore-container">
             <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
-            <div className="inter-normal-keppel-12px guest-explore-button" onClick={() => navigate("/home")}>
+            <div
+              className="inter-normal-keppel-12px guest-explore-button"
+              onClick={() => {
+                if (isLoading) return;
+                setIsLoading(true);
+                setIsLoading(false);
+                navigate("/home");
+              }}
+            >
               Explore as a guest
             </div>
           </div>

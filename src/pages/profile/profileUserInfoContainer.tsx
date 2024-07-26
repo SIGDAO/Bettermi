@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import { NFTDetailPopUpWindow } from "../../components/popupWindow";
-import { GuestConnectWallectButton } from "../../components/button";
+import { GuestConnectWallectButton, PurpleButton } from "../../components/button";
 
 interface IProfileUserInfoContainerProps {
   isUpdatingUserSetting: boolean;
@@ -93,7 +93,7 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
 
   const handleCopyDiscordUsername = (discordUsername) => {
     navigator.clipboard.writeText(discordUsername);
-    displayPopUpMessage("Copied!");
+    displayPopUpMessage("Copied !");
   };
 
   React.useEffect(() => {
@@ -142,8 +142,8 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
           </div>
         </>
       )}
-      <div className="button_nft-collections" onClick={() => toUserNftList()}>
-        <div className="continue-profile inter-semi-bold-white-15px">{isMyProfile ? "My NFT Collection" : "NFT Collection"}</div>
+      <div className="button_nft-collections">
+        <PurpleButton text={isMyProfile ? "My NFT Collection" : "NFT Collection"} action={() => toUserNftList()} height={"56px"} width={"248px"} />
       </div>
       {isMyProfile && !isSettingLoading && !isUpdatingUserSetting && (
         <div className="ic_edit" onClick={() => setIsOpen(!isOpen)}>
@@ -163,9 +163,7 @@ const ProfileUserInfoContainer: React.FunctionComponent<IProfileUserInfoContaine
       <div className="inter-normal-cadet-blue-16px">Receive a FREE NFT membership !</div>
       <div className="profile-guest-user-button-container">
         <GuestConnectWallectButton height={"56px"} width={"248px"} />
-        <div className="button_nft-guest-collections" onClick={() => setIsPopUpNFTDetailWinodow(true)}>
-          <div className="continue-profile inter-semi-bold-white-15px">{isMyProfile ? "My NFT Collection" : "NFT Collection"}</div>
-        </div>
+        <PurpleButton text={isMyProfile ? "My NFT Collection" : "NFT Collection"} action={() => setIsPopUpNFTDetailWinodow(true)} height={"56px"} width={"248px"} />
       </div>
     </div>
   );

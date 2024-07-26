@@ -1,0 +1,15 @@
+.ReferralCodeLogo-bg-img-container{
+    width: 280px;
+    height: 394px;
+    /* padding-bottom: 20px; */
+    /* margin-bottom: 20px; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.ReferralCodeLogo-bg-img{
+    /* position: absolute; */
+    width: 217px;
+    height: 325px;
+    object-fit: cover;
+}
