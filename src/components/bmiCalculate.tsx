@@ -5,7 +5,8 @@ import { BMI_Day } from '../redux/userBMI';
 import { UTCTimestamp, SeriesDataItemTypeMap, Time } from 'lightweight-charts';
 import { calBMIType } from './rewardCalculate';
 import axios from 'axios';
-import { Ledger } from '@signumjs/core';
+import { Ledger, TransactionList } from '@signumjs/core';
+import { ChainTime } from '@signumjs/util';
 // import { SeriesDataItemTypeMap } from 'lightweight-charts/dist/typings/series-options';
 
 
@@ -18,9 +19,75 @@ export interface UserBMIData{
   data:string[];
 }
 
+const convertSignumTimestampsToDate = (timestamp) => {
+  const unsortedDate = timestamp.map((timestamp) => {
+    return ChainTime.fromChainTimestamp(timestamp).getDate();
+  });
+
+  return unsortedDate.sort((a: Date, b: Date) => a.getTime() - b.getTime());
+};
+
+export const findBMIblockchainContractTimestamp = async (tempAccountId: string, Ledger2: Ledger) => {
+  var contractAddress:string = '';
+  var description: any;
+  var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
+  const bmiRecordtimestamp: Array<any> = [];
+  const decryptedBMIRecord: Array<any> = [];
+  const bmiHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/"/g, '');
+
+  // find BMI contract build timestamp
+  const bmiContract = await Ledger2.account.getAccountTransactions({
+    accountId: tempAccountId,
+    type: 22,
+    subtype: 0,
+  });
+  
+  if (!bmiContract) return [];
+  if (!bmiContract.transactions) return [];
+
+  for (let i = 0; i < bmiContract.transactions.length; i++) {
+    const element = bmiContract.transactions[i];
+    if (element.attachment.hasOwnProperty('name') && element.attachment.name === 'BMI') {
+      // get the bmi contract address
+      contractAddress = element.transaction;
+
+      // push the timestamp of the contract build
+      bmiRecordtimestamp.push(element.timestamp);
+      break;
+    }
+  }
+
+  // find uncomfirmed BMI contract transaction timestamp
+  const unconfirmedMessage = await Ledger2.account.getUnconfirmedAccountTransactions(contractAddress);
+
+  if (!unconfirmedMessage.unconfirmedTransactions) return convertSignumTimestampsToDate(bmiRecordtimestamp);
+
+
+  for (let i = 0; i < unconfirmedMessage.unconfirmedTransactions.length; i++) {
+    bmiRecordtimestamp.push(unconfirmedMessage.unconfirmedTransactions[i].timestamp);
+  }
+
+
+  // find BMI contract confirmed transaction timestamp
+  const message = await Ledger2.account.getAccountTransactions({accountId:contractAddress}); //Contract Id
+
+  if (!message) return convertSignumTimestampsToDate(bmiRecordtimestamp);
+  if (!message.transactions) return convertSignumTimestampsToDate(bmiRecordtimestamp);
+
+  for(let i = 0; i < message.transactions.length ;i++){
+    bmiRecordtimestamp.push(message.transactions[i].timestamp);
+  }
+
+
+  console.log("BMIRecordtime", convertSignumTimestampsToDate(bmiRecordtimestamp))
+
+  return convertSignumTimestampsToDate(bmiRecordtimestamp);
+}
+
+
 // find BMI contract content
 // output: [] || [description || {time: time, value: value}]
-const findBMIblockchainContract = async (tempAccountId: string, Ledger2: Ledger) => {
+const findBMIblockchainContractContent = async (tempAccountId: string, Ledger2: Ledger) => {
   var contractAddress:string = '';
   var description: any;
   var bmiArray: SeriesDataItemTypeMap['Area'][]= [];
@@ -33,11 +100,14 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: Ledger)
     machineCodeHash: bmiHashId,
   });
 
+
   // await Ledger2.account.
   if (!contract) return [];
   if (!contract.hasOwnProperty('ats')) return [];
 
   contractAddress = contract.ats[0]?.at;
+
+  console.log("contractAddress", contractAddress);
 
   const BMIData:string[] = [];
 
@@ -84,8 +154,8 @@ const findBMIblockchainContract = async (tempAccountId: string, Ledger2: Ledger)
     let { data: decryptedArray } = data;
 
     for ( let i = 0; i < decryptedArray.length; i++ ) {
-      let content = decryptedArray[i]
-  
+      let content = decryptedArray[i];
+
       content.time = new Date(content.time);
       decryptedBMIRecord.push(content);
     }
@@ -116,7 +186,7 @@ export const findBMI = async (tempAccountId: string, Ledger2: any, today?: boole
 
   if(Ledger2 == null) return [];
 
-  const bmiDataObject = await findBMIblockchainContract(tempAccountId, Ledger2);
+  const bmiDataObject = await findBMIblockchainContractContent(tempAccountId, Ledger2);
 
 
   if (!bmiDataObject) return [];
@@ -162,46 +232,28 @@ export const isTodayHaveSelfieRecord = async (tempAccountId: string, Ledger2: an
 
   // if bmi_fetchedData, check if today have record
   if (bmi_fetchedData) {    
-
-    for (let i = 0; i < bmi_fetchedData.length; i++) {
-      const element = bmi_fetchedData[i];
-      const elementDate = new Date(element.time * 1000);
-      if (elementDate.getDate() === today.getDate() && elementDate.getMonth() === today.getMonth() && elementDate.getFullYear() === today.getFullYear()) {
-        return true;
-      };
-    }
-    return false;
+    let latestDate = bmi_fetchedData[bmi_fetchedData.length - 1].time;
+    return latestDate.getDate() === today.getDate() && latestDate.getMonth() === today.getMonth() && latestDate.getFullYear() === today.getFullYear();
   }
 
-
   // if no bmi_fetchedData, fetch data from blockchain and check if today have record
-  const contract = await findBMIblockchainContract(tempAccountId, Ledger2);
+  const contract = await findBMIblockchainContractContent(tempAccountId, Ledger2);
 
   if (!contract) return false;
 
-  const message = contract;
-
-  let BMI: SeriesDataItemTypeMap['Area'][]= [];
-
-
   // handle bmi contract message
-  for(let i = message.length - 1; i >= 0 ;i--){
-    let content = message[i];
+  let latestDate = contract[contract.length - 1].time;
 
-    let tempDate = content.time
+  const todayHaveSelfieRecord = 
+    latestDate.getDate() === today.getDate() && 
+    latestDate.getMonth() === today.getMonth() && 
+    latestDate.getFullYear() === today.getFullYear();
 
-
-    if (tempDate.getDate() === today.getDate() && tempDate.getMonth() === today.getMonth() && tempDate.getFullYear() === today.getFullYear()) {
-
-      return true;
-    };
-  }
-
-  return false;
+  return todayHaveSelfieRecord;
 }
 
 export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
-  const message = await findBMIblockchainContract(tempAccountId, Ledger2)
+  const message = await findBMIblockchainContractContent(tempAccountId, Ledger2)
 
   // if no ledger, return false
   if (message.length === 0) return false;//Strange?
@@ -209,7 +261,7 @@ export const isSelfieRecord = async (tempAccountId: string, Ledger2: any) => {
 }
 
 export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
-  const message = await findBMIblockchainContract(tempAccountId, Ledger2)
+  const message = await findBMIblockchainContractContent(tempAccountId, Ledger2)
 
 
   if (message.length === 0) {
@@ -244,7 +296,7 @@ export const getBMIRecordDay = async (tempAccountId: string, Ledger2: any) => {
 }
 
 export const isHitFirstHealthyBMIRange = async (tempAccountId: string, Ledger2: any) => {
-  const message = await findBMIblockchainContract(tempAccountId, Ledger2)
+  const message = await findBMIblockchainContractContent(tempAccountId, Ledger2)
 
   // if no ledger, return false
   if (message.length === 0) return false;

@@ -67,7 +67,7 @@ const determinePageClass = (id: string) => {
 const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const { id } = useParams();
   const displayRewardDetail = rewardDetailList.find((item) => item.id === Number(id));
-  const pageExist = rewardDetailList.length >= Number(id);
+  const pageExist = displayRewardDetail ? displayRewardDetail.active : false;
   const isSigdaoReward = typeof displayRewardDetail?.reward === "number";
   const classNameList = determinePageClass(id as string);
   const tempAccountId = useSelector(accountId);
@@ -82,18 +82,6 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const storageAccounts = [...mimiNftStorageAccounts, ...ioNftStorageAccounts];
-  const codeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
-  // const loadNftList = async () => {
-  //   try {
-
-  //     userNftList = await GetUserNftList(ledger2, tempAccountId, nftDistributor, codeHashIdForNft);
-  //     setMyNfts(userNftList);
-  //     setLoadingNft(false);
-
-  //   } catch (e: any) {
-  //     console.log(e);
-  //   }
-  // };
 
   const getrewardDetailTimes = async () => {
     switch (id) {
@@ -126,44 +114,40 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
     }
   };
   const getReward = async () => {
-    console.log("displayRewardDetail", displayRewardDetail);
-    console.log("BMIRecordTimes", BMIRecordTimes);
     try {
       if (!BMIRecordTimes) return;
 
       if (displayRewardDetail!.requireTimes <= BMIRecordTimes!) {
         switch (id) {
           case "1":
-            // alert("You have already redeemed this reward");
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/masterCollectorRedeemReward/", {
               accountId: tempAccountId,
             });
 
             break;
           case "2":
-            // alert("You have already redeemed this reward");
-            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/selfieChampionRedeemReward", {
               userAccountId: tempAccountId,
               codeHashIdForNFT: codeHashIdForNft,
               nftStorageAccounts: storageAccounts,
             });
             break;
           case "3":
-            console.log("calles distribute reward");
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/superConnectorRedeemReward", {
               userAccountId: tempAccountId,
               assetId: tokenId,
             });
             break;
           case "4":
-            // alert("You have already redeemed this reward");
-            // await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
-            //   userAccountId: tempAccountId,
-            //   assetId:tokenId,
-            // });
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
+              userAccountId: tempAccountId,
+              assetId:tokenId,
+            });
             break;
           case "5":
-            // alert("You have already redeemed this reward");
+            await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/wellnessMilestoneRedeemReward", {
+              userAccountId: tempAccountId,
+            });
             break;
           default:
             break;
@@ -174,6 +158,7 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
     }
   };
   const isRunned = useRef(false);
+
   useEffect(() => {
     if (isGuest) return;
     if (isRunned.current) {
@@ -240,23 +225,3 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
 };
 
 export default RewardDetail;
-
-// if (!pageExist) {
-//   return (
-//     <CenterLayout
-//       content={
-//         <div
-//           style={
-//             {
-//               height: '100%',
-//               width: '100%',
-//               color: 'white',
-//               display: 'flex',
-//               justifyContent: 'center',
-//               alignItems: 'center',
-//             }}>
-//           Page not found
-//         </div>}
-//       bgImg={false}/>
-//   )
-// }
