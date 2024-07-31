@@ -15,7 +15,7 @@ export const displayPopUpMessage = (message: string): void => {
   }
 };
 
-export const BlackAlert: React.FunctionComponent<IBlackAlertProps> = () => {
+export const BlackAlert: React.FunctionComponent = () => {
   const [alert, setAlert] = useState<{ show: boolean; message: string }>({ show: false, message: "" });
 
   // Set the global setAlert function
