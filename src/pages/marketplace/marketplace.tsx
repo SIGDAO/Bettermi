@@ -115,7 +115,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
     };
 
     return (
-      <div className={reward.active ? "rewards-cards" : "rewards-cards-disable-content rewards-cards"} onClick={() => determinRewardPath()}>
+      <div className={reward.active ? "rewards-cards" : "rewards-cards rewards-cards-disable-content"} onClick={() => determinRewardPath()}>
         {!reward.active && <img src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} className="lock-image" alt="" />}
 
         <div className={reward.id === 5 || reward.id === 3 ? "marketplace-rewards-image-container-border" : "marketplace-rewards-image-container"}>

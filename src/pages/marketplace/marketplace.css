@@ -305,6 +305,7 @@
 
 .rewards-cards-disable-content {
   opacity: 0.5;
+  cursor: default !important;
 }
 
 .bettermidapp-marketplace-1 .elite-challenger-VtU7WE {
@@ -532,6 +533,7 @@
   gap: 15px;
   padding: 21.5px 20.5px;
   position: relative;
+  cursor: pointer;
 }
 
 .bettermidapp-marketplace-1 .see-all {

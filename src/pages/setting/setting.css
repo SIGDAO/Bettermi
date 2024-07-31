@@ -133,6 +133,10 @@
   width: calc(100.00% + 2px);
 }
 
+.setting-option-content::-webkit-scrollbar {
+  display: none;
+}
+
 .bettermidapp-settings-1 .settings-7DUKxJ {
   min-height: 642px;
   left: 16px;
@@ -146,6 +150,12 @@
   flex-direction: column;
   align-items: center;
   padding: 25.5px 38.25px;
+}
+
+.setting-option-content {
+  width: 100%;
+  height: 596px;
+  overflow-y: scroll;
 }
 
 .bettermidapp-settings-1 .layer-azNBHQ {

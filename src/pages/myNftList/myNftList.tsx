@@ -334,6 +334,7 @@ const MyNftList: React.FunctionComponent<IMyNftListProps> = (props) => {
       />
     );
   });
+  
   const displayNftToken = userNftTokenList.map((nft) => {
     //Contract Id
     return (

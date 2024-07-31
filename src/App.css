@@ -464,13 +464,20 @@ a:focus-visible {
   font-size: 18px;
 }
 
+.inter-semi-bold-white-22px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+}
+
 .inter-semi-bold-white-23px {
   color: var(--white);
   font-family: var(--font-family-inter);
   font-size: 23px;
   font-style: normal;
   font-weight: 600;
-
 }
 
 .inter-normal-cadet-blue-16px {

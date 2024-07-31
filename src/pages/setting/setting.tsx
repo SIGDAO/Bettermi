@@ -34,16 +34,19 @@ const Setting: React.FunctionComponent<ISettingProps> = (props) => {
         {/* <a href="bettermidapp-profile-edit-1.html"><img className="bg-7DUKxJ" src="img/setting/bg-9@1x.png" alt="BG" /> </a> */}
         <ShortTitleBar title="Settings" transparent={true} />
         <div className="settings-7DUKxJ settings">
-          <SettingOption title={"Membership"} description={"Discord"} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://discord.com/invite/MATW3Dcdcw"} />
-          <SettingOption title={"Account ID"} description={userAccountId ?? ""} disabled={isGuest} arrow={true} inBettermiPath={false} navigatePath={Config.Explorer + "address/" + userAccountId} />
-          <SettingOption title={"Wallet"} description={isGuest ? "Connect Wallet" : "XT wallet"} disabled={false} arrow={true} inBettermiPath={true} navigatePath={isGuest ? "/" : undefined} />
-          <SettingOption title={"Invite Friends"} description={"Show link"} disabled={isGuest} arrow={true} inBettermiPath={true} navigatePath={"/inviteFriend"} />
-          <SettingOption title={"Get SIGDAO Token"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.signumswap.com/tokens/5453974739826751020"} />
-          <SettingOption title={"NFTs Marketplace"} description={""} disabled={false} arrow={true} inBettermiPath={true} navigatePath={"/allNftList"} />
-          <SettingOption title={"Terms of Service"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/termsofservice.html"} />
-          <SettingOption title={"Privacy Policy"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/privacypolicy.html"} />
-          <SettingOption title={"Help"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/#content3-gm"} />
-          <SettingOption title={"Disable"} description={""} disabled={true} arrow={isGuest} inBettermiPath={false} isBorderShow={false}/>
+          <div className="setting-option-content">
+            <SettingOption title={"Membership"} description={"Discord"} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://discord.com/invite/MATW3Dcdcw"} />
+            <SettingOption title={"Account ID"} description={userAccountId ?? ""} disabled={isGuest} arrow={true} inBettermiPath={false} navigatePath={Config.Explorer + "address/" + userAccountId} />
+            <SettingOption title={"Wallet"} description={isGuest ? "Connect Wallet" : "XT wallet"} disabled={false} arrow={true} inBettermiPath={true} navigatePath={isGuest ? "/" : undefined} />
+            <SettingOption title={"Invite Friends"} description={"Show link"} disabled={isGuest} arrow={true} inBettermiPath={true} navigatePath={"/inviteFriend"} />
+            <SettingOption title={"Get SIGDAO Token"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.signumswap.com/tokens/5453974739826751020"} />
+            <SettingOption title={"NFTs Marketplace"} description={""} disabled={false} arrow={true} inBettermiPath={true} navigatePath={"/allNftList"} />
+            <SettingOption title={"Terms of Service"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/termsofservice.html"} />
+            <SettingOption title={"Privacy Policy"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/en/privacypolicy.html"} />
+            <SettingOption title={"Help"} description={""} disabled={false} arrow={true} inBettermiPath={false} navigatePath={"https://www.bettermi.io/#content3-gm"} />
+            <SettingOption title={"Disable"} description={""} disabled={true} arrow={isGuest} inBettermiPath={false} isBorderShow={false} />
+            <SettingOption title={"Version"} description={"1.2.0.1"} disabled={false} arrow={false} inBettermiPath={true} isBorderShow={false} />
+          </div>
           {isGuest ? (
             <div className="setting-button-container">
               <GuestConnectWallectButton height={"56px"} width={"248px"} />
