@@ -142,6 +142,8 @@ const RewardDetail: React.FunctionComponent<IRewardDetailProps> = (props) => {
             await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/eliteChallengerRedeemReward", {
               userAccountId: tempAccountId,
               assetId: tokenId,
+              nftStorageAccounts: storageAccounts,
+              codeHashIdForNft: codeHashIdForNft,
             });
             break;
           case "5":
