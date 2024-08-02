@@ -1,7 +1,5 @@
 name: Vercel Production Deployment
 
-env:
-
 
 on:
     push:
