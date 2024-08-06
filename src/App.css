@@ -516,3 +516,7 @@ a:focus-visible {
 a[disabled] {
   pointer-events: none;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
