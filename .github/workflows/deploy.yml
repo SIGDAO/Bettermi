@@ -1,0 +1,34 @@
+name: Deploy Bettermi to OVH
+on:
+  push:
+    branches: develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+          script -q -c "ssh-keyscan -p 22 ${{ secrets.SERVER_ADDRESS }}" ~/.ssh/known_hosts
+          sed '1d;$d' ~/.ssh/known_hosts > ~/.ssh/tmp.txt && mv ~/.ssh/tmp.txt ~/.ssh/known_hosts
+          sudo chmod 600 ~/.ssh/id_rsa
+      - name: Access to Server, Remove Docker Containers, Build Docker Image, Run Docker Container
+        run: |
+          ssh -i "~/.ssh/id_rsa" -o StrictHostKeyChecking=no ${{ secrets.SSH_USER_NAME }}@${{ secrets.SERVER_ADDRESS }}  << 'ENDSSH'
+          echo ✅ SSH connection successful
+          cd ~/${{ secrets.APP_ROOT }}
+          git pull origin develop
+          echo ✅ Pulling from GitHub
+          running_containers=$(docker ps -q --filter ancestor=deploy-bettermi-app)
+          if [ -n \"$running_containers\" ]; then
+          echo ✅ Stopping and removing running containers
+          docker stop $running_containers
+          docker rm $running_containers
+          fi
+          echo ✅ Building Docker Image
+          docker build -t deploy-bettermi-app .
+          echo ✅ Running Docker Container
+          docker run -d -p 3000:3000 --name deploy-bettermi-app deploy-bettermi-app
+          echo ✅ Deployed successfully
+          ENDSSH
