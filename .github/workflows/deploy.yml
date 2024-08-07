@@ -9,9 +9,8 @@ jobs:
       - name: Create SSH key
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-          script -q -c "ssh-keyscan -p 22 ${{ secrets.SERVER_ADDRESS }}" ~/.ssh/known_hosts
-          sed '1d;$d' ~/.ssh/known_hosts > ~/.ssh/tmp.txt && mv ~/.ssh/tmp.txt ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/~/.ssh/known_hosts
           sudo chmod 600 ~/.ssh/id_rsa
       - name: Access to Server, Remove Docker Containers, Build Docker Image, Run Docker Container
         run: |
