@@ -780,8 +780,9 @@
   top: -40px;
   width: 80px;
   clip: rect(0, 80px, 80px, 0);
-  background-color: #221D4B;
+  /* background-color: #221D4B; */
  /* background-color: linear-gradient(180deg, #171717 0%, #291a49 41.22%, #171717 100%); */
+ background-color: linear-gradient(180deg, #8743FF 0%, #4136F1 100%);;
 }
 .profile_icon_nft_-avatar_empty {
   border-radius: 6px;
@@ -1361,6 +1362,8 @@
   white-space: pre;
   position: absolute;
   top: 100px;
+  left: 50%;
+  transform: translate(-50%, 0%);
   background-color: rgb(13 13 13) !important;
   color: white !important;
 

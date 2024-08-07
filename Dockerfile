@@ -1,9 +1,12 @@
-FROM node:14-alpine
-WORKDIR /app
+FROM node:20-alpine3.19
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
+
 COPY . .
-ENV PORT=3001
-RUN npm run build
-EXPOSE 3001
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run your application
 CMD ["npm", "start"]

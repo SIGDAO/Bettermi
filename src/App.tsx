@@ -305,7 +305,7 @@ function App() {
               <Route path="/loadingDiscordAuthorization" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />}>
                 <Route path=":referralCode" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />} />
               </Route>
-              <Route path="/discordStartLoading" element={<DiscordStartLoading></DiscordStartLoading>}></Route>
+              <Route path="/discordStartLoading" element={<DiscordStartLoading/>}></Route>
             </Route>
             {/* </Route> */}
           </Routes>

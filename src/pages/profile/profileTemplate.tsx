@@ -83,11 +83,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
   // initialize hooks from library
   const dispatch = useDispatch();
 
-  // alert related
-  const [alert, setAlert] = useState<boolean>(false); // copy alert
-  const [copyAlertCount, setCopyAlertCount] = useState<number>(0);
-  const [alertWarningString, setAlertWarningString] = useState<string>("");
-
   // pop up window related
   const [isOpen, setIsOpen] = useState<boolean>(false); // is open profile edit pop up window
   const [isBackButton, setIsBackButton] = useState<boolean>(false); // set if BackButton is display in profile edit window
@@ -174,11 +169,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
     }
   };
 
-  const displayPopUpMessage = (message: string): void => {
-    setAlertWarningString(message);
-    setAlert(true);
-    setCopyAlertCount(1);
-  };
 
   // open the profile edit pop up window if the previous path is customizeYourProfile
   const checkIsPrevPathIsCustomizeYourProfile = () => {
@@ -213,7 +203,7 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
       }}
     >
       <ShortTitleBar title="Profile" aiCoach={true} setting={true} />
-      <BlackAlert alertWarningString={alertWarningString} copyAlertCount={copyAlertCount} setCopyAlertCount={setCopyAlertCount} alert={alert} setAlert={setAlert} />
+      <BlackAlert />
       <div className="overlap-design-layout">
         <ProfileUserInfoContainer
           isUpdatingUserSetting={isUpdatingUserSetting}
@@ -228,7 +218,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
           setImgAddress={setImgAddress}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
-          displayPopUpMessage={displayPopUpMessage}
           isMyProfile={isMyProfile}
         />
         <UserNFTList
@@ -251,7 +240,6 @@ const ProfileTemplate: React.FunctionComponent<IProfileTemplateProps> = (props) 
           fetchName={fetchName}
           fetchAboutYourself={fetchAboutYourself}
           fetchDiscordUsername={fetchDiscordUsername}
-          displayPopUpMessage={displayPopUpMessage}
           ledger2={ledger2}
           userAccountId={userAccountId}
           Wallet={Wallet}

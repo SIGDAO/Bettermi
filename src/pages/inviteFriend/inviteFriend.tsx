@@ -2,7 +2,7 @@ import * as React from "react";
 import "./inviteFriend.css";
 import { CenterLayout } from "../../components/layout";
 import { BackButton } from "../../components/button";
-import { BlackAlert } from "../../components/alert";
+import { BlackAlert, displayPopUpMessage } from "../../components/alert";
 import { useSelector } from "react-redux";
 import { accountId } from "../../redux/account";
 import { ShortTitleBar } from "../../components/titleBar";
@@ -50,15 +50,13 @@ const InviteFriend: React.FunctionComponent<IInviteFriendProps> = (props) => {
 
   const handleCopyDiscordUsername = (): void => {
     navigator.clipboard.writeText(inviteFriendLink);
-    setAlertWarningString("Copied !");
-    setAlert(true);
-    setCopyAlertCount(1);
+    displayPopUpMessage("Copied !");
   };
 
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermi-invite-friend-layout">
-        <BlackAlert alertWarningString={alertWarningString} copyAlertCount={copyAlertCount} setCopyAlertCount={setCopyAlertCount} alert={alert} setAlert={setAlert} />
+        <BlackAlert />
         {/* <BackButton /> */}
         <ShortTitleBar title="Invite Friends" />
         <div className="referral-program-banner-container">
