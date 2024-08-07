@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { profileSlice } from '../redux/profile'
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef, Dispatch } from 'react';
+import { profileSlice, selectCurrentBirthday } from '../redux/profile'
+import { useDispatch, useSelector } from 'react-redux';
 import Calendar from 'react-calendar';
 import './select.css';
 
@@ -81,22 +81,24 @@ interface IBirthSelectProps {
   date?: string;
   setData?: (date: string) => void;
   onSelect?: (option: any) => void;
+  // isFirstBirthdaySelectClick: boolean;
+  // setIsFirstBirthdaySelectClick: Dispatch<React.SetStateAction<boolean>>;
 }
 
+// export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = ({isFirstBirthdaySelectClick, setIsFirstBirthdaySelectClick}) => {
 export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) => {
   // todo: reduce the code duplication
   const dispatch = useDispatch();
   // const { isOpen, setIsOpen } = props;
-
-  const [value, setValue] = useState(new Date('2023-07-26')); // selected day on calendar
+  const selectedBirthday = useSelector(selectCurrentBirthday);
+  const [value, setValue] = useState(selectedBirthday || new Date()); // selected day on calendar
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownRef2 = useRef<HTMLDivElement>(null);
-  const [isFirstClick, setIsFirstClick] = useState(true);
+  const [isFirstClick, setIsFirstClick] = useState(!selectedBirthday);
 
   useEffect(() => {
     if (value && !isFirstClick){
-      // console.log(value)
       dispatch(profileSlice.actions.setBirthday(value))
     }
   }, [value])
@@ -136,15 +138,9 @@ export const BirthSelect: React.FunctionComponent<IBirthSelectProps> = (props) =
             calendarType='Arabic'
             onChange={(e: any) => handleCalender(e)}
             value={value}
-            // onChange={}
-            
-            
             locale='en-US'
             minDetail='decade'
-            // allowPartialRange={true}
-            // selectRange={true}
           />
-
         </div>
       )}
 

@@ -1,5 +1,5 @@
-import { useRef } from "react";
-
+import { useEffect, useRef } from "react";
+import './horizontalScrollContainer.css';
 import * as React from 'react';
 
 interface IHorizontalScrollContainerProps {
@@ -9,7 +9,7 @@ interface IHorizontalScrollContainerProps {
 }
 
 const HorizontalScrollContainer: React.FunctionComponent<IHorizontalScrollContainerProps> = (props: any) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { inputClassName } = props;
 
   function handleScrollHorizontally(e: any) {
@@ -38,17 +38,27 @@ const HorizontalScrollContainer: React.FunctionComponent<IHorizontalScrollContai
   
   }
   
+    useEffect(() => {
+      const containerElement = containerRef.current;
+      if (containerElement) {
+        containerElement.addEventListener("wheel", handleScrollHorizontally, { passive: false });
+      }
+      return () => {
+        if (containerElement) {
+          containerElement.removeEventListener("wheel", handleScrollHorizontally);
+        }
+      };
+    }, []);
+  
     return (
       <div
-        className={inputClassName}
+        className={`${inputClassName} horizontal-scroll-ontainer`}
         ref={containerRef}
-        style={{ overflowX: 'auto', overflowY: 'hidden' , ...props.style}}
-        onWheel={handleScrollHorizontally}
+        style={{ overflowX: 'auto', overflowY: 'hidden', msOverflowStyle: `none`, scrollbarWidth: `none`, ...props.style}}
       >
         {props.children}
       </div>
     );
-  return HorizontalScrollContainer;
 };
 
 export default HorizontalScrollContainer;

@@ -94,20 +94,21 @@
 
 .bettermidapp-marketplace-1 .x7-vbUx2m {
   background-color: transparent;
-  bottom: 0px;
   height: 43px;
-  left: 0px;
   mix-blend-mode: normal;
-  overflow-x: scroll;
-  position: absolute;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 460px;
 }
 
-.bettermidapp-marketplace-1 .zoe-fitness-8cjGPE {
-  background-color: transparent;
+.sponser-image-container {
+  position: absolute;
+  bottom: 0px;
   left: 0px;
-  object-fit: cover;
+  width: 352px;
 }
+
 
 .bettermidapp-marketplace-1 .vitev-8cjGPE {
   background-color: transparent;
@@ -118,55 +119,6 @@
   position: absolute;
   top: 0px;
   width: 40px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-HI0Hnc {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 120px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-eRgkx7 {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 180px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-u91zz4 {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 240px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-aEJ33D {
-  background-color: var(--royal-blue);
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 300px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-Jc5OoT {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 360px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-SxtrzH {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 420px;
-}
-
-.bettermidapp-marketplace-1 .zoe-fitness-ppgU72 {
-  /* background-color: var(--royal-blue); */
-  border: 1px solid;
-  border-color: var(--cape-cod);
-  left: 480px;
 }
 
 .bettermidapp-marketplace-1 .redeem-rewards-oobbG1 {
@@ -208,9 +160,13 @@
   width: calc(100.00% - 25px);
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-PbMWvx {
-  left: 0px;
+.reward-card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: fit-content;
 }
+
 
 .bettermidapp-marketplace-1 .master-collector-YV3xtK {
   background-color: transparent;
@@ -257,10 +213,6 @@
   width: 20px;
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-dMXoGx {
-  cursor: pointer;
-  left: 350px;
-}
 
 .bettermidapp-marketplace-1 .selfie-champion-gKPNC7 {
   background-color: transparent;
@@ -304,11 +256,6 @@
 
 .bettermidapp-marketplace-1 .x3-KUFXm3 {
   width: 29px;
-}
-
-.bettermidapp-marketplace-1 .rewards-cards-YuvWOM {
-  cursor: pointer;
-  left: 700px;
 }
 
 .bettermidapp-marketplace-1 .social-butterfly-00FLo4 {
@@ -355,9 +302,10 @@
   width: 28px;
 }
 
-.bettermidapp-marketplace-1 .rewards-cards-DNKKjx {
-  cursor: pointer;
-  left: 1050px;
+
+.rewards-cards-disable-content {
+  opacity: 0.5;
+  cursor: default !important;
 }
 
 .bettermidapp-marketplace-1 .elite-challenger-VtU7WE {
@@ -542,15 +490,6 @@
   position: absolute;
 }
 
-.bettermidapp-marketplace-1 .ic_chevron_right_24px {
-  background-color: transparent;
-  height: 12px;
-  left: calc(49.19% - 4px);
-  object-fit: cover;
-  position: absolute;
-  top: calc(50.00% - 6px);
-  width: 7px;
-}
 
 
 .bettermidapp-marketplace-1 .nft_-avatar {
@@ -582,11 +521,19 @@
 }
 
 .bettermidapp-marketplace-1 .rewards-cards {
-  background-color: transparent;
+  background-color: #0D0D0D;
   height: 150px;
-  position: absolute;
-  top: 0px;
+  /* position: absolute;
+  top: 0px; */
   width: 340px;
+  border: 1px solid #4136F1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 21.5px 20.5px;
+  position: relative;
+  cursor: pointer;
 }
 
 .bettermidapp-marketplace-1 .see-all {
@@ -648,9 +595,93 @@
 }
 
 .bettermidapp-marketplace-1 .zoe-fitness {
-  border-radius: 20px;
+  height: 46px;
+  width: 46px;
+  object-fit: cover;
+  /* transform: scale(1.2); */
+}
+
+.zoe-fitness-not-scaleup {
   height: 40px;
-  position: absolute;
-  top: 0px;
   width: 40px;
+  object-fit: cover;
+}
+
+.zoe-fitness-container {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  border: 1px solid #3D454B80;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marketplace_ic_next {
+  height: 30px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute;
+  bottom: 17.5px;
+  right: 22px; */
+
+}
+
+.bettermidapp-marketplace-1 .marketplace_ic_chevron_right_24px {
+  background-color: transparent;
+  height: 12px;
+  object-fit: cover;
+  width: 7px;
+}
+
+.marketplace-rewards-information {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rewards-goal {
+  display: flex;
+  width: 65px;
+  height: 35px;
+  background: #171717;
+  flex-direction: row;
+  gap: 4.5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketplace-rewards-image-container {
+  width: 107px;
+  height: 107px;
+  /* overflow: hidden; */
+  justify-content: center;
+  align-items: center;
+}
+
+.marketplace-rewards-image-container-border {
+  width: 107px;
+  height: 107px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--royal-blue);
+
+}
+
+.marketplace-rewards-image {
+  width: 107px;
+  height: 107px;
+  object-fit: cover;
+}
+
+.marketplace-rewards-goal-container {
+  display: flex;
+  flex-direction: row;
+  gap: 66.5px;
 }

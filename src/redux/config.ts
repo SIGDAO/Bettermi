@@ -5,15 +5,14 @@ const Networks = {
   };
   
   // Here you can assign on which network you want to work
-  const selectedNetwork = Networks.MainNet;
-  
+  const selectedNetwork = process.env.REACT_APP_NETWORK==="Signum-TESTNET"?Networks.TestNet: Networks.MainNet;
   // Here you can assign the dApp name
   const appName = "bettermi.io dapp";
   
   // Explorer URL
   const explorerUrl =
     selectedNetwork === Networks.TestNet
-      ? "https://testnet.explorer.signum.network/"
+      ? "https://t-chain.signum.network/"
       : "https://explorer.signum.network/";
   
   

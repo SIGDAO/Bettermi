@@ -10,7 +10,6 @@ import { AppContext } from '../../redux/useContext';
 import { accountPublicKey } from '../../redux/account';
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
-import { TransferNFTOwnership } from './transferNFTOwnership';
 import { accountSlice } from '../../redux/account';
 import { store } from '../../redux/reducer';
 import { selectCurrentGender } from '../../redux/profile';
@@ -33,7 +32,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const {appName,Wallet,Ledger} = useContext(AppContext);
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, '');
   const gender = useSelector(selectCurrentGender);
   const assetId = process.env.REACT_APP_TOKEN_ID!;
   var nftsWaitedToBeDistributed:string[] = [];
@@ -41,10 +40,10 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   const handleMint = async () => {
   }
 
-  console.log(ledger);
+
   const confirm = async () => {
     if (minted){
-      console.log('not minted');
+
       return
     }
 
@@ -62,27 +61,27 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         if(obj.account == userAccountId){
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)/1000000));
           localStorage.setItem('token',obj.quantityQNT);
-            console.log(obj.quantityQNT);
+
         }
       });
-      console.log(store.getState());
+
       let ourContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: codeHashId,
       });
-      // console.log(ourContract);
-      // console.log(ourContract.ats[0]);
+
+
       let storeNftContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
       });
-      // console.log(storeNftContract);
-      // console.log(storeNftContract.ats[0]);
-      // console.log(typeof(storeNftContract.ats[0]));
+
+
+
 
       try {
         if(storeNftContract.ats[0] == null){
-          //console.log("called storeNftContract.ats.length",typeof(process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_FULL_HASH));
+
           const initializeNftContract = await ledger.contract.publishContractByReference({
             name: "NFT",
             description:"storage_space_for_your_nft",
@@ -90,12 +89,12 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
-            console.log(initializeNftContract);
+
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
 
         }
         if(ourContract.ats[0] == null){
-          //console.log("called ourContract.ats[0] == null");
+
           const initializeContract = await ledger.contract.publishContractByReference({
             name: "BMI",
             description: `{'bmi': ${BMI}, 'gender': ${gender}, 'time': ${new Date()}}`,  //the first data is hidden in the description
@@ -103,7 +102,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
             feePlanck:"30000000",
             senderPublicKey:publicKey,
             deadline:1440,}) as UnsignedTransaction;
-            console.log(initializeContract);
+
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           while(ourContract.ats[0] == null){
             ourContract = await ledger.contract.getContractsByAccount({
@@ -111,7 +110,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
               machineCodeHash: codeHashId,
   
               });
-            console.log(ourContract);
+
           }
     /*
           const sendBMI = await ledger.message.sendMessage({
@@ -140,8 +139,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
         }) as UnsignedTransaction;
         await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
         }
-        console.log('confirm');
-        //await TransferNFTOwnership(ledger,userAccountId,Wallet);
+
         navigate('/generateFreeNFT');
       } catch (error) {
         console.log(error);
@@ -154,7 +152,7 @@ const AnimaGenContent: React.FunctionComponent<IAnimaGenContentProps> = (props) 
   return (
     <>
       <BackButton/>
-      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/photo-2@1x.png`}  alt="dfd" />
+      <img className="bmi-photo" src={selfie? selfie : `${process.env.PUBLIC_URL}/img/mimi.png`}  alt="dfd" />
       <h1 className="bmi-result inter-semi-bold-white-28px">Your BMI Result :</h1>
       <div className="bmi-display-container">
         <div className="flex-row">

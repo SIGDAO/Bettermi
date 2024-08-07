@@ -6,7 +6,7 @@ import { CenterLayout } from "../../components/layout";
 import { BackButton, DisabledButton } from "../../components/button";
 import { BirthSelect, GenderSelect } from "../../components/select";
 import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, selectCurrentBirthday, profileSlice, selectCurrentIsSelfie } from "../../redux/profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { TransferNftTokenOwnershipFinale } from "../../components/transferNftTokenFinale";
@@ -15,29 +15,32 @@ import { useNavigate } from "react-router-dom";
 import { useLedger } from "../../redux/useLedger";
 import { Api } from "@reduxjs/toolkit/dist/query";
 import { UnsignedTransaction } from "@signumjs/core";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../redux/useContext";
 import { accountPublicKey } from "../../redux/account";
 import { accountId } from "../../redux/account";
-import { TransferNFTOwnership } from "./transferNFTOwnership";
 import { accountSlice } from "../../redux/account";
 import { store } from "../../redux/reducer";
-import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
+import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/rewardCalculate";
 import { TransferToken } from "../../components/transferToken";
 import JSEncrypt from "jsencrypt";
-import { encrypt } from "../../components/encryption";
+import axios from "axios";
+import { contractSlice, selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
+import { BlackAlert, displayPopUpMessage } from "../../components/alert";
 
 interface IGenerateBMINFTImportProps {}
 
 const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> = (props) => {
+  const navigate = useNavigate();
+  const ledger = useLedger();
+  const dispatch = useDispatch();
+
   const gender = useSelector(selectCurrentGender);
   const selfie = useSelector(selectCurrentImg);
   const BMI = useSelector(selectCurrentBMI);
   const birthday = useSelector(selectCurrentBirthday);
   const nodeHost = useSelector(selectWalletNodeHost);
   const [minted, setMinted] = React.useState(false); // whether the user has minted the NFT
-  const navigate = useNavigate();
-  const ledger = useLedger();
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const publicKey = useSelector(accountPublicKey);
   const userAccountId = useSelector(accountId);
@@ -48,7 +51,8 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   const [isTransferToken, setIsTransferToken] = React.useState(false);
   const [isTransferNFT, setIsTransferNFT] = React.useState(false);
   const [isTransferBMI, setIsTransferBMI] = React.useState(false);
-
+  const isTransferBMIBefore = useSelector(selectCurrentIsBMIContractBuild);
+  const isTransferNFTBefore = useSelector(selectCurrentIsNFTContractBuild);
 
   // add a validation function to see if the user has already minted the NFT
   // check the
@@ -60,26 +64,26 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
   var nftsWaitedToBeDistributed: string[] = [];
   var nftsToBeDistributed: string;
 
-  React.useEffect(() => {
-    console.log(calRewardSigdaoOnSelfie(BMI).toString());
-  }, []);
-
-  console.log(ledger);
   const confirm = async () => {
+    let encrypted: any;
+
+    // validate if the user has already minted the NFT and filled in the gender and birthday
+
+    if (!birthday || !gender) {
+      displayPopUpMessage("Please fill in all the column !");
+      return;
+    }
     if (minted) {
-      console.log("minted");
       return;
     }
 
     if (ledger) {
       setMinted(true);
-      // TransferNftTokenOwnershipFinale(nodeHost,userAccountId);
-      const asset = await ledger.asset.getAssetHolders({ assetId:  assetId});
+      const asset = await ledger.asset.getAssetHolders({ assetId: assetId });
       asset.accountAssets.map((obj) => {
         if (obj.account == userAccountId) {
           store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT) / 1000000));
           localStorage.setItem("token", obj.quantityQNT);
-          console.log(obj.quantityQNT);
         }
       });
 
@@ -87,20 +91,16 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         accountId: userAccountId,
         machineCodeHash: codeHashId,
       });
-      // console.log(ourContract);
-      // console.log(ourContract.ats[0]);
+
       let storeNftContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: process.env.REACT_APP_NFT_MACHINE_CODE_HASH!,
       });
-      // console.log(storeNftContract);
-      // console.log(storeNftContract.ats[0]);
-      // console.log(typeof(storeNftContract.ats[0]));
-      console.log(Wallet);
+
       try {
-        // todo: check if user has finished all smart contract build up
-        if (storeNftContract.ats[0] == null && isTransferNFT == false) {
-          console.log(storeNftContract.ats[0],"storeNftContract.ats[0] == null");
+        // check if the user has NFT contract
+        // if not, create one
+        if (storeNftContract.ats[0] == null && isTransferNFT == false && isTransferNFTBefore == false) {
           const initializeNftContract = (await ledger.contract.publishContractByReference({
             name: "NFT",
             description: "storage_space_for_your_nft",
@@ -109,24 +109,32 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             senderPublicKey: publicKey,
             deadline: 1440,
           })) as UnsignedTransaction;
-          console.log(initializeNftContract);
           await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
-          setIsTransferBMI(true);
+          setIsTransferNFT(true);
+          dispatch(contractSlice.actions.setIsNFTContractBuild(true));
         }
 
-        // check if the user has minted the NFT
-        if (ourContract.ats[0] == null &&  isTransferBMI== false) {
-          console.log("called ourContract.ats[0] == null");
-
-          let bmiMessage = JSON.stringify({ 
-            bmi: BMI, 
-            gender: gender, 
-            birthday: birthday, 
-            time: new Date() 
+        // check if the user has BMI contract
+        // if not, create one
+        if (ourContract.ats[0] == null && isTransferBMI == false && isTransferBMIBefore == false) {
+          let bmiMessage = JSON.stringify({
+            bmi: BMI,
+            gender: gender,
+            birthday: birthday,
+            time: new Date(),
           });
-          
-          let encrypted: string = encrypt(bmiMessage);
 
+          try {
+            encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", {
+              data: bmiMessage,
+            });
+
+            encrypted = encrypted.data;
+          } catch (error) {
+            console.log(error);
+            alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page");
+            navigate("/");
+          }
 
           const initializeContract = (await ledger.contract.publishContractByReference({
             name: "BMI",
@@ -136,31 +144,40 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
             senderPublicKey: publicKey,
             deadline: 1440,
           })) as UnsignedTransaction;
-          console.log(initializeContract);
+
           await Wallet.Extension.confirm(initializeContract.unsignedTransactionBytes);
           setIsTransferBMI(true);
-        } else {
-          //check whether the user has registered an account
-          //testing
-          let bmiMessage = JSON.stringify({
-            bmi: BMI,
-            time: new Date(),
-          });
-          
-          let encrypted: string = encrypt(bmiMessage);
-
-
-          const sendBMI = (await ledger.message.sendMessage({
-            message: encrypted,
-            messageIsText: true,
-            recipientId: ourContract.ats[0].at,
-            feePlanck: "1000000",
-            senderPublicKey: publicKey,
-            deadline: 1440,
-          })) as UnsignedTransaction;
-          await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
-          setIsTransferBMI(true);
+          dispatch(contractSlice.actions.setIsBMIContractBuild(true));
         }
+        // } else {
+        //   //check whether the user has registered an account
+        //   //testing
+        //   let bmiMessage = JSON.stringify({
+        //     bmi: BMI,
+        //     time: new Date(),
+        //   });
+
+        //   try {
+        //     console.log("bmi Message",bmiMessage)
+        //     encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", bmiMessage);
+
+        //     encrypted = encrypted.data;
+        //   } catch (error) {
+        //     alert("Cannot fetch the record, please core team through discord!\nWill return to home page");
+        //     navigate("/");
+        //   }
+
+        //   const sendBMI = (await ledger.message.sendMessage({
+        //     message: encrypted,
+        //     messageIsText: true,
+        //     recipientId: ourContract.ats[0].at,
+        //     feePlanck: "1000000",
+        //     senderPublicKey: publicKey,
+        //     deadline: 1440,
+        //   })) as UnsignedTransaction;
+        //   await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+        //   setIsTransferBMI(true);
+        // }
         if (!isTransferToken) {
           TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString()).then((result) => {
             setIsTransferToken(true);
@@ -169,11 +186,22 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         // store.dispatch(profileSlice.actions.setIsSelfie);
         navigate("/loadingMinting");
       } catch (error) {
-        console.log(error);
-        if (error.name !== "ExtensionWalletError") {
+        console.log("error is: ", error);
+        setMinted(false);
+
+        if (error.data && error.data.errorDescription.includes("Not enough funds")) {
+          navigate("/errorNotEnoughFunds");
+          return;
+        }
+
+        if (error.name && error.name === "NotGrantedWalletError") {
+          navigate("/errorGenerateNFTNotGrantedWallet");
+          return;
+        }
+
+        if (error.name && error.name !== "ExtensionWalletError" && error.name === "NotGrantedWalletError") {
           navigate("/errorGenerateNFT");
         }
-        setMinted(false);
       }
     }
   };
@@ -184,6 +212,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         className="bettermidapp-generate-bmidata-import"
         // onclick="window.open('bettermidapp-generate-bmi-daily.html', '_self');"
       >
+        <BlackAlert />
         <BackButton />
         <p className="import-biological-sex-birth-pqhvJT inter-bold-royal-blue-15px">IMPORT BIOLOGICAL SEX &amp; BIRTH:</p>
         <p className="your-selection-cannot-be-changed-later-pqhvJT">Your selection cannot be changed later.</p>
@@ -215,7 +244,7 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
         </div>
         <div className="bottom-controls-pqhvJT" onClick={confirm}>
           {minted ? (
-            <DisabledButton text="connecting..." height="56px" width="248px" />
+            <DisabledButton text="Connecting..." height="56px" width="248px" />
           ) : (
             <div className="button_-mint-RUzxTX">
               <div className="button1-T8l3Om"></div>
@@ -224,17 +253,12 @@ const GenerateBMINFTImport: React.FunctionComponent<IGenerateBMINFTImportProps> 
           )}
         </div>
 
-        <img className="photo-pqhvJT" src={selfie ? selfie : "img/generateBMINFTImport/photo-1@1x.png"} alt="Photo" />
+        <img className="photo-pqhvJT" src={selfie ? selfie : "img/generateBMINFTImport/photo-6@1x"} alt="Photo" />
       </div>
     </div>
   );
 
-  return (
-    isSelfie ? 
-      <Navigate to="/home" />
-       :   
-      <CenterLayout content={content} bgImg={false} />
-  )
+  return isSelfie ? <Navigate to="/home" /> : <CenterLayout content={content} bgImg={false} />;
 };
 
 export default GenerateBMINFTImport;

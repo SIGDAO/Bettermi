@@ -14,6 +14,8 @@ export interface ProfileState {
   isSelfie: boolean;
   NFTimageAddress: string;
   nftId: string;
+  isGuest: boolean;
+  isNewUser: boolean;
 }
 
 export interface BMIState {
@@ -36,6 +38,8 @@ const initialState: ProfileState = {
   isSelfie: false,
   NFTimageAddress: "",
   nftId: "",
+  isGuest: true,
+  isNewUser: false,
 };
 
 
@@ -110,13 +114,19 @@ export const profileSlice = createSlice({
     clearNFTId: (state) => {
       state.nftId = "";
     },
-    clearAll: (state) => {
-      state.selfiePath = "";
-      state.username = "";
-      state.bmi = "";
-      state.gender = "";
-      state.birthday = null;
-    }
+    authenticated: (state) => {
+      state.isGuest = false;
+    },
+    unauthenticated: (state) => {
+      state.isGuest = true;
+    },
+    setIsNewUser: (state, action: PayloadAction<boolean>) => {
+      state.isNewUser = action.payload;
+    },
+    clearIsNewUser: (state) => {
+      state.isNewUser = false
+    },
+    clearAll: (state) => initialState,
   },
 });
 
@@ -137,3 +147,6 @@ export const selectCurrentDescription = (state: any) => state.profile.descriptio
 export const selectCurrentAboutYourself = (state: any) => state.profile.aboutYourself;
 export const selectCurrentIsSelfie = (state: any) => state.profile.isSelfie;
 export const selectCurrentNFTImageAddress = (state: any) => state.profile.NFTimageAddress;
+export const selectCurrentNFTId = (state: any) => state.profile.nftId;
+export const selectCurrentIsGuest = (state: any) => state.profile.isGuest;
+export const selectCurrentIsNewUser = (state: any) => state.profile.isNewUser;

@@ -1,0 +1,77 @@
+.discord-start-loading-layout{
+    width: 100vw;
+    height: 100vh;
+    /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+    background: #1b192b;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+}
+@media screen and (max-height: 594px) {
+    #referralCode-button-container {
+      /* position: fixed; */
+      /* bottom: 20px; */
+    }
+  
+    #discord-start-loading-container {
+        justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #discord-start-loading-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin:auto;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        /* overflow-y: auto; */
+    }
+  }
+  @media (max-width: 768px) {
+    #discord-start-loading-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        /* height: 100%; */
+        width: 100%;
+        min-height: auto;
+        margin-bottom: 20%;
+    }
+  }
+
+  .discord-start-loading-title{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    color:white;
+    margin-bottom: 40px;
+  }
+  .discord-start-loading-entrance-title{
+    font-size:28px;
+  }
+  .discord-start-loading-entrance-content{
+    font-size: 23px;
+  }
+  .discord-start-loading-button-container{
+    margin-top: 25px;
+  }
+  .discord-start-loading-progress{
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    min-height: 22px;
+    min-width: 1px;
+  }
+  .discord-start-loading-instruction{
+    margin-top: 30px;
+    text-align: center;
+    min-height: 38px;
+    min-width: 1px;
+  }

@@ -19,10 +19,10 @@ const RoleRoute: React.FunctionComponent<IRoleRouteProps> = (props) => {
   const { role } = props;
   const location = useLocation();
 
-  console.log('why this happen')
+
 
   if (!nftContractStorage && role === "registeredUser") {
-    console.log('confirm 1')
+
     return <Navigate to="/connectWallet" />;
   }
 
@@ -32,7 +32,7 @@ const RoleRoute: React.FunctionComponent<IRoleRouteProps> = (props) => {
 
 
   if (nftContractStorage && role === "unregisteredUser") {
-    console.log('confirm 2')
+
 
     return <Navigate to="/home" />;
   }
@@ -44,7 +44,7 @@ const RoleRoute: React.FunctionComponent<IRoleRouteProps> = (props) => {
     return <Navigate to="/home" />;
   }
 
-  console.log('confirm 4')
+
 
   // also check the name of the user, if have name
   return <Outlet />;

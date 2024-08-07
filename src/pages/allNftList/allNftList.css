@@ -61,9 +61,9 @@
   font-style: normal;
   font-weight: 600;
 }
-.allNftButton:hover{
+/* .allNftButton:hover{
   background:  linear-gradient(90deg, #8643FF 0%, #4136F1 100%);
-}
+} */
 .allNftBottom{
   display:flex;
   flex-direction: row;
@@ -88,4 +88,22 @@
   flex-direction: row;
   justify-content: center;
   width:100%;
+}
+.allNftImage{
+  height:217px;
+  width: 137px;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.all-nft-list-connect-wallet-button {
+  width: 100px;
+  height: 31px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent linear-gradient(90deg, #25817E 0%, #37C9C3 100%) 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  cursor: pointer;
 }

@@ -11,7 +11,7 @@ export interface WalletState {
 }
 
 const initialState: WalletState = {
-  walletNodeHost: "",
+  walletNodeHost: process.env.REACT_APP_NETWORK_URL || "",
   walletPublicKey: "",
   isWalletConnected: false,
   watchOnly: false,
@@ -47,7 +47,7 @@ export const walletSlice = createSlice({
 
 export const { actions } = walletSlice;
 export const walletNodeHost = (state: any) => {
-  console.log(localStorage.getItem("nodeHost"));
+
   return state.wallet.walletNodeHost?state.wallet.walletNodeHost:localStorage.getItem("walletNodeHost");
  
 }

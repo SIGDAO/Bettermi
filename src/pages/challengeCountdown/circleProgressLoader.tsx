@@ -9,6 +9,7 @@ import { TransferToken } from '../../components/transferToken';
 import { useSelector } from 'react-redux';
 import { accountId } from '../../redux/account';
 import { walletNodeHost } from '../../redux/wallet';
+import { selectCurrentIsGuest } from '../../redux/profile';
 
 
 interface ICircularWithValueLabelProps {
@@ -80,6 +81,8 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   const userWalletNodeHost = useSelector(walletNodeHost);
   const rewardInSigdao = reward * 10 ** 6;
   const { pathname } = useLocation();
+  const isGuest = useSelector(selectCurrentIsGuest);
+
 
   const handleTransfer = () => {
     //TransferToken(userWalletNodeHost,userAccountId, rewardInSigdao.toString( )) 
@@ -102,7 +105,7 @@ const CircularWithValueLabel: React.FunctionComponent<ICircularWithValueLabelPro
   }, [progress, timeBeforeStart]);
   
   // React.useEffect(() => {
-  //   console.log((progress / time) * 100);
+
   // }, [progress]);
   
   // const progressInPercent = ((time - progress) / time) * 100;

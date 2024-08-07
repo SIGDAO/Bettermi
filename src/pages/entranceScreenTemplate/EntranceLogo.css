@@ -1,0 +1,22 @@
+.EntranceLogo-bg-img-container {
+  /* width: 390px; */
+  width: 260px;
+  /* max-height: 1; */
+  overflow-x: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);  
+  /* padding-bottom: 20px; */
+  /* margin-bottom: 20px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  }
+
+  .EntranceLogo-bg-img {
+    width: 290px;
+    margin-bottom: 40px;
+    
+    /* height: 344px; */
+    object-fit: cover;
+  }

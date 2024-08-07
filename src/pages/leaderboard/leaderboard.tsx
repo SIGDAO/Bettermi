@@ -14,6 +14,9 @@ import { leaderBoardBanner, userRankingSlice } from "../../redux/userRanking";
 import { userRanking } from "../../redux/userRanking";
 import { userRankingListRedux } from "../../redux/userRanking";
 import { useNavigate } from "react-router-dom";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { selectCurrentIsGuest } from "../../redux/profile";
+import SigdaoIcon from "../../components/icon";
 
 type Props = {};
 
@@ -25,22 +28,24 @@ const Leaderboard = (props: Props) => {
   const [isLeaderBoardLoading, setIsLeaderBoardLoading] = React.useState<boolean>(true);
   const userRankingListFromRedux = useSelector(userRankingListRedux);
   const navigate = useNavigate();
-  console.log(userRankingListFromRedux);
+  const isGuest = useSelector(selectCurrentIsGuest);
+
 
   const imageLoadForTop3 = (index: number) => {
     return (
       <>
         {userRankingList[index]?.accountImage || index == 0 ? (
-          <img
+          <IPFSImageComponent
             className={index == 0 ? "leaderboard_nft_-avatar" : "leaderboard_nft_-avatar-top3"}
-            src={index == 0 ? `https://ipfs.io/ipfs/QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `https://ipfs.io/ipfs/${userRankingList[index]?.accountImage}`}
+            // imgAddress={index == 0 ? `QmPs1xzhieR4RjC9k1VMHauyqhALrK1tJyvk9Wtn8hHpY7` : `${userRankingList[index]?.accountImage}`}
+            imgAddress={`${userRankingList[index]?.accountImage}`}
             alt="NFT_Avatar"
             onClick={() => {
               navigate("/OtherUserProfile", { state: { userId: userRankingList[0].accountId } });
             }}
           />
         ) : (
-          <div className="leaderboard_nft_-avatar">
+          <div className="leaderboard_nft_-avatar-top3">
             <img className="home_icon_ic_add" src={`${process.env.PUBLIC_URL}/img/profile/ic-add-2@1x.png`} alt="ic_add" />
           </div>
         )}
@@ -110,11 +115,7 @@ const Leaderboard = (props: Props) => {
           <div className="inter-medium-white-12px">{userRankingList[index]?.displayAccountId.substring(0, 11)}</div>
         </div>
         <div className="sigdao-score-3 sigdao-score-4">
-          <div className="sigdao_tokengradient">
-            <div className="x441"></div>
-            <div className="x442"></div>
-            <img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" />
-          </div>
+          <SigdaoIcon width="17px" height="17px" />
           <div className="x10-2 x10-7 inter-semi-bold-keppel-14px">{userRankingList[index]?.tokenBalance}</div>
         </div>
       </div>
@@ -125,10 +126,10 @@ const Leaderboard = (props: Props) => {
     GetTokenRanking(ledger2)
       .then((userRankingList) => {
         setUserRankingList(userRankingList);
-        console.log(userRankingList);
+
         setIsLeaderBoardLoading(false);
         let state: userRanking = { userRankingList: userRankingList };
-        console.log(state);
+
         store.dispatch(userRankingSlice.actions.setUserRanking(state));
       })
       .catch((e: any) => {
@@ -139,8 +140,9 @@ const Leaderboard = (props: Props) => {
   };
 
   useEffect(() => {
+
     if (nftLoaded.current === true) {
-      console.log("loaded nft");
+
     } else {
       nftLoaded.current = true;
       //if(userRankingListFromRedux == null ){
@@ -188,7 +190,7 @@ const Leaderboard = (props: Props) => {
               <div className="ic_settings_24px"></div>
             </div>
             <div className="overlap-group-leader7">
-              <img className="photo" src="img/leaderboard/Leaderboard_Banner.png" alt="Photo" />
+              <img className="photo" src={`${process.env.PUBLIC_URL}/img/leaderboard/Leaderboard_Banner.png`} alt="Photo" />
               <div className="leaderboard-top3">
                 {Top3displayContainer(1)}
                 {Top3displayContainer(0)}
@@ -197,50 +199,6 @@ const Leaderboard = (props: Props) => {
             </div>
             <div className="x26">
               {leaderBoardBanner()}
-              {/* <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-3 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-4 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-5 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div>
-            <div className="rewards_card">
-              <div className="number inter-semi-bold-white-18px">4</div>
-              <img className="nft_-avatar-1 nft_-avatar-3" src="img/leaderboard/nft-avatar-3@1x.png" alt="NFT_Avatar" />
-              <div className="x300 inter-medium-white-12px">zoe_li</div>
-              <div className="sigdao-score">
-                <div className="signdao_tokengradient">
-                  <div className="overlap-group-leader"><img className="x880" src="img/leaderboard/file---880@1x.png" alt="880" /></div>
-                </div>
-                <div className="x10-6 x10-7 inter-semi-bold-keppel-14px">1234</div>
-              </div>
-            </div> */}
             </div>
           </div>
         </>

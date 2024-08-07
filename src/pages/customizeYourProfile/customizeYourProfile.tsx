@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CenterLayout } from "../../components/layout";
 import { BackButton } from "../../components/button";
 import "./customizeYourProfile.css";
-import generateName from "../../components/generateName";
 import { profileSlice, selectCurrentNFTImageAddress } from "../../redux/profile";
 import { store } from "../../redux/reducer";
 import { RandomGenNameInput } from "../../components/input";
@@ -15,6 +14,9 @@ import { accountId, accountSlice } from "../../redux/account";
 import { accountPublicKey } from "../../redux/account";
 import { useContext } from "react";
 import { AppContext } from "../../redux/useContext";
+import IPFSImageComponent from "../../components/ipfsImgComponent";
+import { selectCurrentNFTId } from "../../redux/profile";
+
 
 interface ICustomizeYourProfileProps {}
 
@@ -23,15 +25,16 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
   // maybe store the path in redux as well
   const ledger = useLedger();
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const defaultName = "zoe_li";
+  const defaultName = "Enter your name";
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const location = useLocation();
-  console.log("pathname is ", pathname);
-  console.log("pathname state is", location.state);
+
+
   const nftImage = location.state?.nftImageAddress;
   const nftImageAddressFormRedux = useSelector(selectCurrentNFTImageAddress);
   const nftId = location.state?.nftId;
+  const nftIdFormRedux = useSelector(selectCurrentNFTId);
   const userAccountId = useSelector(accountId);
   const userAccountpublicKey = useSelector(accountPublicKey);
   const [minted, setMinted] = useState<boolean>(false);
@@ -61,8 +64,11 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
 
   const handleSave = async () => {
     try {
-      if (!minted) 
-        await UpdateUserIcon(ledger, nftImage, nftId, userAccountId, userAccountpublicKey, Wallet, name);
+      if (!minted) {
+        console.log("minting", nftImageAddressFormRedux, nftIdFormRedux);
+        await UpdateUserIcon(ledger, nftImageAddressFormRedux, nftIdFormRedux, userAccountId, userAccountpublicKey, Wallet, name);
+        
+      }
       if (!name) {
         localStorage.setItem("name", defaultName);
         store.dispatch(profileSlice.actions.setUsername(defaultName));
@@ -70,7 +76,7 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
         localStorage.setItem("name", name);
         store.dispatch(profileSlice.actions.setUsername(name));
       }
-      navigate("/profile", { state: { previousPath: pathname } });  
+      navigate("/profile");
     } catch (error) {
       console.log(error);
       if (error.name !== "ExtensionWalletError") {
@@ -88,7 +94,11 @@ const CustomizeYourProfile: React.FunctionComponent<ICustomizeYourProfileProps> 
       </div>
       <div className="pick-a-username-Gzrq3v">PICK A USERNAME</div>
       <p className="reserve-your-name-before-its-taken-Gzrq3v">Reserve your @name before it's taken.</p>
-      <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage|| nftImageAddressFormRedux}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" />
+      {/* <img className="photo-Gzrq3v" src={`https://ipfs.io/ipfs/${nftImage|| nftImageAddressFormRedux}` || `${process.env.PUBLIC_URL}/img/mimi.png`} alt="Photo" /> */}
+      <IPFSImageComponent
+        imgAddress={nftImageAddressFormRedux}
+        className="photo-Gzrq3v"
+      />
       <div className="search-bar-container-customizeYourProfile">
         <RandomGenNameInput name={name} setName={setName} />
       </div>

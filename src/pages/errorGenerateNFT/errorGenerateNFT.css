@@ -8,16 +8,13 @@
   position: relative;
   width: 390px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 83px;
+  padding-top: 245px;
 }
 
-.bettermidapp-generate-free-nft-error .bg_2-FumncE {
-  background-color: transparent;
-  height: 844px;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 390px;
-}
 
 .bettermidapp-generate-free-nft-error .bg-lme0fw {
   background-color: transparent;
@@ -29,60 +26,41 @@
   width: calc(100.00% + 90px);
 }
 
-.bettermidapp-generate-free-nft-error .x16220-lme0fw {
-  background-color: transparent;
-  height: 298px;
-  left: 55px;
-  position: absolute;
-  top: calc(49.96% - 149px);
-  width: calc(100.00% - 110px);
-}
-
 .bettermidapp-generate-free-nft-error .this-nft-has-been-sn-RYas9d {
   background-color: transparent;
-  bottom: 4px;
-  color: #a6b3bb98;
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
-  font-style: normal;
-  font-weight: 400;
-  height: 77px;
-  left: 0px;
-  letter-spacing: -0.36px;
   line-height: 28px;
-  position: absolute;
+  margin: 0px;
   text-align: center;
-  width: calc(100.00% + 2px);
-  white-space: pre;
+  white-space: pre-wrap;
+}
 
+.error-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 .bettermidapp-generate-free-nft-error .title-RYas9d {
   background-color: transparent;
-  bottom: calc(42.17% - 15px);
-  height: 36px;
-  left: 0px;
-  letter-spacing: -0.67px;
-  line-height: 41px;
-  position: absolute;
-  text-align: center;
+  margin: 0;
   white-space: nowrap;
-  width: 100%;
 }
 
-.bettermidapp-generate-free-nft-error .ic_sentiment_very_dissatisfied_24px-RYas9d {
-  bottom: 180px;
-  height: 150px;
-  left: calc(50.00% - 75px);
-  width: 150px;
-}
-
-.bettermidapp-generate-free-nft-error .ic_sentiment_very_dissatisfied_24px-TVetTD {
-  height: 100%;
-  left: 0px;
+.bettermidapp-generate-free-nft-error .ic_sentiment_very_dissatisfied_24px {
   object-fit: cover;
-  top: 0px;
-  width: 100%;
+  height: 169px;
+}
+
+.bettermidapp-generate-free-nft-error .x16220-lme0fw {
+  background-color: transparent;
+  /* height: 298px; */
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: ; */
 }
 
 .bettermidapp-generate-free-nft-error .ic_settings_24px-lme0fw {
@@ -296,7 +274,18 @@
   /* width: 78px; */
 }
 
-.bettermidapp-generate-free-nft-error .ic_sentiment_very_dissatisfied_24px {
-  background-color: transparent;
-  position: absolute;
+@media screen and (max-height: 844px) {
+  .bettermidapp-generate-free-nft-error {
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-height: 430px) {
+  .bettermidapp-generate-free-nft-error {
+    height: 430px;
+    gap: 30px;
+  }
 }

@@ -44,7 +44,7 @@ export const userBMISlice = createSlice({
     // getblockchainBMI: (state, action: PayloadAction<GetblockchainBMIProps>) => {
     //   findBMI(action.payload.tempAccountId, action.payload.Ledger2)
     //     .then((res) => {
-    //       console.log("res", res);
+
     //       state.userBMI = res;
     //     })
     //   // state.userBMI = 

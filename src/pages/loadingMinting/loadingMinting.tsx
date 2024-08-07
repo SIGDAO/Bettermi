@@ -14,7 +14,8 @@ import { useRef } from "react";
 import { isTodayHaveSelfieRecord } from "../../components/bmiCalculate";
 import { store } from "../../redux/reducer";
 import { profileSlice } from "../../redux/profile";
-import { decrypt } from "../../components/encryption";
+import axios from "axios";
+import LoadingScreen from "../../template/loadingScreen/loadingScreen";
 
 interface ILoadingMintingProps {
   pathname: string;
@@ -26,14 +27,11 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
   const userAccountId = useSelector(accountId);
   const nftCodeHashId = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!; // the code hash of the BMI contract
   const bmiCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
-  console.log("nftCodeHashId", nftCodeHashId);
-  console.log("bmiCodeHashId", bmiCodeHashId);
+
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const nftLoaded = useRef(false);
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
   const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
   const pathname: string = props.pathname;
@@ -46,7 +44,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-    let isTodayRecord = false
+    let isTodayRecord = false;
 
     while (true) {
       if (await isTodayHaveSelfieRecord(userAccountId, ledger)) break;
@@ -55,8 +53,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
     setCount(100);
     setIsLoading(false);
     navigate("/selfToEarn");
-  }
-
+  };
 
   const checkIfNFTMinted = async () => {
     if (!ledger) return;
@@ -71,7 +68,7 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       machineCodeHash: bmiCodeHashId,
     });
 
-    while (bmiContract.ats[0] == null) {
+    while (bmiContract.ats[0] == null || nftContract.ats[0] == null) {
       bmiContract = await ledger.contract.getContractsByAccount({
         accountId: userAccountId,
         machineCodeHash: bmiCodeHashId,
@@ -80,73 +77,65 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
         accountId: userAccountId,
         machineCodeHash: nftCodeHashId,
       });
-      console.log(nftContract);
-      console.log(bmiContract);
     }
     var description: any;
-    
+
     try {
-       description = JSON.parse(bmiContract.ats[0].description);
+      description = JSON.parse(bmiContract.ats[0].description);
     } catch (error) {
-      description = decrypt(bmiContract.ats[0].description);
+      try {
+        const bmiEncrypteddata = bmiContract.ats[0].description;
+        description = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/decrypt", {
+          data: [bmiEncrypteddata],
+        });
+        description = description.data.data;
+      } catch (error) {
+        alert("Cannot fetch the record, please contact core team through discord !");
+        navigate("/");
+      }
     }
-    console.log("description is",description);
-    console.log("description, gender is",description.gender)
     var gender = "Male";
-    if (description.gender.includes("Female")) {
+    if (description[0].gender.includes("Female")) {
       gender = "Female";
     }
     if (gender === "Male") {
-      console.log("called gender === Male");
-      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, ioNftStorageAccounts, nftCodeHashId, nftDistributor);
     } else {
-      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor, nftDistributorPublicKey, nftDistributorPrivateKey);
+      await TransferNftToNewUser(ledger, userAccountId, mimiNftStorageAccounts, nftCodeHashId, nftDistributor);
     }
-    console.log("gender is   ", gender);
+
     const latestTransactionNumber = await FindLatestTransactionNumber(ledger, nftContract.ats[0].at, nftDistributor);
     const latestTransactionList = await FindLatestTransactionArray(ledger, nftContract.ats[0].at, nftDistributor, latestTransactionNumber);
-    console.log(latestTransactionList);
-    console.log(latestTransactionList[0]);
+
     if (nftContract.ats[0] != null) {
       store.dispatch(accountSlice.actions.setNftContractStorage(nftContract.ats[0].at));
     }
+
     if (latestTransactionList.length === 0) {
-      console.log("The latestTransactionList is empty, returned error", latestTransactionList);
       setCount(100);
       setIsLoading(false);
+      store.dispatch(profileSlice.actions.setNFTId("error"));
       navigate("/generateFreeNFT", { state: { nftId: "error" } });
     } else {
       setCount(100);
       setIsLoading(false);
-      store.dispatch(profileSlice.actions.setNFTImageAddress(latestTransactionList[0]));
+      console.log("latestTransactionList[0] is", latestTransactionList[0]);
+      store.dispatch(profileSlice.actions.setNFTId(latestTransactionList[0]));
       navigate("/generateFreeNFT", { state: { nftId: latestTransactionList[0] } });
     }
   };
-
-  useEffect(() => {
-    if (nftLoaded.current === true) {
-      console.log("loaded nft");
-    } else {
-      nftLoaded.current = true;
-      if (pathname === "/loadingBMIDaily") {
-        checkIfBMIcreated()
-          .catch((err) => {
-            console.error(err);
-          })
-        return;
-      }
-      checkIfNFTMinted().catch((err) => {
-        console.error(err);
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const incrementInterval = 240000 / 96; // Time divided by the number of increments
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
       if (count < 100) {
-        setCount((prevCount) => prevCount + 1);
+        setCount((prevCount) => {
+          if (prevCount < 99) {
+            return prevCount + 1;
+          }
+          return prevCount;
+        });
       }
       // if (count => 100 ) {
       // } else {
@@ -161,6 +150,24 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
       // navigate('/generateFreeNFT');
       clearInterval(timer);
     };
+  }, []);
+
+  // main function
+  useEffect(() => {
+    if (nftLoaded.current === true) return;
+
+    nftLoaded.current = true;
+    if (pathname === "/loadingBMIDaily") {
+      checkIfBMIcreated().catch((err) => {
+        console.error(err);
+      });
+      return;
+    }
+    
+    checkIfNFTMinted().catch((err) => {
+      console.error(err);
+    });
+
   }, []);
 
   // useEffect(() => {
@@ -183,51 +190,32 @@ const LoadingMinting: React.FunctionComponent<ILoadingMintingProps> = (props) =>
 
   //Trying disabling refresh
   useEffect(() => {
-    const disableRefresh = (e:any) => {
+    const disableRefresh = (e: any) => {
       e.preventDefault();
-      e.returnValue = '';
+      e.returnValue = "";
     };
 
-    const handleBeforeUnload = (e:any) => {
+    const handleBeforeUnload = (e: any) => {
       disableRefresh(e);
     };
 
-    const handleUnload = (e:any) => {
+    const handleUnload = (e: any) => {
       disableRefresh(e);
     };
 
     // Add event listeners to disable refreshing
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('unload', handleUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleUnload);
 
     return () => {
       // Remove event listeners when component unmounts
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('unload', handleUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleUnload);
     };
   }, []);
   //ends here
 
-  const content: JSX.Element = (
-    <div className="screen">
-      <div className="bettermidapp-generate-free-nft-minting">
-        <div className="bg_2-JdJl2l">
-          <div className="mimi-loading">
-            <img className="mimi-loading-image" src="/img/loadingMinting/mimi-dancing-for-loadin-page.gif" alt="" />
-          </div>
-          <div className="x50-7ckAMs">{count}%</div>
-        </div>
-        <div className="minting-JdJl2l inter-normal-white-15px">Minting…</div>
-        <div className="reminder-text-1 inter-normal-white-15px">
-          Please wait patiently
-          <br />
-          and do not refresh the page
-        </div>
-      </div>
-    </div>
-  );
-
-  return <CenterLayout content={content} bgImg={false} />;
+  return <LoadingScreen pathname={pathname} count={count}></LoadingScreen>;
 };
 
 export default LoadingMinting;

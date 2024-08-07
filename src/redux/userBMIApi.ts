@@ -10,12 +10,12 @@ export interface BMI {
 export const userBMIApi = createApi({
   reducerPath: 'userBMIApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: 'https://bmi.bettermi.io/' 
+    baseUrl: 'https://dapp.bettermi.io/' 
   }),
   endpoints: (builder) => ({
     getBMI: builder.mutation<BMI, Object>({
       query: (imageForm) => ({
-        url: 'getbmi/',
+        url: 'getbmi',
         method: 'POST',
         body: imageForm,
         header: {

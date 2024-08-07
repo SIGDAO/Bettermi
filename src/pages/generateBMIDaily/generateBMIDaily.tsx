@@ -1,9 +1,9 @@
 import * as React from "react";
 import "./generateBMIDaily.css";
 import { CenterLayout } from "../../components/layout";
-import { BackButton } from "../../components/button";
+import { BackButton, DisabledButton, GuestConnectWallectButton } from "../../components/button";
 import { Link, useNavigate } from "react-router-dom";
-import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, profileSlice } from "../../redux/profile";
+import { selectCurrentGender, selectCurrentImg, selectCurrentBMI, profileSlice, selectCurrentIsGuest } from "../../redux/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { useLedger } from "../../redux/useLedger";
@@ -15,8 +15,7 @@ import { walletNodeHost } from "../../redux/wallet";
 import { LedgerClientFactory } from "@signumjs/core";
 import { TransferToken } from "../../components/transferToken";
 import { calBMIType, calRewardSigdaoOnSelfie } from "../../components/selfieToEarnRewardType";
-import JSEncrypt from 'jsencrypt'
-import { encrypt } from "../../components/encryption";
+import axios from "axios";
 
 interface IGenerateBMIDailyProps {}
 
@@ -29,25 +28,31 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
   const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH;
   const nodeHost = useSelector(walletNodeHost);
   const BMI = useSelector(selectCurrentBMI);
+  const [isTransferToken, setIsTransferToken] = React.useState(false);
+  const [isTransferBMI, setIsTransferBMI] = React.useState(false);
+  const [minted, setMinted] = React.useState(false);
+  const isGuest = useSelector(selectCurrentIsGuest);
 
   const navigate = useNavigate();
   const ledger = useLedger();
   const dispatch = useDispatch();
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!; // the code hash of the BMI contract
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, ""); // the code hash of the BMI contract
 
   const handleImport = async () => {
-    if (!ledger) return;
+    if (!ledger ) return;
+    var encrypted: string = "";
+    if (isTransferBMI) return;
+    setIsTransferBMI(true);
+    setMinted(true);
     // const startTime: number = Date.now(); // get the current time in milliseconds
 
     let storeNftContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
-      machineCodeHash:codeHashIdForNft,
+      machineCodeHash: codeHashIdForNft,
     });
-    console.log(storeNftContract);
+
     try {
       if (storeNftContract.ats[0] == null) {
-        console.log(storeNftContract.ats[0]);
-        console.log("called storeNftContract.ats.length", typeof process.env.REACT_APP_NFT_CONTRACT_REFERENCED_TRANSACTION_HASH);
         const initializeNftContract = (await ledger.contract.publishContractByReference({
           name: "NFT",
           description: "storage_space_for_your_nft",
@@ -56,39 +61,55 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
           senderPublicKey: publicKey,
           deadline: 1440,
         })) as UnsignedTransaction;
-        console.log(initializeNftContract);
+
         await Wallet.Extension.confirm(initializeNftContract.unsignedTransactionBytes);
       }
     } catch (error) {
       if (error.name !== "ExtensionWalletError") {
+        setIsTransferBMI(false);
+        setMinted(false);
         navigate("/errorGenerateNFT");
       }
     }
 
     let ourContract = await ledger.contract.getContractsByAccount({
       accountId: userAccountId,
-      machineCodeHash: codeHashId.replace(/['"]+/g, ''),
+      machineCodeHash: codeHashId.replace(/['"]+/g, ""),
     });
-
 
     let bmiMessage = JSON.stringify({
       bmi: BMI,
       time: new Date(),
     });
-    
-    let encrypted: string = encrypt(bmiMessage);
-    
-    const sendBMI = (await ledger.message.sendMessage({
-      message: encrypted,
-      messageIsText: true,
-      recipientId: ourContract.ats[0]?.at,
-      feePlanck: "1000000",
-      senderPublicKey: publicKey,
-      deadline: 1440,
-    })) as UnsignedTransaction;
 
+    try {
+      encrypted = await axios.post(process.env.REACT_APP_NODE_ADDRESS + "/encrypt", {
+        data: bmiMessage,
+      });
+      encrypted = encrypted.data;
+    } catch (error) {
+      setMinted(false);
+      alert("Cannot fetch the record, please contact core team through discord!\nWill return to home page");
+      navigate("/");
+    }
 
-    await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+    try {
+      const sendBMI = (await ledger.message.sendMessage({
+        message: encrypted,
+        messageIsText: true,
+        recipientId: ourContract.ats[0]?.at,
+        feePlanck: "1000000",
+        senderPublicKey: publicKey,
+        deadline: 1440,
+      })) as UnsignedTransaction;
+
+      await Wallet.Extension.confirm(sendBMI.unsignedTransactionBytes);
+    } catch (error) {
+      setMinted(false);
+      setIsTransferBMI(false);
+
+      return;
+    }
 
     //Code inserted by Anderson, to transfer the token to the user
     await TransferToken(nodeHost, userAccountId, calRewardSigdaoOnSelfie(BMI).toString());
@@ -110,17 +131,37 @@ const GenerateBMIDaily: React.FunctionComponent<IGenerateBMIDailyProps> = (props
     navigate("/loadingBMIDaily");
   };
 
+  const buttonDisplay = (): JSX.Element => {
+    if (isGuest) {
+      return <GuestConnectWallectButton height={"56px"} width={"248px"} />;
+    }
+    if (minted) {
+      <DisabledButton text="connecting..." height="56px" width="248px" />;
+    }
+    return (
+      <div className="button_-mint-FZh05Y" onClick={handleImport}>
+        <div className="button1-WZiHbv"></div>
+        <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
+      </div>
+    );
+  };
+
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-generate-bmi-daily">
         {/* <div className="bg_2-Fd1por"><img className="bg-8YXhC4" src={`${process.env.PUBLIC_URL}/img/generateBMIDaily/bg-11@1x.png`} alt="BG" /></div> */}
         <BackButton />
-        <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-1@1x.png`} alt="Photo" />
-        <div className="bottom-controls-Fd1por" onClick={handleImport}>
-          <div className="button_-mint-FZh05Y">
-            <div className="button1-WZiHbv"></div>
-            <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
-          </div>
+        <img className="photo-Fd1por" src={selfie || `${process.env.PUBLIC_URL}/img/generateBMIDaily/photo-6@1x`} alt="Photo" />
+        <div className="bottom-controls-Fd1por">
+          {/* {minted ? (
+            <DisabledButton text="connecting..." height="56px" width="248px" />
+          ) : (
+            <div className="button_-mint-FZh05Y">
+              <div className="button1-WZiHbv"></div>
+              <div className="mint-WZiHbv inter-semi-bold-white-15px">Import</div>
+            </div>
+          )} */}
+          {buttonDisplay()}
         </div>
         <div className="bmi-bar-Fd1por">
           <div

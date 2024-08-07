@@ -41,24 +41,43 @@ function extractDateFromString(message: string) {
   return null;
 }
 
+function getTime(){
+  try{
+    const options = { timeZone: 'Asia/Taipei' };
+
+    // Create a new Date object with the current time
+    const date = new Date();
+    console.log("date is",date);
+    // Get the time in the specified timezone
+    const timeInTimeZone = date.toLocaleString('en-US', options);
+
+    console.log("timeInZone is ",timeInTimeZone);
+    const parsedDate = [
+      date.getDate().toString(),     // Get the day of the month (1-31)
+      (date.getMonth() + 1).toString(), // Get the month (0-11) and add 1 to match human-readable format (1-12)
+      date.getFullYear().toString()  // Get the four-digit year
+    ];
+    
+    console.log("parsed date is",parsedDate);
+    return parsedDate;
+  }
+  catch(e){
+    console.log(e);
+  }
+}
+
 async function getWorldTime() {
   try {
     const response = await fetch("https://worldtimeapi.org/api/ip");
-    console.log("response is", response);
     const data = await response.json();
-    const dateTime = new Date(data.datetime);
-    var dateString = dateTime.toLocaleString();
-    console.log("Current world time:", dateTime.toLocaleString());
 
-    const [datePart, timePart] = dateString.split(", ");
 
-// Split the date part into day, month, and year
+    const [datePart, timePart] = data.datetime.split("T");
+    const [year, month, day] = datePart.split("-");
+    return [day, month, year];
 
-    const [day, month, year] = datePart.split("/");
-    console.log(day);
-    console.log(month);
-    console.log(year);
-    return [day, month, year ]
+
+
   } catch (error) {
     console.log("Error:", error);
   }
@@ -72,17 +91,11 @@ async function getWorldTime() {
   const day = date.getDate();
   const month = date.getMonth()+1;
   const year = date.getFullYear();
-  console.log("day is",day);
-  console.log("month is",month+1);
-  console.log("year is",year);
   // Get today's date
 
   const todayDay = parseInt(today[0]);
   const todayMonth = parseInt(today[1]);
   const todayYear = parseInt(today[2]);
-  console.log(todayDay);
-  console.log(todayMonth);
-  console.log(todayYear);
   // Check if the extracted date matches today's date
   const isToday = (day === todayDay && month === todayMonth && year === todayYear);
 
@@ -106,8 +119,8 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
   if (Ledger2 != null) {
     const unconfirmedTransaction = await Ledger2.account.getUnconfirmedAccountTransactions(accountId);
     console.log(unconfirmedTransaction);
-    const today = await getWorldTime();
-    console.log(today);
+    const today = getTime();
+    console.log("today from api is",today);
     if(today == null){
       return [3,3,3,3,3,3,3,3,3];
     }
@@ -124,10 +137,6 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
         console.log("game time is",gametime)
         if (gametime != null) {
           const dateInfo: DateInfo =  extractDateInfoAndCheckToday(gametime,today);
-          console.log("Day:", dateInfo.day);
-          console.log("Month:", dateInfo.month);
-          console.log("Year:", dateInfo.year);
-          console.log("Is today:", dateInfo.isToday);
           if (dateInfo.isToday !== false) {
             const contains = checkString(message);
             console.log("String contains 'challenge number':", contains);
@@ -158,15 +167,10 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
         if (!message) {
           continue;
         }
-        console.log("checking is skipped", message);
         var gametime: string | null = extractDateFromString(message);
-        console.log("game time is",gametime);
+            
         if (gametime != null) {
           const dateInfo: DateInfo =  extractDateInfoAndCheckToday(gametime,today);
-          console.log("Day:", dateInfo.day);
-          console.log("Month:", dateInfo.month);
-          console.log("Year:", dateInfo.year);
-          console.log("Is today:", dateInfo.isToday);
           if (dateInfo.isToday !== false) {
             const contains = checkString(message);
             console.log("String contains 'challenge number':", contains);
@@ -182,6 +186,66 @@ export async function CountChallenges(accountId: string, Ledger2: any): Promise<
         // else{
         //     countTimes[1].push(0);
         // }
+      }
+    }
+    console.log(countTimes);
+  }
+  return countTimes;
+}
+
+export async function countTotalChallengesTimes(accountId: string, Ledger2: any): Promise<number> {
+  var countTimes: number = 0;
+
+  // const GMTOffset = extractGMTOffset(dateString);
+  // console.log("extracting GMT offset from string:", GMTOffset);
+  // console.log("original Date:", dateString);
+  // const hongKongTime = convertToHongKongTime(dateString);
+
+  // console.log("Hong Kong Time:", hongKongTime);
+  if (Ledger2 != null) {
+    const unconfirmedTransaction = await Ledger2.account.getUnconfirmedAccountTransactions(accountId);
+    console.log(unconfirmedTransaction);
+    const today = await getWorldTime();
+    console.log("today from api is",today);
+    if(today == null){
+      return 0;
+    }
+    
+    for (var i = 0; i < unconfirmedTransaction.unconfirmedTransactions.length; i++) {
+      if (unconfirmedTransaction.unconfirmedTransactions[i] != undefined && unconfirmedTransaction.unconfirmedTransactions[i].attachment != undefined) {
+        try{
+        const message = unconfirmedTransaction.unconfirmedTransactions[i].attachment.message;
+        if (!message) {
+          continue;
+        }
+        console.log("unconfirmed transactions", message);
+        if (message.includes("Congrats! You completed challenge number")) {
+          countTimes++;
+        }
+      }
+      catch(error){
+        console.log("error is",error);
+
+        continue;
+      }
+      }
+    }
+    //Check string from unconfirmedList
+    const accounts = await Ledger2.account.getAccountTransactions({
+      accountId: accountId,
+      type: 2,
+      subtype: 1,
+    });
+    console.log(accounts);
+    for (var i = 0; i < accounts.transactions.length; i++) {
+      if (accounts.transactions[i] != undefined) {
+        const message = accounts.transactions[i].attachment.message;
+        if (!message) {
+          continue;
+        }
+        if (message.includes("Congrats! You completed challenge number")) {
+          countTimes++;
+        }
       }
     }
     console.log(countTimes);

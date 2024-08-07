@@ -12,7 +12,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useLedger = () => {
   const nodeHost = useAppSelector(selectWalletNodeHost);
-    console.log(nodeHost);
+
   return useMemo(() => {
     if (!nodeHost) return null;
     console.debug("Connected to new host", nodeHost);

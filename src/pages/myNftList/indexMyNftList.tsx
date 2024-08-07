@@ -19,6 +19,7 @@ import { IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { GetEquippedNftId } from "../../NftSystem/updateUserNftStorage";
 import { selectedNftInfo } from "../allNftList/indexAllNftList";
 import NftDetails from "../../components/nftDetails";
+import { NFTDetailPopUpWindow } from "../../components/popupWindow";
 
 interface MyNftProps {
   userId?: string;
@@ -37,15 +38,13 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const userAccountId: string = useSelector(accountId);
   const userId = location.state == null ? userAccountId : location.state.userAccountId;
-  //console.log("location.state is  ",location.state);
-  //console.log("userId is ",userId);
-  //console.log("userAccountId is ",userAccountId);
+
   const navigate = useNavigate();
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadingNft, setLoadingNft] = useState<boolean>(true);
   const [selectedNft, setSelectedNft] = useState<selectedNftInfo>();
-  const [openModel,setOpenModel] = useState<boolean>(false);
+  const [openModel, setOpenModel] = useState<boolean>(false);
   const nftLoaded = useRef(false);
   const dataFetchedRef = useRef(false);
   const [myNfts, setMyNfts] = useState<myNftList[]>([]);
@@ -54,31 +53,28 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   if (location.state == null) {
     isOtherUser = false;
   }
-  //console.log("isOtherUser is ",isOtherUser);
 
   const checkIsLoading = async () => {
     // const messages = await ledger2.account.getUnconfirmedAccountTransactions(userAccountId);
-    // console.log(messages);
+
     // for (var i = 0; i < messages.unconfirmedTransactions.length; i++){
     //     if(messages.unconfirmedTransactions[i].type === 1 && messages.unconfirmedTransactions[i].subtype === 5 && messages.unconfirmedTransactions[i].sender === userAccountId){
-    //         console.log("updating personal info");
+
     //         setIsUpdating(true);
     //         setIsLoading(false);
     //         return;
     //     }
     // }
     try {
-      console.log("called check is loading");
       const equippedNftId = await GetEquippedNftId(ledger2, userId);
       setEquippedNftIpfsAddress(equippedNftId);
       const isUserUpdatingIcon = await IsUserUpdatingIcon(ledger2, userId);
       if (isUserUpdatingIcon === true) {
-        console.log("updating personal info");
         setIsUpdating(true);
         setIsLoading(false);
         return;
       }
-      console.log("is user updating icon", isUserUpdatingIcon);
+
       setIsUpdating(false);
       setIsLoading(false);
     } catch (e: any) {
@@ -93,25 +89,58 @@ const IndexMyNftList: React.FunctionComponent<MyNftProps> = (props) => {
   return (
     <>
       {isLoading === true || loadingNft === true ? (
+        // loading screen
         <>
-          <ShortTitleBar title="My NFTs" setting={false} addSign={false} aiCoach={false} filter={false} importButton={false} />
+          <ShortTitleBar title="Loading NFT collections..." />
           <LoadingMintingMyNftList loadingNft={loadingNft} userId={userId} setLoadingNft={setLoadingNft} myNfts={myNfts} setMyNfts={setMyNfts} isOtherUser={isOtherUser}></LoadingMintingMyNftList>
         </>
-      ) : 
-        openModel?
-        (
-          <NftDetails disabled = {true}imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon = {openModel}></NftDetails>
-        )
-        :(
-          isOtherUser === true ? (
-            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel} setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={true}></MyNftList>
-          ) : (
-            <MyNftList setSelectedNft={setSelectedNft} setOpenModel={setOpenModel}  setIsUpdatingDescription={setIsUpdating} isUpdatingDescription={isUpdating} myNfts={myNfts} isOtherUser={false} equippedNftIpfsAddress={equippedNftIpfsAddress}></MyNftList>
-          )
-      )
-      }
+      ) : (
+        // content
+        <NFTDetailPopUpWindow
+          isPopUpNFTDetailWinodow={openModel}
+          isNFTiconLoading={isUpdating}
+          imgAddress={selectedNft?.imageUrl || ""}
+          level={selectedNft?.nftLevel || ""}
+          rewardPercentage={selectedNft?.nftReward || ""}
+          setIsPopUpNFTDetailWinodow={setOpenModel}
+        >
+          <MyNftList
+            setSelectedNft={setSelectedNft}
+            setOpenModel={setOpenModel}
+            setIsUpdatingDescription={setIsUpdating}
+            isUpdatingDescription={isUpdating}
+            myNfts={myNfts}
+            isOtherUser={isOtherUser}
+            equippedNftIpfsAddress={equippedNftIpfsAddress || ""}
+          />
+        </NFTDetailPopUpWindow>
+      )}
     </>
   );
+  // ) : openModel ? (
+  //   <NftDetails disabled={true} imgAddress={selectedNft} setPopUpIcon={setOpenModel} popUpIcon={openModel}></NftDetails>
+  // ) : (
+  // // ) : isOtherUser === true ? (
+  // //   <MyNftList
+  // //     setSelectedNft={setSelectedNft}
+  // //     setOpenModel={setOpenModel}
+  // //     setIsUpdatingDescription={setIsUpdating}
+  // //     isUpdatingDescription={isUpdating}
+  // //     myNfts={myNfts}
+  // //     isOtherUser={isOtherUser}
+  // //   ></MyNftList>
+  // // ) : (
+  // //   <MyNftList
+  // //     setSelectedNft={setSelectedNft}
+  // //     setOpenModel={setOpenModel}
+  // //     setIsUpdatingDescription={setIsUpdating}
+  // //     isUpdatingDescription={isUpdating}
+  // //     myNfts={myNfts}
+  // //     isOtherUser={false}
+  // //     equippedNftIpfsAddress={equippedNftIpfsAddress}
+  // //   ></MyNftList>
+  // )}
+  // </>
 
   // return (
   //   <CenterLayout

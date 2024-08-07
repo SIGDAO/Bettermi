@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./connectWallet.css";
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CenterLayout } from "../../components/layout";
-import { ButtonWithAction, ButtonWithNavigation, DisabledButton } from "../../components/button";
+import { ButtonWithAction, ButtonWithNavigation, DisabledButton, PurpleButton } from "../../components/button";
 import { store } from "../../redux/reducer";
 import { walletSlice } from "../../redux/wallet";
 import { DeeplinkableWallet, GenericExtensionWallet } from "@signumjs/wallets";
@@ -16,163 +17,170 @@ import { profileSlice } from "../../redux/profile";
 import { CheckUnconfirmedNewNFTContract } from "../myNftList/checkNewContract";
 import { CheckUnconfirmedNewBMIContract } from "../myNftList/checkNewContract";
 import { Link } from "react-router-dom";
+import { contractSlice, selectCurrentIsBMIContractBuild, selectCurrentIsNFTContractBuild } from "../../redux/contract";
+import axios from "axios";
+import { checkEquippedBettermiNFT } from "../../NftSystem/UserLevel/checkUserLevel";
+import { UpdateUserIconNewVersion } from "../../NftSystem/updateUserNftStorage";
+import { FindLatestTransactionNumber } from "../../NftSystem/updateUserNftStorage";
+import { FindLatestTransactionArray } from "../../NftSystem/updateUserNftStorage";
+import { connectWallet } from "../../NftSystem/connectWallet/connectWallet";
+import { useDispatch, useSelector } from "react-redux";
+import { selectWalletNodeHost } from "../../redux/useLedger";
 
 export interface IConnectWalletProps {}
 
-export default function ConnectWallet (props: IConnectWalletProps) {
-  localStorage.clear();//Guess we need to clear out all local storage after connecting account
+export default function ConnectWallet(props: IConnectWalletProps) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { appName, Wallet, Ledger } = useContext(AppContext);
-  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/'"/g, '');
-  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace(/'"/g, ''); // the code hash of the NFT contract
-  const assetId = process.env.REACT_APP_TOKEN_ID!.replace(/'"/g, '');
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace(/'"/g, '');
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!.replace(/'"/g, '');
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!.replace(/'"/g, '');
-  store.dispatch({ type: "USER_LOGOUT" });
-  const connectWallet = async (appName: any, Wallet: any, Ledger: any) => {
-    //const wallet = new GenericExtensionWallet();
-    let key: string;
-    Wallet.Extension.connect({ appName, networkName: Ledger.Network })
-      .then(async (wallet: any) => {
-        key = wallet.publicKey;
-        const import_account: Address = Address.fromPublicKey(key, Ledger.AddressPrefix);
-        const accountinfo: userAccount = {
-          accountId: import_account.getNumericId(),
-          accountRS: import_account.getReedSolomonAddress(),
-          publicKey: import_account.getPublicKey(),
-          isWatchOnlyMode: true,
-          token: 0,
-          level: "1",
-          nftContractStorage: "",
-        };
-        store.dispatch(accountSlice.actions.setAccount(accountinfo));
-        store.dispatch(walletSlice.actions.setWalletPublicKey(key));
-        store.dispatch(walletSlice.actions.setIsWalletConnected(true));
-        store.dispatch(walletSlice.actions.setWalletNodeHost(wallet.currentNodeHost));
-        localStorage.setItem("accountId", import_account.getNumericId());
-        localStorage.setItem("nodeHost", wallet.currentNodeHost);
-        const ledger = LedgerClientFactory.createClient({ nodeHost: wallet.currentNodeHost });
-        const openedNftContract = await CheckUnconfirmedNewNFTContract(ledger, import_account.getNumericId());
-        const openedBmiContract = await CheckUnconfirmedNewBMIContract(ledger, import_account.getNumericId());
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isIconLoading, setIsIconLoading] = useState<boolean>(true);
+  const codeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace('"', "");
+  const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!.replace('"', ""); // the code hash of the NFT contract
+  const assetId = process.env.REACT_APP_TOKEN_ID!.replace('"', "");
+  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!.replace('"', "");
+  const userAccountId = useSelector(accountId);
 
-        console.log(codeHashId);
+  // store.dispatch({ type: "USER_LOGOUT" });
 
-        let ourContract = await ledger.contract.getContractsByAccount({
-          accountId: accountinfo.accountId,
-          machineCodeHash: codeHashId.replace(/'"/g, ''),
-        });
-        ledger.asset.getAssetHolders({ assetId: assetId }).then((asset) => {
-          for (var i = 0; i < asset.accountAssets.length; i++) {
-            if (asset.accountAssets[i].account === accountinfo.accountId) {
-              store.dispatch(accountSlice.actions.setToken(Number(asset.accountAssets[i].quantityQNT) / 1000000));
-              localStorage.setItem("token", asset.accountAssets[i].quantityQNT);
-              break;
-            }
-            if (i == asset.accountAssets.length - 1) {
-              store.dispatch(accountSlice.actions.setToken(0));
-              localStorage.setItem("token", "0");
-            }
-          }
-          // asset.accountAssets.map((obj)=>{
-          //   console.log(asset);
-          //   console.log(import_account.getNumericId());
-          //   if(obj.account == import_account.getNumericId()){
-          //     store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT)));
-          //     localStorage.setItem('token',obj.quantityQNT);
-          //       console.log(obj.quantityQNT);
-          //   }
-          // })
-        });
-        const asset = await ledger.asset.getAssetHolders({ assetId: assetId });
-        asset.accountAssets.map((obj) => {
-          if (obj.account == accountinfo.accountId) {
-            store.dispatch(accountSlice.actions.setToken(Number(obj.quantityQNT) / 1000000));
-            localStorage.setItem("token", obj.quantityQNT);
-          }
-        });
-        // navigate('/connectSucceed');
+  useEffect(() => {
+    store.dispatch({ type: "USER_LOGOUT" });
+    localStorage.clear(); //Guess we need to clear out all local storage after connecting account
+  }, []);
 
-        let senderNftStorage = await ledger.contract.getContractsByAccount({
-          accountId: accountinfo.accountId,
-          machineCodeHash: codeHashIdForNft,
-        });
+  const userConnectWallet = async (appName: any, Wallet: any, Ledger: any, codeHashId: string, codeHashIdForNft: string, assetId: string, navigate: any) => {
+    try {
+      if (isLoading) return;
 
-        if ((ourContract.ats[0] != null || openedBmiContract === true) && (senderNftStorage.ats[0] != null || openedNftContract === true)) {
-          //await TransferNft(ledger,import_account.getNumericId(),nftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-          //Transfer Nft plaed here for better testing. Will cancel later
+      setIsLoading(true);
 
-          console.log("called the if statement");
+      const userInfo = await connectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId);
+      if (userInfo == null) {
+        alert("seems like an error has occured. We would be grateful if you could report to core team at discord");
+      }
+      const equippedBettermiNft = await checkEquippedBettermiNFT(userInfo?.ledger, userInfo!.loginedAcctID);
 
-          if (senderNftStorage.ats[0] != null) {
-            store.dispatch(accountSlice.actions.setNftContractStorage(senderNftStorage.ats[0].at));
-          }
-          if (ourContract.ats[0] != null) {
-            var description = ourContract.ats[0].description;
+      // situation:
+      // all contract is created, but one or more contract still unconfirmed
+      // or, not enqiuped NFT, then navigate to loadingMinting
+      if (
+        !equippedBettermiNft &&
+        ((userInfo!.openedBmiContract === true && userInfo!.openedNftContract === true) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.openedNftContract === true) ||
+          (userInfo!.openedBmiContract === true && userInfo!.userNftStorage.ats[0] != null) ||
+          (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null))
+      ) {
+        dispatch(profileSlice.actions.setIsNewUser(true));
+        navigate("/loadingMinting");
+        return;
+      }
 
-            //description = description.replace(/'/g, '"');
-            //description = description.replace(/ /g, '"');
-            // description = `"${description}"`
-            //  description = JSON.parse(description);
-            // console.log(description);
-            if (description.includes("Female") === true) {
-              store.dispatch(profileSlice.actions.setGender("Female"));
-            } else if (description.includes("Male") === true) {
-              store.dispatch(profileSlice.actions.setGender("Male"));
-            } else {
-              store.dispatch(profileSlice.actions.setGender("Male"));
-            }
-          }
+      if (userInfo!.userBMIStorage.ats[0] != null && userInfo!.userNftStorage.ats[0] != null) {
+        store.dispatch(accountSlice.actions.setNftContractStorage(userInfo!.userNftStorage.ats[0].at));
 
-          // Replace single quotes with double quotes
+        var description = userInfo!.userBMIStorage.ats[0].description;
 
-          // store.dispatch(profileSlice.actions.setGender(gender));
-          // console.log(gender);
-          // console.log(ourContract.ats[0]);
-          //navigate('/connectSucceed');
-          navigate("/home");
+        if (description.includes("Female") === true) {
+          store.dispatch(profileSlice.actions.setGender("Female"));
+        } else if (description.includes("Male") === true) {
+          store.dispatch(profileSlice.actions.setGender("Male"));
         } else {
-          navigate("/connectSucceed");
+          store.dispatch(profileSlice.actions.setGender("Male"));
         }
-      })
+        setIsLoading(false);
+
+        dispatch(profileSlice.actions.authenticated());
+        navigate("/home");
+      } else {
+        setIsLoading(false);
+        dispatch(profileSlice.actions.setIsNewUser(true));
+        navigate("/connectSucceed");
+      }
+    } catch (error: any) {
       // todo: add error handling, and show it to user
-      .catch((error: any) => {
-        if (error.name === "InvalidNetworkError") {
-          alert(
-            "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again"
-          );
-        }
-        if (error.name === "NotFoundWalletError") {
-          window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
-        }
-      });
+
+      if (error.message === "Failed to fetch IPFS JSON") {
+        alert("Cannot connect wallet, failed to fetch IPFS JSON. Please try again !\nIf the problem persists, please contact core team through discord !");
+      }
+
+      if (error.name === "InvalidNetworkError") {
+        alert(
+          "It looks like you are not connecting to the correct signum node in your XT-Wallet, currently in our beta version we are using Europe node, please change your node to Europe node and try again",
+        );
+      }
+
+      setIsLoading(false);
+      if (error.name === "NotFoundWalletError") {
+        window.location.href = "https://chrome.google.com/webstore/detail/signum-xt-wallet/kdgponmicjmjiejhifbjgembdcaclcib/";
+      }
+    }
   };
+
+  const guestExplore = (): void => {
+    navigate("/home");
+  };
+
+  const logo: JSX.Element = (
+    <>
+      {isIconLoading && <img className="connectWallet-bg-img" src={process.env.PUBLIC_URL + "/img/connectWallet/preview_logo.jpg"} />}
+      <img
+        className="connectWallet-bg-img"
+        src={process.env.PUBLIC_URL + "/img/connectWallet/Bettermi.io-dAPP-Landing-Animation-V2_compressed.gif"}
+        onLoad={() => setIsIconLoading(false)}
+        style={{ display: isIconLoading ? "none" : "inline-block" }}
+      />
+    </>
+    // </div>
+  );
 
   const content: JSX.Element = (
     <div className="connectWallet-layout">
+      {/* {logo} */}
       <div id="connectWallet-container">
-        <h1 id="connectWalletTopic" className="default-font-setting">
-          Connect Your Wallet
-        </h1>
-        <p id="connectWalletDisciption" className="default-font-setting">
-          Connect your crypto wallet <br />
-          &amp; Start your Bettermi Journey!
-        </p>
-        <div id="img-slider">
-          <img className="connect-profilePic-side" src={process.env.PUBLIC_URL + "/img/connectWallet/photo-6@1x.png"} alt="Photo" />
-          <img className="connect-profilePic" src={process.env.PUBLIC_URL + "/img/mimi.png"} alt="Photo" />
-          <img className="connect-profilePic-side" src={process.env.PUBLIC_URL + "/img/connectWallet/photo-7@1x.png"} alt="photo" />
-        </div>
-        <div id="collectWallet-button-container">
-          <Link to="https://phoenix-wallet.rocks/">
-            <DisabledButton text="Phoenix wallet" height="56px" width="150px" />
-          </Link>
-          <ButtonWithAction
-            text="XT wallet"
-            action={() => connectWallet(appName, Wallet, Ledger)} // TODO: add action to connect wallet
-            height="56px"
-            width="150px"
-          />
+        {logo}
+        <div className="connectWallet-option-container">
+          <div id="connectWallet-button-container">
+            {/* <ButtonWithAction
+              text="XT Wallet"
+              action={() => {
+                userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
+              }} // TODO: add action to connect wallet
+              height="56px"
+              width="248px"
+            /> */}
+            <PurpleButton
+              text="XT Wallet"
+              action={() => {
+                userConnectWallet(appName, Wallet, Ledger, codeHashId, codeHashIdForNft, assetId, navigate);
+              }}
+              height="56px"
+              width="248px"
+              // style={{ borderRadius: "10px" }}
+            />
+            {/* <Link to="https://phoenix-wallet.rocks/"> */}
+            <DisabledButton text="Phoenix Wallet" height="56px" width="248px" />
+            {/* </Link> */}
+          </div>
+          <div className="guest-explore-container">
+            <p className="inter-normal-white-12px">Curious to see what awaits ?</p>
+            <div
+              className="inter-normal-keppel-12px guest-explore-button"
+              onClick={() => {
+                if (isLoading) return;
+                setIsLoading(true);
+                setIsLoading(false);
+                navigate("/home");
+              }}
+            >
+              Explore as a guest
+            </div>
+          </div>
+
+          {/* <p className="inter-normal-white-15px">or</p>
+          <div className="inter-semi-bold-keppel-15px guest-explore-button" onClick={() => navigate("/home")}>
+            Explore as a guest
+          </div> */}
         </div>
       </div>
     </div>

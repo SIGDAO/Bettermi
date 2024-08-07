@@ -38,17 +38,17 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       ledger2.account
         .getAccount({ accountId: userAccountId })
         .then((account) => {
-          console.log(account);
+
           const description = JSON.parse(account.description);
-          console.log(description);
-          console.log(Object.keys(description.av));
-          console.log(typeof Object.keys(description.av)[0]);
+
+
+
           setImgAddress(Object.keys(description.av)[0]);
           setIsLoading(false);
         })
         .catch((error) => {
           setIsLoading(false);
-          console.log("need to equip nft");
+
         });
       const latestTransactionNumber = await FindLatestTransactionNumber(Ledger, NftContractStorage, nftDistributor);
       const latestTransactionList = await FindLatestTransactionArray(Ledger, NftContractStorage, nftDistributor, latestTransactionNumber);
@@ -64,14 +64,14 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
     if (!nftId) return;
     FindNftIpfsAddressWithConractId(Ledger, nftId)
       .then((result) => {
-        console.log("reslt is ", result);
+
         dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
         setNftIpfsAddress(result.nftImage);
         setNftNumber(result.nftNumber);
         setIsLoading(false);
       })
       .catch((e: any) => {
-        alert("We apologize that some error has occured. You can still get your free NFT in myNft Collection if you haven't get one");
+        alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
         console.log(e);
       });
   }, [nftId]);
@@ -124,8 +124,8 @@ export default Testing;
 //   const [ sendMsg, {isLoading, data} ] = useSendMsgMutation()
 
 //   useEffect(() => {
-//     console.log("testing")
-//     console.log(booleanStates)
+
+
 //   }, []);
 
 //   const handleSendMsg = async () => {
@@ -207,7 +207,7 @@ export default Testing;
 // const genBMIlist = (option: string) => {
 //   // let returnList: BMI_Day [] = []
 //   let today = new Date()
-//   // console.log(today, "today")
+//
 //   let totalDays = 0
 //   switch (option) {
 //     case '1W':
@@ -239,7 +239,7 @@ export default Testing;
 //     const formattedDate = `${year}-${month}-${day}`;
 
 //     // let dateFormat: string = tempDate.getFullYear() + "-" + (tempDate.getMonth()+1) + "-" + tempDate.getDate()
-//     // console.log()
+//
 //     returnList.push({time: formattedDate, value: Math.floor(Math.random() * 10) + 20.1})
 //   }
 //   return returnList
@@ -281,9 +281,9 @@ export default Testing;
 //         // data = res
 //         // const displayData = [res]
 //         setData(res)
-//         console.log("data", typeof res)
-//         console.log("res data", res)
-//         // console.log("data", initialData)
+
+
+//
 //         // dispatch(userBMISlice.actions.setBMI(res))
 //       })
 
@@ -292,7 +292,7 @@ export default Testing;
 //   // const genBMIlist
 
 //   // useEffect(() => {
-//   //   console.log('data', data)
+//
 //   // }, [data])
 
 //   const options = {
@@ -397,7 +397,7 @@ export default Testing;
 //     if (!ledger) return;
 //     // const startTime: number = Date.now(); // get the current time in milliseconds
 
-//     console.log("sdfidjifj");
+
 
 //     let ourContract = await ledger.contract.getContractsByAccount({
 //       accountId: userAccountId,
@@ -409,7 +409,7 @@ export default Testing;
 //         accountId: userAccountId,
 //         machineCodeHash: codeHashId,
 //       });
-//       console.log(ourContract);
+
 //       if (pathname === "/loadingMinting") setIsMinting(false);
 //     }
 
@@ -420,11 +420,11 @@ export default Testing;
 //         });
 //         let last_transaction = transaction.transactions[transaction.transactions.length - 1];
 //         let content = JSON.parse(last_transaction.attachment.message);
-//         console.log(content.time);
+
 //         // compare upload time is today
 //         let selfieTime = new Date(content.time);
 //         let today = new Date();
-//         console.log(selfieTime.getDate(), today);
+
 //         if (selfieTime.getDate() === today.getDate()) {
 //           setIsMinting(false);
 //         }

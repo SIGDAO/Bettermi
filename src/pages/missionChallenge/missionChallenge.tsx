@@ -10,13 +10,15 @@ import { Button } from "@mui/material";
 import { walletNodeHost } from "../../redux/wallet";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { missionList } from "../../data/featureMissionList";
+import { challengeList } from "../../data/challengeList";
 import { CheckIsUserFirstDayOfRegistration } from "../../NftSystem/BMISelfieSystem";
 import { selectWalletNodeHost } from "../../redux/useLedger";
 import { LedgerClientFactory } from "@signumjs/core";
 import { CountChallenges } from "../../NftSystem/Token/countChallenges";
 import { findNFTLevel } from "../../NftSystem/FindNFTLevel";
 import { checkUserLevel } from "../../NftSystem/UserLevel/checkUserLevel";
+import { selectCurrentIsGuest } from "../../redux/profile";
+import SigdaoIcon from "../../components/icon";
 
 interface IMissionChallengeProps {}
 
@@ -31,12 +33,11 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const [allowedChallengeList, setAllowedChallengeList] = useState<boolean[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // const [Timedifference, setTimedifference] = useState<string[]>([]);
-  const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!;
+  const BMIMachineCodeHashId = process.env.REACT_APP_BMI_MACHINE_CODE_HASH!.replace(/['"]+/g, "");
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
   const updated = useRef(false);
   let isNew = false;
+  const isGuest = useSelector(selectCurrentIsGuest);
 
   // to use CountChallenges to count
   // display as 0/3 as text
@@ -44,7 +45,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   //Anderson's code starts here
   // const NewUserCheck = async () => {
   //   const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
-  //   console.log("isUpdated", isUpdated);
+
   //   return isUpdated === true
   // };
 
@@ -68,6 +69,14 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
   useEffect(() => {
     const checkTimeSlot = async () => {
+      // guest user
+      if (isGuest) {
+        setIsLoading(false);
+        setAllowedChallengeList([true, true, true, false, false, false, false, false, false]);
+
+        return;
+      }
+
       //Anderson's code starts here
       //findNFTLevel(ledger2,userAccountId);
       if (updated.current === false) {
@@ -85,45 +94,42 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
             allowedChallenge.push(true);
           }
         } //Temporarily disable the remaining six challenges
-        console.log("allowedChallenge",allowedChallenge);
+
         setAllowedChallengeList(allowedChallenge);
 
         setUserChallengeTimes(playedChallenge);
-        console.log(playedChallenge);
-        console.log("userChallengeTimes is ", userChallengeTimes);
 
-        console.log(userChallengeTimes);
         setisOverDailyPlayTimesLimit(
           playedChallenge.map((numChallengesPlayed) => {
-            if (numChallengesPlayed > 2) {
+            if (numChallengesPlayed >= 2) {
               return false;
             }
             return true;
-          })
+          }),
         );
         setIsLoading(false);
-        console.log("isOverDailyPlayTimesLimit is ", isOverDailyPlayTimesLimit);
+
         //Anderson's code ends here
 
         //Anderson disabled this 2023/11/12
         // setisOverDailyPlayTimesLimit(
-        //   missionList.map((mission) => {
+        //   challengeList.map((mission) => {
         //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
-        //       console.log("special case for Hello Bae",isNew)
+
         //       return true;
         //     }
         //     const { timeslot } = mission;
         //     const isInSlot = timeslot.some(
         //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
         //     );
-        //     console.log("is In slot for",mission.title, "is",isInSlot)
+
         //     return isInSlot;
         //   })
         // );
 
         //Anderson disabled till here
         // setTimedifference(
-        //   missionList.map((mission) => {
+        //   challengeList.map((mission) => {
         //     const { timeslot } = mission;
         //     const timedifferentInFormat = timeslot.map((slot) => {
         //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
@@ -137,13 +143,12 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       return timeDiff;
         //     });
         //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
-        //       console.log(date > 0, "timedifferentInFormat date");
+
         //       return date > 0;
         //     });
-        //     console.log(filteredtimedifferentInFormat, "filteredtimedifferentInFormat");
 
         //     filteredtimedifferentInFormat.sort((a, b) => a - b);
-        //     console.log(filteredtimedifferentInFormat, "timedifferentInFormat");
+
         //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
         //       .toString()
         //       .padStart(2, "0");
@@ -152,7 +157,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //       .padStart(2, "0");
         //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
 
-        //     console.log(hours, minutes, seconds, "hours, minutes, seconds");
         //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
         //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
         //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
@@ -162,8 +166,6 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
         //     // return '';
         //   })
         // );
-        // console.log(Timedifference, "Timedifference");
-        //console.log(isOverDailyPlayTimesLimit, "isOverDailyPlayTimesLimit");
       }
     };
 
@@ -172,7 +174,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
     return () => clearInterval(interval);
 
     // setisOverDailyPlayTimesLimit(
-    //   missionList.map((mission) => {
+    //   challengeList.map((mission) => {
     //     return true;
     //   })
     // );
@@ -183,13 +185,40 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
     return hours * 60 + minutes;
   };
 
+  const challengeTimesDisplay = (index): JSX.Element => {
+    if (!allowedChallengeList[index]) {
+      return <div className="score-bar_2-inactive inter-semi-bold-white-15px">LOCKED</div>;
+    }
+
+    if (isOverDailyPlayTimesLimit[index]) {
+      return (
+        <div className="score-bar_2">
+          <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
+        </div>
+      );
+    }
+
+    if (isGuest) {
+      return <div className="score-bar_2-completed inter-semi-bold-white-15px">STARTING</div>;
+    }
+
+
+    return (
+      <div className="score-bar_2-completed inter-semi-bold-white-15px">
+        {/* {mission.timeslot[0].startingTime} */}
+        COMPLETED
+        {/* {Timedifference[index]} */}
+      </div>
+    );
+  };
+
   // const checkTimeSlot = () => {
   //   const currentTime = new Date().toLocaleTimeString([], {
   //     hour: '2-digit',
   //     minute: '2-digit',
   //   });
 
-  //   for (const mission of missionList) {
+  //   for (const mission of challengeList) {
   //     for (const time of mission.timeslot) {
   //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
   //         setisOverDailyPlayTimesLimit(true);
@@ -212,7 +241,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} backButton = {true} customiseBackButton = {true} customiseBackButtonLink="/featureMissions"/>
+        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/featureMissions" />
         <img className="photo-7K5ObS" src="img/missionChallenge/photo@1x.png" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -221,39 +250,25 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
               {isLoading ? (
                 <div></div>
               ) : (
-                missionList.map((mission, index) => {
+                challengeList.map((mission, index) => {
                   return (
                     <Button
                       onClick={async () => {
-                        
+                        // go to challengeCountdown page
+                        if (allowedChallengeList[index] && isGuest) {
+                          navigate(`/challengeCountdown/${index + 1}`);
+                          return;
+                        }
                         const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
-                        console.log(numChallengesPlayed);
-                        if (isOverDailyPlayTimesLimit[index]  && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
+
+                        if (isOverDailyPlayTimesLimit[index] && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
                           navigate(`/challengeCountdown/${index + 1}`);
                         }
                       }}
                       className="challenge-cards-Ic1qil"
                     >
                       <>
-                        {allowedChallengeList[index] === false? (
-                          <div className="score-bar_2-inactive inter-semi-bold-white-15px">
-                            {/* {mission.timeslot[0].startingTime} */}
-                            LOCKED
-                            {/* {Timedifference[index]} */}
-                          </div>
-                        ) : (isOverDailyPlayTimesLimit[index] ? (
-                          <div className="score-bar_2">
-                            <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/3`}</div>
-                          </div>
-                        ) : (
-                          <div className="score-bar_2-completed inter-semi-bold-white-15px">
-                            {/* {mission.timeslot[0].startingTime} */}
-                            COMPLETED
-                            {/* {Timedifference[index]} */}
-                          </div>
-                        )
-                        )
-                      }
+                        {challengeTimesDisplay(index)}
                         <div
                           className="inner-mission-container"
                           // style={isOverDailyPlayTimesLimit[index] ? {opacity: '1'} : {opacity: '0.4'}}
@@ -277,11 +292,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
                               <div className="mission-level inter-semi-bold-keppel-15px">LV {mission.nftLevel}</div>
                               <div className="level-and-sigdao-separate-line"></div>
                               <div className="mission-reward-container">
-                                <div className="signdao_tokengradient">
-                                  <div className="x441"></div>
-                                  <div className="x442"></div>
-                                  <img className="x880" src="img/missionChallenge/file---880-1x-png-10@1x.png" alt="880" />
-                                </div>
+                                <SigdaoIcon width="17px" height="17px" />
                                 <p className="inter-semi-bold-keppel-14px">{mission.sigdao}</p>
                               </div>
                               <img className="mission-bar-arrow-right" src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
@@ -305,7 +316,7 @@ const MissionChallenge: React.FunctionComponent<IMissionChallengeProps> = (props
 
 export default MissionChallenge;
 
-// const cardContent = missionList.map((mission) => (
+// const cardContent = challengeList.map((mission) => (
 //   <div className="challenge-cards-Ic1qil">
 //     <img className="card_bg" src="img/missionChallenge/card-bg-1@1x.png" alt="Card_bg" />
 //     <div className="x1-hello-bae inter-semi-bold-white-18px">1. Hello Bae !</div>
@@ -328,7 +339,7 @@ export default MissionChallenge;
 //       <div className="arms inter-semi-bold-cadet-blue-14px">Arms</div>
 //     </div>
 //     <div className="sigdao-score">
-//       <div className="x10 inter-semi-bold-keppel-14px">+5.25</div>
+//       <div className="x10 inter-semi-bold-keppel-14px">+0.875</div>
 //       <div className="signdao_tokengradient">
 //         <div className="x441"></div>
 //         <div className="x442"></div>

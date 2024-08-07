@@ -6,6 +6,7 @@ import './bmi-bar.css'
 import { useEffect } from 'react';
 import { selectCurrentImg, selectCurrentBMI } from '../../redux/profile';
 import { useSelector } from 'react-redux';
+import React from 'react';
 
 export interface IGenerateBMIProps {
 }

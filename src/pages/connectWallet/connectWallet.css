@@ -5,8 +5,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  /* margin: auto; */
   /* height: 100%; */
+  /* for big gif */
+  /* margin-top: 545px;  */
+  /* margin-top: 100px; */
+
   width: 100%;
   min-height: auto;
   /* overflow-y: auto; */
@@ -17,7 +21,10 @@
   /* left: calc((100% - 820px) / 2); */
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom right, #221D4B, #171717);
+  position: relative;
+
+  /* background: linear-gradient(to bottom right, #221D4B, #171717); */
+  background: #1b192b;
   overflow-x: hidden;
   display: flex;
 }
@@ -58,18 +65,68 @@
   height: 198px;
 }
 
-#collectWallet-button-container {
+#connectWallet-button-container {
   display: flex;
-  /* flex-direction: row; */
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
+}
+
+.guest-explore-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.guest-explore-container > p {
+  margin: 0;
+}
+
+.guest-explore-button {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.connectWallet-option-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 36px;
+  z-index: 2;
+}
+
+.connectWallet-bg-img-container {
+  /* width: 390px; */
+  width: 260px;
+  /* max-height: 1; */
+  overflow-x: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);  
+  /* padding-bottom: 20px; */
+  /* margin-bottom: 20px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.connectWallet-bg-img {
+  /* position: absolute; */
+  /* width: 390px; */
+  width: 290px;
+  margin-bottom: 40px;
+  
+  /* height: 344px; */
+  object-fit: cover;
 }
 
 @media screen and (max-height: 594px) {
   #img-slider {
     margin-bottom: 20px;
   }
-  #collectWallet-button-container {
+  #connectWallet-button-container {
     /* position: fixed; */
     /* bottom: 20px; */
   }
@@ -84,9 +141,10 @@
     margin-bottom: 20px;
   }
 
-  #collectWallet-button-container {
+  #connectWallet-button-container {
 
     gap: 20px;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
+

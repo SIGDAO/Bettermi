@@ -1,0 +1,146 @@
+.guest-nft-detail-popup-window-container {
+  width: 332px;
+  height: 330px;
+  background: transparent linear-gradient(135deg, #221D4B 0%, #171717 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  border: 1px solid var(--royal-blue);  
+  border-radius: 10px;
+  z-index: 201;
+  position: relative;
+}
+
+.guest-nft-detail-popup-window-connect-wallet-button {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+}
+
+.guest-nft-detail-popup-window-lower-content {
+  width: 100%;
+  padding-top: 20.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.guest-nft-detail-popup-window-lower-content > div {
+  text-align: center;
+}
+
+.guest-nft-detail-popup-window-mimi {
+  /* width: 118px; */
+  height: 118px;
+}
+
+.guest-nft-detail-popup-window-upper-content {
+  border-bottom: 1px solid var(--royal-blue);
+  width: 100%;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.hidden-content {
+  width: 100vw;
+  height: 100vh;
+  background:#0d0d0da8;
+  z-index: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.click-the-area-to-make-it-hidden-again {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.guest-take-selfie-button-container {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+  width: 248px;
+  height: 56px;
+  /* background: linear-gradient(270deg,  #8743ff 0%, #4136f1 100%); */
+}
+
+.guest-nft-detail-description {
+  margin-top: 2px;
+}
+
+.referral-reward-add-container {
+  display: flex;
+  gap: 3.3px;
+  align-items: center;
+}
+
+
+/* template */
+.standard-popup-window-container {
+  width: 332px;
+  height: 330px;
+  background: transparent linear-gradient(135deg, #221D4B 0%, #171717 100%) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 20px var(--royal-blue);
+  border: 1px solid var(--royal-blue);  
+  border-radius: 10px;
+  z-index: 201;
+  position: relative;
+}
+
+.standard-popup-window-connect-wallet-button {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  transform: translate(-50%, 0%);
+}
+
+.standard-popup-window-lower-content {
+  width: 100%;
+  /* padding-top: 20.5px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.standard-popup-window-lower-content p {
+  margin: 0;
+}
+
+.standard-popup-window-lower-content > div {
+  text-align: center;
+}
+
+.standard-popup-window-mimi {
+  /* width: 118px; */
+  height: 118px;
+}
+
+.standard-popup-window-upper-content {
+  border-bottom: 1px solid var(--royal-blue);
+  width: 100%;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+
+.guest-nft-detail-popup-lower-content {
+  margin-top: 20.5px;
+}
+
+.guest-nft-detail-popup-lower-content > p {
+  margin: 0;
+}

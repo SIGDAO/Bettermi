@@ -860,6 +860,14 @@ opacity: 0.5;
   width:100%;
 }
 
+.myNftBottom-guest {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+
+}
+
 .myNftButtomArrow{
   align-self: center;
   width:21px;
@@ -887,12 +895,13 @@ opacity: 0.5;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  color:#FFFFFF
+  color:#FFFFFF;
+  margin-left: 30px;
 }
-.myNftButtonOnDuty:hover{
+/* .myNftButtonOnDuty:hover{
   opacity: 0.5;
   cursor: pointer;
-}
+} */
 
 .bettermidapp-mimi-nfts-send-address-1 .edit-profile-layer {
   background-color: #0d0d0dcb;
@@ -1390,6 +1399,14 @@ opacity: 0.5;
   border-radius: 10px;
   position: absolute;
   cursor:text
+}
+
+.myNftListRewardPercentage {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
 }
 
 

@@ -12,7 +12,14 @@ const AllNftLoading:React.FC<AllNftLoadingProps> = () => {
     // const incrementInterval = 5000 / 100;
     const timer = setInterval(() => {
       if (count < 100) {
-        setCount((prevCount) => prevCount + 1);
+        setCount((prevCount) => {
+
+          if (prevCount < 99) {
+
+            return prevCount + 1;
+          }
+          return prevCount;
+        });
       }
       // if (count => 100 ) {
       // } else {
@@ -31,7 +38,7 @@ const AllNftLoading:React.FC<AllNftLoadingProps> = () => {
 
 const content: JSX.Element = (
     <>
-    <ShortTitleBar title='NFT Marketplace' setting = {false}addSign = {false} aiCoach = {false} filter = {false} importButton = {false} />
+    <ShortTitleBar title='NFT Marketplace'/>
     <div className="screen">
     <div className="bettermidapp-generate-free-nft-minting">
       <div className="bg_2-JdJl2l">
@@ -97,7 +104,7 @@ const content: JSX.Element = (
             </div>
           </div>
       </div> */}
-      <div className="minting-JdJl2l inter-normal-white-15px">Loading Marketplace</div>
+      <div className="minting-JdJl2l inter-normal-white-15px">Loading Marketplace...</div>
       <div className="reminder-text-1 inter-normal-white-15px">Please wait patiently<br/>and do not refresh the page</div>
       {/* <div className="reminder-text-2 inter-normal-white-15px">and do not refresh the page</div> */}
     </div>

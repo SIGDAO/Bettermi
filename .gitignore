@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 .env
+env.txt
+envBackup.txt
+testingEnv.txt
+env_final.txt
 # testing
 /coverage
 
@@ -14,6 +18,7 @@
 # misc
 .DS_Store
 .env.local
+.envV1
 .env.development.local
 .env.test.local
 .env.production.local

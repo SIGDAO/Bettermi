@@ -11,6 +11,7 @@ import { accountId } from "../redux/account";
 import { accountPublicKey } from "../redux/account";
 import { CenterLayout } from "./layout";
 import { selectedNftInfo } from "../pages/allNftList/indexAllNftList";
+import IPFSImageComponent from "./ipfsImgComponent";
 interface AllNftProps {
   imgAddress?: selectedNftInfo;
   setPopUpIcon: (popUpIcon: boolean) => void;
@@ -19,15 +20,13 @@ interface AllNftProps {
 }
 
 const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
-  const { imgAddress, setPopUpIcon, popUpIcon,disabled } = props;
+  const { imgAddress, setPopUpIcon, popUpIcon, disabled } = props;
   const { appName, Wallet, Ledger } = useContext(AppContext);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
   const userAccountId = useSelector(accountId);
   const codeHashIdForNft = process.env.REACT_APP_NFT_CONTRACT_MACHINE_CODE_HASH!;
   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-  const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
   const userAccountPublicKey = useSelector(accountPublicKey);
 
   return (
@@ -36,7 +35,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
       content={
         <>{imgAddress == null?
             <>
-            <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/bafkreigun2emdg5ndaavw2mmvocqwpdct2qcpb6kud7x76awln2cstodda`} alt="0" />
+            <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={"bafkreigun2emdg5ndaavw2mmvocqwpdct2qcpb6kud7x76awln2cstodda"} />
             {/* <h1 className="text-1">#{nftNumber}</h1> */}
   
             <div className="x16206">
@@ -47,7 +46,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             {disabled ===true?
             <></>
             
-            :<div className="x0-signa">${} SIGDAO</div>
+            :<div className="x0-signa">${} SIGNA</div>
       }
             <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
             <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
@@ -55,7 +54,8 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             :
             <>
             <div style = {{display:'flex',alignItems:"center", justifyContent:"center",height:'100%',width:'100%'}}>
-          <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress.imageUrl}`} alt="0" />
+          {/* <img className="x0-generateFreeNFT" src={`https://ipfs.io/ipfs/${imgAddress.imageUrl}`} alt="0" /> */}
+          <IPFSImageComponent className="x0-generateFreeNFT" imgAddress={imgAddress.imageUrl} />
           <h1 className="text-1">#{imgAddress.nftNumber}</h1>
           
           <div className="x16206">
@@ -63,11 +63,7 @@ const NftDetails: React.FunctionComponent<AllNftProps> = (props) => {
             <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
             <div className="reward-10">REWARD +{imgAddress.nftReward}%</div>
           </div>
-          {disabled?
-          <></>
-          :
-          <div className="x0-signa">${imgAddress.nftPrice} SIGDAO</div>
-      }
+          <div className="x0-signa" style={{'position': 'absolute'}}>$0 SIGNA</div>
           <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
           <div onClick={() => setPopUpIcon(false)} className="click-the-area-to-make-it-hidden-again"></div>
           </div>

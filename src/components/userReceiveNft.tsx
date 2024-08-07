@@ -14,14 +14,14 @@ import {generateMasterKeys} from "@signumjs/crypto";
 export async function UserReceiveNft(accountId:string, nodeHost:any,nftId:string){
   const walletNodeHost:string = nodeHost?nodeHost:window.localStorage.getItem('nodeHost');
     const ledger2 =LedgerClientFactory.createClient({nodeHost:nodeHost || walletNodeHost});
-    console.log();
+
     let nftStorage = await ledger2.contract.getContractsByAccount({
         accountId: accountId,
         machineCodeHash: process.env.REACT_APP_NFT_CONTRACT_MACHINE_CODE_HASH!,
       });
-      console.log(nftStorage);
-    console.log(ledger2, "ledger2");
-    console.log(nodeHost, "nodeHost");
+
+
+
     
 
 

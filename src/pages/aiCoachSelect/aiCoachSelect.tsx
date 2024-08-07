@@ -11,7 +11,7 @@ interface IAiCoachSelectProps {
 const questionList = [
   {
     question: 'Q:  What is Bettermi.io?',
-    ans: "A:  Bettermi.io is a web application designed to enhance users' lifestyles by integrating fitness, wellness, and social elements."
+    ans: "A: Bettermi.io is a Web3 lifestyle dAPP that rewards users for fitness. Users equipped with Bettermi 'green' NFTs can earn token by selfies (Selfie to Earn), fitness and matching in metaverse."
   },
   {
     question: 'Q:  How does Bettermi.io work?',
@@ -23,7 +23,7 @@ const questionList = [
   },
   {
     question: 'Q:  How can I earn rewards on Bettermi.io?',
-    ans: "A:  Bettermi.io takes privacy and data security seriously, we do not store any picture from users. We also implemented measures to protect users' personal information in accordance with relevant privacy laws."
+    ans: "A:  Users can earn rewards by completing daily selfies, participating in fitness challenges, achieving goals, referring friends, and engaging with the community."
   },
   {
     question: "Q:  Can I connect with other users?",
@@ -72,7 +72,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
   const [answer, setAnswer] = React.useState('');
   const handleExportAns = (questionIndex: number) => {
     setAnswer(questionList[questionIndex].ans);
-    console.log(answer);
+
     // setShowQuestion((prev) => !prev);
     setshowQuestion((prev) => {
       const newArray = [...prev];
@@ -127,7 +127,7 @@ const AiCoachSelect: React.FunctionComponent<IAiCoachSelectProps> = (props) => {
             <div className="bg-Kcwf64"></div>
             <img className="ai-chatbot_-mimi-Kcwf64" src="img/aiCoachSelect/ai-chatbot-mimi-2@1x.png" alt="Ai Chatbot_Mimi" />
             <div className="mental-coach-Kcwf64 inter-normal-white-12px">Mental coach</div>
-            <div className="mimi-Kcwf64 inter-semi-bold-white-15px">Mimi</div>
+            <div className="mimi-Kcwf64 inter-semi-bold-white-15px">mimi</div>
           </div>
         {/* </Link> */}
         {/* <Link to="/aiCoachDetail/2"> */}

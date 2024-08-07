@@ -16,7 +16,7 @@ export const CarouselItem = ({ children }) => {
 
 const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
   const { slides } = props;
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [onholdPage, setOnholdPage] = useState<boolean[]>([false, false]);
 
   const Carousel = ({ children }) => {
@@ -32,9 +32,9 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
 
     useEffect(() => {
       let id = setInterval(() => {
-        console.log("activeIndex", activeIndex);
-        setOnholdPage([false, false]);
-        updateIndex(activeIndex + 1);
+
+        setOnholdPage(slides.map((item, i) => false));
+        updateIndex((activeIndex + 1) % 3);
       }, 2000);
 
       return () => {
@@ -75,37 +75,22 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
   return (
     <div className="special-card-RoXPLo">
       <div className="buttons-slider-container">
-        <button className={onholdPage[0] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(0)}>
+        <button className={`${activeIndex === 0 ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} cursor-pointer`} onClick={() => updateOnHoldPage(0)}>
           <div className="ic_notifications-9uK1Tx ic_notifications">
             <img className="ic_notifications-6bhCAa ic_notifications" src={`${process.env.PUBLIC_URL}/img/home/bxs-News.svg`} alt="ic_notifications" />
           </div>
         </button>
         <button className="special_button-hH9Cww">
           <div className="ic_reservation-nXPAX5 ic_reservation">
-            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/bxs-forum.svg`} alt="ic_reservation" />
+            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/Reservation_button.svg`} alt="ic_reservation" />
           </div>
           <div className="ic_locked-nXPAX5 ic_locked">
             <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
           </div>
         </button>
-{/* 
-        <button className={onholdPage[1] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(1)}>
-          <div className="ic_forum_image ic_leaderboard">
-            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/`} alt="ic_leaderboard" />
-          </div>
-        </button> */}
-
-        {/* <button className="special_button-hH9Cww">
-          <div className="ic_reservation-nXPAX5 ic_reservation">
-            <img className="ic_reservation-p9BhAR ic_reservation" src={`${process.env.PUBLIC_URL}/img/home/ic-reservation@1x.png`} alt="ic_reservation" />
-          </div>
-          <div className="ic_locked-nXPAX5 ic_locked">
-            <img className="ic_locked-OiAYIf ic_locked" src={`${process.env.PUBLIC_URL}/img/ic-locked-1@1x.png`} alt="ic_locked" />
-          </div>
-        </button> */}
-        <button className={onholdPage[1] ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} onClick={() => updateOnHoldPage(1)}>
+        <button className={`${activeIndex === slides.length - 1 ? "special_button-hH9Cww-active" : "special_button-hH9Cww"} cursor-pointer`} onClick={() => updateOnHoldPage(slides.length - 1 )}>
           <div className="ic_leaderboard-IgToMG ic_leaderboard">
-            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/bxs-Leaderboard.svg`} alt="ic_leaderboard" />
+            <img className="ic_leaderboard-6DxnCN ic_leaderboard" src={`${process.env.PUBLIC_URL}/img/home/Leaderboard_button.svg`} alt="ic_leaderboard" />
           </div>
         </button>
       </div>
@@ -115,7 +100,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = (props) => {
             {slides.map((slide, index) => {
               return (
                 <CarouselItem key={index}>
-                  <Link to={slide.link}>
+                  <Link to={slide.link} target={slide.link.charAt(0) === "/" ? "" : "_blank"} >
                     <img className="home-scroller-element-image" src={slide.src} alt="" />
                   </Link>
                 </CarouselItem>

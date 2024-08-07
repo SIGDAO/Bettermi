@@ -26,8 +26,6 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
     const [inputAddress, setInputAddress] = useState<string>("");
     const codeHashIdForNft = process.env.REACT_APP_NFT_MACHINE_CODE_HASH!;
     const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-    const nftDistributorPublicKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PUBLIC_KEY!;
-    const nftDistributorPrivateKey = process.env.REACT_APP_NFT_DISTRIBUTOR_PRIVATE_KEY!;
     const [hasError, setHasError] = useState<boolean>(false);
     const [loading,setLoading] = useState<boolean>(false);
     const nodeHost = useSelector(selectWalletNodeHost);
@@ -35,28 +33,28 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
     const gender = useSelector(selectCurrentGender)
     const ledger2 = LedgerClientFactory.createClient({ nodeHost });
     const mimiNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_MIMI!.split(",");
-    console.log(mimiNftStorageAccounts, "miminftstorage is");
+
     const ioNftStorageAccounts = process.env.REACT_APP_NFT_STORAGE_IO!.split(",");
     const importNft = async (ledger2:any,nftAddress:string,userAccountId:string) => {
         setLoading(true);
-        if(nftAddress === "nft"){
-            if(gender === "Female"){
-                await TransferNft(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-            }
-            if(gender === "Male"){
-                await TransferNft(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
-            }
-            setLoading(false);
-            setImportSuccess(true);
-            setIsOpenImport(false);
-        }
-        else{
+        // if(nftAddress === "nft"){
+        //     if(gender === "Female"){
+        //         await TransferNft(ledger2,userAccountId,mimiNftStorageAccounts,codeHashIdForNft,nftDistributor);
+        //     }
+        //     if(gender === "Male"){
+        //         await TransferNft(ledger2,userAccountId,ioNftStorageAccounts,codeHashIdForNft,nftDistributor);
+        //     }
+        //     setLoading(false);
+        //     setImportSuccess(true);
+        //     setIsOpenImport(false);
+        // }
+        // else{
                 try{
                     let accountDes = await ledger2.account.getAccount({accountId:nftAddress});
                     const nftId = accountDes.account;
                     const nftOwnerId = await CheckNftOwnerId(ledger2,nftId);
                     if(nftOwnerId === userAccountId){
-                        const result = await updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor,nftDistributorPublicKey,nftDistributorPrivateKey);
+                        const result = await updateReceiverAccount(ledger2,userAccountId,codeHashIdForNft,nftId,nftDistributor);
                         if(result === "unsuccessful"){
                             setHasError(true);
                             setLoading(false);
@@ -78,7 +76,7 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
                     setLoading(false);
                     console.log(e);
                 }
-        }
+        // }
       }
   
 
@@ -144,7 +142,7 @@ const ImportAccountScreen: React.FC<IimportAccountScreensProps> = (props) => {
                             <Button className="importAccountbutton_save" onClick = {() =>  {importNft(ledger2,inputAddress,userAccountId)}}>
                                 {hasError === false?
                                     <div className="importAccountcontinue" >
-                                        Import Your Nft
+                                        Import Your NFT
                                     </div>:
                                     (
                                     <div className="importAccountcontinue" >

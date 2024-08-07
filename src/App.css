@@ -8,6 +8,7 @@
   --keppel: #39b3af;
   --neon-carrot: #ff9f3e;
   --royal-blue: #4136f1;
+  --grey: #747474;
   --white: #ffffff;
   --white-2: rgba(255, 255, 255, 0);
   --white-3: rgba(255, 255, 255, 0.349);
@@ -25,7 +26,7 @@
   --font-size-s: 14px;
   --font-size-m: 15px;
   /* --font-size-l: 16px; */
-  --font-size-xl: 28px;
+  /* --font-size-xl: 28px; */
 
 
  
@@ -45,6 +46,26 @@ html, body {
   height: 100%;
 }
 
+a:link { 
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+a:hover { 
+  text-decoration: none; 
+} 
+a:active { 
+  text-decoration: none; 
+  border: none;
+  outline: none;
+}
+
+a:focus-visible {
+  outline: none;
+}
+
+
 /* p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 } */
@@ -57,6 +78,15 @@ html, body {
   font-weight: 400;
 }
 
+.inter-normal-white-16px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+
 .inter-normal-15px {
   /* color: var(--white); */
   font-family: var(--font-family-inter);
@@ -65,21 +95,23 @@ html, body {
   font-weight: 400;
 }
 
-.inter-semi-bold-white-15px {
-  color: var(--white);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-m);
-  font-style: normal;
-  font-weight: 600;
-}
 
 .inter-semi-bold-white-28px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
+  font-size: 28px;
   font-style: normal;
   font-weight: 600;
 }
+
+.inter-semi-bold-white-10px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+
 
 .inter-normal-cadet-blue-14px {
   color: var(--cadet-blue);
@@ -106,6 +138,23 @@ html, body {
   margin: 0;
 }
 
+.inter-normal-grey-12px {
+  color: var(--grey);
+  font-family: var(--font-family-inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-normal-keppel-14px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+
 .inter-semi-bold-keppel-14px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
@@ -122,6 +171,14 @@ html, body {
   font-weight: 600;
 }
 
+.inter-normal-grey-18px {
+  color: var(--grey);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-normal-cadet-blue-15px {
   color: var(--cadet-blue);
   font-family: var(--font-family-inter);
@@ -131,13 +188,6 @@ html, body {
 }
 
 
-/* .inter-semi-bold-white-15px {
-  color: var(--white);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-xl);
-  font-style: normal;
-  font-weight: 600;
-} */
 
 .inter-semi-bold-cadet-blue-14px {
   color: var(--cadet-blue);
@@ -171,6 +221,14 @@ html, body {
   font-weight: 600;
 }
 
+.inter-normal-keppel-15px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-semi-bold-keppel-15px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
@@ -179,10 +237,10 @@ html, body {
   font-weight: 600;
 }
 
-.inter-semi-bold-white-12px {
+.inter-semi-bold-white-15px {
   color: var(--white);
   font-family: var(--font-family-inter);
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
 }
@@ -201,6 +259,14 @@ html, body {
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
+}
+
+.inter-bold-white-15px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .inter-bold-royal-blue-14px {
@@ -225,13 +291,6 @@ html, body {
   font-size: 12px;
 }
 
-.inter-normal-cadet-blue-14px {
-  color: var(--cadet-blue-2);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-l);
-  font-style: normal;
-  font-weight: 400;
-}
 
 .inter-semi-bold-white-14px {
   color: var(--white);
@@ -265,12 +324,53 @@ html, body {
   font-weight: 600;
 }
 
+.inter-bold-keppel-15px {
+  color: var(--keppel);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-bold-royal-blue-15px {
+  color: #5146FF;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-normal-hot-magenta-14px {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-normal-hot-magenta-15px {
+  color: var(--hot-magenta);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .inter-normal-keppel-12px {
   color: var(--keppel);
   font-family: var(--font-family-inter);
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
+}
+
+.inter-normal-cadet-blue-2-15px {
+  color: var(--cadet-blue-2);
+  font-family: var(--font-family-inter);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+
 }
 
 .inter-normal-cadet-blue-12px-3 {
@@ -362,4 +462,61 @@ html, body {
   color: var(--white);
   font-family: var(--font-family-inter);
   font-size: 18px;
+}
+
+.inter-semi-bold-white-22px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.inter-semi-bold-white-23px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.inter-normal-cadet-blue-16px {
+  color: var(--cadet-blue);
+  font-family: var(--font-family-inter);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+}
+
+.inter-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.line-height-21px {
+  line-height: 21px;
+}
+
+.brightness-0-5 {
+  filter: brightness(0.5);
+}
+
+.opacity-0-5 {
+  opacity: 0.5;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+a[disabled] {
+  pointer-events: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
