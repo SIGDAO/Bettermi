@@ -28,6 +28,6 @@ jobs:
           echo ✅ Building Docker Image
           docker build -t deploy-bettermi-app .
           echo ✅ Running Docker Container
-          docker run -d -p 127.0.0.13000:3000 --name deploy-bettermi-app deploy-bettermi-app
+          docker run -d -p 127.0.0.1:3000:3000 --name deploy-bettermi-app deploy-bettermi-app
           echo ✅ Deployed successfully
           ENDSSH
