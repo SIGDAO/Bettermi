@@ -2,7 +2,489 @@ import * as React from "react";
 import "./titleBar.css";
 import { BackButton } from "./button";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "reactstrap";
+
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AlarmIcon from '@mui/icons-material/Alarm';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+
+//for dialog test
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
+import Typography from '@mui/material/Typography';
+import { blue } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+// radio button
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+// select
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+//Chip-select 
+import { Theme, useTheme } from '@mui/material/styles';
+// import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
+//Login 
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginIcon from '@mui/icons-material/Login';
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kell',
+  'Kelly',
+  'Kelly Sn',
+  'Kelly Sny',
+  'Kelly Snyd',
+  'Kelly Snyde',
+];
+
+
+function Copyright(props: any) {
+  return (
+    <Typography variant="body2" color="white" align="center" {...props}>
+      {'By the subscription, you agree our terms, private policy and Cookie use.'}
+      {/* <Link color="primary" to="https://mui.com/">
+        terms
+      </Link>{' '}
+      <Link color="primary" to="/aiCoachSelect">
+        private policy
+      </Link>{' '}
+      {`, and `}
+      <Link color="white" to="/aiCoachSelect">
+        Cookie use
+      </Link>{' '}
+
+      {new Date().getFullYear()} */}
+     
+    </Typography>
+  );
+}
+const defaultTheme = createTheme();
+
+
+function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+//radio button - 
+
+export interface SimpleDialogProps {
+  //chip-select
+  
+
+
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
+}
+const ResponsiveDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialog-paper': {
+    margin: '0px',
+    width: '95%',
+    height: '95%',
+    backgroundColor: 'black',
+    color: "white",
+    border: "#4136F1 solid",
+    borderRadius: "15px",
+    [theme.breakpoints.up('sm')]: {
+      width: '390px',
+      height: '90%',
+      backgroundColor: 'black',
+      color: "white",
+      border: "#4136F1 solid",
+      borderRadius: "15px",
+    },
+  },
+}));
+export interface LoginDialogProps {
+  //chip-select
+  
+
+
+  open: boolean;
+  selectedValue: string;
+  onClose: (value: string) => void;
+}
+const LoginDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialog-paper': {
+    margin: '0px',
+    width: '95%',
+    height: '95%',
+    backgroundColor: 'black',
+    color: "white",
+    border: "#4136F1 solid",
+    borderRadius: "15px",
+    [theme.breakpoints.up('sm')]: {
+      width: '390px',
+      height: '90%',
+      backgroundColor: 'black',
+      color: "white",
+      border: "#4136F1 solid",
+      borderRadius: "15px",
+    },
+  },
+}));
+
+
+function SimpleDialog(props: SimpleDialogProps) {
+  //chip-select
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState<string[]>([]);
+
+  const handleChange02 = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value: string) => {
+    onClose(value);
+  };
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
+  return (
+    <ResponsiveDialog open={open} onClose={onClose}  >
+    <DialogTitle><div className="title-bar-title inter-semi-bold-white-18px">篩選及排序</div></DialogTitle>
+    <DialogContent   sx={{color: "white"}}>
+    
+      {/* radio button */}
+    
+      <FormControl sx={{color: "white"}}>
+      <FormLabel id="demo-row-radio-buttons-group-label"  ><div className="title-bar-title inter-semi-bold-white-18px ">排序</div>
+      </FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        sx={{
+          '&, &.Mui-checked': {
+            color: 'white',
+          },
+        }}
+      >
+
+        <FormControlLabel value="female" control={<Radio  sx={{
+          '&, &.Mui-checked': {
+            color: '#4136F1',
+          },
+        }}/>} label="近期最新" />
+        <FormControlLabel value="male" control={<Radio sx={{
+          '&, &.Mui-checked': {
+            color: '#4136F1',
+          },
+        }}/>} label="接近過期" />
+        {/* <FormControlLabel value="other" control={<Radio sx={{
+          '&, &.Mui-checked': {
+            color: '#4136F1',
+          },
+        }}/>} label="最符合結果" />
+        <FormControlLabel value="aaa" control={<Radio sx={{
+          '&, &.Mui-checked': {
+            color: '#4136F1',
+          },
+        }}/>} label="接近過期" /> */}
+
+ </RadioGroup>
+ </FormControl>
+ <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司類型
+ </div></FormLabel>
+ {/* <InputLabel id="demo-multiple-chip-label">Chip</InputLabel> */}
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={personName}
+          onChange={handleChange02}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value}  color="primary" sx={{
+            "&":{
+              background: "4136F1",
+              color: "white",
+            },
+          }}/>
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+          fullWidth={true}
+          sx={{
+            "&, & [aria-expanded=true]":{
+              border: "3px solid #4136F1",
+            },
+          }}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+       
+  {/* <InputLabel id="demo-simple-select-label">公司類型</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={age}
+    label="Age"
+    onChange={handleChange}
+  >
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select> */}
+ <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司
+  </div></FormLabel>
+  {/* <InputLabel id="demo-multiple-chip-label">Chip</InputLabel> */}
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={personName}
+          onChange={handleChange02}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} color="primary" />
+              ))}
+            </Box>
+          )}
+          sx={{
+            "&, & [aria-expanded=true]":{
+              border: "3px solid #4136F1",
+            },
+          }}
+          MenuProps={MenuProps}
+          fullWidth={true}
+        >
+          {names.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+  
+     
+   
+   
+    </DialogContent>
+    <Button variant="outlined" fullWidth={true}>Reset</Button>
+    <Button variant="contained" fullWidth={true}>套用</Button>
+  </ResponsiveDialog>
+  );
+
+  
+}
+
+//login-dialog 
+function LogDialog(props: LoginDialogProps) {
+  //chip-select
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+  const theme = useTheme();
+  const [personName, setPersonName] = React.useState<string[]>([]);
+
+  const handleChange02 = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  const { onClose, selectedValue, open } = props;
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value: string) => {
+    onClose(value);
+  };
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
+  return (
+    <LoginDialog open={open} onClose={onClose}  >
+    <DialogTitle><div className="title-bar-title inter-semi-bold-white-18px">Email Suscription </div></DialogTitle>
+    <DialogContent>
+    <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Welcome to Coupons system
+          </Typography>
+          <Box sx={{ mt: 1 ,marginTop: 25}}></Box>
+          
+          <Typography component="p" variant="h9">
+          Please provide the email to enter the system
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              variant="filled" 
+              color="white"
+              sx={{
+                "&, & [aria-expanded=true]":{
+                  border: "3px solid #4136F1",
+                },
+                input: { color: '#fafafa',  opacity: 1}, 
+                "label": {color: '#fafafa', opacity: 1,} 
+              }}
+            />
+            {/* <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              variant="filled" 
+              color="white"
+              sx={{
+                "&, & [aria-expanded=true]":{
+                  border: "3px solid #4136F1",
+                  
+                },
+                 input: { color: '#fafafa',  opacity: 1}, 
+                 "label": {color: '#fafafa', opacity: 1,} // if you also want to change the color of the input, this is the prop you'd use
+    
+              }}
+            /> */}
+            {/* <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            /> */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              create the email link
+            </Button>
+           
+          </Box>
+        </Box>
+        <Box ></Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+    </DialogContent>
+    {/* <Button variant="outlined" fullWidth={true}>Reset</Button>
+    <Button variant="contained" fullWidth={true}>套用</Button> */}
+  </LoginDialog>
+  );
+
+  
+}
+
+
 
 interface IShortTitleBarProps {
   title: string | undefined;
@@ -18,16 +500,38 @@ interface IShortTitleBarProps {
   isOpenImport?: boolean;
   customiseBackButton?: boolean;
   customiseBackButtonLink?: string;
+  isCouponSystem?: boolean ;
   // isPositionNotFixed?: boolean;
 }
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   // back button default to true
-  const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink } = props;
+  const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink, isCouponSystem} = props;
+  const [open, setOpen] = React.useState(false);
+  const [open02, setOpen02] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+  const [selectedValue02, setSelectedValue02] = React.useState(emails[1]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value: string) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
   // right first button:
   // ai coach
   // import (not implemented)
+  const handleClickOpen02 = () => {
+    setOpen02(true);
+  };
+
+  const handleClose02 = (value: string) => {
+    setOpen02(false);
+  };
+
+
   const rightFirstButton: JSX.Element = (
     <>
       <Link to="/aiCoachSelect">
@@ -50,6 +554,27 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
     </>
   );
+  const rightFilterButton: JSX.Element = (
+    <>
+      {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
+      <IconButton color="white" aria-label="add to shopping cart" onClick={handleClickOpen} sx={{padding: "0"}}>
+        <FilterAltIcon />
+      </IconButton>
+      {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
+    </>
+  );
+
+  const rightLoginButton: JSX.Element = (
+    <>
+      {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
+      <IconButton color="white" aria-label="add to shopping cart" onClick={handleClickOpen02} sx={{padding: "0"}}>
+        <LoginIcon />
+      </IconButton>
+      {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
+    </>
+  );
+
+  
 
   return (
     // <div className="title-bar-layout">
@@ -58,7 +583,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         // style={isPositionNotFixed ? {position: "relative"} : {}}
         // style={
         //   {
-        //     // background: `url(${process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
+        //     // background: `url($q{process.env.PUBLIC_URL}/img/bg-11@1x.png)`,
         //     // backgroundPosition: 'center',
         //     // backgroundSize: 'cover',
         //   }
@@ -72,9 +597,25 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           <div className="title-bar-right-container">
             {rightFirstButton}
             {rightSecondButton}
+            {isCouponSystem && rightFilterButton}
+            {isCouponSystem && rightLoginButton}
           </div>
         </div>
-        {/* {keepAsReference} */}
+        {/* {keepAsReference &Dialog} */}
+        <SimpleDialog
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+      />
+        <LogDialog
+        selectedValue={selectedValue02}
+        open={open02}
+        onClose={handleClose02}
+      />
+
+
+        
+
       </div>
     // </div>
   );

@@ -685,3 +685,7 @@
   flex-direction: row;
   gap: 66.5px;
 }
+
+.coupons-a {
+  display: flex;
+}

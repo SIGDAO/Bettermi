@@ -520,3 +520,32 @@ a[disabled] {
 .cursor-pointer {
   cursor: pointer;
 }
+
+
+.couponExpiryDate {
+  text-align: left;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.couponImage {
+  height: 150px;
+  width: 150px;
+  align-self: center;
+  
+}
+
+.couponsContainer {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  width: 340px;
+  align-self: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #0D0D0D;
+  border: 1px solid #4136F1;
+  padding-left: 0;
+}

@@ -20,6 +20,7 @@ import { LedgerClientFactory } from "@signumjs/core";
 interface IMarketplaceProps {}
 
 const sponsorImageList = [
+"/img/marketplace/all_coupons.png",
   "/img/marketplace/zomate-fitness-logo-nft-436x436.png",
   "/img/marketplace/ichio-logo-nft-436x436.png",
   "/img/marketplace/ycy-logo-nft.png",
@@ -65,7 +66,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const sponsorImageDisplay: JSX.Element[] = sponsorImageList.map((imagePath) => {
     return (
       <div className="zoe-fitness-container">
-        <img className={imagePath === "/img/marketplace/Era.png" ? "zoe-fitness-not-scaleup" : "zoe-fitness"} src={`${process.env.PUBLIC_URL + imagePath}`} alt="Zoe Fitness" />
+        <Link className="coupons-a"  to={`/coupons`}><img className={imagePath === "/img/marketplace/Era.png" ? "zoe-fitness-not-scaleup" : "zoe-fitness"} src={`${process.env.PUBLIC_URL + imagePath}`} alt="Zoe Fitness" /></Link>
       </div>
     );
   });
@@ -141,7 +142,7 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-marketplace-1">
-        <ShortTitleBar title="Marketplace" aiCoach={true} setting={true} />
+        <ShortTitleBar title="Marketplace" aiCoach={true}  setting={true} />
         <div className="partner-company-y1jIXk partner-company">
           <img className="bg-oobbG1" src={`${process.env.PUBLIC_URL}/img/marketplace/bg-23@1x.png`} alt="bg" />
           <div className="partner-company-oobbG1 partner-company">
@@ -165,9 +166,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
         <div className="partner-company-Rea9Nd partner-company">
           <div className="bg-AStx0d"></div>
           <div className="hot-deals-AStx0d">HOT DEALS</div>
-          {/* <Link to="https://www.bettermi.io/" >
+          <Link to="https://www.bettermi.io/" >
             <div className="see-all-AStx0d see-all inter-medium-royal-blue-14px">See all</div>
-          </Link> */}
+          </Link>
           <HorizontalScrollContainer inputClassName="special-scroll-AStx0d">
             <div className="x25-Wx9nPx">
               <div className="x0-Y63lEW x0-marketplace">

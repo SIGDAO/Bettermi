@@ -70,6 +70,7 @@ const AllMission: React.FunctionComponent<IAllMissionProps> = (props) => {
         <div className="mission-body-container">
           <div className="mission-body">
             <div className="rewardTitle inter-semi-bold-royal-blue-15px">EARNING REWARDS</div>
+            
             <button className="challengeCompletedLink" onClick={() => navigate("/missionChallenge")}>
               <img className="buttonIconChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/nft-avatar-1@1x.png`} alt="Card_bg"></img>
               <div className="descriptionChallengeCompleted">

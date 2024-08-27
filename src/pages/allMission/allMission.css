@@ -398,3 +398,51 @@ align-self: flex-start;
     height: 17px;
     position: relative;
   }
+
+
+
+.couponExpiryDate {
+  text-align: left;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.couponImage {
+  height: 150px;
+  width: 150px;
+  align-self: center;
+  
+}
+
+.couponsContainer {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  width: 340px;
+  align-self: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #0D0D0D;
+  border: 1px solid #4136F1;
+  padding-left: 0;
+}
+
+.bettermidapp-challenges-1 .challenge-cards-QuyfDF{
+  padding-bottom: 15vh;
+}
+
+.couponDetail-rewardTitle {
+  padding: 20.48px 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: black;
+    color: white;
+}
+.couponDetail-rewardTitle h2 {
+    color: white;
+}
+.couponDetail-rewardTitle p {
+    color: white;
+}

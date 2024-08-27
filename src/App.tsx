@@ -47,6 +47,8 @@ import Setting from "./pages/setting/setting";
 import IndexMyNftList from "./pages/myNftList/indexMyNftList";
 import Leaderboard from "./pages/leaderboard/leaderboard";
 import OtherUserProfile from "./pages/leaderboard/otherUserProfile";
+import Coupons from "./pages/coupons/coupons"
+import CouponDetail from "./pages/couponDetail/couponDetail"
 import RoleRoute from "./route/roleRoute";
 import AllNftList from "./pages/allNftList/allNftList";
 import { IndexAllNftList } from "./pages/allNftList/indexAllNftList";
@@ -70,6 +72,10 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#4136F1",
+    },
+    white: {
+      main: "#ffffff",
+      
     },
   },
 });
@@ -152,6 +158,8 @@ const guestAllowedPath = [
   "/discordStartLoading",
   "/errorReferralCodeNetworkError",
   "/errorReferralCodeIncorrectRecipient",
+  "/coupons",
+  "/couponDetail",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -265,6 +273,13 @@ function App() {
               <Route path="/selfieToEarn" element={<SelfieToEarn />} />
               <Route path="/profile" element={<Profile previousPath={previousPath} />} />
               <Route path="/marketplace" element={<Marketplace />} />
+              <Route path="/coupons" element={<Coupons />} />
+              {/* <Route path="/couponDetail" element={<CouponDetail/>}/> */}
+              <Route path="/couponDetail" >
+                <Route path=":couponCode" element={<CouponDetail />} />
+              </Route>
+              {/* <Route path="/emailVerification" element={<Verification />} />
+              <Route path="/filter" element={<Filter />} /> */}
               <Route path="/previewNFTImg" element={<Testing />} />
               <Route path="/generateBMIDaily" element={<GenerateBMIDaily />} />
               <Route path="/aiCoachSelect" element={<AiCoachSelect />} />
