@@ -15,6 +15,8 @@ import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLo
 import { couponUserSlice, selectCurrentEmail } from "../../redux/couponUser";
 import { useGetCouponsByUserMutation } from "../../redux/couponAPI";
 import { couponSlice, selectCurrentCouponList } from "../../redux/coupon";
+import { useGetFilterOptionMutation } from "../../redux/filterAPI";
+import { FilterOption, filterSlice, selectCurrentFilterOption } from "../../redux/filter";
 
 interface TestingProps {}
 
@@ -23,8 +25,11 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [getLoginLink, { isSuccess: isSendLoginLinkSuccess, data, error }] = useGetLoginLinkMutation();
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
+  const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
   const loginedEmail = useSelector(selectCurrentEmail);
   const couponList = useSelector(selectCurrentCouponList);
+  const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
+
 
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const location = useLocation();
@@ -87,14 +92,29 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       });
   };
 
+  const getFilter = async () => {
+    getFilterOption()
+      .then((res) => {
+        console.log(res);
+        if ('data' in res) {
+          dispatch(filterSlice.actions.setFilterOption(res.data));
+        } else {
+          console.error('Failed to fetch filter options:', res.error);
+        }
+      })
+  
+  }
+
   const content: JSX.Element = (
     <>
       <button onClick={emailLogin}>testing get email login</button>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
       <button onClick={userLogout}>Logout</button>
       <button onClick={getCoupon}>Get Coupon</button>
+      <button onClick={getFilter}>Get Filter</button>
       {isSendLoginLinkSuccess && <p style={{ color: "white" }}>send the email link</p>}
       {isLoginSuccess && <p style={{ color: "white" }}>login success</p>}
+      {isLogoutSuccess && <p style={{ color: "white" }}>logout success</p>}
       {couponList.map((coupon, index) => {
         return (
           <div key={index}>
@@ -103,6 +123,24 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
+      {isGetFilterOptionSuccess && <p style={{ color: "white" }}>get filter option</p>}
+      {isGetFilterOptionSuccess && <p style={{ color: "white" }}><br/>industry:</p>}
+      {filterOption.industry.map((option, index) => {
+        return (
+          <div key={index}>
+            <div style={{ color: "white" }}>{option.industry_name}</div>
+          </div>
+        );
+      })}
+      {isGetFilterOptionSuccess && <p style={{ color: "white" }}><br/>merchant</p>}
+      {filterOption.merchant.map((option, index) => {
+        return (
+          <div key={index}>
+            <div style={{ color: "white" }}>{option.merchant_name}</div>
+          </div>
+        );
+      })}
+
     </>
   );
 
