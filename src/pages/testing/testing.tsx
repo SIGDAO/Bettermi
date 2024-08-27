@@ -11,92 +11,98 @@ import { useDispatch, useSelector } from "react-redux";
 import { profileSlice } from "../../redux/profile";
 import { accountId, getNftContractStorage } from "../../redux/account";
 import { LedgerClientFactory } from "@signumjs/core";
+import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation } from "../../redux/couponUserAPI";
+import { couponUserSlice, selectCurrentEmail } from "../../redux/couponUser";
+import { useGetCouponsByUserMutation } from "../../redux/couponAPI";
+import { couponSlice, selectCurrentCouponList } from "../../redux/coupon";
 
 interface TestingProps {}
 
 const Testing: React.FunctionComponent<TestingProps> = (props) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-  const Ledger = useLedger();
-  const userAccountId = useSelector(accountId);
-  const nodeHost = useSelector(selectWalletNodeHost);
-  const ledger2 = LedgerClientFactory.createClient({ nodeHost });
-  const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
-  const NftContractStorage = useSelector(getNftContractStorage);
+  const [getLoginLink, { isSuccess: isSendLoginLinkSuccess, data, error }] = useGetLoginLinkMutation();
+  const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
+  const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
+  const loginedEmail = useSelector(selectCurrentEmail);
+  const couponList = useSelector(selectCurrentCouponList);
 
-  const [nftId, setNftId] = React.useState<string>("");
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
-  const [nftNumber, setNftNumber] = React.useState<string>("");
-  const [imgAddress, setImgAddress] = React.useState<string>("");
-  const fetchUserIcon = async () => {
-    const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
-    if (isUserSettingUpdating === true) {
-      setIsLoading(false);
-    } else {
-      ledger2.account
-        .getAccount({ accountId: userAccountId })
-        .then((account) => {
+  const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
+  const location = useLocation();
 
-          const description = JSON.parse(account.description);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const paramValue = searchParams.get("apiKey");
+    console.log(paramValue);
 
-
-
-          setImgAddress(Object.keys(description.av)[0]);
-          setIsLoading(false);
+    if (searchParams.size > 0 && !isLoginLoading) {
+      login({ email: localStorage.getItem("email") || "", href: window.location.href })
+        .then((res) => {
+          if ("data" in res) {
+            dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
+          }
+          const newUrl = `${location.pathname}`;
+          window.history.replaceState({}, "", newUrl);
         })
-        .catch((error) => {
-          setIsLoading(false);
-
+        .catch((err) => {
+          console.log(err);
         });
-      const latestTransactionNumber = await FindLatestTransactionNumber(Ledger, NftContractStorage, nftDistributor);
-      const latestTransactionList = await FindLatestTransactionArray(Ledger, NftContractStorage, nftDistributor, latestTransactionNumber);
-      setNftId(latestTransactionList[0]);
     }
+  }, [location.search]);
+
+  const [email, setEmail] = React.useState<string>("");
+
+  const emailLogin = async () => {
+    const sendEmail: SendEmailLinkContent = {
+      email,
+      href: window.location.href,
+    };
+
+    await getLoginLink(sendEmail);
+    localStorage.setItem("email", email);
+    console.log(data);
   };
 
-  useEffect(() => {
-    fetchUserIcon();
-  }, []);
-
-  useEffect(() => {
-    if (!nftId) return;
-    FindNftIpfsAddressWithConractId(Ledger, nftId)
-      .then((result) => {
-
-        dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
-        setNftIpfsAddress(result.nftImage);
-        setNftNumber(result.nftNumber);
-        setIsLoading(false);
+  const getCoupon = async () => {
+    getCouponsByUser(loginedEmail)
+      .then((res) => {
+        console.log(res);
+        if ("data" in res) {
+          const couponList = res.data;
+          dispatch(couponSlice.actions.setCouponList(couponList));
+        }
       })
-      .catch((e: any) => {
-        alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
-        console.log(e);
+      .catch((err) => {
+        console.log(err);
       });
-  }, [nftId]);
+  };
+
+  const userLogout = async () => {
+    logout("testing")
+      .then((res) => {
+        console.log(res);
+        dispatch(couponUserSlice.actions.logout());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const content: JSX.Element = (
     <>
-      <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
-      {/* <BackButton /> */}
-      {isLoading === true ? (
-        <div className="x0"></div>
-      ) : (
-        <>
-          <img className="x0" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
-          <h1 className="text-1">#{nftNumber}</h1>
-        </>
-      )}
-      <div className="x16206">
-        <div className="lv-1">LV 1</div>
-        <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
-        <div className="reward-10">REWARD +10%</div>
-      </div>
-      <div className="x0-signa">$0 SIGNA</div>
-      {/* <div className="button_-import" onClick={() => navigate(-1)}>
-        <div className="continue inter-semi-bold-white-15px">Return</div>
-      </div> */}
+      <button onClick={emailLogin}>testing get email login</button>
+      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <button onClick={userLogout}>Logout</button>
+      <button onClick={getCoupon}>Get Coupon</button>
+      {isSendLoginLinkSuccess && <p style={{ color: "white" }}>send the email link</p>}
+      {isLoginSuccess && <p style={{ color: "white" }}>login success</p>}
+      {couponList.map((coupon, index) => {
+        return (
+          <div key={index}>
+            <p style={{ color: "white" }}>{coupon.c_name}</p>
+            <p style={{ color: "white" }}>{coupon.c_description}</p>
+          </div>
+        );
+      })}
     </>
   );
 
@@ -104,6 +110,95 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
 };
 
 export default Testing;
+
+// const Testing: React.FunctionComponent<TestingProps> = (props) => {
+//   const navigate = useNavigate();
+//   const location = useLocation();
+//   const dispatch = useDispatch();
+//   const Ledger = useLedger();
+//   const userAccountId = useSelector(accountId);
+//   const nodeHost = useSelector(selectWalletNodeHost);
+//   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
+//   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
+//   const NftContractStorage = useSelector(getNftContractStorage);
+
+//   const [nftId, setNftId] = React.useState<string>("");
+//   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+//   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
+//   const [nftNumber, setNftNumber] = React.useState<string>("");
+//   const [imgAddress, setImgAddress] = React.useState<string>("");
+//   const fetchUserIcon = async () => {
+//     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
+//     if (isUserSettingUpdating === true) {
+//       setIsLoading(false);
+//     } else {
+//       ledger2.account
+//         .getAccount({ accountId: userAccountId })
+//         .then((account) => {
+
+//           const description = JSON.parse(account.description);
+
+//           setImgAddress(Object.keys(description.av)[0]);
+//           setIsLoading(false);
+//         })
+//         .catch((error) => {
+//           setIsLoading(false);
+
+//         });
+//       const latestTransactionNumber = await FindLatestTransactionNumber(Ledger, NftContractStorage, nftDistributor);
+//       const latestTransactionList = await FindLatestTransactionArray(Ledger, NftContractStorage, nftDistributor, latestTransactionNumber);
+//       setNftId(latestTransactionList[0]);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchUserIcon();
+//   }, []);
+
+//   useEffect(() => {
+//     if (!nftId) return;
+//     FindNftIpfsAddressWithConractId(Ledger, nftId)
+//       .then((result) => {
+
+//         dispatch(profileSlice.actions.setNFTImageAddress(result.nftImage));
+//         setNftIpfsAddress(result.nftImage);
+//         setNftNumber(result.nftNumber);
+//         setIsLoading(false);
+//       })
+//       .catch((e: any) => {
+//         alert("We apologize that some error has occurred. You can still get your free NFT in myNft Collection if you haven't get one");
+//         console.log(e);
+//       });
+//   }, [nftId]);
+
+//   const content: JSX.Element = (
+//     <>
+//       <img className="photo" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/photo-1@1x.png`} alt="Photo" />
+//       {/* <BackButton /> */}
+//       {isLoading === true ? (
+//         <div className="x0"></div>
+//       ) : (
+//         <>
+//           <img className="x0" src={`https://ipfs.io/ipfs/${imgAddress}`} alt="0" />
+//           <h1 className="text-1">#{nftNumber}</h1>
+//         </>
+//       )}
+//       <div className="x16206">
+//         <div className="lv-1">LV 1</div>
+//         <img className="x6" src={`${process.env.PUBLIC_URL}/img/generateFreeNFT/file---6@1x.png`} alt="6" />
+//         <div className="reward-10">REWARD +10%</div>
+//       </div>
+//       <div className="x0-signa">$0 SIGNA</div>
+//       {/* <div className="button_-import" onClick={() => navigate(-1)}>
+//         <div className="continue inter-semi-bold-white-15px">Return</div>
+//       </div> */}
+//     </>
+//   );
+
+//   return <CenterLayout bgImg={false} content={content} />;
+// };
+
+// export default Testing;
 
 // import React, { useEffect, useState } from "react";
 // import "./testing.css";
@@ -124,7 +219,6 @@ export default Testing;
 //   const [ sendMsg, {isLoading, data} ] = useSendMsgMutation()
 
 //   useEffect(() => {
-
 
 //   }, []);
 
@@ -282,7 +376,6 @@ export default Testing;
 //         // const displayData = [res]
 //         setData(res)
 
-
 //
 //         // dispatch(userBMISlice.actions.setBMI(res))
 //       })
@@ -396,8 +489,6 @@ export default Testing;
 //   const checkIfTransactionOnChain = async () => {
 //     if (!ledger) return;
 //     // const startTime: number = Date.now(); // get the current time in milliseconds
-
-
 
 //     let ourContract = await ledger.contract.getContractsByAccount({
 //       accountId: userAccountId,

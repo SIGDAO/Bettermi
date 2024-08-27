@@ -13,6 +13,10 @@ import { aiCoachAPI } from "./aiCoachAPI"
 import { contractSlice } from "./contract";
 import { aiCoachSlice } from "./aiCoach";
 import { referrerSlice } from "./referrer";
+import { couponUserSlice } from "./couponUser";
+import { apiSlice } from "./couponSystemAPISlice";
+import { filterSlice } from "./filter";
+import { couponSlice } from "./coupon";
 
 const appReducer = combineReducers({
   wallet: walletSlice.reducer,
@@ -24,10 +28,15 @@ const appReducer = combineReducers({
   contract: contractSlice.reducer,
   aiCoachMsg: aiCoachSlice.reducer,
   referrer:referrerSlice.reducer,
+  couponUser: couponUserSlice.reducer,
+  filter: filterSlice.reducer,
+  coupon: couponSlice.reducer,
   [userBMIApi.reducerPath]: userBMIApi.reducer,
   [tokenAPI.reducerPath]: tokenAPI.reducer,
   [aiCoachAPI.reducerPath]: aiCoachAPI.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
+
 const rootReducer = (state:any, action:any) => {
   if (action.type === 'USER_LOGOUT') {
     localStorage.removeItem('persist:root')
@@ -35,6 +44,7 @@ const rootReducer = (state:any, action:any) => {
   }
   return appReducer(state, action)
 }
+
 export const store = configureStore({
   preloadedState:loadState(),
   reducer: rootReducer,
@@ -43,7 +53,9 @@ export const store = configureStore({
       serializableCheck: false
     })
       .concat(userBMIApi.middleware)
-      .concat(aiCoachAPI.middleware),
+      .concat(aiCoachAPI.middleware)
+      .concat(tokenAPI.middleware)
+      .concat(apiSlice.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

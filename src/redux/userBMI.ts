@@ -15,7 +15,6 @@ import { findBMI } from "../components/bmiCalculate";
 
 export interface UserBMIState {
   userBMI: SeriesDataItemTypeMap['Area'][];
-  localtok
 }
 
 const initialState: UserBMIState = {
@@ -41,6 +40,9 @@ export const userBMISlice = createSlice({
       // state is imagePath
       state.userBMI = action.payload;
     },
+    clearBMI: (state) => {
+      state.userBMI = [];
+    }
     // getblockchainBMI: (state, action: PayloadAction<GetblockchainBMIProps>) => {
     //   findBMI(action.payload.tempAccountId, action.payload.Ledger2)
     //     .then((res) => {
