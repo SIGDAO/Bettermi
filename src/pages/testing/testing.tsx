@@ -112,8 +112,10 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const getCoupon = async () => {
     getCouponDetail(userEnterCouponId)
       .then((res) => {
-        console.log(res);
-        dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+        console.log("res", res);
+        if ("data" in res) {
+          dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+        }
       })
       .catch((err) => {
         console.log(err);
