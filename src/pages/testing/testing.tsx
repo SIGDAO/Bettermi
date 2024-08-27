@@ -13,8 +13,8 @@ import { accountId, getNftContractStorage } from "../../redux/account";
 import { LedgerClientFactory } from "@signumjs/core";
 import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation } from "../../redux/couponUserAPI";
 import { couponUserSlice, selectCurrentEmail } from "../../redux/couponUser";
-import { useGetCouponsByUserMutation } from "../../redux/couponAPI";
-import { couponSlice, selectCurrentCouponList } from "../../redux/coupon";
+import { useGetCouponDetailMutation, useGetCouponsByUserMutation } from "../../redux/couponAPI";
+import { couponSlice, selectCurrentCouponList, selectCurrentSelectedCoupon } from "../../redux/coupon";
 import { useGetFilterOptionMutation } from "../../redux/filterAPI";
 import { FilterOption, filterSlice, selectCurrentFilterOption } from "../../redux/filter";
 
@@ -26,13 +26,18 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
   const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
+  const [getCouponDetail, { isSuccess: isGetCouponCodeSuccess, error: getCouponCodeError }] = useGetCouponDetailMutation();
   const loginedEmail = useSelector(selectCurrentEmail);
   const couponList = useSelector(selectCurrentCouponList);
   const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
+  const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
 
 
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const location = useLocation();
+
+  const [email, setEmail] = React.useState<string>("");
+  const [userEnterCouponId, setUserEnterCouponId] = React.useState<number>(0);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -54,7 +59,6 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
     }
   }, [location.search]);
 
-  const [email, setEmail] = React.useState<string>("");
 
   const emailLogin = async () => {
     const sendEmail: SendEmailLinkContent = {
@@ -67,7 +71,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
     console.log(data);
   };
 
-  const getCoupon = async () => {
+  const getCouponList = async () => {
     getCouponsByUser(loginedEmail)
       .then((res) => {
         console.log(res);
@@ -105,13 +109,29 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   
   }
 
+  const getCoupon = async () => {
+    getCouponDetail(userEnterCouponId)
+      .then((res) => {
+        console.log(res);
+        dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   const content: JSX.Element = (
     <>
       <button onClick={emailLogin}>testing get email login</button>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
       <button onClick={userLogout}>Logout</button>
-      <button onClick={getCoupon}>Get Coupon</button>
+      <button onClick={getCouponList}>Get Coupon list</button>
       <button onClick={getFilter}>Get Filter</button>
+      <button onClick={getCoupon}>Get coupon detail by coupon id(need to enter coupon id that user have )</button>
+      <input type="number" placeholder="coupon_id" value={userEnterCouponId} onChange={(e) => setUserEnterCouponId(parseInt(e.target.value))} />
+
+
+
       {isSendLoginLinkSuccess && <p style={{ color: "white" }}>send the email link</p>}
       {isLoginSuccess && <p style={{ color: "white" }}>login success</p>}
       {isLogoutSuccess && <p style={{ color: "white" }}>logout success</p>}
@@ -140,6 +160,10 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
+      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>get coupon code</p>}
+      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.c_name}</p>}
+      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.c_description}</p>}
+      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.coupon_code}</p>}
 
     </>
   );

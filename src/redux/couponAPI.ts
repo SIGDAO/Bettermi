@@ -1,3 +1,4 @@
+import { SelectedCoupon } from "./coupon";
 import { apiSlice } from "./couponSystemAPISlice";
 
 export const couponAPI = apiSlice.injectEndpoints({
@@ -16,12 +17,13 @@ export const couponAPI = apiSlice.injectEndpoints({
         body: { email },
       }),
     }),
-    // getCouponsByUser: builder.query({
-    //   query: () => ({
-    //     url: "/coupon/getCouponsByUser",
-    //     method: "GET",
-    //   }),
-    // }),
+    getCouponDetail: builder.mutation({
+      query: (coupon_id: number) => ({
+        url: "/coupon/getCouponDetail",
+        method: "POST",
+        body: { coupon_id },
+      }),
+    }),
     refreshCouponCode: builder.mutation({
       query: (credentials) => ({
         url: "/coupon/refreshCouponCode",
@@ -39,7 +41,9 @@ export const couponAPI = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetCouponsByMerchantMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation } = couponAPI;
+
+export const { useGetCouponsByMerchantMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation, useGetCouponDetailMutation } = couponAPI;
+
 
 // // no role
 // router.get("/getCouponsByMerchant", getAllCoupons);

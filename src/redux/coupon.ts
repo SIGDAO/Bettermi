@@ -9,9 +9,13 @@ export interface Coupon {
   c_description: string;
 }
 
+export interface SelectedCoupon extends Coupon {
+  coupon_code: string;
+}
+
 export interface AppCouponContent {
   couponList: Coupon[];
-  selectedCoupon: Coupon & { coupon_code: string };
+  selectedCoupon: SelectedCoupon;
 }
 
 const initialState: AppCouponContent = {
