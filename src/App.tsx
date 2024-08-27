@@ -160,6 +160,7 @@ const guestAllowedPath = [
   "/errorReferralCodeIncorrectRecipient",
   "/coupons",
   "/couponDetail",
+  "/testing",
 ];
 
 const checkCurrentPathIsGuestAllowed = (currentPath: string): boolean => {
@@ -321,6 +322,7 @@ function App() {
                 <Route path=":referralCode" element={<LoadingDiscordAuthorization pathname="/loadingDiscordAuthorization" />} />
               </Route>
               <Route path="/discordStartLoading" element={<DiscordStartLoading/>}></Route>
+              <Route path="/testing" element={<Testing />} />
             </Route>
             {/* </Route> */}
           </Routes>
