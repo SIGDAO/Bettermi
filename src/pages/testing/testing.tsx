@@ -66,6 +66,9 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   useEffect(() => {
     if (isTriggerGetCouponCode && couponDetailStatus !== "rejected") {
       const interval = setInterval(() => {
+        // if (selectedCoupon.) {
+
+        // }
         getCouponDetail(userEnterCouponId)
           .then((res) => {
             console.log("res", res);
