@@ -4,7 +4,7 @@ import { BackButton } from "../../components/button";
 import "./testing.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FindLatestTransactionArray, FindLatestTransactionNumber, FindNftIpfsAddressWithConractId, IsUserUpdatingIcon } from "../../NftSystem/updateUserNftStorage";
 import { selectWalletNodeHost, useLedger } from "../../redux/useLedger";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,18 +26,19 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
   const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
-  const [getCouponDetail, { isSuccess: isGetCouponCodeSuccess, error: getCouponCodeError }] = useGetCouponDetailMutation();
+  const [getCouponDetail, { isSuccess: isGetCouponCodeSuccess, error: getCouponCodeError, status: couponDetailStatus }] = useGetCouponDetailMutation();
   const loginedEmail = useSelector(selectCurrentEmail);
   const couponList = useSelector(selectCurrentCouponList);
   const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
   const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
+  const [isTriggerGetCouponCode, setIsTriggerGetCouponCode] = useState<boolean>(false);
 
 
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const location = useLocation();
 
-  const [email, setEmail] = React.useState<string>("");
-  const [userEnterCouponId, setUserEnterCouponId] = React.useState<number>(0);
+  const [email, setEmail] = useState<string>("");
+  const [userEnterCouponId, setUserEnterCouponId] = useState<number>(0);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -58,6 +59,27 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         });
     }
   }, [location.search]);
+
+  // build a function to get coupon code for every 30 seconds
+  // if isTriggerGetCouponCode is false, stop the interval
+  useEffect(() => {
+    if (isTriggerGetCouponCode && couponDetailStatus !== "rejected") {
+      const interval = setInterval(() => {
+        getCouponDetail(userEnterCouponId)
+          .then((res) => {
+            console.log("res", res);
+            if ("data" in res) {
+              dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isTriggerGetCouponCode]);
 
 
   const emailLogin = async () => {
@@ -110,20 +132,22 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   }
 
   const getCoupon = async () => {
-    getCouponDetail(userEnterCouponId)
-      .then((res) => {
-        console.log("res", res);
-        if ("data" in res) {
-          dispatch(couponSlice.actions.setSelectedCoupon(res.data));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setIsTriggerGetCouponCode(true);
+    // getCouponDetail(userEnterCouponId)
+    //   .then((res) => {
+    //     console.log("res", res);
+    //     if ("data" in res) {
+    //       dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   const content: JSX.Element = (
     <>
+      <BackButton customiseBackButtonLink={"/home"} />
       <button onClick={emailLogin}>testing get email login</button>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
       <button onClick={userLogout}>Logout</button>
@@ -131,6 +155,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       <button onClick={getFilter}>Get Filter</button>
       <button onClick={getCoupon}>Get coupon detail by coupon id(need to enter coupon id that user have )</button>
       <input type="number" placeholder="coupon_id" value={userEnterCouponId} onChange={(e) => setUserEnterCouponId(parseInt(e.target.value))} />
+      <button onClick={() => setIsTriggerGetCouponCode(false)}>Stop get coupon code</button>
 
 
 
@@ -162,11 +187,12 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
-      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>get coupon code</p>}
-      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.c_name}</p>}
-      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.c_description}</p>}
-      {isGetCouponCodeSuccess && <p style={{ color: "white" }}>{selectedCoupon.coupon_code}</p>}
-
+      {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>get coupon detail</p>}
+      {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.c_name}</p>}
+      {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.c_description}</p>}
+      {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.coupon_code}</p>}
+      <p style={{ color: "white" }}>{couponDetailStatus}</p>
+      <p style={{ color: "white" }}>{isTriggerGetCouponCode ? "triggered get coupon code" : "stop get coupon code"}</p>
     </>
   );
 
@@ -186,11 +212,11 @@ export default Testing;
 //   const nftDistributor = process.env.REACT_APP_NFT_DISTRIBUTOR!;
 //   const NftContractStorage = useSelector(getNftContractStorage);
 
-//   const [nftId, setNftId] = React.useState<string>("");
-//   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-//   const [nftIpfsAddress, setNftIpfsAddress] = React.useState<string>("");
-//   const [nftNumber, setNftNumber] = React.useState<string>("");
-//   const [imgAddress, setImgAddress] = React.useState<string>("");
+//   const [nftId, setNftId] = useState<string>("");
+//   const [isLoading, setIsLoading] = useState<boolean>(true);
+//   const [nftIpfsAddress, setNftIpfsAddress] = useState<string>("");
+//   const [nftNumber, setNftNumber] = useState<string>("");
+//   const [imgAddress, setImgAddress] = useState<string>("");
 //   const fetchUserIcon = async () => {
 //     const isUserSettingUpdating = await IsUserUpdatingIcon(ledger2, userAccountId);
 //     if (isUserSettingUpdating === true) {
