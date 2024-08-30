@@ -49,7 +49,9 @@ export const couponSlice = createSlice({
         coupon_code: "",
       };
     },
-
+    setSelectedCouponCode: (state, action: PayloadAction<string>) => {
+      state.selectedCoupon.coupon_code = action.payload;
+    }
   },
 });
 export const { actions } = couponSlice;

@@ -13,7 +13,7 @@ import { accountId, getNftContractStorage } from "../../redux/account";
 import { LedgerClientFactory } from "@signumjs/core";
 import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation } from "../../redux/couponUserAPI";
 import { couponUserSlice, selectCurrentEmail } from "../../redux/couponUser";
-import { useGetCouponDetailMutation, useGetCouponsByUserMutation } from "../../redux/couponAPI";
+import { useGetCouponDetailMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../../redux/couponAPI";
 import { couponSlice, selectCurrentCouponList, selectCurrentSelectedCoupon } from "../../redux/coupon";
 import { useGetFilterOptionMutation } from "../../redux/filterAPI";
 import { FilterOption, filterSlice, selectCurrentFilterOption } from "../../redux/filter";
@@ -28,12 +28,13 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
   const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
   const [getCouponDetail, { isSuccess: isGetCouponCodeSuccess, error: getCouponCodeError, status: couponDetailStatus }] = useGetCouponDetailMutation();
+  const [refreshCouponCode, { isSuccess: isRefreshCouponCodeSuccess, error: refreshCouponCodeError, status: refreshCouponCodeStatus }] = useRefreshCouponCodeMutation();
+
   const loginedEmail = useSelector(selectCurrentEmail);
   const couponList = useSelector(selectCurrentCouponList);
   const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
   const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
   const [isTriggerGetCouponCode, setIsTriggerGetCouponCode] = useState<boolean>(false);
-
 
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const location = useLocation();
@@ -41,11 +42,15 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [email, setEmail] = useState<string>("");
   const [userEnterCouponId, setUserEnterCouponId] = useState<number>(0);
 
+  // for testing login
+  // handle action after user click email link
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+    // get the apiKey of the search query
     const paramValue = searchParams.get("apiKey");
     console.log(paramValue);
 
+    // if the search query has apiKey, then call login api
     if (searchParams.size > 0 && !isLoginLoading) {
       login({ email: localStorage.getItem("email") || "", href: window.location.href })
         .then((res) => {
@@ -53,6 +58,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
             dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
           }
           const newUrl = `${location.pathname}`;
+          // remove the search query from the url after logined
           window.history.replaceState({}, "", newUrl);
         })
         .catch((err) => {
@@ -66,26 +72,38 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   useEffect(() => {
     if (isTriggerGetCouponCode && couponDetailStatus !== "rejected") {
       const interval = setInterval(() => {
-        // if (selectedCoupon.) {
-
-        // }
-        getCouponDetail(userEnterCouponId)
-          .then((res) => {
-            console.log("res", res);
-            if ("data" in res) {
-              dispatch(couponSlice.actions.setSelectedCoupon(res.data));
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        // after 1st time get coupon detail
+        // should refresh coupon code only
+        if (selectedCoupon.coupon_code) {
+          refreshCouponCode(selectedCoupon.coupon_id)
+            .then((res) => {
+              console.log("res", res);
+              if ("data" in res) {
+                dispatch(couponSlice.actions.setSelectedCouponCode(res.data));
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          getCouponDetail(userEnterCouponId)
+            .then((res) => {
+              console.log("res", res);
+              if ("data" in res) {
+                dispatch(couponSlice.actions.setSelectedCoupon(res.data));
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       }, 3000);
 
       return () => clearInterval(interval);
     }
   }, [isTriggerGetCouponCode]);
 
-
+  // send email link to user
   const emailLogin = async () => {
     const sendEmail: SendEmailLinkContent = {
       email,
@@ -96,6 +114,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
     localStorage.setItem("email", email);
     console.log(data);
   };
+
 
   const getCouponList = async () => {
     getCouponsByUser(loginedEmail)
@@ -134,6 +153,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   };
 
   const getCoupon = async () => {
+    // trigger get coupon code per 30 seconds
     setIsTriggerGetCouponCode(true);
     // getCouponDetail(userEnterCouponId)
     //   .then((res) => {
@@ -145,7 +165,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-  }
+  };
 
   const content: JSX.Element = (
     <>
@@ -160,10 +180,10 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       <button onClick={() => setIsTriggerGetCouponCode(false)}>Stop get coupon code</button>
 
 
-
       {isSendLoginLinkSuccess && <p style={{ color: "white" }}>send the email link</p>}
       {isLoginSuccess && <p style={{ color: "white" }}>login success</p>}
       {isLogoutSuccess && <p style={{ color: "white" }}>logout success</p>}
+      {/* get coupon list result */}
       {couponList.map((coupon, index) => {
         return (
           <div key={index}>
@@ -172,6 +192,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
+      {/* get filterOption result */}
       {isGetFilterOptionSuccess && <p style={{ color: "white" }}>get filter option</p>}
       {isGetFilterOptionSuccess && (
         <p style={{ color: "white" }}>
@@ -199,12 +220,14 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
+      {/* get coupon detail result */}
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>get coupon detail</p>}
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.c_name}</p>}
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.c_description}</p>}
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.coupon_code}</p>}
       <p style={{ color: "white" }}>{couponDetailStatus}</p>
-      <p style={{ color: "white" }}>{isTriggerGetCouponCode ? "triggered get coupon code" : "stop get coupon code"}</p>      {isGetCouponCodeSuccess && <QRCodeSVG size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} value={selectedCoupon.coupon_code} viewBox={`0 0 256 256`} />}
+      <p style={{ color: "white" }}>{isTriggerGetCouponCode ? "triggered get coupon code" : "stop get coupon code"}</p>{" "}
+      {isGetCouponCodeSuccess && <QRCodeSVG size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} value={selectedCoupon.coupon_code} viewBox={`0 0 256 256`} />}
     </>
   );
 
