@@ -17,6 +17,7 @@ import { useGetCouponDetailMutation, useGetCouponsByUserMutation } from "../../r
 import { couponSlice, selectCurrentCouponList, selectCurrentSelectedCoupon } from "../../redux/coupon";
 import { useGetFilterOptionMutation } from "../../redux/filterAPI";
 import { FilterOption, filterSlice, selectCurrentFilterOption } from "../../redux/filter";
+import { QRCodeSVG } from "qrcode.react";
 
 interface TestingProps {}
 
@@ -119,17 +120,15 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   };
 
   const getFilter = async () => {
-    getFilterOption()
-      .then((res) => {
-        console.log(res);
-        if ('data' in res) {
-          dispatch(filterSlice.actions.setFilterOption(res.data));
-        } else {
-          console.error('Failed to fetch filter options:', res.error);
-        }
-      })
-  
-  }
+    getFilterOption().then((res) => {
+      console.log(res);
+      if ("data" in res) {
+        dispatch(filterSlice.actions.setFilterOption(res.data));
+      } else {
+        console.error("Failed to fetch filter options:", res.error);
+      }
+    });
+  };
 
   const getCoupon = async () => {
     setIsTriggerGetCouponCode(true);
@@ -171,7 +170,12 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
         );
       })}
       {isGetFilterOptionSuccess && <p style={{ color: "white" }}>get filter option</p>}
-      {isGetFilterOptionSuccess && <p style={{ color: "white" }}><br/>industry:</p>}
+      {isGetFilterOptionSuccess && (
+        <p style={{ color: "white" }}>
+          <br />
+          industry:
+        </p>
+      )}
       {filterOption.industry.map((option, index) => {
         return (
           <div key={index}>
@@ -179,7 +183,12 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
           </div>
         );
       })}
-      {isGetFilterOptionSuccess && <p style={{ color: "white" }}><br/>merchant</p>}
+      {isGetFilterOptionSuccess && (
+        <p style={{ color: "white" }}>
+          <br />
+          merchant
+        </p>
+      )}
       {filterOption.merchant.map((option, index) => {
         return (
           <div key={index}>
@@ -192,7 +201,7 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.c_description}</p>}
       {couponDetailStatus === "fulfilled" && <p style={{ color: "white" }}>{selectedCoupon.coupon_code}</p>}
       <p style={{ color: "white" }}>{couponDetailStatus}</p>
-      <p style={{ color: "white" }}>{isTriggerGetCouponCode ? "triggered get coupon code" : "stop get coupon code"}</p>
+      <p style={{ color: "white" }}>{isTriggerGetCouponCode ? "triggered get coupon code" : "stop get coupon code"}</p>      {isGetCouponCodeSuccess && <QRCodeSVG size={256} style={{ height: "auto", maxWidth: "100%", width: "100%" }} value={selectedCoupon.coupon_code} viewBox={`0 0 256 256`} />}
     </>
   );
 
