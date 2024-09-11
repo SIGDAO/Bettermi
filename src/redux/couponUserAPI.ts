@@ -27,7 +27,13 @@ export const couponUserAPI = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    userStatus: builder.mutation({
+      query: () => ({
+        url: "/auth/userStatus",
+        method: "GET",
+      }),
+    })
   }),
 });
 
-export const { useAccessMutation, useGetLoginLinkMutation, useLogoutMutation } = couponUserAPI;
+export const { useAccessMutation, useGetLoginLinkMutation, useLogoutMutation ,useUserStatusMutation} = couponUserAPI;

@@ -63,7 +63,8 @@ import AuthorizationDone from "./pages/AuthorizationDone/AuthorizationDone";
 import LoadingDiscordAuthorization from "./pages/loadingDiscordAuthorization/loadingDiscordAuthorization";
 import DiscordStart from "./pages/discordStart/discordStart";
 import DiscordStartLoading from "./pages/discordStartLoading/discordStartLoading";
-
+//Cookie 
+import { CookiesProvider } from 'react-cookie';
 store.subscribe(() => {
   saveState(store.getState());
 });
@@ -227,6 +228,7 @@ function App() {
 
   return (
     // path
+    <CookiesProvider defaultSetOptions={{ path: '/' }}>
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={appConfig}>
         <ReduxProvider store={store}>
@@ -329,6 +331,7 @@ function App() {
         </ReduxProvider>
       </AppContext.Provider>
     </ThemeProvider>
+    </CookiesProvider>
   );
 }
 

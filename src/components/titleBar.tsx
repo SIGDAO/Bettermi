@@ -1,6 +1,8 @@
 import * as React from "react";
 import "./titleBar.css";
 import { BackButton } from "./button";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import IconButton from '@mui/material/IconButton';
@@ -55,6 +57,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useDispatch, useSelector } from "react-redux";
+import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation, useUserStatusMutation } from "../redux/couponUserAPI";
+import { couponUserSlice, selectCouponUserEmail} from "../redux/couponUser";
+import { useGetCouponDetailMutation,useGetUserMutation,useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../redux/couponAPI";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -82,6 +89,18 @@ const names = [
   'Kelly Sny',
   'Kelly Snyd',
   'Kelly Snyde',
+];
+
+const merchant = [
+  "Best Deals Inc.",
+  "Super Savings Mart",
+  "Discount Emporium",
+];
+
+const merchantType = [
+  "Retail",
+  "Education",
+  "Food & Beverage",
 ];
 
 
@@ -183,7 +202,6 @@ function SimpleDialog(props: SimpleDialogProps) {
   //chip-select
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
-
   const handleChange02 = (event: SelectChangeEvent<typeof personName>) => {
     const {
       target: { value },
@@ -203,11 +221,15 @@ function SimpleDialog(props: SimpleDialogProps) {
   const handleListItemClick = (value: string) => {
     onClose(value);
   };
-  const [age, setAge] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOrder((event.target as HTMLInputElement).value);
+    console.log("change order")
   };
+
+  const [order, setOrder] = React.useState("descending");
+  const [merchant, setMerchant] = React.useState<string[]>([]);
+  const [merchantType, setMerchantType] = React.useState<string[]>([]);
 
   return (
     <ResponsiveDialog open={open} onClose={onClose}  >
@@ -228,14 +250,16 @@ function SimpleDialog(props: SimpleDialogProps) {
             color: 'white',
           },
         }}
+        value={order} 
+        onChange={handleRadioChange}
       >
 
-        <FormControlLabel value="female" control={<Radio  sx={{
+        <FormControlLabel value="ascending" control={<Radio  sx={{
           '&, &.Mui-checked': {
             color: '#4136F1',
           },
         }}/>} label="近期最新" />
-        <FormControlLabel value="male" control={<Radio sx={{
+        <FormControlLabel value="descending" control={<Radio sx={{
           '&, &.Mui-checked': {
             color: '#4136F1',
           },
@@ -347,7 +371,13 @@ function SimpleDialog(props: SimpleDialogProps) {
    
     </DialogContent>
     <Button variant="outlined" fullWidth={true}>Reset</Button>
-    <Button variant="contained" fullWidth={true}>套用</Button>
+    <Button variant="contained" fullWidth={true} onClick={
+    () => {
+      console.log("order:",order)
+      console.log("merchant:",merchant)
+      console.log("merchant Type:" ,merchantType)
+    }
+    }>套用</Button>
   </ResponsiveDialog>
   );
 
@@ -357,13 +387,36 @@ function SimpleDialog(props: SimpleDialogProps) {
 //login-dialog 
 function LogDialog(props: LoginDialogProps) {
   //chip-select
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch();
+  const [getLoginLink, { isSuccess: isSendLoginLinkSuccess, data, error }] = useGetLoginLinkMutation();
+  const [email, setEmail] = React.useState<string>("");
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+    const email = data.get('email')?.toString();
+    if (email !== null && email !== undefined){
+    const sendEmail: SendEmailLinkContent = {
+      email: email,
+      href: window.location.href,
+    };
+    await getLoginLink(sendEmail);
+    localStorage.setItem("email", email);
+    console.log(data);
+  }
+  };
+  const emailLogin = async () => {
+    const sendEmail: SendEmailLinkContent = {
+      email,
+      href: window.location.href,
+    };
+
+    await getLoginLink(sendEmail);
+    localStorage.setItem("email", email);
+    console.log(data);
   };
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
@@ -467,14 +520,15 @@ function LogDialog(props: LoginDialogProps) {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+
             >
               create the email link
             </Button>
-           
+            {isSendLoginLinkSuccess && <p style={{ color: "white" }}>sent the email link</p>}
           </Box>
         </Box>
         <Box ></Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
     </DialogContent>
     {/* <Button variant="outlined" fullWidth={true}>Reset</Button>
     <Button variant="contained" fullWidth={true}>套用</Button> */}
@@ -506,12 +560,18 @@ interface IShortTitleBarProps {
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   // back button default to true
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink, isCouponSystem} = props;
   const [open, setOpen] = React.useState(false);
   const [open02, setOpen02] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [selectedValue02, setSelectedValue02] = React.useState(emails[1]);
-
+  // const couponUser = useSelector(selectCouponUser);
+  const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
+  const [getUser, { isSuccess: isGetUser, error: getError }] = useGetUserMutation();
+  const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -544,7 +604,6 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       {/* {importButton && <img src="" alt="" className="title-bar-right-first-button-image" />} */}
     </>
   );
-
   // right second button:
   // setting
   // store (not implemented)
@@ -573,7 +632,84 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
     </>
   );
+  const rightLogoutButton: JSX.Element = (
+    <>
+      {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
+      <IconButton color="white" aria-label="add to shopping cart" sx={{padding: "0"}}>
+        <LogoutIcon />
+      </IconButton>
+      {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
+    </>
+  );
 
+
+  useEffect(() => {
+    // console.log("Redux login:", login)
+    // console.log("Redux login success:", isLoginSuccess)
+    // console.log("Redux data:", loginData)
+    // console.log("logined email", loginedEmail)
+    // old and useless method for login
+    // getUser(loginedEmail)
+    //   .then((res) => {
+    //     console.log(res);
+    //     if ("data" in res) {
+    //       // const couponList = res.data;
+    //       dispatch(couponUserSlice.actions.setCredentials({ email: res.data.email || "", token: res.data.accessToken || "" }));
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    console.log("couponUser: ", couponUser);
+    if (!couponUser){
+        userStatus("")
+           .then((res) => {
+        console.log(res);
+        if ("data" in res) {
+          // const couponList = res.data;
+          dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
+          setCouponUser(res.data.user.email );
+        }
+      })
+      .catch((err) => {
+         console.log("Auto login failed")
+        console.log(err);
+      });
+    }
+  }, []);
+
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const paramValue = searchParams.get("apiKey");
+    console.log(paramValue);
+
+    if (searchParams.size > 0 && !isLoginLoading) {
+      login({ email: localStorage.getItem("email") || "", href: window.location.href })
+        .then((res) => {
+          if ("data" in res) {
+            dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
+          }
+          const newUrl = `${location.pathname}`;
+          window.history.replaceState({}, "", newUrl);
+        })
+        .catch((err) => {
+         
+          console.log(err);
+        });
+    }
+    // getUser(loginedEmail)
+    // .then((res) => {
+    //   console.log(res);
+    //   if ("data" in res) {
+    //     // const couponList = res.data;
+    //     dispatch(couponUserSlice.actions.setCredentials({ email: res.data.email || "", token: res.data.accessToken || "" }));
+    //   }
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
+  }, [location.search]);
   
 
   return (
@@ -598,7 +734,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
             {rightFirstButton}
             {rightSecondButton}
             {isCouponSystem && rightFilterButton}
-            {isCouponSystem && rightLoginButton}
+            {couponUser ? rightLogoutButton : rightLoginButton}
           </div>
         </div>
         {/* {keepAsReference &Dialog} */}

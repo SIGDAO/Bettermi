@@ -14,13 +14,15 @@ const baseQuery = fetchBaseQuery({
     } catch (error) {
       console.log(error);
     }
+    console.log(headers)
     return headers;
   },
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
+    console.log("baseQueryWithReauth:", args, api, extraOptions)
   let result = await baseQuery(args, api, extraOptions);
-
+    console.log("result:", result)
   if (result?.error?.status === 403) {
     console.log("sending refresh token");
     // send refresh token to get new access token

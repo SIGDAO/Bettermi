@@ -25,4 +25,7 @@ export const couponUserSlice = createSlice({
   },
 });
 export const { actions } = couponUserSlice;
-export const selectCurrentEmail = (state: any) => state.contract.isBMICouponUserBuild;
+export const selectCouponUser = (state: any) => state.couponUser;
+export const selectCouponUserEmail = (state: any) => state.couponUser.email;
+export const selectCouponUserToken = (state: any) => state.couponUser.token;
+

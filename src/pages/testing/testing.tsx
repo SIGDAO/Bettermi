@@ -11,14 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { profileSlice } from "../../redux/profile";
 import { accountId, getNftContractStorage } from "../../redux/account";
 import { LedgerClientFactory } from "@signumjs/core";
-import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation } from "../../redux/couponUserAPI";
-import { couponUserSlice, selectCurrentEmail } from "../../redux/couponUser";
-import { useGetCouponDetailMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../../redux/couponAPI";
+import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation ,useUserStatusMutation} from "../../redux/couponUserAPI";
+import { couponUserSlice, selectCouponUser,selectCouponUserEmail } from "../../redux/couponUser";
+import { useGetCouponDetailMutation,useGetUserMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../../redux/couponAPI";
 import { couponSlice, selectCurrentCouponList, selectCurrentSelectedCoupon } from "../../redux/coupon";
 import { useGetFilterOptionMutation } from "../../redux/filterAPI";
 import { FilterOption, filterSlice, selectCurrentFilterOption } from "../../redux/filter";
 import { QRCodeSVG } from "qrcode.react";
-
+import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 interface TestingProps {}
 
 const Testing: React.FunctionComponent<TestingProps> = (props) => {
@@ -27,10 +28,11 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [getCouponsByUser, { isSuccess: isGetCouponsByUser, error: getCouponError }] = useGetCouponsByUserMutation();
   const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
+  // const [getUser, { isSuccess: isGetUser, error: getError }] = useGetUserMutation();
   const [getCouponDetail, { isSuccess: isGetCouponCodeSuccess, error: getCouponCodeError, status: couponDetailStatus }] = useGetCouponDetailMutation();
   const [refreshCouponCode, { isSuccess: isRefreshCouponCodeSuccess, error: refreshCouponCodeError, status: refreshCouponCodeStatus }] = useRefreshCouponCodeMutation();
-
-  const loginedEmail = useSelector(selectCurrentEmail);
+ 
+  const loginedEmail = useSelector(selectCouponUser);
   const couponList = useSelector(selectCurrentCouponList);
   const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
   const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
@@ -41,14 +43,60 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
 
   const [email, setEmail] = useState<string>("");
   const [userEnterCouponId, setUserEnterCouponId] = useState<number>(0);
+  const [cookie, setCookie] = useCookies(['refreshToken']);
+  //for login after page refreshing 
+  const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
+  const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
 
   // for testing login
+  // handle action after user have logged in to coupons system 
+  // auto login after refreshing 
+  useEffect(() => {
+    // console.log("Redux login:", login)
+    // console.log("Redux login success:", isLoginSuccess)
+    // console.log("Redux data:", loginData)
+    // console.log("logined email", loginedEmail)
+    // old and useless method for login
+    // getUser(loginedEmail)
+    //   .then((res) => {
+    //     console.log(res);
+    //     if ("data" in res) {
+    //       // const couponList = res.data;
+    //       dispatch(couponUserSlice.actions.setCredentials({ email: res.data.email || "", token: res.data.accessToken || "" }));
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    console.log("couponUser: ", couponUser);
+    if (!couponUser){
+        userStatus("")
+           .then((res) => {
+        console.log(res);
+        if ("data" in res) {
+          // const couponList = res.data;
+          dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
+          setCouponUser(res.data.user.email );
+        }
+      })
+      .catch((err) => {
+         console.log("Auto login failed")
+        console.log(err);
+      });
+    }
+  }, []);
+
   // handle action after user click email link
   useEffect(() => {
+    console.log("loginedEmail",loginedEmail)
     const searchParams = new URLSearchParams(location.search);
     // get the apiKey of the search query
     const paramValue = searchParams.get("apiKey");
     console.log(paramValue);
+    console.log(Cookies);
+    const refreshToken = Cookies.get('refreshToken');
+    console.log("refreshToken",refreshToken);
+    console.log("cookie:", cookie)
 
     // if the search query has apiKey, then call login api
     if (searchParams.size > 0 && !isLoginLoading) {
@@ -183,7 +231,9 @@ const Testing: React.FunctionComponent<TestingProps> = (props) => {
       {isSendLoginLinkSuccess && <p style={{ color: "white" }}>send the email link</p>}
       {isLoginSuccess && <p style={{ color: "white" }}>login success</p>}
       {isLogoutSuccess && <p style={{ color: "white" }}>logout success</p>}
-      {/* get coupon list result */}
+      {/*load the  couponUser*/}
+      {couponUser && <p style={{ color: "white" }}>User Status: {couponUser}</p> }
+       {/* get coupon list result */}
       {couponList.map((coupon, index) => {
         return (
           <div key={index}>
