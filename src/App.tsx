@@ -78,6 +78,9 @@ const theme = createTheme({
       main: "#ffffff",
       
     },
+    secondary: {
+      main: "#ffffff",
+    }
   },
 });
 

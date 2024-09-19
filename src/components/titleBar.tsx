@@ -62,6 +62,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation, useUserStatusMutation } from "../redux/couponUserAPI";
 import { couponUserSlice, selectCouponUserEmail} from "../redux/couponUser";
 import { useGetCouponDetailMutation,useGetUserMutation,useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../redux/couponAPI";
+import { useGetFilterOptionMutation } from "../redux/filterAPI";
+import { FilterOption, filterSlice, selectCurrentFilterOption } from "../redux/filter";
+//for alert message
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -91,13 +96,13 @@ const names = [
   'Kelly Snyde',
 ];
 
-const merchant = [
+const merchants = [
   "Best Deals Inc.",
   "Super Savings Mart",
   "Discount Emporium",
 ];
 
-const merchantType = [
+const industries = [
   "Retail",
   "Education",
   "Food & Beverage",
@@ -200,18 +205,43 @@ const LoginDialog = styled(Dialog)(({ theme }) => ({
 
 function SimpleDialog(props: SimpleDialogProps) {
   //chip-select
+  const dispatch = useDispatch();
   const theme = useTheme();
+  const [merchantList , setMerchantList] = React.useState<object[]>([]);
+  const [industryList , setIndustryList] = React.useState<object[]>([]);
+  const [filteredMerchant , setFilteredMerchant] = React.useState<string[]>([]);
+  const [filteredIndustry , setFilteredIndustry] = React.useState<string[]>([]);
   const [personName, setPersonName] = React.useState<string[]>([]);
-  const handleChange02 = (event: SelectChangeEvent<typeof personName>) => {
+  const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
+  const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
+ 
+  const filterIndustry = (event: SelectChangeEvent<typeof filteredIndustry>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setFilteredIndustry(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
-
+  const filterMerchant = (event: SelectChangeEvent<typeof filteredMerchant>) => {
+    const {
+      target: { value},
+    } = event;
+    setFilteredMerchant(
+      typeof value === 'string' ? value.split(',') : value,
+    )
+  }
+  const getFilter = async () => {
+    getFilterOption().then((res) => {
+      console.log(res);
+      if ("data" in res) {
+        dispatch(filterSlice.actions.setFilterOption(res.data));
+      } else {
+        console.error("Failed to fetch filter options:", res.error);
+      }
+    });
+  };
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -227,10 +257,23 @@ function SimpleDialog(props: SimpleDialogProps) {
     console.log("change order")
   };
 
-  const [order, setOrder] = React.useState("descending");
+  const [order, setOrder] = React.useState("ascending");
   const [merchant, setMerchant] = React.useState<string[]>([]);
   const [merchantType, setMerchantType] = React.useState<string[]>([]);
+  useEffect(() => {
+    console.log("loading the filter option")
+    getFilterOption().then((res) => {
+      console.log(res);
+      if ("data" in res) {
 
+        dispatch(filterSlice.actions.setFilterOption(res.data));
+        setMerchantList(res.data.merchant)
+        setIndustryList(res.data.industry)
+      } else {
+        console.error("Failed to fetch filter options:", res.error);
+      }
+    });
+  }, []);
   return (
     <ResponsiveDialog open={open} onClose={onClose}  >
     <DialogTitle><div className="title-bar-title inter-semi-bold-white-18px">篩選及排序</div></DialogTitle>
@@ -254,12 +297,12 @@ function SimpleDialog(props: SimpleDialogProps) {
         onChange={handleRadioChange}
       >
 
-        <FormControlLabel value="ascending" control={<Radio  sx={{
+        <FormControlLabel value="newFirst" control={<Radio  sx={{
           '&, &.Mui-checked': {
             color: '#4136F1',
           },
         }}/>} label="近期最新" />
-        <FormControlLabel value="descending" control={<Radio sx={{
+        <FormControlLabel value="expiredFirst" control={<Radio sx={{
           '&, &.Mui-checked': {
             color: '#4136F1',
           },
@@ -284,8 +327,8 @@ function SimpleDialog(props: SimpleDialogProps) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
-          onChange={handleChange02}
+          value={filteredMerchant}
+          onChange={filterMerchant}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -303,17 +346,27 @@ function SimpleDialog(props: SimpleDialogProps) {
           fullWidth={true}
           sx={{
             "&, & [aria-expanded=true]":{
-              border: "3px solid #4136F1",
+              border: "2px solid #4136F1",
             },
           }}
         >
-          {names.map((name) => (
+          {/* //if fetch options */}
+          {/* {merchantList.map((merchant) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={merchant["merchant_name"]}
+              value={merchant["merchant_name"]}
+              style={getStyles(merchant["merchant_name"], personName, theme)}
             >
-              {name}
+              {merchant["merchant_name"]}
+            </MenuItem>
+          ))} */}
+          {merchants.map((merchant) => (
+            <MenuItem
+              key={merchant}
+              value={merchant}
+              style={getStyles(merchant, personName, theme)}
+            >
+              {merchant}
             </MenuItem>
           ))}
         </Select>
@@ -337,8 +390,8 @@ function SimpleDialog(props: SimpleDialogProps) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
-          onChange={handleChange02}
+          value={filteredIndustry}
+          onChange={filterIndustry}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -349,19 +402,19 @@ function SimpleDialog(props: SimpleDialogProps) {
           )}
           sx={{
             "&, & [aria-expanded=true]":{
-              border: "3px solid #4136F1",
+              border: "2px solid #4136F1",
             },
           }}
           MenuProps={MenuProps}
           fullWidth={true}
         >
-          {names.map((name) => (
+          {industries.map((industry) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={industry}
+              value={industry}
+              style={getStyles(industry, personName, theme)}
             >
-              {name}
+              {industry}
             </MenuItem>
           ))}
         </Select>
@@ -374,8 +427,8 @@ function SimpleDialog(props: SimpleDialogProps) {
     <Button variant="contained" fullWidth={true} onClick={
     () => {
       console.log("order:",order)
-      console.log("merchant:",merchant)
-      console.log("merchant Type:" ,merchantType)
+      console.log("merchant:",filteredMerchant.join("^^^"))
+      console.log("merchant Type:" ,filteredIndustry.join("^^^"))
     }
     }>套用</Button>
   </ResponsiveDialog>
@@ -390,6 +443,19 @@ function LogDialog(props: LoginDialogProps) {
   const dispatch = useDispatch();
   const [getLoginLink, { isSuccess: isSendLoginLinkSuccess, data, error }] = useGetLoginLinkMutation();
   const [email, setEmail] = React.useState<string>("");
+  //for message-box
+  const [openSuccessMessage, setOpenSuccessMessage] = React.useState(false);
+  //for message-box
+  const handleCloseSuccessMessage = (
+    event?: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSuccessMessage(false);
+  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -403,8 +469,15 @@ function LogDialog(props: LoginDialogProps) {
       email: email,
       href: window.location.href,
     };
-    await getLoginLink(sendEmail);
-    localStorage.setItem("email", email);
+    const res = await getLoginLink(sendEmail);
+    if (res){
+      const result = res;
+      console.log(result);
+      localStorage.setItem("email", email);
+      setOpenSuccessMessage(true);
+    }
+    
+  
     console.log(data);
   }
   };
@@ -467,7 +540,7 @@ function LogDialog(props: LoginDialogProps) {
           </Typography>
           <Box sx={{ mt: 1 ,marginTop: 25}}></Box>
           
-          <Typography component="p" variant="h9">
+          <Typography component="p" >
           Please provide the email to enter the system
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -481,7 +554,7 @@ function LogDialog(props: LoginDialogProps) {
               autoComplete="email"
               autoFocus
               variant="filled" 
-              color="white"
+              color="secondary"
               sx={{
                 "&, & [aria-expanded=true]":{
                   border: "3px solid #4136F1",
@@ -524,7 +597,18 @@ function LogDialog(props: LoginDialogProps) {
             >
               create the email link
             </Button>
-            {isSendLoginLinkSuccess && <p style={{ color: "white" }}>sent the email link</p>}
+            {/* for success message
+            {isSendLoginLinkSuccess && <p style={{ color: "white" }}>sent the email link</p>} */}
+              <Snackbar open={openSuccessMessage} autoHideDuration={1000} onClose={handleCloseSuccessMessage}  anchorOrigin={{ horizontal: "center", vertical: "bottom" }}>
+        <Alert
+          onClose={handleCloseSuccessMessage}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+         sent the email link
+        </Alert>
+      </Snackbar>
           </Box>
         </Box>
         <Box ></Box>
@@ -556,24 +640,46 @@ interface IShortTitleBarProps {
   customiseBackButtonLink?: string;
   isCouponSystem?: boolean ;
   // isPositionNotFixed?: boolean;
+  //for coupons system
+  isFilteringButton? : boolean;
+  isLoginButton? : boolean; 
+
 }
 
 export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (props) => {
   // back button default to true
-  const dispatch = useDispatch();
+  
   const location = useLocation();
-  const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
-  const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink, isCouponSystem} = props;
+ 
+  const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink, isCouponSystem, isFilteringButton = false , isLoginButton = false} = props;
+  //for filtering and login popup
   const [open, setOpen] = React.useState(false);
   const [open02, setOpen02] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [selectedValue02, setSelectedValue02] = React.useState(emails[1]);
   // const couponUser = useSelector(selectCouponUser);
-  const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
+ 
   const [getUser, { isSuccess: isGetUser, error: getError }] = useGetUserMutation();
+  //checking user
+  const dispatch = useDispatch();
+  const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
+  const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
+  const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
+  //alert message
   const handleClickOpen = () => {
     setOpen(true);
+  };
+  const userLogout = async () => {
+    logout("testing")
+      .then((res) => {
+        console.log(res);
+        dispatch(couponUserSlice.actions.logout());
+        setCouponUser(null);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleClose = (value: string) => {
@@ -616,7 +722,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   const rightFilterButton: JSX.Element = (
     <>
       {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
-      <IconButton color="white" aria-label="add to shopping cart" onClick={handleClickOpen} sx={{padding: "0"}}>
+      <IconButton color="secondary" aria-label="add to shopping cart" onClick={handleClickOpen} sx={{padding: "0"}}>
         <FilterAltIcon />
       </IconButton>
       {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
@@ -626,7 +732,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   const rightLoginButton: JSX.Element = (
     <>
       {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
-      <IconButton color="white" aria-label="add to shopping cart" onClick={handleClickOpen02} sx={{padding: "0"}}>
+      <IconButton color="secondary" aria-label="add to shopping cart" onClick={handleClickOpen02} sx={{padding: "0"}}>
         <LoginIcon />
       </IconButton>
       {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
@@ -635,7 +741,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   const rightLogoutButton: JSX.Element = (
     <>
       {/* <Link to="/setting">{setting && <img src={process.env.PUBLIC_URL + "/img/ic_filter.png"} alt="" className="title-bar-setting-button-image" />}</Link> */}
-      <IconButton color="white" aria-label="add to shopping cart" sx={{padding: "0"}}>
+      <IconButton color="secondary" aria-label="add to shopping cart" onClick={userLogout} sx={{padding: "0"}}>
         <LogoutIcon />
       </IconButton>
       {/* {store && <img src="" alt="" className="title-bar-right-second-button-image" />} */}
@@ -684,7 +790,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
     const paramValue = searchParams.get("apiKey");
     console.log(paramValue);
 
-    if (searchParams.size > 0 && !isLoginLoading) {
+    if (searchParams.size > 0 && !isLoginLoading && paramValue !==null) {
       login({ email: localStorage.getItem("email") || "", href: window.location.href })
         .then((res) => {
           if ("data" in res) {
@@ -692,6 +798,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           }
           const newUrl = `${location.pathname}`;
           window.history.replaceState({}, "", newUrl);
+          setCouponUser(localStorage.getItem("email"));
         })
         .catch((err) => {
          

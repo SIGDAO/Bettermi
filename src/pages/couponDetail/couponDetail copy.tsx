@@ -21,15 +21,12 @@ import { selectCurrentIsGuest } from "../../redux/profile";
 import SigdaoIcon from "../../components/icon";
 import MenuBar from "../../components/menuBar";
 import { usePostCouponDetailMutation } from "../../redux/couponAPI";
-import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation, useUserStatusMutation } from "../../redux/couponUserAPI";
-import { couponUserSlice, selectCouponUserEmail} from "../../redux/couponUser";
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import Alert, { AlertColor } from '@mui/material/Alert';
 interface ICouponsProps {}
 
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
+  console.log("Coupon Code:",  params)
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -45,46 +42,9 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   let isNew = false;
   const isGuest = useSelector(selectCurrentIsGuest);
   const [couponName , setCouponName] = useState<string>("Coupon Name");
-  const [couponDescription, setCouponDescription] = useState<string>("Coupon Description");
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
-  //user checking 
-  const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
-  const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
-  const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
-  const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
-  //alert message 
-  const [open, setOpen] = React.useState(false);
-  const [severity, setSeverity] = React.useState<AlertColor>("success")
-  const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated")
-  //click the button to use the coupon 
-  const handleClick = () => {
-    console.log("couponsUser: ", couponUser)
-    setSeverity("success");
-    setAlertMessage("QRcode generated")
-    //no user information, send out the error message 
-    if(couponUser=== undefined || couponUser === null || couponUser === ""){
-      setSeverity("error");
-      setAlertMessage("no user information")
-      setOpen(true);
-    }else{
-    //find user information, use the api to record the use of coupon
-    //api function 
-    setOpen(true);
-    }
-    
-  };
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
+  
   // to use CountChallenges to count
   // display as 0/3 as text
 
@@ -100,67 +60,131 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   //   NewUserCheck();
   // })
   useEffect(() => {
-   
-    console.log("Coupon Code:",  params.couponCode)
-    if(params.couponCode){
-    postCouponDetail(params.couponCode)
-    .then((res) => {
-      console.log(res);
-      if ("data" in res) {
-        const couponList = res.data;
-       if (couponList.length === 0){
-        console.log("404 not found")
-        navigate("/404")
-       }
-        console.log(couponList);
-        setCouponName(couponList[0].c_name);
-        setCouponDescription(couponList[0].c_description);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    const handleBeforeUnload = () => {
+      updated.current = false; // Reset the value before navigating away
+    };
 
-  }else{
-    console.log("404 not found")
-    navigate("/404")
-  }
- 
-      userStatus("")
-         .then((res) => {
-      console.log(res);
-      if ("data" in res) {
-        // const couponList = res.data;
-        dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
-        setCouponUser(res.data.user.email );
-      }else{
-        console.log("Auto login failed")
-        dispatch(couponUserSlice.actions.setCredentials({ email: "" , token:  "" }));
-      }
-    })
-    .catch((err) => {
-       console.log("Auto login failed")
-      console.log(err);
-      dispatch(couponUserSlice.actions.setCredentials({ email: "" , token:  "" }));
-      setCouponUser("");
-    });
-  
-    // const handleBeforeUnload = () => {
-    //   updated.current = false; // Reset the value before navigating away
-    // };
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
-    // window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // return () => {
-    //   window.removeEventListener("beforeunload", handleBeforeUnload);
-    // };
-
-
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
   //Anderson's code ends here
 
+  useEffect(() => {
+    const checkTimeSlot = async () => {
+      // guest user
+      if (isGuest) {
+        setIsLoading(false);
+        setAllowedChallengeList([true, true, true, false, false, false, false, false, false]);
 
+        return;
+      }
+
+      //Anderson's code starts here
+      //findNFTLevel(ledger2,userAccountId);
+      if (updated.current === false) {
+        updated.current = true;
+        //isNew = await NewUserCheck(); //Run a check on whether there is a new user. Also, the handleBeforeUnload function ensures the check only run once
+        const userLevel = await checkUserLevel(ledger2, userAccountId);
+
+        const playedChallenge = await CountChallenges(userAccountId, ledger2);
+        const allowedChallenge: boolean[] = [];
+        for (var i = 0; i < 9; i++) {
+          if (i >= userLevel * 3) {
+            allowedChallenge.push(false);
+            //playedChallenge[i] = 3;
+          } else {
+            allowedChallenge.push(true);
+          }
+        } //Temporarily disable the remaining six challenges
+
+        setAllowedChallengeList(allowedChallenge);
+
+        setUserChallengeTimes(playedChallenge);
+
+        setisOverDailyPlayTimesLimit(
+          playedChallenge.map((numChallengesPlayed) => {
+            if (numChallengesPlayed >= 2) {
+              return false;
+            }
+            return true;
+          }),
+        );
+        setIsLoading(false);
+
+        //Anderson's code ends here
+
+        //Anderson disabled this 2023/11/12
+        // setisOverDailyPlayTimesLimit(
+        //   challengeList.map((mission) => {
+        //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
+
+        //       return true;
+        //     }
+        //     const { timeslot } = mission;
+        //     const isInSlot = timeslot.some(
+        //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
+        //     );
+
+        //     return isInSlot;
+        //   })
+        // );
+
+        //Anderson disabled till here
+        // setTimedifference(
+        //   challengeList.map((mission) => {
+        //     const { timeslot } = mission;
+        //     const timedifferentInFormat = timeslot.map((slot) => {
+        //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
+        //       const formatTime = time[0] * 60 * 60 + time[1] * 60;
+        //       const timeDiff = formatTime - currentTimeInSecond;
+
+        //       if (timeDiff < 0) {
+        //         return timeDiff + 24 * 60 * 60;
+        //       }
+
+        //       return timeDiff;
+        //     });
+        //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
+
+        //       return date > 0;
+        //     });
+
+        //     filteredtimedifferentInFormat.sort((a, b) => a - b);
+
+        //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
+        //       .toString()
+        //       .padStart(2, "0");
+        //     const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60)
+        //       .toString()
+        //       .padStart(2, "0");
+        //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
+
+        //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
+        //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
+        //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
+
+        //     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        //     // return timedifferentInFormat;
+        //     // return '';
+        //   })
+        // );
+      }
+    };
+
+    const interval = setInterval(checkTimeSlot, 2000);
+
+    return () => clearInterval(interval);
+
+    // setisOverDailyPlayTimesLimit(
+    //   challengeList.map((mission) => {
+    //     return true;
+    //   })
+    // );
+  }, []);
 
   const getTimeInMinutes = (time: string): number => {
     const [hours, minutes] = time.split(":").map(Number);
@@ -228,9 +252,9 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
 
             <div className="couponDetail-rewardTitle inter-semi-bold-royal-blue-15px">
-              <h2>{couponName}</h2>
-              <p>{couponDescription}</p>
-              <Button variant="contained" fullWidth={true} onClick={() =>{handleClick()}}>使用優惠</Button>
+              <h2>迎新獎賞：$50現金優惠券</h2>
+              <p>有效期至xx/xx/xxxxx</p>
+              <Button variant="contained" fullWidth={true}>使用優惠</Button>
               </div>
             <div className="containerCouponsTermsAndPolicies"> 
             <div className="couponsTermsAndPolicies">
@@ -247,16 +271,6 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           </div>
           <MenuBar />
         </div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ horizontal: "center", vertical: "bottom" }}>
-        <Alert
-          onClose={handleClose}
-          severity={severity}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {alertMessage}
-        </Alert>
-      </Snackbar>
     </div>
   );
 

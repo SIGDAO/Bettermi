@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { clear } from "console";
+// import { clear } from "console";
 
 // output: [{ coupon_id: number, c_name: string, c_description: string }]
 
