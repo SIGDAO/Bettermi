@@ -65,6 +65,8 @@ import DiscordStart from "./pages/discordStart/discordStart";
 import DiscordStartLoading from "./pages/discordStartLoading/discordStartLoading";
 //Cookie 
 import { CookiesProvider } from 'react-cookie';
+//couponUser
+import { UserProvider } from './providers/userProvider';
 store.subscribe(() => {
   saveState(store.getState());
 });
@@ -231,6 +233,7 @@ function App() {
 
   return (
     // path
+    <UserProvider>
     <CookiesProvider defaultSetOptions={{ path: '/' }}>
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={appConfig}>
@@ -335,6 +338,7 @@ function App() {
       </AppContext.Provider>
     </ThemeProvider>
     </CookiesProvider>
+    </UserProvider>
   );
 }
 

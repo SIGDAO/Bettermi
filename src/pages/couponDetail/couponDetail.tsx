@@ -25,6 +25,7 @@ import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLo
 import { couponUserSlice, selectCouponUserEmail} from "../../redux/couponUser";
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert, { AlertColor } from '@mui/material/Alert';
+import { useUser } from '../../providers/userProvider';
 interface ICouponsProps {}
 
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {

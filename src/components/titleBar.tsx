@@ -64,6 +64,7 @@ import { couponUserSlice, selectCouponUserEmail} from "../redux/couponUser";
 import { useGetCouponDetailMutation,useGetUserMutation,useGetCouponsByUserMutation, useRefreshCouponCodeMutation } from "../redux/couponAPI";
 import { useGetFilterOptionMutation } from "../redux/filterAPI";
 import { FilterOption, filterSlice, selectCurrentFilterOption } from "../redux/filter";
+import { useUser } from '../providers/userProvider';
 //for alert message
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -650,7 +651,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   // back button default to true
   
   const location = useLocation();
- 
+  const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
   const { title, aiCoach, help, transparent, filter, addSign, setting, backButton = true, importButton, setIsOpenImport, isOpenImport, customiseBackButton, customiseBackButtonLink, isCouponSystem, isFilteringButton = false , isLoginButton = false} = props;
   //for filtering and login popup
   const [open, setOpen] = React.useState(false);
@@ -795,6 +796,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         .then((res) => {
           if ("data" in res) {
             dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
+           
           }
           const newUrl = `${location.pathname}`;
           window.history.replaceState({}, "", newUrl);

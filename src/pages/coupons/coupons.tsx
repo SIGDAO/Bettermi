@@ -344,7 +344,7 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
           <div key={index}>
             {/* <p style={{ color: "white" }}>{coupon.c_name}</p>
             <p style={{ color: "white" }}>{coupon.c_description}</p> */}
-                       <button className="couponsContainer" onClick={() => navigate("/couponDetail/XYZ456")}>
+                       <button className="couponsContainer" onClick={() => navigate(`/couponDetail/${coupon.coupon_code}`)}>
               <img className="couponImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Card_bg"></img>
               <div className="descriptionChallengeCompleted">
                 <div className="descriptionTitleChallengeCompleted">{coupon.c_name}</div>
