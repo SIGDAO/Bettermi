@@ -16,6 +16,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [token, setToken ] = useState<string | null>(null);
 
   const loginCouponUser = (email: string, token: string) => {
+    console.log("login", email,token)
     setIsLoggedIn(true);
     setEmail(email);
     setToken(token);

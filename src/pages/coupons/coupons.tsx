@@ -23,6 +23,7 @@ import MenuBar from "../../components/menuBar";
 import { useLocation } from "react-router-dom";
 import { useGetCouponDetailMutation, useGetUserMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation, useGetAllCouponsMutation,usePostCouponsByFilteringMutation } from "../../redux/couponAPI";
 import { couponSlice, selectCurrentCouponList, selectCurrentSelectedCoupon } from "../../redux/coupon";
+import { useUser } from '../../providers/userProvider';
 interface ICouponsProps {}
 
 const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
@@ -49,34 +50,30 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
   const [getAllCoupons, {isSuccess: isGetAllCoupons, error: getAllCouponsError}] = useGetAllCouponsMutation();
   const [postCouponsByFiltering, {isSuccess: isGetFilteredCoupons, error: getFilteredCouponsError}] = usePostCouponsByFilteringMutation();
   const couponList = useSelector(selectCurrentCouponList);
+  //useContext - userProvider
+  const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
 
   // to use CountChallenges to count
   // display as 0/3 as text
+  
 
-  //Anderson's code starts here
-  // const NewUserCheck = async () => {
-  //   const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
-
-  //   return isUpdated === true
-  // };
-
-  // useEffect(() => {
-
-  //   NewUserCheck();
-  // })
+  //joe 20/9
    useEffect(() => {
+    console.log("UseContext-user data in Coupon:", email, token)
+    // console.log("UseContext-user data in coupons:", email, token)
     const searchParams = new URLSearchParams(location.search);
     const paramValue = searchParams.get("apiKey");
     const paramMerchants = searchParams.get("merchant")
     const paramIndustries = searchParams.get("industry")
     const paramOrder = searchParams.get("order")
-    console.log("paramValue:", paramValue);
-    console.log("paramMerchants:", paramMerchants);
+    // console.log("paramValue:", paramValue);
+    // console.log("paramMerchants:", paramMerchants);
     if (paramMerchants !== null) {
+    
     console.log("num:", paramMerchants.split("^^^").length)
     }
-    console.log("paramIndustries:", paramIndustries);
-    console.log("paramOrder: ", paramOrder)
+    // console.log("paramIndustries:", paramIndustries);
+    // console.log("paramOrder: ", paramOrder)
     if (paramIndustries === null && paramOrder === null && ((paramMerchants !== null) && paramMerchants.split("^^^").length === 1)){
       setTitle(paramMerchants);
     }else if ( paramIndustries !== null || paramOrder !== null  || paramMerchants !== null){
@@ -112,36 +109,10 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log(err);
       });
     }
-    
-    if (searchParams.size > 0 && paramValue !==null) {
-      // login({ email: localStorage.getItem("email") || "", href: window.location.href })
-      //   .then((res) => {
-      //     if ("data" in res) {
-      //       dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
-      //     }
-      //     const newUrl = `${location.pathname}`;
-      //     window.history.replaceState({}, "", newUrl);
-      //     setCouponUser(localStorage.getItem("email"));
-      //   })
-      //   .catch((err) => {
-         
-      //     console.log(err);
-      //   });
-    }
-    // getUser(loginedEmail)
-    // .then((res) => {
-    //   console.log(res);
-    //   if ("data" in res) {
-    //     // const couponList = res.data;
-    //     dispatch(couponUserSlice.actions.setCredentials({ email: res.data.email || "", token: res.data.accessToken || "" }));
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
-  }, [location.search]);
+  }, []);
   // copied code, may delete after checking 
   useEffect(() => {
+    
     const handleBeforeUnload = () => {
       updated.current = false; // Reset the value before navigating away
     };
@@ -196,64 +167,6 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
           }),
         );
         setIsLoading(false);
-
-        //Anderson's code ends here
-
-        //Anderson disabled this 2023/11/12
-        // setisOverDailyPlayTimesLimit(
-        //   challengeList.map((mission) => {
-        //     if(mission.title === "1. Hello Bae !" /*&& isNew === true*/){
-
-        //       return true;
-        //     }
-        //     const { timeslot } = mission;
-        //     const isInSlot = timeslot.some(
-        //       (slot) => currentTime >= getTimeInMinutes(slot.startingTime) && currentTime <= getTimeInMinutes(slot.endTime)
-        //     );
-
-        //     return isInSlot;
-        //   })
-        // );
-
-        //Anderson disabled till here
-        // setTimedifference(
-        //   challengeList.map((mission) => {
-        //     const { timeslot } = mission;
-        //     const timedifferentInFormat = timeslot.map((slot) => {
-        //       const time = slot.startingTime.split(":").map((ele) => parseInt(ele));
-        //       const formatTime = time[0] * 60 * 60 + time[1] * 60;
-        //       const timeDiff = formatTime - currentTimeInSecond;
-
-        //       if (timeDiff < 0) {
-        //         return timeDiff + 24 * 60 * 60;
-        //       }
-
-        //       return timeDiff;
-        //     });
-        //     let filteredtimedifferentInFormat = timedifferentInFormat.filter((date) => {
-
-        //       return date > 0;
-        //     });
-
-        //     filteredtimedifferentInFormat.sort((a, b) => a - b);
-
-        //     const hours = Math.floor(filteredtimedifferentInFormat[0] / 3600)
-        //       .toString()
-        //       .padStart(2, "0");
-        //     const minutes = Math.floor((filteredtimedifferentInFormat[0] % 3600) / 60)
-        //       .toString()
-        //       .padStart(2, "0");
-        //     const seconds = (filteredtimedifferentInFormat[0] % 60).toString().padStart(2, "0");
-
-        //     // const hours = Math.floor(timedifferentInFormat[0] / (1000 * 60 * 60));
-        //     // const minutes = Math.floor((timedifferentInFormat[0] / (1000 * 60)) % 60);
-        //     // const seconds = Math.floor((timedifferentInFormat[0] / 1000) % 60);
-
-        //     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-        //     // return timedifferentInFormat;
-        //     // return '';
-        //   })
-        // );
       }
     };
 
@@ -267,69 +180,10 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
     //   })
     // );
   }, []);
-
-  const getTimeInMinutes = (time: string): number => {
-    const [hours, minutes] = time.split(":").map(Number);
-    return hours * 60 + minutes;
-  };
-
-  const challengeTimesDisplay = (index): JSX.Element => {
-    if (!allowedChallengeList[index]) {
-      return <div className="score-bar_2-inactive inter-semi-bold-white-15px">LOCKED</div>;
-    }
-
-    if (isOverDailyPlayTimesLimit[index]) {
-      return (
-        <div className="score-bar_2">
-          <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
-        </div>
-      );
-    }
-
-    if (isGuest) {
-      return <div className="score-bar_2-completed inter-semi-bold-white-15px">STARTING</div>;
-    }
-
-
-    return (
-      <div className="score-bar_2-completed inter-semi-bold-white-15px">
-        {/* {mission.timeslot[0].startingTime} */}
-        COMPLETED
-        {/* {Timedifference[index]} */}
-      </div>
-    );
-  };
-
-  // const checkTimeSlot = () => {
-  //   const currentTime = new Date().toLocaleTimeString([], {
-  //     hour: '2-digit',
-  //     minute: '2-digit',
-  //   });
-
-  //   for (const mission of challengeList) {
-  //     for (const time of mission.timeslot) {
-  //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
-  //         setisOverDailyPlayTimesLimit(true);
-  //         return;
-  //       }
-  //     }
-  //   }
-
-  //   setisOverDailyPlayTimesLimit(false);
-  // };
-
-  // useEffect(() => {
-  //   const interval = setInterval(checkTimeSlot, 1000); // Check every second
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
-
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/marketplace" isCouponSystem={true}/>
+        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/marketplace" isCouponSystem={true} isFilteringButton={true} isLoginButton={true}/>
         <img className="photo-7K5ObS" src="img/coupons/coupons_landing.jpg" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -398,59 +252,6 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
               </div>
             </button>
             </div>
-                // challengeList.map((mission, index) => {
-                //   return (
-                //     <Button
-                //       onClick={async () => {
-                //         // go to challengeCountdown page
-                //         if (allowedChallengeList[index] && isGuest) {
-                //           navigate(`/challengeCountdown/${index + 1}`);
-                //           return;
-                //         }
-                //         const numChallengesPlayed = await CountChallenges(userAccountId, ledger2);
-
-                //         if (isOverDailyPlayTimesLimit[index] && allowedChallengeList[index] === true && numChallengesPlayed[index] < 3) {
-                //           navigate(`/challengeCountdown/${index + 1}`);
-                //         }
-                //       }}
-                //       className="challenge-cards-Ic1qil"
-                //     >
-                //       <>
-                //         {challengeTimesDisplay(index)}
-                //         <div
-                //           className="inner-mission-container"
-                //           // style={isOverDailyPlayTimesLimit[index] ? {opacity: '1'} : {opacity: '0.4'}}
-                //         >
-                //           <div className="mission-graph">
-                //             <img className="mission-gif" src={mission.missionImgPath} alt="" />
-                //           </div>
-                //           <div className="mission-detail">
-                //             <div className="mission-topic inter-semi-bold-white-18px">{mission.title}</div>
-                //             <div className="mission-time-bodyPart-container">
-                //               <div className="mission-time-container">
-                //                 <img className="ic_time" src="img/missionChallenge/ic-time@1x.png" alt="ic_time" />
-                //                 <p className="inter-semi-bold-cadet-blue-14px">{mission.duration}</p>
-                //               </div>
-                //               <div className="mission-bodyPart-container">
-                //                 <img className="ic_-body" src="img/missionChallenge/ic-body@1x.png" alt="ic_Body" />
-                //                 <p className="inter-semi-bold-cadet-blue-14px">{mission.bodyPart}</p>
-                //               </div>
-                //             </div>
-                //             <div className="mission-level-and-reward">
-                //               <div className="mission-level inter-semi-bold-keppel-15px">LV {mission.nftLevel}</div>
-                //               <div className="level-and-sigdao-separate-line"></div>
-                //               <div className="mission-reward-container">
-                //                 <SigdaoIcon width="17px" height="17px" />
-                //                 <p className="inter-semi-bold-keppel-14px">{mission.sigdao}</p>
-                //               </div>
-                //               <img className="mission-bar-arrow-right" src="img/missionChallenge/ic-chevron-right-24px-1@1x.png" alt="" />
-                //             </div>
-                //           </div>
-                //         </div>
-                //       </>
-                //     </Button>
-                //   );
-                // })
               )}
             </div>
           </div>

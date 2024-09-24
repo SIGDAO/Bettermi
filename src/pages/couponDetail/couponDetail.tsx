@@ -58,13 +58,18 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [open, setOpen] = React.useState(false);
   const [severity, setSeverity] = React.useState<AlertColor>("success")
   const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated")
+
+  //useContext - userProvider
+  const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
+
   //click the button to use the coupon 
   const handleClick = () => {
     console.log("couponsUser: ", couponUser)
+    console.log(email, token);
     setSeverity("success");
     setAlertMessage("QRcode generated")
     //no user information, send out the error message 
-    if(couponUser=== undefined || couponUser === null || couponUser === ""){
+    if((email=== undefined || email === null || email === "")&& (token ===undefined || token === null || token === "")){
       setSeverity("error");
       setAlertMessage("no user information")
       setOpen(true);
@@ -75,7 +80,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     }
     
   };
-
+  //close the alert box
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
@@ -89,19 +94,10 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   // to use CountChallenges to count
   // display as 0/3 as text
 
-  //Anderson's code starts here
-  // const NewUserCheck = async () => {
-  //   const isUpdated = await CheckIsUserFirstDayOfRegistration(ledger2, userAccountId, BMIMachineCodeHashId);
-
-  //   return isUpdated === true
-  // };
-
-  // useEffect(() => {
-
-  //   NewUserCheck();
-  // })
+  //joe 20/9
+  //fetch the coupon detail by its coupon code
   useEffect(() => {
-   
+    console.log("UseContext-user data in CouponDetail:", email, token)
     console.log("Coupon Code:",  params.couponCode)
     if(params.couponCode){
     postCouponDetail(params.couponCode)
@@ -126,106 +122,13 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     console.log("404 not found")
     navigate("/404")
   }
- 
-      userStatus("")
-         .then((res) => {
-      console.log(res);
-      if ("data" in res) {
-        // const couponList = res.data;
-        dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
-        setCouponUser(res.data.user.email );
-      }else{
-        console.log("Auto login failed")
-        dispatch(couponUserSlice.actions.setCredentials({ email: "" , token:  "" }));
-      }
-    })
-    .catch((err) => {
-       console.log("Auto login failed")
-      console.log(err);
-      dispatch(couponUserSlice.actions.setCredentials({ email: "" , token:  "" }));
-      setCouponUser("");
-    });
-  
-    // const handleBeforeUnload = () => {
-    //   updated.current = false; // Reset the value before navigating away
-    // };
-
-    // window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // return () => {
-    //   window.removeEventListener("beforeunload", handleBeforeUnload);
-    // };
-
-
   }, []);
-
-  //Anderson's code ends here
-
-
-
-  const getTimeInMinutes = (time: string): number => {
-    const [hours, minutes] = time.split(":").map(Number);
-    return hours * 60 + minutes;
-  };
-
-  const challengeTimesDisplay = (index): JSX.Element => {
-    if (!allowedChallengeList[index]) {
-      return <div className="score-bar_2-inactive inter-semi-bold-white-15px">LOCKED</div>;
-    }
-
-    if (isOverDailyPlayTimesLimit[index]) {
-      return (
-        <div className="score-bar_2">
-          <div className="starting inter-semi-bold-white-15px">{`${userChallengeTimes[index]}/2`}</div>
-        </div>
-      );
-    }
-
-    if (isGuest) {
-      return <div className="score-bar_2-completed inter-semi-bold-white-15px">STARTING</div>;
-    }
-
-
-    return (
-      <div className="score-bar_2-completed inter-semi-bold-white-15px">
-        {/* {mission.timeslot[0].startingTime} */}
-        COMPLETED
-        {/* {Timedifference[index]} */}
-      </div>
-    );
-  };
-
-  // const checkTimeSlot = () => {
-  //   const currentTime = new Date().toLocaleTimeString([], {
-  //     hour: '2-digit',
-  //     minute: '2-digit',
-  //   });
-
-  //   for (const mission of challengeList) {
-  //     for (const time of mission.timeslot) {
-  //       if (currentTime >= time.startingTime && currentTime <= time.endTime) {
-  //         setisOverDailyPlayTimesLimit(true);
-  //         return;
-  //       }
-  //     }
-  //   }
-
-  //   setisOverDailyPlayTimesLimit(false);
-  // };
-
-  // useEffect(() => {
-  //   const interval = setInterval(checkTimeSlot, 1000); // Check every second
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
 
   const content: JSX.Element = (
     <div className="screen">
             <div className="mission-body-container">
           <div className="mission-body">
-          <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true}/>
+          <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={true} isLoginButton={true}/>
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
 
             <div className="couponDetail-rewardTitle inter-semi-bold-royal-blue-15px">
@@ -248,7 +151,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           </div>
           <MenuBar />
         </div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ horizontal: "center", vertical: "bottom" }}>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ horizontal: "center", vertical: "top" }}>
         <Alert
           onClose={handleClose}
           severity={severity}

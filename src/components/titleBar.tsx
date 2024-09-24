@@ -215,7 +215,8 @@ function SimpleDialog(props: SimpleDialogProps) {
   const [personName, setPersonName] = React.useState<string[]>([]);
   const filterOption: FilterOption = useSelector(selectCurrentFilterOption);
   const [getFilterOption, { isSuccess: isGetFilterOptionSuccess, error: getFilterOptionError }] = useGetFilterOptionMutation();
- 
+  // useContext userProvider
+  const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
   const filterIndustry = (event: SelectChangeEvent<typeof filteredIndustry>) => {
     const {
       target: { value },
@@ -261,20 +262,20 @@ function SimpleDialog(props: SimpleDialogProps) {
   const [order, setOrder] = React.useState("ascending");
   const [merchant, setMerchant] = React.useState<string[]>([]);
   const [merchantType, setMerchantType] = React.useState<string[]>([]);
-  useEffect(() => {
-    console.log("loading the filter option")
-    getFilterOption().then((res) => {
-      console.log(res);
-      if ("data" in res) {
+  // useEffect(() => {
+  //   console.log("loading the filter option")
+  //   getFilterOption().then((res) => {
+  //     console.log(res);
+  //     if ("data" in res) {
 
-        dispatch(filterSlice.actions.setFilterOption(res.data));
-        setMerchantList(res.data.merchant)
-        setIndustryList(res.data.industry)
-      } else {
-        console.error("Failed to fetch filter options:", res.error);
-      }
-    });
-  }, []);
+  //       dispatch(filterSlice.actions.setFilterOption(res.data));
+  //       setMerchantList(res.data.merchant)
+  //       setIndustryList(res.data.industry)
+  //     } else {
+  //       console.error("Failed to fetch filter options:", res.error);
+  //     }
+  //   });
+  // }, []);
   return (
     <ResponsiveDialog open={open} onClose={onClose}  >
     <DialogTitle><div className="title-bar-title inter-semi-bold-white-18px">篩選及排序</div></DialogTitle>
@@ -446,7 +447,8 @@ function LogDialog(props: LoginDialogProps) {
   const [email, setEmail] = React.useState<string>("");
   //for message-box
   const [openSuccessMessage, setOpenSuccessMessage] = React.useState(false);
-  //for message-box
+  //useContext userProvider
+  // const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
   const handleCloseSuccessMessage = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
@@ -676,6 +678,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
       .then((res) => {
         console.log(res);
         dispatch(couponUserSlice.actions.logout());
+        logoutCouponUser();
         setCouponUser(null);
       })
       .catch((err) => {
@@ -751,6 +754,23 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
 
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await userStatus("")
+        if ("data" in response){
+          const userEmail = response.data.user.email;
+          const userToken = response.data.token;
+          loginCouponUser(userEmail,userToken);
+        }
+        
+        console.log(response);
+        console.log("email:", email, " token:", token)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+ 
     // console.log("Redux login:", login)
     // console.log("Redux login success:", isLoginSuccess)
     // console.log("Redux data:", loginData)
@@ -767,15 +787,21 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
     //   .catch((err) => {
     //     console.log(err);
     //   });
-    console.log("couponUser: ", couponUser);
-    if (!couponUser){
+    // console.log("couponUser: ", couponUser);
+    console.log("UseContext-user data in TitleBAr:", email, token)
+    if (!couponUser ||!isLoggedIn){
         userStatus("")
            .then((res) => {
         console.log(res);
         if ("data" in res) {
           // const couponList = res.data;
           dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
+          const email = res.data.user.email;
+          const token = res.data.token;
+          console.log("email", email , " token: ", token);
+          loginCouponUser(res.data.email,res.data.accessToken);
           setCouponUser(res.data.user.email );
+          console.log("UseContext-user data in TitleBAr:", email, token)
         }
       })
       .catch((err) => {
@@ -790,23 +816,45 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
     const searchParams = new URLSearchParams(location.search);
     const paramValue = searchParams.get("apiKey");
     console.log(paramValue);
-
+    const fetchUserData = async () => {
+      try {
+        const response = await login({ email: localStorage.getItem("email") || "", href: window.location.href })
+        console.log(response)
+        if ("data" in response){
+          const userEmail = response.data.email;
+          const userToken = response.data.accessToken;
+          console.log("userEmail", userEmail , "userToken", userToken)
+          dispatch(couponUserSlice.actions.setCredentials({email: userEmail || "", token: userToken || "" }));
+          loginCouponUser(userEmail,userToken);
+          const newUrl = `${location.pathname}`;
+          window.history.replaceState({}, "", newUrl);
+          setCouponUser(localStorage.getItem("email"))
+        }
+        console.log(response);
+        console.log("email:", email, " token:", token)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    if (searchParams.size > 0 && !isLoginLoading && paramValue !==null) {
+    fetchUserData();
+    }
     if (searchParams.size > 0 && !isLoginLoading && paramValue !==null) {
       login({ email: localStorage.getItem("email") || "", href: window.location.href })
         .then((res) => {
           if ("data" in res) {
-            dispatch(couponUserSlice.actions.setCredentials({ email: localStorage.getItem("email") || "", token: res.data.accessToken || "" }));
-           
+            dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
+            loginCouponUser(res.data.email,res.data.accessToken);
           }
           const newUrl = `${location.pathname}`;
           window.history.replaceState({}, "", newUrl);
-          setCouponUser(localStorage.getItem("email"));
+         
         })
         .catch((err) => {
          
           console.log(err);
         });
-    }
+     }
     // getUser(loginedEmail)
     // .then((res) => {
     //   console.log(res);
@@ -842,8 +890,8 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
           <div className="title-bar-right-container">
             {rightFirstButton}
             {rightSecondButton}
-            {isCouponSystem && rightFilterButton}
-            {couponUser ? rightLogoutButton : rightLoginButton}
+            {isFilteringButton && rightFilterButton}
+            {isLoginButton && (isLoggedIn ? rightLogoutButton : rightLoginButton)}
           </div>
         </div>
         {/* {keepAsReference &Dialog} */}
