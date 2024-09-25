@@ -789,26 +789,26 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
     //   });
     // console.log("couponUser: ", couponUser);
     console.log("UseContext-user data in TitleBAr:", email, token)
-    if (!couponUser ||!isLoggedIn){
-        userStatus("")
-           .then((res) => {
-        console.log(res);
-        if ("data" in res) {
-          // const couponList = res.data;
-          dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
-          const email = res.data.user.email;
-          const token = res.data.token;
-          console.log("email", email , " token: ", token);
-          loginCouponUser(res.data.email,res.data.accessToken);
-          setCouponUser(res.data.user.email );
-          console.log("UseContext-user data in TitleBAr:", email, token)
-        }
-      })
-      .catch((err) => {
-         console.log("Auto login failed")
-        console.log(err);
-      });
-    }
+    // if (!couponUser ||!isLoggedIn){
+    //     userStatus("")
+    //        .then((res) => {
+    //     console.log(res);
+    //     if ("data" in res) {
+    //       // const couponList = res.data;
+    //       dispatch(couponUserSlice.actions.setCredentials({ email: res.data.user.email || "", token: res.data.token || "" }));
+    //       const email = res.data.user.email;
+    //       const token = res.data.token;
+    //       console.log("email", email , " token: ", token);
+    //       loginCouponUser(res.data.email,res.data.accessToken);
+    //       setCouponUser(res.data.user.email );
+    //       console.log("UseContext-user data in TitleBAr:", email, token)
+    //     }
+    //   })
+    //   .catch((err) => {
+    //      console.log("Auto login failed")
+    //     console.log(err);
+    //   });
+    // }
   }, []);
 
 

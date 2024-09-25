@@ -720,6 +720,8 @@
     padding-right: 15px;
     background: black;
     color: white;
+    display: flex;
+    flex-direction: column;
 }
 .couponDetail-rewardTitle h2 {
     color: white;
@@ -738,4 +740,7 @@
   padding: 10px;
   border: #4136F1 solid;
   border-radius: 5%;
+}
+.QRCode{
+  
 }

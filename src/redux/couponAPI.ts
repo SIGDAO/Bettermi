@@ -32,10 +32,10 @@ export const couponAPI = apiSlice.injectEndpoints({
       }),
     }),
     refreshCouponCode: builder.mutation({
-      query: (credentials) => ({
+      query: (coupon_id: number  ) => ({
         url: "/coupon/refreshCouponCode",
         method: "POST",
-        body: { ...credentials },
+        body: { coupon_id },
       }),
     }),
     getFilteredCoupon: builder.mutation({

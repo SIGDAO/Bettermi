@@ -20,12 +20,17 @@ import { checkUserLevel } from "../../NftSystem/UserLevel/checkUserLevel";
 import { selectCurrentIsGuest } from "../../redux/profile";
 import SigdaoIcon from "../../components/icon";
 import MenuBar from "../../components/menuBar";
-import { usePostCouponDetailMutation } from "../../redux/couponAPI";
+import { usePostCouponDetailMutation, useRefreshCouponCodeMutation } from "../../redux/couponAPI";
 import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation, useUserStatusMutation } from "../../redux/couponUserAPI";
 import { couponUserSlice, selectCouponUserEmail} from "../../redux/couponUser";
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert, { AlertColor } from '@mui/material/Alert';
 import { useUser } from '../../providers/userProvider';
+import { QRCodeSVG } from "qrcode.react";
+import { selectCurrentSelectedCoupon } from "../../redux/coupon";
+import QRCode from 'qrcode'
+
+
 interface ICouponsProps {}
 
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
@@ -45,42 +50,99 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const updated = useRef(false);
   let isNew = false;
   const isGuest = useSelector(selectCurrentIsGuest);
+  const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
   const [couponName , setCouponName] = useState<string>("Coupon Name");
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description");
+  const [coupon_id, setCoupon_id] = useState<number>(0);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
+  const [refreshCouponCode,{isSuccess:isRefreshedCoupon,error:refreshCouponError}] = useRefreshCouponCodeMutation();
   //user checking 
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
   const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
   //alert message 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [startFetching,setStartFetching] = React.useState<boolean>(false);
   const [severity, setSeverity] = React.useState<AlertColor>("success")
   const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated")
 
   //useContext - userProvider
   const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
 
+
+  //testing
+  const [qrCode,setQRCode] = React.useState<string>("");
+  const [switcher,setSwitcher] = React.useState<boolean>(true);
+
   //click the button to use the coupon 
-  const handleClick = () => {
-    console.log("couponsUser: ", couponUser)
-    console.log(email, token);
+  const DataFetcher = () => {
+    refreshCouponCode(coupon_id)
+    .then(async (res) => {
+      console.log(res);
+      if('data' in res){
+        console.log("hihihi");
+        console.log(res.data);
+        const QrCode = await QRCode.toDataURL(res.data.coupon_code);
+        setQRCode(QrCode);
+      }
+      else{
+        alert("We are sorry, something happened after ")
+        navigate('/coupons');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  const handleClick = async() => {
+    console.log("couponsUser: ", couponUser);
+    console.log("email is ",email);
+    console.log("token is ",token)
     setSeverity("success");
-    setAlertMessage("QRcode generated")
+    setAlertMessage("QRcode generated");
     //no user information, send out the error message 
-    if((email=== undefined || email === null || email === "")&& (token ===undefined || token === null || token === "")){
+    if((email === undefined || email === null || email === "") && (token === undefined || token === null || token === "")){
       setSeverity("error");
       setAlertMessage("no user information")
       setOpen(true);
+      
+      console.log(params.couponCode)
     }else{
     //find user information, use the api to record the use of coupon
     //api function 
     setOpen(true);
+    setStartFetching(true);
+    console.log("params.couponCode is ",params.couponCode)
+    DataFetcher();
     }
     
   };
+
+  useEffect(() => {
+    // Initial fetch when the component mounts
+    let interval:any;
+    console.log("startFetching is",startFetching)
+    if (startFetching) {
+      // Fetch data immediately after button click
+      // Set up an interval to fetch data every 30 seconds
+      interval = setInterval(() => {
+        // setSwitcher(switcher)
+        DataFetcher();
+      }, 3000);
+    }
+
+    // Clean up the interval when the component unmounts or when fetching is stopped
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [startFetching]); // Empty dependency array ensures this effect runs once on mount
   //close the alert box
+
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
@@ -88,7 +150,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     if (reason === 'clickaway') {
       return;
     }
-
+    console.log("set open is false");
     setOpen(false);
   };
   // to use CountChallenges to count
@@ -101,7 +163,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     console.log("Coupon Code:",  params.couponCode)
     if(params.couponCode){
     postCouponDetail(params.couponCode)
-    .then((res) => {
+    .then(async (res) => {
       console.log(res);
       if ("data" in res) {
         const couponList = res.data;
@@ -109,9 +171,10 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log("404 not found")
         navigate("/404")
        }
-        console.log(couponList);
+        console.log("couponList is ",couponList);
         setCouponName(couponList[0].c_name);
         setCouponDescription(couponList[0].c_description);
+        setCoupon_id(couponList[0].coupon_id);
       }
     })
     .catch((err) => {
@@ -123,18 +186,35 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     navigate("/404")
   }
   }, []);
-
+  useEffect(() => {
+   console.log(email);
+  }, [email]);
+  useEffect(() => {
+   console.log(token);
+  }, [token]);
   const content: JSX.Element = (
     <div className="screen">
             <div className="mission-body-container">
           <div className="mission-body">
           <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={true} isLoginButton={true}/>
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
+          <div>
+    </div>
+
 
             <div className="couponDetail-rewardTitle inter-semi-bold-royal-blue-15px">
               <h2>{couponName}</h2>
               <p>{couponDescription}</p>
-              <Button variant="contained" fullWidth={true} onClick={() =>{handleClick()}}>使用優惠</Button>
+              <Button variant="contained" fullWidth={true} onClick={async() => {await handleClick()}}>使用優惠</Button>
+              {qrCode && isGetCouponsByUser && <img className = "QRCode" src={qrCode} alt="QR Code" />}
+          {/* {isGetCouponsByUser && open && <QRCodeSVG size={256}     style={{
+      height: "80%",
+      width: "80%",
+      maxWidth: "100%",
+      maxHeight: "100%",
+      margin: "auto",
+      display: "block",
+    }} value={selectedCoupon.coupon_code} viewBox={`0 0 256 256`} />} */}
               </div>
             <div className="containerCouponsTermsAndPolicies"> 
             <div className="couponsTermsAndPolicies">
