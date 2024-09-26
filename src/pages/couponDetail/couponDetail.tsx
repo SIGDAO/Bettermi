@@ -29,6 +29,7 @@ import { useUser } from '../../providers/userProvider';
 import { QRCodeSVG } from "qrcode.react";
 import { selectCurrentSelectedCoupon } from "../../redux/coupon";
 import QRCode from 'qrcode'
+import { start } from "repl";
 
 
 interface ICouponsProps {}
@@ -36,6 +37,7 @@ interface ICouponsProps {}
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
+  const couponExpiryTime:number = 30;
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -54,6 +56,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [couponName , setCouponName] = useState<string>("Coupon Name");
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description");
   const [coupon_id, setCoupon_id] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
   const [refreshCouponCode,{isSuccess:isRefreshedCoupon,error:refreshCouponError}] = useRefreshCouponCodeMutation();
@@ -86,6 +89,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log(res.data);
         const QrCode = await QRCode.toDataURL(res.data.coupon_code);
         setQRCode(QrCode);
+        setTimeLeft(couponExpiryTime);
       }
       else{
         alert("We are sorry, something happened after ")
@@ -130,7 +134,9 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
       interval = setInterval(() => {
         // setSwitcher(switcher)
         DataFetcher();
-      }, 3000);
+      }, couponExpiryTime*1000);
+
+
     }
 
     // Clean up the interval when the component unmounts or when fetching is stopped
@@ -141,6 +147,19 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     };
   }, [startFetching]); // Empty dependency array ensures this effect runs once on mount
   //close the alert box
+  useEffect(() => {
+    console.log("startFetching is ",startFetching)
+    let timerId:any;
+    if (startFetching) {
+    console.log("Start count down")
+    timerId = setInterval(() => {
+     if(timeLeft > 0){
+       setTimeLeft(timeLeft-1);
+     }
+   }, 1000);
+  }
+    return () => clearInterval(timerId); // Cleanup the interval on component unmount
+  }, [timeLeft,startFetching]);
 
 
   const handleClose = (
@@ -207,6 +226,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
               <p>{couponDescription}</p>
               <Button variant="contained" fullWidth={true} onClick={async() => {await handleClick()}}>使用優惠</Button>
               {qrCode && isGetCouponsByUser && <img className = "QRCode" src={qrCode} alt="QR Code" />}
+              {qrCode && isGetCouponsByUser && <p className = "QRCodeExpiryTime">expires in: {timeLeft}s</p>}
           {/* {isGetCouponsByUser && open && <QRCodeSVG size={256}     style={{
       height: "80%",
       width: "80%",

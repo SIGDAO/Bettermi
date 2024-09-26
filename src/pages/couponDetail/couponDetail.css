@@ -742,5 +742,10 @@
   border-radius: 5%;
 }
 .QRCode{
-  
+  margin-top: 20px;
+  width:300px;
+  align-self: center;
+}
+.QRCodeExpiryTime{
+  align-self: center;
 }
