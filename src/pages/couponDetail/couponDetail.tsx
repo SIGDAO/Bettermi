@@ -91,6 +91,9 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         setQRCode(QrCode);
         setTimeLeft(couponExpiryTime);
       }
+      else if(res.error?.data?.message === "Coupon is used"){
+        alert("You have used this coupon")
+      }
       else{
         alert("We are sorry, something happened after ")
         navigate('/coupons');
