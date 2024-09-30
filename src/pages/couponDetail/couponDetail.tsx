@@ -30,6 +30,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { selectCurrentSelectedCoupon } from "../../redux/coupon";
 import QRCode from 'qrcode'
 import { start } from "repl";
+import io from 'socket.io-client';
 
 
 interface ICouponsProps {}
@@ -78,6 +79,26 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   //testing
   const [qrCode,setQRCode] = React.useState<string>("");
   const [switcher,setSwitcher] = React.useState<boolean>(true);
+
+  const socket = io("http://localhost:8082");
+  useEffect(() => {
+    socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
+      console.log("chat message:",data.sender,data.message )
+      console.log("the user email is",data.userEmail);
+      console.log("email is ",email)
+      if(email === data.userEmail){
+        alert("the coupon is burned")
+        navigate('/coupons')
+      }
+      // alert("the coupon is burned")
+      // navigate('/coupons')
+    });
+
+    return () => {
+      socket.off('chat message');
+    };
+  }, []);
+
 
   //click the button to use the coupon 
   const DataFetcher = () => {
