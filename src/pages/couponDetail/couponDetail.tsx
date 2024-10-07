@@ -34,7 +34,7 @@ import io from 'socket.io-client';
 
 
 interface ICouponsProps {}
-
+const socket = io("http://localhost:8082");
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
@@ -79,25 +79,31 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   //testing
   const [qrCode,setQRCode] = React.useState<string>("");
   const [switcher,setSwitcher] = React.useState<boolean>(true);
+  const hasRendered = useRef(false);
 
-  const socket = io("http://localhost:8082");
   useEffect(() => {
+    // console.log("hasRendered.current is",hasRendered.current)
+    // if (hasRendered.current === true) {
+    //   return;
+    // }
+    // console.log("ran the useEffect");
+    // hasRendered.current = true
     socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
       console.log("chat message:",data.sender,data.message )
       console.log("the user email is",data.userEmail);
       console.log("email is ",email)
       if(email === data.userEmail){
+        setStartFetching(false)
         alert("the coupon is burned")
         navigate('/coupons')
       }
       // alert("the coupon is burned")
       // navigate('/coupons')
     });
-
     return () => {
-      socket.off('chat message');
-    };
-  }, []);
+        socket.off('chat message');
+      };
+  }, [socket]);
 
 
   //click the button to use the coupon 
