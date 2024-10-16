@@ -2,7 +2,7 @@ import * as React from "react";
 import "./couponDetail.css";
 import { CenterLayout } from "../../components/layout";
 import { ShortTitleBar } from "../../components/titleBar";
-import { Link ,useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { accountId } from "../../redux/account";
 import { useDispatch, useSelector } from "react-redux";
 import { TransferToken } from "../../components/transferToken";
@@ -22,23 +22,22 @@ import SigdaoIcon from "../../components/icon";
 import MenuBar from "../../components/menuBar";
 import { usePostCouponDetailMutation, useRefreshCouponCodeMutation } from "../../redux/couponAPI";
 import { SendEmailLinkContent, useGetLoginLinkMutation, useAccessMutation, useLogoutMutation, useUserStatusMutation } from "../../redux/couponUserAPI";
-import { couponUserSlice, selectCouponUserEmail} from "../../redux/couponUser";
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import Alert, { AlertColor } from '@mui/material/Alert';
-import { useUser } from '../../providers/userProvider';
+import { couponUserSlice, selectCouponUserEmail } from "../../redux/couponUser";
+import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
+import Alert, { AlertColor } from "@mui/material/Alert";
+import { useUser } from "../../providers/userProvider";
 import { QRCodeSVG } from "qrcode.react";
 import { selectCurrentSelectedCoupon } from "../../redux/coupon";
-import QRCode from 'qrcode'
+import QRCode from "qrcode";
 import { start } from "repl";
-import io from 'socket.io-client';
-
+import io from "socket.io-client";
 
 interface ICouponsProps {}
-const socket = io("http://localhost:8082");
+// const socket = io("https://dapp.bettermi.io/couponApi/");
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
-  const couponExpiryTime:number = 30;
+  const couponExpiryTime: number = 30;
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -54,19 +53,19 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   let isNew = false;
   const isGuest = useSelector(selectCurrentIsGuest);
   const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
-  const [couponName , setCouponName] = useState<string>("Coupon Name");
+  const [couponName, setCouponName] = useState<string>("Coupon Name");
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description");
   const [coupon_id, setCoupon_id] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
-  const [refreshCouponCode,{isSuccess:isRefreshedCoupon,error:refreshCouponError}] = useRefreshCouponCodeMutation();
-  //user checking 
+  const [refreshCouponCode, { isSuccess: isRefreshedCoupon, error: refreshCouponError }] = useRefreshCouponCodeMutation();
+  //user checking
   const [login, { isSuccess: isLoginSuccess, isLoading: isLoginLoading, data: loginData, error: loginError }] = useAccessMutation();
-  const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
+  const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError }] = useUserStatusMutation();
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
-  //alert message 
+  //alert message
   const [open, setOpen] = React.useState<boolean>(false);
   const [startFetching,setStartFetching] = React.useState<boolean>(false);
   const [severity, setSeverity] = React.useState<AlertColor>("success")
@@ -74,48 +73,39 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [expiredDate, setExpiredDate] = React.useState<String>()
   const [quantityPerUser, setQuantityPerUser] = React.useState<String>();
   //useContext - userProvider
-  const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
-
+  const { isLoggedIn, email, token, logoutCouponUser, loginCouponUser } = useUser();
 
   //testing
-  const [qrCode,setQRCode] = React.useState<string>("");
-  const [switcher,setSwitcher] = React.useState<boolean>(true);
+  const [qrCode, setQRCode] = React.useState<string>("");
+  const [switcher, setSwitcher] = React.useState<boolean>(true);
   const hasRendered = useRef(false);
 
-  useEffect(() => {
-    console.log("email: ", email)
+  // useEffect(() => {
     // console.log("hasRendered.current is",hasRendered.current)
     // if (hasRendered.current === true) {
     //   return;
     // }
     // console.log("ran the useEffect");
     // hasRendered.current = true
-    socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
-      console.log("chat message:",data.sender,data.message )
-      console.log("the user email is",data.userEmail);
-      console.log("user email is ",email)
-      // if (email === null){
-      //   console.log("null email")
-      //   const newEmail = useUser().email;
-      //   console.log("new Email:", newEmail)
-      // }
-      if(email === data.userEmail){
-        setStartFetching(false)
-        alert("the coupon by you is burned")
-        navigate('/coupons')
-      }else{
-        alert("the coupon by other is burned")
-      }
+    // socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
+    //   console.log("chat message:",data.sender,data.message )
+    //   console.log("the user email is",data.userEmail);
+    //   console.log("email is ",email)
+    //   if(email === data.userEmail){
+    //     setStartFetching(false)
+    //     alert("the coupon is burned")
+    //     navigate('/coupons')
+    //   }
       // alert("the coupon is burned")
       // navigate('/coupons')
-    });
-    return () => {
-        socket.off('chat message');
-      };
-  }, [socket, email]);
+  //   });
+  //   return () => {
+  //       socket.off('chat message');
+  //     };
+  // }, [socket]);
 
 
-  //click the button to use the coupon 
+  //click the button to use the coupon
   const DataFetcher = () => {
     refreshCouponCode(coupon_id)
     .then(async (res) => {
@@ -154,7 +144,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     //no user information, send out the error message 
     if((email === undefined || email === null || email === "") && (token === undefined || token === null || token === "")){
       setSeverity("error");
-      setAlertMessage("no user information")
+      setAlertMessage("no user information");
       setOpen(true);
       console.log(params.couponCode)
     }else{
@@ -165,22 +155,19 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     console.log("params.couponCode is ",params.couponCode)
     DataFetcher();
     }
-    
   };
 
   useEffect(() => {
     // Initial fetch when the component mounts
-    let interval:any;
-    console.log("startFetching is",startFetching)
+    let interval: any;
+    console.log("startFetching is", startFetching);
     if (startFetching) {
       // Fetch data immediately after button click
       // Set up an interval to fetch data every 30 seconds
       interval = setInterval(() => {
         // setSwitcher(switcher)
         DataFetcher();
-      }, couponExpiryTime*1000);
-
-
+      }, couponExpiryTime * 1000);
     }
 
     // Clean up the interval when the component unmounts or when fetching is stopped
@@ -192,25 +179,21 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   }, [startFetching]); // Empty dependency array ensures this effect runs once on mount
   //close the alert box
   useEffect(() => {
-    console.log("startFetching is ",startFetching)
-    let timerId:any;
+    console.log("startFetching is ", startFetching);
+    let timerId: any;
     if (startFetching) {
-    console.log("Start count down")
-    timerId = setInterval(() => {
-     if(timeLeft > 0){
-       setTimeLeft(timeLeft-1);
-     }
-   }, 1000);
-  }
+      console.log("Start count down");
+      timerId = setInterval(() => {
+        if (timeLeft > 0) {
+          setTimeLeft(timeLeft - 1);
+        }
+      }, 1000);
+    }
     return () => clearInterval(timerId); // Cleanup the interval on component unmount
-  }, [timeLeft,startFetching]);
+  }, [timeLeft, startFetching]);
 
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
-  ) => {
-    if (reason === 'clickaway') {
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    if (reason === "clickaway") {
       return;
     }
     console.log("set open is false");
@@ -252,10 +235,10 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   }
   }, []);
   useEffect(() => {
-   console.log(email);
+    console.log(email);
   }, [email]);
   useEffect(() => {
-   console.log(token);
+    console.log(token);
   }, [token]);
   const content: JSX.Element = (
     <div className="screen">
@@ -263,17 +246,23 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           <div className="mission-body">
           <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={false} isLoginButton={true}/>
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
-          <div>
-    </div>
+          <div></div>
 
-
-            <div className="couponDetail-rewardTitle inter-semi-bold-royal-blue-15px">
-              <h2>{couponName}</h2>
-              <p>{couponDescription}</p>
-              <Button variant="contained" fullWidth={true} onClick={async() => {await handleClick()}}>使用優惠</Button>
-              {qrCode && isGetCouponsByUser && <img className = "QRCode" src={qrCode} alt="QR Code" />}
-              {qrCode && isGetCouponsByUser && <p className = "QRCodeExpiryTime">expires in: {timeLeft}s</p>}
-          {/* {isGetCouponsByUser && open && <QRCodeSVG size={256}     style={{
+          <div className="couponDetail-rewardTitle inter-semi-bold-royal-blue-15px">
+            <h2>{couponName}</h2>
+            <p>{couponDescription}</p>
+            <Button
+              variant="contained"
+              fullWidth={true}
+              onClick={async () => {
+                await handleClick();
+              }}
+            >
+              使用優惠
+            </Button>
+            {qrCode && isGetCouponsByUser && <img className="QRCode" src={qrCode} alt="QR Code" />}
+            {qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">expires in: {timeLeft}s</p>}
+            {/* {isGetCouponsByUser && open && <QRCodeSVG size={256}     style={{
       height: "80%",
       width: "80%",
       maxWidth: "100%",
@@ -281,8 +270,8 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
       margin: "auto",
       display: "block",
     }} value={selectedCoupon.coupon_code} viewBox={`0 0 256 256`} />} */}
-              </div>
-            <div className="containerCouponsTermsAndPolicies"> 
+          </div>
+          <div className="containerCouponsTermsAndPolicies">
             <div className="couponsTermsAndPolicies">
             <h2>條款與細則</h2>
             <p>使用範圍-此優惠券僅適用於指定商品或服務，詳情請參閱產品頁面。</p>
@@ -293,17 +282,12 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
             <p>其他條款-我們保留修改或取消優惠券的權利，恕不另行通知。
               如有任何爭議，我們保留最終解釋權。</p>
             </div>
-            </div>
           </div>
-          <MenuBar />
         </div>
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ horizontal: "center", vertical: "top" }}>
-        <Alert
-          onClose={handleClose}
-          severity={severity}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
+        <MenuBar />
+      </div>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ horizontal: "center", vertical: "top" }}>
+        <Alert onClose={handleClose} severity={severity} variant="filled" sx={{ width: "100%" }}>
           {alertMessage}
         </Alert>
       </Snackbar>
