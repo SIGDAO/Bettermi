@@ -71,7 +71,8 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [startFetching,setStartFetching] = React.useState<boolean>(false);
   const [severity, setSeverity] = React.useState<AlertColor>("success")
   const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated")
-
+  const [expiredDate, setExpiredDate] = React.useState<String>()
+  const [quantityPerUser, setQuantityPerUser] = React.useState<String>();
   //useContext - userProvider
   const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
 
@@ -82,6 +83,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const hasRendered = useRef(false);
 
   useEffect(() => {
+    console.log("email: ", email)
     // console.log("hasRendered.current is",hasRendered.current)
     // if (hasRendered.current === true) {
     //   return;
@@ -91,11 +93,18 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
       console.log("chat message:",data.sender,data.message )
       console.log("the user email is",data.userEmail);
-      console.log("email is ",email)
+      console.log("user email is ",email)
+      // if (email === null){
+      //   console.log("null email")
+      //   const newEmail = useUser().email;
+      //   console.log("new Email:", newEmail)
+      // }
       if(email === data.userEmail){
         setStartFetching(false)
-        alert("the coupon is burned")
+        alert("the coupon by you is burned")
         navigate('/coupons')
+      }else{
+        alert("the coupon by other is burned")
       }
       // alert("the coupon is burned")
       // navigate('/coupons')
@@ -103,7 +112,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     return () => {
         socket.off('chat message');
       };
-  }, [socket]);
+  }, [socket, email]);
 
 
   //click the button to use the coupon 
@@ -117,9 +126,16 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         const QrCode = await QRCode.toDataURL(res.data.coupon_code);
         setQRCode(QrCode);
         setTimeLeft(couponExpiryTime);
+        setSeverity("success");
+        setAlertMessage("QRcode generated");
+        setOpen(true);
       }
       else if(res.error?.data?.message === "Coupon is used"){
-        alert("You have used this coupon")
+        // alert("You have used this coupon")
+        setStartFetching(false);
+        setSeverity("error");
+        setAlertMessage("You have used this coupon")
+        setOpen(true);
       }
       else{
         alert("We are sorry, something happened after ")
@@ -134,19 +150,17 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     console.log("couponsUser: ", couponUser);
     console.log("email is ",email);
     console.log("token is ",token)
-    setSeverity("success");
-    setAlertMessage("QRcode generated");
+
     //no user information, send out the error message 
     if((email === undefined || email === null || email === "") && (token === undefined || token === null || token === "")){
       setSeverity("error");
       setAlertMessage("no user information")
       setOpen(true);
-      
       console.log(params.couponCode)
     }else{
     //find user information, use the api to record the use of coupon
     //api function 
-    setOpen(true);
+ 
     setStartFetching(true);
     console.log("params.couponCode is ",params.couponCode)
     DataFetcher();
@@ -224,6 +238,8 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         setCouponName(couponList[0].c_name);
         setCouponDescription(couponList[0].c_description);
         setCoupon_id(couponList[0].coupon_id);
+        setExpiredDate(couponList[0].expired_date);
+        setQuantityPerUser(couponList[0].quantity_per_user);
       }
     })
     .catch((err) => {
@@ -245,7 +261,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     <div className="screen">
             <div className="mission-body-container">
           <div className="mission-body">
-          <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={true} isLoginButton={true}/>
+          <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={false} isLoginButton={true}/>
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
           <div>
     </div>
@@ -270,8 +286,8 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
             <div className="couponsTermsAndPolicies">
             <h2>條款與細則</h2>
             <p>使用範圍-此優惠券僅適用於指定商品或服務，詳情請參閱產品頁面。</p>
-            <p>有效期限-優惠券自發行日起有效，截止日期為 [截止日期]。逾期無效。</p>
-            <p>使用限制-每位顧客僅限使用一次。</p>
+            <p>有效期限-優惠券自發行日起有效，截止日期為{expiredDate}。逾期無效。</p>
+            <p>使用限制-每位顧客僅限使用{quantityPerUser}次。</p>
             <p>兌換方式-在結帳時輸入優惠券代碼以享受折扣。</p>
             <p>使用範圍-此優惠券僅適用於指定商品或服務，詳情請參閱產品頁面。</p>
             <p>其他條款-我們保留修改或取消優惠券的權利，恕不另行通知。

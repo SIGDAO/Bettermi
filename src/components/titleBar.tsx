@@ -258,8 +258,8 @@ function SimpleDialog(props: SimpleDialogProps) {
     setOrder((event.target as HTMLInputElement).value);
     console.log("change order")
   };
-
-  const [order, setOrder] = React.useState("ascending");
+  const navigate = useNavigate();
+  const [order, setOrder] = React.useState("newFirst");
   const [merchant, setMerchant] = React.useState<string[]>([]);
   const [merchantType, setMerchantType] = React.useState<string[]>([]);
   // useEffect(() => {
@@ -322,7 +322,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 
  </RadioGroup>
  </FormControl>
- <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司類型
+ <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司
  </div></FormLabel>
  {/* <InputLabel id="demo-multiple-chip-label">Chip</InputLabel> */}
         <Select
@@ -385,7 +385,7 @@ function SimpleDialog(props: SimpleDialogProps) {
     <MenuItem value={20}>Twenty</MenuItem>
     <MenuItem value={30}>Thirty</MenuItem>
   </Select> */}
- <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司
+ <FormLabel id="demo-multiple-chip-label"><div className="title-bar-title inter-semi-bold-white-18px">公司業務
   </div></FormLabel>
   {/* <InputLabel id="demo-multiple-chip-label">Chip</InputLabel> */}
         <Select
@@ -425,12 +425,34 @@ function SimpleDialog(props: SimpleDialogProps) {
    
    
     </DialogContent>
-    <Button variant="outlined" fullWidth={true}>Reset</Button>
-    <Button variant="contained" fullWidth={true} onClick={
+    <Button variant="outlined" fullWidth={true} onClick={
     () => {
+      setOrder("newFirst");
+      setFilteredIndustry([]);
+      setFilteredMerchant([]);
       console.log("order:",order)
       console.log("merchant:",filteredMerchant.join("^^^"))
       console.log("merchant Type:" ,filteredIndustry.join("^^^"))
+    }
+  }>Reset</Button>
+    <Button variant="contained" fullWidth={true} onClick={
+    () => {
+      let urlParams = `?order=${order}`;
+      console.log("order:",order)
+      console.log("merchant:",filteredMerchant.join("^^^"))
+      console.log("merchant Type:" ,filteredIndustry.join("^^^"))
+      if (filteredIndustry.join("^^^") === ""){
+        console.log("null industry");
+      }else{
+        urlParams = urlParams +"&industry="+ filteredIndustry.join("^^^")
+      }
+      if (filteredMerchant.join("^^^") === ""){
+        console.log("null merchant");
+      }else{
+        urlParams = urlParams +"&merchant="+ filteredMerchant.join("^^^")
+      }
+      console.log("/coupons" + urlParams);
+      navigate(`/coupons${urlParams}`)
     }
     }>套用</Button>
   </ResponsiveDialog>

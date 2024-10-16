@@ -708,3 +708,9 @@
   border: 1px solid #4136F1;
   padding-left: 0;
 }
+
+.couponExpiryDate02 {
+  text-align: right;
+  color: #ffffff;
+  margin-right: 10px;
+}

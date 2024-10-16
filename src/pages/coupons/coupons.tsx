@@ -2,7 +2,7 @@ import * as React from "react";
 import "./coupons.css";
 import { CenterLayout } from "../../components/layout";
 import { ShortTitleBar } from "../../components/titleBar";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { accountId } from "../../redux/account";
 import { useDispatch, useSelector } from "react-redux";
 import { TransferToken } from "../../components/transferToken";
@@ -52,10 +52,10 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
   const couponList = useSelector(selectCurrentCouponList);
   //useContext - userProvider
   const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
-
+  const [onFilteringButton , setFilteringButton] =  useState<boolean>(true); // on the filtering button
   // to use CountChallenges to count
   // display as 0/3 as text
-  
+  const [searchParams] = useSearchParams();
 
   //joe 20/9
    useEffect(() => {
@@ -76,6 +76,7 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
     // console.log("paramOrder: ", paramOrder)
     if (paramIndustries === null && paramOrder === null && ((paramMerchants !== null) && paramMerchants.split("^^^").length === 1)){
       setTitle(paramMerchants);
+      setFilteringButton(false);
     }else if ( paramIndustries !== null || paramOrder !== null  || paramMerchants !== null){
       setTitle("Filtered result")
     }
@@ -109,7 +110,7 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log(err);
       });
     }
-  }, []);
+  }, [searchParams]);
   // copied code, may delete after checking 
   useEffect(() => {
     
@@ -183,7 +184,7 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
   const content: JSX.Element = (
     <div className="screen">
       <div className="bettermidapp-challenges-1">
-        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/marketplace" isCouponSystem={true} isFilteringButton={true} isLoginButton={true}/>
+        <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/marketplace" isCouponSystem={true} isFilteringButton={onFilteringButton} isLoginButton={true}/>
         <img className="photo-7K5ObS" src="img/coupons/coupons_landing.jpg" alt="Photo" />
         <div className="challenges-card-7K5ObS">
           <img className="layer-nLfc9z" src="img/missionChallenge/layer-1@1x.png" alt="Layer" />
@@ -203,7 +204,10 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
               <div className="descriptionChallengeCompleted">
                 <div className="descriptionTitleChallengeCompleted">{coupon.c_name}</div>
                 {/* <div className="couponExpiryDate">使用期xx/xx/xxxx</div> */}
-                   <div className="couponExpiryDate">{coupon.c_description}</div>
+                   {/* <div className="couponExpiryDate">{coupon.c_description}</div> */}
+                   <div className="couponExpiryDate">{coupon.coupon_type}</div>
+                   <div className="couponExpiryDate">{`${coupon.distributed_amount}/100` }</div>
+                   <div className="couponExpiryDate02">{`使用期至${coupon.expired_date}` }</div>
                 <div className="descriptionBottomBodyChallengeCompleted">
                   {/* <SigdaoIcon width="16px" height="16px" /> */}
                   {/* <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div> */}
@@ -214,43 +218,8 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
           </div>
         );
       })}
-            {/* //non dymatic demo */}
-            <button className="couponsContainer" onClick={() => navigate("/couponDetail/BTS789")}>
-              <img className="couponImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Card_bg"></img>
-              <div className="descriptionChallengeCompleted">
-                <div className="descriptionTitleChallengeCompleted">迎新獎賞：$50現金優惠劵</div>
-                <div className="couponExpiryDate">使用期xx/xx/xxxx</div>
-                <div className="descriptionBottomBodyChallengeCompleted">
-                  {/* <SigdaoIcon width="16px" height="16px" /> */}
-                  {/* <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div> */}
-                  {/* <img className="arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img> */}
-                </div>
-              </div>
-            </button>
-            <button className="couponsContainer" onClick={() => navigate("/couponDetail/NTD0001")}>
-              <img className="couponImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Card_bg"></img>
-              <div className="descriptionChallengeCompleted">
-                <div className="descriptionTitleChallengeCompleted">迎新獎賞：xxx現金優惠劵</div>
-                <div className="couponExpiryDate">使用期xx/xx/xxxx</div>
-                <div className="descriptionBottomBodyChallengeCompleted">
-                  {/* <SigdaoIcon width="16px" height="16px" /> */}
-                  {/* <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div> */}
-                  {/* <img className="arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img> */}
-                </div>
-              </div>
-            </button>
-            <button className="couponsContainer" onClick={() => navigate("/couponDetail/BEST10GUY")}>
-              <img className="couponImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Card_bg"></img>
-              <div className="descriptionChallengeCompleted">
-                <div className="descriptionTitleChallengeCompleted">迎新獎賞：免費飲品</div>
-                <div className="couponExpiryDate">使用期xx/xx/xxxx</div>
-                <div className="descriptionBottomBodyChallengeCompleted">
-                  {/* <SigdaoIcon width="16px" height="16px" /> */}
-                  {/* <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div> */}
-                  {/* <img className="arrowChallengeCompleted" src={`${process.env.PUBLIC_URL}/img/allMission/ic-chevron-right-24px-1@1x.png`}></img> */}
-                </div>
-              </div>
-            </button>
+            {/* //non dynamic demo */}
+           
             </div>
               )}
             </div>

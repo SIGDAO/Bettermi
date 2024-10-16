@@ -20,16 +20,28 @@ import { LedgerClientFactory } from "@signumjs/core";
 interface IMarketplaceProps {}
 
 const sponsorImageList = [
-"/img/marketplace/all_coupons.png",
-  "/img/marketplace/zomate-fitness-logo-nft-436x436.png",
-  "/img/marketplace/ichio-logo-nft-436x436.png",
-  "/img/marketplace/ycy-logo-nft.png",
+  {
+  imagePath : "/img/marketplace/all_coupons.png",
+  link : "",
+},
+{
+  imagePath : "/img/marketplace/zomate-fitness-logo-nft-436x436.png",
+  link : "Super Savings Mart",
+},
+{
+  imagePath : "/img/marketplace/ichio-logo-nft-436x436.png",
+  link : "Discount Emporium",
+},
+{
+  imagePath : "/img/marketplace/ycy-logo-nft.png",
+  link : "Best Deals Inc.",
+},
   // "/img/marketplace/Era.png",
-  "/img/marketplace/philo-logo-nft-436x436.png",
-  "/img/marketplace/together-matching-logo-nft-436x436.png",
-  "/img/marketplace/BPSAA-Logo-NFT.png",
-  "/img/marketplace/Chuen-Yik-Logo-NFT.png",
-  "/img/marketplace/Fourcheer-Logo-NFT.png",
+  // "/img/marketplace/philo-logo-nft-436x436.png",
+  // "/img/marketplace/together-matching-logo-nft-436x436.png",
+  // "/img/marketplace/BPSAA-Logo-NFT.png",
+  // "/img/marketplace/Chuen-Yik-Logo-NFT.png",
+  // "/img/marketplace/Fourcheer-Logo-NFT.png",
 ];
 
 const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
@@ -63,10 +75,10 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
     }
   };
 
-  const sponsorImageDisplay: JSX.Element[] = sponsorImageList.map((imagePath) => {
+  const sponsorImageDisplay: JSX.Element[] = sponsorImageList.map((imageData) => {
     return (
       <div className="zoe-fitness-container">
-        <Link className="coupons-a"  to={`/coupons`}><img className={imagePath === "/img/marketplace/Era.png" ? "zoe-fitness-not-scaleup" : "zoe-fitness"} src={`${process.env.PUBLIC_URL + imagePath}`} alt="Zoe Fitness" /></Link>
+        <Link className="coupons-a"  to={imageData.link === "" ? `/coupons` :`/coupons?merchant=${imageData.link}`}><img className={imageData.imagePath === "/img/marketplace/Era.png" ? "zoe-fitness-not-scaleup" : "zoe-fitness"} src={`${process.env.PUBLIC_URL + imageData.imagePath}`} alt="Zoe Fitness" /></Link>
       </div>
     );
   });
@@ -147,8 +159,9 @@ const Marketplace: React.FunctionComponent<IMarketplaceProps> = (props) => {
           <img className="bg-oobbG1" src={`${process.env.PUBLIC_URL}/img/marketplace/bg-23@1x.png`} alt="bg" />
           <div className="partner-company-oobbG1 partner-company">
             <p className="where-can-i-pay-with-sigdao-vbUx2m">WHERE CAN I PAY WITH SIGDAO?</p>
-            <Link to="https://www.bettermi.io/en/partner.html" target="_blank" rel="noopener noreferrer">
-              <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">Partner</div>
+            {/* <Link to={`${process.env.PUBLIC_URL}/coupons`} target="_blank" rel="noopener noreferrer"> */}
+            <Link to={`${process.env.PUBLIC_URL}/coupons`} rel="noopener noreferrer">
+              <div className="see-all-vbUx2m see-all inter-medium-royal-blue-14px">All</div>
             </Link>
             <p className="discover-thousands-o-vbUx2m">Discover thousands of products that accept SIGDAO!</p>
             <HorizontalScrollContainer inputClassName="sponser-image-container">
