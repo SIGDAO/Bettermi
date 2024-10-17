@@ -78,8 +78,8 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   //testing
   const [qrCode, setQRCode] = React.useState<string>("");
   const [switcher, setSwitcher] = React.useState<boolean>(true);
-  const hasRendered = useRef(false);
-
+  
+  //for the function that check the number of use to 
   // useEffect(() => {
     // console.log("hasRendered.current is",hasRendered.current)
     // if (hasRendered.current === true) {

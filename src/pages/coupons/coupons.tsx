@@ -110,7 +110,7 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log(err);
       });
     }
-  }, [searchParams]);
+  }, [searchParams, isLoggedIn]);
   // copied code, may delete after checking 
   useEffect(() => {
     

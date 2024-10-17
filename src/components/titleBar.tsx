@@ -691,6 +691,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
   const [userStatus, { isSuccess: isGetUserStauts, error: getUserStatusError  }] = useUserStatusMutation();
   const [logout, { isSuccess: isLogoutSuccess, error: logoutError }] = useLogoutMutation();
   const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
+  const hasLogged = React.useRef(false);
   //alert message
   const handleClickOpen = () => {
     setOpen(true);
@@ -702,6 +703,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         dispatch(couponUserSlice.actions.logout());
         logoutCouponUser();
         setCouponUser(null);
+        hasLogged.current = false;
       })
       .catch((err) => {
         console.log(err);
@@ -840,6 +842,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
     console.log(paramValue);
     const fetchUserData = async () => {
       try {
+        hasLogged.current = true;
         const response = await login({ email: localStorage.getItem("email") || "", href: window.location.href })
         console.log(response)
         if ("data" in response){
@@ -858,7 +861,7 @@ export const ShortTitleBar: React.FunctionComponent<IShortTitleBarProps> = (prop
         console.error("Error fetching user data:", error);
       }
     };
-    if (searchParams.size > 0 && !isLoginLoading && paramValue !==null) {
+    if (searchParams.size > 0 && !isLoginLoading && paramValue !==null && (hasLogged.current === false)) {
     fetchUserData();
     }
     // if (searchParams.size > 0 && !isLoginLoading && paramValue !==null) {
