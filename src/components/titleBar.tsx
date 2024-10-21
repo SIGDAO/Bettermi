@@ -67,7 +67,7 @@ import { FilterOption, filterSlice, selectCurrentFilterOption } from "../redux/f
 import { useUser } from '../providers/userProvider';
 //for alert message
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Alert, { AlertColor } from '@mui/material/Alert';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -469,6 +469,9 @@ function LogDialog(props: LoginDialogProps) {
   const [email, setEmail] = React.useState<string>("");
   //for message-box
   const [openSuccessMessage, setOpenSuccessMessage] = React.useState(false);
+  const [message, setMessage] = React.useState("error");
+  const [messageSeverity, setMessageSeverity] = React.useState<AlertColor>("error")
+
   //useContext userProvider
   // const { isLoggedIn, email, token,  logoutCouponUser, loginCouponUser } = useUser();
   const handleCloseSuccessMessage = (
@@ -481,14 +484,24 @@ function LogDialog(props: LoginDialogProps) {
 
     setOpenSuccessMessage(false);
   };
+  const validateEmail = (email: string): boolean => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+};
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
-      password: data.get('password'),
     });
+
     const email = data.get('email')?.toString();
+    if (email && !validateEmail(email)) {
+      setMessage("Invalid Email");
+      setMessageSeverity("error");
+      setOpenSuccessMessage(true);
+      return;
+    }
     if (email !== null && email !== undefined){
     const sendEmail: SendEmailLinkContent = {
       email: email,
@@ -499,6 +512,8 @@ function LogDialog(props: LoginDialogProps) {
       const result = res;
       console.log(result);
       localStorage.setItem("email", email);
+      setMessage("Sent the email link");
+      setMessageSeverity("success");
       setOpenSuccessMessage(true);
     }
     
@@ -627,11 +642,11 @@ function LogDialog(props: LoginDialogProps) {
               <Snackbar open={openSuccessMessage} autoHideDuration={1000} onClose={handleCloseSuccessMessage}  anchorOrigin={{ horizontal: "center", vertical: "bottom" }}>
         <Alert
           onClose={handleCloseSuccessMessage}
-          severity="success"
+          severity={messageSeverity}
           variant="filled"
           sx={{ width: '100%' }}
         >
-         sent the email link
+        {message}
         </Alert>
       </Snackbar>
           </Box>

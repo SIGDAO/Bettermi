@@ -53,8 +53,9 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   let isNew = false;
   const isGuest = useSelector(selectCurrentIsGuest);
   const selectedCoupon = useSelector(selectCurrentSelectedCoupon);
-  const [couponName, setCouponName] = useState<string>("Coupon Name");
-  const [couponDescription, setCouponDescription] = useState<string>("Coupon Description");
+  const [couponName, setCouponName] = useState<string>("Coupon Name Loading ...");
+  const [couponCode, setCouponCode] = useState<string>("Coupon Code Loading ...");
+  const [couponDescription, setCouponDescription] = useState<string>("Coupon Description Loading ...");
   const [coupon_id, setCoupon_id] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
   const dispatch = useDispatch();
@@ -219,6 +220,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
        }
         console.log("couponList is ",couponList);
         setCouponName(couponList[0].c_name);
+        setCouponCode(couponList[0].coupon_code);
         setCouponDescription(couponList[0].c_description);
         setCoupon_id(couponList[0].coupon_id);
         setExpiredDate(couponList[0].expired_date);
@@ -261,6 +263,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
               使用優惠
             </Button>
             {qrCode && isGetCouponsByUser && <img className="QRCode" src={qrCode} alt="QR Code" />}
+            {qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">{couponCode}</p>}
             {qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">expires in: {timeLeft}s</p>}
             {/* {isGetCouponsByUser && open && <QRCodeSVG size={256}     style={{
       height: "80%",
@@ -277,7 +280,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
             <p>使用範圍-此優惠券僅適用於指定商品或服務，詳情請參閱產品頁面。</p>
             <p>有效期限-優惠券自發行日起有效，截止日期為{expiredDate}。逾期無效。</p>
             <p>使用限制-每位顧客僅限使用{quantityPerUser}次。</p>
-            <p>兌換方式-在結帳時輸入優惠券代碼以享受折扣。</p>
+            <p>兌換方式-在結帳時請願出示QR代碼以享受折扣。</p>
             <p>使用範圍-此優惠券僅適用於指定商品或服務，詳情請參閱產品頁面。</p>
             <p>其他條款-我們保留修改或取消優惠券的權利，恕不另行通知。
               如有任何爭議，我們保留最終解釋權。</p>
