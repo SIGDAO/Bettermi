@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { couponUserSlice } from "./couponUser";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://dapp.bettermi.io/couponApi/",  //http://localhost:8082
+  baseUrl: "https://dapp.bettermi.io/couponApi/", // "http://localhost:8082",
   credentials: 'include', 
   prepareHeaders: (headers, { getState }) => {
     try {

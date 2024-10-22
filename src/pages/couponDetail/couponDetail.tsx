@@ -58,7 +58,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description Loading ...");
   const [coupon_id, setCoupon_id] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
-  const [numberOfUse, setNumberOfUse] = useState<number | null>(null);
+  const numberOfUse = useRef(-1);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
   const [refreshCouponCode, { isSuccess: isRefreshedCoupon, error: refreshCouponError }] = useRefreshCouponCodeMutation();
@@ -111,22 +111,28 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const DataFetcher = () => {
     refreshCouponCode(coupon_id)
     .then(async (res) => {
-      console.log(res);
+      // console.log(res);
       if('data' in res){
         console.log("hihihi");
         console.log(res.data);
         const QrCode = await QRCode.toDataURL(res.data.coupon_code);
         if (QrCode) {
-          console.log("res.data.number_of_use:", res.data.number_of_use )
-          console.log("numberOfUse:", numberOfUse )
-          if (numberOfUse != null && numberOfUse && (res.data.number_of_use > numberOfUse) ){
+          if (numberOfUse.current != -1 && (res.data.number_of_use > numberOfUse.current) ){
             setStartFetching(false)
-            alert("the coupon is burned")
-            navigate('/coupons')
+            setSeverity("success");
+            setAlertMessage("The coupon is used")
+            setOpen(true);
+            const promiseResult = await new Promise(res => setTimeout(() => {
+              res(true);
+            }, 2000));
+            if(promiseResult){
+              navigate('/coupons')
+            }
           }
-          setNumberOfUse(res.data.number_of_use)
-
-        
+          if (numberOfUse.current === -1 ){
+            numberOfUse.current = res.data.number_of_use
+          }
+          numberOfUse.current = res.data.number_of_use ;
         setQRCode(QrCode);
         setTimeLeft(couponExpiryTime);
         setSeverity("success");
@@ -139,10 +145,24 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
       }
       else if(res.error?.data?.message === "Coupon is used"){
         // alert("You have used this coupon")
+        if ( numberOfUse.current === -1) {
         setStartFetching(false);
         setSeverity("error");
         setAlertMessage("You have used this coupon")
         setOpen(true);
+        } else {
+          setStartFetching(false);
+          setSeverity("success");
+          setAlertMessage("The coupon is used")
+          setOpen(true);
+          const promiseResult = await new Promise(res => setTimeout(() => {
+            res(true);
+          }, 3000));
+          console.log("over 2s", promiseResult)
+          if(promiseResult){
+            navigate('/coupons')
+          }
+        }
       }
       else{
         alert("We are sorry, something happened after ")
