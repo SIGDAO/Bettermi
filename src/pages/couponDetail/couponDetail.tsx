@@ -37,7 +37,7 @@ interface ICouponsProps {}
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
-  const couponExpiryTime: number = 30;
+  const couponExpiryTime: number = 10;
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
@@ -58,6 +58,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description Loading ...");
   const [coupon_id, setCoupon_id] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
+  const [numberOfUse, setNumberOfUse] = useState<number | null>(null);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
   const [refreshCouponCode, { isSuccess: isRefreshedCoupon, error: refreshCouponError }] = useRefreshCouponCodeMutation();
@@ -115,11 +116,26 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         console.log("hihihi");
         console.log(res.data);
         const QrCode = await QRCode.toDataURL(res.data.coupon_code);
+        if (QrCode) {
+          console.log("res.data.number_of_use:", res.data.number_of_use )
+          console.log("numberOfUse:", numberOfUse )
+          if (numberOfUse != null && numberOfUse && (res.data.number_of_use > numberOfUse) ){
+            setStartFetching(false)
+            alert("the coupon is burned")
+            navigate('/coupons')
+          }
+          setNumberOfUse(res.data.number_of_use)
+
+        
         setQRCode(QrCode);
         setTimeLeft(couponExpiryTime);
         setSeverity("success");
         setAlertMessage("QRcode generated");
         setOpen(true);
+        }else{
+        alert("We are sorry, something happened after ")
+        navigate('/coupons');
+        }
       }
       else if(res.error?.data?.message === "Coupon is used"){
         // alert("You have used this coupon")
@@ -151,7 +167,6 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
     }else{
     //find user information, use the api to record the use of coupon
     //api function 
- 
     setStartFetching(true);
     console.log("params.couponCode is ",params.couponCode)
     DataFetcher();
@@ -202,7 +217,35 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   };
   // to use CountChallenges to count
   // display as 0/3 as text
+  //joe 21/10
+  //refetch the detail if 503 example
+//   const fetchCouponDetail = async (urlParams, retries = 5, delay = 2000) => {
+//     try {
+//         const response = await  postCouponDetail(urlParams)
 
+//         // Check if the response is OK
+//         if (response.ok) {
+//             const result = await response.json();
+//             setData(result);
+//             setError(null); // Clear any previous errors
+//             return;
+//         }
+
+//         // If we receive a 503 status, we will retry
+//         if (response.status === 503 && retries > 0) {
+//             console.log(`Received 503. Retrying... (${retries} retries left)`);
+//             await new Promise(res => setTimeout(res, delay)); // Wait for the specified delay
+//             return fetchData(url, retries - 1, delay); // Retry the fetch
+//         }
+
+//         // Handle other errors
+//         throw new Error(`Fetch failed with status: ${response.status}`);
+//     } catch (err) {
+//         setError(err.message);
+//     } finally {
+//         setLoading(false);
+//     }
+// };
   //joe 20/9
   //fetch the coupon detail by its coupon code
   useEffect(() => {
@@ -226,14 +269,46 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         setExpiredDate(couponList[0].expired_date);
         setQuantityPerUser(couponList[0].quantity_per_user);
       }
+      if (res&&res.error?.status == "FETCH_ERROR") {
+        console.log("refetch the request")
+        const promiseResult = await new Promise(res => setTimeout(() => {
+          res(true);
+        }, 1500));
+        console.log("over 2s", promiseResult)
+        if(params.couponCode && promiseResult){
+        postCouponDetail(params.couponCode)
+        .then(async (res) => {
+          console.log(res);
+          if ("data" in res) {
+            const couponList = res.data;
+           if (couponList.length === 0){
+            console.log("404 not found")
+            navigate("/404")
+           }
+            console.log("couponList is ",couponList);
+            setCouponName(couponList[0].c_name);
+            setCouponCode(couponList[0].coupon_code);
+            setCouponDescription(couponList[0].c_description);
+            setCoupon_id(couponList[0].coupon_id);
+            setExpiredDate(couponList[0].expired_date);
+            setQuantityPerUser(couponList[0].quantity_per_user);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          
+        });
+      }
+      }
     })
     .catch((err) => {
       console.log(err);
+      
     });
 
   }else{
     console.log("404 not found")
-    navigate("/404")
+    navigate("/coupons")
   }
   }, []);
   useEffect(() => {
