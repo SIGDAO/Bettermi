@@ -1,5 +1,3 @@
-[🔓daodao] # Bettermi.io
-
 ![Bettermi.io Logo][]
 
 ## Overview
