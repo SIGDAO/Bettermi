@@ -58,7 +58,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [couponDescription, setCouponDescription] = useState<string>("Coupon Description Loading ...");
   const [coupon_id, setCoupon_id] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(couponExpiryTime);
-  const numberOfUse = useRef(-1);
+  const numberOfUse = useRef(999);
   const dispatch = useDispatch();
   const [postCouponDetail, { isSuccess: isGetCouponsByUser, error: getCouponError }] = usePostCouponDetailMutation();
   const [refreshCouponCode, { isSuccess: isRefreshedCoupon, error: refreshCouponError }] = useRefreshCouponCodeMutation();
@@ -131,7 +131,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         //console.log(res.data);
         const QrCode = await QRCode.toDataURL(res.data.coupon_code);
         if (QrCode) {
-          if (numberOfUse.current != -1 && (res.data.number_of_use > numberOfUse.current) ){
+          if (numberOfUse.current !== 999 && (res.data.number_of_use > numberOfUse.current) ){
             setStartFetching(false)
             setSeverity("success");
             setAlertMessage("The coupon is used")
@@ -140,10 +140,11 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
               res(true);
             }, 2000));
             if(promiseResult){
-              navigate('/coupons')
+              console.log("error at line 143");
+              navigate('/coupons');
             }
           }
-          if (numberOfUse.current === -1 ){
+          if (numberOfUse.current === 999 ){
             numberOfUse.current = res.data.number_of_use
           }
           numberOfUse.current = res.data.number_of_use ;
@@ -156,12 +157,13 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
         setOpen(true);
         }else{
         alert("We are sorry, something happened after ")
+        console.log("error at line 160");
         navigate('/coupons');
         }
       }
       else if(res.error?.data?.message === "Coupon is used"){
         // alert("You have used this coupon")
-        if ( numberOfUse.current === -1) {
+        if ( numberOfUse.current === 999) {
         setStartFetching(false);
         setSeverity("error");
         setAlertMessage("You have used this coupon")
@@ -176,12 +178,14 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           }, 3000));
           //console.log("over 2s", promiseResult)
           if(promiseResult){
+            console.log("error at line 181");
             navigate('/coupons')
           }
         }
       }
       else{
         alert("We are sorry, something happened after ")
+        console.log("error at line 188");
         navigate('/coupons');
       }
     })
@@ -483,7 +487,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
                 Copy Text
               </button>
             )} */}
-               {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">{couponCode}</p>}
+            {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">{couponCode}</p>}
             {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">Please copy coupon code or QR code and use at the specified online store</p>}
             {!isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">Please show the QR code for the staff scanning</p>}
             {!isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">expires in: {timeLeft}s</p>}
