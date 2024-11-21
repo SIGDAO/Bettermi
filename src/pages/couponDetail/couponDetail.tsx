@@ -37,7 +37,7 @@ interface ICouponsProps {}
 const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const title = "Coupon Detail";
   const params = useParams();
-  const couponExpiryTime: number = 10;
+  const couponExpiryTime: number = 30;
   const userAccountId = useSelector(accountId);
   const nodeHost = useSelector(selectWalletNodeHost);
   const ledger2 = LedgerClientFactory.createClient({ nodeHost });
