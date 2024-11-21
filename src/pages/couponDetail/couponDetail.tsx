@@ -70,16 +70,17 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   const [couponUser, setCouponUser] = React.useState(useSelector(selectCouponUserEmail));
   //alert message
   const [open, setOpen] = React.useState<boolean>(false);
-  const [startFetching,setStartFetching] = React.useState<boolean>(false);
-  const [severity, setSeverity] = React.useState<AlertColor>("success")
-  const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated")
-  const [expiredDate, setExpiredDate] = React.useState<String>()
+  const [startFetching, setStartFetching] = React.useState<boolean>(false);
+  const [severity, setSeverity] = React.useState<AlertColor>("success");
+  const [alertMessage, setAlertMessage] = React.useState<String>("QRcode generated");
+  const [expiredDate, setExpiredDate] = React.useState<String>();
   const [quantityPerUser, setQuantityPerUser] = React.useState<String>();
   //useContext - userProvider
   const { isLoggedIn, email, token, logoutCouponUser, loginCouponUser } = useUser();
 
   //testing
   const [qrCode, setQRCode] = React.useState<string>("");
+  const [qrCodeText, setQRCodeText] = React.useState<string>("");
   const [switcher, setSwitcher] = React.useState<boolean>(true);
   
   //check the coupon type 
@@ -87,16 +88,16 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
 
   //for the function that check the number of use to 
   // useEffect(() => {
-    // //console.log("hasRendered.current is",hasRendered.current)
+    // console.log("hasRendered.current is",hasRendered.current)
     // if (hasRendered.current === true) {
     //   return;
     // }
-    // //console.log("ran the useEffect");
+    // console.log("ran the useEffect");
     // hasRendered.current = true
     // socket.on('chat message', (data: { userEmail:string;sender: string; message: string }) => {
-    //   //console.log("chat message:",data.sender,data.message )
-    //   //console.log("the user email is",data.userEmail);
-    //   //console.log("email is ",email)
+    //   console.log("chat message:",data.sender,data.message )
+    //   console.log("the user email is",data.userEmail);
+    //   console.log("email is ",email)
     //   if(email === data.userEmail){
     //     setStartFetching(false)
     //     alert("the coupon is burned")
@@ -110,8 +111,17 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   //     };
   // }, [socket]);
 
-
   //click the button to use the coupon
+  const copyText = () => {
+    navigator.clipboard
+      .writeText(qrCodeText)
+      .then(() => {
+        alert("Text copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Error copying text: ", err);
+      });
+  };
   const DataFetcher = () => {
     refreshCouponCode(coupon_id)
     .then(async (res) => {
@@ -139,6 +149,7 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
           numberOfUse.current = res.data.number_of_use ;
         
         setQRCode(QrCode);
+        setQRCodeText(res.data.coupon_code);
         setTimeLeft(couponExpiryTime);
         setSeverity("success");
         setAlertMessage("QRcode generated");
@@ -331,33 +342,33 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   // display as 0/3 as text
   //joe 21/10
   //refetch the detail if 503 example
-//   const fetchCouponDetail = async (urlParams, retries = 5, delay = 2000) => {
-//     try {
-//         const response = await  postCouponDetail(urlParams)
+  //   const fetchCouponDetail = async (urlParams, retries = 5, delay = 2000) => {
+  //     try {
+  //         const response = await  postCouponDetail(urlParams)
 
-//         // Check if the response is OK
-//         if (response.ok) {
-//             const result = await response.json();
-//             setData(result);
-//             setError(null); // Clear any previous errors
-//             return;
-//         }
+  //         // Check if the response is OK
+  //         if (response.ok) {
+  //             const result = await response.json();
+  //             setData(result);
+  //             setError(null); // Clear any previous errors
+  //             return;
+  //         }
 
 //         // If we receive a 503 status, we will retry
 //         if (response.status === 503 && retries > 0) {
-//             //console.log(`Received 503. Retrying... (${retries} retries left)`);
+//             console.log(`Received 503. Retrying... (${retries} retries left)`);
 //             await new Promise(res => setTimeout(res, delay)); // Wait for the specified delay
 //             return fetchData(url, retries - 1, delay); // Retry the fetch
 //         }
 
-//         // Handle other errors
-//         throw new Error(`Fetch failed with status: ${response.status}`);
-//     } catch (err) {
-//         setError(err.message);
-//     } finally {
-//         setLoading(false);
-//     }
-// };
+  //         // Handle other errors
+  //         throw new Error(`Fetch failed with status: ${response.status}`);
+  //     } catch (err) {
+  //         setError(err.message);
+  //     } finally {
+  //         setLoading(false);
+  //     }
+  // };
   //joe 20/9
   //fetch the coupon detail by its coupon code
   useEffect(() => {
@@ -437,9 +448,18 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
   }, [token]);
   const content: JSX.Element = (
     <div className="screen">
-            <div className="mission-body-container">
-          <div className="mission-body">
-          <ShortTitleBar title={title} aiCoach={true} setting={true} customiseBackButton={true} customiseBackButtonLink="/coupons" isCouponSystem={true} isFilteringButton={false} isLoginButton={true}/>
+      <div className="mission-body-container">
+        <div className="mission-body">
+          <ShortTitleBar
+            title={title}
+            aiCoach={true}
+            setting={true}
+            customiseBackButton={true}
+            customiseBackButtonLink="/coupons"
+            isCouponSystem={true}
+            isFilteringButton={false}
+            isLoginButton={true}
+          />
           <img className="couponDetailImage" src={`${process.env.PUBLIC_URL}/img/coupons/demo_coupons.jpg`} alt="Photo" />
           <div></div>
 
@@ -456,7 +476,14 @@ const CouponDetail: React.FunctionComponent<ICouponsProps> = (props) => {
               使用優惠
             </Button>
             {qrCode && isGetCouponsByUser && <img className="QRCode" src={qrCode} alt="QR Code" />}
-            {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">{couponCode}</p>}
+            {isOnlineCoupon && qrCodeText && isGetCouponsByUser && <p className="QRCodeTextDescription">Your coupon code:</p>}
+            {/* {qrCodeText && isGetCouponsByUser && <p className="QRCodeText">{qrCodeText}</p>}
+            {qrCodeText && isGetCouponsByUser && (
+              <button onClick={copyText} className="copyTextButton">
+                Copy Text
+              </button>
+            )} */}
+               {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">{couponCode}</p>}
             {isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">Please copy coupon code or QR code and use at the specified online store</p>}
             {!isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">Please show the QR code for the staff scanning</p>}
             {!isOnlineCoupon && qrCode && isGetCouponsByUser && <p className="QRCodeExpiryTime">expires in: {timeLeft}s</p>}

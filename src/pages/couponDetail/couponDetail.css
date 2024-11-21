@@ -749,3 +749,24 @@
 .QRCodeExpiryTime{
   align-self: center;
 }
+.QRCodeText{
+  align-self: center;
+  width:100%;
+  /* overflow:auto; */
+  overflow-wrap: break-word;
+  text-align: center;
+}
+.QRCodeTextDescription{
+  align-self: center;
+}
+.copyTextButton{
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: 'white';
+  border: 'none';
+  border-radius: 5px;
+  cursor: 'pointer';
+  font-size: 16px;
+  width:30%;
+  align-self: center;
+}
