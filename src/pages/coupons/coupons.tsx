@@ -250,8 +250,8 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
                 {/* <div className="couponExpiryDate">使用期xx/xx/xxxx</div> */}
                    {/* <div className="couponExpiryDate">{coupon.c_description}</div> */}
                    <div className="couponExpiryDate">{coupon.coupon_type}</div>
-                   <div className="couponExpiryDate">{`${coupon.distributed_amount}/100` }</div>
-                   <div className="couponExpiryDate02">{`使用期至${coupon.expired_date}` }</div>
+                   <div className="couponExpiryDate">{`${coupon.distributed_amount}/${coupon.total_amount}` }</div>
+                   {(coupon.coupon_type !== "Online Coupon")&&<div className="couponExpiryDate02">{`使用期至${coupon.expired_date}` }</div>}
                 <div className="descriptionBottomBodyChallengeCompleted">
                   {/* <SigdaoIcon width="16px" height="16px" /> */}
                   {/* <div className="sigdaoChallengeCompleted">+5.25 ~ 15.75</div> */}
