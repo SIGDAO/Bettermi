@@ -85,12 +85,35 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
     if (paramMerchants === null && paramIndustries === null && paramOrder === null){
       //get all coupon 
       getAllCoupons("")
-      .then((res) => {
+      .then( async (res) => {
         console.log(res);
         if ("data" in res) {
           const couponList = res.data;
           dispatch(couponSlice.actions.setCouponList(couponList));
           console.log(couponList);
+        }
+        //for refetch
+        if (res&&res.error?.status == "FETCH_ERROR") {
+          console.log("refetch the request")
+          const promiseResult = await new Promise(res => setTimeout(() => {
+            res(true);
+          }, 1500));
+          console.log("over 2s", promiseResult)
+          if( promiseResult){
+            getAllCoupons("")
+            .then((res) => {
+              console.log(res);
+              if ("data" in res) {
+                const couponList = res.data;
+                dispatch(couponSlice.actions.setCouponList(couponList));
+                console.log(couponList);
+              }
+            }
+          )
+              .catch((err) => {
+                console.log(err);
+              });
+        }
         }
       })
       .catch((err) => {
@@ -98,12 +121,33 @@ const Coupons: React.FunctionComponent<ICouponsProps> = (props) => {
       });
     }else{
       postCouponsByFiltering({paramOrder, paramMerchants,paramIndustries})
-      .then((res) => {
+      .then( async (res) => {
         console.log(res);
         if ("data" in res) {
           const couponList = res.data;
           dispatch(couponSlice.actions.setCouponList(couponList));
-          console.log(couponList);
+          if (res&&res.error?.status == "FETCH_ERROR") {
+            console.log("refetch the request")
+            const promiseResult = await new Promise(res => setTimeout(() => {
+              res(true);
+            }, 1500));
+            console.log("over 2s", promiseResult)
+            if( promiseResult){
+              postCouponsByFiltering({paramOrder, paramMerchants,paramIndustries})
+              .then((res) => {
+                console.log(res);
+                if ("data" in res) {
+                  const couponList = res.data;
+                  dispatch(couponSlice.actions.setCouponList(couponList));
+                  console.log(couponList);
+                }
+              }
+            )
+                .catch((err) => {
+                  console.log(err);
+                });
+          }
+          }
         }
       })
       .catch((err) => {

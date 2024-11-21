@@ -65,12 +65,19 @@ export const couponAPI = apiSlice.injectEndpoints({
         method: "POST",
         body: {couponCode},
       })
-    })
+    }),
+    refreshNumberOfUse: builder.mutation({
+      query: (coupon_id: number  ) => ({
+        url: "/coupon/couponNumberOfUseByUserId",
+        method: "POST",
+        body: { coupon_id },
+      }),
+    }),
   }),
 });
 
 
-export const { useGetCouponsByMerchantMutation, useGetUserMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation, useGetCouponDetailMutation , useGetAllCouponsMutation , usePostCouponsByFilteringMutation, usePostCouponDetailMutation} = couponAPI;
+export const { useGetCouponsByMerchantMutation, useGetUserMutation, useGetCouponsByUserMutation, useRefreshCouponCodeMutation, useGetCouponDetailMutation , useGetAllCouponsMutation , usePostCouponsByFilteringMutation, usePostCouponDetailMutation, useRefreshNumberOfUseMutation} = couponAPI;
 
 
 // // no role
