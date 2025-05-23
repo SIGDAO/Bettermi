@@ -173,7 +173,7 @@ const CheckSetting: React.FC = () => {
   // or user is in guest allowed path
   // or user is guest
   useEffect(() => {
-    console.log("pathname is ",currentPath,"is Guest ",isGuest);
+    console.log("pathname is ",currentPath,"is Guest User",isGuest);
      if (Wallet.Extension.connection !== null && sessionStorage.getItem("state") !== null) {
       console.log("123123123");
       dispatch(profileSlice.actions.authenticated());
